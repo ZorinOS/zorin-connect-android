@@ -1,0 +1,122 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="org.kde.kdeconnect.UserInterface.DeviceFragment">
+
+    <LinearLayout
+        android:id="@+id/pairing_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/pair_progress"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/pair_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dip"
+            android:text="@string/device_not_paired"
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+        <Button
+            android:id="@+id/pair_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_suggested"
+            android:text="@string/request_pairing"
+            android:textColor="?attr/colorPrimary" />
+
+
+        <LinearLayout
+            android:id="@+id/pair_request_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/accept_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dip"
+                android:layout_weight="1"
+                android:background="@drawable/button_suggested"
+                android:text="@string/pairing_accept"
+                android:textColor="?attr/colorPrimary" />
+
+            <Button
+                android:id="@+id/reject_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dip"
+                android:layout_weight="1"
+                android:background="@drawable/button_suggested"
+                android:text="@string/pairing_reject"
+                android:textColor="?attr/colorPrimary" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/error_message_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/error_message_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:paddingEnd="16dip"
+            android:paddingLeft="0dip"
+            android:paddingRight="16dip"
+            android:paddingStart="0dip"
+            android:src="@drawable/ic_error_outline_black_48dp"
+            app:tint="?attr/android:textColorSecondary"
+            tools:ignore="UnusedAttribute"/>
+
+        <TextView
+            android:id="@+id/not_reachable_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/unreachable_description"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/on_data_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/on_data_message"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+
+    <ListView
+        android:id="@+id/buttons_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:divider="@drawable/list_divider"
+        tools:context=".DeviceActivity"
+        tools:listitem="@layout/list_item_with_icon_entry"/>
+</LinearLayout>

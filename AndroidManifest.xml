@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zorinos.zorin_connect"
+    android:versionCode="11201"
+    android:versionName="1.12">
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- <uses-permission android:name="android.permission.BLUETOOTH" /> -->
+    <!-- <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:icon="@mipmap/icon"
+        android:roundIcon="@mipmap/icon_round"
+        android:label="Zorin Connect"
+        android:supportsRtl="true"
+        android:theme="@style/KdeConnectTheme">
+        <service
+            android:name="org.kde.kdeconnect.BackgroundService"
+            android:enabled="true" />
+        <service
+            android:name="org.kde.kdeconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardService"
+            android:label="Zorin Connect Remote Keyboard"
+            android:permission="android.permission.BIND_INPUT_METHOD">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/remotekeyboardplugin_method" />
+        </service>
+
+        <activity
+            android:name="org.kde.kdeconnect.UserInterface.MainActivity"
+            android:label="Zorin Connect"
+            android:theme="@style/KdeConnectTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.UserInterface.DeviceSettingsActivity"
+            android:label="@string/device_menu_plugins"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.UserInterface.CustomDevicesActivity"
+            android:label="@string/custom_devices_settings"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.SharePlugin.SendFileActivity"
+            android:label="Zorin Connect"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
+
+        <receiver android:name="org.kde.kdeconnect.KdeConnectBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+
+                <data
+                    android:host="zorinconnect"
+                    android:path="/"
+                    android:scheme="package" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.FindMyPhonePlugin.FindMyPhoneActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:label="@string/findmyphone_title"
+            android:launchMode="singleInstance" />
+
+        <!-- Plugin-related activities and services -->
+
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.MprisPlugin.MprisActivity"
+            android:label="@string/open_mpris_controls"
+            android:launchMode="singleTop"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
+
+        <receiver android:name="org.kde.kdeconnect.Plugins.MprisPlugin.MprisMediaNotificationReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.RunCommandPlugin.RunCommandActivity"
+            android:label="@string/pref_plugin_runcommand"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.RunCommandPlugin.RunCommandWidgetDeviceSelector"
+            android:excludeFromRecents="true"
+            android:label="@string/pref_plugin_runcommand"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:screenOrientation="user"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+
+        <service
+            android:name="org.kde.kdeconnect.Plugins.RunCommandPlugin.RunCommandWidgetDataProviderService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <receiver
+            android:name="org.kde.kdeconnect.Plugins.RunCommandPlugin.RunCommandWidget"
+            android:label="@string/pref_plugin_runcommand">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="RUN_COMMAND_ACTION" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/remotecommandplugin_widget" />
+        </receiver>
+
+        <activity android:name="org.kde.kdeconnect.Plugins.RunCommandPlugin.RunCommandUrlActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="runcommand"
+                    android:scheme="zorinconnect" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.MousePadPlugin.MousePadActivity"
+            android:label="@string/pref_plugin_mousepad"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.PresenterPlugin.PresenterActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/pref_plugin_presenter"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.SharePlugin.ShareActivity"
+            android:label="Zorin Connect">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.chooser.chooser_target_service"
+                android:value="org.kde.kdeconnect.Plugins.SharePlugin.ShareChooserTargetService" />
+        </activity>
+
+        <receiver android:name="org.kde.kdeconnect.Plugins.SharePlugin.ShareBroadcastReceiver">
+            <intent-filter>
+                <action android:name="org.kde.kdeconnect.Plugins.SharePlugin.CancelShare" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.zorinos.zorin_connect.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider_paths" />
+        </provider>
+
+        <service
+            android:name="org.kde.kdeconnect.Plugins.NotificationsPlugin.NotificationReceiver"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="org.kde.kdeconnect.Plugins.SharePlugin.ShareChooserTargetService"
+            android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.chooser.ChooserTargetService" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.NotificationsPlugin.NotificationFilterActivity"
+            android:label="@string/title_activity_notification_filter"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.DeviceSettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.DeviceSettingsActivity" />
+        </activity>
+        <activity android:name="org.kde.kdeconnect.Plugins.PhotoPlugin.PhotoActivity" />
+
+    </application>
+
+</manifest>

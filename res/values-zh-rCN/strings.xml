@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="kde_connect">Zorin Connect</string>
+  <string name="foreground_notification_no_devices">没有连接到任何设备</string>
+  <string name="foreground_notification_devices">已连接到：%s</string>
+  <string name="pref_plugin_telephony">电话通知</string>
+  <string name="pref_plugin_telephony_desc">发送来电通知</string>
+  <string name="pref_plugin_battery">电池报告</string>
+  <string name="pref_plugin_battery_desc">定期报告电池状态</string>
+  <string name="pref_plugin_sftp">开放文件系统</string>
+  <string name="pref_plugin_sftp_desc">允许远程浏览设备的文件系统</string>
+  <string name="pref_plugin_clipboard">剪贴板同步</string>
+  <string name="pref_plugin_clipboard_desc">共享剪贴板内容</string>
+  <string name="pref_plugin_mousepad">远程输入</string>
+  <string name="pref_plugin_mousepad_desc">将您的手机用或平板电脑用作触摸板和键盘</string>
+  <string name="pref_plugin_presenter_desc">使用移动设备切换幻灯片</string>
+  <string name="pref_plugin_remotekeyboard">接收远程按键</string>
+  <string name="pref_plugin_remotekeyboard_desc">从远程设备接收按键事件</string>
+  <string name="pref_plugin_mpris">多媒体控制</string>
+  <string name="pref_plugin_mpris_desc">媒体播放器的遥控器</string>
+  <string name="pref_plugin_runcommand">执行命令</string>
+  <string name="pref_plugin_runcommand_desc">触发您的手机或平板电脑的远程命令</string>
+  <string name="pref_plugin_contacts">联系人同步器</string>
+  <string name="pref_plugin_contacts_desc">允许同步设备的通讯录</string>
+  <string name="pref_plugin_ping">Ping</string>
+  <string name="pref_plugin_ping_desc">发送和接受ping</string>
+  <string name="pref_plugin_notifications">通知同步</string>
+  <string name="pref_plugin_notifications_desc">从其他设备访问您的通知</string>
+  <string name="pref_plugin_receive_notifications">接收通知</string>
+  <string name="pref_plugin_receive_notifications_desc">从其他设备接收通知并显示在 Android 上</string>
+  <string name="pref_plugin_sharereceiver">分享和接收</string>
+  <string name="pref_plugin_sharereceiver_desc">在设备间共享文件和 URL</string>
+  <string name="plugin_not_available">该特性不适用于您的Android版本</string>
+  <string name="device_list_empty">无设备</string>
+  <string name="ok">确认</string>
+  <string name="cancel">取消</string>
+  <string name="open_settings">开启设置</string>
+  <string name="no_permissions">您需要授予权限以便访问通知</string>
+  <string name="no_permission_mprisreceiver">为了能够控制您的媒体播放器，您需要授予访问通知消息的权限</string>
+  <string name="send_ping">发送ping</string>
+  <string name="open_mpris_controls">多媒体控制</string>
+  <string name="remotekeyboard_editing_only_title">只有在编辑时才接受远程按键</string>
+  <string name="remotekeyboard_not_connected">没有活动的远程键盘链接，请在 Zorin Connect 中连接</string>
+  <string name="remotekeyboard_connected">远程键盘连接已启用</string>
+  <string name="remotekeyboard_multiple_connections">发现多个远程键盘连接，请选择设备进行配置</string>
+  <string name="open_mousepad">远程输入</string>
+  <string name="mousepad_info">在屏幕上移动手指来移动光标。轻击代表左键，双指或三指点击代表右键或中键。用双指滚动。用长按来拖放。</string>
+  <string name="mousepad_double_tap_settings_title">设置双指点击动作</string>
+  <string name="mousepad_triple_tap_settings_title">设置三指点击动作</string>
+  <string name="mousepad_sensitivity_settings_title">设置触摸板灵敏度</string>
+  <string name="mousepad_acceleration_profile_settings_title">设置指针加速</string>
+  <string name="mousepad_scroll_direction_title">滚动方向反向</string>
+  <string-array name="mousepad_tap_entries">
+    <item>右键点击</item>
+    <item>中键点击</item>
+    <item>无</item>
+  </string-array>
+  <string-array name="mousepad_sensitivity_entries">
+    <item>最慢</item>
+    <item>高于最慢</item>
+    <item>默认</item>
+    <item>高于默认</item>
+    <item>最快</item>
+  </string-array>
+  <string-array name="mousepad_acceleration_profile_entries">
+    <item>无加速</item>
+    <item>最弱</item>
+    <item>更弱</item>
+    <item>中等</item>
+    <item>更强</item>
+    <item>最强</item>
+  </string-array>
+  <string name="category_connected_devices">已连接设备</string>
+  <string name="category_not_paired_devices">可用设备</string>
+  <string name="category_remembered_devices">已记住设备</string>
+  <string name="device_menu_plugins">插件设置</string>
+  <string name="device_menu_unpair">取消配对</string>
+  <string name="device_not_reachable">配对设备不可及</string>
+  <string name="pair_new_device">配对新设备</string>
+  <string name="unknown_device">未知设备</string>
+  <string name="error_not_reachable">设备不可及</string>
+  <string name="error_already_requested">已在请求配对</string>
+  <string name="error_already_paired">设备已配对</string>
+  <string name="error_could_not_send_package">数据包无法发送</string>
+  <string name="error_timed_out">超时</string>
+  <string name="error_canceled_by_user">已被用户取消</string>
+  <string name="error_canceled_by_other_peer">已被另一方取消</string>
+  <string name="error_invalid_key">收到无效密钥</string>
+  <string name="encryption_info_title">加密信息</string>
+  <string name="encryption_info_msg_no_ssl">另一设备没有使用最新的 Zorin Connect，使用旧版加密方法。</string>
+  <string name="my_device_fingerprint">您的设备证书的 SHA1 指纹是：</string>
+  <string name="remote_device_fingerprint">远程设备证书的 SHA1 指纹是：</string>
+  <string name="pair_requested">已请求配对</string>
+  <string name="pairing_request_from">来自%1s的配对请求</string>
+  <string name="received_url_title">已从%1s接收链接</string>
+  <string name="received_url_text">点击以打开“%1s”</string>
+  <plurals name="incoming_file_title">
+    <item quantity="other">正在从 %2$s 接收 %1$d 个文件</item>
+  </plurals>
+  <plurals name="incoming_files_text">
+    <item quantity="other">(%3$d 个文件中的第 %2$d 个)：%1$s</item>
+  </plurals>
+  <string name="outgoing_file_title">正在向%1s发送文件</string>
+  <string name="outgoing_files_title">正在向 %1s 发送文件</string>
+  <plurals name="outgoing_files_text">
+    <item quantity="other">已发送 %2$d 个文件中的 %1$d 个</item>
+  </plurals>
+  <plurals name="received_files_title">
+    <item quantity="other">已从 %1$s 接收了 %2$d 个文件</item>
+  </plurals>
+  <plurals name="received_files_fail_title">
+    <item quantity="other">从 %1$s 接收的 %3$d 个文件中的 %2$d 个失败</item>
+  </plurals>
+  <string name="received_file_text">点击以打开“%1s”</string>
+  <string name="cannot_create_file">无法创建文件 %s</string>
+  <string name="sent_file_title">发送文件到%1s</string>
+  <string name="sent_file_text">%1s</string>
+  <string name="sent_file_failed_title">向 %1s 发送文件失败</string>
+  <string name="sent_file_failed_text">%1s</string>
+  <string name="tap_to_answer">点击以应答</string>
+  <string name="reconnect">重新连接</string>
+  <string name="right_click">发送右键点击</string>
+  <string name="middle_click">发送中键点击</string>
+  <string name="show_keyboard">显示键盘</string>
+  <string name="device_not_paired">设备未配对</string>
+  <string name="request_pairing">请求配对</string>
+  <string name="pairing_accept">接受</string>
+  <string name="pairing_reject">拒绝</string>
+  <string name="device">设备</string>
+  <string name="pair_device">进行配对</string>
+  <string name="settings">设置</string>
+  <string name="mpris_play">播放</string>
+  <string name="mpris_pause">Pause</string>
+  <string name="mpris_previous">前一个</string>
+  <string name="mpris_rew">后退</string>
+  <string name="mpris_ff">快进</string>
+  <string name="mpris_next">下一个</string>
+  <string name="mpris_volume">音量</string>
+  <string name="mpris_settings">多媒体设置</string>
+  <string name="mpris_time_settings_title">快进/后退按钮</string>
+  <string name="mpris_time_settings_summary">当按下时调整快进或后退的时间</string>
+  <string-array name="mpris_time_entries">
+    <item>10秒</item>
+    <item>20秒</item>
+    <item>30秒</item>
+    <item>1分钟</item>
+    <item>2分钟</item>
+  </string-array>
+  <string name="mpris_notification_settings_title">显示媒体控制通知部件</string>
+  <string name="mpris_notification_settings_summary">允许在不用打开 Zorin 连接的情况下控制媒体播放器</string>
+  <string name="share_to">分享到...</string>
+  <string name="protocol_version_older">该设备使用旧版本的协议</string>
+  <string name="protocol_version_newer">该设备使用较新版本的协议</string>
+  <string name="general_settings">常规设置</string>
+  <string name="plugin_settings">设置</string>
+  <string name="plugin_settings_with_name">%s设置</string>
+  <string name="device_name">设备名</string>
+  <string name="device_name_preference_summary">%s</string>
+  <string name="invalid_device_name">设备名无效</string>
+  <string name="shareplugin_text_saved">已收到文本，存至剪贴板</string>
+  <string name="custom_devices_settings">自定义设备列表</string>
+  <string name="pair_device_action">配对新设备</string>
+  <string name="unpair_device_action">取消配对 %s</string>
+  <string name="custom_device_list">通过IP增加设备</string>
+  <string name="delete_custom_device">删除 %s 吗？</string>
+  <string name="share_notification_preference">出声通知</string>
+  <string name="share_notification_preference_summary">当收到文件时震动并播放声音</string>
+  <string name="share_destination_customize">配置目标目录</string>
+  <string name="share_destination_customize_summary_disabled">接收的文件会出现在“Downloads”中</string>
+  <string name="share_destination_customize_summary_enabled">文件将会被存储在以下目录中</string>
+  <string name="share_destination_folder_preference">目标目录</string>
+  <string name="share">共享</string>
+  <string name="share_received_file">分享 \"%s\"</string>
+  <string name="title_activity_notification_filter">通知过滤器</string>
+  <string name="filter_apps_info">所选软件的通知将会被同步。</string>
+  <string name="sftp_internal_storage">内部存储</string>
+  <string name="sftp_all_files">所有文件</string>
+  <string name="sftp_sdcard_num">SD卡%d</string>
+  <string name="sftp_sdcard">SD卡</string>
+  <string name="sftp_readonly">(只读)</string>
+  <string name="sftp_camera">相机照片</string>
+  <string name="no_players_connected">未找到播放器</string>
+  <string name="mpris_player_on_device">%2$s上的%1$s</string>
+  <string name="send_files">发送文件</string>
+  <string name="pairing_title">Zorin Connect 设备</string>
+  <string name="pairing_description">其他在同一网络运行 Zorin Connect 的设备会在此处显示。</string>
+  <string name="device_paired">已配对设备</string>
+  <string name="device_rename_title">重命名设备</string>
+  <string name="device_rename_confirm">重命名</string>
+  <string name="refresh">刷新</string>
+  <string name="unreachable_description">此配对设备不可达。请确认它已经连接到与您相同的网络。</string>
+  <string name="on_data_message">似乎你正在使用蜂窝数据网络。Zorin Connect 只能在局域网中使用。</string>
+  <string name="no_file_browser">未安装文件浏览器</string>
+  <string name="pref_plugin_telepathy">发送短消息</string>
+  <string name="pref_plugin_telepathy_desc">从桌面发送短消息</string>
+  <string name="plugin_not_supported">设备不支持此插件</string>
+  <string name="findmyphone_title">找到我的手机</string>
+  <string name="findmyphone_title_tablet">找到我的平板电脑</string>
+  <string name="findmyphone_title_tv">查找我的电视</string>
+  <string name="findmyphone_description">让设备响铃从而找到它</string>
+  <string name="findmyphone_found">找到</string>
+  <string name="open">打开</string>
+  <string name="close">关闭</string>
+  <string name="no_permissions_storage">您需要授予权限以访问存储</string>
+  <string name="plugins_need_permission">某些插件需要权限才能工作 (点击以获取更多信息)：</string>
+  <string name="permission_explanation">这个插件需要权限才能工作</string>
+  <string name="optional_permission_explanation">您需要授予额外权限以启用全部功能</string>
+  <string name="plugins_need_optional_permission">因缺少权限，某些插件的一些功能已禁用（点击以查看更多信息）：</string>
+  <string name="sftp_permission_explanation">此应用需要手机存储权限才能从您的 PC 访问手机内的文件</string>
+  <string name="share_optional_permission_explanation">您需要给予访问手机存储的权限才能在手机和桌面计算机之间分享文件</string>
+  <string name="telepathy_permission_explanation">从计算机桌面读取、写入短消息需要向应用程序授予 SMS 权限</string>
+  <string name="telephony_permission_explanation">您必须给予访问手机通话和短信的权限才能从桌面计算机查看通话记录和短信</string>
+  <string name="telephony_optional_permission_explanation">要查看联系人姓名而非电话号码，您需要授予访问手机通讯录的权限</string>
+  <string name="contacts_permission_explanation">要与桌面共享通讯薄，您需要给予联系人权限</string>
+  <string name="select_ringtone">选择铃声</string>
+  <string name="telephony_pref_blocked_title">已屏蔽的号码</string>
+  <string name="telephony_pref_blocked_dialog_desc">不要显示来自这些号码的电话和短信。一行一个号码</string>
+  <string name="mpris_coverart_description">当前媒体的封面艺术</string>
+  <string name="device_icon_description">设备图标</string>
+  <string name="settings_icon_description">设置图标</string>
+  <string name="presenter_fullscreen">全屏</string>
+  <string name="presenter_exit">退出演示</string>
+  <string name="presenter_lock_tip">您可以锁定设备，用音量键作为上一页/下一页按钮</string>
+  <string name="add_command">添加命令</string>
+  <string name="addcommand_explanation">没有已注册的命令</string>
+  <string name="addcommand_explanation2">您可以在 Zorin Connect 系统设置中添加新命令</string>
+  <string name="add_command_description">您可以在桌面添加新命令</string>
+  <string name="pref_plugin_mprisreceiver">控制媒体播放器</string>
+  <string name="pref_plugin_mprisreceiver_desc">从其他设备控制您手机的媒体播放器</string>
+  <string name="dark_theme">暗色主题</string>
+  <string name="notification_channel_default">其他通知</string>
+  <string name="notification_channel_persistent">持久性通知</string>
+  <string name="notification_channel_media_control">媒体控制</string>
+  <string name="notification_channel_filetransfer">文件传送</string>
+  <string name="mpris_stop">停止但前播放器</string>
+  <string name="copy_url_to_clipboard">复制 URL 到剪贴板</string>
+  <string name="clipboard_toast">已复制到剪贴板</string>
+  <string name="runcommand_notreachable">设备不可达</string>
+  <string name="runcommand_notpaired">设备未配对</string>
+  <string name="runcommand_nosuchdevice">没有此设备</string>
+  <string name="runcommand_noruncommandplugin">此设备没有启用“运行命令插件”</string>
+  <string name="pref_plugin_findremotedevice">查找远程设备</string>
+  <string name="pref_plugin_findremotedevice_desc">让远程设备响铃</string>
+  <string name="ring">响铃</string>
+  <string name="pref_plugin_systemvolume">系统音量</string>
+  <string name="pref_plugin_systemvolume_desc">在远程设备上控制系统音量</string>
+  <string name="mute">静音</string>
+  <string name="all">全部</string>
+  <string name="devices">设备</string>
+  <string name="settings_rename">设备名</string>
+  <string name="settings_dark_mode">暗色主题</string>
+  <string name="settings_more_settings_title">更多设置</string>
+  <string name="settings_more_settings_text">每个设备的独立设置可以在设备页内的“插件设置”下找到。</string>
+  <string name="setting_persistent_notification">启用常驻通知栏</string>
+  <string name="extra_options">附加选项</string>
+  <string name="privacy_options">隐私选项</string>
+  <string name="set_privacy_options">设置您的隐私选项</string>
+  <string name="new_notification">新通知</string>
+  <string name="block_contents">阻止通知内容</string>
+  <string name="block_images">阻止通知图像</string>
+  <string name="notification_channel_receivenotification">来自其他设备的通知</string>
+</resources>

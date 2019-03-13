@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="6dip"
+        android:bottom="6dip"
+        android:left="6dip"
+        android:right="6dip"
+        android:drawable="@drawable/button_round">
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListPreference
+        android:id="@+id/mpris_time_preference"
+        android:defaultValue="@string/mpris_time_default"
+        android:entries="@array/mpris_time_entries"
+        android:entryValues="@array/mpris_time_entries_values"
+        android:key="@string/mpris_time_key"
+        android:summary="@string/mpris_time_settings_summary"
+        android:title="@string/mpris_time_settings_title" />
+
+    <CheckBoxPreference
+        android:id="@+id/mpris_notification_preference"
+        android:defaultValue="true"
+        android:key="@string/mpris_notification_key"
+        android:summary="@string/mpris_notification_settings_summary"
+        android:title="@string/mpris_notification_settings_title" />
+
+</PreferenceScreen>

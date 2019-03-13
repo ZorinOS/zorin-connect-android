@@ -1,0 +1,60 @@
+<resources>
+    <color name="primary">#FFFFFF</color>
+    <color name="statusBarBackground">#808080</color>
+    <color name="accent">#15a6f0</color>
+    <color name="text">#333333</color>
+    <color name="textSecondary">#999999</color>
+    <color name="buttonBackground">#ebebeb</color>
+    <color name="buttonDisabledBackground">#f5f5f5</color>
+
+    <!-- NoActionBar because we use a Toolbar widget as ActionBar -->
+    <style name="KdeConnectThemeBase" parent="Theme.MaterialComponents.Light">
+        <!-- The three colors used by system widgets, according to https://chris.banes.me/2014/10/17/appcompat-v21/ -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/statusBarBackground</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="colorControlHighlight">@color/textSecondary</item>
+        <item name="android:windowBackground">@color/primary</item>
+        <item name="toolbarStyle">@style/KdeConnectTheme.Toolbar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="mainNavigationViewStyle">@style/MainNavigationView</item>
+        <item name="disableableButtonStyle">@style/DisableableButton</item>
+        <item name="buttonBackgroundColor">@color/buttonBackground</item>
+        <item name="colorHighContrast">@android:color/black</item>
+        <!-- TODO: The 2 items below change to much (eg snackbar text is now black, should be white) -->
+        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:textColorSecondary">@color/textSecondary</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="textColor">@color/text</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+        <item name="colorButtonNormal">@color/buttonBackground</item>
+        <item name="actionModeStyle">@style/ActionModeStyle</item>
+    </style>
+
+    <style name="KdeConnectThemeBase.NoActionBar" parent="KdeConnectThemeBase">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="KdeConnectTheme" parent="KdeConnectThemeBase" />
+
+    <style name="KdeConnectTheme.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+    <style name="KdeConnectTheme.NoActionBar" parent="KdeConnectThemeBase.NoActionBar" />
+
+    <style name="MainNavigationView">
+        <item name="android:background">@drawable/state_list_drawer_background</item>
+        <item name="itemBackground">@drawable/state_list_drawer_background</item>
+        <item name="itemIconTint">@color/state_list_drawer_text</item>
+        <item name="itemTextColor">@color/state_list_drawer_text</item>
+    </style>
+
+    <style name="DisableableButton" parent="ThemeOverlay.AppCompat">
+        <item name="colorButtonNormal">@drawable/disableable_button</item>
+    </style>
+
+    <style name="ActionModeStyle" parent="Widget.AppCompat.ActionMode">
+        <item name="background">@color/accent</item>
+    </style>
+</resources>

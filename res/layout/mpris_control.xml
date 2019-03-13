@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mpris_control_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/no_players"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/no_players_connected"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/player_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/now_playing_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:padding="8dip"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ImageButton
+        android:id="@+id/play_button"
+        android:layout_width="fill_parent"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:layout_weight="0"
+        android:adjustViewBounds="false"
+        android:baselineAlignBottom="true"
+        android:clickable="false"
+        android:contentDescription="@string/mpris_play"
+        android:src="@drawable/ic_play_black"
+        android:background="@drawable/button_ripple"
+        android:tint="?attr/android:textColor"
+        style="?attr/disableableButtonStyle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/prev_button"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/mpris_previous"
+            android:src="@drawable/ic_previous_black"
+            android:background="@drawable/button_ripple"
+            android:tint="?attr/android:textColor"
+            style="?attr/disableableButtonStyle" />
+
+        <ImageButton
+            android:id="@+id/rew_button"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/mpris_rew"
+            android:src="@drawable/ic_rewind_black"
+            android:background="@drawable/button_ripple"
+            android:tint="?attr/android:textColor"
+            style="?attr/disableableButtonStyle" />
+
+        <ImageButton
+            android:id="@+id/stop_button"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/mpris_stop"
+            android:src="@drawable/ic_stop"
+            android:background="@drawable/button_ripple"
+            android:tint="?attr/android:textColor"
+            style="?attr/disableableButtonStyle" />
+
+
+        <ImageButton
+            android:id="@+id/ff_button"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/mpris_ff"
+            android:src="@drawable/ic_fast_forward_black"
+            android:background="@drawable/button_ripple"
+            android:tint="?attr/android:textColor"
+            style="?attr/disableableButtonStyle" />
+
+        <ImageButton
+            android:id="@+id/next_button"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.25"
+            android:contentDescription="@string/mpris_next"
+            android:src="@drawable/ic_next_black"
+            android:background="@drawable/button_ripple"
+            android:tint="?attr/android:textColor"
+            style="?attr/disableableButtonStyle" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/progress_slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/progress_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="8dip"
+            android:singleLine="true"
+            android:text="00:00"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <SeekBar
+            android:id="@+id/positionSeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/time_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="8dip"
+            android:singleLine="true"
+            android:text="00:00"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/volume_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dip"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageView"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
+            android:layout_marginEnd="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_weight="0"
+            android:contentDescription="@string/mpris_volume"
+            android:maxWidth="30dip"
+            android:src="@drawable/ic_volume_black"
+            app:tint="?android:attr/textColorSecondary" />
+
+
+        <SeekBar
+            android:id="@+id/volume_seek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:max="100" />
+
+    </LinearLayout>
+</LinearLayout>

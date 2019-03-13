@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="Zorin_connect">Zorin Connect</string>
+  <string name="foreground_notification_no_devices">Ikkje tilkopla ei eining</string>
+  <string name="foreground_notification_devices">Kopla til: %s</string>
+  <string name="pref_plugin_telephony">Telefonvarsling</string>
+  <string name="pref_plugin_telephony_desc">Send varsling ved oppringing</string>
+  <string name="pref_plugin_battery">Batterirapport</string>
+  <string name="pref_plugin_battery_desc">Meld regelmessig frå om batteristatusen</string>
+  <string name="pref_plugin_sftp">Vis filsystem</string>
+  <string name="pref_plugin_sftp_desc">Tillat lesing av filsystemet frå datamaskina</string>
+  <string name="pref_plugin_clipboard">Synkroniser utklippstavle</string>
+  <string name="pref_plugin_clipboard_desc">Del innhaldet på utklippstavla</string>
+  <string name="pref_plugin_mousepad">Fjernstyring</string>
+  <string name="pref_plugin_mousepad_desc">Bruk telefonen eller nettbrettet som styreplate og tastatur</string>
+  <string name="pref_plugin_presenter_desc">Bruk eininga til å byta lysbilete i presentasjonar</string>
+  <string name="pref_plugin_remotekeyboard">Ta imot eksterne tastetrykk</string>
+  <string name="pref_plugin_remotekeyboard_desc">Ta imot tastetrykk frå eksterne einingar</string>
+  <string name="pref_plugin_mpris">Mediekontrollar</string>
+  <string name="pref_plugin_mpris_desc">Gje fjernkontroll til mediespelarar</string>
+  <string name="pref_plugin_runcommand">Køyr kommando</string>
+  <string name="pref_plugin_runcommand_desc">Utløys fjernkommandoar frå telefonen eller nettbrettet</string>
+  <string name="pref_plugin_contacts">Kontaktsynkronisering</string>
+  <string name="pref_plugin_contacts_desc">Tillat synkronisering av adresseboka på eininga</string>
+  <string name="pref_plugin_ping">Ping</string>
+  <string name="pref_plugin_ping_desc">Send og ta imot pingsignal</string>
+  <string name="pref_plugin_notifications">Varslingssynkronisering</string>
+  <string name="pref_plugin_notifications_desc">Få tilgang til varslingar frå andre einingar</string>
+  <string name="pref_plugin_receive_notifications">Få varslingar</string>
+  <string name="pref_plugin_receive_notifications_desc">Få varslingar frå den andre eininga og vis dei i Android</string>
+  <string name="pref_plugin_sharereceiver">Del og ta imot</string>
+  <string name="pref_plugin_sharereceiver_desc">Del filer og nettadresser mellom einingar</string>
+  <string name="plugin_not_available">Denne funksjonen er ikkje tilgjengeleg i din Android-versjon</string>
+  <string name="device_list_empty">Ingen einingar</string>
+  <string name="ok">OK</string>
+  <string name="cancel">Avbryt</string>
+  <string name="open_settings">Opna innstillingar</string>
+  <string name="no_permissions">Du må gje tilgang til lesing av varslingar</string>
+  <string name="no_permission_mprisreceiver">Du må gje tilgang til varslingar for å kunne kontrollera mediespelarar</string>
+  <string name="send_ping">Send pingsignal</string>
+  <string name="open_mpris_controls">Mediekontroll</string>
+  <string name="remotekeyboard_editing_only_title">Handter eksterne tastetrykk berre ved redigering</string>
+  <string name="remotekeyboard_not_connected">Det finst ikkje noko verksamt tastatursamband (må setjast opp i Zorin Connect)</string>
+  <string name="remotekeyboard_connected">Eksternt tastatursamband er verksamt</string>
+  <string name="remotekeyboard_multiple_connections">Det finst meir enn eitt eksternt tastatursamband (vel eining å setja opp)</string>
+  <string name="open_mousepad">Fjernstyring</string>
+  <string name="mousepad_info">Dra ein finger over skjermen for å flytta peikaren på datamaskina. Trykk for å klikka, og bruk to eller tre fingrar for høvesvis høgre- og midtknappen. Bruk to fingrar for å rulla. Trykk lenge for å dra og sleppa.</string>
+  <string name="mousepad_double_tap_settings_title">Vel handling for tofingertrykk</string>
+  <string name="mousepad_triple_tap_settings_title">Vel handling for trefingertrykk</string>
+  <string name="mousepad_sensitivity_settings_title">Vel følsemd for styreplate</string>
+  <string name="mousepad_acceleration_profile_settings_title">Vel peikarakselerasjon</string>
+  <string name="mousepad_scroll_direction_title">Omvend rulleretning</string>
+  <string-array name="mousepad_tap_entries">
+    <item>Høgreklikk</item>
+    <item>Midtklikk</item>
+    <item>Ingenting</item>
+  </string-array>
+  <string-array name="mousepad_sensitivity_entries">
+    <item>Saktast</item>
+    <item>Raskare enn saktast</item>
+    <item>Standard</item>
+    <item>Raskare enn standard</item>
+    <item>Raskast</item>
+  </string-array>
+  <string-array name="mousepad_acceleration_profile_entries">
+    <item>Ingen akselerasjon</item>
+    <item>Svakast</item>
+    <item>Svakare</item>
+    <item>Middels</item>
+    <item>Sterkare</item>
+    <item>Sterkast</item>
+  </string-array>
+  <string name="category_connected_devices">Tilkopla einingar</string>
+  <string name="category_not_paired_devices">Tilgjengelege einingar</string>
+  <string name="category_remembered_devices">Hugs einingar</string>
+  <string name="device_menu_plugins">Programtillegg-oppsett</string>
+  <string name="device_menu_unpair">Løys paring</string>
+  <string name="device_not_reachable">Får ikkje kontakt med para eining</string>
+  <string name="pair_new_device">Par ny eining</string>
+  <string name="unknown_device">Ukjend eining</string>
+  <string name="error_not_reachable">Får ikkje kontakt med eininga</string>
+  <string name="error_already_requested">Paringsførespurnad er alt send</string>
+  <string name="error_already_paired">Eininga er alt para</string>
+  <string name="error_could_not_send_package">Klarte ikkje senda pakke</string>
+  <string name="error_timed_out">Tidsavbrot</string>
+  <string name="error_canceled_by_user">Avbroten av brukar</string>
+  <string name="error_canceled_by_other_peer">Avbroten av den andre eininga</string>
+  <string name="error_invalid_key">Fekk ugyldig nøkkel</string>
+  <string name="encryption_info_title">Krypteringsinfo</string>
+  <string name="encryption_info_msg_no_ssl">Den andre eininga brukar ein gammal versjon av Zorin Connect, med ein utdatert krypteringsmetode.</string>
+  <string name="my_device_fingerprint">SHA-fingeravtrykket til einingssertifikatet er:</string>
+  <string name="remote_device_fingerprint">SHA-fingeravtrykket fjerneiningssertifikatet er:</string>
+  <string name="pair_requested">Paringsførespurnad</string>
+  <string name="pairing_request_from">Paringsførespurnad frå %1s</string>
+  <string name="received_url_title">Fekk lenkje frå %1s</string>
+  <string name="received_url_text">Trykk for å opna «%1s»</string>
+  <plurals name="incoming_file_title">
+    <item quantity="one">Fekk %1$d fil frå %2$s</item>
+    <item quantity="other">Fekk %1$d filer frå %2$s</item>
+  </plurals>
+  <plurals name="incoming_files_text">
+    <item quantity="one">Fil: %1s</item>
+    <item quantity="other">(Fil %2$d av %3$d): %1$s</item>
+  </plurals>
+  <string name="outgoing_file_title">Sender fil til %1s</string>
+  <string name="outgoing_files_title">Sender filer til %1s</string>
+  <plurals name="outgoing_files_text">
+    <item quantity="one">Sende %1$d fil</item>
+    <item quantity="other">Sende %1$d av %2$d filer</item>
+  </plurals>
+  <plurals name="received_files_title">
+    <item quantity="one">Fekk fil frå %1$s</item>
+    <item quantity="other">Fekk %2$d filer frå %1$s</item>
+  </plurals>
+  <plurals name="received_files_fail_title">
+    <item quantity="one">Klarte ikkje ta imot fil frå %1$s</item>
+    <item quantity="other">Klarte ikkje ta imot %2$d av %3$d filer frå %1$s</item>
+  </plurals>
+  <string name="received_file_text">Trykk for å opna «%1s»</string>
+  <string name="cannot_create_file">Klarte ikkje oppretta fila %s</string>
+  <string name="sent_file_title">Send fil til %1s</string>
+  <string name="sent_file_text">%1s</string>
+  <string name="sent_file_failed_title">Klarte ikkje senda fil til %1s</string>
+  <string name="sent_file_failed_text">%1s</string>
+  <string name="tap_to_answer">Trykk for å svara</string>
+  <string name="reconnect">Kopla til på nytt</string>
+  <string name="right_click">Send høgreklikk</string>
+  <string name="middle_click">Send midtklikk</string>
+  <string name="show_keyboard">Vis tastatur</string>
+  <string name="device_not_paired">Eininga er ikkje para</string>
+  <string name="request_pairing">Be om paring</string>
+  <string name="pairing_accept">Godta</string>
+  <string name="pairing_reject">Avvis</string>
+  <string name="device">Eining</string>
+  <string name="pair_device">Par ny eining</string>
+  <string name="settings">Innstillingar</string>
+  <string name="mpris_play">Spel</string>
+  <string name="mpris_pause">Pause</string>
+  <string name="mpris_previous">Førre</string>
+  <string name="mpris_rew">Spol tilbake</string>
+  <string name="mpris_ff">Spol fram</string>
+  <string name="mpris_next">Neste</string>
+  <string name="mpris_volume">Lydstyrke</string>
+  <string name="mpris_settings">Medieinnstillingar</string>
+  <string name="mpris_time_settings_title">Spoleknappar</string>
+  <string name="mpris_time_settings_summary">Juster tida for spoling ved trykking</string>
+  <string-array name="mpris_time_entries">
+    <item>10 sekund</item>
+    <item>20 sekund</item>
+    <item>30 sekund</item>
+    <item>1 minutt</item>
+    <item>2 minutt</item>
+  </string-array>
+  <string name="mpris_notification_settings_title">Vis varsling med avspelingskontrollar</string>
+  <string name="mpris_notification_settings_summary">Tillat å kontrollera mediespelarar utan å opna Zorin Connect</string>
+  <string name="share_to">Del til …</string>
+  <string name="protocol_version_older">Denne eininga brukar ein gammal protokollversjon</string>
+  <string name="protocol_version_newer">Denne eininga brukar ein nyare protokollversjon</string>
+  <string name="general_settings">Generelle innstillingar</string>
+  <string name="plugin_settings">Innstillingar</string>
+  <string name="plugin_settings_with_name">%s-innstillingar</string>
+  <string name="device_name">Einingsnamn</string>
+  <string name="device_name_preference_summary">%s</string>
+  <string name="invalid_device_name">Ugyldig einingsnamn</string>
+  <string name="shareplugin_text_saved">Fekk tekst, som vart lagra på utklippstavla</string>
+  <string name="custom_devices_settings">Tilpassa einingsliste</string>
+  <string name="pair_device_action">Par ny eining</string>
+  <string name="unpair_device_action">Løys paring for %s</string>
+  <string name="custom_device_list">Legg til eining basert på IP</string>
+  <string name="delete_custom_device">Vil du sletta %s?</string>
+  <string name="share_notification_preference">Lydvarsling</string>
+  <string name="share_notification_preference_summary">Vibrer og spel ein lyd ved mottak av fil</string>
+  <string name="share_destination_customize">Sjølvvald målmappe</string>
+  <string name="share_destination_customize_summary_disabled">Mottekne filer vert lagra i nedlastingsmappa</string>
+  <string name="share_destination_customize_summary_enabled">Mottekne filer vert lagra i mappa nedanfor</string>
+  <string name="share_destination_folder_preference">Målmappe</string>
+  <string name="share">Del</string>
+  <string name="share_received_file">Del «%s»</string>
+  <string name="title_activity_notification_filter">Varslingsfilter</string>
+  <string name="filter_apps_info">Varslingar vert synkroniserte for dei valde appane.</string>
+  <string name="sftp_internal_storage">Intern lagring</string>
+  <string name="sftp_all_files">Alle filer</string>
+  <string name="sftp_sdcard_num">SD-kort %d</string>
+  <string name="sftp_sdcard">SD-kort</string>
+  <string name="sftp_readonly">(skriveverna)</string>
+  <string name="sftp_camera">Kamerabilete</string>
+  <string name="no_players_connected">Fann ingen spelarar</string>
+  <string name="mpris_player_on_device">%1$s på %2$s</string>
+  <string name="send_files">Send filer</string>
+  <string name="pairing_title">Zorin Connect-einingar</string>
+  <string name="pairing_description">Andre einingar i nettverket som køyrer Zorin Connect, vil dukka opp her.</string>
+  <string name="device_paired">Eininga er para</string>
+  <string name="device_rename_title">Endra namn på eining</string>
+  <string name="device_rename_confirm">Endra namn</string>
+  <string name="refresh">Oppdater</string>
+  <string name="unreachable_description">Får ikkje kontakt med den para eininga. Sjå til at ho er kopla til same nettverk.</string>
+  <string name="on_data_message">Det ser ut til at er kopla til eit mobilt samband. Zorin Connect verkar berre på lokale nettverk.</string>
+  <string name="no_file_browser">Ingen filhandsamarar er installerte.</string>
+  <string name="pref_plugin_telepathy">Send SMS</string>
+  <string name="pref_plugin_telepathy_desc">Send tekstmeldingar frå datamaskina</string>
+  <string name="plugin_not_supported">Dette tillegget er ikkje støtta av eininga</string>
+  <string name="findmyphone_title">Finn telefonen min</string>
+  <string name="findmyphone_title_tablet">Finn nettbrettet mitt</string>
+  <string name="findmyphone_title_tv">Finn TV-en min</string>
+  <string name="findmyphone_description">Spel av lydsignal på eininga, slik at du lett kan finna ho</string>
+  <string name="findmyphone_found">Funnen</string>
+  <string name="open">Opna</string>
+  <string name="close">Lukk</string>
+  <string name="no_permissions_storage">Du må gje Zorin Connect løyve til å få tilgang til lagringsområdet</string>
+  <string name="plugins_need_permission">Nokre av tillegga treng utvida løyva for å fungera (trykk på dei for meir informasjon):</string>
+  <string name="permission_explanation">Dette tillegget treng utvida løyve for å fungera</string>
+  <string name="optional_permission_explanation">Du må gje utvida løyve for at alle funksjonane skal fungera</string>
+  <string name="plugins_need_optional_permission">På grunn av manglande løyve har nokre av tillegga funksjonar slåtte av (trykk på dei for meir informasjon):</string>
+  <string name="sftp_permission_explanation">For å gje tilgang til filene frå datamaskina treng appen leseløyve til lagringsområdet på telefonen</string>
+  <string name="share_optional_permission_explanation">For å kunna dela filer mellom telefonen og datamaskina må du gje appen lese- og skriveløyve til lagringsområdet på telefonen</string>
+  <string name="telepathy_permission_explanation">For å kunna lesa og skriva tekstmeldingar frå datamaskina må du gje appen tilgang til SMS</string>
+  <string name="telephony_permission_explanation">For å kunna sjå telefonsamtalar og tekstmeldingar frå datamaskina må du gje appen tilgang til telefon- og SMS-funksjonar</string>
+  <string name="telephony_optional_permission_explanation">For å kunna sjå namn på kontaktar i staden for berre telefonnummeret må du gje appen tilgang til kontaktlista di</string>
+  <string name="contacts_permission_explanation">For å kunna dela adresseboka di med datamaskina må du gje appen lese- og skriveløyve til adresseboka</string>
+  <string name="select_ringtone">Vel ringjetone</string>
+  <string name="telephony_pref_blocked_title">Blokkerte nummer</string>
+  <string name="telephony_pref_blocked_dialog_desc">Ikkje vis oppringingar og SMS-ar frå desse telefonnummera. Skriv inn eitt telefonnummer per linje.</string>
+  <string name="mpris_coverart_description">Omslagsbilete til gjeldande mediefil</string>
+  <string name="device_icon_description">Einingsikon</string>
+  <string name="settings_icon_description">Innstillingsikon</string>
+  <string name="presenter_fullscreen">Fullskjerm</string>
+  <string name="presenter_exit">Avslutt presentasjon</string>
+  <string name="add_command">Legg til kommando</string>
+  <string name="addcommand_explanation">Ingen kommandoar er registrerte</string>
+  <string name="addcommand_explanation2">Du kan leggja til nye kommandoar i systeminnstillingane til Zorin Connect</string>
+  <string name="add_command_description">Du kan leggja til kommandoar på skrivebordet</string>
+  <string name="pref_plugin_mprisreceiver">Mediespelarkontrollar</string>
+  <string name="pref_plugin_mprisreceiver_desc">Kontroller mediespelarar på telefonen din frå ei anna eining</string>
+  <string name="dark_theme">Mørkt tema</string>
+  <string name="notification_channel_default">Andre varslingar</string>
+  <string name="notification_channel_persistent">Evigvarande varslingar</string>
+  <string name="notification_channel_media_control">Mediestyring</string>
+  <string name="notification_channel_filetransfer">Filoverføring</string>
+  <string name="mpris_stop">Stopp gjeldande avspelar</string>
+  <string name="copy_url_to_clipboard">Kopier adresse til utklippstavla</string>
+  <string name="clipboard_toast">Kopiert til utklippstavla</string>
+  <string name="runcommand_notreachable">Får ikkje kontakt med eininga</string>
+  <string name="runcommand_notpaired">Eininga er ikkje para</string>
+  <string name="runcommand_nosuchdevice">Eininga finst ikkje</string>
+  <string name="runcommand_noruncommandplugin">Eininga har ikkje «Køyr kommando»-tillegget slått på</string>
+  <string name="pref_plugin_findremotedevice">Find ekstern eining</string>
+  <string name="pref_plugin_findremotedevice_desc">Ring til ekstern eining</string>
+  <string name="ring">Ring</string>
+  <string name="pref_plugin_systemvolume">Systemlydstyrke</string>
+  <string name="pref_plugin_systemvolume_desc">Juster systemlydstyrken til ekstern eining</string>
+  <string name="mute">Demp lyd</string>
+  <string name="all">Alle</string>
+  <string name="devices">Einingar</string>
+  <string name="settings_rename">Einingsnamn</string>
+  <string name="settings_dark_mode">Mørkt tema</string>
+  <string name="settings_more_settings_title">Fleire innstillingar</string>
+  <string name="settings_more_settings_text">Innstillingar for einskildeiningar finn du under «Programtillegg-oppsett» på kvar eining.</string>
+  <string name="setting_persistent_notification">Vis evigvarande varsling</string>
+  <string name="setting_persistent_notification_oreo">Evigvarande varsling</string>
+  <string name="setting_persistent_notification_description">Trykk for å slå på/av i varslingsinnstillingane</string>
+  <string name="extra_options">Tilleggsval</string>
+  <string name="privacy_options">Personverninstillingar</string>
+  <string name="set_privacy_options">Vel personverninnstillingar</string>
+  <string name="new_notification">Ny varsling</string>
+  <string name="block_contents">Blokker varslingsinnhald</string>
+  <string name="block_images">Blokker bilete i varslingar</string>
+  <string name="notification_channel_receivenotification">Varslingar frå andre einingar</string>
+</resources>

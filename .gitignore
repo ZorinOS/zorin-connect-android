@@ -1,0 +1,14 @@
+local.properties
+.gradle/
+.idea/
+out/
+gen/
+bin/
+build/
+target/
+classes/
+gradle
+*.iml
+*.keystore
+.directory
+GPUCache/

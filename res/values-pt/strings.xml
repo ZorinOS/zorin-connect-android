@@ -1,0 +1,276 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="kde_connect">Zorin Connect</string>
+  <string name="foreground_notification_no_devices">Não está ligado a nenhum dispositivo</string>
+  <string name="foreground_notification_devices">Ligado a: %s</string>
+  <string name="pref_plugin_telephony">Notificação telefónica</string>
+  <string name="pref_plugin_telephony_desc">Enviar notificações para as chamadas recebidas</string>
+  <string name="pref_plugin_battery">Relatório da bateria</string>
+  <string name="pref_plugin_battery_desc">Comunicar periodicamente o estado da bateria</string>
+  <string name="pref_plugin_sftp">Exposição do sistema de ficheiros</string>
+  <string name="pref_plugin_sftp_desc">Permite navegar pelo sistema de ficheiros remoto deste dispositivo</string>
+  <string name="pref_plugin_clipboard">Sincronização da área de transferência</string>
+  <string name="pref_plugin_clipboard_desc">Partilhar o conteúdo da área de transferência</string>
+  <string name="pref_plugin_mousepad">Introdução remota de dados</string>
+  <string name="pref_plugin_mousepad_desc">Usar o seu telefone ou \'tablet\' como um rato ou teclado</string>
+  <string name="pref_plugin_presenter">Apresentação remota</string>
+  <string name="pref_plugin_presenter_desc">Use o seu dispositivo para mudar de \'slides\' numa apresentação</string>
+  <string name="pref_plugin_remotekeyboard">Receber as teclas remotamente</string>
+  <string name="pref_plugin_remotekeyboard_desc">Receber eventos de teclas dos dispositivos remotos</string>
+  <string name="pref_plugin_mpris">Comandos multimédia</string>
+  <string name="pref_plugin_mpris_desc">Oferece um comando à distância para o seu leitor multimédia</string>
+  <string name="pref_plugin_runcommand">Executar um Comando</string>
+  <string name="pref_plugin_runcommand_desc">Despoletar comandos remotos a partir do seu telefone ou \'tablet\'</string>
+  <string name="pref_plugin_contacts">Sincronização de Contactos</string>
+  <string name="pref_plugin_contacts_desc">Permitir a sincronização do livro de contactos do dispositivo</string>
+  <string name="pref_plugin_ping">Contacto</string>
+  <string name="pref_plugin_ping_desc">Enviar e receber pedidos de contacto (\'ping\')</string>
+  <string name="pref_plugin_notifications">Sincronização da notificação</string>
+  <string name="pref_plugin_notifications_desc">Aceder às suas notificações a partir de outros dispositivos</string>
+  <string name="pref_plugin_receive_notifications">Receber as notificações</string>
+  <string name="pref_plugin_receive_notifications_desc">Receber as notificações de outros dispositivos e mostrá-las no Android</string>
+  <string name="pref_plugin_sharereceiver">Partilhar e receber</string>
+  <string name="pref_plugin_sharereceiver_desc">Partilhar ficheiros e URL\'s entre dispositivos</string>
+  <string name="plugin_not_available">Esta funcionalidade não está disponível na sua versão do Android</string>
+  <string name="device_list_empty">Sem dispositivos</string>
+  <string name="ok">OK</string>
+  <string name="cancel">Cancelar</string>
+  <string name="open_settings">Abrir a configuração</string>
+  <string name="no_permissions">Precisa de dar permissões de acesso às notificações</string>
+  <string name="no_permission_mprisreceiver">Para poder controlar os seus leitores multimédia, terá de dar acesso às notificações</string>
+  <string name="send_ping">Enviar um pedido de contacto</string>
+  <string name="open_mpris_controls">Comando multimédia</string>
+  <string name="remotekeyboard_editing_only_title">Lidar com as teclas remotas apenas na edição</string>
+  <string name="remotekeyboard_not_connected">Não existe nenhuma ligação activa a teclados remotos - crie uma no \'Zorin Connect\'</string>
+  <string name="remotekeyboard_connected">A ligação ao teclado remoto está activa</string>
+  <string name="remotekeyboard_multiple_connections">Existe mais que uma ligação a teclados remotos; seleccione o dispositivo a configurar</string>
+  <string name="open_mousepad">Introdução remota de dados</string>
+  <string name="mousepad_info">Mova um dedo pelo ecrã para mover o cursor do rato. Dê um toque para carregar no botão esquerdo e use dois/três dedos para os botões direito e do meio. Use uma pressão longa para arrastar e largar.</string>
+  <string name="mousepad_double_tap_settings_title">Definir a acção do toque com dois dedos</string>
+  <string name="mousepad_triple_tap_settings_title">Definir a acção do toque com três dedos</string>
+  <string name="mousepad_sensitivity_settings_title">Definir a sensibilidade do rato por toque</string>
+  <string name="mousepad_acceleration_profile_settings_title">Definir a aceleração do cursor</string>
+  <string name="mousepad_scroll_direction_title">Direcção de Deslocamento Inversa</string>
+  <string-array name="mousepad_tap_entries">
+    <item>Botão direito</item>
+    <item>Botão do meio</item>
+    <item>Nada</item>
+  </string-array>
+  <string-array name="mousepad_sensitivity_entries">
+    <item>Mais Lento</item>
+    <item>Ainda Mais Lento</item>
+    <item>Predefinição</item>
+    <item>Acima da Predefinição</item>
+    <item>Mais Rápido</item>
+  </string-array>
+  <string-array name="mousepad_acceleration_profile_entries">
+    <item>Sem Aceleração</item>
+    <item>Mais Fraca</item>
+    <item>Fraca</item>
+    <item>Média</item>
+    <item>Forte</item>
+    <item>Mais Forte</item>
+  </string-array>
+  <string name="category_connected_devices">Dispositivos ligados</string>
+  <string name="category_not_paired_devices">Dispositivos disponíveis</string>
+  <string name="category_remembered_devices">Dispositivos recordados</string>
+  <string name="device_menu_plugins">Configuração do \'plugin\'</string>
+  <string name="device_menu_unpair">Desemparelhar</string>
+  <string name="device_not_reachable">O dispositivo emparelhado está inacessível</string>
+  <string name="pair_new_device">Emparelhar um novo dispositivo</string>
+  <string name="unknown_device">Dispositivo desconhecido</string>
+  <string name="error_not_reachable">Dispositivo inacessível</string>
+  <string name="error_already_requested">O emparelhamento já foi pedido</string>
+  <string name="error_already_paired">O dispositivo já foi emparelhado</string>
+  <string name="error_could_not_send_package">Não foi possível enviar o pacote</string>
+  <string name="error_timed_out">Expirou o tempo-limite</string>
+  <string name="error_canceled_by_user">Cancelado pelo utilizador</string>
+  <string name="error_canceled_by_other_peer">Cancelado pela outra máquina</string>
+  <string name="error_invalid_key">Chave inválida recebida</string>
+  <string name="encryption_info_title">Dados de Encriptação</string>
+  <string name="encryption_info_msg_no_ssl">O outro dispositivo não usa uma versão recente do Zorin Connect; será usado o método antigo de encriptação.</string>
+  <string name="my_device_fingerprint">A impressão digital SHA1 do certificado do seu dispositivo é:</string>
+  <string name="remote_device_fingerprint">A impressão digital SHA1 do certificado do dispositivo remoto é:</string>
+  <string name="pair_requested">Emparelhamento pedido</string>
+  <string name="pairing_request_from">Pedido de emparelhamento de %1s</string>
+  <string name="received_url_title">Ligação recebida de %1s</string>
+  <string name="received_url_text">Toque para abrir o \'%1s\'</string>
+  <plurals name="incoming_file_title">
+    <item quantity="one">A receber %1$d ficheiro de %2$s</item>
+    <item quantity="other">A receber %1$d ficheiros de %2$s</item>
+  </plurals>
+  <plurals name="incoming_files_text">
+    <item quantity="one">Ficheiro: %1$s</item>
+    <item quantity="other">(Ficheiro %2$d de %3$d) : %1$s</item>
+  </plurals>
+  <string name="outgoing_file_title">A enviar o ficheiro para o %1s</string>
+  <string name="outgoing_files_title">A enviar os ficheiros para o %1s</string>
+  <plurals name="outgoing_files_text">
+    <item quantity="one">Foi enviado %1$d ficheiro</item>
+    <item quantity="other">Foram enviados %1$d de %2$d ficheiros</item>
+  </plurals>
+  <plurals name="received_files_title">
+    <item quantity="one">Ficheiro recebido de %1$s</item>
+    <item quantity="other">Foram recebidos %2$d ficheiros de %1$s</item>
+  </plurals>
+  <plurals name="received_files_fail_title">
+    <item quantity="one">Falhou a recepção do ficheiro de %1$s</item>
+    <item quantity="other">Falhou a recepção de %2$d de %3$d ficheiros de %1$s</item>
+  </plurals>
+  <string name="received_file_text">Toque para abrir o \'%1s\'</string>
+  <string name="cannot_create_file">Não é possível criar o ficheiro %s</string>
+  <string name="sent_file_title">O ficheiro foi enviado para %1s</string>
+  <string name="sent_file_text">%1s</string>
+  <string name="sent_file_failed_title">Não foi possível enviar o ficheiro para o %1s</string>
+  <string name="sent_file_failed_text">%1s</string>
+  <string name="tap_to_answer">Toque para responder</string>
+  <string name="reconnect">Ligar de Novo</string>
+  <string name="right_click">Enviar um Botão Direito</string>
+  <string name="middle_click">Enviar um Botão do Meio</string>
+  <string name="show_keyboard">Mostrar o Teclado</string>
+  <string name="device_not_paired">Dispositivo não emparelhado</string>
+  <string name="request_pairing">Pedir o emparelhamento</string>
+  <string name="pairing_accept">Aceitar</string>
+  <string name="pairing_reject">Rejeitar</string>
+  <string name="device">Dispositivo</string>
+  <string name="pair_device">Emparelhar o dispositivo</string>
+  <string name="settings">Configuração</string>
+  <string name="mpris_play">Tocar</string>
+  <string name="mpris_pause">Pausa</string>
+  <string name="mpris_previous">Anterior</string>
+  <string name="mpris_rew">Recuar</string>
+  <string name="mpris_ff">Avançar</string>
+  <string name="mpris_next">Seguinte</string>
+  <string name="mpris_volume">Volume</string>
+  <string name="mpris_settings">Configuração Multimédia</string>
+  <string name="mpris_time_settings_title">Botões para avançar/recuar</string>
+  <string name="mpris_time_settings_summary">Ajusta o tempo para o avanço/recuo quando pressionar</string>
+  <string-array name="mpris_time_entries">
+    <item>10 segundos</item>
+    <item>20 segundos</item>
+    <item>30 segundos</item>
+    <item>1 minuto</item>
+    <item>2 minutos</item>
+  </string-array>
+  <string name="mpris_notification_settings_title">Mostrar a notificação do controlo multimédia</string>
+  <string name="mpris_notification_settings_summary">Permite controlar os seus leitores multimédia sem abrir o Zorin Connect</string>
+  <string name="share_to">Partilhar Com...</string>
+  <string name="protocol_version_older">Este dispositivo usa uma versão antiga do protocolo</string>
+  <string name="protocol_version_newer">Este dispositivo usa uma versão mais recente do protocolo</string>
+  <string name="general_settings">Configuração Geral</string>
+  <string name="plugin_settings">Configuração</string>
+  <string name="plugin_settings_with_name">Configuração do %s</string>
+  <string name="device_name">Nome do dispositivo</string>
+  <string name="device_name_preference_summary">%s</string>
+  <string name="invalid_device_name">Nome do dispositivo inválido</string>
+  <string name="shareplugin_text_saved">Texto recebido e guardado na área de transferência</string>
+  <string name="custom_devices_settings">Lista de dispositivos personalizada</string>
+  <string name="pair_device_action">Emparelhar um novo dispositivo</string>
+  <string name="unpair_device_action">Desemparelhar o %s</string>
+  <string name="custom_device_list">Adicionar dispositivos pelo IP</string>
+  <string name="delete_custom_device">Apagar o %s?</string>
+  <string name="custom_device_deleted">Dispositivo personalizado removido</string>
+  <string name="custom_device_list_help">Se o seu dispositivo não for detectado automaticamente, poderá adicionar o seu endereço IP ou nome da máquina, carregando no botão da Acção Flutuante</string>
+  <string name="custom_device_fab_hint">Adicionar um dispositivo</string>
+  <string name="undo">Desfazer</string>
+  <string name="share_notification_preference">Notificações com ruído</string>
+  <string name="share_notification_preference_summary">Vibrar e tocar um som ao receber um ficheiro</string>
+  <string name="share_destination_customize">Personalizar a pasta de destino</string>
+  <string name="share_destination_customize_summary_disabled">Os ficheiros recebidos irão aparecer em \'Transferências\'</string>
+  <string name="share_destination_customize_summary_enabled">Os ficheiros serão guardados na pasta abaixo</string>
+  <string name="share_destination_folder_preference">Pasta de destino</string>
+  <string name="share">Partilhar</string>
+  <string name="share_received_file">Partilhar o \"%s\"</string>
+  <string name="title_activity_notification_filter">Filtro de notificações</string>
+  <string name="filter_apps_info">As notificações serão sincronizadas para as aplicações seleccionadas.</string>
+  <string name="sftp_internal_storage">Armazenamento interno</string>
+  <string name="sftp_all_files">Todos os ficheiros</string>
+  <string name="sftp_sdcard_num">Cartão SD %d</string>
+  <string name="sftp_sdcard">Cartão SD</string>
+  <string name="sftp_readonly">(apenas para leitura)</string>
+  <string name="sftp_camera">Fotografias</string>
+  <string name="add_device_dialog_title">Adicionar um dispositivo</string>
+  <string name="add_device_hint">Nome ou IP da máquina</string>
+  <string name="no_players_connected">Não foram encontrados leitores</string>
+  <string name="mpris_player_on_device">%1$s em %2$s</string>
+  <string name="send_files">Enviar os ficheiros</string>
+  <string name="pairing_title">Dispositivos do Zorin Connect</string>
+  <string name="pairing_description">Os outros dispositivos a executar o Zorin Connect na mesma rede que você deverão aparecer aqui.</string>
+  <string name="device_paired">Dispositivo emparelhado</string>
+  <string name="device_rename_title">Mudar o nome do dispositivo</string>
+  <string name="device_rename_confirm">Mudar o Nome</string>
+  <string name="refresh">Actualizar</string>
+  <string name="unreachable_description">Este dispositivo emparelhado não está acessível. Certifique-se que está ligado à mesma rede que você.</string>
+  <string name="on_data_message">Parece que está com uma ligação de dados móveis. O Zorin Connect só se liga em redes locais.</string>
+  <string name="no_file_browser">Não existem gestores de ficheiros instalados.</string>
+  <string name="pref_plugin_telepathy">Enviar um SMS</string>
+  <string name="pref_plugin_telepathy_desc">Enviar mensagens de texto a partir do seu ambiente de trabalho</string>
+  <string name="plugin_not_supported">Este \'plugin\' não é suportado pelo dispositivo</string>
+  <string name="findmyphone_title">Descobrir o meu telefone</string>
+  <string name="findmyphone_title_tablet">Descobrir o meu \'tablet\'</string>
+  <string name="findmyphone_title_tv">Descobrir a minha TV</string>
+  <string name="findmyphone_description">Toca este dispositivo para que o possa encontrar</string>
+  <string name="findmyphone_found">Encontrado</string>
+  <string name="open">Abrir</string>
+  <string name="close">Fechar</string>
+  <string name="no_permissions_storage">Precisa de dar permissões de acesso ao armazenamento</string>
+  <string name="plugins_need_permission">Alguns \'plugins\' precisam de permissões para funcionar (toque para mais informações):</string>
+  <string name="permission_explanation">Este \'plugin\' precisa de permissões para funcionar</string>
+  <string name="optional_permission_explanation">Precisa de dar permissões extra para activar todas as funcionalidades</string>
+  <string name="plugins_need_optional_permission">Alguns \'plugins\' têm funcionalidades desactivadas devido à falta de permissões (toque para obter mais informações):</string>
+  <string name="sftp_permission_explanation">Para aceder aos seus ficheiros a partir do seu PC, a aplicação precisa de permissão para aceder ao armazenamento do seu telemóvel</string>
+  <string name="share_optional_permission_explanation">Para partilhar ficheiros entre o seu telemóvel e o seu ambiente de trabalho, precisa de permissão para aceder ao armazenamento do seu telemóvel</string>
+  <string name="telepathy_permission_explanation">Para ler e escrever SMS\'s a partir do seu ambiente de trabalho, precisa de dar permissões para os SMS\'s</string>
+  <string name="telephony_permission_explanation">Para ver as chamadas e os SMS\'s a partir do seu ambiente de trabalho, precisa de dar permissões para as chamadas telefónicas e SMS\'s</string>
+  <string name="telephony_optional_permission_explanation">Para ver o nome de um contacto em vez do seu número de telefone, precisa de dar acesso aos contactos do telemóvel</string>
+  <string name="contacts_permission_explanation">Para partilhar o seu livro de contactos com o ambiente de trabalho, precisa de dar permissões para os contactos</string>
+  <string name="select_ringtone">Seleccione um toque de chamada</string>
+  <string name="telephony_pref_blocked_title">Números bloqueados</string>
+  <string name="telephony_pref_blocked_dialog_desc">Não mostrar as chamadas e SMS\'s desses números. Por favor, indique um número por linha</string>
+  <string name="mpris_coverart_description">Capa do conteúdo actual</string>
+  <string name="device_icon_description">Ícone do dispositivo</string>
+  <string name="settings_icon_description">Ícone de configuração</string>
+  <string name="presenter_fullscreen">Ecrã Completo</string>
+  <string name="presenter_exit">Sair da apresentação</string>
+  <string name="presenter_lock_tip">Poderá bloquear o seu dispositivo para usar as teclas de volume como botões para o \'slide\' anterior/seguinte</string>
+  <string name="add_command">Adicionar um comando</string>
+  <string name="addcommand_explanation">Não existem comandos registados</string>
+  <string name="addcommand_explanation2">Poderá adicionar comandos novos na Configuração do Sistema Zorin Connect</string>
+  <string name="add_command_description">Poderá adicionar comandos no ambiente de trabalho</string>
+  <string name="pref_plugin_mprisreceiver">Controlo de Leitores Multimédia</string>
+  <string name="pref_plugin_mprisreceiver_desc">Controle os leitores multimédia dos seus telemóveis a partir de outro dispositivo</string>
+  <string name="dark_theme">Tema escuro</string>
+  <string name="notification_channel_default">Outras notificações</string>
+  <string name="notification_channel_persistent">Indicador persistente</string>
+  <string name="notification_channel_media_control">Comando multimédia</string>
+  <string name="notification_channel_filetransfer">Transferência de ficheiros</string>
+  <string name="mpris_stop">Parar o leitor actual</string>
+  <string name="copy_url_to_clipboard">Copiar o URL para a área de transferência</string>
+  <string name="clipboard_toast">Copiado para a área de transferência</string>
+  <string name="runcommand_notreachable">O dispositivo está inacessível</string>
+  <string name="runcommand_notpaired">O dispositivo não está emparelhado</string>
+  <string name="runcommand_nosuchdevice">Não existe esse dispositivo</string>
+  <string name="runcommand_noruncommandplugin">Este dispositivo não tem o \'Plugin\' de Execução de Comandos activo</string>
+  <string name="pref_plugin_findremotedevice">Procurar um dispositivo remoto</string>
+  <string name="pref_plugin_findremotedevice_desc">Fazer tocar o seu dispositivo remoto</string>
+  <string name="ring">Toque</string>
+  <string name="pref_plugin_systemvolume">Volume do sistema</string>
+  <string name="pref_plugin_systemvolume_desc">Controle o volume do sistema desde o dispositivo remoto</string>
+  <string name="mute">Silenciar</string>
+  <string name="all">Tudo</string>
+  <string name="devices">Dispositivos</string>
+  <string name="settings_rename">Nome do dispositivo</string>
+  <string name="settings_dark_mode">Tema escuro</string>
+  <string name="settings_more_settings_title">Mais configurações</string>
+  <string name="settings_more_settings_text">As configurações por dispositivo podem ser encontradas na \'Configuração do plugin\' dentro de um dado dispositivo.</string>
+  <string name="setting_persistent_notification">Mostrar uma notificação persistente</string>
+  <string name="setting_persistent_notification_oreo">Notificação persistente</string>
+  <string name="setting_persistent_notification_description">Toque para activar/desactivar na configuração das Notificações</string>
+  <string name="extra_options">Opções extra</string>
+  <string name="privacy_options">Opções de privacidade</string>
+  <string name="set_privacy_options">Defina as suas opções de privacidade</string>
+  <string name="new_notification">Nova notificação</string>
+  <string name="block_contents">Bloquear o conteúdo das notificações</string>
+  <string name="block_images">Bloquear as imagens das notificações</string>
+  <string name="notification_channel_receivenotification">Notificações dos outros dispositivos</string>
+</resources>

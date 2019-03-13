@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="kde_connect">Zorin-anslut</string>
+  <string name="foreground_notification_no_devices">Inte ansluten till någon apparat</string>
+  <string name="foreground_notification_devices">Ansluten till: %s</string>
+  <string name="pref_plugin_telephony">Telefonunderrättelser</string>
+  <string name="pref_plugin_telephony_desc">Skicka underrättelser för inkommande samtal</string>
+  <string name="pref_plugin_battery">Batterirapport</string>
+  <string name="pref_plugin_battery_desc">Rapportera periodiskt batteriets status</string>
+  <string name="pref_plugin_sftp">Exponera filsystem</string>
+  <string name="pref_plugin_sftp_desc">Gör det möjligt att bläddra i apparatens filsystem från annan apparat</string>
+  <string name="pref_plugin_clipboard">Synkronisera klippbord</string>
+  <string name="pref_plugin_clipboard_desc">Dela klippbordets innehåll</string>
+  <string name="pref_plugin_mousepad">Extern inmatning</string>
+  <string name="pref_plugin_mousepad_desc">Använd telefonen eller surfplattan som mus och tangentbord</string>
+  <string name="pref_plugin_presenter">Fjärrbildspel</string>
+  <string name="pref_plugin_presenter_desc">Använd apparaten för att byta bilder i en presentation</string>
+  <string name="pref_plugin_remotekeyboard">Ta emot externa tangentnedtryckningar</string>
+  <string name="pref_plugin_remotekeyboard_desc">Ta emot tangentnedtryckningar från externa apparater</string>
+  <string name="pref_plugin_mpris">Multimediakontroller</string>
+  <string name="pref_plugin_mpris_desc">Tillhandahåller en fjärrkontroll för mediaspelaren</string>
+  <string name="pref_plugin_runcommand">Kör kommando</string>
+  <string name="pref_plugin_runcommand_desc">Utlös fjärrkommandon från din telefon eller surfplatta</string>
+  <string name="pref_plugin_contacts">Kontaktsynkronisering</string>
+  <string name="pref_plugin_contacts_desc">Tillåt synkronisering av apparatens kontaktlista</string>
+  <string name="pref_plugin_ping">Ping</string>
+  <string name="pref_plugin_ping_desc">Skicka och ta emot ping</string>
+  <string name="pref_plugin_notifications">Synkronisering av underrättelser</string>
+  <string name="pref_plugin_notifications_desc">Kom åt underrättelser från andra apparater</string>
+  <string name="pref_plugin_receive_notifications">Ta emot underrättelser</string>
+  <string name="pref_plugin_receive_notifications_desc">Ta emot underrättelser från andra apparater och visa dem på Android</string>
+  <string name="pref_plugin_sharereceiver">Dela och ta emot</string>
+  <string name="pref_plugin_sharereceiver_desc">Dela filer och webbadresser mellan apparater</string>
+  <string name="plugin_not_available">Funktionen är inte tillgänglig i Android-versionen</string>
+  <string name="device_list_empty">Inga apparater</string>
+  <string name="ok">Ok</string>
+  <string name="cancel">Avbryt</string>
+  <string name="open_settings">Öppna inställningarna</string>
+  <string name="no_permissions">Du måste ge rättighet att komma åt underrättelser</string>
+  <string name="no_permission_mprisreceiver">För att kunna styra mediaspelare måste du ge tillgång till underrättelser</string>
+  <string name="send_ping">Skicka ping</string>
+  <string name="open_mpris_controls">Kontroll av multimedia</string>
+  <string name="remotekeyboard_editing_only_title">Hantera bara externa tangenter vid redigering</string>
+  <string name="remotekeyboard_not_connected">Det finns ingen aktiv anslutning till externt tangentbord, upprätta en i Zorin-anslut</string>
+  <string name="remotekeyboard_connected">Anslutning till externt tangentbord är aktiv</string>
+  <string name="remotekeyboard_multiple_connections">Det finns mer än en anslutning till externt tangentbord, välj apparat att anpassa</string>
+  <string name="open_mousepad">Extern inmatning</string>
+  <string name="mousepad_info">Flytta fingret på skärmen för att röra muspekaren. Rör för att klicka, och använd två eller tre fingrar för höger- och mittenknapparna. Använd två fingrar för att panorera. Använd en längre beröring för drag och släpp.</string>
+  <string name="mousepad_double_tap_settings_title">Ställ in åtgärd vid två fingerberöringar</string>
+  <string name="mousepad_triple_tap_settings_title">Ställ in åtgärd vid tre fingerberöringar</string>
+  <string name="mousepad_sensitivity_settings_title">Ställ in tryckplattans känslighet</string>
+  <string name="mousepad_acceleration_profile_settings_title">Ställ in pekaracceleration</string>
+  <string name="mousepad_scroll_direction_title">Omvänd rullningsriktning</string>
+  <string-array name="mousepad_tap_entries">
+    <item>Högerklick</item>
+    <item>Mittenklick</item>
+    <item>Ingenting</item>
+  </string-array>
+  <string-array name="mousepad_sensitivity_entries">
+    <item>Långsammaste</item>
+    <item>Ovanför långsammaste</item>
+    <item>Normal</item>
+    <item>Ovanför normal</item>
+    <item>Snabbaste</item>
+  </string-array>
+  <string-array name="mousepad_acceleration_profile_entries">
+    <item>Ingen acceleration</item>
+    <item>Minsta</item>
+    <item>Mindre</item>
+    <item>Medium</item>
+    <item>Större</item>
+    <item>Störst</item>
+  </string-array>
+  <string name="category_connected_devices">Anslutna apparater</string>
+  <string name="category_not_paired_devices">Tillgängliga apparater</string>
+  <string name="category_remembered_devices">Ihågkomna apparater</string>
+  <string name="device_menu_plugins">Inställningar av insticksprogram</string>
+  <string name="device_menu_unpair">Ta bort ihopparning</string>
+  <string name="device_not_reachable">Ihopparad apparat kan inte nås</string>
+  <string name="pair_new_device">Para ihop ny apparat</string>
+  <string name="unknown_device">Okänd apparat</string>
+  <string name="error_not_reachable">Apparaten kan inte nås</string>
+  <string name="error_already_requested">Ihopparning redan begärd</string>
+  <string name="error_already_paired">Apparat redan ihopparad</string>
+  <string name="error_could_not_send_package">Kunde inte skicka paket</string>
+  <string name="error_timed_out">Tidsgräns överskriden</string>
+  <string name="error_canceled_by_user">Avbruten av användaren</string>
+  <string name="error_canceled_by_other_peer">Avbruten av motparten</string>
+  <string name="error_invalid_key">Ogiltig nyckel mottagen</string>
+  <string name="encryption_info_title">Krypteringsinformation</string>
+  <string name="encryption_info_msg_no_ssl">Den andra apparaten använder inte en aktuell version av Zorin-anslut. Använder den föråldrade krypteringsmetoden.</string>
+  <string name="my_device_fingerprint">SHA1-fingeravtryck för din apparats certifikat är:</string>
+  <string name="remote_device_fingerprint">SHA1-fingeravtryck för den andra apparatens certifikat är:</string>
+  <string name="pair_requested">Ihopparning begärd</string>
+  <string name="pairing_request_from">Begäran om ihopparning från %1s</string>
+  <string name="received_url_title">Tog emot länk från %1s</string>
+  <string name="received_url_text">Rör för att öppna \'%1s\'</string>
+  <plurals name="incoming_file_title">
+    <item quantity="one">Tog emot %1$d fil från %2$s</item>
+    <item quantity="other">Tog emot %1$d filer från %2$s</item>
+  </plurals>
+  <plurals name="incoming_files_text">
+    <item quantity="one">Fil: %1s</item>
+    <item quantity="other">(Fil %2$d av %3$d) : %1$s</item>
+  </plurals>
+  <string name="outgoing_file_title">Skickar fil till %1s</string>
+  <string name="outgoing_files_title">Skickar filer till %1s</string>
+  <plurals name="outgoing_files_text">
+    <item quantity="one">Skickade %1$d fil</item>
+    <item quantity="other">Skickade %1$d av %2$d filer</item>
+  </plurals>
+  <plurals name="received_files_title">
+    <item quantity="one">Tog emot fil från %1$s</item>
+    <item quantity="other">Tog emot %2$d filer från %1$s</item>
+  </plurals>
+  <plurals name="received_files_fail_title">
+    <item quantity="one">Misslyckades ta emot fil från %1$s</item>
+    <item quantity="other">Misslyckades ta emot %2$d av %3$d filer från %1$s</item>
+  </plurals>
+  <string name="received_file_text">Rör för att öppna \'%1s\'</string>
+  <string name="cannot_create_file">Kan inte skapa filen %s</string>
+  <string name="sent_file_title">Skickade fil till %1s</string>
+  <string name="sent_file_text">%1s</string>
+  <string name="sent_file_failed_title">Misslyckades skicka fil till %1s</string>
+  <string name="sent_file_failed_text">%1s</string>
+  <string name="tap_to_answer">Rör för att svara</string>
+  <string name="reconnect">Anslut igen</string>
+  <string name="right_click">Skicka högerklick</string>
+  <string name="middle_click">Skicka mittenklick</string>
+  <string name="show_keyboard">Visa tangentbord</string>
+  <string name="device_not_paired">Apparat inte ihopparad</string>
+  <string name="request_pairing">Begära ihopparning</string>
+  <string name="pairing_accept">Acceptera</string>
+  <string name="pairing_reject">Avslå</string>
+  <string name="device">Apparat</string>
+  <string name="pair_device">Para ihop apparat</string>
+  <string name="settings">Inställningar</string>
+  <string name="mpris_play">Spela</string>
+  <string name="mpris_pause">Paus</string>
+  <string name="mpris_previous">Föregående</string>
+  <string name="mpris_rew">Snabbspola bakåt</string>
+  <string name="mpris_ff">Snabbspola framåt</string>
+  <string name="mpris_next">Nästa</string>
+  <string name="mpris_volume">Volym</string>
+  <string name="mpris_settings">Multimediainställningar</string>
+  <string name="mpris_time_settings_title">Framåt- och bakåt-knappar</string>
+  <string name="mpris_time_settings_summary">Justera tiden för att snabbspola framåt eller tillbaka om nertryckt</string>
+  <string-array name="mpris_time_entries">
+    <item>10 sekunder</item>
+    <item>20 sekunder</item>
+    <item>30 sekunder</item>
+    <item>1 minut</item>
+    <item>2 minuter</item>
+  </string-array>
+  <string name="mpris_notification_settings_title">Visa underrättelser om mediastyrning</string>
+  <string name="mpris_notification_settings_summary">Tillåt att styra mediaspelare utan att Zorin-anslut öppnas</string>
+  <string name="share_to">Dela med...</string>
+  <string name="protocol_version_older">Apparaten använder en gammal protokollversion</string>
+  <string name="protocol_version_newer">Apparaten använder en nyare protokollversion</string>
+  <string name="general_settings">Allmänna inställningar</string>
+  <string name="plugin_settings">Inställningar</string>
+  <string name="plugin_settings_with_name">Inställningar av %s</string>
+  <string name="device_name">Apparatnamn</string>
+  <string name="device_name_preference_summary">%s</string>
+  <string name="invalid_device_name">Ogiltigt apparatnamn</string>
+  <string name="shareplugin_text_saved">Tog emot text, spara på klippbordet</string>
+  <string name="custom_devices_settings">Egen apparatlista</string>
+  <string name="pair_device_action">Para ihop med ny apparat</string>
+  <string name="unpair_device_action">Ta bort ihopparning %s</string>
+  <string name="custom_device_list">Lägg till apparater enligt IP-adress</string>
+  <string name="delete_custom_device">Ta bort %s?</string>
+  <string name="custom_device_deleted">Egen apparat borttagen</string>
+  <string name="custom_device_list_help">Om apparaten inte detekteras automatiskt kan dess IP-adress eller värddatornamn läggas till genom att klicka på den lösa åtgärdsknappen.</string>
+  <string name="custom_device_fab_hint">Lägg till en apparat</string>
+  <string name="undo">Ångra</string>
+  <string name="share_notification_preference">Ljudliga underrättelser</string>
+  <string name="share_notification_preference_summary">Vibrera och spela ett ljud när en fil tas emot</string>
+  <string name="share_destination_customize">Anpassa målkatalog</string>
+  <string name="share_destination_customize_summary_disabled">Mottagna filer hamnar i Nerladdningar</string>
+  <string name="share_destination_customize_summary_enabled">Filer lagras i katalogen nedan</string>
+  <string name="share_destination_folder_preference">Målkatalog</string>
+  <string name="share">Dela</string>
+  <string name="share_received_file">Dela \"%s\"</string>
+  <string name="title_activity_notification_filter">Underrättelsefilter</string>
+  <string name="filter_apps_info">Underrättelser synkroniseras för markerade applikationer.</string>
+  <string name="sftp_internal_storage">Intern lagring</string>
+  <string name="sftp_all_files">Alla filer</string>
+  <string name="sftp_sdcard_num">SD-kort %d</string>
+  <string name="sftp_sdcard">SD-kort</string>
+  <string name="sftp_readonly">(skrivskyddat)</string>
+  <string name="sftp_camera">Kamerabilder</string>
+  <string name="add_device_dialog_title">Lägg till apparat</string>
+  <string name="add_device_hint">Värddatornamn eller IP-adress</string>
+  <string name="no_players_connected">Inga spelare hittades</string>
+  <string name="mpris_player_on_device">%1$s på %2$s</string>
+  <string name="send_files">Skicka filer</string>
+  <string name="pairing_title">Zorin-anslut apparater</string>
+  <string name="pairing_description">Andra apparater som kör Zorin-anslut i samma nätverk ska synas här.</string>
+  <string name="device_paired">Apparat ihopparad</string>
+  <string name="device_rename_title">Byt namn på apparat</string>
+  <string name="device_rename_confirm">Byt namn</string>
+  <string name="refresh">Uppdatera</string>
+  <string name="unreachable_description">Den här ihopparade apparaten kan inte nås. Försäkra dig om att den är ansluten till samma nätverk.</string>
+  <string name="on_data_message">Det verkar som om du använder en mobil dataanslutning. Zorin-anslut fungerar bara på lokala nätverk.</string>
+  <string name="no_file_browser">Det finns inga filbläddrare installerade.</string>
+  <string name="pref_plugin_telepathy">Skicka SMS</string>
+  <string name="pref_plugin_telepathy_desc">Skicka textmeddelanden från skrivbordet</string>
+  <string name="plugin_not_supported">Insticksprogrammet stöds inte av apparaten</string>
+  <string name="findmyphone_title">Hitta min telefon</string>
+  <string name="findmyphone_title_tablet">Hitta min surfplatta</string>
+  <string name="findmyphone_title_tv">Hitta min tv</string>
+  <string name="findmyphone_description">Ringer till apparaten så att du kan hitta den</string>
+  <string name="findmyphone_found">Hittade den</string>
+  <string name="open">Öppna</string>
+  <string name="close">Stäng</string>
+  <string name="no_permissions_storage">Du måste ge rättighet att komma åt lagringen</string>
+  <string name="plugins_need_permission">Vissa insticksprogram kräver rättigheter för att fungera (rör för mer information):</string>
+  <string name="permission_explanation">Insticksprogrammet behöver rättigheter för att fungera</string>
+  <string name="optional_permission_explanation">Du måste ge extra rättigheter för att aktivera alla funktioner</string>
+  <string name="plugins_need_optional_permission">Vissa insticksprogram har inaktiverade funktioner på grund av att rättigheter saknas (rör för mer information):</string>
+  <string name="sftp_permission_explanation">För att komma åt filerna från din dator behöver applikationen rättighet att komma åt telefonens lagringsutrymme</string>
+  <string name="share_optional_permission_explanation">För att dela filer mellan telefonen och skrivbordet behöver du ge tillgång till telefonens lagringsutrymme</string>
+  <string name="telepathy_permission_explanation">För att läsa och skriva SMS från skrivbordet måste du ge rättigheter för SMS</string>
+  <string name="telephony_permission_explanation">För att se telefonsamtal och SMS från skrivbordet måste du ge rättigheter för telefonsamtal och SMS</string>
+  <string name="telephony_optional_permission_explanation">För att se ett kontaktnamn istället för ett telefonnummer måste du ge tillgång till telefonens kontakter</string>
+  <string name="contacts_permission_explanation">För att dela kontaktlistan med skrivbordet måste du ge rättigheter för kontakter</string>
+  <string name="select_ringtone">Välj en ringsignal</string>
+  <string name="telephony_pref_blocked_title">Blockerade nummer</string>
+  <string name="telephony_pref_blocked_dialog_desc">Visa inte samtal och SMS från dessa nummer. Ange ett nummer per rad.</string>
+  <string name="mpris_coverart_description">Omslag för aktuell media</string>
+  <string name="device_icon_description">Apparatikon</string>
+  <string name="settings_icon_description">Inställningsikon</string>
+  <string name="presenter_fullscreen">Fullskärm</string>
+  <string name="presenter_exit">Avsluta presentation</string>
+  <string name="presenter_lock_tip">Apparaten kan låsas och volymtangenterna användas för att gå till föregående eller nästa bild</string>
+  <string name="add_command">Lägg till ett kommando</string>
+  <string name="addcommand_explanation">Det finns inga kommandon registrerade</string>
+  <string name="addcommand_explanation2">Du kan lägga till nya kommandon i Zorin-ansluts systeminställningar</string>
+  <string name="add_command_description">Du kan lägga till kommandon på skrivbordet</string>
+  <string name="pref_plugin_mprisreceiver">Styrning av mediaspelare</string>
+  <string name="pref_plugin_mprisreceiver_desc">Styr telefonens mediaspelare från en annan apparat</string>
+  <string name="dark_theme">Mörkt tema</string>
+  <string name="notification_channel_default">Andra underrättelser</string>
+  <string name="notification_channel_persistent">Permanent indikering</string>
+  <string name="notification_channel_media_control">Kontroll av media</string>
+  <string name="notification_channel_filetransfer">Filöverföring</string>
+  <string name="mpris_stop">Stoppa aktuell spelare</string>
+  <string name="copy_url_to_clipboard">Kopiera webbadress till klippbordet</string>
+  <string name="clipboard_toast">Kopierad till klippbordet</string>
+  <string name="runcommand_notreachable">Apparaten kan inte nås</string>
+  <string name="runcommand_notpaired">Apparat inte ihopparad</string>
+  <string name="runcommand_nosuchdevice">Det finns ingen sådan apparat</string>
+  <string name="runcommand_noruncommandplugin">Apparaten har inte insticksprogrammet Kör kommando aktiverat</string>
+  <string name="pref_plugin_findremotedevice">Hitta extern apparat</string>
+  <string name="pref_plugin_findremotedevice_desc">Ring till extern apparat</string>
+  <string name="ring">Ring</string>
+  <string name="pref_plugin_systemvolume">Systemvolym</string>
+  <string name="pref_plugin_systemvolume_desc">Kontrollera systemvolymen för den externa apparaten</string>
+  <string name="mute">Tyst</string>
+  <string name="all">Alla</string>
+  <string name="devices">Apparater</string>
+  <string name="settings_rename">Apparatnamn</string>
+  <string name="settings_dark_mode">Mörkt tema</string>
+  <string name="settings_more_settings_title">Fler inställningar</string>
+  <string name="settings_more_settings_text">Inställningar per apparat hittas i \'Insticksprograminställningar\' på apparaten.</string>
+  <string name="setting_persistent_notification">Visa permanent underrättelse</string>
+  <string name="setting_persistent_notification_oreo">Permanent underrättelse</string>
+  <string name="setting_persistent_notification_description">Tryck för att aktivera eller inaktivera i underrättelseinställningarna</string>
+  <string name="extra_options">Extra alternativ</string>
+  <string name="privacy_options">Integritetsalternativ</string>
+  <string name="set_privacy_options">Ställ in integritetsalternativ</string>
+  <string name="new_notification">Ny underrättelse</string>
+  <string name="block_contents">Blockera underrättelsernas innehåll</string>
+  <string name="block_images">Blockera bilder i underrättelser</string>
+  <string name="notification_channel_receivenotification">Underrättelser från andra apparater</string>
+  <string name="take_picture">Ta bild</string>
+  <string name="plugin_photo_desc">Ta en bild och skicka den till en annan apparat</string>
+</resources>

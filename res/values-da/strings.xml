@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="pref_plugin_telephony">Telefonibekendtgørelse</string>
+  <string name="pref_plugin_battery">Batterirapport</string>
+  <string name="pref_plugin_battery_desc">Rapportér batteristatus periodisk</string>
+  <string name="pref_plugin_sftp">Filsystem-expose</string>
+  <string name="pref_plugin_sftp_desc">Muliggør at gennemsøge denne enheds filsystem eksternt</string>
+  <string name="pref_plugin_clipboard">Synk. af udklipsholder</string>
+  <string name="pref_plugin_clipboard_desc">Del indholdet af udklipsholderen</string>
+  <string name="pref_plugin_mousepad">Eksternt input</string>
+  <string name="pref_plugin_mousepad_desc">Brug din telefon eller tablet som mus og tastatur</string>
+  <string name="pref_plugin_remotekeyboard">Modtag eksterne tastetryk</string>
+  <string name="pref_plugin_remotekeyboard_desc">Modtag tastetryk-hændelser fra eksterne enheder</string>
+  <string name="pref_plugin_mpris">Multimediekontroller</string>
+  <string name="pref_plugin_mpris_desc">Giver en fjernbetjening til din medieafspiller</string>
+  <string name="pref_plugin_runcommand">Kør kommando</string>
+  <string name="pref_plugin_runcommand_desc">Kør eksterne kommandoer fra din telefon eller tablet</string>
+  <string name="pref_plugin_ping">Ping</string>
+  <string name="pref_plugin_ping_desc">Send og modtag ping</string>
+  <string name="pref_plugin_notifications">Synk. af bekendtgørelser</string>
+  <string name="pref_plugin_notifications_desc">Tilgå dine bekendtgørelser fra andre enheder</string>
+  <string name="pref_plugin_receive_notifications">Modtag bekendtgørelser</string>
+  <string name="pref_plugin_receive_notifications_desc">Modtag bekendtgørelser fra den anden enhed og vis dem på Android</string>
+  <string name="pref_plugin_sharereceiver">Del og modtag</string>
+  <string name="pref_plugin_sharereceiver_desc">Del filer og URL\'er mellem enheder</string>
+  <string name="plugin_not_available">Denne funktion er ikke tilgængelig i din Android-version</string>
+  <string name="device_list_empty">Ingen enheder</string>
+  <string name="ok">OK</string>
+  <string name="cancel">Annullér</string>
+  <string name="open_settings">Åbn indstillinger</string>
+  <string name="no_permissions">Du skal give tilladelse for at tilgå bekendtgørelser</string>
+  <string name="send_ping">Send ping</string>
+  <string name="open_mpris_controls">Multimediekontrol</string>
+  <string name="remotekeyboard_editing_only_title">Håndtér kun eksterne tastetryk under redigering</string>
+  <string name="remotekeyboard_not_connected">Der er ingen aktiv ekstern tastaturforbindelse. Opret en i Zorin Connect</string>
+  <string name="remotekeyboard_connected">Ekstern tastaturforbindelse er aktiv</string>
+  <string name="remotekeyboard_multiple_connections">Der er mere end en ekstern tastaturforbindelse, vælg den enhed der skal konfigureres</string>
+  <string name="open_mousepad">Eksternt input</string>
+  <string name="mousepad_double_tap_settings_title">Angiv handling for tap med to fingre</string>
+  <string name="mousepad_triple_tap_settings_title">Angiv handling for tap med tre fingre</string>
+  <string name="mousepad_sensitivity_settings_title">Angiv følsomhed for touchpad</string>
+  <string name="mousepad_scroll_direction_title">Omvendt rulleretning</string>
+  <string-array name="mousepad_tap_entries">
+    <item>Højreklik</item>
+    <item>Midterklik</item>
+    <item>Intet</item>
+  </string-array>
+  <string-array name="mousepad_sensitivity_entries">
+    <item>Mest langsom</item>
+    <item>Over mest langsom</item>
+    <item>Standard</item>
+    <item>Over standard</item>
+    <item>Hurtigst</item>
+  </string-array>
+  <string-array name="mousepad_acceleration_profile_entries">
+    <item>No Acceleration</item>
+    <item>Weakest</item>
+    <item>Weaker</item>
+    <item>Medium</item>
+    <item>Stronger</item>
+    <item>Strongest</item>
+  </string-array>
+  <string name="category_connected_devices">Forbundne enheder</string>
+  <string name="category_not_paired_devices">Tilgængelig enheder</string>
+  <string name="category_remembered_devices">Huskede enheder</string>
+  <string name="device_menu_plugins">Plugin-indstillinger</string>
+  <string name="device_menu_unpair">Fjern parring</string>
+  <string name="device_not_reachable">Den parrede enhed kan ikke tilgås</string>
+  <string name="pair_new_device">Par med ny enhed</string>
+  <string name="unknown_device">Ukendt enhed</string>
+  <string name="error_not_reachable">Enheden kan ikke nås</string>
+  <string name="error_already_requested">Allerede anmodet om parring</string>
+  <string name="error_already_paired">Enhed allerede parret</string>
+  <string name="error_could_not_send_package">Kunne ikke sende pakke</string>
+  <string name="error_timed_out">Tidsudløb</string>
+  <string name="error_canceled_by_user">Annulleret af brugeren</string>
+  <string name="error_canceled_by_other_peer">Annulleret af modpart</string>
+  <string name="error_invalid_key">Ugyldige nøgle modtaget</string>
+  <string name="encryption_info_title">Krypteringsinfo</string>
+  <string name="encryption_info_msg_no_ssl">Den anden enhed bruger ikke en nylig version af Zorin Connect, og bruger dermed den forældede krypteringsmetode.</string>
+  <string name="my_device_fingerprint">SHA1-fingeraftrykket for dit enhedscertifikat er:</string>
+  <string name="remote_device_fingerprint">SHA1-fingeraftrykket for det eksterne enhedscertifikat er:</string>
+  <string name="pair_requested">Anmodet om parring</string>
+  <string name="pairing_request_from">Parringsanmodning fra %1s</string>
+  <string name="received_url_title">Modtog link fra %1s</string>
+  <string name="received_url_text">Tap for at åbne \"%1s\"</string>
+  <string name="outgoing_file_title">Sender fil til %1s</string>
+  <string name="outgoing_files_title">Sender filer til %1s</string>
+  <string name="received_file_text">Tap for at åbne \"%1s\"</string>
+  <string name="sent_file_title">Fil sendt til %1s</string>
+  <string name="sent_file_text">%1s</string>
+  <string name="sent_file_failed_title">Kunne ikke sende filen til %1s</string>
+  <string name="sent_file_failed_text">%1s</string>
+  <string name="tap_to_answer">Tap for at svare</string>
+  <string name="reconnect">Forbind igen</string>
+  <string name="right_click">Send højreklik</string>
+  <string name="middle_click">Send midterklik</string>
+  <string name="show_keyboard">Vis tastatur</string>
+  <string name="device_not_paired">Enhed ikke parret</string>
+  <string name="request_pairing">Anmod om parring</string>
+  <string name="pairing_accept">Acceptér</string>
+  <string name="pairing_reject">Afvis</string>
+  <string name="device">Enhed</string>
+  <string name="pair_device">Par med enhed</string>
+  <string name="mpris_play">Afspil</string>
+  <string name="mpris_previous">Forrige</string>
+  <string name="mpris_rew">Spol tilbage</string>
+  <string name="mpris_ff">Spol frem</string>
+  <string name="mpris_next">Næste</string>
+  <string name="mpris_volume">Lydstyrke</string>
+  <string name="mpris_settings">Multimedieindstillinger</string>
+  <string name="mpris_time_settings_title">Spol frem/tilbage-knapper</string>
+  <string-array name="mpris_time_entries">
+    <item>10 sekunder</item>
+    <item>20 sekunder</item>
+    <item>30 sekunder</item>
+    <item>1 minut</item>
+    <item>2 minutter</item>
+  </string-array>
+  <string name="protocol_version_older">Denne enhed bruger en gammel protokolversion</string>
+  <string name="protocol_version_newer">Denne enhed bruger en nyere protokolversion</string>
+  <string name="general_settings">Generelle indstillinger</string>
+  <string name="plugin_settings">Indstillinger</string>
+  <string name="plugin_settings_with_name">Indstilling af %s</string>
+  <string name="device_name">Enhedsnavn</string>
+  <string name="device_name_preference_summary">%s</string>
+  <string name="invalid_device_name">Ugyldigt enhedsnavn</string>
+  <string name="shareplugin_text_saved">Modtog tekst, gemt til udklipsholder</string>
+  <string name="custom_devices_settings">Brugertilpasset liste over enheder</string>
+  <string name="pair_device_action">Par med en ny enhed</string>
+  <string name="unpair_device_action">Fjern parring med %s</string>
+  <string name="custom_device_list">Tilføj enheder via IP</string>
+  <string name="share_notification_preference">Støjende bekendtgørelser</string>
+  <string name="share_notification_preference_summary">Vibrér og afspil en lyd når en fil modtages</string>
+  <string name="share_destination_customize">Tilpas destinationsmappe</string>
+  <string name="share_destination_customize_summary_disabled">Modtagne filer vil dukke op i Downloads</string>
+  <string name="share_destination_customize_summary_enabled">Filer vil blive gemt i mappen nedenfor</string>
+  <string name="share_destination_folder_preference">Destinationsmappe</string>
+  <string name="title_activity_notification_filter">Bekendtgørelsesfilter</string>
+  <string name="filter_apps_info">Bekendtgørelser vil blive synkroniseret for de valgte apps.</string>
+  <string name="sftp_internal_storage">Intern lagring</string>
+  <string name="sftp_all_files">Alle filer</string>
+  <string name="sftp_sdcard_num">SD-kort %d</string>
+  <string name="sftp_sdcard">SD-kort</string>
+  <string name="sftp_readonly">(skrivebeskyttet)</string>
+  <string name="sftp_camera">Kamerabilleder</string>
+  <string name="no_players_connected">Ingen afspillere fundet</string>
+  <string name="mpris_player_on_device">%1$s på %2$s</string>
+  <string name="send_files">Send filer</string>
+  <string name="pairing_title">Zorin Connect-enheder</string>
+  <string name="pairing_description">Andre enheder som kører Zorin Connect i samme netværk som dig, bør dukke op her.</string>
+  <string name="device_paired">Enhed parret</string>
+  <string name="device_rename_title">Omdøb enhed</string>
+  <string name="device_rename_confirm">Omdøb</string>
+  <string name="refresh">Genopfrisk</string>
+  <string name="unreachable_description">Denne parrede enhed kan ikke nås. Sørg for at den er forbundet til samme netværk som dig.</string>
+  <string name="on_data_message">Det lader til at du er på en mobil dataforbindelse. Zorin Connect virker kun på lokale netværk.</string>
+  <string name="no_file_browser">Der er ingen filhåndtering installeret.</string>
+  <string name="pref_plugin_telepathy">Send SMS</string>
+  <string name="pref_plugin_telepathy_desc">Send SMS-beskeder fra din desktop</string>
+  <string name="plugin_not_supported">Dette plugin er ikke understøttet af enheden</string>
+  <string name="findmyphone_title">Find min telefon</string>
+  <string name="findmyphone_title_tablet">Find min tablet</string>
+  <string name="findmyphone_description">Ringer til denne enhed, så du kan finde den.</string>
+  <string name="findmyphone_found">Fundet</string>
+  <string name="open">Åbn</string>
+  <string name="close">Luk</string>
+  <string name="no_permissions_storage">Du skal give tilladelse for at tilgå datalagret</string>
+  <string name="plugins_need_permission">Nogle plugins kræver tilladelser for at virke (tap for mere info):</string>
+  <string name="permission_explanation">Dette plugin kræver tilladelser for at virke</string>
+  <string name="optional_permission_explanation">Du skal give ekstra tilladelser for at aktivere alle funktioner</string>
+  <string name="plugins_need_optional_permission">Nogle plugins har deaktiverede funktioner pga. manglende tilladelser (tap for mere info):</string>
+  <string name="sftp_permission_explanation">For at tilgå filerne fra din pc, skal app\'en have tilladelse til at til gå telefonens datalager</string>
+  <string name="share_optional_permission_explanation">For at dele filer mellem din telefon og din desktop skal du give adgang til telefonens datalager.</string>
+  <string name="telepathy_permission_explanation">For at læse og skrive sms\'er fra din desktop, skal du give tilladelse til sms</string>
+  <string name="telephony_permission_explanation">For at se telefonopkald og sms\'er fra desktoppen, skal du give tilladelse til telefonopkald og sms.</string>
+  <string name="telephony_optional_permission_explanation">For at se et kontaktnavn i stedet for et telefonnummer, skal du give adgang til telefonens kontakter</string>
+</resources>
