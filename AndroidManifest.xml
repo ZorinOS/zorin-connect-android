@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zorinos.zorin_connect"
-    android:versionCode="11201"
+    android:versionCode="11202"
     android:versionName="1.12">
 
     <supports-screens
