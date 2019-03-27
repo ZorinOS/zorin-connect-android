@@ -87,7 +87,7 @@
   <string name="error_canceled_by_other_peer">Přerušeno druhým uživatelem</string>
   <string name="error_invalid_key">Byl přijat neplatný klíč</string>
   <string name="encryption_info_title">Informace o šifrování</string>
-  <string name="encryption_info_msg_no_ssl">Druhé zařízení nepoužívá poslední verzi Zorin connect. Bude použita stará metoda šifrování.</string>
+  <string name="encryption_info_msg_no_ssl">Druhé zařízení nepoužívá poslední verzi Zorin Connect. Bude použita stará metoda šifrování.</string>
   <string name="my_device_fingerprint">Otisk SHA1 certifikátu vašeho zařízení je:</string>
   <string name="remote_device_fingerprint">Otisk SHA1 certifikátu vzdáleného zařízení je:</string>
   <string name="pair_requested">Bylo vyžádáno párování</string>
@@ -189,11 +189,12 @@
   <string name="title_activity_notification_filter">Filtr upozornění</string>
   <string name="filter_apps_info">Upozorňování mezi vybranými aplikacemi bude synchronizováno.</string>
   <string name="sftp_internal_storage">Interní úložiště</string>
-  <string name="sftp_all_files">Všechny soubory</string>
   <string name="sftp_sdcard_num">SD karta %d</string>
   <string name="sftp_sdcard">SD karta</string>
   <string name="sftp_readonly">(pouze ke čtení)</string>
   <string name="sftp_camera">Obrázky z fotoaparátu</string>
+  <string name="add_host">Přidat stroj/IP</string>
+  <string name="add_host_hint">Název hostitele nebo IP</string>
   <string name="no_players_connected">Přehrávač nenalezen</string>
   <string name="mpris_player_on_device">%1$s na %2$s</string>
   <string name="send_files">Odeslat soubory</string>
@@ -221,7 +222,6 @@
   <string name="permission_explanation">Tento modul potřebuje pro práci povolení</string>
   <string name="optional_permission_explanation">Pro zpřístupnění všech funkcí potřebujete další oprávnění</string>
   <string name="plugins_need_optional_permission">Některé moduly mají vypnuté vlastnosti, kvůli nedostatečným oprávněním (ťukněte pro více informací):</string>
-  <string name="sftp_permission_explanation">Pro přístup k souborům z vašeho počítače aplikace potřebuje oprávnění k úložišti telefonu</string>
   <string name="share_optional_permission_explanation">Pro sdílení souborů mezi telefonem a počítačem potřebujete udělit oprávnění k úložišti telefonu</string>
   <string name="telepathy_permission_explanation">Pro čtení a psaní SMS z počítače musíte udělit oprávnění k SMS</string>
   <string name="telephony_permission_explanation">Pro zobrazení telefonátů a SMS v počítači musíte udělit oprávnění k telefonování a SMS</string>

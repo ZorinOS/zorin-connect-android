@@ -61,7 +61,7 @@
     <item>Strongest</item>
   </string-array>
   <string name="category_connected_devices">Verbundene Geräte</string>
-  <string name="category_not_paired_devices">Verfügbare Gerät</string>
+  <string name="category_not_paired_devices">Verfügbare Geräte</string>
   <string name="category_remembered_devices">Gemerkte Geräte</string>
   <string name="device_menu_plugins">Modul-Einstellungen</string>
   <string name="device_menu_unpair">Verbindung trennen</string>
@@ -77,7 +77,7 @@
   <string name="error_canceled_by_other_peer">Abbruch durch Gegenstelle</string>
   <string name="error_invalid_key">Ungültiger Schlüssel empfangen</string>
   <string name="encryption_info_title">Verschlüsselungsinformationen</string>
-  <string name="encryption_info_msg_no_ssl">Das andere Gerät verwendet eine ältere Version von Zorin-Connect, eine veraltete Verschlüsselungsmethode wird verwendet.</string>
+  <string name="encryption_info_msg_no_ssl">Das andere Gerät verwendet eine ältere Version von Zorin Connect, eine veraltete Verschlüsselungsmethode wird verwendet.</string>
   <string name="my_device_fingerprint">Der SHA1-Fingerabdruck Ihres Gerätezertifikats lautet:</string>
   <string name="remote_device_fingerprint">Der SHA1-Fingerabdruck des Gerätezertifikats der Gegenstelle lautet:</string>
   <string name="pair_requested">Verbindung angefordert</string>
@@ -150,22 +150,22 @@
   <string name="title_activity_notification_filter">Benachrichtigungs-Filter</string>
   <string name="filter_apps_info">Benachrichtigungen werden zwischen den ausgewählten Anwendungen abgeglichen.</string>
   <string name="sftp_internal_storage">Interner Speicher</string>
-  <string name="sftp_all_files">Alle Dateien</string>
   <string name="sftp_sdcard_num">SD-Karte %d</string>
   <string name="sftp_sdcard">SD-Karte</string>
   <string name="sftp_readonly">(Nur lesen)</string>
   <string name="sftp_camera">Kamerabilder</string>
+  <string name="add_host">Rechner/IP-Adresse hinzufügen</string>
   <string name="no_players_connected">Keine Medienspieler gefunden</string>
   <string name="mpris_player_on_device">%1$s auf %2$s</string>
   <string name="send_files">Dateien senden</string>
-  <string name="pairing_title">Zorin-Connect-Geräte</string>
-  <string name="pairing_description">Andere Geräte im selben Netzwerk, auf denen Zorin-Connect läuft, sollten hier angezeigt werden.</string>
+  <string name="pairing_title">Zorin Connect-Geräte</string>
+  <string name="pairing_description">Andere Geräte im selben Netzwerk, auf denen Zorin Connect läuft, sollten hier angezeigt werden.</string>
   <string name="device_paired">Gerät verbunden</string>
   <string name="device_rename_title">Geräte umbenennen</string>
   <string name="device_rename_confirm">Umbenennen</string>
   <string name="refresh">Aktualisieren</string>
   <string name="unreachable_description">Das verbundene Gerät ist nicht erreichbar. Stellen Sie sicher, dass es mit demselben Netzwerk verbunden ist.</string>
-  <string name="on_data_message">Sie benutzen anscheinend eine mobile Datenverbindung. Zorin-Connect funktioniert nur in lokalen Netzwerken.</string>
+  <string name="on_data_message">Sie benutzen anscheinend eine mobile Datenverbindung. Zorin Connect funktioniert nur in lokalen Netzwerken.</string>
   <string name="no_file_browser">Es sind keine Dateiverwaltungsprogramme installiert.</string>
   <string name="pref_plugin_telepathy">SMS senden</string>
   <string name="pref_plugin_telepathy_desc">Text-Nachrichten von Ihrer Arbeitsfläche senden</string>
@@ -182,7 +182,6 @@
   <string name="permission_explanation">Dieses Modul benötigt zusätzliche Berechtigungen</string>
   <string name="optional_permission_explanation">Es müssen weitere Berechtigungen erteilt werden, um alle Funktionen nutzen zu können</string>
   <string name="plugins_need_optional_permission">Einige Module haben eingeschränkte Funktionen wegen fehlender Berechtigungen, tippen Sie für weitere Informationen:</string>
-  <string name="sftp_permission_explanation">Um vom Rechner auf den Telefonspeicher zuzugreifen, werden weitere Berechtigungen benötigt</string>
   <string name="share_optional_permission_explanation">m Dateien zwischen Rechner und Telefon auszutauschen, muss der Zugriff auf den Telefonspeicher gewährt werden</string>
   <string name="telepathy_permission_explanation">Um SMS vom Rechner aus zu lesen und zu versenden, muss der Zugriff auf die SMS-Funktion gewährt werden</string>
   <string name="telephony_permission_explanation">Um Telefonate und SMS auf dem Rechner zu sehen, müssen Berechtigungen für Anrufe und SMS erteilt werden</string>
@@ -197,7 +196,7 @@
   <string name="presenter_exit">Präsentation beenden</string>
   <string name="add_command">Einen Befehl hinzufügen</string>
   <string name="addcommand_explanation">Es sind keine Befehle registriert.</string>
-  <string name="addcommand_explanation2">Sie können neue Befehle in den Systemeinstellungen für Zorin-Connect hinzufügen.</string>
+  <string name="addcommand_explanation2">Sie können neue Befehle in den Systemeinstellungen für Zorin Connect hinzufügen.</string>
   <string name="add_command_description">Sie können Befehle auf der Arbeitsfläche hinzufügen</string>
   <string name="pref_plugin_mprisreceiver">Steuerung für Medienwiedergabe</string>
   <string name="dark_theme">Dunkles Design</string>

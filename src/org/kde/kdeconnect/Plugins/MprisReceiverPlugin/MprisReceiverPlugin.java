@@ -45,6 +45,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+//FIXME: Breaks on Android 4 because it extends OnActiveSessionsChangedListener
 //@PluginFactory.LoadablePlugin
 public class MprisReceiverPlugin extends Plugin implements MediaSessionManager.OnActiveSessionsChangedListener {
 
@@ -76,6 +77,15 @@ public class MprisReceiverPlugin extends Plugin implements MediaSessionManager.O
         }
 
         return true;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        MediaSessionManager manager = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
+        if (manager != null) {
+            manager.removeOnActiveSessionsChangedListener(MprisReceiverPlugin.this);
+        }
     }
 
     private void createPlayers(List<MediaController> sessions) {
@@ -116,10 +126,21 @@ public class MprisReceiverPlugin extends Plugin implements MediaSessionManager.O
             return true;
         }
 
+        if (np.has("SetPosition")) {
+            long position = np.getLong("SetPosition", 0);
+            player.setPosition(position);
+        }
+
         if (np.has("action")) {
             String action = np.getString("action");
 
             switch (action) {
+                case "Play":
+                    player.play();
+                    break;
+                case "Pause":
+                    player.pause();
+                    break;
                 case "PlayPause":
                     player.playPause();
                     break;
@@ -128,6 +149,10 @@ public class MprisReceiverPlugin extends Plugin implements MediaSessionManager.O
                     break;
                 case "Previous":
                     player.previous();
+                    break;
+                case "Stop":
+                    player.stop();
+                    break;
             }
         }
 
@@ -159,6 +184,9 @@ public class MprisReceiverPlugin extends Plugin implements MediaSessionManager.O
     }
 
     private void createPlayer(MediaController controller) {
+        // Skip the media session we created ourselves as KDE Connect
+        if (controller.getPackageName().equals(context.getPackageName())) return;
+
         MprisReceiverPlayer player = new MprisReceiverPlayer(controller, AppsHelper.appNameLookup(context, controller.getPackageName()));
         controller.registerCallback(new MprisReceiverCallback(this, player), new Handler(Looper.getMainLooper()));
         players.put(player.getName(), player);
@@ -170,20 +198,12 @@ public class MprisReceiverPlugin extends Plugin implements MediaSessionManager.O
         device.sendPacket(np);
     }
 
-    void sendPlaying(MprisReceiverPlayer player) {
-
-        NetworkPacket np = new NetworkPacket(MprisReceiverPlugin.PACKET_TYPE_MPRIS);
-        np.set("player", player.getName());
-        np.set("isPlaying", player.isPlaying());
-        device.sendPacket(np);
-    }
-
     @Override
     public int getMinSdk() {
         return Build.VERSION_CODES.LOLLIPOP_MR1;
     }
 
-    public void sendMetadata(MprisReceiverPlayer player) {
+    void sendMetadata(MprisReceiverPlayer player) {
         NetworkPacket np = new NetworkPacket(MprisReceiverPlugin.PACKET_TYPE_MPRIS);
         np.set("player", player.getName());
         if (player.getArtist().isEmpty()) {
@@ -196,12 +216,12 @@ public class MprisReceiverPlugin extends Plugin implements MediaSessionManager.O
         np.set("album", player.getAlbum());
         np.set("isPlaying", player.isPlaying());
         np.set("pos", player.getPosition());
-        device.sendPacket(np);
-    }
-
-    public void sendVolume(MprisReceiverPlayer player) {
-        NetworkPacket np = new NetworkPacket(MprisReceiverPlugin.PACKET_TYPE_MPRIS);
-        np.set("player", player.getName());
+        np.set("length", player.getLength());
+        np.set("canPlay", player.canPlay());
+        np.set("canPause", player.canPause());
+        np.set("canGoPrevious", player.canGoPrevious());
+        np.set("canGoNext", player.canGoNext());
+        np.set("canSeek", player.canSeek());
         np.set("volume", player.getVolume());
         device.sendPacket(np);
     }

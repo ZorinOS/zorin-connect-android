@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  <string name="kde_connect">Zorin-anslut</string>
+  <string name="kde_connect">Zorin Connect</string>
   <string name="foreground_notification_no_devices">Inte ansluten till någon apparat</string>
   <string name="foreground_notification_devices">Ansluten till: %s</string>
   <string name="pref_plugin_telephony">Telefonunderrättelser</string>
@@ -38,10 +38,11 @@
   <string name="open_settings">Öppna inställningarna</string>
   <string name="no_permissions">Du måste ge rättighet att komma åt underrättelser</string>
   <string name="no_permission_mprisreceiver">För att kunna styra mediaspelare måste du ge tillgång till underrättelser</string>
+  <string name="no_permissions_remotekeyboard">Zorin Connects fjärrtangentbord måste aktiveras för att ta emot tangentnedtryckningar</string>
   <string name="send_ping">Skicka ping</string>
   <string name="open_mpris_controls">Kontroll av multimedia</string>
   <string name="remotekeyboard_editing_only_title">Hantera bara externa tangenter vid redigering</string>
-  <string name="remotekeyboard_not_connected">Det finns ingen aktiv anslutning till externt tangentbord, upprätta en i Zorin-anslut</string>
+  <string name="remotekeyboard_not_connected">Det finns ingen aktiv anslutning till externt tangentbord, upprätta en i Zorin Connect</string>
   <string name="remotekeyboard_connected">Anslutning till externt tangentbord är aktiv</string>
   <string name="remotekeyboard_multiple_connections">Det finns mer än en anslutning till externt tangentbord, välj apparat att anpassa</string>
   <string name="open_mousepad">Extern inmatning</string>
@@ -88,7 +89,7 @@
   <string name="error_canceled_by_other_peer">Avbruten av motparten</string>
   <string name="error_invalid_key">Ogiltig nyckel mottagen</string>
   <string name="encryption_info_title">Krypteringsinformation</string>
-  <string name="encryption_info_msg_no_ssl">Den andra apparaten använder inte en aktuell version av Zorin-anslut. Använder den föråldrade krypteringsmetoden.</string>
+  <string name="encryption_info_msg_no_ssl">Den andra apparaten använder inte en aktuell version av Zorin Connect. Använder den föråldrade krypteringsmetoden.</string>
   <string name="my_device_fingerprint">SHA1-fingeravtryck för din apparats certifikat är:</string>
   <string name="remote_device_fingerprint">SHA1-fingeravtryck för den andra apparatens certifikat är:</string>
   <string name="pair_requested">Ihopparning begärd</string>
@@ -153,7 +154,7 @@
     <item>2 minuter</item>
   </string-array>
   <string name="mpris_notification_settings_title">Visa underrättelser om mediastyrning</string>
-  <string name="mpris_notification_settings_summary">Tillåt att styra mediaspelare utan att Zorin-anslut öppnas</string>
+  <string name="mpris_notification_settings_summary">Tillåt att styra mediaspelare utan att Zorin Connect öppnas</string>
   <string name="share_to">Dela med...</string>
   <string name="protocol_version_older">Apparaten använder en gammal protokollversion</string>
   <string name="protocol_version_newer">Apparaten använder en nyare protokollversion</string>
@@ -184,24 +185,43 @@
   <string name="title_activity_notification_filter">Underrättelsefilter</string>
   <string name="filter_apps_info">Underrättelser synkroniseras för markerade applikationer.</string>
   <string name="sftp_internal_storage">Intern lagring</string>
-  <string name="sftp_all_files">Alla filer</string>
   <string name="sftp_sdcard_num">SD-kort %d</string>
   <string name="sftp_sdcard">SD-kort</string>
   <string name="sftp_readonly">(skrivskyddat)</string>
   <string name="sftp_camera">Kamerabilder</string>
   <string name="add_device_dialog_title">Lägg till apparat</string>
   <string name="add_device_hint">Värddatornamn eller IP-adress</string>
+  <string name="sftp_preference_detected_sdcards">Detekterade SD-kort</string>
+  <string name="sftp_preference_edit_sdcard_title">Redigera SD-kort</string>
+  <string name="sftp_preference_configured_storage_locations">Anpassa lagringsplatser</string>
+  <string name="sftp_preference_add_storage_location_title">Lägg till lagringsplats</string>
+  <string name="sftp_preference_edit_storage_location">Redigera lagringsplats</string>
+  <string name="sftp_preference_add_camera_shortcut">Lägg till genväg till kamerakatalog</string>
+  <string name="sftp_preference_add_camera_shortcut_summary_on">Lägg till en genväg till kamerakatalogen</string>
+  <string name="sftp_preference_add_camera_shortcut_summary_off">Lägg inte till en genväg till kamerakatalogen</string>
+  <string name="sftp_storage_preference_storage_location">Lagringsplats</string>
+  <string name="sftp_storage_preference_storage_location_already_configured">Platsen har redan ställts in</string>
+  <string name="sftp_storage_preference_click_to_select">klicka för att välja</string>
+  <string name="sftp_storage_preference_display_name">Namn att visa</string>
+  <string name="sftp_storage_preference_display_name_already_used">Namn att visa används redan</string>
+  <string name="sftp_storage_preference_display_name_cannot_be_empty">Namn att visa kan inte vara tomt</string>
+  <string name="sftp_action_mode_menu_delete">Ta bort</string>
+  <string name="sftp_no_sdcard_detected">Inga SD-kort detekterades</string>
+  <string name="sftp_no_storage_locations_configured">Inga lagringsplatser inställda</string>
+  <string name="sftp_saf_permission_explanation">För att komma åt filer från en annan apparat måste lagringsplatser ställas in</string>
+  <string name="add_host">Lägg till värddator/IP-adress</string>
+  <string name="add_host_hint">Värddatornamn eller IP</string>
   <string name="no_players_connected">Inga spelare hittades</string>
   <string name="mpris_player_on_device">%1$s på %2$s</string>
   <string name="send_files">Skicka filer</string>
-  <string name="pairing_title">Zorin-anslut apparater</string>
-  <string name="pairing_description">Andra apparater som kör Zorin-anslut i samma nätverk ska synas här.</string>
+  <string name="pairing_title">Zorin Connect apparater</string>
+  <string name="pairing_description">Andra apparater som kör Zorin Connect i samma nätverk ska synas här.</string>
   <string name="device_paired">Apparat ihopparad</string>
   <string name="device_rename_title">Byt namn på apparat</string>
   <string name="device_rename_confirm">Byt namn</string>
   <string name="refresh">Uppdatera</string>
   <string name="unreachable_description">Den här ihopparade apparaten kan inte nås. Försäkra dig om att den är ansluten till samma nätverk.</string>
-  <string name="on_data_message">Det verkar som om du använder en mobil dataanslutning. Zorin-anslut fungerar bara på lokala nätverk.</string>
+  <string name="on_data_message">Det verkar som om du använder en mobil dataanslutning. Zorin Connect fungerar bara på lokala nätverk.</string>
   <string name="no_file_browser">Det finns inga filbläddrare installerade.</string>
   <string name="pref_plugin_telepathy">Skicka SMS</string>
   <string name="pref_plugin_telepathy_desc">Skicka textmeddelanden från skrivbordet</string>
@@ -218,7 +238,6 @@
   <string name="permission_explanation">Insticksprogrammet behöver rättigheter för att fungera</string>
   <string name="optional_permission_explanation">Du måste ge extra rättigheter för att aktivera alla funktioner</string>
   <string name="plugins_need_optional_permission">Vissa insticksprogram har inaktiverade funktioner på grund av att rättigheter saknas (rör för mer information):</string>
-  <string name="sftp_permission_explanation">För att komma åt filerna från din dator behöver applikationen rättighet att komma åt telefonens lagringsutrymme</string>
   <string name="share_optional_permission_explanation">För att dela filer mellan telefonen och skrivbordet behöver du ge tillgång till telefonens lagringsutrymme</string>
   <string name="telepathy_permission_explanation">För att läsa och skriva SMS från skrivbordet måste du ge rättigheter för SMS</string>
   <string name="telephony_permission_explanation">För att se telefonsamtal och SMS från skrivbordet måste du ge rättigheter för telefonsamtal och SMS</string>
@@ -235,7 +254,7 @@
   <string name="presenter_lock_tip">Apparaten kan låsas och volymtangenterna användas för att gå till föregående eller nästa bild</string>
   <string name="add_command">Lägg till ett kommando</string>
   <string name="addcommand_explanation">Det finns inga kommandon registrerade</string>
-  <string name="addcommand_explanation2">Du kan lägga till nya kommandon i Zorin-ansluts systeminställningar</string>
+  <string name="addcommand_explanation2">Du kan lägga till nya kommandon i Zorin Connects systeminställningar</string>
   <string name="add_command_description">Du kan lägga till kommandon på skrivbordet</string>
   <string name="pref_plugin_mprisreceiver">Styrning av mediaspelare</string>
   <string name="pref_plugin_mprisreceiver_desc">Styr telefonens mediaspelare från en annan apparat</string>
@@ -273,6 +292,6 @@
   <string name="block_contents">Blockera underrättelsernas innehåll</string>
   <string name="block_images">Blockera bilder i underrättelser</string>
   <string name="notification_channel_receivenotification">Underrättelser från andra apparater</string>
-  <string name="take_picture">Ta bild</string>
-  <string name="plugin_photo_desc">Ta en bild och skicka den till en annan apparat</string>
+  <string name="take_picture">Starta kamera</string>
+  <string name="plugin_photo_desc">Starta kameraprogrammet för att förenkla att ta och överföra bilder</string>
 </resources>
