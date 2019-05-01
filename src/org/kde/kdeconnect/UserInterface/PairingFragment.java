@@ -45,6 +45,7 @@ import com.zorinos.zorin_connect.R;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -66,7 +67,7 @@ public class PairingFragment extends Fragment implements PairingDeviceItem.Callb
     private TextView headerText;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         //Log.e("PairingFragmen", "OnCreateView");
@@ -97,7 +98,7 @@ public class PairingFragment extends Fragment implements PairingDeviceItem.Callb
     }
 
     private void updateComputerListAction() {
-        updateComputerList();
+        updateDeviceList();
         BackgroundService.RunCommand(mActivity, BackgroundService::onNetworkChange);
         mSwipeRefreshLayout.setRefreshing(true);
         new Thread(() -> {
@@ -109,7 +110,7 @@ public class PairingFragment extends Fragment implements PairingDeviceItem.Callb
         }).start();
     }
 
-    private void updateComputerList() {
+    private void updateDeviceList() {
         BackgroundService.RunCommand(mActivity, service -> mActivity.runOnUiThread(() -> {
 
             if (!isAdded()) {
@@ -185,7 +186,6 @@ public class PairingFragment extends Fragment implements PairingDeviceItem.Callb
                 //Restore scroll
                 list.setSelectionFromTop(index, top);
             } catch (IllegalStateException e) {
-                e.printStackTrace();
                 //Ignore: The activity was closed while we were trying to update it
             } finally {
                 listRefreshCalledThisFrame = false;
@@ -197,8 +197,8 @@ public class PairingFragment extends Fragment implements PairingDeviceItem.Callb
     @Override
     public void onStart() {
         super.onStart();
-        BackgroundService.RunCommand(mActivity, service -> service.addDeviceListChangedCallback("PairingFragment", this::updateComputerList));
-        updateComputerList();
+        BackgroundService.RunCommand(mActivity, service -> service.addDeviceListChangedCallback("PairingFragment", this::updateDeviceList));
+        updateDeviceList();
     }
 
     @Override

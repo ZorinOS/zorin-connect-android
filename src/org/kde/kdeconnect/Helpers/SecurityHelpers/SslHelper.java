@@ -65,11 +65,6 @@ import javax.net.ssl.X509TrustManager;
 
 public class SslHelper {
 
-    public enum SslMode {
-        Client,
-        Server
-    }
-
     public static X509Certificate certificate; //my device's certificate
 
     public static final BouncyCastleProvider BC = new BouncyCastleProvider();
@@ -114,8 +109,7 @@ public class SslHelper {
                 edit.apply();
 
             } catch (Exception e) {
-                e.printStackTrace();
-                Log.e("KDE/initialiseCert", "Exception");
+                Log.e("KDE/initialiseCert", "Exception", e);
             }
 
         } else {
@@ -125,8 +119,7 @@ public class SslHelper {
                 X509CertificateHolder certificateHolder = new X509CertificateHolder(certificateBytes);
                 certificate = new JcaX509CertificateConverter().setProvider(BC).getCertificate(certificateHolder);
             } catch (Exception e) {
-                Log.e("KDE/SslHelper", "Exception reading own certificate");
-                e.printStackTrace();
+                Log.e("KDE/SslHelper", "Exception reading own certificate", e);
             }
         }
     }
@@ -195,8 +188,7 @@ public class SslHelper {
             }
             return tlsContext;
         } catch (Exception e) {
-            Log.e("KDE/SslHelper", "Error creating tls context");
-            e.printStackTrace();
+            Log.e("KDE/SslHelper", "Error creating tls context", e);
         }
         return null;
 

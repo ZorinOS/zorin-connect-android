@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -89,10 +90,10 @@ public class StorageHelper {
             try (Scanner scanner = new Scanner(new File("/proc/mounts"))) {
                 mounts = scanner.useDelimiter("\\A").next();
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.e("StorageHelper", "Exception while getting storageList", e);
             }
 
-            File dirs[] = storage.listFiles();
+            File[] dirs = storage.listFiles();
             for (File dir : dirs) {
                 //Log.e("getStorageList", "path: "+dir.getAbsolutePath());
                 if (dir.isDirectory() && dir.canRead() && dir.canExecute()) {
@@ -129,7 +130,7 @@ public class StorageHelper {
                     }
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                Log.e("StorageHelper", "Exception", e);
             }
 
             for (String line : entries) {

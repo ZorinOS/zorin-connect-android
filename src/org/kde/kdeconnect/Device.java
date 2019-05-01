@@ -35,7 +35,6 @@ import android.util.Log;
 
 import org.kde.kdeconnect.Backends.BaseLink;
 import org.kde.kdeconnect.Backends.BasePairingHandler;
-import org.kde.kdeconnect.Backends.LanBackend.LanLinkProvider;
 import org.kde.kdeconnect.Helpers.NotificationHelper;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.SslHelper;
 import org.kde.kdeconnect.Plugins.Plugin;
@@ -45,10 +44,8 @@ import com.zorinos.zorin_connect.R;
 
 import java.security.KeyFactory;
 import java.security.PrivateKey;
-import java.security.PublicKey;
 import java.security.cert.Certificate;
 import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -68,7 +65,6 @@ public class Device implements BaseLink.PacketReceiver {
 
     private final String deviceId;
     private String name;
-    public PublicKey publicKey;
     public Certificate certificate;
     private int notificationId;
     private int protocolVersion;
@@ -81,7 +77,7 @@ public class Device implements BaseLink.PacketReceiver {
 
     private final CopyOnWriteArrayList<BaseLink> links = new CopyOnWriteArrayList<>();
 
-    private List<String> m_supportedPlugins = new ArrayList<>();
+    private List<String> supportedPlugins = new ArrayList<>();
     private final ConcurrentHashMap<String, Plugin> plugins = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, Plugin> pluginsWithoutPermissions = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, Plugin> pluginsWithoutOptionalPermissions = new ConcurrentHashMap<>();
@@ -150,19 +146,8 @@ public class Device implements BaseLink.PacketReceiver {
         this.protocolVersion = NetworkPacket.ProtocolVersion; //We don't know it yet
         this.deviceType = DeviceType.FromString(settings.getString("deviceType", "desktop"));
 
-        try {
-            String publicKeyStr = settings.getString("publicKey", null);
-            if (publicKeyStr != null) {
-                byte[] publicKeyBytes = Base64.decode(publicKeyStr, 0);
-                publicKey = KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(publicKeyBytes));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("KDE/Device", "Exception deserializing stored public key for device");
-        }
-
         //Assume every plugin is supported until addLink is called and we can get the actual list
-        m_supportedPlugins = new Vector<>(PluginFactory.getAvailablePlugins());
+        supportedPlugins = new Vector<>(PluginFactory.getAvailablePlugins());
 
         //Do not load plugins yet, the device is not present
         //reloadPluginsFromSettings();
@@ -179,7 +164,6 @@ public class Device implements BaseLink.PacketReceiver {
         this.pairStatus = PairStatus.NotPaired;
         this.protocolVersion = 0;
         this.deviceType = DeviceType.Computer;
-        this.publicKey = null;
 
         settings = context.getSharedPreferences(deviceId, Context.MODE_PRIVATE);
 
@@ -459,8 +443,7 @@ public class Device implements BaseLink.PacketReceiver {
                 certificate = SslHelper.parseCertificate(certificateBytes);
                 Log.i("KDE/Device", "Got certificate ");
             } catch (Exception e) {
-                e.printStackTrace();
-                Log.e("KDE/Device", "Error getting certificate");
+                Log.e("KDE/Device", "Error getting certificate", e);
 
             }
         }
@@ -474,8 +457,7 @@ public class Device implements BaseLink.PacketReceiver {
             PrivateKey privateKey = KeyFactory.getInstance("RSA").generatePrivate(new PKCS8EncodedKeySpec(privateKeyBytes));
             link.setPrivateKey(privateKey);
         } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("KDE/Device", "Exception reading our own private key"); //Should not happen
+            Log.e("KDE/Device", "Exception reading our own private key", e); //Should not happen
         }
 
         Log.i("KDE/Device", "addLink " + link.getLinkProvider().getName() + " -> " + getName() + " active links: " + links.size());
@@ -512,9 +494,9 @@ public class Device implements BaseLink.PacketReceiver {
         Set<String> outgoingCapabilities = identityPacket.getStringSet("outgoingCapabilities", null);
         Set<String> incomingCapabilities = identityPacket.getStringSet("incomingCapabilities", null);
         if (incomingCapabilities != null && outgoingCapabilities != null) {
-            m_supportedPlugins = new Vector<>(PluginFactory.pluginsForCapabilities(incomingCapabilities, outgoingCapabilities));
+            supportedPlugins = new Vector<>(PluginFactory.pluginsForCapabilities(incomingCapabilities, outgoingCapabilities));
         } else {
-            m_supportedPlugins = new Vector<>(PluginFactory.getAvailablePlugins());
+            supportedPlugins = new Vector<>(PluginFactory.getAvailablePlugins());
         }
 
         link.addPacketReceiver(this);
@@ -549,8 +531,6 @@ public class Device implements BaseLink.PacketReceiver {
     @Override
     public void onPacketReceived(NetworkPacket np) {
 
-        hackToMakeRetrocompatiblePacketTypes(np);
-
         if (NetworkPacket.PACKET_TYPE_PAIR.equals(np.getType())) {
 
             Log.i("KDE/Device", "Pair package");
@@ -559,8 +539,7 @@ public class Device implements BaseLink.PacketReceiver {
                 try {
                     ph.packageReceived(np);
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.e("PairingPacketReceived", "Exception");
+                    Log.e("PairingPacketReceived", "Exception", e);
                 }
             }
         } else if (isPaired()) {
@@ -578,8 +557,7 @@ public class Device implements BaseLink.PacketReceiver {
                     try {
                         plugin.onPacketReceived(np);
                     } catch (Exception e) {
-                        e.printStackTrace();
-                        Log.e("KDE/Device", "Exception in " + plugin.getPluginKey() + "'s onPacketReceived()");
+                        Log.e("KDE/Device", "Exception in " + plugin.getPluginKey() + "'s onPacketReceived()", e);
                         //try { Log.e("KDE/Device", "NetworkPacket:" + np.serialize()); } catch (Exception _) { }
                     }
                 }
@@ -604,8 +582,7 @@ public class Device implements BaseLink.PacketReceiver {
                     try {
                         plugin.onUnpairedDevicePacketReceived(np);
                     } catch (Exception e) {
-                        e.printStackTrace();
-                        Log.e("KDE/Device", "Exception in " + plugin.getDisplayName() + "'s onPacketReceived() in unPairedPacketListeners");
+                        Log.e("KDE/Device", "Exception in " + plugin.getDisplayName() + "'s onPacketReceived() in unPairedPacketListeners", e);
                     }
                 }
             } else {
@@ -631,11 +608,7 @@ public class Device implements BaseLink.PacketReceiver {
 
         @Override
         public void onFailure(Throwable e) {
-            if (e != null) {
-                e.printStackTrace();
-            } else {
-                Log.e("KDE/sendPacket", "Unknown (null) exception");
-            }
+            Log.e("KDE/sendPacket", "Exception", e);
         }
     };
 
@@ -661,20 +634,12 @@ public class Device implements BaseLink.PacketReceiver {
         }
         */
 
-        hackToMakeRetrocompatiblePacketTypes(np);
-
-        boolean useEncryption = (protocolVersion < LanLinkProvider.MIN_VERSION_WITH_SSL_SUPPORT && (!np.getType().equals(NetworkPacket.PACKET_TYPE_PAIR) && isPaired()));
-
         boolean success = false;
         //Make a copy to avoid concurrent modification exception if the original list changes
         for (final BaseLink link : links) {
             if (link == null)
                 continue; //Since we made a copy, maybe somebody destroyed the link in the meanwhile
-            if (useEncryption) {
-                success = link.sendPacketEncrypted(np, callback, publicKey);
-            } else {
-                success = link.sendPacket(np, callback);
-            }
+            success = link.sendPacket(np, callback);
             if (success) break; //If the link didn't call sendSuccess(), try the next one
         }
 
@@ -734,10 +699,7 @@ public class Device implements BaseLink.PacketReceiver {
             success = plugin.onCreate();
         } catch (Exception e) {
             success = false;
-            e.printStackTrace();
-        }
-        if (!success) {
-            Log.e("KDE/addPlugin", "plugin failed to load " + pluginKey);
+            Log.e("KDE/addPlugin", "plugin failed to load " + pluginKey, e);
         }
 
         plugins.put(pluginKey, plugin);
@@ -775,8 +737,7 @@ public class Device implements BaseLink.PacketReceiver {
             plugin.onDestroy();
             //Log.e("removePlugin","removed " + pluginKey);
         } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("KDE/removePlugin", "Exception calling onDestroy for plugin " + pluginKey);
+            Log.e("KDE/removePlugin", "Exception calling onDestroy for plugin " + pluginKey, e);
         }
 
         return true;
@@ -796,7 +757,7 @@ public class Device implements BaseLink.PacketReceiver {
 
         HashMap<String, ArrayList<String>> newPluginsByIncomingInterface = new HashMap<>();
 
-        for (String pluginKey : m_supportedPlugins) {
+        for (String pluginKey : supportedPlugins) {
 
             PluginFactory.PluginInfo pluginInfo = PluginFactory.getPluginInfo(pluginKey);
 
@@ -810,7 +771,6 @@ public class Device implements BaseLink.PacketReceiver {
                 boolean success = addPlugin(pluginKey);
                 if (success) {
                     for (String packageType : pluginInfo.getSupportedPacketTypes()) {
-                        packageType = hackToMakeRetrocompatiblePacketTypes(packageType);
                         ArrayList<String> plugins = newPluginsByIncomingInterface.get(packageType);
                         if (plugins == null) plugins = new ArrayList<>();
                         plugins.add(pluginKey);
@@ -877,17 +837,7 @@ public class Device implements BaseLink.PacketReceiver {
     }
 
     public List<String> getSupportedPlugins() {
-        return m_supportedPlugins;
-    }
-
-    private void hackToMakeRetrocompatiblePacketTypes(NetworkPacket np) {
-        if (protocolVersion >= 6) return;
-        np.mType = np.getType().replace(".request", "");
-    }
-
-    private String hackToMakeRetrocompatiblePacketTypes(String type) {
-        if (protocolVersion >= 6) return type;
-        return type.replace(".request", "");
+        return supportedPlugins;
     }
 
 }

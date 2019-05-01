@@ -46,6 +46,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.collection.LongSparseArray;
 
@@ -191,7 +192,7 @@ public class ContactsHelper {
             }
         } catch (IOException e) {
             // If you are experiencing this, please open a bug report indicating how you got here
-            e.printStackTrace();
+            Log.e("Contacts", "Exception while fetching vcards", e);
         }
 
         // At this point we are screwed:
@@ -213,7 +214,6 @@ public class ContactsHelper {
      * @param IDs        collection of uIDs to look up
      * @return Mapping of uIDs to the corresponding VCard
      */
-    @SuppressWarnings("UnnecessaryContinue")
     private static Map<uID, VCardBuilder> getVCardsSlow(Context context, Collection<uID> IDs) {
         Map<uID, VCardBuilder> toReturn = new HashMap<>();
 
@@ -239,10 +239,10 @@ public class ContactsHelper {
                 toReturn.put(ID, new VCardBuilder(vcard.toString()));
             } catch (IOException e) {
                 // If you are experiencing this, please open a bug report indicating how you got here
-                e.printStackTrace();
+                Log.e("Contacts", "Exception while fetching vcards", e);
             } catch (NullPointerException e) {
                 // If you are experiencing this, please open a bug report indicating how you got here
-                e.printStackTrace();
+                Log.e("Contacts", "Exception while fetching vcards", e);
             }
         }
 
@@ -394,6 +394,7 @@ public class ContactsHelper {
                     .append("\n");
         }
 
+        @NonNull
         public String toString() {
             return vcardBody.toString() + VCARD_END;
         }
@@ -415,9 +416,14 @@ public class ContactsHelper {
         static final String COLUMN = ContactsContract.Contacts.LOOKUP_KEY;
 
         public uID(String lookupKey) {
+
+            if (lookupKey == null)
+                throw new IllegalArgumentException("lookUpKey should not be null");
+
             contactLookupKey = lookupKey;
         }
 
+        @NonNull
         public String toString() {
             return this.contactLookupKey;
         }

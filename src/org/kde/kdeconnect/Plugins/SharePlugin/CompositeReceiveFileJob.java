@@ -21,6 +21,7 @@
 package org.kde.kdeconnect.Plugins.SharePlugin;
 
 import android.app.DownloadManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -46,7 +47,7 @@ import androidx.core.content.FileProvider;
 import androidx.documentfile.provider.DocumentFile;
 
 public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
-    private final ShareNotification shareNotification;
+    private final ReceiveNotification receiveNotification;
     private NetworkPacket currentNetworkPacket;
     private String currentFileName;
     private int currentFileNum;
@@ -65,8 +66,8 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
 
         lock = new Object();
         networkPacketList = new ArrayList<>();
-        shareNotification = new ShareNotification(device);
-        shareNotification.addCancelAction(getId());
+        receiveNotification = new ReceiveNotification(device);
+        receiveNotification.addCancelAction(getId());
         currentFileNum = 0;
         totalNumFiles = 0;
         totalPayloadSize = 0;
@@ -86,7 +87,7 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
             this.totalNumFiles = numberOfFiles;
             this.totalPayloadSize = totalPayloadSize;
 
-            shareNotification.setTitle(getDevice().getContext().getResources()
+            receiveNotification.setTitle(getDevice().getContext().getResources()
                     .getQuantityString(R.plurals.incoming_file_title, totalNumFiles, totalNumFiles, getDevice().getName()));
         }
     }
@@ -99,7 +100,7 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
                 totalNumFiles = networkPacket.getInt(SharePlugin.KEY_NUMBER_OF_FILES, 1);
                 totalPayloadSize = networkPacket.getLong(SharePlugin.KEY_TOTAL_PAYLOAD_SIZE);
 
-                shareNotification.setTitle(getDevice().getContext().getResources()
+                receiveNotification.setTitle(getDevice().getContext().getResources()
                         .getQuantityString(R.plurals.incoming_file_title, totalNumFiles, totalNumFiles, getDevice().getName()));
             }
         }
@@ -148,6 +149,7 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
                         publishFile(fileDocument, received);
                     }
                 } else {
+                    //TODO: Only set progress to 100 if this is the only file/packet to send
                     setProgress(100);
                     publishFile(fileDocument, 0);
                 }
@@ -179,7 +181,7 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
             isRunning = false;
 
             if (canceled) {
-                shareNotification.cancel();
+                receiveNotification.cancel();
                 return;
             }
 
@@ -189,29 +191,35 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
             }
 
             if (numFiles == 1 && currentNetworkPacket.has("open")) {
-                shareNotification.cancel();
+                receiveNotification.cancel();
                 openFile(fileDocument);
             } else {
                 //Update the notification and allow to open the file from it
-                shareNotification.setFinished(getDevice().getContext().getResources().getQuantityString(R.plurals.received_files_title, numFiles, getDevice().getName(), numFiles));
+                receiveNotification.setFinished(getDevice().getContext().getResources().getQuantityString(R.plurals.received_files_title, numFiles, getDevice().getName(), numFiles));
 
                 if (totalNumFiles == 1 && fileDocument != null) {
-                    shareNotification.setURI(fileDocument.getUri(), fileDocument.getType(), fileDocument.getName());
+                    receiveNotification.setURI(fileDocument.getUri(), fileDocument.getType(), fileDocument.getName());
                 }
 
-                shareNotification.show();
+                receiveNotification.show();
             }
             reportResult(null);
+
+        } catch (ActivityNotFoundException e) {
+            receiveNotification.setFinished(getDevice().getContext().getString(R.string.no_app_for_opening));
+            receiveNotification.show();
         } catch (Exception e) {
             isRunning = false;
+
+            Log.e("Shareplugin", "Error receiving file", e);
 
             int failedFiles;
             synchronized (lock) {
                 failedFiles = (totalNumFiles - currentFileNum + 1);
             }
 
-            shareNotification.setFinished(getDevice().getContext().getResources().getQuantityString(R.plurals.received_files_fail_title, failedFiles, getDevice().getName(), failedFiles, totalNumFiles));
-            shareNotification.show();
+            receiveNotification.setFinished(getDevice().getContext().getResources().getQuantityString(R.plurals.received_files_fail_title, failedFiles, getDevice().getName(), failedFiles, totalNumFiles));
+            receiveNotification.show();
             reportError(e);
         } finally {
             closeAllInputStreams();
@@ -231,7 +239,7 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
 
         //We need to check for already existing files only when storing in the default path.
         //User-defined paths use the new Storage Access Framework that already handles this.
-        //If the file should be opened immediately store it in the standard location to avoid the FileProvider trouble (See ShareNotification::setURI)
+        //If the file should be opened immediately store it in the standard location to avoid the FileProvider trouble (See ReceiveNotification::setURI)
         if (open || !ShareSettingsFragment.isCustomDestinationEnabled(getDevice().getContext())) {
             final String defaultPath = ShareSettingsFragment.getDefaultDestinationDirectory().getAbsolutePath();
             filenameToUse = FilesHelper.findNonExistingNameForNewFile(defaultPath, filenameToUse);
@@ -256,7 +264,7 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
     }
 
     private long receiveFile(InputStream input, OutputStream output) throws IOException {
-        byte data[] = new byte[4096];
+        byte[] data = new byte[4096];
         int count;
         long received = 0;
 
@@ -293,10 +301,10 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
 
     private void setProgress(int progress) {
         synchronized (lock) {
-            shareNotification.setProgress(progress, getDevice().getContext().getResources()
+            receiveNotification.setProgress(progress, getDevice().getContext().getResources()
                     .getQuantityString(R.plurals.incoming_files_text, totalNumFiles, currentFileName, currentFileNum, totalNumFiles));
         }
-        shareNotification.show();
+        receiveNotification.show();
     }
 
     private void publishFile(DocumentFile fileDocument, long size) {
@@ -319,7 +327,7 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
             File file = new File(fileDocument.getUri().getPath());
             Uri contentUri = FileProvider.getUriForFile(getDevice().getContext(), "com.zorinos.zorin_connect.fileprovider", file);
             intent.setDataAndType(contentUri, mimeType);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
         } else {
             intent.setDataAndType(fileDocument.getUri(), mimeType);
         }

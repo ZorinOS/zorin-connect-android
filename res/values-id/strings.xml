@@ -10,7 +10,7 @@
   <string name="pref_plugin_sftp">Menyingkap sistem file</string>
   <string name="pref_plugin_sftp_desc">Membolehkan menelusuri sistem file perangkat ini secara jarak jauh</string>
   <string name="pref_plugin_clipboard">Sinkron clipboard</string>
-  <string name="pref_plugin_clipboard_desc">Berbagi isi clipboard</string>
+  <string name="pref_plugin_clipboard_desc">Berbagi konten clipboard</string>
   <string name="pref_plugin_mousepad">Input jarak jauh</string>
   <string name="pref_plugin_mousepad_desc">Gunakan telepon atau tabletmu sebagai touchpad dan keyboard</string>
   <string name="pref_plugin_presenter_desc">Gunakan perangkatmu untuk mengubah slide dalam sebuah presentasi</string>
@@ -99,11 +99,6 @@
   <plurals name="incoming_files_text">
     <item quantity="other">File: %1s</item>
   </plurals>
-  <string name="outgoing_file_title">Mengirim file ke %1s</string>
-  <string name="outgoing_files_title">Mengirim file ke %1s</string>
-  <plurals name="outgoing_files_text">
-    <item quantity="other">Kirimkan file %1$d</item>
-  </plurals>
   <plurals name="received_files_title">
     <item quantity="other">File yang diterima dari %1$s</item>
   </plurals>
@@ -112,10 +107,6 @@
   </plurals>
   <string name="received_file_text">Ketuk untuk membuka \'%1s\'</string>
   <string name="cannot_create_file">Gak bisa menciptakan file %s</string>
-  <string name="sent_file_title">Kirim file ke %1s</string>
-  <string name="sent_file_text">%1s</string>
-  <string name="sent_file_failed_title">Gagal mengirim file ke %1s</string>
-  <string name="sent_file_failed_text">%1s</string>
   <string name="tap_to_answer">Ketuk untuk menjawab</string>
   <string name="reconnect">Sambung-ulang</string>
   <string name="right_click">Kirim Klik Kanan</string>
@@ -206,7 +197,6 @@
   <string name="plugins_need_optional_permission">Beberapa plugin yang memiliki fitur dinonfungsikan karena kurangnya perizinan (ketuk untuk info selebihnya):</string>
   <string name="share_optional_permission_explanation">Untuk membagikan file antara teleponmu dan desktopmu kamu harus memberikan akses ke penyimpanan teleponmu</string>
   <string name="telepathy_permission_explanation">Untuk membaca dan menulis SMS dari desktopmu kamu harus memberikan perizinan untuk SMS</string>
-  <string name="telephony_permission_explanation">Untuk melihat paggian telepon dan SMS dari desktopmu kamu harus memberikan perizinan untuk panggilan telepon dan SMS</string>
   <string name="telephony_optional_permission_explanation">Untuk melihat nama kontak alih-alih nomor telepon, kamu harus memberikan akses ke kontak telepon</string>
   <string name="contacts_permission_explanation">Untuk membagikan buku kontak dengan desktopmu, kamu harus memberikan perizinan kontak</string>
   <string name="select_ringtone">Pilih sebuah ringtone</string>

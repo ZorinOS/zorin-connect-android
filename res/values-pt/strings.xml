@@ -38,6 +38,7 @@
   <string name="open_settings">Abrir a configuração</string>
   <string name="no_permissions">Precisa de dar permissões de acesso às notificações</string>
   <string name="no_permission_mprisreceiver">Para poder controlar os seus leitores multimédia, terá de dar acesso às notificações</string>
+  <string name="no_permissions_remotekeyboard">Para receber eventos de teclado, tem de activar o Teclado Remoto do Zorin Connect</string>
   <string name="send_ping">Enviar um pedido de contacto</string>
   <string name="open_mpris_controls">Comando multimédia</string>
   <string name="remotekeyboard_editing_only_title">Lidar com as teclas remotas apenas na edição</string>
@@ -103,11 +104,13 @@
     <item quantity="one">Ficheiro: %1$s</item>
     <item quantity="other">(Ficheiro %2$d de %3$d) : %1$s</item>
   </plurals>
-  <string name="outgoing_file_title">A enviar o ficheiro para o %1s</string>
-  <string name="outgoing_files_title">A enviar os ficheiros para o %1s</string>
+  <plurals name="outgoing_file_title">
+    <item quantity="one">A enviar %1$d ficheiro para o %2$s</item>
+    <item quantity="other">A enviar %1$d ficheiros para o %2$s</item>
+  </plurals>
   <plurals name="outgoing_files_text">
-    <item quantity="one">Foi enviado %1$d ficheiro</item>
-    <item quantity="other">Foram enviados %1$d de %2$d ficheiros</item>
+    <item quantity="one">Ficheiro: %1$s</item>
+    <item quantity="other">(Ficheiro %2$d e %3$d) : %1$s</item>
   </plurals>
   <plurals name="received_files_title">
     <item quantity="one">Ficheiro recebido de %1$s</item>
@@ -117,12 +120,16 @@
     <item quantity="one">Falhou a recepção do ficheiro de %1$s</item>
     <item quantity="other">Falhou a recepção de %2$d de %3$d ficheiros de %1$s</item>
   </plurals>
+  <plurals name="sent_files_title">
+    <item quantity="one">Foi enviado um ficheiro para %1$s</item>
+    <item quantity="other">Foram enviados %2$d ficheiros para %1$s</item>
+  </plurals>
+  <plurals name="send_files_fail_title">
+    <item quantity="one">Não foi possível enviar o ficheiro para o %1$s</item>
+    <item quantity="other">Não foi possível enviar %2$d de %3$d ficheiros para o %1$s</item>
+  </plurals>
   <string name="received_file_text">Toque para abrir o \'%1s\'</string>
   <string name="cannot_create_file">Não é possível criar o ficheiro %s</string>
-  <string name="sent_file_title">O ficheiro foi enviado para %1s</string>
-  <string name="sent_file_text">%1s</string>
-  <string name="sent_file_failed_title">Não foi possível enviar o ficheiro para o %1s</string>
-  <string name="sent_file_failed_text">%1s</string>
   <string name="tap_to_answer">Toque para responder</string>
   <string name="reconnect">Ligar de Novo</string>
   <string name="right_click">Enviar um Botão Direito</string>
@@ -190,6 +197,26 @@
   <string name="sftp_camera">Fotografias</string>
   <string name="add_device_dialog_title">Adicionar um dispositivo</string>
   <string name="add_device_hint">Nome ou IP da máquina</string>
+  <string name="sftp_preference_detected_sdcards">Cartões SD detectados</string>
+  <string name="sftp_preference_edit_sdcard_title">Editar o cartão SD</string>
+  <string name="sftp_preference_configured_storage_locations">Locais de armazenamento configurados</string>
+  <string name="sftp_preference_add_storage_location_title">Adicionar um local de armazenamento</string>
+  <string name="sftp_preference_edit_storage_location">Editar o local de armazenamento</string>
+  <string name="sftp_preference_add_camera_shortcut">Adicionar um atalho para a pasta da câmara</string>
+  <string name="sftp_preference_add_camera_shortcut_summary_on">Adicionar um atalho para a pasta da câmara</string>
+  <string name="sftp_preference_add_camera_shortcut_summary_off">Não adicionar um atalho para a pasta da câmara</string>
+  <string name="sftp_storage_preference_storage_location">Local de armazenamento</string>
+  <string name="sftp_storage_preference_storage_location_already_configured">Este local já foi configurado</string>
+  <string name="sftp_storage_preference_click_to_select">carregar para seleccionar</string>
+  <string name="sftp_storage_preference_display_name">Nome visível</string>
+  <string name="sftp_storage_preference_display_name_already_used">Este nome visível já foi usado</string>
+  <string name="sftp_storage_preference_display_name_cannot_be_empty">O nome visível não pode estar vazio</string>
+  <string name="sftp_action_mode_menu_delete">Apagar</string>
+  <string name="sftp_no_sdcard_detected">Nenhum cartão SD detectado</string>
+  <string name="sftp_no_storage_locations_configured">Não estão configurados locais de armazenamento</string>
+  <string name="sftp_saf_permission_explanation">Para aceder a ficheiros remotos, tem de configurar os locais de armazenamento</string>
+  <string name="add_host">Adicionar uma máquina/IP</string>
+  <string name="add_host_hint">Nome ou IP da máquina</string>
   <string name="no_players_connected">Não foram encontrados leitores</string>
   <string name="mpris_player_on_device">%1$s em %2$s</string>
   <string name="send_files">Enviar os ficheiros</string>
@@ -219,7 +246,7 @@
   <string name="plugins_need_optional_permission">Alguns \'plugins\' têm funcionalidades desactivadas devido à falta de permissões (toque para obter mais informações):</string>
   <string name="share_optional_permission_explanation">Para partilhar ficheiros entre o seu telemóvel e o seu ambiente de trabalho, precisa de permissão para aceder ao armazenamento do seu telemóvel</string>
   <string name="telepathy_permission_explanation">Para ler e escrever SMS\'s a partir do seu ambiente de trabalho, precisa de dar permissões para os SMS\'s</string>
-  <string name="telephony_permission_explanation">Para ver as chamadas e os SMS\'s a partir do seu ambiente de trabalho, precisa de dar permissões para as chamadas telefónicas e SMS\'s</string>
+  <string name="telephony_permission_explanation">Para ver as chamadas telefónicas a partir do seu ambiente de trabalho, precisa de dar permissões para o registo de chamadas telefónicas e do estado do telemóvel</string>
   <string name="telephony_optional_permission_explanation">Para ver o nome de um contacto em vez do seu número de telefone, precisa de dar acesso aos contactos do telemóvel</string>
   <string name="contacts_permission_explanation">Para partilhar o seu livro de contactos com o ambiente de trabalho, precisa de dar permissões para os contactos</string>
   <string name="select_ringtone">Seleccione um toque de chamada</string>
@@ -271,4 +298,7 @@
   <string name="block_contents">Bloquear o conteúdo das notificações</string>
   <string name="block_images">Bloquear as imagens das notificações</string>
   <string name="notification_channel_receivenotification">Notificações dos outros dispositivos</string>
+  <string name="take_picture">Lançar a câmara</string>
+  <string name="plugin_photo_desc">Lança a aplicação da câmara para facilitar a tirada de fotografias e sua transferência</string>
+  <string name="no_app_for_opening">Não existe nenhuma aplicação adequada para abrir este ficheiro</string>
 </resources>

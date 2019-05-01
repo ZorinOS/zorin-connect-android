@@ -84,17 +84,7 @@
   <string name="pairing_request_from">Verbindungsanfrage von %1s</string>
   <string name="received_url_title">Verknüpfung von %1s erhalten</string>
   <string name="received_url_text">Tippen um „%1s“ zu öffnen</string>
-  <string name="outgoing_file_title">Datei wird an %1s gesendet</string>
-  <string name="outgoing_files_title">Datei wird an %1s gesendet</string>
-  <plurals name="outgoing_files_text">
-    <item quantity="one">%1$d Datei gesendet</item>
-    <item quantity="other">%1$d von %2$d Dateien gesendet</item>
-  </plurals>
   <string name="received_file_text">Tippen um „%1s“ zu öffnen</string>
-  <string name="sent_file_title">Datei an %1s gesendet</string>
-  <string name="sent_file_text">%1s</string>
-  <string name="sent_file_failed_title">Das Senden der Datei an %1s ist fehlgeschlagen</string>
-  <string name="sent_file_failed_text">%1s</string>
   <string name="tap_to_answer">Tippen zum Antworten</string>
   <string name="reconnect">Erneut verbinden</string>
   <string name="right_click">Rechtsklick senden</string>
@@ -184,7 +174,6 @@
   <string name="plugins_need_optional_permission">Einige Module haben eingeschränkte Funktionen wegen fehlender Berechtigungen, tippen Sie für weitere Informationen:</string>
   <string name="share_optional_permission_explanation">m Dateien zwischen Rechner und Telefon auszutauschen, muss der Zugriff auf den Telefonspeicher gewährt werden</string>
   <string name="telepathy_permission_explanation">Um SMS vom Rechner aus zu lesen und zu versenden, muss der Zugriff auf die SMS-Funktion gewährt werden</string>
-  <string name="telephony_permission_explanation">Um Telefonate und SMS auf dem Rechner zu sehen, müssen Berechtigungen für Anrufe und SMS erteilt werden</string>
   <string name="telephony_optional_permission_explanation">Um einen Namen anstelle einer Telefonnummer zu sehen, muss der Zugriff auf das Adressbuch gewährt werden</string>
   <string name="select_ringtone">Einen Klingelton auswählen</string>
   <string name="telephony_pref_blocked_title">Unterdrückte Nummern</string>

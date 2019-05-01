@@ -43,6 +43,8 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import javax.net.ssl.SSLSocket;
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(PowerMockRunner.class)
@@ -52,7 +54,6 @@ public class LanLinkTest {
     private LanLink badLanLink;
     private LanLink goodLanLink;
 
-    private OutputStream badOutputStream;
     private OutputStream goodOutputStream;
 
     private Device.SendPacketStatusCallback callback;
@@ -67,15 +68,15 @@ public class LanLinkTest {
         callback = Mockito.mock(Device.SendPacketStatusCallback.class);
 
         goodOutputStream = Mockito.mock(OutputStream.class);
-        badOutputStream = Mockito.mock(OutputStream.class);
+        OutputStream badOutputStream = Mockito.mock(OutputStream.class);
         Mockito.doThrow(new IOException("AAA")).when(badOutputStream).write(Mockito.any(byte[].class));
 
 
-        Socket socketMock = Mockito.mock(Socket.class);
+        SSLSocket socketMock = Mockito.mock(SSLSocket.class);
         Mockito.when(socketMock.getRemoteSocketAddress()).thenReturn(new InetSocketAddress(5000));
         Mockito.when(socketMock.getOutputStream()).thenReturn(goodOutputStream);
 
-        Socket socketBadMock = Mockito.mock(Socket.class);
+        SSLSocket socketBadMock = Mockito.mock(SSLSocket.class);
         Mockito.when(socketBadMock.getRemoteSocketAddress()).thenReturn(new InetSocketAddress(5000));
         Mockito.when(socketBadMock.getOutputStream()).thenReturn(badOutputStream);
 
@@ -142,15 +143,14 @@ public class LanLinkTest {
                         np.setPayload(new NetworkPacket.Payload(socket.getInputStream(), np.getPayloadSize()));
                     } catch (Exception e) {
                         socket.close();
-                        e.printStackTrace();
-                        Log.e("KDE/LanLinkTest", "Exception connecting to remote socket");
+                        Log.e("KDE/LanLinkTest", "Exception connecting to remote socket", e);
                         throw e;
                     }
 
                     final InputStream input = np.getPayload().getInputStream();
                     final long fileLength = np.getPayloadSize();
 
-                    byte data[] = new byte[1024];
+                    byte[] data = new byte[1024];
                     long progress = 0, prevProgressPercentage = 0;
                     int count;
                     while ((count = input.read(data)) >= 0) {
@@ -169,8 +169,7 @@ public class LanLinkTest {
                     input.close();
 
                 } catch (Exception e) {
-                    Log.e("Downloader Test", "Exception");
-                    e.printStackTrace();
+                    Log.e("Downloader Test", "Exception", e);
                 }
             }
         }
@@ -233,7 +232,7 @@ public class LanLinkTest {
             // Wait 1 secs for downloader to finish (if some error, it will continue and assert will fail)
             downloader.join(1000);
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("Test", "Exception", e);
             throw e;
         }
         assertEquals(new String(data), new String(downloader.getOutputStream().toByteArray()));

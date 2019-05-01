@@ -25,6 +25,7 @@ import com.zorinos.zorin_connect.R;
 import java.util.Collection;
 import java.util.HashMap;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -346,20 +347,18 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case RESULT_NEEDS_RELOAD:
-                BackgroundService.RunCommand(this, service -> {
-                    Device device = service.getDevice(mCurrentDevice);
-                    device.reloadPluginsFromSettings();
-                });
-                break;
-            default:
-                super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RESULT_NEEDS_RELOAD) {
+            BackgroundService.RunCommand(this, service -> {
+                Device device = service.getDevice(mCurrentDevice);
+                device.reloadPluginsFromSettings();
+            });
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         boolean grantedPermission = false;
         for (int result : grantResults) {
             if (result == PackageManager.PERMISSION_GRANTED) {
@@ -378,13 +377,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        switch (key) {
-            case DeviceHelper.KEY_DEVICE_NAME_PREFERENCE:
-                mNavViewDeviceName.setText(DeviceHelper.getDeviceName(this));
-                BackgroundService.RunCommand(this, BackgroundService::onNetworkChange);
-                break;
-            default:
-                break;
+        if (DeviceHelper.KEY_DEVICE_NAME_PREFERENCE.equals(key)) {
+            mNavViewDeviceName.setText(DeviceHelper.getDeviceName(this));
+            BackgroundService.RunCommand(this, BackgroundService::onNetworkChange);
         }
     }
 }

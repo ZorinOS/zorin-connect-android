@@ -38,6 +38,7 @@
   <string name="open_settings">Abrir preferencias</string>
   <string name="no_permissions">Debe otorgar permisos para acceder a las notificaciones</string>
   <string name="no_permission_mprisreceiver">Para poder controlar sus reproductores de medios, necesita dar acceso a las notificaciones</string>
+  <string name="no_permissions_remotekeyboard">Para recibir pulsaciones de teclado debe activar el teclado remoto de Zorin Connect</string>
   <string name="send_ping">Enviar ping</string>
   <string name="open_mpris_controls">Control multimedia</string>
   <string name="remotekeyboard_editing_only_title">Manejar teclas remotas solo al editar</string>
@@ -103,11 +104,13 @@
     <item quantity="one">Archivo: %1s</item>
     <item quantity="other">(Archivo %2$d de %3$d) : %1$s</item>
   </plurals>
-  <string name="outgoing_file_title">Enviando archivo a %1s</string>
-  <string name="outgoing_files_title">Enviando archivos a %1s</string>
+  <plurals name="outgoing_file_title">
+    <item quantity="one">Enviando %1$d archivo a %2$s</item>
+    <item quantity="other">Enviando %1$d archivos a %2$s</item>
+  </plurals>
   <plurals name="outgoing_files_text">
-    <item quantity="one">Enviado %1$d archivo</item>
-    <item quantity="other">Enviados %1$d de %2$d archivos</item>
+    <item quantity="one">Archivo: %1$s</item>
+    <item quantity="other">(Archivo %2$d de %3$d) : %1$s</item>
   </plurals>
   <plurals name="received_files_title">
     <item quantity="one">Recibido archivo desde %1$s</item>
@@ -117,12 +120,16 @@
     <item quantity="one">Fallo recibiendo archivo desde %1$s</item>
     <item quantity="other">Fallo recibiendo %2$d de %3$d archivos desde %1$s</item>
   </plurals>
+  <plurals name="sent_files_title">
+    <item quantity="one">Archivo enviado a %1$s</item>
+    <item quantity="other">Enviados %2$d archivos a %1$s</item>
+  </plurals>
+  <plurals name="send_files_fail_title">
+    <item quantity="one">Fallo al enviar el archivo a %1$s</item>
+    <item quantity="other">Fallo al enviar %2$d de %3$d archivos a %1$s</item>
+  </plurals>
   <string name="received_file_text">Pulse para abrir «%1s»</string>
   <string name="cannot_create_file">No se pudo crear el archivo %s</string>
-  <string name="sent_file_title">Archivo enviado a %1s</string>
-  <string name="sent_file_text">%1s</string>
-  <string name="sent_file_failed_title">Fallo al enviar el archivo a %1s</string>
-  <string name="sent_file_failed_text">%1s</string>
   <string name="tap_to_answer">Pulse para responder</string>
   <string name="reconnect">Reconectar</string>
   <string name="right_click">Enviar clic derecho</string>
@@ -239,7 +246,7 @@
   <string name="plugins_need_optional_permission">Algunos complementos tienen funcionalidades desactivadas por falta de permisos (pulse para más información):</string>
   <string name="share_optional_permission_explanation">Para compartir archivos entre su teléfono y su escritorio, necesita dar acceso al almacenamiento de su teléfono</string>
   <string name="telepathy_permission_explanation">Para leer y escribir SMS desde su escritorio, necesita dar permisos para SMS</string>
-  <string name="telephony_permission_explanation">Para ver las llamadas telefónicas y SMS desde su escritorio, necesita dar permisos para llamadas telefónicas y SMS</string>
+  <string name="telephony_permission_explanation">Para ver las llamadas telefónicas en el escritorio, necesita dar permisos al registro de llamadas telefónicas y al estado del teléfono</string>
   <string name="telephony_optional_permission_explanation">Para ver el nombre de un contacto en lugar de un número telefónico, necesita dar acceso a los contactos de su teléfono</string>
   <string name="contacts_permission_explanation">Para compartir sus contactos con el escritorio, necesita dar permisos de acceso a los mismos</string>
   <string name="select_ringtone">Seleccionar tono</string>
@@ -293,4 +300,5 @@
   <string name="notification_channel_receivenotification">Notificaciones desde otros dispositivos</string>
   <string name="take_picture">Lanzar cámara</string>
   <string name="plugin_photo_desc">Lanzar la aplicación de la cámara para facilitar tomar y transferir imágenes</string>
+  <string name="no_app_for_opening">No se encontró ninguna aplicación adecuada para abrir este archivo</string>
 </resources>

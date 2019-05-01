@@ -13,6 +13,7 @@
   <string name="pref_plugin_clipboard_desc">Partage le contenu du presse-papiers</string>
   <string name="pref_plugin_mousepad">Contrôle distant</string>
   <string name="pref_plugin_mousepad_desc">Utilisez votre téléphone ou tablette comme un pavé tactile et un clavier</string>
+  <string name="pref_plugin_presenter">Télécommande de présentation</string>
   <string name="pref_plugin_presenter_desc">Utilisez votre appareil pour changer les diapositives d\'une présentation</string>
   <string name="pref_plugin_remotekeyboard">Recevoir les appuis de touches distants</string>
   <string name="pref_plugin_remotekeyboard_desc">Recevoir les appuis de touches des périphériques distants</string>
@@ -37,10 +38,11 @@
   <string name="open_settings">Accéder aux paramètres</string>
   <string name="no_permissions">Vous devez accorder la permission d\'accéder aux notifications</string>
   <string name="no_permission_mprisreceiver">Pour pouvoir contrôler vos lecteurs multimédia, veuillez permettre l\'accès aux notifications</string>
+  <string name="no_permissions_remotekeyboard">Vous devez activer le Clavier à distance Zorin Connect pour recevoir les appuis sur les touches</string>
   <string name="send_ping">Envoyer un « Ping »</string>
   <string name="open_mpris_controls">Contrôles multimédia</string>
   <string name="remotekeyboard_editing_only_title">Gérer les appuis de touches à distance uniquement lors de l\'édition</string>
-  <string name="remotekeyboard_not_connected">Aucune connexion active d\'un clavier sans fil disponible, établissez-en une dans Zorin Connect</string>
+  <string name="remotekeyboard_not_connected">Aucune connexion active d\'un clavier à distance disponible, établissez-en une dans Zorin Connect</string>
   <string name="remotekeyboard_connected">La connexion au clavier sans fil est active</string>
   <string name="remotekeyboard_multiple_connections">Plusieurs connexions à des claviers sans fil sont disponibles, sélectionnez le périphérique à configurer</string>
   <string name="open_mousepad">Contrôle distant</string>
@@ -102,12 +104,6 @@
     <item quantity="one">Fichier : %1s</item>
     <item quantity="other">(Fichier %2$d sur %3$d) : %1$s</item>
   </plurals>
-  <string name="outgoing_file_title">Envoi d\'un fichier à %1s</string>
-  <string name="outgoing_files_title">Envoi de fichiers à %1s</string>
-  <plurals name="outgoing_files_text">
-    <item quantity="one">%1$d fichier envoyé</item>
-    <item quantity="other">%1$d fichiers envoyés sur %2$d</item>
-  </plurals>
   <plurals name="received_files_title">
     <item quantity="one">Fichier reçu de %1$s</item>
     <item quantity="other">%2$d fichiers reçus de %1$s</item>
@@ -118,10 +114,6 @@
   </plurals>
   <string name="received_file_text">Appuyez pour ouvrir %1s</string>
   <string name="cannot_create_file">Impossible de créer le fichier %s</string>
-  <string name="sent_file_title">Fichier envoyé à %1s</string>
-  <string name="sent_file_text">%1s</string>
-  <string name="sent_file_failed_title">Impossible d\'envoyer le fichier à %1s</string>
-  <string name="sent_file_failed_text">%1s</string>
   <string name="tap_to_answer">Cliquer pour répondre</string>
   <string name="reconnect">Reconnecter</string>
   <string name="right_click">Envoyer un clic droit</string>
@@ -168,6 +160,10 @@
   <string name="unpair_device_action">Dissocier %s</string>
   <string name="custom_device_list">Ajouter des périphériques par IP</string>
   <string name="delete_custom_device">Supprimer %s ?</string>
+  <string name="custom_device_deleted">Périphérique personnalisé supprimé</string>
+  <string name="custom_device_list_help">Si votre périphérique n\'est pas détecté automatiquement, vous pouvez ajouter son adresse IP ou son nom d\'hôte en cliquant sur le bouton d\'action flottant</string>
+  <string name="custom_device_fab_hint">Ajouter un périphérique</string>
+  <string name="undo">Annuler</string>
   <string name="share_notification_preference">Notifications sonores</string>
   <string name="share_notification_preference_summary">Vibrer et jouer un son quand un fichier est reçu</string>
   <string name="share_destination_customize">Personnaliser le dossier de destination</string>
@@ -183,6 +179,26 @@
   <string name="sftp_sdcard">Carte SD</string>
   <string name="sftp_readonly">(lecture seule)</string>
   <string name="sftp_camera">Images de l\'appareil photo</string>
+  <string name="add_device_dialog_title">Ajouter un périphérique</string>
+  <string name="add_device_hint">Nom d\'hôte ou adresse IP</string>
+  <string name="sftp_preference_detected_sdcards">Cartes SD détectées</string>
+  <string name="sftp_preference_edit_sdcard_title">Modifier la carte SD</string>
+  <string name="sftp_preference_configured_storage_locations">Emplacements de stockage configurés</string>
+  <string name="sftp_preference_add_storage_location_title">Ajouter un emplacement de stockage</string>
+  <string name="sftp_preference_edit_storage_location">Modifier un emplacement de stockage</string>
+  <string name="sftp_preference_add_camera_shortcut">Ajouter un raccourci pour le dossier de l\'appareil photo</string>
+  <string name="sftp_preference_add_camera_shortcut_summary_on">Ajouter un raccourci vers le dossier de l\'appareil photo</string>
+  <string name="sftp_preference_add_camera_shortcut_summary_off">Ne pas ajouter de raccourci vers le dossier de l\'appareil photo</string>
+  <string name="sftp_storage_preference_storage_location">Emplacement de stockage</string>
+  <string name="sftp_storage_preference_storage_location_already_configured">Cet emplacement est déjà configuré</string>
+  <string name="sftp_storage_preference_click_to_select">cliquez pour sélectionner</string>
+  <string name="sftp_storage_preference_display_name">Nom d\'affichage</string>
+  <string name="sftp_storage_preference_display_name_already_used">Ce nom d\'affichage est déjà utilisé</string>
+  <string name="sftp_storage_preference_display_name_cannot_be_empty">Impossible de configurer un nom d\'affichage vide</string>
+  <string name="sftp_action_mode_menu_delete">Supprimer</string>
+  <string name="sftp_no_sdcard_detected">Aucune carte SD détectée</string>
+  <string name="sftp_no_storage_locations_configured">Aucun emplacement stockage n\'est configuré</string>
+  <string name="sftp_saf_permission_explanation">Vous devez configurer des emplacements de stockage pour accéder aux fichiers à distance</string>
   <string name="add_host">Ajouter hôte/IP</string>
   <string name="add_host_hint">"Nom d\'hôte ou adresse IP "</string>
   <string name="no_players_connected">Aucun lecteur trouvé</string>
@@ -214,7 +230,6 @@
   <string name="plugins_need_optional_permission">Certaines fonctionnalités de modules externes sont désactivées faute de permissions suffisantes (tapez pour plus d\'informations) :</string>
   <string name="share_optional_permission_explanation">Pour partager des fichiers entre votre téléphone et votre ordinateur, veuillez permettre l\'accès à la mémoire de stockage du téléphone</string>
   <string name="telepathy_permission_explanation">Pour lire et écrire des SMS depuis votre ordinateur, veuillez permettre l\'accès aux SMS</string>
-  <string name="telephony_permission_explanation">Pour voir les appels et les SMS depuis votre ordinateur, veuillez permettre l\'accès aux appels et aux SMS</string>
   <string name="telephony_optional_permission_explanation">Pour voir le nom du contact au lieu du numéro de téléphone, veuillez permettre l\'accès aux contacts du téléphone</string>
   <string name="contacts_permission_explanation">Pour partager votre carnet de contacts avec votre ordinateur, veuillez permettre l\'accès aux contacts du téléphone</string>
   <string name="select_ringtone">Sélectionnez une sonnerie</string>
@@ -225,6 +240,7 @@
   <string name="settings_icon_description">Icône des paramètres</string>
   <string name="presenter_fullscreen">Plein écran</string>
   <string name="presenter_exit">Quitter la présentation</string>
+  <string name="presenter_lock_tip">Vous pouvez verrouiller votre appareil et utiliser les touches de volume pour passer d\'une diapositive à l\'autre</string>
   <string name="add_command">Ajouter une commande</string>
   <string name="addcommand_explanation">Aucune commande enregistrée</string>
   <string name="addcommand_explanation2">Vous pouvez ajouter de nouvelles commandes dans la configuration système de Zorin Connect</string>
@@ -265,4 +281,7 @@
   <string name="block_contents">Bloquer les contenus des notifications</string>
   <string name="block_images">Bloquer les images des notifications</string>
   <string name="notification_channel_receivenotification">Notifications provenant d\'autres périphériques</string>
+  <string name="take_picture">Lancer l\'appareil photo</string>
+  <string name="plugin_photo_desc">Lancer l\'application appareil photo pour prendre et transférer des photos</string>
+  <string name="no_app_for_opening">Aucune application adaptée trouvée pour ouvrir ce fichier.</string>
 </resources>

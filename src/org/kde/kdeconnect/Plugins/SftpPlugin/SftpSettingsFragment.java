@@ -30,6 +30,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -276,7 +277,7 @@ public class SftpSettingsFragment
                 storageInfoList.add(SftpPlugin.StorageInfo.fromJSON(jsonArray.getJSONObject(i)));
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e("SFTPSettings", "Couldn't load storage info", e);
         }
 
         if (Build.VERSION.SDK_INT <= 19) {
@@ -473,7 +474,13 @@ public class SftpSettingsFragment
                         SftpPlugin.StorageInfo info = storageInfoList.remove(i);
 
                         if (Build.VERSION.SDK_INT >= 21) {
-                            requireContext().getContentResolver().releasePersistableUriPermission(info.uri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                            try {
+                                // This throws when trying to release a URI we don't have access to
+                                requireContext().getContentResolver().releasePersistableUriPermission(info.uri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                            } catch (SecurityException e) {
+                                // Usually safe to ignore, but who knows?
+                                Log.e("SFTP Settings", "Exception", e);
+                            }
                         }
                     }
                 }

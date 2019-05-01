@@ -20,7 +20,6 @@
 
 package org.kde.kdeconnect.UserInterface;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,6 +33,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.Device;
@@ -53,9 +57,6 @@ import java.util.ConcurrentModificationException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -107,8 +108,8 @@ public class DeviceFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
         mActivity = ((MainActivity) getActivity());
     }
 
@@ -124,7 +125,7 @@ public class DeviceFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.activity_device, container, false);
@@ -352,7 +353,6 @@ public class DeviceFragment extends Fragment {
                         mActivity.invalidateOptionsMenu();
 
                     } catch (IllegalStateException e) {
-                        e.printStackTrace();
                         //Ignore: The activity was closed while we were trying to update it
                     } catch (ConcurrentModificationException e) {
                         Log.e("DeviceActivity", "ConcurrentModificationException");

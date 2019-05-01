@@ -40,6 +40,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 public class SMSHelper {
@@ -93,6 +94,7 @@ public class SMSHelper {
      * @param threadID Thread to look up
      * @return List of all messages in the thread
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static List<Message> getMessagesInThread(Context context, ThreadID threadID) {
         final String selection = ThreadID.lookupColumn + " == ?";
         final String[] selectionArgs = new String[] { threadID.toString() };
@@ -106,6 +108,7 @@ public class SMSHelper {
      * @param timestamp epoch in millis matching the timestamp to return
      * @return null if no matching message is found, otherwise return a Message
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static List<Message> getMessagesSinceTimestamp(Context context, long timestamp) {
         final String selection = Message.DATE + " > ?";
         final String[] selectionArgs = new String[] {Long.toString(timestamp)};
@@ -122,10 +125,11 @@ public class SMSHelper {
      * @param selectionArgs Parameters for selection. May be null.
      * @return Returns HashMap<ThreadID, List<Message>>, which is transformed in caller functions into other classes.
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private static HashMap<ThreadID, List<Message>> getMessages(Uri Uri,
-                                                          Context context,
-                                                          String selection,
-                                                          String[] selectionArgs) {
+                                                                Context context,
+                                                                String selection,
+                                                                String[] selectionArgs) {
         HashMap<ThreadID, List<Message>> toReturn = new HashMap<>();
             try (Cursor myCursor = context.getContentResolver().query(
                 Uri,
@@ -145,7 +149,7 @@ public class SMSHelper {
                     }
 
                     Message message = new Message(messageInfo);
-                    ThreadID threadID = new ThreadID(message.m_threadID);
+                    ThreadID threadID = new ThreadID(message.threadID);
 
                     if (!toReturn.containsKey(threadID)) {
                         toReturn.put(threadID, new ArrayList<>());
@@ -167,6 +171,7 @@ public class SMSHelper {
      * @param selectionArgs Parameters for selection. May be null.
      * @return List of messages matching the filter
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private static List<Message> getMessagesWithFilter(Context context, String selection, String[] selectionArgs) {
         HashMap<ThreadID, List<Message>> result = getMessages(SMSHelper.getSMSUri(), context, selection, selectionArgs);
         List<Message> toReturn = new ArrayList<>();
@@ -184,6 +189,7 @@ public class SMSHelper {
      * @param context android.content.Context running the request
      * @return Mapping of thread_id to the first message in each thread
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static Map<ThreadID, Message> getConversations(Context context) {
         HashMap<ThreadID, List<Message>> result = getMessages(SMSHelper.getConversationUri(), context, null, null);
         HashMap<ThreadID, Message> toReturn = new HashMap<>();
@@ -213,6 +219,7 @@ public class SMSHelper {
     /**
      * Represent an ID used to uniquely identify a message thread
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static class ThreadID {
         final Long threadID;
         static final String lookupColumn = Telephony.Sms.THREAD_ID;
@@ -221,13 +228,14 @@ public class SMSHelper {
             this.threadID = threadID;
         }
 
+        @NonNull
         public String toString() {
-            return this.threadID.toString();
+            return threadID.toString();
         }
 
         @Override
         public int hashCode() {
-            return this.threadID.hashCode();
+            return threadID.hashCode();
         }
 
         @Override
@@ -239,15 +247,16 @@ public class SMSHelper {
     /**
      * Represent a message and all of its interesting data columns
      */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static class Message {
 
-        final String m_address;
-        final String m_body;
-        public final long m_date;
-        final int m_type;
-        final int m_read;
-        final long m_threadID; // ThreadID is *int* for SMS messages but *long* for MMS
-        final int m_uID;
+        final String address;
+        final String body;
+        public final long date;
+        final int type;
+        final int read;
+        final long threadID; // ThreadID is *int* for SMS messages but *long* for MMS
+        final int uID;
 
         /**
          * Named constants which are used to construct a Message
@@ -283,40 +292,40 @@ public class SMSHelper {
         };
 
         Message(final HashMap<String, String> messageInfo) {
-            m_address = messageInfo.get(Message.ADDRESS);
-            m_body = messageInfo.get(Message.BODY);
-            m_date = Long.parseLong(messageInfo.get(Message.DATE));
+            address = messageInfo.get(Message.ADDRESS);
+            body = messageInfo.get(Message.BODY);
+            date = Long.parseLong(messageInfo.get(Message.DATE));
             if (messageInfo.get(Message.TYPE) == null)
             {
                 // To be honest, I have no idea why this happens. The docs say the TYPE field is mandatory.
                 // Just stick some junk in here and hope we can figure it out later.
                 // Quick investigation suggests that these are multi-target MMSes
-                m_type = -1;
+                type = -1;
             } else {
-                m_type = Integer.parseInt(messageInfo.get(Message.TYPE));
+                type = Integer.parseInt(messageInfo.get(Message.TYPE));
             }
-            m_read = Integer.parseInt(messageInfo.get(Message.READ));
-            m_threadID = Long.parseLong(messageInfo.get(Message.THREAD_ID));
-            m_uID = Integer.parseInt(messageInfo.get(Message.U_ID));
+            read = Integer.parseInt(messageInfo.get(Message.READ));
+            threadID = Long.parseLong(messageInfo.get(Message.THREAD_ID));
+            uID = Integer.parseInt(messageInfo.get(Message.U_ID));
         }
 
         public JSONObject toJSONObject() throws JSONException {
             JSONObject json = new JSONObject();
 
-            json.put(Message.ADDRESS, m_address);
-            json.put(Message.BODY, m_body);
-            json.put(Message.DATE, m_date);
-            json.put(Message.TYPE, m_type);
-            json.put(Message.READ, m_read);
-            json.put(Message.THREAD_ID, m_threadID);
-            json.put(Message.U_ID, m_uID);
+            json.put(Message.ADDRESS, address);
+            json.put(Message.BODY, body);
+            json.put(Message.DATE, date);
+            json.put(Message.TYPE, type);
+            json.put(Message.READ, read);
+            json.put(Message.THREAD_ID, threadID);
+            json.put(Message.U_ID, uID);
 
             return json;
         }
 
         @Override
         public String toString() {
-            return this.m_body;
+            return body;
         }
     }
 

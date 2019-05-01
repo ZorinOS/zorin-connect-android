@@ -44,12 +44,10 @@ public class NetworkPacket {
 
     public final static String PACKET_TYPE_IDENTITY = "kdeconnect.identity";
     public final static String PACKET_TYPE_PAIR = "kdeconnect.pair";
-    public final static String PACKET_TYPE_ENCRYPTED = "kdeconnect.encrypted";
 
     public static Set<String> protocolPacketTypes = new HashSet<String>() {{
         add(PACKET_TYPE_IDENTITY);
         add(PACKET_TYPE_PAIR);
-        add(PACKET_TYPE_ENCRYPTED);
     }};
 
     private long mId;
@@ -57,6 +55,7 @@ public class NetworkPacket {
     private JSONObject mBody;
     private Payload mPayload;
     private JSONObject mPayloadTransferInfo;
+    private volatile boolean canceled;
 
     private NetworkPacket() {
 
@@ -69,6 +68,9 @@ public class NetworkPacket {
         mPayload = null;
         mPayloadTransferInfo = new JSONObject();
     }
+
+    public boolean isCanceled() { return canceled; }
+    public void cancel() { canceled = true; }
 
     public String getType() {
         return mType;
@@ -91,7 +93,7 @@ public class NetworkPacket {
         if (value == null) return;
         try {
             mBody.put(key, value);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -114,7 +116,7 @@ public class NetworkPacket {
     public void set(String key, int value) {
         try {
             mBody.put(key, value);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -129,7 +131,7 @@ public class NetworkPacket {
     public void set(String key, boolean value) {
         try {
             mBody.put(key, value);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -144,7 +146,7 @@ public class NetworkPacket {
     public void set(String key, double value) {
         try {
             mBody.put(key, value);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -155,7 +157,7 @@ public class NetworkPacket {
     public void set(String key, JSONArray value) {
         try {
             mBody.put(key, value);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -166,7 +168,7 @@ public class NetworkPacket {
     public void set(String key, JSONObject value) {
         try {
             mBody.put(key, value);
-        } catch (JSONException e) {
+        } catch (JSONException ignored) {
         }
     }
 
@@ -179,7 +181,7 @@ public class NetworkPacket {
             try {
                 String str = jsonArray.getString(i);
                 list.add(str);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         return list;
@@ -197,7 +199,7 @@ public class NetworkPacket {
                 jsonArray.put(str);
             }
             mBody.put(key, jsonArray);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -210,7 +212,7 @@ public class NetworkPacket {
             try {
                 String str = jsonArray.getString(i);
                 list.add(str);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
         return list;
@@ -228,7 +230,7 @@ public class NetworkPacket {
                 jsonArray.put(str);
             }
             mBody.put(key, jsonArray);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
@@ -279,8 +281,7 @@ public class NetworkPacket {
             np.mBody.put("incomingCapabilities", new JSONArray(PluginFactory.getIncomingCapabilities()));
             np.mBody.put("outgoingCapabilities", new JSONArray(PluginFactory.getOutgoingCapabilities()));
         } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("NetworkPacakge", "Exception on createIdentityPacket");
+            Log.e("NetworkPackage", "Exception on createIdentityPacket", e);
         }
 
         return np;
@@ -318,7 +319,7 @@ public class NetworkPacket {
         private Socket inputSocket;
         private long payloadSize;
 
-        Payload(long payloadSize) {
+        public Payload(long payloadSize) {
             this((InputStream)null, payloadSize);
         }
 

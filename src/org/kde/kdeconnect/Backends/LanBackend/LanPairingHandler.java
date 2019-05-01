@@ -22,7 +22,6 @@ package org.kde.kdeconnect.Backends.LanBackend;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 
@@ -31,9 +30,7 @@ import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.NetworkPacket;
 import com.zorinos.zorin_connect.R;
 
-import java.security.KeyFactory;
 import java.security.cert.CertificateEncodingException;
-import java.security.spec.X509EncodedKeySpec;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -54,14 +51,11 @@ public class LanPairingHandler extends BasePairingHandler {
     private NetworkPacket createPairPacket() {
         NetworkPacket np = new NetworkPacket(NetworkPacket.PACKET_TYPE_PAIR);
         np.set("pair", true);
-        SharedPreferences globalSettings = PreferenceManager.getDefaultSharedPreferences(mDevice.getContext());
-        String publicKey = "-----BEGIN PUBLIC KEY-----\n" + globalSettings.getString("publicKey", "").trim()+ "\n-----END PUBLIC KEY-----\n";
-        np.set("publicKey", publicKey);
         return np;
     }
 
     @Override
-    public void packageReceived(NetworkPacket np) throws Exception{
+    public void packageReceived(NetworkPacket np) {
 
         boolean wantsPair = np.getBoolean("pair");
 
@@ -76,15 +70,6 @@ public class LanPairingHandler extends BasePairingHandler {
         }
 
         if (wantsPair) {
-
-            //Retrieve their public key
-            try {
-                String publicKeyContent = np.getString("publicKey").replace("-----BEGIN PUBLIC KEY-----\n","").replace("-----END PUBLIC KEY-----\n", "");
-                byte[] publicKeyBytes = Base64.decode(publicKeyContent, 0);
-                mDevice.publicKey = KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(publicKeyBytes));
-            } catch (Exception e) {
-                //IGNORE
-            }
 
             if (mPairStatus == PairStatus.Requested)  { //We started pairing
 
@@ -158,11 +143,7 @@ public class LanPairingHandler extends BasePairingHandler {
 
             @Override
             public void onFailure(Throwable e) {
-                if (e != null) {
-                    e.printStackTrace();
-                } else {
-                    Log.e("LanPairing/onFailure", "Unknown (null) exception");
-                }
+                Log.e("LanPairing/onFailure", "Exception", e);
                 mCallback.pairingFailed(mDevice.getContext().getString(R.string.error_could_not_send_package));
             }
         };
@@ -187,11 +168,7 @@ public class LanPairingHandler extends BasePairingHandler {
 
             @Override
             public void onFailure(Throwable e) {
-                if (e != null) {
-                    e.printStackTrace();
-                } else {
-                    Log.e("LanPairing/onFailure", "Unknown (null) exception");
-                }
+                Log.e("LanPairing/onFailure", "Exception", e);
                 mCallback.pairingFailed(mDevice.getContext().getString(R.string.error_not_reachable));
             }
         };
@@ -212,25 +189,15 @@ public class LanPairingHandler extends BasePairingHandler {
         //Log.e("KDE/PairingDone", "Pairing Done");
         SharedPreferences.Editor editor = mDevice.getContext().getSharedPreferences(mDevice.getDeviceId(), Context.MODE_PRIVATE).edit();
 
-        if (mDevice.publicKey != null) {
-            try {
-                String encodedPublicKey = Base64.encodeToString(mDevice.publicKey.getEncoded(), 0);
-                editor.putString("publicKey", encodedPublicKey);
-            } catch (Exception e) {
-                Log.e("KDE/PairingDone", "Error encoding public key");
-            }
-        }
-
         try {
             String encodedCertificate = Base64.encodeToString(mDevice.certificate.getEncoded(), 0);
             editor.putString("certificate", encodedCertificate);
         } catch (NullPointerException n) {
-            Log.w("KDE/PairingDone", "Certificate is null, remote device does not support ssl");
+            Log.w("KDE/PairingDone", "Certificate is null, remote device does not support ssl", n);
         } catch (CertificateEncodingException c) {
-            Log.e("KDE/PairingDOne", "Error encoding certificate");
+            Log.e("KDE/PairingDOne", "Error encoding certificate", c);
         } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("KDE/Pairng", "Exception");
+            Log.e("KDE/Pairng", "Exception", e);
         }
         editor.apply();
 
