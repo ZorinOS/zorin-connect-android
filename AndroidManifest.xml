@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zorinos.zorin_connect"
-    android:versionCode="11270"
-    android:versionName="1.12.7">
+    android:versionCode="11350"
+    android:versionName="1.13.5">
 
     <supports-screens
         android:anyDensity="true"
@@ -32,19 +32,22 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:icon="@mipmap/icon"
         android:roundIcon="@mipmap/icon_round"
         android:label="Zorin Connect"
         android:supportsRtl="true"
+        android:allowBackup="false"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/KdeConnectTheme">
         <service
             android:name="org.kde.kdeconnect.BackgroundService"
             android:enabled="true" />
         <service
             android:name="org.kde.kdeconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardService"
-            android:label="Zorin Connect Remote Keyboard"
+            android:label="@string/remote_keyboard_service"
             android:permission="android.permission.BIND_INPUT_METHOD">
             <intent-filter>
                 <action android:name="android.view.InputMethod" />
@@ -66,7 +69,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.kde.kdeconnect.UserInterface.DeviceSettingsActivity"
+            android:name="org.kde.kdeconnect.UserInterface.PluginSettingsActivity"
             android:label="@string/device_menu_plugins"
             android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
             <meta-data
@@ -260,10 +263,10 @@
         <activity
             android:name="org.kde.kdeconnect.Plugins.NotificationsPlugin.NotificationFilterActivity"
             android:label="@string/title_activity_notification_filter"
-            android:parentActivityName="org.kde.kdeconnect.UserInterface.DeviceSettingsActivity">
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.PluginSettingsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.kde.kdeconnect.UserInterface.DeviceSettingsActivity" />
+                android:value="org.kde.kdeconnect.UserInterface.PluginSettingsActivity" />
         </activity>
         <activity android:name="org.kde.kdeconnect.Plugins.PhotoPlugin.PhotoActivity" />
 

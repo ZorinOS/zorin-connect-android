@@ -15,8 +15,8 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
-*/
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 package org.kde.kdeconnect.Plugins.MousePadPlugin;
 
@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
+import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
@@ -36,6 +37,17 @@ public class MousePadPlugin extends Plugin {
 
     //public final static String PACKET_TYPE_MOUSEPAD = "kdeconnect.mousepad";
     public final static String PACKET_TYPE_MOUSEPAD_REQUEST = "kdeconnect.mousepad.request";
+    private final static String PACKET_TYPE_MOUSEPAD_KEYBOARDSTATE = "kdeconnect.mousepad.keyboardstate";
+
+    private boolean keyboardEnabled = true;
+
+    @Override
+    public boolean onPacketReceived(NetworkPacket np) {
+
+        keyboardEnabled = np.getBoolean("state", true);
+
+        return true;
+    }
 
     @Override
     public String getDisplayName() {
@@ -71,7 +83,7 @@ public class MousePadPlugin extends Plugin {
 
     @Override
     public String[] getSupportedPacketTypes() {
-        return new String[0];
+        return new String[]{PACKET_TYPE_MOUSEPAD_KEYBOARDSTATE};
     }
 
     @Override
@@ -85,12 +97,18 @@ public class MousePadPlugin extends Plugin {
     }
 
     public void sendMouseDelta(float dx, float dy) {
-        NetworkPacket np = new NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST);
+        NetworkPacket np = device.getAndRemoveUnsentPacket(NetworkPacket.PACKET_REPLACEID_MOUSEMOVE);
+        if (np == null) {
+            np = new NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST);
+        } else {
+            dx += np.getInt("dx");
+            dy += np.getInt("dx");
+        }
 
         np.set("dx", dx);
         np.set("dy", dy);
 
-        device.sendPacket(np);
+        device.sendPacket(np, NetworkPacket.PACKET_REPLACEID_MOUSEMOVE);
     }
 
     public void sendSingleClick() {
@@ -133,6 +151,10 @@ public class MousePadPlugin extends Plugin {
 
     public void sendKeyboardPacket(NetworkPacket np) {
         device.sendPacket(np);
+    }
+
+    boolean isKeyboardEnabled() {
+        return keyboardEnabled;
     }
 
 }

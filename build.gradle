@@ -6,7 +6,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.android.tools.build:gradle:3.5.2'
     }
 }
 
@@ -44,10 +44,19 @@ android {
         abortOnError false
         checkReleaseBuilds false
     }
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
     buildTypes {
         debug {
             minifyEnabled false
             useProguard false
+            signingConfig signingConfigs.debug
         }
         release { //keep on 'release' for faster builds, set to 'all' when testing to make sure proguard is not deleting important stuff
             minifyEnabled true
@@ -69,15 +78,16 @@ dependencies {
         */
     }
 
-    implementation 'androidx.media:media:1.0.1'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.preference:preference:1.0.0'
+    implementation 'androidx.media:media:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.preference:preference:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.jakewharton:disklrucache:2.0.2' //For caching album art bitmaps
+    implementation 'com.jaredrummler:android-device-names:1.1.9' //To get a human-friendly device name
 
     implementation 'org.apache.sshd:sshd-core:0.14.0'
-    implementation 'org.apache.mina:mina-core:2.0.19' //For some reason, makes sshd-core:0.14.0 work without NIO, which isn't available until Android 8+
+    implementation 'org.apache.mina:mina-core:2.0.19' //For some reason, makes sshd-core:0.14.0 work without NIO, which isn't available until Android 8 (api 26)
 
     //implementation('com.github.bright:slf4android:0.1.6') { transitive = true } // For org.apache.sshd debugging
     implementation 'com.madgag.spongycastle:bcpkix-jdk15on:1.58.0.0' //For SSL certificate generation

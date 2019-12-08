@@ -41,20 +41,17 @@ import androidx.fragment.app.Fragment;
 
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.Device;
-import org.kde.kdeconnect.Helpers.NetworkHelper;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.SslHelper;
 import org.kde.kdeconnect.Plugins.Plugin;
-import org.kde.kdeconnect.UserInterface.List.CustomItem;
+import org.kde.kdeconnect.UserInterface.List.PluginListHeaderItem;
 import org.kde.kdeconnect.UserInterface.List.FailedPluginListItem;
 import org.kde.kdeconnect.UserInterface.List.ListAdapter;
 import org.kde.kdeconnect.UserInterface.List.PluginItem;
-import org.kde.kdeconnect.UserInterface.List.SmallEntryItem;
 import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import butterknife.BindView;
@@ -70,6 +67,8 @@ public class DeviceFragment extends Fragment {
 
     private static final String ARG_DEVICE_ID = "deviceId";
     private static final String ARG_FROM_DEVICE_LIST = "fromDeviceList";
+
+    private static final String TAG = "KDE/DeviceFragment";
 
     private View rootView;
     private String mDeviceId;
@@ -88,7 +87,6 @@ public class DeviceFragment extends Fragment {
     @BindView(R.id.pair_request_buttons) View pairRequestButtons;
     @BindView(R.id.error_message_container) View errorMessageContainer;
     @BindView(R.id.not_reachable_message) TextView notReachableMessage;
-    @BindView(R.id.on_data_message) TextView onDataMessage;
     @BindView(R.id.buttons_list) ListView buttonsList;
 
     private Unbinder unbinder;
@@ -133,12 +131,10 @@ public class DeviceFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        //Log.e("DeviceFragment", "device: " + deviceId);
-
         BackgroundService.RunCommand(mActivity, service -> {
             device = service.getDevice(mDeviceId);
             if (device == null) {
-                Log.e("DeviceFragment", "Trying to display a device fragment but the device is not present");
+                Log.e(TAG, "Trying to display a device fragment but the device is not present");
                 mActivity.onDeviceSelected(null);
                 return;
             }
@@ -208,8 +204,6 @@ public class DeviceFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
 
-        //Log.e("DeviceFragment", "onPrepareOptionsMenu");
-
         super.onPrepareOptionsMenu(menu);
         menu.clear();
 
@@ -231,7 +225,7 @@ public class DeviceFragment extends Fragment {
         }
 
         menu.add(R.string.device_menu_plugins).setOnMenuItemClickListener(menuItem -> {
-            Intent intent = new Intent(mActivity, DeviceSettingsActivity.class);
+            Intent intent = new Intent(mActivity, PluginSettingsActivity.class);
             intent.putExtra("deviceId", mDeviceId);
             startActivity(intent);
             return true;
@@ -251,7 +245,7 @@ public class DeviceFragment extends Fragment {
                     builder.setMessage(context.getResources().getString(R.string.my_device_fingerprint) + "\n" + SslHelper.getCertificateHash(SslHelper.certificate) + "\n\n"
                             + context.getResources().getString(R.string.remote_device_fingerprint) + "\n" + SslHelper.getCertificateHash(device.certificate));
                 }
-                builder.create().show();
+                builder.show();
                 return true;
             });
         }
@@ -290,7 +284,6 @@ public class DeviceFragment extends Fragment {
     }
 
     private void refreshUI() {
-        //Log.e("DeviceFragment", "refreshUI");
 
         if (device == null || rootView == null) {
             return;
@@ -313,12 +306,10 @@ public class DeviceFragment extends Fragment {
 
                     boolean paired = device.isPaired();
                     boolean reachable = device.isReachable();
-                    boolean onData = NetworkHelper.isOnMobileNetwork(DeviceFragment.this.getContext());
 
                     pairingButtons.setVisibility(paired ? View.GONE : View.VISIBLE);
                     errorMessageContainer.setVisibility((paired && !reachable) ? View.VISIBLE : View.GONE);
-                    notReachableMessage.setVisibility((paired && !reachable && !onData) ? View.VISIBLE : View.GONE);
-                    onDataMessage.setVisibility((paired && !reachable && onData) ? View.VISIBLE : View.GONE);
+                    notReachableMessage.setVisibility((paired && !reachable) ? View.VISIBLE : View.GONE);
 
                     try {
                         pluginListItems = new ArrayList<>();
@@ -355,7 +346,7 @@ public class DeviceFragment extends Fragment {
                     } catch (IllegalStateException e) {
                         //Ignore: The activity was closed while we were trying to update it
                     } catch (ConcurrentModificationException e) {
-                        Log.e("DeviceActivity", "ConcurrentModificationException");
+                        Log.e(TAG, "ConcurrentModificationException");
                         this.run(); //Try again
                     }
 
@@ -404,31 +395,15 @@ public class DeviceFragment extends Fragment {
     };
 
     private void createPluginsList(ConcurrentHashMap<String, Plugin> plugins, int headerText, FailedPluginListItem.Action action) {
-        if (!plugins.isEmpty()) {
+        if (plugins.isEmpty())
+            return;
 
-            TextView header = new TextView(mActivity);
-            header.setPadding(
-                    ((int) (16 * getResources().getDisplayMetrics().density)),
-                    ((int) (28 * getResources().getDisplayMetrics().density)),
-                    ((int) (16 * getResources().getDisplayMetrics().density)),
-                    ((int) (8 * getResources().getDisplayMetrics().density))
-            );
-            header.setOnClickListener(null);
-            header.setOnLongClickListener(null);
-            header.setText(headerText);
-
-            pluginListItems.add(new CustomItem(header));
-            for (Map.Entry<String, Plugin> entry : plugins.entrySet()) {
-                String pluginKey = entry.getKey();
-                final Plugin plugin = entry.getValue();
-                if (device.isPluginEnabled(pluginKey)) {
-                    if (plugin == null) {
-                        pluginListItems.add(new SmallEntryItem(pluginKey));
-                    } else {
-                        pluginListItems.add(new FailedPluginListItem(plugin, action));
-                    }
-                }
+        pluginListItems.add(new PluginListHeaderItem(headerText));
+        for (Plugin plugin : plugins.values()) {
+            if (!device.isPluginEnabled(plugin.getPluginKey())) {
+                continue;
             }
+            pluginListItems.add(new FailedPluginListItem(plugin, action));
         }
     }
 }

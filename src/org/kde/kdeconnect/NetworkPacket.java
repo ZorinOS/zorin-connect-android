@@ -45,6 +45,9 @@ public class NetworkPacket {
     public final static String PACKET_TYPE_IDENTITY = "kdeconnect.identity";
     public final static String PACKET_TYPE_PAIR = "kdeconnect.pair";
 
+    public final static int PACKET_REPLACEID_MOUSEMOVE = 0;
+    public final static int PACKET_REPLACEID_PRESENTERPOINTER = 1;
+
     public static Set<String> protocolPacketTypes = new HashSet<String>() {{
         add(PACKET_TYPE_IDENTITY);
         add(PACKET_TYPE_PAIR);
@@ -105,6 +108,13 @@ public class NetworkPacket {
         return mBody.optInt(key, defaultValue);
     }
 
+    public void set(String key, int value) {
+        try {
+            mBody.put(key, value);
+        } catch (Exception ignored) {
+        }
+    }
+
     public long getLong(String key) {
         return mBody.optLong(key, -1);
     }
@@ -113,7 +123,7 @@ public class NetworkPacket {
         return mBody.optLong(key, defaultValue);
     }
 
-    public void set(String key, int value) {
+    public void set(String key, long value) {
         try {
             mBody.put(key, value);
         } catch (Exception ignored) {

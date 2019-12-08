@@ -173,6 +173,13 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_mousepad, menu);
+
+        BackgroundService.RunWithPlugin(this, deviceId, MousePadPlugin.class, plugin -> {
+            if (!plugin.isKeyboardEnabled()) {
+                menu.removeItem(R.id.menu_show_keyboard);
+            }
+        });
+
         return true;
     }
 
@@ -364,18 +371,6 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         keyListenerView.requestFocus();
         imm.toggleSoftInputFromWindow(keyListenerView.getWindowToken(), 0, 0);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        BackgroundService.addGuiInUseCounter(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        BackgroundService.removeGuiInUseCounter(this);
     }
 
 }

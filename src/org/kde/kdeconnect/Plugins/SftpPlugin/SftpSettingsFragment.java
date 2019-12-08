@@ -42,7 +42,7 @@ import org.json.JSONObject;
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Helpers.StorageHelper;
-import org.kde.kdeconnect.UserInterface.DeviceSettingsActivity;
+import org.kde.kdeconnect.UserInterface.PluginSettingsActivity;
 import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import com.zorinos.zorin_connect.R;
 
@@ -185,7 +185,7 @@ public class SftpSettingsFragment
     private void restoreActionMode() {
         try {
             if (savedActionModeState.getBoolean(KEY_ACTION_MODE_ENABLED)) {
-                actionMode = ((DeviceSettingsActivity)requireActivity()).startSupportActionMode(this);
+                actionMode = ((PluginSettingsActivity)requireActivity()).startSupportActionMode(this);
 
                 if (actionMode != null) {
                     JSONArray jsonArray = savedActionModeState.getJSONArray(KEY_ACTION_MODE_SELECTED_ITEMS);
@@ -197,7 +197,7 @@ public class SftpSettingsFragment
 
                     for (int i = 0, count = preferenceCategory.getPreferenceCount(); i < count; i++) {
                         StoragePreference preference = (StoragePreference) preferenceCategory.getPreference(i);
-                        preference.setSelectable(true);
+                        preference.setInSelectionMode(true);
                         preference.checkbox.setChecked(selectedItems.get(i, false));
                     }
                 }
@@ -403,6 +403,11 @@ public class SftpSettingsFragment
     }
 
     private void handleChangedStorageInfoList() {
+
+        if (actionMode != null) {
+            actionMode.finish(); // In case we are in selection mode, finish it
+        }
+
         saveStorageInfoList();
 
         preferenceCategory.removeAll();
@@ -438,12 +443,12 @@ public class SftpSettingsFragment
     @Override
     public void onLongClick(StoragePreference storagePreference) {
         if (actionMode == null) {
-            actionMode = ((DeviceSettingsActivity)requireActivity()).startSupportActionMode(this);
+            actionMode = ((PluginSettingsActivity)requireActivity()).startSupportActionMode(this);
 
             if (actionMode != null) {
                 for (int i = 0, count = preferenceCategory.getPreferenceCount(); i < count; i++) {
                     StoragePreference preference = (StoragePreference) preferenceCategory.getPreference(i);
-                    preference.setSelectable(true);
+                    preference.setInSelectionMode(true);
                     if (storagePreference.equals(preference)) {
                         preference.checkbox.setChecked(true);
                     }
@@ -485,7 +490,6 @@ public class SftpSettingsFragment
                     }
                 }
 
-                actionMode.finish();            //This must be called before handleChangedStorageInfoList()
                 handleChangedStorageInfoList();
                 return true;
             default:
@@ -499,7 +503,7 @@ public class SftpSettingsFragment
 
         for (int i = 0, count = preferenceCategory.getPreferenceCount(); i < count; i++) {
             StoragePreference preference = (StoragePreference) preferenceCategory.getPreference(i);
-            preference.setSelectable(false);
+            preference.setInSelectionMode(false);
             preference.checkbox.setChecked(false);
         }
     }

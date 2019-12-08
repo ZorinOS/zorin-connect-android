@@ -116,6 +116,11 @@ public class MprisMediaSession implements SharedPreferences.OnSharedPreferenceCh
         public void onStop() {
             notificationPlayer.stop();
         }
+
+        @Override
+        public void onSeekTo(long pos) {
+            notificationPlayer.setPosition((int) pos);
+        }
     };
 
     /**
@@ -191,35 +196,44 @@ public class MprisMediaSession implements SharedPreferences.OnSharedPreferenceCh
     }
 
     private Pair<Device, MprisPlugin.MprisPlayer> findPlayer(BackgroundService service) {
-        //First try the previously displayed player
+        //First try the previously displayed player (if still playing) or the previous displayed device (otherwise)
         if (notificationDevice != null && mprisDevices.contains(notificationDevice)) {
             Device device = service.getDevice(notificationDevice);
 
-            if (device != null && device.isPluginEnabled("MprisPlugin")) {
-                if (shouldShowPlayer(notificationPlayer)){
-                    return new Pair<>(device, notificationPlayer);
-                }
-
-                // Try a different player for the same device
-                MprisPlugin.MprisPlayer player = getPlayerFromDevice(device);
-                if (player != null) {
-                    return new Pair<>(device, player);
-                }
+            MprisPlugin.MprisPlayer player;
+            if (notificationPlayer != null && notificationPlayer.isPlaying()) {
+                player = getPlayerFromDevice(device, notificationPlayer);
+            } else {
+                player = getPlayerFromDevice(device, null);
+            }
+            if (player != null) {
+                return new Pair<>(device, player);
             }
         }
 
         // Try a different player from another device
         for (Device otherDevice : service.getDevices().values()) {
-            MprisPlugin.MprisPlayer player = getPlayerFromDevice(otherDevice);
+            MprisPlugin.MprisPlayer player = getPlayerFromDevice(otherDevice, null);
             if (player != null) {
                 return new Pair<>(otherDevice, player);
+            }
+        }
+
+        //So no player is playing. Try the previously displayed player again
+        //  This will succeed if it's paused:
+        //  that allows pausing and subsequently resuming via the notification
+        if (notificationDevice != null && mprisDevices.contains(notificationDevice)) {
+            Device device = service.getDevice(notificationDevice);
+
+            MprisPlugin.MprisPlayer player = getPlayerFromDevice(device, notificationPlayer);
+            if (player != null) {
+                return new Pair<>(device, player);
             }
         }
         return new Pair<>(null, null);
     }
 
-    private MprisPlugin.MprisPlayer getPlayerFromDevice(Device device) {
-
+    private MprisPlugin.MprisPlayer getPlayerFromDevice(Device device, MprisPlugin.MprisPlayer preferredPlayer) {
         if (!mprisDevices.contains(device.getDeviceId()))
             return null;
 
@@ -229,6 +243,12 @@ public class MprisMediaSession implements SharedPreferences.OnSharedPreferenceCh
             return null;
         }
 
+        //First try the preferred player, if supplied
+        if (plugin.hasPlayer(preferredPlayer) && shouldShowPlayer(preferredPlayer)) {
+            return preferredPlayer;
+        }
+
+        //Otherwise, accept any playing player
         MprisPlugin.MprisPlayer player = plugin.getPlayingPlayer();
         if (shouldShowPlayer(player)) {
             return player;
@@ -383,7 +403,7 @@ public class MprisMediaSession implements SharedPreferences.OnSharedPreferenceCh
                 iCloseNotification.setAction(MprisMediaNotificationReceiver.ACTION_CLOSE_NOTIFICATION);
                 iCloseNotification.putExtra(MprisMediaNotificationReceiver.EXTRA_DEVICE_ID, notificationDevice);
                 iCloseNotification.putExtra(MprisMediaNotificationReceiver.EXTRA_MPRIS_PLAYER, notificationPlayer.getPlayer());
-                PendingIntent piCloseNotification = PendingIntent.getActivity(service, 0, iCloseNotification, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent piCloseNotification = PendingIntent.getBroadcast(service, 0, iCloseNotification, PendingIntent.FLAG_UPDATE_CURRENT);
                 notification.setDeleteIntent(piCloseNotification);
             }
 
@@ -409,6 +429,13 @@ public class MprisMediaSession implements SharedPreferences.OnSharedPreferenceCh
                 notification.addAction(aNext.build());
                 playbackActions |= PlaybackStateCompat.ACTION_SKIP_TO_NEXT;
                 ++numActions;
+            }
+            // Documentation says that this was added in Lollipop (21) but it seems to cause crashes on < Pie (28)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                if (notificationPlayer.isSeekAllowed()) {
+                    playbackActions |= PlaybackStateCompat.ACTION_SEEK_TO;
+                    ++numActions;
+                }
             }
             playbackState.setActions(playbackActions);
             mediaSession.setPlaybackState(playbackState.build());
@@ -448,6 +475,9 @@ public class MprisMediaSession implements SharedPreferences.OnSharedPreferenceCh
         //Clear the current player and media session
         notificationPlayer = null;
         if (mediaSession != null) {
+            mediaSession.setPlaybackState(new PlaybackStateCompat.Builder().build());
+            mediaSession.setMetadata(new MediaMetadataCompat.Builder().build());
+            mediaSession.setActive(false);
             mediaSession.release();
             mediaSession = null;
         }

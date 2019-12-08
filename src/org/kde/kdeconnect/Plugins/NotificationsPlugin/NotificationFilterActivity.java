@@ -199,7 +199,7 @@ public class NotificationFilterActivity extends AppCompatActivity {
                                         compoundButton.isChecked()));
 
                         ad.cancel();
-                        myBuilder.create().show();
+                        myBuilder.show();
                         break;
                 }
             });
@@ -216,18 +216,6 @@ public class NotificationFilterActivity extends AppCompatActivity {
         listView.setVisibility(View.VISIBLE);
         findViewById(R.id.spinner).setVisibility(View.GONE);
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        BackgroundService.addGuiInUseCounter(this);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        BackgroundService.removeGuiInUseCounter(this);
     }
 
     private Drawable resizeIcon(Drawable icon, int maxSize) {

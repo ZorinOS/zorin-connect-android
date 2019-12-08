@@ -21,6 +21,10 @@
 package org.kde.kdeconnect.Plugins.PresenterPlugin;
 
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -29,6 +33,8 @@ import android.support.v4.media.session.PlaybackStateCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.UserInterface.ThemeUtil;
@@ -37,11 +43,52 @@ import com.zorinos.zorin_connect.R;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.media.VolumeProviderCompat;
 
-public class PresenterActivity extends AppCompatActivity {
+public class PresenterActivity extends AppCompatActivity implements SensorEventListener {
 
     private MediaSessionCompat mMediaSession;
 
     private PresenterPlugin plugin;
+
+    private SensorManager sensorManager;
+
+    static final float SENSITIVITY = 0.05f; //TODO: Make configurable?
+
+    public void gyroscopeEvent(SensorEvent event) {
+        float xPos = -event.values[2] * SENSITIVITY;
+        float yPos = -event.values[0] * SENSITIVITY;
+
+        plugin.sendPointer(xPos, yPos);
+    }
+
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
+            gyroscopeEvent(event);
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        //Ignored
+    }
+
+    void enablePointer() {
+        if (sensorManager != null) {
+            return; //Already enabled
+        }
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        findViewById(R.id.pointer_button).setVisibility(View.VISIBLE);
+        findViewById(R.id.pointer_button).setOnTouchListener((v, event) -> {
+            if(event.getAction() == MotionEvent.ACTION_DOWN){
+                sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE), SensorManager.SENSOR_DELAY_GAME);
+                v.performClick(); // The linter complains if this is not called
+            }
+            else if (event.getAction() == MotionEvent.ACTION_UP) {
+                sensorManager.unregisterListener(this);
+                plugin.stopPointer();
+            }
+            return true;
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +103,9 @@ public class PresenterActivity extends AppCompatActivity {
             this.plugin = plugin;
             findViewById(R.id.next_button).setOnClickListener(v -> plugin.sendNext());
             findViewById(R.id.previous_button).setOnClickListener(v -> plugin.sendPrevious());
+            if (plugin.isPointerSupported()) {
+                enablePointer();
+            }
         }));
     }
     @Override
@@ -82,18 +132,21 @@ public class PresenterActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        BackgroundService.addGuiInUseCounter(this);
         if (mMediaSession != null) {
             mMediaSession.setActive(true);
             return;
         }
-        createMediaSession(); //Mediasession will keep
+        createMediaSession();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        BackgroundService.removeGuiInUseCounter(this);
+
+        if (sensorManager != null) {
+            // Make sure we don't leave the listener on
+            sensorManager.unregisterListener(this);
+        }
 
         if (mMediaSession != null) {
             PowerManager pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);

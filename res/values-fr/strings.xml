@@ -31,7 +31,6 @@
   <string name="pref_plugin_receive_notifications_desc">Recevoir les notifications du périphérique et les afficher dans Android</string>
   <string name="pref_plugin_sharereceiver">Partager et recevoir</string>
   <string name="pref_plugin_sharereceiver_desc">Partagez des URLs et des fichiers entre périphériques</string>
-  <string name="plugin_not_available">Cette fonctionnalité n\'est pas disponible dans votre version de Android</string>
   <string name="device_list_empty">Pas de périphériques</string>
   <string name="ok">Ok</string>
   <string name="cancel">Annuler</string>
@@ -77,31 +76,34 @@
   <string name="category_remembered_devices">Périphériques mémorisés</string>
   <string name="device_menu_plugins">Paramètres des modules externes</string>
   <string name="device_menu_unpair">Dissocier</string>
-  <string name="device_not_reachable">Périphérique inaccessible</string>
   <string name="pair_new_device">Associer un nouveau périphérique</string>
   <string name="unknown_device">Périphérique inconnu</string>
   <string name="error_not_reachable">Périphérique inaccessible</string>
-  <string name="error_already_requested">L\'association a déjà été demandée</string>
   <string name="error_already_paired">Périphérique déjà associé</string>
   <string name="error_could_not_send_package">Il est impossible d\'envoyer un paquet</string>
   <string name="error_timed_out">Délai expiré</string>
   <string name="error_canceled_by_user">Annulé par l\'utilisateur</string>
   <string name="error_canceled_by_other_peer">Annulé par un autre homologue</string>
-  <string name="error_invalid_key">Clé reçue non valable</string>
   <string name="encryption_info_title">Informations de chiffrement</string>
   <string name="encryption_info_msg_no_ssl">Ce périphérique n\'utilise pas une version récente de Zorin Connect qui utilise l\'ancienne méthode de chiffrement.</string>
   <string name="my_device_fingerprint">L\'empreinte SHA1 du certificat de votre appareil est :</string>
   <string name="remote_device_fingerprint">L\'empreinte SHA1 du certificat du périphérique distant est :</string>
   <string name="pair_requested">Paire demandée</string>
   <string name="pairing_request_from">Demande d\'association provenant de %1s</string>
-  <string name="received_url_title">Lien reçu de %1s</string>
-  <string name="received_url_text">Appuyez pour ouvrir %1s</string>
   <plurals name="incoming_file_title">
     <item quantity="one">%1$d fichier reçu de %2$s</item>
     <item quantity="other">%1$d fichiers reçus de %2$s</item>
   </plurals>
   <plurals name="incoming_files_text">
     <item quantity="one">Fichier : %1s</item>
+    <item quantity="other">(Fichier %2$d sur %3$d) : %1$s</item>
+  </plurals>
+  <plurals name="outgoing_file_title">
+    <item quantity="one">Envoi de %1$d fichier à %2$s</item>
+    <item quantity="other">Envoi de %1$d fichiers à %2$s</item>
+  </plurals>
+  <plurals name="outgoing_files_text">
+    <item quantity="one">Fichier : %1$s</item>
     <item quantity="other">(Fichier %2$d sur %3$d) : %1$s</item>
   </plurals>
   <plurals name="received_files_title">
@@ -112,10 +114,17 @@
     <item quantity="one">Impossible de recevoir le fichier depuis %1$s</item>
     <item quantity="other">Impossible de recevoir %2$d fichiers sur %3$d depuis %1$s</item>
   </plurals>
+  <plurals name="sent_files_title">
+    <item quantity="one">Fichier envoyé à %1$s</item>
+    <item quantity="other">%2$d fichiers envoyés à %1$s</item>
+  </plurals>
+  <plurals name="send_files_fail_title">
+    <item quantity="one">Impossible d\'envoyer le fichier à %1$s</item>
+    <item quantity="other">Impossible d\'envoyer %2$d fichiers sur %3$d à %1$s</item>
+  </plurals>
   <string name="received_file_text">Appuyez pour ouvrir %1s</string>
   <string name="cannot_create_file">Impossible de créer le fichier %s</string>
   <string name="tap_to_answer">Cliquer pour répondre</string>
-  <string name="reconnect">Reconnecter</string>
   <string name="right_click">Envoyer un clic droit</string>
   <string name="middle_click">Envoyer un clic central</string>
   <string name="show_keyboard">Afficher le clavier</string>
@@ -123,8 +132,6 @@
   <string name="request_pairing">Demande d\'association</string>
   <string name="pairing_accept">Accepter</string>
   <string name="pairing_reject">Rejeter</string>
-  <string name="device">Périphérique</string>
-  <string name="pair_device">Associer un périphérique</string>
   <string name="settings">Configuration</string>
   <string name="mpris_play">Lire</string>
   <string name="mpris_pause">Pause</string>
@@ -133,7 +140,6 @@
   <string name="mpris_ff">Avance rapide</string>
   <string name="mpris_next">Suivant</string>
   <string name="mpris_volume">Volume</string>
-  <string name="mpris_settings">Configuration multimédia</string>
   <string name="mpris_time_settings_title">Boutons avance / retour rapide.</string>
   <string name="mpris_time_settings_summary">Ajustez le temps pour l\'avance ou retour rapide.</string>
   <string-array name="mpris_time_entries">
@@ -146,20 +152,12 @@
   <string name="mpris_notification_settings_title">Afficher la notification de contrôle du lecteur multimédia</string>
   <string name="mpris_notification_settings_summary">Vous permet de contrôler vos lecteurs multimédia sans ouvrir Zorin Connect.</string>
   <string name="share_to">Partager vers…</string>
-  <string name="protocol_version_older">Le périphérique utilise une version ancienne du protocole</string>
   <string name="protocol_version_newer">Le périphérique utilise une version plus récente du protocole</string>
-  <string name="general_settings">Paramètres généraux</string>
-  <string name="plugin_settings">Configuration</string>
   <string name="plugin_settings_with_name">Configuration %s</string>
-  <string name="device_name">Nom du périphérique</string>
-  <string name="device_name_preference_summary">%s</string>
   <string name="invalid_device_name">Nom de périphérique non valable</string>
   <string name="shareplugin_text_saved">Texte reçu et enregistré dans le presse-papiers</string>
   <string name="custom_devices_settings">Liste personnalisée de périphériques</string>
-  <string name="pair_device_action">Associer un nouveau périphérique</string>
-  <string name="unpair_device_action">Dissocier %s</string>
   <string name="custom_device_list">Ajouter des périphériques par IP</string>
-  <string name="delete_custom_device">Supprimer %s ?</string>
   <string name="custom_device_deleted">Périphérique personnalisé supprimé</string>
   <string name="custom_device_list_help">Si votre périphérique n\'est pas détecté automatiquement, vous pouvez ajouter son adresse IP ou son nom d\'hôte en cliquant sur le bouton d\'action flottant</string>
   <string name="custom_device_fab_hint">Ajouter un périphérique</string>
@@ -174,7 +172,6 @@
   <string name="share_received_file">Partager « %s »</string>
   <string name="title_activity_notification_filter">Filtre des notifications</string>
   <string name="filter_apps_info">Les notifications seront synchronisées pour les applications sélectionnées.</string>
-  <string name="sftp_internal_storage">Stockage interne</string>
   <string name="sftp_sdcard_num">Carte SD %d</string>
   <string name="sftp_sdcard">Carte SD</string>
   <string name="sftp_readonly">(lecture seule)</string>
@@ -199,23 +196,18 @@
   <string name="sftp_no_sdcard_detected">Aucune carte SD détectée</string>
   <string name="sftp_no_storage_locations_configured">Aucun emplacement stockage n\'est configuré</string>
   <string name="sftp_saf_permission_explanation">Vous devez configurer des emplacements de stockage pour accéder aux fichiers à distance</string>
-  <string name="add_host">Ajouter hôte/IP</string>
-  <string name="add_host_hint">"Nom d\'hôte ou adresse IP "</string>
   <string name="no_players_connected">Aucun lecteur trouvé</string>
-  <string name="mpris_player_on_device">%1$s sur %2$s</string>
   <string name="send_files">Envoyer des fichiers</string>
   <string name="pairing_title">Périphériques Zorin Connect</string>
   <string name="pairing_description">Les autres périphériques utilisant Zorin Connect dans votre réseau apparaissent ici.</string>
-  <string name="device_paired">Périphérique associé</string>
   <string name="device_rename_title">Renommer le périphérique</string>
   <string name="device_rename_confirm">Renommer</string>
   <string name="refresh">Mettre à jour</string>
   <string name="unreachable_description">Ce périphérique associé n\'est pas accessible. Assurez-vous qu\'il est bien connecté au même réseau.</string>
-  <string name="on_data_message">Il semble que vous utilisiez une connexion de données mobile. Zorin Connect fonctionne uniquement sur un réseau local.</string>
+  <string name="no_wifi">Vous n\'êtes connecté à aucun réseau Wi-Fi, il est possible que vous ne puissiez afficher aucun appareil. Cliquez ici pour activer le Wi-Fi.</string>
   <string name="no_file_browser">Aucun navigateur de fichiers installé.</string>
   <string name="pref_plugin_telepathy">Envoyer un SMS</string>
   <string name="pref_plugin_telepathy_desc">Envoyer des SMS depuis votre bureau</string>
-  <string name="plugin_not_supported">Ce module externe n\'est pas géré par le périphérique</string>
   <string name="findmyphone_title">Trouver mon téléphone</string>
   <string name="findmyphone_title_tablet">Trouver ma tablette</string>
   <string name="findmyphone_title_tv">Trouver ma télévision</string>
@@ -223,13 +215,13 @@
   <string name="findmyphone_found">Trouvé</string>
   <string name="open">Ouvrir</string>
   <string name="close">Fermer</string>
-  <string name="no_permissions_storage">Vous devez accorder la permission d\'accéder à l\'espace de stockage</string>
   <string name="plugins_need_permission">Certains modules externes nécessitent des permissions pour fonctionner (tapez pour plus d\'informations) :</string>
   <string name="permission_explanation">Ce module externe nécessite des permissions pour fonctionner</string>
   <string name="optional_permission_explanation">Vous devez accorder des permissions supplémentaires pour activer toutes les fonctionnalités</string>
   <string name="plugins_need_optional_permission">Certaines fonctionnalités de modules externes sont désactivées faute de permissions suffisantes (tapez pour plus d\'informations) :</string>
   <string name="share_optional_permission_explanation">Pour partager des fichiers entre votre téléphone et votre ordinateur, veuillez permettre l\'accès à la mémoire de stockage du téléphone</string>
   <string name="telepathy_permission_explanation">Pour lire et écrire des SMS depuis votre ordinateur, veuillez permettre l\'accès aux SMS</string>
+  <string name="telephony_permission_explanation">Pour voir les appels depuis votre ordinateur, veuillez permettre l\'accès au journal des appels et à l\'état du téléphone</string>
   <string name="telephony_optional_permission_explanation">Pour voir le nom du contact au lieu du numéro de téléphone, veuillez permettre l\'accès aux contacts du téléphone</string>
   <string name="contacts_permission_explanation">Pour partager votre carnet de contacts avec votre ordinateur, veuillez permettre l\'accès aux contacts du téléphone</string>
   <string name="select_ringtone">Sélectionnez une sonnerie</string>
@@ -246,8 +238,6 @@
   <string name="addcommand_explanation2">Vous pouvez ajouter de nouvelles commandes dans la configuration système de Zorin Connect</string>
   <string name="add_command_description">Vous pouvez ajouter des commandes sur votre ordinateur</string>
   <string name="pref_plugin_mprisreceiver">Contrôle du lecteur multimédia</string>
-  <string name="pref_plugin_mprisreceiver_desc">Contrôlez les lecteurs multimédia de vos téléphones depuis un autre appareil</string>
-  <string name="dark_theme">Thème sombre</string>
   <string name="notification_channel_default">Autres notifications</string>
   <string name="notification_channel_persistent">Indicateur persistant</string>
   <string name="notification_channel_media_control">Contrôle multimédia</string>
@@ -277,11 +267,12 @@
   <string name="extra_options">Options supplémentaires</string>
   <string name="privacy_options">Options de confidentialité</string>
   <string name="set_privacy_options">Configurez vos options de confidentialité</string>
-  <string name="new_notification">Nouvelle notification</string>
   <string name="block_contents">Bloquer les contenus des notifications</string>
   <string name="block_images">Bloquer les images des notifications</string>
   <string name="notification_channel_receivenotification">Notifications provenant d\'autres périphériques</string>
   <string name="take_picture">Lancer l\'appareil photo</string>
   <string name="plugin_photo_desc">Lancer l\'application appareil photo pour prendre et transférer des photos</string>
   <string name="no_app_for_opening">Aucune application adaptée trouvée pour ouvrir ce fichier.</string>
+  <string name="remote_keyboard_service">Clavier à distance Zorin Connect</string>
+  <string name="presenter_pointer">Pointeur</string>
 </resources>

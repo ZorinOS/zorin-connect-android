@@ -49,6 +49,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,6 +57,8 @@ import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import androidx.annotation.AnyThread;
+import androidx.annotation.WorkerThread;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
@@ -76,6 +79,7 @@ public class Device implements BaseLink.PacketReceiver {
     private final Map<String, BasePairingHandler> pairingHandlers = new HashMap<>();
 
     private final CopyOnWriteArrayList<BaseLink> links = new CopyOnWriteArrayList<>();
+    private DevicePacketQueue packetQueue;
 
     private List<String> supportedPlugins = new ArrayList<>();
     private final ConcurrentHashMap<String, Plugin> plugins = new ConcurrentHashMap<>();
@@ -86,6 +90,11 @@ public class Device implements BaseLink.PacketReceiver {
     private final SharedPreferences settings;
 
     private final CopyOnWriteArrayList<PluginsChangedListener> pluginsChangedListeners = new CopyOnWriteArrayList<>();
+    private Set<String> incomingCapabilities = new HashSet<>();
+
+    public boolean supportsPacketType(String type) {
+        return incomingCapabilities.contains(type);
+    }
 
     public interface PluginsChangedListener {
         void onPluginsChanged(Device device);
@@ -401,14 +410,11 @@ public class Device implements BaseLink.PacketReceiver {
                 .build();
 
         NotificationHelper.notifyCompat(notificationManager, notificationId, noti);
-
-        BackgroundService.addGuiInUseCounter(context);
     }
 
     public void hidePairingNotification() {
         final NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(notificationId);
-        BackgroundService.removeGuiInUseCounter(context);
     }
 
     //
@@ -420,7 +426,12 @@ public class Device implements BaseLink.PacketReceiver {
     }
 
     public void addLink(NetworkPacket identityPacket, BaseLink link) {
+        if (links.isEmpty()) {
+            packetQueue = new DevicePacketQueue(this);
+        }
         //FilesHelper.LogOpenFileCount();
+        links.add(link);
+        link.addPacketReceiver(this);
 
         this.protocolVersion = identityPacket.getInt("protocolVersion");
 
@@ -447,9 +458,6 @@ public class Device implements BaseLink.PacketReceiver {
 
             }
         }
-
-
-        links.add(link);
 
         try {
             SharedPreferences globalSettings = PreferenceManager.getDefaultSharedPreferences(context);
@@ -493,13 +501,14 @@ public class Device implements BaseLink.PacketReceiver {
 
         Set<String> outgoingCapabilities = identityPacket.getStringSet("outgoingCapabilities", null);
         Set<String> incomingCapabilities = identityPacket.getStringSet("incomingCapabilities", null);
+
+
         if (incomingCapabilities != null && outgoingCapabilities != null) {
             supportedPlugins = new Vector<>(PluginFactory.pluginsForCapabilities(incomingCapabilities, outgoingCapabilities));
         } else {
             supportedPlugins = new Vector<>(PluginFactory.getAvailablePlugins());
         }
-
-        link.addPacketReceiver(this);
+        this.incomingCapabilities = incomingCapabilities;
 
         reloadPluginsFromSettings();
 
@@ -525,6 +534,10 @@ public class Device implements BaseLink.PacketReceiver {
         Log.i("KDE/Device", "removeLink: " + link.getLinkProvider().getName() + " -> " + getName() + " active links: " + links.size());
         if (links.isEmpty()) {
             reloadPluginsFromSettings();
+            if (packetQueue != null) {
+                packetQueue.disconnected();
+                packetQueue = null;
+            }
         }
     }
 
@@ -612,19 +625,64 @@ public class Device implements BaseLink.PacketReceiver {
         }
     };
 
+    @AnyThread
     public void sendPacket(NetworkPacket np) {
-        sendPacket(np, defaultCallback);
+        sendPacket(np, -1, defaultCallback);
     }
 
+    @AnyThread
+    public void sendPacket(NetworkPacket np, int replaceID) {
+        sendPacket(np, replaceID, defaultCallback);
+    }
+
+    @WorkerThread
     public boolean sendPacketBlocking(NetworkPacket np) {
         return sendPacketBlocking(np, defaultCallback);
     }
 
-    //Async
+    @AnyThread
     public void sendPacket(final NetworkPacket np, final SendPacketStatusCallback callback) {
-        new Thread(() -> sendPacketBlocking(np, callback)).start();
+        sendPacket(np, -1, callback);
     }
 
+    /**
+     * Send a packet to the device asynchronously
+     * @param np The packet
+     * @param replaceID If positive, replaces all unsent packages with the same replaceID
+     * @param callback A callback for success/failure
+     */
+    @AnyThread
+    public void sendPacket(final NetworkPacket np, int replaceID, final SendPacketStatusCallback callback) {
+        if (packetQueue == null) {
+            callback.onFailure(new Exception("Device disconnected!"));
+        } else {
+            packetQueue.addPacket(np, replaceID, callback);
+        }
+    }
+
+    /**
+     * Check if we still have an unsent packet in the queue with the given ID.
+     * If so, remove it from the queue and return it
+     * @param replaceID The replace ID (must be positive)
+     * @return The found packet, or null
+     */
+    public NetworkPacket getAndRemoveUnsentPacket(int replaceID) {
+        if (packetQueue == null) {
+            return null;
+        } else {
+            return packetQueue.getAndRemoveUnsentPacket(replaceID);
+        }
+    }
+
+    /**
+     * Send {@code np} over one of this device's connected {@link #links}.
+     *
+     * @param np       the packet to send
+     * @param callback a callback that can receive realtime updates
+     * @return true if the packet was sent ok, false otherwise
+     * @see BaseLink#sendPacket(NetworkPacket, SendPacketStatusCallback)
+     */
+    @WorkerThread
     public boolean sendPacketBlocking(final NetworkPacket np, final SendPacketStatusCallback callback) {
 
         /*

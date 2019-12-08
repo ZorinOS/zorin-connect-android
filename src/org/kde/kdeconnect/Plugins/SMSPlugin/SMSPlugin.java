@@ -22,6 +22,7 @@
 package org.kde.kdeconnect.Plugins.SMSPlugin;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -54,17 +55,18 @@ import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import static org.kde.kdeconnect.Plugins.TelephonyPlugin.TelephonyPlugin.PACKET_TYPE_TELEPHONY;
 
 @PluginFactory.LoadablePlugin
+@SuppressLint("InlinedApi")
 public class SMSPlugin extends Plugin {
 
     /**
@@ -73,23 +75,47 @@ public class SMSPlugin extends Plugin {
      * The body should contain the key "messages" mapping to an array of messages
      * <p>
      * For example:
-     * { "messages" : [
+     * {
+     *   "version": 2                     // This is the second version of this packet type and
+     *                                    // version 1 packets (which did not carry this flag)
+     *                                    // are incompatible with the new format
+     *   "messages" : [
      *   { "event"     : 1,               // 32-bit field containing a bitwise-or of event flags
      *                                    // See constants declared in SMSHelper.Message for defined
      *                                    // values and explanations
      *     "body"      : "Hello",         // Text message body
-     *     "address"   : "2021234567",    // Sending or receiving address of the message
+     *     "addresses": <List<Address>>   // List of Address objects, one for each participant of the conversation
+     *                                    // The user's Address is excluded so:
+     *                                    // If this is a single-target messsage, there will only be one
+     *                                    // Address (the other party)
+     *                                    // If this is an incoming multi-target message, the first Address is the
+     *                                    // sender and all other addresses are other parties to the conversation
+     *                                    // If this is an outgoing multi-target message, the sender is implicit
+     *                                    // (the user's phone number) and all Addresses are recipients
      *     "date"      : "1518846484880", // Timestamp of the message
      *     "type"      : "2",   // Compare with Android's
      *                          // Telephony.TextBasedSmsColumns.MESSAGE_TYPE_*
-     *     "thread_id" : "132"  // Thread to which the message belongs
+     *     "thread_id" : 132    // Thread to which the message belongs
      *     "read"      : true   // Boolean representing whether a message is read or unread
      *   },
      *   { ... },
      *   ...
      * ]
+     *
+     * The following optional fields of a message object may be defined
+     * "sub_id": <int> // Android's subscriber ID, which is basically used to determine which SIM card the message
+     *                 // belongs to. This is mostly useful when attempting to reply to an SMS with the correct
+     *                 // SIM card using PACKET_TYPE_SMS_REQUEST.
+     *                 // If this value is not defined or if it does not match a valid subscriber_id known by
+     *                 // Android, we will use whatever subscriber ID Android gives us as the default
+     *
+     * An Address object looks like:
+     * {
+     *     "address": <String> // Address (phone number, email address, etc.) of this object
+     * }
      */
     private final static String PACKET_TYPE_SMS_MESSAGE = "kdeconnect.sms.messages";
+    private final static int SMS_MESSAGE_PACKET_VERSION = 2; // We *send* packets of this version
 
     /**
      * Packet sent to request a message be sent
@@ -161,18 +187,15 @@ public class SMSPlugin extends Plugin {
     private final Lock mostRecentTimestampLock = new ReentrantLock();
 
     private class MessageContentObserver extends ContentObserver {
-        final SMSPlugin mPlugin;
 
         /**
          * Create a ContentObserver to watch the Messages database. onChange is called for
          * every subscribed change
          *
-         * @param parent  Plugin which owns this observer
          * @param handler Handler object used to make the callback
          */
-        MessageContentObserver(SMSPlugin parent, Handler handler) {
+        MessageContentObserver(Handler handler) {
             super(handler);
-            mPlugin = parent;
         }
 
         /**
@@ -181,40 +204,34 @@ public class SMSPlugin extends Plugin {
          * In this case, this onChange expects to be called whenever *anything* in the Messages
          * database changes and simply reports those updated messages to anyone who might be listening
          */
-        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         public void onChange(boolean selfChange) {
-            if (mPlugin.mostRecentTimestamp == 0) {
+            // Lock so no one uses the mostRecentTimestamp between the moment we read it and the
+            // moment we update it. This is because reading the Messages DB can take long.
+            mostRecentTimestampLock.lock();
+
+            if (mostRecentTimestamp == 0) {
                 // Since the timestamp has not been initialized, we know that nobody else
                 // has requested a message. That being the case, there is most likely
                 // nobody listening for message updates, so just drop them
+                mostRecentTimestampLock.unlock();
                 return;
             }
-            mostRecentTimestampLock.lock();
-            // Grab the mostRecentTimestamp into the local stack because reading the Messages
-            // database could potentially be a long operation
-            long mostRecentTimestamp = mPlugin.mostRecentTimestamp;
-            mostRecentTimestampLock.unlock();
 
-            List<SMSHelper.Message> messages = SMSHelper.getMessagesSinceTimestamp(mPlugin.context, mostRecentTimestamp);
+            SMSHelper.Message message = SMSHelper.getNewestMessage(context);
 
-            if (messages.size() == 0) {
-                // Our onChange often gets called many times for a single message. Don't make unnecessary
-                // noise
+            if (message == null || message.date <= mostRecentTimestamp) {
+                // onChange can trigger many times for a single message. Don't make unnecessary noise
+                mostRecentTimestampLock.unlock();
                 return;
             }
 
             // Update the most recent counter
-            mostRecentTimestampLock.lock();
-            for (SMSHelper.Message message : messages) {
-                if (message.date > mostRecentTimestamp) {
-                    mPlugin.mostRecentTimestamp = message.date;
-                }
-            }
+            mostRecentTimestamp = message.date;
             mostRecentTimestampLock.unlock();
 
             // Send the alert about the update
-            device.sendPacket(constructBulkMessagePacket(messages));
+            device.sendPacket(constructBulkMessagePacket(Collections.singleton(message)));
         }
     }
 
@@ -275,7 +292,6 @@ public class SMSPlugin extends Plugin {
         device.sendPacket(np);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public boolean onCreate() {
         permissionExplanation = R.string.telepathy_permission_explanation;
@@ -285,8 +301,12 @@ public class SMSPlugin extends Plugin {
         context.registerReceiver(receiver, filter);
 
         Looper helperLooper = SMSHelper.MessageLooper.getLooper();
-        ContentObserver messageObserver = new MessageContentObserver(this, new Handler(helperLooper));
+        ContentObserver messageObserver = new MessageContentObserver(new Handler(helperLooper));
         SMSHelper.registerObserver(messageObserver, context);
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            Log.w("SMSPlugin", "This is a very old version of Android. The SMS Plugin might not function as intended.");
+        }
 
         return true;
     }
@@ -301,7 +321,6 @@ public class SMSPlugin extends Plugin {
         return context.getResources().getString(R.string.pref_plugin_telepathy_desc);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public boolean onPacketReceived(NetworkPacket np) {
 
@@ -344,7 +363,6 @@ public class SMSPlugin extends Plugin {
      * @param messages Messages to include in the packet
      * @return NetworkPacket of type PACKET_TYPE_SMS_MESSAGE
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private static NetworkPacket constructBulkMessagePacket(Collection<SMSHelper.Message> messages) {
         NetworkPacket reply = new NetworkPacket(PACKET_TYPE_SMS_MESSAGE);
 
@@ -354,16 +372,14 @@ public class SMSPlugin extends Plugin {
             try {
                 JSONObject json = message.toJSONObject();
 
-                json.put("event", SMSHelper.Message.TEXT_MESSAGE);
-
                 body.put(json);
             } catch (JSONException e) {
-                Log.e("Conversations", "Error serializing message");
+                Log.e("Conversations", "Error serializing message", e);
             }
         }
 
         reply.set("messages", body);
-        reply.set("event", "batch_messages");
+        reply.set("version", SMS_MESSAGE_PACKET_VERSION);
 
         return reply;
     }
@@ -373,7 +389,6 @@ public class SMSPlugin extends Plugin {
      * <p>
      * Send one packet of type PACKET_TYPE_SMS_MESSAGE with the first message in all conversations
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private boolean handleRequestConversations(NetworkPacket packet) {
         Map<SMSHelper.ThreadID, SMSHelper.Message> conversations = SMSHelper.getConversations(this.context);
 
@@ -394,7 +409,6 @@ public class SMSPlugin extends Plugin {
         return true;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private boolean handleRequestConversation(NetworkPacket packet) {
         SMSHelper.ThreadID threadID = new SMSHelper.ThreadID(packet.getLong("threadID"));
 
@@ -440,11 +454,23 @@ public class SMSPlugin extends Plugin {
         return new String[]{
                 Manifest.permission.SEND_SMS,
                 Manifest.permission.READ_SMS,
+                // READ_PHONE_STATE should be optional, since we can just query the user, but that
+                // requires a GUI implementation for querying the user!
+                Manifest.permission.READ_PHONE_STATE,
         };
     }
 
+    /**
+     * With versions older than KITKAT, lots of the content providers used in SMSHelper become
+     * un-documented. Most manufacturers *did* do things the same way as was done in mainline
+     * Android at that time, but some did not. If the manufacturer followed the default route,
+     * everything will be fine. If not, the plugin will crash. But, since we have a global catch-all
+     * in Device.onPacketReceived, it will not crash catastrophically.
+     * The onCreated method of this SMSPlugin complains if a version older than KitKat is loaded,
+     * but it still allowed in the optimistic hope that things will "just work"
+     */
     @Override
     public int getMinSdk() {
-        return Build.VERSION_CODES.KITKAT;
+        return Build.VERSION_CODES.FROYO;
     }
 }

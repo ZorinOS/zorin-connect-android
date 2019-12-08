@@ -31,7 +31,6 @@ import org.kde.kdeconnect.Backends.BaseLinkProvider;
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Helpers.DeviceHelper;
-import org.kde.kdeconnect.Helpers.NetworkHelper;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.SslHelper;
 import org.kde.kdeconnect.Helpers.StringsHelper;
 import org.kde.kdeconnect.NetworkPacket;
@@ -76,6 +75,9 @@ public class LanLinkProvider extends BaseLinkProvider implements LanLink.LinkDis
 
     private ServerSocket tcpServer;
     private DatagramSocket udpServer;
+
+    private long lastBroadcast = 0;
+    private final static long delayBetweenBroadcasts = 500;
 
     private boolean listening = false;
 
@@ -356,11 +358,11 @@ public class LanLinkProvider extends BaseLinkProvider implements LanLink.LinkDis
     }
 
     private void broadcastUdpPacket() {
-
-        if (NetworkHelper.isOnMobileNetwork(context)) {
-            Log.w("LanLinkProvider", "On 3G network, not sending broadcast.");
+        if (System.currentTimeMillis() < lastBroadcast + delayBetweenBroadcasts) {
+            Log.i("LanLinkProvider", "broadcastUdpPacket: relax cowboy");
             return;
         }
+        lastBroadcast = System.currentTimeMillis();
 
         new Thread(() -> {
             ArrayList<String> iplist = CustomDevicesActivity

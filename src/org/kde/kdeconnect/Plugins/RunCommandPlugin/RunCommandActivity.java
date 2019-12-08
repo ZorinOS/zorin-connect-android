@@ -107,7 +107,11 @@ public class RunCommandActivity extends AppCompatActivity {
 
         deviceId = getIntent().getStringExtra("deviceId");
 
-        boolean canAddCommands = BackgroundService.getInstance().getDevice(deviceId).getPlugin(RunCommandPlugin.class).canAddCommand();
+        boolean canAddCommands = false;
+        try {
+            canAddCommands = BackgroundService.getInstance().getDevice(deviceId).getPlugin(RunCommandPlugin.class).canAddCommand();
+        } catch (Exception ignore) {
+        }
 
         FloatingActionButton addCommandButton = findViewById(R.id.add_command_button);
         if (canAddCommands) {
@@ -118,14 +122,12 @@ public class RunCommandActivity extends AppCompatActivity {
 
         addCommandButton.setOnClickListener(v -> BackgroundService.RunWithPlugin(RunCommandActivity.this, deviceId, RunCommandPlugin.class, plugin -> {
             plugin.sendSetupPacket();
-            AlertDialog dialog = new AlertDialog.Builder(RunCommandActivity.this)
+             new AlertDialog.Builder(RunCommandActivity.this)
                     .setTitle(R.string.add_command)
                     .setMessage(R.string.add_command_description)
                     .setPositiveButton(R.string.ok, null)
-                    .create();
-            dialog.show();
+                    .show();
         }));
-
         updateView();
     }
 
