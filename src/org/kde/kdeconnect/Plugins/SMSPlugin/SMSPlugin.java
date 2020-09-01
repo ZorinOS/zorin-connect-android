@@ -126,7 +126,8 @@ public class SMSPlugin extends Plugin {
      * The body should look like so:
      * { "sendSms": true,
      * "phoneNumber": "542904563213",
-     * "messageBody": "Hi mom!"
+     * "messageBody": "Hi mom!",
+     * "sub_id": "3859358340534"
      * }
      */
     private final static String PACKET_TYPE_SMS_REQUEST = "kdeconnect.sms.request";
@@ -141,9 +142,12 @@ public class SMSPlugin extends Plugin {
     /**
      * Packet sent to request all the messages in a particular conversation
      * <p>
-     * The body should contain the key "threadID" mapping to the threadID (as a string) being requested
-     * For example:
-     * { "threadID": 203 }
+     * The following fields are available:
+     * "threadID": <long>            // (Required) ThreadID to request
+     * "rangeStartTimestamp": <long> // (Optional) Millisecond epoch timestamp indicating the start of the range from which to return messages
+     * "numberToRequest": <long>     // (Optional) Number of messages to return, starting from rangeStartTimestamp.
+     *                               // May return fewer than expected if there are not enough or more than expected if many
+     *                               // messages have the same timestamp.
      */
     private final static String PACKET_TYPE_SMS_REQUEST_CONVERSATION = "kdeconnect.sms.request_conversation";
 
@@ -336,9 +340,11 @@ public class SMSPlugin extends Plugin {
                 if (np.getBoolean("sendSms")) {
                     String phoneNo = np.getString("phoneNumber");
                     String sms = np.getString("messageBody");
+                    long subID = np.getLong("subID", -1);
 
                     try {
-                        SmsManager smsManager = SmsManager.getDefault();
+                        SmsManager smsManager = subID == -1? SmsManager.getDefault() :
+                            SmsManager.getSmsManagerForSubscriptionId((int) subID);
                         ArrayList<String> parts = smsManager.divideMessage(sms);
 
                         // If this message turns out to fit in a single SMS, sendMultipartTextMessage
@@ -412,7 +418,19 @@ public class SMSPlugin extends Plugin {
     private boolean handleRequestConversation(NetworkPacket packet) {
         SMSHelper.ThreadID threadID = new SMSHelper.ThreadID(packet.getLong("threadID"));
 
-        List<SMSHelper.Message> conversation = SMSHelper.getMessagesInThread(this.context, threadID);
+        Long rangeStartTimestamp = packet.getLong("rangeStartTimestamp", -1);
+        Long numberToGet = packet.getLong("numberToRequest", -1);
+
+        if (numberToGet < 0) {
+            numberToGet = null;
+        }
+
+        List<SMSHelper.Message> conversation;
+        if (rangeStartTimestamp < 0) {
+            conversation = SMSHelper.getMessagesInThread(this.context, threadID, numberToGet);
+        } else {
+            conversation = SMSHelper.getMessagesInRange(this.context, threadID, rangeStartTimestamp, numberToGet);
+        }
 
         NetworkPacket reply = constructBulkMessagePacket(conversation);
 

@@ -113,7 +113,6 @@
             android:background="@drawable/button_ripple"
             android:tint="?attr/android:textColor"
             style="?attr/disableableButtonStyle" />
-
     </LinearLayout>
 
     <LinearLayout

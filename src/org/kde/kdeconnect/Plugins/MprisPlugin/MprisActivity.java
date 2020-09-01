@@ -20,14 +20,21 @@
 
 package org.kde.kdeconnect.Plugins.MprisPlugin;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,15 +44,18 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.kde.kdeconnect.Backends.BaseLink;
 import org.kde.kdeconnect.Backends.BaseLinkProvider;
 import org.kde.kdeconnect.BackgroundService;
+import org.kde.kdeconnect.Helpers.VideoUrlsHelper;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.SystemvolumePlugin.SystemvolumeFragment;
 import org.kde.kdeconnect.UserInterface.ThemeUtil;
 import com.zorinos.zorin_connect.R;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -293,6 +303,8 @@ public class MprisActivity extends AppCompatActivity {
         rewButton.setVisibility(playerStatus.isSeekAllowed() ? View.VISIBLE : View.GONE);
         ffButton.setVisibility(playerStatus.isSeekAllowed() ? View.VISIBLE : View.GONE);
 
+        invalidateOptionsMenu();
+
         //Show and hide previous/next buttons simultaneously
         if (playerStatus.isGoPreviousAllowed() || playerStatus.isGoNextAllowed()) {
             prevButton.setVisibility(View.VISIBLE);
@@ -371,8 +383,15 @@ public class MprisActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mpris);
         ButterKnife.bind(this);
 
-        final String targetPlayerName = getIntent().getStringExtra("player");
+        String targetPlayerName = getIntent().getStringExtra("player");
         getIntent().removeExtra("player");
+
+        if (targetPlayerName == null || targetPlayerName.isEmpty()) {
+            if (savedInstanceState != null) {
+                targetPlayerName = savedInstanceState.getString("targetPlayer");
+            }
+        }
+
         deviceId = getIntent().getStringExtra("deviceId");
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -449,4 +468,39 @@ public class MprisActivity extends AppCompatActivity {
         nowPlayingText.setSelected(true);
     }
 
+
+    final static int MENU_OPEN_URL = Menu.FIRST;
+
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.clear();
+        if(targetPlayer != null && !"".equals(targetPlayer.getUrl())) {
+            menu.add(0, MENU_OPEN_URL, Menu.NONE, R.string.mpris_open_url);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (targetPlayer != null && item.getItemId() == MENU_OPEN_URL) {
+            try {
+                String url = VideoUrlsHelper.formatUriWithSeek(targetPlayer.getUrl(), targetPlayer.getPosition()).toString();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+                targetPlayer.pause();
+                return true;
+            } catch (MalformedURLException | ActivityNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), getString(R.string.cant_open_url), Toast.LENGTH_LONG).show();
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        if (targetPlayer != null) {
+            outState.putString("targetPlayer", targetPlayer.getPlayer());
+        }
+        super.onSaveInstanceState(outState);
+    }
 }

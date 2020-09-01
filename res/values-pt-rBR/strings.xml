@@ -33,6 +33,7 @@
   <string name="pref_plugin_sharereceiver_desc">Compartilha arquivos e URLs entre os dispositivos</string>
   <string name="device_list_empty">Sem dispositivos</string>
   <string name="ok">OK</string>
+  <string name="sad_ok">OK :(</string>
   <string name="cancel">Cancelar</string>
   <string name="open_settings">Abrir configurações</string>
   <string name="no_permissions">Você precisa conceder permissão para acessar as notificações</string>
@@ -205,6 +206,7 @@
   <string name="refresh">Atualizar</string>
   <string name="unreachable_description">Este dispositivo emparelhado não está acessível. Certifique-se de que está conectado à mesma rede que você.</string>
   <string name="no_wifi">Você não está conectado a nenhuma rede Wi-Fi, então não conseguirá ver nenhum dispositivo. Clique aqui para ativar o Wi-Fi.</string>
+  <string name="on_non_trusted_message">Não é uma rede confiável: a descoberta automática está desativada.</string>
   <string name="no_file_browser">Não há gerenciadores de arquivos instalados.</string>
   <string name="pref_plugin_telepathy">Enviar SMS</string>
   <string name="pref_plugin_telepathy_desc">Envia mensagens de texto do seu Desktop</string>
@@ -243,6 +245,7 @@
   <string name="notification_channel_persistent">Indicador persistente</string>
   <string name="notification_channel_media_control">Controle multimídia</string>
   <string name="notification_channel_filetransfer">Transferência de arquivo</string>
+  <string name="notification_channel_high_priority">Prioridade alta</string>
   <string name="mpris_stop">Parar o reprodutor atual</string>
   <string name="copy_url_to_clipboard">Copiar URL para a área de transferência</string>
   <string name="clipboard_toast">Copiado para a área de transferência</string>
@@ -276,4 +279,22 @@
   <string name="no_app_for_opening">Não foi encontrado nenhum aplicativo adequado para abrir este arquivo</string>
   <string name="remote_keyboard_service">Teclado Remoto do Zorin Connect</string>
   <string name="presenter_pointer">Ponteiro</string>
+  <string name="trusted_networks">Redes confiáveis</string>
+  <string name="trusted_networks_desc">Restringir a descoberta automática a redes conhecidas</string>
+  <string name="add_trusted_network">Adicionar à %1s</string>
+  <string name="empty_trusted_networks_list_text">Você ainda não adicionou nenhuma rede confiável</string>
+  <string name="allow_all_networks_text">Permitir tudo</string>
+  <string name="location_permission_needed_title">É necessário ter permissão</string>
+  <string name="location_permission_needed_desc">O Android precisa da permissão de Localização para identificar a sua rede Wi-Fi</string>
+  <string name="clipboard_android_x_incompat">O Android 10 removeu o acesso à área de transferência para todos os aplicativos. Este plugin ficará desativado.</string>
+  <string name="mpris_open_url">Continuar tocando aqui</string>
+  <string name="cant_open_url">Não foi possível abrir a URL para continuar tocando</string>
+  <string name="bigscreen_home">Início</string>
+  <string name="bigscreen_up">Para cima</string>
+  <string name="bigscreen_left">Esquerda</string>
+  <string name="bigscreen_select">Selecionar</string>
+  <string name="bigscreen_right">Direita</string>
+  <string name="bigscreen_down">Para baixo</string>
+  <string name="pref_plugin_bigscreen">Controle remoto do Bigscreen</string>
+  <string name="pref_plugin_bigscreen_desc">Use seu dispositivo como um controle remoto para o Plasma Bigscreen</string>
 </resources>

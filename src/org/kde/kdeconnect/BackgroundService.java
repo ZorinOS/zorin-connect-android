@@ -32,8 +32,11 @@ import android.net.ConnectivityManager;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.core.app.NotificationCompat;
 
 import org.kde.kdeconnect.Backends.BaseLink;
 import org.kde.kdeconnect.Backends.BaseLinkProvider;
@@ -41,19 +44,22 @@ import org.kde.kdeconnect.Backends.LanBackend.LanLinkProvider;
 import org.kde.kdeconnect.Helpers.NotificationHelper;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.RsaHelper;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.SslHelper;
+import org.kde.kdeconnect.Plugins.ClibpoardPlugin.ClipboardFloatingActivity;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
+import org.kde.kdeconnect.Plugins.RunCommandPlugin.RunCommandActivity;
+import org.kde.kdeconnect.Plugins.RunCommandPlugin.RunCommandPlugin;
+import org.kde.kdeconnect.Plugins.SharePlugin.SendFileActivity;
 import org.kde.kdeconnect.UserInterface.MainActivity;
 import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import androidx.core.app.NotificationCompat;
 
 //import org.kde.kdeconnect.Backends.BluetoothBackend.BluetoothLinkProvider;
 
@@ -274,6 +280,7 @@ public class BackgroundService extends Service {
         initializeSecurityParameters();
         NotificationHelper.initializeChannels(this);
         loadRememberedDevicesFromSettings();
+        migratePluginSettings();
         registerLinkProviders();
 
         //Link Providers need to be already registered
@@ -284,6 +291,29 @@ public class BackgroundService extends Service {
         }
     }
 
+    private void migratePluginSettings() {
+        SharedPreferences globalPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        for (String pluginKey : PluginFactory.getAvailablePlugins()) {
+            if (PluginFactory.getPluginInfo(pluginKey).supportsDeviceSpecificSettings()) {
+                Iterator<Device> it = devices.values().iterator();
+
+                while (it.hasNext()) {
+                    Device device = it.next();
+                    Plugin plugin = PluginFactory.instantiatePluginForDevice(getBaseContext(), pluginKey, device);
+
+                    if (plugin == null) {
+                        continue;
+                    }
+
+                    plugin.copyGlobalToDeviceSpecificSettings(globalPrefs);
+                    if (!it.hasNext()) {
+                        plugin.removeSettings(globalPrefs);
+                    }
+                }
+            }
+        }
+    }
 
     public void changePersistentNotificationVisibility(boolean visible) {
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -311,24 +341,53 @@ public class BackgroundService extends Service {
                 .setAutoCancel(false);
         notification.setGroup("BackgroundService");
 
-        ArrayList<String> connectedDevices = new ArrayList<>();
-        for (Device device : getDevices().values()) {
-            if (device.isReachable() && device.isPaired()) {
-                connectedDevices.add(device.getName());
-            }
-        }
-
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             //Pre-oreo, the notification will have an empty title line without this
             notification.setContentTitle(getString(R.string.kde_connect));
+        }
+
+        ArrayList<String> connectedDevices = new ArrayList<>();
+        ArrayList<String> connectedDeviceIds = new ArrayList<>();
+        for (Device device : getDevices().values()) {
+            if (device.isReachable() && device.isPaired()) {
+                connectedDeviceIds.add(device.getDeviceId());
+                connectedDevices.add(device.getName());
+            }
         }
 
         if (connectedDevices.isEmpty()) {
             notification.setContentText(getString(R.string.foreground_notification_no_devices));
         } else {
             notification.setContentText(getString(R.string.foreground_notification_devices, TextUtils.join(", ", connectedDevices)));
-        }
 
+            // Adding an action button to send clipboard manually in Android 10 and later.
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                Intent sendClipboard = new Intent(this, ClipboardFloatingActivity.class);
+                sendClipboard.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                sendClipboard.putExtra("connectedDeviceIds", connectedDeviceIds);
+                PendingIntent sendPendingClipboard = PendingIntent.getActivity(this, 3, sendClipboard, PendingIntent.FLAG_UPDATE_CURRENT);
+                notification.addAction(0, getString(R.string.foreground_notification_send_clipboard), sendPendingClipboard);
+            }
+
+            if (connectedDeviceIds.size() == 1) {
+                // Adding two action buttons only when there is a single device connected.
+                // Setting up Send File Intent.
+                Intent sendFile = new Intent(this, SendFileActivity.class);
+                sendFile.putExtra("deviceId", connectedDeviceIds.get(0));
+                PendingIntent sendPendingFile = PendingIntent.getActivity(this, 1, sendFile, PendingIntent.FLAG_UPDATE_CURRENT);
+                notification.addAction(0, getString(R.string.send_files), sendPendingFile);
+
+                // Checking if there are registered commands and adding the button.
+                Device device = getDevice(connectedDeviceIds.get(0));
+                RunCommandPlugin plugin = (RunCommandPlugin) device.getPlugin("RunCommandPlugin");
+                if (plugin != null && !plugin.getCommandList().isEmpty()) {
+                    Intent runCommand = new Intent(this, RunCommandActivity.class);
+                    runCommand.putExtra("deviceId", connectedDeviceIds.get(0));
+                    PendingIntent runPendingCommand = PendingIntent.getActivity(this, 2, runCommand, PendingIntent.FLAG_UPDATE_CURRENT);
+                    notification.addAction(0, getString(R.string.pref_plugin_runcommand), runPendingCommand);
+                }
+            }
+        }
         return notification.build();
     }
 

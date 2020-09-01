@@ -36,7 +36,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_suggested"
             android:text="@string/request_pairing"
-            android:textColor="?attr/colorPrimary" />
+            android:textColor="?attr/colorPrimary"
+            app:backgroundTint="@null" />
 
 
         <LinearLayout
@@ -54,7 +55,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_suggested"
                 android:text="@string/pairing_accept"
-                android:textColor="?attr/colorPrimary" />
+                android:textColor="?attr/colorPrimary"
+                app:backgroundTint="@null" />
 
             <Button
                 android:id="@+id/reject_button"
@@ -64,7 +66,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/button_suggested"
                 android:text="@string/pairing_reject"
-                android:textColor="?attr/colorPrimary" />
+                android:textColor="?attr/colorPrimary"
+                app:backgroundTint="@null" />
 
         </LinearLayout>
     </LinearLayout>

@@ -8,14 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.view.View;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import org.kde.kdeconnect.BackgroundService;
-import org.kde.kdeconnect.Helpers.DeviceHelper;
-import org.kde.kdeconnect.Helpers.NotificationHelper;
-import com.zorinos.zorin_connect.R;
 
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
@@ -23,6 +15,13 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
+
+import com.google.android.material.snackbar.Snackbar;
+
+import org.kde.kdeconnect.BackgroundService;
+import org.kde.kdeconnect.Helpers.DeviceHelper;
+import org.kde.kdeconnect.Helpers.NotificationHelper;
+import com.zorinos.zorin_connect.R;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -69,10 +68,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         });
 
         screen.addPreference(renameDevice);
-
-
-        //TODO: Trusted wifi networks settings should go here
-
 
         // Dark mode
         final TwoStatePreference darkThemeSwitch = new SwitchPreferenceCompat(context);
@@ -126,6 +121,30 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
             screen.addPreference(notificationSwitch);
         }
+
+
+        // Trusted Networks
+        Preference trustedNetworkPref = new Preference(context);
+        trustedNetworkPref.setPersistent(false);
+        trustedNetworkPref.setTitle(R.string.trusted_networks);
+        trustedNetworkPref.setSummary(R.string.trusted_networks_desc);
+        screen.addPreference(trustedNetworkPref);
+        trustedNetworkPref.setOnPreferenceClickListener(preference -> {
+            startActivity(new Intent(context, TrustedNetworksActivity.class));
+            return true;
+        });
+
+        // Add device by IP
+        Preference devicesByIpPreference = new Preference(context);
+        devicesByIpPreference.setPersistent(false);
+        devicesByIpPreference.setTitle(R.string.custom_device_list);
+        screen.addPreference(devicesByIpPreference);
+        devicesByIpPreference.setOnPreferenceClickListener(preference -> {
+
+            startActivity(new Intent(context, CustomDevicesActivity.class));
+            return true;
+        });
+
 
         // More settings text
         Preference moreSettingsText = new Preference(context);

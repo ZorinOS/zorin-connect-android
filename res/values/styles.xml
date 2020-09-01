@@ -12,6 +12,8 @@
         <!-- The three colors used by system widgets, according to https://chris.banes.me/2014/10/17/appcompat-v21/ -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/statusBarBackground</item>
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorOnSecondary">@color/primary</item>
         <item name="colorAccent">@color/accent</item>
         <item name="colorControlHighlight">@color/textSecondary</item>
         <item name="android:windowBackground">@color/primary</item>
@@ -29,6 +31,20 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
         <item name="colorButtonNormal">@color/buttonBackground</item>
         <item name="actionModeStyle">@style/ActionModeStyle</item>
+        <item name="alertDialogTheme">@style/ZorinConnectAlertDialogStyle</item>
+    </style>
+
+    <style name="ZorinConnectAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:background">@color/primary</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AlertDialogButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AlertDialogButtonStyle</item>
+    </style>
+
+    <style name="AlertDialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/accent</item>
     </style>
 
     <style name="KdeConnectThemeBase.NoActionBar" parent="KdeConnectThemeBase">
@@ -56,5 +72,13 @@
 
     <style name="ActionModeStyle" parent="Widget.AppCompat.ActionMode">
         <item name="background">@color/accent</item>
+    </style>
+    <style name="Theme.Transparent" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
     </style>
 </resources>

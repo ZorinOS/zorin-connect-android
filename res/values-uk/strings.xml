@@ -33,6 +33,7 @@
   <string name="pref_plugin_sharereceiver_desc">Спільне використання файлів і адрес між пристроями</string>
   <string name="device_list_empty">Немає пристроїв</string>
   <string name="ok">Гаразд</string>
+  <string name="sad_ok">Гаразд :(</string>
   <string name="cancel">Скасувати</string>
   <string name="open_settings">Відкрити вікно параметрів</string>
   <string name="no_permissions">Вам слід надати доступ до сповіщень</string>
@@ -138,6 +139,7 @@
     <item quantity="many">Не вдалося надіслати %2$d з %3$d файлів до %1$s</item>
     <item quantity="other">Не вдалося надіслати файл до %1$s</item>
   </plurals>
+  <string name="tap_to_open">Натисніть, щоб відкрити</string>
   <string name="received_file_text">Натисніть, щоб відкрити «%1s»</string>
   <string name="cannot_create_file">Не вдалося створити файл %s</string>
   <string name="tap_to_answer">Натисніть, щоб відповісти</string>
@@ -221,6 +223,7 @@
   <string name="refresh">Оновити</string>
   <string name="unreachable_description">Цей пов’язаний пристрій недоступний. Переконайтеся, що його з’єднано з вашою мережею.</string>
   <string name="no_wifi">Ваш комп\'ютер не з\'єднано із мережею Wi-Fi, отже перегляд пристроїв у мережі неможливий. Натисніть тут, щоб увімкнути Wi-Fi.</string>
+  <string name="on_non_trusted_message">Не є надійною мережею: автовиявлення вимкнено.</string>
   <string name="no_file_browser">Програм для навігації файловою системою не встановлено.</string>
   <string name="pref_plugin_telepathy">Надіслати SMS</string>
   <string name="pref_plugin_telepathy_desc">Надсилати текстові повідомлення з вашої робочої станції</string>
@@ -259,6 +262,7 @@
   <string name="notification_channel_persistent">Постійний індикатор</string>
   <string name="notification_channel_media_control">Керування відтворенням</string>
   <string name="notification_channel_filetransfer">Передавання файлів</string>
+  <string name="notification_channel_high_priority">Високий пріоритет</string>
   <string name="mpris_stop">Зупинити відтворення у поточному програвачі</string>
   <string name="copy_url_to_clipboard">Скопіювати адресу до буфера</string>
   <string name="clipboard_toast">Скопійовано до буфера</string>
@@ -292,4 +296,22 @@
   <string name="no_app_for_opening">Не знайдено відповідної програми для відкриття цього файла</string>
   <string name="remote_keyboard_service">Віддалена клавіатура Zorin Connect</string>
   <string name="presenter_pointer">Указка</string>
+  <string name="trusted_networks">Надійні мережі</string>
+  <string name="trusted_networks_desc">Обмежити автовиявлення відомими мережами</string>
+  <string name="add_trusted_network">Додати %1s</string>
+  <string name="empty_trusted_networks_list_text">Вами ще не додано надійних мереж</string>
+  <string name="allow_all_networks_text">Дозволити всі</string>
+  <string name="location_permission_needed_title">Потрібні права доступу</string>
+  <string name="location_permission_needed_desc">Android потрібні права доступу до даних місця перебування для ідентифікації вашої мережі WiFi</string>
+  <string name="clipboard_android_x_incompat">У Android 10 вилучено доступ до буфера даних для усіх програм. Цей додаток буде вимкнено.</string>
+  <string name="mpris_open_url">Продовжити відтворення тут</string>
+  <string name="cant_open_url">Не вдалося відкрити адресу для продовження відтворення</string>
+  <string name="bigscreen_home">Домівка</string>
+  <string name="bigscreen_up">Вгору</string>
+  <string name="bigscreen_left">Ліворуч</string>
+  <string name="bigscreen_select">Вибрати</string>
+  <string name="bigscreen_right">Праворуч</string>
+  <string name="bigscreen_down">Вниз</string>
+  <string name="pref_plugin_bigscreen">Керування великим екраном</string>
+  <string name="pref_plugin_bigscreen_desc">Скористайтеся вашим пристроєм як дистанційним керуванням для великого екрана Плазми</string>
 </resources>

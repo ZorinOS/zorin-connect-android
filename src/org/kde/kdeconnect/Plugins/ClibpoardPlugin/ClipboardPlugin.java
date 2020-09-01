@@ -20,6 +20,8 @@
 
 package org.kde.kdeconnect.Plugins.ClibpoardPlugin;
 
+
+
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
@@ -85,7 +87,7 @@ public class ClipboardPlugin extends Plugin {
 
     private final ClipboardListener.ClipboardObserver observer = this::propagateClipboard;
 
-    private void propagateClipboard(String content) {
+    void propagateClipboard(String content) {
         NetworkPacket np = new NetworkPacket(ClipboardPlugin.PACKET_TYPE_CLIPBOARD);
         np.set("content", content);
         device.sendPacket(np);
@@ -99,6 +101,7 @@ public class ClipboardPlugin extends Plugin {
         np.set("content", content);
         device.sendPacket(np);
     }
+
 
     @Override
     public boolean onCreate() {

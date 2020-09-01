@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="kde_connect">Zorin Connect</string>
-  <string name="foreground_notification_no_devices">Nun se coneutó con dengún preséu</string>
+  <string name="foreground_notification_no_devices">Nun se coneutó con nengún preséu</string>
   <string name="foreground_notification_devices">Coneutóse con %s</string>
   <string name="pref_plugin_telephony">Avisador telefónicu</string>
   <string name="pref_plugin_telephony_desc">Unvia avisos de les llamaes entrantes</string>
@@ -19,6 +19,7 @@
   <string name="pref_plugin_runcommand_desc">Aiciona comandos remotos dende\'l preséu</string>
   <string name="pref_plugin_contacts">Sincronizador de contautos</string>
   <string name="pref_plugin_contacts_desc">Permite la sincronización de la llista telefónica del teléfonu</string>
+  <string name="pref_plugin_ping">Ping</string>
   <string name="pref_plugin_ping_desc">Unviu y receición de pings</string>
   <string name="pref_plugin_notifications">Sincronización d\'avisos</string>
   <string name="pref_plugin_notifications_desc">Accede a los avisos n\'otros preseos</string>
@@ -33,7 +34,7 @@
   <string name="no_permissions_remotekeyboard">Pa recibir calcos de tecles precises activar el tecláu remotu de Zorin Connect</string>
   <string name="send_ping">Unviar un ping</string>
   <string name="open_mpris_controls">Mandu multimedia</string>
-  <string name="remotekeyboard_editing_only_title">Remanar les tecles remotes namái al editar</string>
+  <string name="remotekeyboard_editing_only_title">Remanar les tecles remotes namás al editar</string>
   <string name="open_mousepad">Entrada remota</string>
   <string name="mousepad_info">Movi un deu pela pantalla pa mover el mur. Con un toque faes un clic esquierdu y teniendo primío faes l\'aición d\'arrastrar y soltar, col toque de dos deos simules un clic drechu y col toque de tres simules un clic col botón d\'en mediu del mur. Esliza dos deos pela pantalla pa desplazate.</string>
   <string name="mousepad_double_tap_settings_title">Aición al tocar con dos deos</string>
@@ -128,7 +129,7 @@
     <item>2 minutos</item>
   </string-array>
   <string name="mpris_notification_settings_summary">Permite\'l control de reproductores multimedia ensin abrir Zorin Connect</string>
-  <string name="share_to">Compartir con...</string>
+  <string name="share_to">Compartir con…</string>
   <string name="protocol_version_newer">Esti preséu una versión nueva del protocolu</string>
   <string name="plugin_settings_with_name">%s</string>
   <string name="custom_devices_settings">Llista de preseos personalizada</string>
@@ -145,6 +146,7 @@
   <string name="title_activity_notification_filter">Peñera d\'avisos</string>
   <string name="filter_apps_info">Van sincronizase los avisos de les aplicaciones esbillaes.</string>
   <string name="sftp_sdcard">Tarxeta SD</string>
+  <string name="sftp_readonly">(namás llectura)</string>
   <string name="add_device_dialog_title">Amiestu d\'un preséu</string>
   <string name="add_device_hint">Nome d\'agospiu o direición IP</string>
   <string name="sftp_preference_configured_storage_locations">Allugamientos d\'almacenamientu configuraos</string>
@@ -167,8 +169,9 @@
   <string name="device_rename_confirm">Renomar</string>
   <string name="refresh">Refrescar</string>
   <string name="unreachable_description">Esti preséu empareyáu nun ye algamable. Asegúrate de que ta coneutáu a la mesma rede que tu.</string>
-  <string name="no_wifi">Nun tas coneutáu a una rede Wi-Fi polo que nun vas ser a ver dengún preséu. Calca equí p\'activar el Wi-Fi.</string>
-  <string name="no_file_browser">Nun hai dengún restolador de ficheros instaláu.</string>
+  <string name="no_wifi">Nun tas coneutáu a una rede Wi-Fi polo que nun vas ser a ver nengún preséu. Calca equí p\'activar el Wi-Fi.</string>
+  <string name="on_non_trusted_message">Nun tas nuna rede d\'enfotu. Desactivóse la descubrición automática.</string>
+  <string name="no_file_browser">Nun hai nengún restolador de ficheros instaláu.</string>
   <string name="pref_plugin_telepathy">Unviu de SMS</string>
   <string name="pref_plugin_telepathy_desc">Unvia SMS dende l\'ordenador</string>
   <string name="findmyphone_description">Fai qu\'esti preséu suene pa que pueas alcontralu</string>
@@ -213,6 +216,13 @@
   <string name="notification_channel_receivenotification">Avisos d\'otros preseos</string>
   <string name="take_picture">Llanzamientu de la cámara</string>
   <string name="plugin_photo_desc">Llanza l\'aplicación de la cámara p\'acenciellar la fechura y tresferencia de semeyes</string>
-  <string name="no_app_for_opening">Nun alcontró denguna aplicación afayadiza p\'abrir esti ficheru.</string>
+  <string name="no_app_for_opening">Nun alcontró nenguna aplicación afayadiza p\'abrir esti ficheru.</string>
   <string name="remote_keyboard_service">Tecláu remotu de Zorin Connect</string>
+  <string name="trusted_networks">Redes d\'enfotu</string>
+  <string name="trusted_networks_desc">Torga la descubrición automática en redes conocíes</string>
+  <string name="empty_trusted_networks_list_text">Entá nun amestesti nenguna rede d\'enfotu</string>
+  <string name="allow_all_networks_text">Permitir toes</string>
+  <string name="location_permission_needed_title">Ríquese un permisu</string>
+  <string name="location_permission_needed_desc">Android rique\'l permisu Allugamientu pa indentificar redes Wi-Fi</string>
+  <string name="clipboard_android_x_incompat">Android 10 quitó l\'accesu al cartafueyu en toles aplicaciones. Esti plugin va desactivase.</string>
 </resources>

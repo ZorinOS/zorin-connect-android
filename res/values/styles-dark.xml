@@ -12,6 +12,8 @@
     <style name="KdeConnectThemeBase.Dark" parent="Theme.MaterialComponents">
         <item name="colorPrimary">@color/darkPrimary</item>
         <item name="colorPrimaryDark">@color/darkStatusBarBackground</item>
+        <item name="colorSecondary">@color/darkAccent</item>
+        <item name="colorOnSecondary">@color/darkPrimary</item>
         <item name="colorAccent">@color/darkAccent</item>
         <item name="colorControlHighlight">@color/darkTextSecondary</item>
         <item name="android:windowBackground">@color/darkPrimary</item>
@@ -28,6 +30,20 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
         <item name="colorButtonNormal">@color/darkButtonBackground</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="alertDialogTheme">@style/ZorinConnectAlertDialogStyle.Dark</item>
+    </style>
+
+    <style name="ZorinConnectAlertDialogStyle.Dark" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="colorPrimary">@color/darkAccent</item>
+        <item name="colorAccent">@color/darkAccent</item>
+        <item name="android:textColorPrimary">@color/darkText</item>
+        <item name="android:background">@color/darkPrimary</item>
+        <item name="buttonBarNegativeButtonStyle">@style/AlertDialogButtonStyle.Dark</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AlertDialogButtonStyle.Dark</item>
+    </style>
+
+    <style name="AlertDialogButtonStyle.Dark" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/darkAccent</item>
     </style>
 
     <style name="KdeConnectThemeBase.Dark.NoActionBar" parent="KdeConnectThemeBase.Dark">

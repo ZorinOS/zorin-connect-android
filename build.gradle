@@ -6,15 +6,16 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.2'
+        classpath 'com.android.tools.build:gradle:3.6.1'
     }
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
     dexOptions {
         javaMaxHeapSize "2g"
@@ -54,14 +55,13 @@ android {
     }
     buildTypes {
         debug {
-            minifyEnabled false
-            useProguard false
+            minifyEnabled true
             signingConfig signingConfigs.debug
         }
-        release { //keep on 'release' for faster builds, set to 'all' when testing to make sure proguard is not deleting important stuff
+        // keep minifyEnabled false above for faster builds; set to 'true'
+        // when testing to make sure ProGuard/R8 is not deleting important stuff
+        release {
             minifyEnabled true
-            useProguard true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -79,10 +79,16 @@ dependencies {
     }
 
     implementation 'androidx.media:media:1.1.0'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.preference:preference:1.1.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    implementation 'androidx.documentfile:documentfile:1.0.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+    implementation 'com.google.android.material:material:1.2.0'
     implementation 'com.jakewharton:disklrucache:2.0.2' //For caching album art bitmaps
     implementation 'com.jaredrummler:android-device-names:1.1.9' //To get a human-friendly device name
 
@@ -92,7 +98,8 @@ dependencies {
     //implementation('com.github.bright:slf4android:0.1.6') { transitive = true } // For org.apache.sshd debugging
     implementation 'com.madgag.spongycastle:bcpkix-jdk15on:1.58.0.0' //For SSL certificate generation
 
-    implementation 'com.jakewharton:butterknife:10.0.0'
+    //noinspection AnnotationProcessorOnCompilePath - c.f. https://issuetracker.google.com/issues/140881211
+    implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
 
     implementation 'org.atteo.classindex:classindex:3.6'
@@ -105,4 +112,8 @@ dependencies {
     testImplementation 'org.powermock:powermock-api-mockito2:2.0.0'
     testImplementation 'org.mockito:mockito-core:2.23.0'
     testImplementation 'org.skyscreamer:jsonassert:1.3.0'
+}
+
+repositories {
+    google()
 }

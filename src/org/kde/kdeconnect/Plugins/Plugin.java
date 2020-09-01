@@ -22,29 +22,56 @@ package org.kde.kdeconnect.Plugins;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.UserInterface.AlertDialogFragment;
+import org.kde.kdeconnect.UserInterface.MainActivity;
 import org.kde.kdeconnect.UserInterface.PermissionsAlertDialogFragment;
 import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import com.zorinos.zorin_connect.R;
-
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
 
 public abstract class Plugin {
     protected Device device;
     protected Context context;
     protected int permissionExplanation = R.string.permission_explanation;
     protected int optionalPermissionExplanation = R.string.optional_permission_explanation;
+    @Nullable
+    protected SharedPreferences preferences;
 
-    public final void setContext(Context context, Device device) {
+    public final void setContext(@NonNull Context context, @Nullable Device device) {
         this.device = device;
         this.context = context;
+
+        if (device != null) {
+            this.preferences = this.context.getSharedPreferences(this.getSharedPreferencesName(), Context.MODE_PRIVATE);
+        }
+    }
+
+    public String getSharedPreferencesName() {
+        if (device == null) {
+            throw new RuntimeException("You have to call setContext() before you can call getSharedPreferencesName()");
+        }
+
+        if (this.supportsDeviceSpecificSettings())
+            return this.device.getDeviceId() + "_" + this.getPluginKey() + "_preferences";
+        else
+            return this.getPluginKey() + "_preferences";
+    }
+
+    @Nullable
+    public SharedPreferences getPreferences() {
+        return this.preferences;
     }
 
     /**
@@ -118,6 +145,30 @@ public abstract class Plugin {
     public boolean hasSettings() {
         return false;
     }
+
+    /**
+     * Called to find out if a plugin supports device specific settings.
+     * If you return true your PluginSettingsFragment will use the device
+     * specific SharedPreferences to store the settings.
+     *
+     * @return true if this plugin supports device specific settings
+     */
+    public boolean supportsDeviceSpecificSettings() { return false; }
+
+    /**
+     * Called when it's time to move the plugin settings from the global preferences
+     * to device specific preferences
+     *
+     * @param globalSharedPreferences The global Preferences to copy the settings from
+     */
+    public void copyGlobalToDeviceSpecificSettings(SharedPreferences globalSharedPreferences) {}
+
+    /**
+     *  Called when the plugin should remove it's settings from the provided ShardPreferences
+     *
+     * @param sharedPreferences The SharedPreferences to remove the settings from
+     */
+    public void removeSettings(SharedPreferences sharedPreferences) {}
 
     /**
      * If hasSettings returns true, this will be called when the user
@@ -207,14 +258,14 @@ public abstract class Plugin {
         return true;
     }
 
-    private PermissionsAlertDialogFragment requestPermissionDialog(final String[] permissions, @StringRes int reason, int requestCode) {
+    private PermissionsAlertDialogFragment requestPermissionDialog(final String[] permissions, @StringRes int reason) {
         return new PermissionsAlertDialogFragment.Builder()
                 .setTitle(getDisplayName())
                 .setMessage(reason)
                 .setPositiveButton(R.string.ok)
                 .setNegativeButton(R.string.cancel)
                 .setPermissions(permissions)
-                .setRequestCode(requestCode)
+                .setRequestCode(MainActivity.RESULT_NEEDS_RELOAD)
                 .create();
     }
 
@@ -223,12 +274,12 @@ public abstract class Plugin {
      * the problem (and how to fix it, if possible) to the user.
      */
 
-    public AlertDialogFragment getPermissionExplanationDialog(int requestCode) {
-        return requestPermissionDialog(getRequiredPermissions(), permissionExplanation, requestCode);
+    public DialogFragment getPermissionExplanationDialog() {
+        return requestPermissionDialog(getRequiredPermissions(), permissionExplanation);
     }
 
-    public AlertDialogFragment getOptionalPermissionExplanationDialog(int requestCode) {
-        return requestPermissionDialog(getOptionalPermissions(), optionalPermissionExplanation, requestCode);
+    public AlertDialogFragment getOptionalPermissionExplanationDialog() {
+        return requestPermissionDialog(getOptionalPermissions(), optionalPermissionExplanation);
     }
 
     public boolean checkRequiredPermissions() {
@@ -242,5 +293,4 @@ public abstract class Plugin {
     public int getMinSdk() {
         return Build.VERSION_CODES.BASE;
     }
-
 }

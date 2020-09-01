@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.zorinos.zorin_connect"
-    android:versionCode="11350"
-    android:versionName="1.13.5">
+    android:versionCode="11421"
+    android:versionName="1.14.2">
 
     <supports-screens
         android:anyDensity="true"
@@ -15,6 +16,7 @@
         android:name="android.hardware.telephony"
         android:required="false" />
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- <uses-permission android:name="android.permission.BLUETOOTH" /> -->
@@ -28,11 +30,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:icon="@mipmap/icon"
@@ -41,7 +45,8 @@
         android:supportsRtl="true"
         android:allowBackup="false"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:theme="@style/KdeConnectTheme">
+        android:theme="@style/KdeConnectTheme"
+        android:name="org.kde.kdeconnect.MyApplication">
         <service
             android:name="org.kde.kdeconnect.BackgroundService"
             android:enabled="true" />
@@ -103,6 +108,9 @@
                     android:scheme="package" />
             </intent-filter>
             <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
             <intent-filter>
@@ -120,7 +128,18 @@
             android:label="@string/findmyphone_title"
             android:launchMode="singleInstance" />
 
+        <receiver android:name="org.kde.kdeconnect.Plugins.FindMyPhonePlugin.FindMyPhoneReceiver">
+            <intent-filter>
+                <action android:name="org.kde.kdeconnect.Plugins.FindMyPhonePlugin.foundIt" />
+            </intent-filter>
+        </receiver>
+
         <!-- Plugin-related activities and services -->
+
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.ClibpoardPlugin.ClipboardFloatingActivity"
+            android:theme="@style/Theme.Transparent"
+            android:excludeFromRecents="true"/>
 
         <activity
             android:name="org.kde.kdeconnect.Plugins.MprisPlugin.MprisActivity"
@@ -187,6 +206,16 @@
                     android:host="runcommand"
                     android:scheme="zorinconnect" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.BigscreenPlugin.BigscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/pref_plugin_bigscreen"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
         </activity>
         <activity
             android:name="org.kde.kdeconnect.Plugins.MousePadPlugin.MousePadActivity"
@@ -268,7 +297,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.kde.kdeconnect.UserInterface.PluginSettingsActivity" />
         </activity>
+
         <activity android:name="org.kde.kdeconnect.Plugins.PhotoPlugin.PhotoActivity" />
+
+        <activity
+            android:name="org.kde.kdeconnect.UserInterface.TrustedNetworksActivity"
+            android:label="@string/trusted_networks"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
+
 
     </application>
 

@@ -47,13 +47,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.DialogFragment;
 
 import org.json.JSONArray;
 import org.kde.kdeconnect.Helpers.AppsHelper;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
-import org.kde.kdeconnect.UserInterface.AlertDialogFragment;
+import org.kde.kdeconnect.UserInterface.MainActivity;
 import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import org.kde.kdeconnect.UserInterface.StartActivityAlertDialogFragment;
 import com.zorinos.zorin_connect.R;
@@ -238,7 +239,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
         np.set("actions", extractActions(notification, key));
 
         np.set("id", key);
-        np.set("silent", (notification.flags & NotificationCompat.FLAG_ONLY_ALERT_ONCE) != 0);
+        np.set("onlyOnce", (notification.flags & NotificationCompat.FLAG_ONLY_ALERT_ONCE) != 0);
         np.set("isClearable", statusBarNotification.isClearable());
         np.set("appName", appName == null ? packageName : appName);
         np.set("time", Long.toString(statusBarNotification.getPostTime()));
@@ -567,7 +568,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
     }
 
     @Override
-    public AlertDialogFragment getPermissionExplanationDialog(int requestCode) {
+    public DialogFragment getPermissionExplanationDialog() {
         return new StartActivityAlertDialogFragment.Builder()
                 .setTitle(R.string.pref_plugin_notifications)
                 .setMessage(R.string.no_permissions)
@@ -575,7 +576,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
                 .setNegativeButton(R.string.cancel)
                 .setIntentAction("android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS")
                 .setStartForResult(true)
-                .setRequestCode(requestCode)
+                .setRequestCode(MainActivity.RESULT_NEEDS_RELOAD)
                 .create();
     }
 

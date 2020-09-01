@@ -33,6 +33,7 @@
   <string name="pref_plugin_sharereceiver_desc">장치끼리 파일과 URL 공유</string>
   <string name="device_list_empty">장치 없음</string>
   <string name="ok">확인</string>
+  <string name="sad_ok">확인 :(</string>
   <string name="cancel">취소</string>
   <string name="open_settings">설정 열기</string>
   <string name="no_permissions">알림 접근 권한이 필요합니다</string>
@@ -147,7 +148,7 @@
   <string name="protocol_version_newer">이 장치의 프로토콜 버전이 더 새롭습니다</string>
   <string name="plugin_settings_with_name">%s 설정</string>
   <string name="invalid_device_name">잘못된 장치 이름</string>
-  <string name="shareplugin_text_saved">텍스트 수신, 클립보드로 복사됨</string>
+  <string name="shareplugin_text_saved">텍스트 수신, 클립보드에 복사됨</string>
   <string name="custom_devices_settings">사용자 정의 장치 목록</string>
   <string name="custom_device_list">IP로 장치 추가</string>
   <string name="custom_device_deleted">사용자 정의 장치 삭제됨</string>
@@ -197,6 +198,7 @@
   <string name="refresh">새로 고침</string>
   <string name="unreachable_description">이 연결된 장치에 접근할 수 없습니다. 같은 네트워크에 있는지 확인하십시오.</string>
   <string name="no_wifi">Wi-Fi 네트워크에 연결된 것 같지 않습니다. 다른 장치를 볼 수 없습니다. 여기를 누르면 Wi-Fi를 활성화합니다.</string>
+  <string name="on_non_trusted_message">신뢰할 수 없는 네트워크: 자동 발견을 비활성화했습니다.</string>
   <string name="no_file_browser">설치된 파일 탐색기가 없습니다.</string>
   <string name="pref_plugin_telepathy">SMS 보내기</string>
   <string name="pref_plugin_telepathy_desc">데스크톱에서 문자 메시지 보내기</string>
@@ -235,9 +237,10 @@
   <string name="notification_channel_persistent">항상 표시된 표시기</string>
   <string name="notification_channel_media_control">미디어 제어</string>
   <string name="notification_channel_filetransfer">파일 전송</string>
+  <string name="notification_channel_high_priority">높은 우선 순위</string>
   <string name="mpris_stop">현재 재생기 정지</string>
   <string name="copy_url_to_clipboard">클립보드로 URL 복사</string>
-  <string name="clipboard_toast">클립보드로 복사됨</string>
+  <string name="clipboard_toast">클립보드에 복사됨</string>
   <string name="runcommand_notreachable">장치에 접근할 수 없음</string>
   <string name="runcommand_notpaired">장치가 연결되지 않음</string>
   <string name="runcommand_nosuchdevice">장치가 없음</string>
@@ -268,4 +271,22 @@
   <string name="no_app_for_opening">이 파일을 열 수 있는 앱을 찾을 수 없음</string>
   <string name="remote_keyboard_service">Zorin Connect 원격 키보드</string>
   <string name="presenter_pointer">포인터</string>
+  <string name="trusted_networks">신뢰할 수 있는 네트워크</string>
+  <string name="trusted_networks_desc">신뢰할 수 있는 네트워크에서만 자동 발견 사용</string>
+  <string name="add_trusted_network">%1s 추가</string>
+  <string name="empty_trusted_networks_list_text">신뢰할 수 있는 네트워크를 추가하지 않았습니다</string>
+  <string name="allow_all_networks_text">모두 허용</string>
+  <string name="location_permission_needed_title">권한이 필요함</string>
+  <string name="location_permission_needed_desc">안드로이드에서 Wi-Fi 네트워크를 식별하려면 위치 권한이 필요합니다</string>
+  <string name="clipboard_android_x_incompat">안드로이드 10부터는 앱에서 클립보드에 접근할 수 없습니다. 이 플러그인이 비활성화되었습니다.</string>
+  <string name="mpris_open_url">여기에서 계속 재생</string>
+  <string name="cant_open_url">계속 재생할 URL을 열 수 없음</string>
+  <string name="bigscreen_home">홈</string>
+  <string name="bigscreen_up">위</string>
+  <string name="bigscreen_left">왼쪽</string>
+  <string name="bigscreen_select">선택</string>
+  <string name="bigscreen_right">오른쪽</string>
+  <string name="bigscreen_down">아래</string>
+  <string name="pref_plugin_bigscreen">큰 화면 리모콘</string>
+  <string name="pref_plugin_bigscreen_desc">내 장치를 Plasma 큰 화면의 리모콘으로 사용</string>
 </resources>
