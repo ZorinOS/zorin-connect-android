@@ -3,14 +3,18 @@
   <string name="kde_connect">Zorin Connect</string>
   <string name="foreground_notification_no_devices">Aucun périphérique connecté</string>
   <string name="foreground_notification_devices">Connecté à : %s</string>
+  <string name="foreground_notification_send_clipboard">Envoyer le presse-papier</string>
   <string name="pref_plugin_telephony">Notifications de téléphonie</string>
   <string name="pref_plugin_telephony_desc">Envoie des notifications pour les appels entrants</string>
   <string name="pref_plugin_battery">Rapport sur la batterie</string>
   <string name="pref_plugin_battery_desc">Rapport périodique sur l\'état de la batterie</string>
+  <string name="pref_plugin_connectivity_report">Rapport sur la connectivité</string>
+  <string name="pref_plugin_connectivity_report_desc">Signaler la force du signal du réseau et son état</string>
   <string name="pref_plugin_sftp">Exposer le système de fichiers</string>
   <string name="pref_plugin_sftp_desc">Permettre de parcourir le système de fichiers du périphérique à distance</string>
   <string name="pref_plugin_clipboard">Synchronisation avec le presse-papiers</string>
   <string name="pref_plugin_clipboard_desc">Partage le contenu du presse-papiers</string>
+  <string name="pref_plugin_clipboard_sent">Presse-papiers envoyé</string>
   <string name="pref_plugin_mousepad">Contrôle distant</string>
   <string name="pref_plugin_mousepad_desc">Utilisez votre téléphone ou tablette comme un pavé tactile et un clavier</string>
   <string name="pref_plugin_presenter">Télécommande de présentation</string>
@@ -42,7 +46,7 @@
   <string name="send_ping">Envoyer un « Ping »</string>
   <string name="open_mpris_controls">Contrôles multimédia</string>
   <string name="remotekeyboard_editing_only_title">Gérer les appuis de touches à distance uniquement lors de l\'édition</string>
-  <string name="remotekeyboard_not_connected">Aucune connexion active d\'un clavier à distance disponible, établissez-en une dans Zorin Connect</string>
+  <string name="remotekeyboard_not_connected">Aucune connexion active d\'un clavier à distance disponible, établissez-en une dans « Zorin Connect ».</string>
   <string name="remotekeyboard_connected">La connexion au clavier sans fil est active</string>
   <string name="remotekeyboard_multiple_connections">Plusieurs connexions à des claviers sans fil sont disponibles, sélectionnez le périphérique à configurer</string>
   <string name="open_mousepad">Contrôle distant</string>
@@ -72,6 +76,21 @@
     <item>Relativement forte</item>
     <item>Très forte</item>
   </string-array>
+  <string name="sendkeystrokes_send_to">Envoyez les appuis de touches vers</string>
+  <string name="sendkeystrokes_textbox_hint">Envoyez les appuis de touches vers l\'hôte</string>
+  <string name="sendkeystrokes_disabled_toast">L\'envoi des appuis de touches est désactivé. Veuillez l\'activer dans la configuration.</string>
+  <string name="sendkeystrokes_wrong_data">Type « MIME » non valable. Doit être « text/x-keystrokes »</string>
+  <string name="sendkeystrokes_sent_text">Envoi de %1s vers le périphérique %2s</string>
+  <string name="sendkeystrokes_pref_category_summary">Ce module permet aux autres applications de partager des portions de texte comme des appuis de touches, qui seront envoyées vers l\'hôte connecté.</string>
+  <string name="sendkeystrokes_pref_category_title">Envoyez les appuis de touches</string>
+  <string name="sendkeystrokes_pref_enabled">Autoriser l\'envoi des appuis de touches</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Attendre des données avec le type « MIME » « text/x-keystrokes »</string>
+  <string name="sendkeystrokes_safe_text_enabled">Envoyez du texte confirmé immédiatement</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Envoyez des chaînes courtes uniquement numériques sans confirmation</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Envoyez comme appuis de touches</string>
+  <string name="mouse_receiver_plugin_description">Recevoir les mouvements de la souri distante</string>
+  <string name="mouse_receiver_plugin_name">Récepteur de souris</string>
+  <string name="mouse_receiver_no_permissions">Vous avez besoin d\'accéder au service « Accessibilité »</string>
   <string name="category_connected_devices">Périphériques connectés</string>
   <string name="category_not_paired_devices">Périphériques disponibles</string>
   <string name="category_remembered_devices">Périphériques mémorisés</string>
@@ -87,8 +106,8 @@
   <string name="error_canceled_by_other_peer">Annulé par un autre homologue</string>
   <string name="encryption_info_title">Informations de chiffrement</string>
   <string name="encryption_info_msg_no_ssl">Ce périphérique n\'utilise pas une version récente de Zorin Connect qui utilise l\'ancienne méthode de chiffrement.</string>
-  <string name="my_device_fingerprint">L\'empreinte SHA1 du certificat de votre appareil est :</string>
-  <string name="remote_device_fingerprint">L\'empreinte SHA1 du certificat du périphérique distant est :</string>
+  <string name="my_device_fingerprint">L\'empreinte SHA256 du certificat de votre périphérique est :</string>
+  <string name="remote_device_fingerprint">L\'empreinte « SHA256 » du certificat du périphérique distant est :</string>
   <string name="pair_requested">Paire demandée</string>
   <string name="pairing_request_from">Demande d\'association provenant de %1s</string>
   <plurals name="incoming_file_title">
@@ -123,6 +142,7 @@
     <item quantity="one">Impossible d\'envoyer le fichier à %1$s</item>
     <item quantity="other">Impossible d\'envoyer %2$d fichiers sur %3$d à %1$s</item>
   </plurals>
+  <string name="tap_to_open">Tapotez pour ouvrir</string>
   <string name="received_file_text">Appuyez pour ouvrir %1s</string>
   <string name="cannot_create_file">Impossible de créer le fichier %s</string>
   <string name="tap_to_answer">Cliquer pour répondre</string>
@@ -210,6 +230,8 @@
   <string name="no_file_browser">Aucun navigateur de fichiers installé.</string>
   <string name="pref_plugin_telepathy">Envoyer un SMS</string>
   <string name="pref_plugin_telepathy_desc">Envoyer des SMS depuis votre bureau</string>
+  <string name="pref_plugin_telepathy_mms">Envoyer un « MMS »</string>
+  <string name="pref_plugin_telepathy_mms_desc">Pour pouvoir envoyer des « MMS » à partir de « Zorin Connect », vous avez besoin de définir « Zorin Connect » comme votre application par défaut pour les « SMS ».</string>
   <string name="findmyphone_title">Trouver mon téléphone</string>
   <string name="findmyphone_title_tablet">Trouver ma tablette</string>
   <string name="findmyphone_title_tv">Trouver ma télévision</string>
@@ -221,7 +243,7 @@
   <string name="permission_explanation">Ce module externe nécessite des permissions pour fonctionner</string>
   <string name="optional_permission_explanation">Vous devez accorder des permissions supplémentaires pour activer toutes les fonctionnalités</string>
   <string name="plugins_need_optional_permission">Certaines fonctionnalités de modules externes sont désactivées faute de permissions suffisantes (tapez pour plus d\'informations) :</string>
-  <string name="share_optional_permission_explanation">Pour partager des fichiers entre votre téléphone et votre ordinateur, veuillez permettre l\'accès à la mémoire de stockage du téléphone</string>
+  <string name="share_optional_permission_explanation">Pour la réception de fichiers partagés, vous devez sélectionner un dossier de destination.</string>
   <string name="telepathy_permission_explanation">Pour lire et écrire des SMS depuis votre ordinateur, veuillez permettre l\'accès aux SMS</string>
   <string name="telephony_permission_explanation">Pour voir les appels depuis votre ordinateur, veuillez permettre l\'accès au journal des appels et à l\'état du téléphone</string>
   <string name="telephony_optional_permission_explanation">Pour voir le nom du contact au lieu du numéro de téléphone, veuillez permettre l\'accès aux contacts du téléphone</string>
@@ -246,6 +268,7 @@
   <string name="notification_channel_media_control">Contrôle multimédia</string>
   <string name="notification_channel_filetransfer">Transfert de fichiers</string>
   <string name="notification_channel_high_priority">Haute priorité</string>
+  <string name="notification_channel_sms_mms">Nouveau message</string>
   <string name="mpris_stop">Arrêter le lecteur actuel</string>
   <string name="copy_url_to_clipboard">Copier l\'URL dans le presse-papiers</string>
   <string name="clipboard_toast">Copié dans le presse-papier</string>
@@ -295,6 +318,38 @@
   <string name="bigscreen_select">Sélectionner</string>
   <string name="bigscreen_right">Vers la droite</string>
   <string name="bigscreen_down">Vers le bas</string>
+  <string name="bigscreen_mic">Mic</string>
   <string name="pref_plugin_bigscreen">Télécommande Bigscreen</string>
   <string name="pref_plugin_bigscreen_desc">Utiliser votre périphérique comme télécommande pour Plasma Bigscreen</string>
+  <string name="bigscreen_optional_permission_explanation">Pour partager l\'entrée microphone de votre téléphone, vous devez donner accès à l\'entrée audio du téléphone.</string>
+  <string name="bigscreen_speech_extra_prompt">Discours</string>
+  <string name="message_reply_label">RÉPONDRE</string>
+  <string name="mark_as_read_label">MARQUER COMME LU</string>
+  <string name="user_display_name">Vous</string>
+  <string name="set_default_sms_app_title">Envoyer un « MMS »</string>
+  <string name="set_group_message_as_mms_title">Envoyer un ensemble de « SMS »</string>
+  <string name="set_long_text_as_mms_title">Envoyer un long message comme un « MMS »</string>
+  <string name="convert_to_mms_after_title">Convertir en « MMS »</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Après un message</item>
+    <item>Après deux messages</item>
+    <item>Après trois messages</item>
+    <item>Après quatre messages</item>
+    <item>Après cinq messages</item>
+  </string-array>
+  <string name="theme_dialog_title">Choisir un thème</string>
+  <string-array name="theme_list">
+    <item>Défini par l\'économiseur de batterie</item>
+    <item>Léger</item>
+    <item>Sombre</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Valeur par défaut du système</item>
+    <item>Léger</item>
+    <item>Sombre</item>
+  </string-array>
+  <string name="report_bug">Signaler un bogue</string>
+  <string name="donate">Faire un don</string>
+  <string name="source_code">Code source</string>
+  <string name="licenses">Licences</string>
 </resources>

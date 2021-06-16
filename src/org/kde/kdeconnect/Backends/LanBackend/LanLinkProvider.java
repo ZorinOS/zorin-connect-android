@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect.Backends.LanBackend;
@@ -32,7 +18,6 @@ import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Helpers.DeviceHelper;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.SslHelper;
-import org.kde.kdeconnect.Helpers.StringsHelper;
 import org.kde.kdeconnect.Helpers.TrustedNetworkHelper;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.UserInterface.CustomDevicesActivity;
@@ -56,6 +41,8 @@ import java.util.TimerTask;
 
 import javax.net.SocketFactory;
 import javax.net.ssl.SSLSocket;
+
+import kotlin.text.Charsets;
 
 /**
  * This BaseLinkProvider creates {@link LanLink}s to other devices on the same
@@ -82,7 +69,7 @@ public class LanLinkProvider extends BaseLinkProvider implements LanLink.LinkDis
 
     private boolean listening = false;
 
-    // To prevent infinte loop between Android < IceCream because both device can only broadcast identity package but cannot connect via TCP
+    // To prevent infinte loop between Android < IceCream because both device can only broadcast identity packet but cannot connect via TCP
     private final ArrayList<InetAddress> reverseConnectionBlackList = new ArrayList<>();
 
     @Override // SocketClosedCallback
@@ -107,11 +94,11 @@ public class LanLinkProvider extends BaseLinkProvider implements LanLink.LinkDis
         }
 
         if (!networkPacket.getType().equals(NetworkPacket.PACKET_TYPE_IDENTITY)) {
-            Log.e("KDE/LanLinkProvider", "Expecting an identity package instead of " + networkPacket.getType());
+            Log.e("KDE/LanLinkProvider", "Expecting an identity packet instead of " + networkPacket.getType());
             return;
         }
 
-        Log.i("KDE/LanLinkProvider", "Identity package received from a TCP connection from " + networkPacket.getString("deviceName"));
+        Log.i("KDE/LanLinkProvider", "identity packet received from a TCP connection from " + networkPacket.getString("deviceName"));
         identityPacketReceived(networkPacket, socket, LanLink.ConnectionStarted.Locally);
     }
 
@@ -122,11 +109,11 @@ public class LanLinkProvider extends BaseLinkProvider implements LanLink.LinkDis
 
         try {
 
-            String message = new String(packet.getData(), StringsHelper.UTF8);
+            String message = new String(packet.getData(), Charsets.UTF_8);
             final NetworkPacket identityPacket = NetworkPacket.unserialize(message);
             final String deviceId = identityPacket.getString("deviceId");
             if (!identityPacket.getType().equals(NetworkPacket.PACKET_TYPE_IDENTITY)) {
-                Log.e("KDE/LanLinkProvider", "Expecting an UDP identity package");
+                Log.e("KDE/LanLinkProvider", "Expecting an UDP identity packet");
                 return;
             } else {
                 String myId = DeviceHelper.getDeviceId(context);
@@ -136,7 +123,7 @@ public class LanLinkProvider extends BaseLinkProvider implements LanLink.LinkDis
                 }
             }
 
-            Log.i("KDE/LanLinkProvider", "Broadcast identity package received from " + identityPacket.getString("deviceName"));
+            Log.i("KDE/LanLinkProvider", "Broadcast identity packet received from " + identityPacket.getString("deviceName"));
 
             int tcpPort = identityPacket.getInt("tcpPort", MIN_PORT);
 
@@ -380,7 +367,10 @@ public class LanLinkProvider extends BaseLinkProvider implements LanLink.LinkDis
             }
 
             NetworkPacket identity = NetworkPacket.createIdentityPacket(context);
-            int port = (tcpServer == null || !tcpServer.isBound()) ? MIN_PORT : tcpServer.getLocalPort();
+            if (tcpServer == null || !tcpServer.isBound()) {
+                throw new RuntimeException("Wont't broadcast UDP packet if TCP socket is not ready");
+            }
+            int port = tcpServer.getLocalPort();
             identity.set("tcpPort", port);
             DatagramSocket socket = null;
             byte[] bytes = null;
@@ -388,7 +378,7 @@ public class LanLinkProvider extends BaseLinkProvider implements LanLink.LinkDis
                 socket = new DatagramSocket();
                 socket.setReuseAddress(true);
                 socket.setBroadcast(true);
-                bytes = identity.serialize().getBytes(StringsHelper.UTF8);
+                bytes = identity.serialize().getBytes(Charsets.UTF_8);
             } catch (Exception e) {
                 Log.e("KDE/LanLinkProvider", "Failed to create DatagramSocket", e);
             }
@@ -399,9 +389,9 @@ public class LanLinkProvider extends BaseLinkProvider implements LanLink.LinkDis
                     try {
                         InetAddress client = InetAddress.getByName(ipstr);
                         socket.send(new DatagramPacket(bytes, bytes.length, client, MIN_PORT));
-                        //Log.i("KDE/LanLinkProvider","Udp identity package sent to address "+client);
+                        //Log.i("KDE/LanLinkProvider","Udp identity packet sent to address "+client);
                     } catch (Exception e) {
-                        Log.e("KDE/LanLinkProvider", "Sending udp identity package failed. Invalid address? (" + ipstr + ")", e);
+                        Log.e("KDE/LanLinkProvider", "Sending udp identity packet failed. Invalid address? (" + ipstr + ")", e);
                     }
                 }
             }

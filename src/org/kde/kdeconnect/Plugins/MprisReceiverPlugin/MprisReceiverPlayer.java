@@ -1,21 +1,7 @@
 /*
- * Copyright 2018 Nicolas Fella <nicolas.fella@gmx.de>
+ * SPDX-FileCopyrightText: 2018 Nicolas Fella <nicolas.fella@gmx.de>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.MprisReceiverPlugin;
@@ -26,6 +12,9 @@ import android.media.session.PlaybackState;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
+
+import static org.apache.commons.lang3.StringUtils.defaultString;
+import static org.apache.commons.lang3.StringUtils.firstNonEmpty;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 class MprisReceiverPlayer {
@@ -101,29 +90,24 @@ class MprisReceiverPlayer {
         MediaMetadata metadata = controller.getMetadata();
         if (metadata == null) return "";
 
-        String album = metadata.getString(MediaMetadata.METADATA_KEY_ALBUM);
-        return album != null ? album : "";
+        return defaultString(metadata.getString(MediaMetadata.METADATA_KEY_ALBUM));
     }
 
     String getArtist() {
         MediaMetadata metadata = controller.getMetadata();
         if (metadata == null) return "";
 
-        String artist = metadata.getString(MediaMetadata.METADATA_KEY_ARTIST);
-        if (artist == null || artist.isEmpty()) artist = metadata.getString(MediaMetadata.METADATA_KEY_ALBUM_ARTIST);
-        if (artist == null || artist.isEmpty()) artist = metadata.getString(MediaMetadata.METADATA_KEY_AUTHOR);
-        if (artist == null || artist.isEmpty()) artist = metadata.getString(MediaMetadata.METADATA_KEY_WRITER);
-
-        return artist != null ? artist : "";
+        return defaultString(firstNonEmpty(metadata.getString(MediaMetadata.METADATA_KEY_ARTIST),
+                metadata.getString(MediaMetadata.METADATA_KEY_AUTHOR),
+                metadata.getString(MediaMetadata.METADATA_KEY_WRITER)));
     }
 
     String getTitle() {
         MediaMetadata metadata = controller.getMetadata();
         if (metadata == null) return "";
 
-        String title = metadata.getString(MediaMetadata.METADATA_KEY_TITLE);
-        if (title == null || title.isEmpty()) title = metadata.getString(MediaMetadata.METADATA_KEY_DISPLAY_TITLE);
-        return title != null ? title : "";
+        return defaultString(firstNonEmpty(metadata.getString(MediaMetadata.METADATA_KEY_TITLE),
+                metadata.getString(MediaMetadata.METADATA_KEY_DISPLAY_TITLE)));
     }
 
     void previous() {
@@ -162,9 +146,10 @@ class MprisReceiverPlayer {
     }
 
     long getPosition() {
-        if (controller.getPlaybackState() == null)
-            return 0;
-        return controller.getPlaybackState().getPosition();
+        PlaybackState state = controller.getPlaybackState();
+        if (state == null) return 0;
+
+        return state.getPosition();
     }
 
     void setPosition(long position) {

@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.TelephonyPlugin;
@@ -32,8 +18,10 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.kde.kdeconnect.Helpers.ContactsHelper;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
@@ -164,7 +152,7 @@ public class TelephonyPlugin extends Plugin {
                 if (photoUri != null) {
                     try {
                         String base64photo = ContactsHelper.photoId64Encoded(context, photoUri);
-                        if (base64photo != null && !base64photo.isEmpty()) {
+                        if (!TextUtils.isEmpty(base64photo)) {
                             np.set("phoneThumbnail", base64photo);
                         }
                     } catch (Exception e) {
@@ -227,7 +215,7 @@ public class TelephonyPlugin extends Plugin {
 
     private void unmuteRinger() {
         if (isMuted) {
-            AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+            AudioManager am = ContextCompat.getSystemService(context, AudioManager.class);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 am.setStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, 0);
             } else {
@@ -239,7 +227,7 @@ public class TelephonyPlugin extends Plugin {
 
     private void muteRinger() {
         if (!isMuted) {
-            AudioManager am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+            AudioManager am = ContextCompat.getSystemService(context, AudioManager.class);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 am.setStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0);
             } else {
@@ -315,7 +303,7 @@ public class TelephonyPlugin extends Plugin {
                     Manifest.permission.READ_CALL_LOG,
             };
         } else {
-            return new String[0];
+            return ArrayUtils.EMPTY_STRING_ARRAY;
         }
     }
 

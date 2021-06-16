@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.NotificationsPlugin;
@@ -49,6 +35,10 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.DialogFragment;
 
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.kde.kdeconnect.Helpers.AppsHelper;
 import org.kde.kdeconnect.NetworkPacket;
@@ -65,8 +55,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -86,7 +74,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
 
     private Set<String> currentNotifications;
     private Map<String, RepliableNotification> pendingIntents;
-    private Map<String, List<Notification.Action>> actions;
+    private MultiValuedMap<String, Notification.Action> actions;
     private boolean serviceReady;
 
     @Override
@@ -121,7 +109,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
 
     private boolean hasPermission() {
         String notificationListenerList = Settings.Secure.getString(context.getContentResolver(), "enabled_notification_listeners");
-        return (notificationListenerList != null && notificationListenerList.contains(context.getPackageName()));
+        return StringUtils.contains(notificationListenerList, context.getPackageName());
     }
 
     @Override
@@ -131,7 +119,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
 
         pendingIntents = new HashMap<>();
         currentNotifications = new HashSet<>();
-        actions = new HashMap<>();
+        actions = new ArrayListValuedHashMap<>();
 
         appDatabase = new AppDatabase(context, true);
 
@@ -201,7 +189,6 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
         String packageName = statusBarNotification.getPackageName();
         String appName = AppsHelper.appNameLookup(context, packageName);
 
-
         if ("com.facebook.orca".equals(packageName) &&
                 (statusBarNotification.getId() == 10012) &&
                 "Messenger".equals(appName) &&
@@ -241,7 +228,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
         np.set("id", key);
         np.set("onlyOnce", (notification.flags & NotificationCompat.FLAG_ONLY_ALERT_ONCE) != 0);
         np.set("isClearable", statusBarNotification.isClearable());
-        np.set("appName", appName == null ? packageName : appName);
+        np.set("appName", StringUtils.defaultString(appName, packageName));
         np.set("time", Long.toString(statusBarNotification.getPostTime()));
 
         if (!appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_CONTENTS)) {
@@ -322,16 +309,10 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
 
     @Nullable
     private JSONArray extractActions(Notification notification, String key) {
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT || ArrayUtils.isEmpty(notification.actions)) {
             return null;
         }
 
-        if (notification.actions == null || notification.actions.length == 0) {
-            return null;
-        }
-
-        actions.put(key, new LinkedList<>());
         JSONArray jsonArray = new JSONArray();
 
         for (Notification.Action action : notification.actions) {
@@ -340,12 +321,14 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
                 continue;
 
             // Check whether it is a reply action. We have special treatment for them
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH)
-                if (action.getRemoteInputs() != null && action.getRemoteInputs().length > 0)
-                    continue;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH &&
+                    ArrayUtils.isNotEmpty(action.getRemoteInputs()))
+                continue;
 
             jsonArray.put(action.title.toString());
-            actions.get(key).add(action);
+
+            // A list is automatically created if it doesn't already exist.
+            actions.put(key, action);
         }
 
         return jsonArray;
@@ -619,16 +602,15 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
         String result;
         // first check if it's one of our remoteIds
         String tag = statusBarNotification.getTag();
-        if (tag != null && tag.startsWith("kdeconnectId:"))
+        if (StringUtils.startsWith(tag, "kdeconnectId:"))
             result = Integer.toString(statusBarNotification.getId());
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             result = statusBarNotification.getKey();
         } else {
             String packageName = statusBarNotification.getPackageName();
             int id = statusBarNotification.getId();
-            String safePackageName = (packageName == null) ? "" : packageName;
-            String safeTag = (tag == null) ? "" : tag;
-            result = safePackageName + ":" + safeTag + ":" + id;
+            result = StringUtils.defaultString(packageName) + ":" + StringUtils.defaultString(tag) +
+                    ":" + id;
         }
         return result;
     }

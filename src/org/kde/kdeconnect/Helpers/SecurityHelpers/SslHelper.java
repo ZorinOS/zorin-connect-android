@@ -1,21 +1,7 @@
 /*
- * Copyright 2015 Vineet Garg <grg.vineet@gmail.com>
+ * SPDX-FileCopyrightText: 2015 Vineet Garg <grg.vineet@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect.Helpers.SecurityHelpers;
@@ -29,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.kde.kdeconnect.Helpers.DeviceHelper;
 import org.kde.kdeconnect.Helpers.RandomHelper;
 import org.spongycastle.asn1.x500.RDN;
@@ -43,6 +30,7 @@ import org.spongycastle.cert.jcajce.JcaX509v3CertificateBuilder;
 import org.spongycastle.jce.provider.BouncyCastleProvider;
 import org.spongycastle.operator.ContentSigner;
 import org.spongycastle.operator.jcajce.JcaContentSignerBuilder;
+import org.spongycastle.util.Arrays;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -55,8 +43,10 @@ import java.security.PublicKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.Locale;
@@ -126,16 +116,15 @@ public class SslHelper {
                 nameBuilder.addRDN(BCStyle.CN, deviceId);
                 nameBuilder.addRDN(BCStyle.OU, "KDE Connect");
                 nameBuilder.addRDN(BCStyle.O, "KDE");
-                Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.YEAR, -1);
-                Date notBefore = calendar.getTime();
-                calendar.add(Calendar.YEAR, 10);
-                Date notAfter = calendar.getTime();
+                final LocalDate localDate = LocalDate.now().minusYears(1);
+                final Instant notBefore = localDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+                final Instant notAfter = localDate.plusYears(10).atStartOfDay(ZoneId.systemDefault())
+                        .toInstant();
                 X509v3CertificateBuilder certificateBuilder = new JcaX509v3CertificateBuilder(
                         nameBuilder.build(),
                         BigInteger.ONE,
-                        notBefore,
-                        notAfter,
+                        Date.from(notBefore),
+                        Date.from(notAfter),
                         nameBuilder.build(),
                         publicKey
                 );
@@ -238,9 +227,11 @@ public class SslHelper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             supportedCiphers.add("TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384");  // API 20+
             supportedCiphers.add("TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256");  // API 20+
+            supportedCiphers.add("TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384");    // API 20+
+            supportedCiphers.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");    // API 20+
         }
         supportedCiphers.add("TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA");       // API 11+
-        socket.setEnabledCipherSuites(supportedCiphers.toArray(new String[0]));
+        socket.setEnabledCipherSuites(supportedCiphers.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
 
         socket.setSoTimeout(10000);
 
@@ -266,7 +257,7 @@ public class SslHelper {
 
     public static String getCertificateHash(Certificate certificate) {
         try {
-            byte[] hash = MessageDigest.getInstance("SHA-1").digest(certificate.getEncoded());
+            byte[] hash = MessageDigest.getInstance("SHA-256").digest(certificate.getEncoded());
             Formatter formatter = new Formatter();
             int i;
             for (i = 0; i < hash.length - 1; i++) {
@@ -291,4 +282,31 @@ public class SslHelper {
         return IETFUtils.valueToString(rdn.getFirst().getValue());
     }
 
+    public static String getVerificationKey(X509Certificate certificateA, Certificate certificateB) {
+        try {
+            byte[] a = certificateA.getPublicKey().getEncoded();
+            byte[] b = certificateB.getPublicKey().getEncoded();
+
+            if (Arrays.compareUnsigned(a, b) < 0) {
+                // Swap them so on both devices they are in the same order
+                byte[] aux = a;
+                a = b;
+                b = aux;
+            }
+
+            byte[] concat = new byte[a.length + b.length];
+            System.arraycopy(a, 0, concat, 0, a.length);
+            System.arraycopy(b, 0, concat, a.length, b.length);
+
+            byte[] hash = MessageDigest.getInstance("SHA-256").digest(concat);
+            Formatter formatter = new Formatter();
+            for (int i = 0; i < hash.length - 1; i++) {
+                formatter.format("%02x", hash[i]);
+            }
+            return formatter.toString();
+        } catch(Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
 }

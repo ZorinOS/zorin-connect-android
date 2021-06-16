@@ -13,14 +13,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.internal.util.ArrayUtils;
+
 import org.kde.kdeconnect.Helpers.TrustedNetworkHelper;
 import com.zorinos.zorin_connect.R;
+import com.zorinos.zorin_connect.databinding.TrustedNetworkListBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class TrustedNetworksActivity extends AppCompatActivity {
-
+    private TrustedNetworkListBinding binding;
     private List<String> trustedNetworks;
 
     private ListView trustedNetworksView;
@@ -29,14 +34,7 @@ public class TrustedNetworksActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        boolean grantedPermission = false;
-        for (int result : grantResults) {
-            if (result == PackageManager.PERMISSION_GRANTED) {
-                grantedPermission = true;
-                break;
-            }
-        }
-        if (grantedPermission) {
+        if (ArrayUtils.contains(grantResults, PackageManager.PERMISSION_GRANTED)) {
             allowAllCheckBox.setChecked(false);
         }
     }
@@ -46,15 +44,21 @@ public class TrustedNetworksActivity extends AppCompatActivity {
 
         ThemeUtil.setUserPreferredTheme(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.trusted_network_list);
-        trustedNetworksView = findViewById(android.R.id.list);
+
+        binding = TrustedNetworkListBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        trustedNetworksView = binding.list;
+
+        setSupportActionBar(binding.toolbarLayout.toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         trustedNetworkHelper = new TrustedNetworkHelper(getApplicationContext());
-        trustedNetworks = new ArrayList<>(trustedNetworkHelper.read());
+        trustedNetworks = new ArrayList<>();
+        Collections.addAll(trustedNetworks, trustedNetworkHelper.read());
 
-        allowAllCheckBox = findViewById(R.id.trust_all_networks_checkBox);
+        allowAllCheckBox = binding.trustAllNetworksCheckBox;
         allowAllCheckBox.setOnCheckedChangeListener((v, isChecked) -> {
-
             if (trustedNetworkHelper.hasPermissions()) {
                 trustedNetworkHelper.allAllowed(isChecked);
                 updateTrustedNetworkListView();
@@ -78,12 +82,11 @@ public class TrustedNetworksActivity extends AppCompatActivity {
 
     private void updateEmptyListMessage() {
         boolean isVisible = trustedNetworks.isEmpty() && !trustedNetworkHelper.allAllowed();
-        findViewById(R.id.trusted_network_list_empty)
-                .setVisibility(isVisible ? View.VISIBLE : View.GONE );
+        binding.trustedNetworkListEmpty.setVisibility(isVisible ? View.VISIBLE : View.GONE );
     }
 
     private void updateTrustedNetworkListView() {
-        Boolean allAllowed = trustedNetworkHelper.allAllowed();
+        boolean allAllowed = trustedNetworkHelper.allAllowed();
         updateEmptyListMessage();
         trustedNetworksView.setVisibility(allAllowed ? View.GONE : View.VISIBLE);
         if (allAllowed){
@@ -108,19 +111,18 @@ public class TrustedNetworksActivity extends AppCompatActivity {
         addNetworkButton();
     }
 
-
     private void addNetworkButton() {
-        Button addButton = findViewById(android.R.id.button1);
+        Button addButton = binding.button1;
         if (trustedNetworkHelper.allAllowed()) {
             addButton.setVisibility(View.GONE);
             return;
         }
         final String currentSSID = trustedNetworkHelper.currentSSID();
-        if (!currentSSID.isEmpty() && trustedNetworks.indexOf(currentSSID) == -1) {
+        if (!currentSSID.isEmpty() && !trustedNetworks.contains(currentSSID)) {
             String buttonText = getString(R.string.add_trusted_network, currentSSID);
             addButton.setText(buttonText);
             addButton.setOnClickListener(v -> {
-                if (trustedNetworks.indexOf(currentSSID) != -1){
+                if (trustedNetworks.contains(currentSSID)){
                     return;
                 }
                 trustedNetworks.add(currentSSID);

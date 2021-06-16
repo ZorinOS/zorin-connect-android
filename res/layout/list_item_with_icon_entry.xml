@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/abc_list_selector_holo_dark"
+    android:background="?android:attr/selectableItemBackground"
     android:baselineAligned="false"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
@@ -21,8 +21,8 @@
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:contentDescription="@string/device_icon_description"
-            android:src="@drawable/ic_device_laptop"
-            app:tint="?attr/colorControlNormal"/>
+            android:src="@drawable/ic_device_laptop_32dp"
+            app:tint="?android:attr/textColorSecondary"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

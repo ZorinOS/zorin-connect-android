@@ -1,29 +1,14 @@
 package org.kde.kdeconnect.Plugins.SharePlugin;
 
 /*
- * Copyright 2017 Nicolas Fella <nicolas.fella@gmx.de>
+ * SPDX-FileCopyrightText: 2017 Nicolas Fella <nicolas.fella@gmx.de>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -32,6 +17,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Helpers.NotificationHelper;
 import com.zorinos.zorin_connect.R;
@@ -39,9 +28,6 @@ import com.zorinos.zorin_connect.R;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.FileProvider;
 
 class ReceiveNotification {
     private final NotificationManager notificationManager;
@@ -59,7 +45,7 @@ class ReceiveNotification {
 
         this.jobId = jobId;
         notificationId = (int) System.currentTimeMillis();
-        notificationManager = (NotificationManager) device.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager = ContextCompat.getSystemService(device.getContext(), NotificationManager.class);
         builder = new NotificationCompat.Builder(device.getContext(), NotificationHelper.Channels.FILETRANSFER)
                 .setSmallIcon(android.R.drawable.stat_sys_download)
                 .setAutoCancel(true)
@@ -85,7 +71,7 @@ class ReceiveNotification {
         cancelIntent.putExtra(SharePlugin.CANCEL_SHARE_DEVICE_ID_EXTRA, device.getDeviceId());
         PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(device.getContext(), 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        builder.addAction(R.drawable.ic_reject_pairing, device.getContext().getString(R.string.cancel), cancelPendingIntent);
+        builder.addAction(R.drawable.ic_reject_pairing_24dp, device.getContext().getString(R.string.cancel), cancelPendingIntent);
     }
 
     public void setTitle(String title) {
@@ -100,7 +86,7 @@ class ReceiveNotification {
     }
 
     public void setFinished(String message) {
-        builder = new NotificationCompat.Builder(device.getContext(), NotificationHelper.Channels.DEFAULT);
+        builder = new NotificationCompat.Builder(device.getContext(), NotificationHelper.Channels.FILETRANSFER);
         builder.setContentTitle(message)
                 .setTicker(message)
                 .setSmallIcon(android.R.drawable.stat_sys_download_done)

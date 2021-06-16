@@ -3,22 +3,26 @@
   <string name="kde_connect">Zorin Connect</string>
   <string name="foreground_notification_no_devices">No està connectat a cap dispositiu</string>
   <string name="foreground_notification_devices">Connectat a: %s</string>
+  <string name="foreground_notification_send_clipboard">Envia al porta-retalls</string>
   <string name="pref_plugin_telephony">Notificador de la telefonia</string>
   <string name="pref_plugin_telephony_desc">Envia notificacions per a les trucades entrants</string>
   <string name="pref_plugin_battery">Informa de la bateria</string>
   <string name="pref_plugin_battery_desc">Informa periòdicament sobre l\'estat de la bateria</string>
+  <string name="pref_plugin_connectivity_report">Informa de la connectivitat</string>
+  <string name="pref_plugin_connectivity_report_desc">Informar la intensitat i l\'estat del senyal de la xarxa</string>
   <string name="pref_plugin_sftp">Exposa el sistema de fitxers</string>
   <string name="pref_plugin_sftp_desc">Permet navegar de forma remota pel sistema de fitxers del dispositiu</string>
   <string name="pref_plugin_clipboard">Sincronitza el porta-retalls</string>
   <string name="pref_plugin_clipboard_desc">Comparteix el contingut del porta-retalls</string>
+  <string name="pref_plugin_clipboard_sent">S\'ha enviat al porta-retalls</string>
   <string name="pref_plugin_mousepad">Entrada remota</string>
   <string name="pref_plugin_mousepad_desc">Usa el vostre telèfon o tauleta com un ratolí i un teclat</string>
   <string name="pref_plugin_presenter">Presentació de diapositives remota</string>
-  <string name="pref_plugin_presenter_desc">Usa el dispositiu per a canviar les dispositives d\'una presentació</string>
+  <string name="pref_plugin_presenter_desc">Usa el dispositiu per a canviar les diapositives d\'una presentació</string>
   <string name="pref_plugin_remotekeyboard">Rep les pulsacions remotes de tecla</string>
   <string name="pref_plugin_remotekeyboard_desc">Rep els esdeveniments de pulsacions de tecla des de dispositius remots</string>
   <string name="pref_plugin_mpris">Controls multimèdia</string>
-  <string name="pref_plugin_mpris_desc">Proporciona un comandament a distància pel reproductor multimèdia</string>
+  <string name="pref_plugin_mpris_desc">Proporciona un comandament a distància per al reproductor multimèdia</string>
   <string name="pref_plugin_runcommand">Executa una ordre</string>
   <string name="pref_plugin_runcommand_desc">Activa les ordres remotes des del telèfon o tauleta</string>
   <string name="pref_plugin_contacts">Sincronitzador dels contactes</string>
@@ -28,7 +32,7 @@
   <string name="pref_plugin_notifications">Sincronitza les notificacions</string>
   <string name="pref_plugin_notifications_desc">Accedeix a les vostres notificacions des d\'altres dispositius</string>
   <string name="pref_plugin_receive_notifications">Rep les notificacions</string>
-  <string name="pref_plugin_receive_notifications_desc">Rep notificacions des d\'altres dispositius i mostrar-los a l\'Android</string>
+  <string name="pref_plugin_receive_notifications_desc">Rep notificacions des d\'altres dispositius i mostrar-les a l\'Android</string>
   <string name="pref_plugin_sharereceiver">Comparteix i rep</string>
   <string name="pref_plugin_sharereceiver_desc">Comparteix els fitxers i URL entre els dispositius</string>
   <string name="device_list_empty">No hi ha cap dispositiu</string>
@@ -36,7 +40,7 @@
   <string name="sad_ok">D\'acord :(</string>
   <string name="cancel">Cancel·la</string>
   <string name="open_settings">Obre l\'arranjament</string>
-  <string name="no_permissions">Us caldrà concedir permís per accedir a les notificacions</string>
+  <string name="no_permissions">Us caldrà concedir permís per a accedir a les notificacions</string>
   <string name="no_permission_mprisreceiver">Per a poder controlar els reproductors multimèdia cal atorgar accés a les notificacions</string>
   <string name="no_permissions_remotekeyboard">Per a rebre les pulsacions de tecles, haureu d\'activar el teclat remot del Zorin Connect</string>
   <string name="send_ping">Envia un ping</string>
@@ -44,9 +48,9 @@
   <string name="remotekeyboard_editing_only_title">Fes servir les tecles remotes només en editar</string>
   <string name="remotekeyboard_not_connected">No hi ha cap connexió activa amb el teclat remot, establiu-ne una al Zorin Connect</string>
   <string name="remotekeyboard_connected">La connexió amb el teclat remot està activa</string>
-  <string name="remotekeyboard_multiple_connections">Hi ha més d\'una connexió amb un teclat remot, seleccioneu el dispositiu per configurar-lo</string>
+  <string name="remotekeyboard_multiple_connections">Hi ha més d\'una connexió amb un teclat remot, seleccioneu el dispositiu per a configurar-lo</string>
   <string name="open_mousepad">Entrada remota</string>
-  <string name="mousepad_info">Moveu un dit per la pantalla per a moure el cursor del ratolí. Toqueu per un clic, i empreu dos/tres dits pels botons dret i mig. Useu 2 dits per desplaçar. Empreu un toc llarg per arrossegar i deixar anar.</string>
+  <string name="mousepad_info">Moveu un dit per la pantalla per a moure el cursor del ratolí. Toqueu per a un clic, i empreu dos/tres dits per als botons dret i mig. Useu 2 dits per a desplaçar. Empreu un toc llarg per a arrossegar i deixar anar.</string>
   <string name="mousepad_double_tap_settings_title">Estableix l\'acció de tocar amb dos dits</string>
   <string name="mousepad_triple_tap_settings_title">Estableix l\'acció de tocar amb tres dits</string>
   <string name="mousepad_sensitivity_settings_title">Estableix la sensibilitat del ratolí tàctil</string>
@@ -72,11 +76,26 @@
     <item>Forta</item>
     <item>La més forta</item>
   </string-array>
+  <string name="sendkeystrokes_send_to">Envia les pulsacions de tecla a</string>
+  <string name="sendkeystrokes_textbox_hint">Envia les pulsacions de tecla a la màquina</string>
+  <string name="sendkeystrokes_disabled_toast">L\'enviament de les pulsacions de tecla està inhabilitat -habiliteu-lo a la configuració-</string>
+  <string name="sendkeystrokes_wrong_data">El tipus MIME no és vàlid -ha de ser «text/x-keystrokes»-</string>
+  <string name="sendkeystrokes_sent_text">Envia %1s al dispositiu %2s</string>
+  <string name="sendkeystrokes_pref_category_summary">Aquest mòdul permet que les altres aplicacions comparteixin segments de text com a pulsacions de tecla que s\'enviaran a la màquina connectada</string>
+  <string name="sendkeystrokes_pref_category_title">Envia les pulsacions de tecla</string>
+  <string name="sendkeystrokes_pref_enabled">Activa l\'enviament de les pulsacions de tecla</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Escolta per a les dades amb el tipus MIME «text/x-keystrokes»</string>
+  <string name="sendkeystrokes_safe_text_enabled">Envia immediatament un text segur</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Només envia cadenes curtes numèriques sense confirmació</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Envia com a pulsacions de tecla</string>
+  <string name="mouse_receiver_plugin_description">Rep el moviment del ratolí remot</string>
+  <string name="mouse_receiver_plugin_name">Receptor del ratolí</string>
+  <string name="mouse_receiver_no_permissions">Cal que habiliteu el servei Accessibilitat</string>
   <string name="category_connected_devices">Dispositius connectats</string>
   <string name="category_not_paired_devices">Dispositius disponibles</string>
   <string name="category_remembered_devices">Dispositius recordats</string>
-  <string name="device_menu_plugins">Arranjament del connector</string>
-  <string name="device_menu_unpair">Desparella</string>
+  <string name="device_menu_plugins">Arranjament dels connectors</string>
+  <string name="device_menu_unpair">Desaparella</string>
   <string name="pair_new_device">Aparella amb un dispositiu nou</string>
   <string name="unknown_device">Dispositiu desconegut</string>
   <string name="error_not_reachable">No es pot accedir al dispositiu</string>
@@ -87,8 +106,8 @@
   <string name="error_canceled_by_other_peer">Cancel·lat per l\'altre parell</string>
   <string name="encryption_info_title">Informació de l\'encriptatge</string>
   <string name="encryption_info_msg_no_ssl">L\'altre dispositiu no usa una versió recent del Zorin Connect, s\'utilitzarà el mètode d\'encriptatge antic.</string>
-  <string name="my_device_fingerprint">L\'empremta digital SHA1 del certificat del vostre dispositiu és:</string>
-  <string name="remote_device_fingerprint">L\'empremta digital SHA1 del certificat del dispositiu remot és:</string>
+  <string name="my_device_fingerprint">L\'empremta digital SHA256 del certificat del vostre dispositiu és:</string>
+  <string name="remote_device_fingerprint">L\'empremta digital SHA256 del certificat del dispositiu remot és:</string>
   <string name="pair_requested">S\'ha demanat aparellar</string>
   <string name="pairing_request_from">S\'ha demanat aparellar des de %1s</string>
   <plurals name="incoming_file_title">
@@ -123,12 +142,12 @@
     <item quantity="one">Ha fallat en enviar el fitxer a %1$s</item>
     <item quantity="other">Ha fallat en enviar %2$d de %3$d fitxers a %1$s</item>
   </plurals>
-  <string name="tap_to_open">Toqueu per obrir</string>
-  <string name="received_file_text">Toqueu per obrir «%1s»</string>
+  <string name="tap_to_open">Toqueu per a obrir</string>
+  <string name="received_file_text">Toqueu per a obrir «%1s»</string>
   <string name="cannot_create_file">No s\'ha pogut crear el fitxer %s</string>
-  <string name="tap_to_answer">Puntegeu per a respondre</string>
-  <string name="right_click">Envia un clic del botó dret</string>
-  <string name="middle_click">Envia un clic del botó del mig</string>
+  <string name="tap_to_answer">Toqueu per a respondre</string>
+  <string name="right_click">Envia un clic dret</string>
+  <string name="middle_click">Envia un clic del mig</string>
   <string name="show_keyboard">Mostra el teclat</string>
   <string name="device_not_paired">El dispositiu no està aparellat</string>
   <string name="request_pairing">Demana aparellar</string>
@@ -142,8 +161,8 @@
   <string name="mpris_ff">Avanç ràpid</string>
   <string name="mpris_next">Següent</string>
   <string name="mpris_volume">Volum</string>
-  <string name="mpris_time_settings_title">Botons per avançar o rebobinar</string>
-  <string name="mpris_time_settings_summary">Ajusta el temps per avançar o rebobinar quan es toca</string>
+  <string name="mpris_time_settings_title">Botons per a avançar o rebobinar</string>
+  <string name="mpris_time_settings_summary">Ajusta el temps per a avançar o rebobinar quan es toca</string>
   <string-array name="mpris_time_entries">
     <item>10 segons</item>
     <item>20 segons</item>
@@ -155,7 +174,7 @@
   <string name="mpris_notification_settings_summary">Permet controlar els reproductors multimèdia sense obrir el Zorin Connect</string>
   <string name="share_to">Comparteix amb...</string>
   <string name="protocol_version_newer">Aquest dispositiu usa una versió nova del protocol</string>
-  <string name="plugin_settings_with_name">Ajustaments del %s</string>
+  <string name="plugin_settings_with_name">Configuració del %s</string>
   <string name="invalid_device_name">El nom del dispositiu no és vàlid</string>
   <string name="shareplugin_text_saved">S\'ha rebut text i s\'ha desat al porta-retalls</string>
   <string name="custom_devices_settings">Llista personalitzada de dispositius</string>
@@ -164,7 +183,7 @@
   <string name="custom_device_list_help">Si el dispositiu no es detecta automàticament, podeu afegir la seva adreça IP o el nom de la màquina fent clic al botó flotant d\'acció</string>
   <string name="custom_device_fab_hint">Afegeix un dispositiu</string>
   <string name="undo">Desfés</string>
-  <string name="share_notification_preference">Rebombori de les notificacions</string>
+  <string name="share_notification_preference">Notificacions sonores</string>
   <string name="share_notification_preference_summary">Vibra i reprodueix un so en rebre un fitxer</string>
   <string name="share_destination_customize">Personalitza el directori de destinació</string>
   <string name="share_destination_customize_summary_disabled">Els fitxers rebuts apareixeran a Baixades</string>
@@ -190,14 +209,14 @@
   <string name="sftp_preference_add_camera_shortcut_summary_off">No afegeixis cap drecera a la carpeta de la càmera</string>
   <string name="sftp_storage_preference_storage_location">Ubicació d\'emmagatzematge</string>
   <string name="sftp_storage_preference_storage_location_already_configured">Aquesta ubicació ja s\'ha configurat</string>
-  <string name="sftp_storage_preference_click_to_select">clic per seleccionar</string>
+  <string name="sftp_storage_preference_click_to_select">clic per a seleccionar</string>
   <string name="sftp_storage_preference_display_name">Nom a mostrar</string>
   <string name="sftp_storage_preference_display_name_already_used">Aquest nom a mostrar ja està en ús</string>
   <string name="sftp_storage_preference_display_name_cannot_be_empty">El nom a mostrar no pot estar buit</string>
   <string name="sftp_action_mode_menu_delete">Suprimeix</string>
   <string name="sftp_no_sdcard_detected">No s\'ha detectat cap targeta SD</string>
   <string name="sftp_no_storage_locations_configured">No s\'ha configurat cap ubicació d\'emmagatzematge</string>
-  <string name="sftp_saf_permission_explanation">Per accedir remotament als fitxer cal configurar les ubicacions d\'emmagatzematge</string>
+  <string name="sftp_saf_permission_explanation">Per a accedir remotament als fitxer cal configurar les ubicacions d\'emmagatzematge</string>
   <string name="no_players_connected">No s\'ha trobat cap reproductor</string>
   <string name="send_files">Envia fitxers</string>
   <string name="pairing_title">Dispositius del Zorin Connect</string>
@@ -206,11 +225,13 @@
   <string name="device_rename_confirm">Reanomena</string>
   <string name="refresh">Refresca</string>
   <string name="unreachable_description">Aquest dispositiu aparellat no és accessible. Assegureu-vos que està connectat a la mateixa xarxa.</string>
-  <string name="no_wifi">No esteu connectat a una xarxa Wi-Fi, per tant, no podreu veure cap dispositiu. Feu clic aquí per activar la Wi-Fi.</string>
+  <string name="no_wifi">No esteu connectat a una xarxa Wi-Fi, per tant, no podreu veure cap dispositiu. Feu clic aquí per a activar la Wi-Fi.</string>
   <string name="on_non_trusted_message">No és una xarxa de confiança: el descobriment automàtic està desactivat.</string>
-  <string name="no_file_browser">No hi ha instal·lat cap explorador de fitxers.</string>
+  <string name="no_file_browser">No hi ha instal·lat cap navegador de fitxers.</string>
   <string name="pref_plugin_telepathy">Envia un SMS</string>
   <string name="pref_plugin_telepathy_desc">Envia missatges de text des de l\'escriptori</string>
+  <string name="pref_plugin_telepathy_mms">Envia un MMS</string>
+  <string name="pref_plugin_telepathy_mms_desc">Per a poder enviar MMS des del Zorin Connect cal establir-la com a aplicació predeterminada per a SMS.</string>
   <string name="findmyphone_title">Troba el meu telèfon</string>
   <string name="findmyphone_title_tablet">Troba la meva tauleta</string>
   <string name="findmyphone_title_tv">Troba la meva TV</string>
@@ -218,11 +239,11 @@
   <string name="findmyphone_found">S\'ha trobat</string>
   <string name="open">Obre</string>
   <string name="close">Tanca</string>
-  <string name="plugins_need_permission">Alguns connectors necessiten permisos per a funcionar (puntegeu per a més informació):</string>
+  <string name="plugins_need_permission">Alguns connectors necessiten permisos per a funcionar (toqueu per a més informació):</string>
   <string name="permission_explanation">Aquest connector necessita permisos per a funcionar</string>
-  <string name="optional_permission_explanation">Us caldrà concedir permisos extres per accedir a totes les característiques</string>
-  <string name="plugins_need_optional_permission">Alguns connectors tenen característiques desactivades per la falta de permís (puntegeu per a més informació):</string>
-  <string name="share_optional_permission_explanation">Per a compartir fitxers entre el telèfon i l\'escriptori, haureu de donar accés a l\'emmagatzematge del telèfon</string>
+  <string name="optional_permission_explanation">Us caldrà concedir permisos extres per a accedir a totes les característiques</string>
+  <string name="plugins_need_optional_permission">Alguns connectors tenen característiques desactivades per la falta de permís (toqueu per a més informació):</string>
+  <string name="share_optional_permission_explanation">Per a rebre fitxers compartits cal triar un directori de destinació</string>
   <string name="telepathy_permission_explanation">Per a llegir i escriure SMS des de l\'escriptori, haureu de donar permís als SMS</string>
   <string name="telephony_permission_explanation">Per a veure les trucades telefòniques des de l\'escriptori, haureu de donar permís d\'accés al registre de trucades telefòniques i a l\'estat del telèfon</string>
   <string name="telephony_optional_permission_explanation">Per a veure un nom de contacte en comptes d\'un número de telèfon, haureu de donar permís als contactes del telèfon</string>
@@ -235,7 +256,7 @@
   <string name="settings_icon_description">Icona d\'arranjament</string>
   <string name="presenter_fullscreen">Pantalla completa</string>
   <string name="presenter_exit">Surt de la presentació</string>
-  <string name="presenter_lock_tip">Podeu bloquejar el dispositiu i emprar les tecles de volum per anar a la diapositiva anterior/següent</string>
+  <string name="presenter_lock_tip">Podeu bloquejar el dispositiu i emprar les tecles de volum per a anar a la diapositiva anterior/següent</string>
   <string name="add_command">Afegeix una ordre</string>
   <string name="addcommand_explanation">No hi ha cap ordre registrada</string>
   <string name="addcommand_explanation2">Podeu afegir ordres noves a l\'Arranjament del sistema del Zorin Connect</string>
@@ -247,12 +268,13 @@
   <string name="notification_channel_media_control">Control multimèdia</string>
   <string name="notification_channel_filetransfer">Transferència de fitxers</string>
   <string name="notification_channel_high_priority">Prioritat alta</string>
+  <string name="notification_channel_sms_mms">Missatge nou</string>
   <string name="mpris_stop">Atura el reproductor actual</string>
   <string name="copy_url_to_clipboard">Copia l\'URL al porta-retalls</string>
   <string name="clipboard_toast">Copiat al porta-retalls</string>
   <string name="runcommand_notreachable">No es pot accedir al dispositiu</string>
   <string name="runcommand_notpaired">El dispositiu no està aparellat</string>
-  <string name="runcommand_nosuchdevice">No existeix aquest dispositiu</string>
+  <string name="runcommand_nosuchdevice">El dispositiu no existeix</string>
   <string name="runcommand_noruncommandplugin">Aquest dispositiu no té el connector d\'executar ordres activat</string>
   <string name="pref_plugin_findremotedevice">Cerca el dispositiu remot</string>
   <string name="pref_plugin_findremotedevice_desc">Truca al dispositiu remot</string>
@@ -264,11 +286,11 @@
   <string name="devices">Dispositius</string>
   <string name="settings_rename">Nom del dispositiu</string>
   <string name="settings_dark_mode">Tema fosc</string>
-  <string name="settings_more_settings_title">Més ajustaments</string>
-  <string name="settings_more_settings_text">Els ajustaments per dispositiu es poden trobar a «Arranjament del connector» des d\'un dispositiu.</string>
+  <string name="settings_more_settings_title">Més opcions</string>
+  <string name="settings_more_settings_text">La configuració per dispositiu es pot trobar a «Arranjament dels connectors» des d\'un dispositiu.</string>
   <string name="setting_persistent_notification">Mostra les notificacions persistents</string>
   <string name="setting_persistent_notification_oreo">Notificacions persistents</string>
-  <string name="setting_persistent_notification_description">Tocar per a des/activar els ajustaments de les notificacions</string>
+  <string name="setting_persistent_notification_description">Tocar per a des/activar la configuració de les notificacions</string>
   <string name="extra_options">Opcions extres</string>
   <string name="privacy_options">Opcions de privadesa</string>
   <string name="set_privacy_options">Establiu les opcions de privadesa</string>
@@ -276,8 +298,8 @@
   <string name="block_images">Bloca les imatges a les notificacions</string>
   <string name="notification_channel_receivenotification">Notificacions des d\'altres dispositius</string>
   <string name="take_picture">Llança la càmera</string>
-  <string name="plugin_photo_desc">Llança l\'aplicació de la càmera per facilitar la presa i la transferència de fotografies</string>
-  <string name="no_app_for_opening">No s\'ha trobat cap aplicació adequada per obrir aquest fitxer</string>
+  <string name="plugin_photo_desc">Llança l\'aplicació de la càmera per a facilitar la presa i la transferència de fotografies</string>
+  <string name="no_app_for_opening">No s\'ha trobat cap aplicació adequada per a obrir aquest fitxer</string>
   <string name="remote_keyboard_service">Teclat remot del Zorin Connect</string>
   <string name="presenter_pointer">Apuntador</string>
   <string name="trusted_networks">Xarxes de confiança</string>
@@ -286,16 +308,48 @@
   <string name="empty_trusted_networks_list_text">Encara no heu afegit cap xarxa de confiança</string>
   <string name="allow_all_networks_text">Permet totes</string>
   <string name="location_permission_needed_title">Es requereix permís</string>
-  <string name="location_permission_needed_desc">L\'Android requereix el permís d\'ubicació per identificar la xarxa WiFi</string>
+  <string name="location_permission_needed_desc">L\'Android requereix el permís d\'ubicació per a identificar la xarxa Wi-Fi</string>
   <string name="clipboard_android_x_incompat">L\'Android 10 ha tret l\'accés al porta-retalls a totes les aplicacions. Aquest connector estarà inhabilitat.</string>
   <string name="mpris_open_url">Continua reproduint aquí</string>
   <string name="cant_open_url">No s\'ha pogut obrir l\'URL per a continuar reproduint</string>
   <string name="bigscreen_home">Inici</string>
-  <string name="bigscreen_up">Dalt</string>
+  <string name="bigscreen_up">Amunt</string>
   <string name="bigscreen_left">Esquerra</string>
   <string name="bigscreen_select">Selecció</string>
   <string name="bigscreen_right">Dreta</string>
-  <string name="bigscreen_down">Baix</string>
-  <string name="pref_plugin_bigscreen">Pantalla gran remota</string>
-  <string name="pref_plugin_bigscreen_desc">Useu el dispositiu com a remot per a la Pantalla gran del Plasma</string>
+  <string name="bigscreen_down">Avall</string>
+  <string name="bigscreen_mic">Micròfon</string>
+  <string name="pref_plugin_bigscreen">Bigscreen remota</string>
+  <string name="pref_plugin_bigscreen_desc">Useu el dispositiu com a remot per a la Bigscreen del Plasma</string>
+  <string name="bigscreen_optional_permission_explanation">Per a compartir l\'entrada del micròfon del telèfon cal donar accés a l\'entrada d\'àudio del telèfon</string>
+  <string name="bigscreen_speech_extra_prompt">Veu</string>
+  <string name="message_reply_label">RESPON</string>
+  <string name="mark_as_read_label">MARCA COM A LLEGIT</string>
+  <string name="user_display_name">Vós</string>
+  <string name="set_default_sms_app_title">Envia un MMS</string>
+  <string name="set_group_message_as_mms_title">Envia un MMS de grup</string>
+  <string name="set_long_text_as_mms_title">Envia un text llarg com a MMS</string>
+  <string name="convert_to_mms_after_title">Converteix a MMS</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Després d\'un missatge</item>
+    <item>Després de dos missatges</item>
+    <item>Després de tres missatges</item>
+    <item>Després de quatre missatges</item>
+    <item>Després de cinc missatges</item>
+  </string-array>
+  <string name="theme_dialog_title">Trieu el tema</string>
+  <string-array name="theme_list">
+    <item>Establert per l\'estalvi de bateria</item>
+    <item>Clar</item>
+    <item>Fosc</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Predeterminat del sistema</item>
+    <item>Clar</item>
+    <item>Fosc</item>
+  </string-array>
+  <string name="report_bug">Informa d\'un error</string>
+  <string name="donate">Donació de diners</string>
+  <string name="source_code">Codi font</string>
+  <string name="licenses">Llicències</string>
 </resources>

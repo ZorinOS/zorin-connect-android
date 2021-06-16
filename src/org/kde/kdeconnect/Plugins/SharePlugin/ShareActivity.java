@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.SharePlugin;
@@ -25,27 +11,26 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ListView;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.Device;
-import org.kde.kdeconnect.UserInterface.List.EntryItem;
+import org.kde.kdeconnect.UserInterface.List.EntryItemWithIcon;
 import org.kde.kdeconnect.UserInterface.List.ListAdapter;
 import org.kde.kdeconnect.UserInterface.List.SectionItem;
 import org.kde.kdeconnect.UserInterface.ThemeUtil;
 import com.zorinos.zorin_connect.R;
+import com.zorinos.zorin_connect.databinding.ActivityShareBinding;
 
 import java.util.ArrayList;
 import java.util.Collection;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import java.util.Objects;
 
 
 public class ShareActivity extends AppCompatActivity {
-
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private ActivityShareBinding binding;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,18 +55,17 @@ public class ShareActivity extends AppCompatActivity {
         updateComputerList();
         BackgroundService.RunCommand(ShareActivity.this, BackgroundService::onNetworkChange);
 
-        mSwipeRefreshLayout.setRefreshing(true);
+        binding.devicesListLayout.refreshListLayout.setRefreshing(true);
         new Thread(() -> {
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException ignored) {
             }
-            runOnUiThread(() -> mSwipeRefreshLayout.setRefreshing(false));
+            runOnUiThread(() -> binding.devicesListLayout.refreshListLayout.setRefreshing(false));
         }).start();
     }
 
     private void updateComputerList() {
-
         final Intent intent = getIntent();
 
         String action = intent.getAction();
@@ -102,42 +86,40 @@ public class ShareActivity extends AppCompatActivity {
             for (Device d : devices) {
                 if (d.isReachable() && d.isPaired()) {
                     devicesList.add(d);
-                    items.add(new EntryItem(d.getName()));
+                    items.add(new EntryItemWithIcon(d.getName(), d.getIcon()));
                     section.isEmpty = false;
                 }
             }
 
             runOnUiThread(() -> {
-                ListView list = findViewById(R.id.devices_list);
-                list.setAdapter(new ListAdapter(ShareActivity.this, items));
-                list.setOnItemClickListener((adapterView, view, i, l) -> {
-
+                binding.devicesListLayout.devicesList.setAdapter(new ListAdapter(ShareActivity.this, items));
+                binding.devicesListLayout.devicesList.setOnItemClickListener((adapterView, view, i, l) -> {
                     Device device = devicesList.get(i - 1); //NOTE: -1 because of the title!
                     BackgroundService.RunWithPlugin(this, device.getDeviceId(), SharePlugin.class, plugin -> plugin.share(intent));
                     finish();
                 });
             });
-
         });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         ThemeUtil.setUserPreferredTheme(this);
-        setContentView(R.layout.devices_list);
+
+        binding = ActivityShareBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        setSupportActionBar(binding.toolbarLayout.toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         ActionBar actionBar = getSupportActionBar();
-        mSwipeRefreshLayout = findViewById(R.id.refresh_list_layout);
-        mSwipeRefreshLayout.setOnRefreshListener(
-                this::updateComputerListAction
-        );
+        binding.devicesListLayout.refreshListLayout.setOnRefreshListener(this::updateComputerListAction);
         if (actionBar != null) {
             actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_CUSTOM);
         }
     }
-
 
     @Override
     protected void onStart() {
@@ -152,7 +134,6 @@ public class ShareActivity extends AppCompatActivity {
                 finish();
             });
         } else {
-
             BackgroundService.RunCommand(this, service -> {
                 service.onNetworkChange();
                 service.addDeviceListChangedCallback("ShareActivity", this::updateComputerList);
@@ -161,11 +142,9 @@ public class ShareActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onStop() {
         BackgroundService.RunCommand(this, service -> service.removeDeviceListChangedCallback("ShareActivity"));
         super.onStop();
     }
-
 }

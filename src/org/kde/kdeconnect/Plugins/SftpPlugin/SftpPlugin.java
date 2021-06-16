@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Samoilenko Yuri <kinnalru@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Samoilenko Yuri <kinnalru@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect.Plugins.SftpPlugin;
@@ -42,6 +28,7 @@ import com.zorinos.zorin_connect.R;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -118,7 +105,7 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
             ArrayList<String> pathNames = new ArrayList<>();
 
             List<StorageInfo> storageInfoList = SftpSettingsFragment.getStorageInfoList(context, this);
-            Collections.sort(storageInfoList, new StorageInfo.UriNameComparator());
+            Collections.sort(storageInfoList, Comparator.comparing(StorageInfo::getUri));
 
             if (storageInfoList.size() > 0) {
                 getPathsAndNamesForStorageInfoList(paths, pathNames, storageInfoList);
@@ -306,6 +293,11 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
             this.uri = uri;
         }
 
+        @NonNull
+        Uri getUri() {
+            return uri;
+        }
+
         static StorageInfo copy(StorageInfo from) {
             //Both String and Uri are immutable
             return new StorageInfo(from.displayName, from.uri);
@@ -352,20 +344,6 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
             int result = displayName.hashCode();
             result = 31 * result + uri.hashCode();
             return result;
-        }
-
-        static class DisplayNameComparator implements java.util.Comparator<StorageInfo> {
-            @Override
-            public int compare(StorageInfo si1, StorageInfo si2) {
-                return si1.displayName.compareToIgnoreCase(si2.displayName);
-            }
-        }
-
-        static class UriNameComparator implements java.util.Comparator<StorageInfo> {
-            @Override
-            public int compare(StorageInfo si1, StorageInfo si2) {
-                return si1.uri.compareTo(si2.uri);
-            }
         }
     }
 }

@@ -74,8 +74,6 @@
   <string name="error_canceled_by_other_peer">Annulleret af modpart</string>
   <string name="encryption_info_title">Krypteringsinfo</string>
   <string name="encryption_info_msg_no_ssl">Den anden enhed bruger ikke en nylig version af Zorin Connect, og bruger dermed den forældede krypteringsmetode.</string>
-  <string name="my_device_fingerprint">SHA1-fingeraftrykket for dit enhedscertifikat er:</string>
-  <string name="remote_device_fingerprint">SHA1-fingeraftrykket for det eksterne enhedscertifikat er:</string>
   <string name="pair_requested">Anmodet om parring</string>
   <string name="pairing_request_from">Parringsanmodning fra %1s</string>
   <string name="received_file_text">Tap for at åbne \"%1s\"</string>
@@ -139,7 +137,23 @@
   <string name="permission_explanation">Dette plugin kræver tilladelser for at virke</string>
   <string name="optional_permission_explanation">Du skal give ekstra tilladelser for at aktivere alle funktioner</string>
   <string name="plugins_need_optional_permission">Nogle plugins har deaktiverede funktioner pga. manglende tilladelser (tap for mere info):</string>
-  <string name="share_optional_permission_explanation">For at dele filer mellem din telefon og din desktop skal du give adgang til telefonens datalager.</string>
   <string name="telepathy_permission_explanation">For at læse og skrive sms\'er fra din desktop, skal du give tilladelse til sms</string>
   <string name="telephony_optional_permission_explanation">For at se et kontaktnavn i stedet for et telefonnummer, skal du give adgang til telefonens kontakter</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>After one message</item>
+    <item>After two messages</item>
+    <item>After three messages</item>
+    <item>After four messages</item>
+    <item>After five messages</item>
+  </string-array>
+  <string-array name="theme_list">
+    <item>Set by Battery Saver</item>
+    <item/>
+    <item>Dark</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item/>
+    <item/>
+    <item>Dark</item>
+  </string-array>
 </resources>

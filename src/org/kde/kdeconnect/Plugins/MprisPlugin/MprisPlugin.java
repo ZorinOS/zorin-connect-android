@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect.Plugins.MprisPlugin;
@@ -211,6 +197,7 @@ public class MprisPlugin extends Plugin {
         }
     }
 
+    public final static String DEVICE_ID_KEY = "deviceId";
     private final static String PACKET_TYPE_MPRIS = "kdeconnect.mpris";
     private final static String PACKET_TYPE_MPRIS_REQUEST = "kdeconnect.mpris.request";
 
@@ -231,7 +218,7 @@ public class MprisPlugin extends Plugin {
 
     @Override
     public Drawable getIcon() {
-        return ContextCompat.getDrawable(context, R.drawable.mpris_plugin_action);
+        return ContextCompat.getDrawable(context, R.drawable.mpris_plugin_action_24dp);
     }
 
     @Override
@@ -342,14 +329,8 @@ public class MprisPlugin extends Plugin {
             Iterator<HashMap.Entry<String, MprisPlayer>> iter = players.entrySet().iterator();
             while (iter.hasNext()) {
                 String oldPlayer = iter.next().getKey();
-
-                boolean found = false;
-                for (String newPlayer : newPlayerList) {
-                    if (newPlayer.equals(oldPlayer)) {
-                        found = true;
-                        break;
-                    }
-                }
+                final boolean found = newPlayerList.stream().anyMatch(newPlayer ->
+                        newPlayer.equals(oldPlayer));
 
                 if (!found) {
                     iter.remove();
@@ -424,12 +405,7 @@ public class MprisPlugin extends Plugin {
      * @return null if no players are playing, a playing player otherwise
      */
     public MprisPlayer getPlayingPlayer() {
-        for (MprisPlayer player : players.values()) {
-            if (player.isPlaying()) {
-                return player;
-            }
-        }
-        return null;
+        return players.values().stream().filter(MprisPlayer::isPlaying).findFirst().orElse(null);
     }
 
     boolean hasPlayer(MprisPlayer player) {
@@ -471,14 +447,7 @@ public class MprisPlugin extends Plugin {
     }
 
     public void fetchedAlbumArt(String url) {
-        boolean doEmitUpdate = false;
-        for (MprisPlayer player : players.values()) {
-            if (url.equals(player.albumArtUrl)) {
-                doEmitUpdate = true;
-            }
-        }
-
-        if (doEmitUpdate) {
+        if (players.values().stream().anyMatch(player -> url.equals(player.albumArtUrl))) {
             for (String key : playerStatusUpdated.keySet()) {
                 try {
                     playerStatusUpdated.get(key).dispatchMessage(new Message());

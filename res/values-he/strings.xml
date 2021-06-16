@@ -31,7 +31,7 @@
   <string name="send_ping">שלח פינג</string>
   <string name="open_mpris_controls">שליטה על המדיה</string>
   <string name="remotekeyboard_editing_only_title">השתמש במקשים מרוחקים רק בעת עריכה</string>
-  <string name="remotekeyboard_not_connected">אין מקלדת מרוחקת מופעלת, הוסף אחת ל־Zorin Connect</string>
+  <string name="remotekeyboard_not_connected">אין מקלדת מרוחקת מופעלת, הוסף אחת ל־ Zorin Connect</string>
   <string name="remotekeyboard_connected">חיבור המקדלת המרוחקת פעיל</string>
   <string name="remotekeyboard_multiple_connections">ישנם כמה מקלדות מרוחקות מחוברות, בחר את ההתקן להגדרה</string>
   <string name="open_mousepad">שליטה מרחוק</string>
@@ -135,4 +135,9 @@
   <string name="findmyphone_description">מפעיל רעש במכשיר כדי שתוכל למצוא אותו.</string>
   <string name="open">פתח</string>
   <string name="close">סגור</string>
+  <string-array name="theme_list">
+    <item>Set by Battery Saver</item>
+    <item/>
+    <item>Dark</item>
+  </string-array>
 </resources>

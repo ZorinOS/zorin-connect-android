@@ -3,14 +3,18 @@
   <string name="kde_connect">Zorin Connect</string>
   <string name="foreground_notification_no_devices">Не з\'єднано із жодним пристроєм</string>
   <string name="foreground_notification_devices">З\'єднано з %s</string>
+  <string name="foreground_notification_send_clipboard">Надіслати вміст буфера</string>
   <string name="pref_plugin_telephony">Телефонний сповіщувач</string>
   <string name="pref_plugin_telephony_desc">Надсилати сповіщення щодо вхідних дзвінків</string>
   <string name="pref_plugin_battery">Звіт щодо заряду</string>
   <string name="pref_plugin_battery_desc">Періодична інформація щодо стану акумулятора</string>
+  <string name="pref_plugin_connectivity_report">Звіт щодо з\'єднання</string>
+  <string name="pref_plugin_connectivity_report_desc">Повідомити про потужність сигналу мережі та її стан</string>
   <string name="pref_plugin_sftp">Показ файлової системи</string>
   <string name="pref_plugin_sftp_desc">Надає змогу віддалено переглядати файлову систему цього пристрою</string>
   <string name="pref_plugin_clipboard">Синхронізація буфера</string>
   <string name="pref_plugin_clipboard_desc">Спільне використання буфера обміну даними</string>
+  <string name="pref_plugin_clipboard_sent">Вміст буфера надіслано</string>
   <string name="pref_plugin_mousepad">Дистанційне введення</string>
   <string name="pref_plugin_mousepad_desc">Скористайтеся телефоном або планшетом як замінником сенсорної панелі і клавіатури</string>
   <string name="pref_plugin_presenter">Віддалений показ слайдів</string>
@@ -72,6 +76,21 @@
     <item>Сильне</item>
     <item>Найсильніше</item>
   </string-array>
+  <string name="sendkeystrokes_send_to">Надіслати натискання клавіш на</string>
+  <string name="sendkeystrokes_textbox_hint">Надіслати натискання клавіш на вузол</string>
+  <string name="sendkeystrokes_disabled_toast">Надсилання натискань клавіш вимкнено — увімкніть його у параметрах програми</string>
+  <string name="sendkeystrokes_wrong_data">Некоректний тип MIME — типом має бути «text/x-keystrokes»</string>
+  <string name="sendkeystrokes_sent_text">Надіслано %1s на пристрій %2s</string>
+  <string name="sendkeystrokes_pref_category_summary">За допомогою цього модуля інші програми можуть спільно використовувати фрагменти тексту як натискання клавіш, які буде надіслано до з\'єднаного вузла мережі</string>
+  <string name="sendkeystrokes_pref_category_title">Надсилання натискань клавіш</string>
+  <string name="sendkeystrokes_pref_enabled">Увімкнути надсилання натискань клавіш</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Очікувати на дані з типом MIME «text/x-keystrokes»</string>
+  <string name="sendkeystrokes_safe_text_enabled">Надсилати безпечний текст негайно</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Надсилати короткі рядки з цифр без підтвердження</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Надсилати як натискання клавіш</string>
+  <string name="mouse_receiver_plugin_description">Отримувати віддалені рухи мишею</string>
+  <string name="mouse_receiver_plugin_name">Отримання даних миші</string>
+  <string name="mouse_receiver_no_permissions">Вам слід увімкнути службу доступності</string>
   <string name="category_connected_devices">З’єднані пристрої</string>
   <string name="category_not_paired_devices">Доступні пристрої</string>
   <string name="category_remembered_devices">Відомі пристрої</string>
@@ -87,8 +106,8 @@
   <string name="error_canceled_by_other_peer">Скасовано з іншого вузла пов’язування</string>
   <string name="encryption_info_title">Дані щодо шифрування</string>
   <string name="encryption_info_msg_no_ssl">На сторонньому пристрої не використовується нова версія Zorin Connect, у якій використовується застарілий спосіб шифрування.</string>
-  <string name="my_device_fingerprint">Відбиток SHA1 сертифіката пристрою:</string>
-  <string name="remote_device_fingerprint">Відбиток SHA1 сертифіката віддаленого пристрою:</string>
+  <string name="my_device_fingerprint">Відбиток SHA256 сертифіката пристрою:</string>
+  <string name="remote_device_fingerprint">Відбиток SHA256 сертифіката віддаленого пристрою:</string>
   <string name="pair_requested">Запит щодо пов’язування</string>
   <string name="pairing_request_from">Запит щодо пов’язування від %1s</string>
   <plurals name="incoming_file_title">
@@ -227,6 +246,8 @@
   <string name="no_file_browser">Програм для навігації файловою системою не встановлено.</string>
   <string name="pref_plugin_telepathy">Надіслати SMS</string>
   <string name="pref_plugin_telepathy_desc">Надсилати текстові повідомлення з вашої робочої станції</string>
+  <string name="pref_plugin_telepathy_mms">Надіслати MMS</string>
+  <string name="pref_plugin_telepathy_mms_desc">Щоб мати змогу надсилати MMS з Zorin Connect, вам слід встановити цю програму як типову програму для роботи з SMS.</string>
   <string name="findmyphone_title">Знайти телефон</string>
   <string name="findmyphone_title_tablet">Знайти планшет</string>
   <string name="findmyphone_title_tv">Знайти мій телевізор</string>
@@ -238,7 +259,7 @@
   <string name="permission_explanation">Для роботи цього додатка потрібні додаткові права доступу</string>
   <string name="optional_permission_explanation">Щоб уможливити використання усіх функцій, вам слід надати програмі додаткові права доступу</string>
   <string name="plugins_need_optional_permission">Можливості деяких додатків вимкнено, оскільки програмі не вистачає прав доступу (натисніть, щоб дізнатися більше):</string>
-  <string name="share_optional_permission_explanation">Щоб спільного використовувати файли на вашому телефоні і робочому комп’ютері, вам слід надати програмі доступ до сховища даних вашого телефону</string>
+  <string name="share_optional_permission_explanation">Для отримання файлів спільного користування вам слід вибрати каталог призначення</string>
   <string name="telepathy_permission_explanation">Щоб читати і писати SMS з вашого робочого комп’ютера, вам слід надати програмі доступ до SMS</string>
   <string name="telephony_permission_explanation">Щоб переглядати дзвінки з робочого комп’ютера, вам слід надати програмі доступ до журналу дзвінків та стану телефону</string>
   <string name="telephony_optional_permission_explanation">Щоб бачити ім’я контакту замість номеру телефону, вам слід надати програмі доступ до записів контактів на телефоні</string>
@@ -263,6 +284,7 @@
   <string name="notification_channel_media_control">Керування відтворенням</string>
   <string name="notification_channel_filetransfer">Передавання файлів</string>
   <string name="notification_channel_high_priority">Високий пріоритет</string>
+  <string name="notification_channel_sms_mms">Нове повідомлення</string>
   <string name="mpris_stop">Зупинити відтворення у поточному програвачі</string>
   <string name="copy_url_to_clipboard">Скопіювати адресу до буфера</string>
   <string name="clipboard_toast">Скопійовано до буфера</string>
@@ -312,6 +334,38 @@
   <string name="bigscreen_select">Вибрати</string>
   <string name="bigscreen_right">Праворуч</string>
   <string name="bigscreen_down">Вниз</string>
+  <string name="bigscreen_mic">Мікрофон</string>
   <string name="pref_plugin_bigscreen">Керування великим екраном</string>
   <string name="pref_plugin_bigscreen_desc">Скористайтеся вашим пристроєм як дистанційним керуванням для великого екрана Плазми</string>
+  <string name="bigscreen_optional_permission_explanation">Щоб оприлюднити вхідні дані з мікрофона вашого телефону, вам слід надати програми доступ до вхідного звукового каналу телефону</string>
+  <string name="bigscreen_speech_extra_prompt">Озвучення</string>
+  <string name="message_reply_label">ВІДПОВІСТИ</string>
+  <string name="mark_as_read_label">ПОЗНАЧИТИ ЯК ПРОЧИТАНЕ</string>
+  <string name="user_display_name">Ви</string>
+  <string name="set_default_sms_app_title">Надіслати MMS</string>
+  <string name="set_group_message_as_mms_title">Надіслати групове MMS</string>
+  <string name="set_long_text_as_mms_title">Надіслати довгий текст як MMS</string>
+  <string name="convert_to_mms_after_title">Перетворити на MMS</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Після одного повідомлення</item>
+    <item>Після двох повідомлень</item>
+    <item>Після трьох повідомлень</item>
+    <item>Після чотирьох повідомлень</item>
+    <item>Після п\'яти повідомлень</item>
+  </string-array>
+  <string name="theme_dialog_title">Вибір теми</string>
+  <string-array name="theme_list">
+    <item>Встановлена зберігачем акумулятора</item>
+    <item>Світла</item>
+    <item>Темна</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Типова для системи</item>
+    <item>Світла</item>
+    <item>Темна</item>
+  </string-array>
+  <string name="report_bug">Повідомити про ваду</string>
+  <string name="donate">Підтримати фінансово</string>
+  <string name="source_code">Початковий код</string>
+  <string name="licenses">Ліцензування</string>
 </resources>

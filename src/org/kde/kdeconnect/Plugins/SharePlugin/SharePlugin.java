@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.SharePlugin;
@@ -23,7 +9,6 @@ package org.kde.kdeconnect.Plugins.SharePlugin;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -33,6 +18,11 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
+import androidx.core.content.ContextCompat;
+
+import org.apache.commons.lang3.StringUtils;
 import org.kde.kdeconnect.Helpers.FilesHelper;
 import org.kde.kdeconnect.Helpers.IntentHelper;
 import org.kde.kdeconnect.NetworkPacket;
@@ -45,10 +35,6 @@ import com.zorinos.zorin_connect.R;
 
 import java.net.URL;
 import java.util.ArrayList;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.WorkerThread;
-import androidx.core.content.ContextCompat;
 
 /**
  * A Plugin for sharing and receiving files and uris.
@@ -95,7 +81,7 @@ public class SharePlugin extends Plugin {
 
     @Override
     public Drawable getIcon() {
-        return ContextCompat.getDrawable(context, R.drawable.share_plugin_action);
+        return ContextCompat.getDrawable(context, R.drawable.share_plugin_action_24dp);
     }
 
     @Override
@@ -176,7 +162,7 @@ public class SharePlugin extends Plugin {
 
     private void receiveText(NetworkPacket np) {
         String text = np.getString("text");
-        ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipboardManager cm = ContextCompat.getSystemService(context, ClipboardManager.class);
         cm.setText(text);
         handler.post(() -> Toast.makeText(context, R.string.shareplugin_text_saved, Toast.LENGTH_LONG).show());
     }
@@ -265,7 +251,7 @@ public class SharePlugin extends Plugin {
                 String subject = extras.getString(Intent.EXTRA_SUBJECT);
 
                 //Hack: Detect shared youtube videos, so we can open them in the browser instead of as text
-                if (subject != null && subject.endsWith("YouTube")) {
+                if (StringUtils.endsWith(subject, "YouTube")) {
                     int index = text.indexOf(": http://youtu.be/");
                     if (index > 0) {
                         text = text.substring(index + 2); //Skip ": "

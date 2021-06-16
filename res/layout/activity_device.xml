@@ -30,14 +30,25 @@
             android:text="@string/device_not_paired"
             android:textAppearance="?android:attr/textAppearanceMedium"/>
 
+        <TextView
+            android:id="@+id/pair_verification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/ic_key"
+            android:drawableStart="@drawable/ic_key"
+            android:layout_marginBottom="8dip"
+            android:visibility="gone"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
         <Button
             android:id="@+id/pair_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_suggested"
+            android:background="@drawable/button_round"
             android:text="@string/request_pairing"
-            android:textColor="?attr/colorPrimary"
-            app:backgroundTint="@null" />
+            android:textColor="@color/base_color"/>
 
 
         <LinearLayout
@@ -53,10 +64,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dip"
                 android:layout_weight="1"
-                android:background="@drawable/button_suggested"
+                android:background="@drawable/button_round"
                 android:text="@string/pairing_accept"
-                android:textColor="?attr/colorPrimary"
-                app:backgroundTint="@null" />
+                android:textColor="@color/base_color"/>
 
             <Button
                 android:id="@+id/reject_button"
@@ -64,10 +74,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dip"
                 android:layout_weight="1"
-                android:background="@drawable/button_suggested"
+                android:background="@drawable/button_round"
                 android:text="@string/pairing_reject"
-                android:textColor="?attr/colorPrimary"
-                app:backgroundTint="@null" />
+                android:textColor="@color/base_color"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -86,12 +95,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAccessibility="no"
-            android:paddingEnd="16dip"
+            android:paddingEnd="8dip"
             android:paddingLeft="0dip"
-            android:paddingRight="16dip"
+            android:paddingRight="8dip"
             android:paddingStart="0dip"
-            android:src="@drawable/ic_error_outline_black_48dp"
-            app:tint="?attr/android:textColorSecondary"
+            android:src="@drawable/ic_error_outline_48dp"
+            app:tint="?attr/colorHighContrast"
             tools:ignore="UnusedAttribute"/>
 
         <TextView
@@ -110,7 +119,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:divider="@drawable/list_divider"
         tools:context=".DeviceActivity"
-        tools:listitem="@layout/list_item_with_icon_entry"/>
+        tools:listitem="@layout/list_item_with_icon_entry"
+        android:divider="@null"
+        android:dividerHeight="0dp" />
 </LinearLayout>

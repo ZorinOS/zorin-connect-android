@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:top="6dip"
-        android:bottom="6dip"
-        android:left="6dip"
-        android:right="6dip"
-        android:drawable="@drawable/button_round">
+    <item android:top="6dp"
+        android:bottom="6dp"
+        android:left="3dp"
+        android:right="3dp">
         <shape android:shape="rectangle">
-            <corners android:radius="20dp" />
+            <corners android:radius="8dp" />
+            <solid android:color="@drawable/disableable_button" />
         </shape>
     </item>
 </layer-list>

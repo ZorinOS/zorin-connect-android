@@ -1,9 +1,5 @@
 package org.kde.kdeconnect.Helpers;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -12,12 +8,12 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 
-import org.kde.kdeconnect.UserInterface.PermissionsAlertDialogFragment;
-import com.zorinos.zorin_connect.R;
+import org.apache.commons.lang3.ArrayUtils;
+
+import java.util.List;
 
 public class TrustedNetworkHelper {
 
@@ -33,12 +29,12 @@ public class TrustedNetworkHelper {
         this.context = context;
     }
 
-    public List<String> read() {
+    public String[] read() {
         String serializeTrustedNetwork = PreferenceManager.getDefaultSharedPreferences(context).getString(
                 KEY_CUSTOM_TRUSTED_NETWORKS, "");
         if (serializeTrustedNetwork.isEmpty())
-            return Collections.emptyList();
-        return Arrays.asList(serializeTrustedNetwork.split(NETWORK_SSID_DELIMITER));
+            return ArrayUtils.EMPTY_STRING_ARRAY;
+        return serializeTrustedNetwork.split(NETWORK_SSID_DELIMITER);
     }
 
     public void update(List<String> trustedNetworks) {
@@ -70,7 +66,8 @@ public class TrustedNetworkHelper {
     }
 
     public String currentSSID() {
-        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = ContextCompat.getSystemService(context.getApplicationContext(),
+                WifiManager.class);
         if (wifiManager == null) return "";
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         if (wifiInfo.getSupplicantState() != SupplicantState.COMPLETED) {
@@ -88,6 +85,6 @@ public class TrustedNetworkHelper {
         if (trustedNetworkHelper.allAllowed()){
             return true;
         }
-        return trustedNetworkHelper.read().contains(trustedNetworkHelper.currentSSID());
+        return ArrayUtils.contains(trustedNetworkHelper.read(), trustedNetworkHelper.currentSSID());
     }
 }

@@ -1,26 +1,11 @@
 /*
- * Copyright 2017 Holger Kaelberer <holger.k@elberer.de>
+ * SPDX-FileCopyrightText: 2017 Holger Kaelberer <holger.k@elberer.de>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.RemoteKeyboardPlugin;
 
-import android.content.Context;
 import android.content.Intent;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
@@ -34,8 +19,10 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import org.kde.kdeconnect.UserInterface.PluginSettingsActivity;
+import androidx.core.content.ContextCompat;
+
 import org.kde.kdeconnect.UserInterface.MainActivity;
+import org.kde.kdeconnect.UserInterface.PluginSettingsActivity;
 import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
@@ -73,10 +60,10 @@ public class RemoteKeyboardService
         List<Keyboard.Key> keys = currentKeyboard.getKeys();
         boolean connected = RemoteKeyboardPlugin.isConnected();
 //        Log.d("RemoteKeyboardService", "Updating keyboard connection icon, connected=" + connected);
-        int disconnectedIcon = R.drawable.ic_phonelink_off_white_36dp;
-        int connectedIcon = R.drawable.ic_phonelink_white_36dp;
+        int disconnectedIcon = R.drawable.ic_phonelink_off_36dp;
+        int connectedIcon = R.drawable.ic_phonelink_36dp;
         int statusKeyIdx = 3;
-        keys.get(statusKeyIdx).icon = getResources().getDrawable(connected ? connectedIcon : disconnectedIcon);
+        keys.get(statusKeyIdx).icon = ContextCompat.getDrawable(this, connected ? connectedIcon : disconnectedIcon);
         inputView.invalidateKey(statusKeyIdx);
     }
 
@@ -189,7 +176,7 @@ public class RemoteKeyboardService
                 break;
             }
             case 2: { // "keyboard"
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = ContextCompat.getSystemService(this, InputMethodManager.class);
                 imm.showInputMethodPicker();
                 break;
             }

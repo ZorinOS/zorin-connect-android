@@ -1,33 +1,25 @@
 /*
- * Copyright 2018 Erik Duisters <e.duisters1@gmail.com>
+ * SPDX-FileCopyrightText: 2018 Erik Duisters <e.duisters1@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.SharePlugin;
 
 import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 
+import androidx.annotation.GuardedBy;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.documentfile.provider.DocumentFile;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Helpers.FilesHelper;
 import org.kde.kdeconnect.Helpers.MediaStoreHelper;
@@ -42,10 +34,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.GuardedBy;
-import androidx.core.content.FileProvider;
-import androidx.documentfile.provider.DocumentFile;
 
 /**
  * A type of {@link BackgroundJob} that reads Files from another device.
@@ -244,10 +232,9 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
         } finally {
             closeAllInputStreams();
             networkPacketList.clear();
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (IOException ignored) {}
+            try {
+                IOUtils.close(outputStream);
+            } catch (IOException ignored) {
             }
         }
     }
@@ -267,7 +254,7 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
         } else {
             destinationFolderDocument = ShareSettingsFragment.getDestinationDirectory(getDevice().getContext());
         }
-        String displayName = FilesHelper.getFileNameWithoutExt(filenameToUse);
+        String displayName = FilenameUtils.getBaseName(filenameToUse);
         String mimeType = FilesHelper.getMimeTypeFromFile(filenameToUse);
 
         if ("*/*".equals(mimeType)) {
@@ -330,7 +317,8 @@ public class CompositeReceiveFileJob extends BackgroundJob<Device, Void> {
     private void publishFile(DocumentFile fileDocument, long size) {
         if (!ShareSettingsFragment.isCustomDestinationEnabled(getDevice().getContext())) {
             Log.i("SharePlugin", "Adding to downloads");
-            DownloadManager manager = (DownloadManager) getDevice().getContext().getSystemService(Context.DOWNLOAD_SERVICE);
+            DownloadManager manager = ContextCompat.getSystemService(getDevice().getContext(),
+                    DownloadManager.class);
             manager.addCompletedDownload(fileDocument.getUri().getLastPathSegment(), getDevice().getName(), true, fileDocument.getType(), fileDocument.getUri().getPath(), size, false);
         } else {
             //Make sure it is added to the Android Gallery anyway

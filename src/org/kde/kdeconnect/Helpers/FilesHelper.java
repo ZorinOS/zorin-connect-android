@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect.Helpers;
@@ -31,6 +17,8 @@ import android.provider.OpenableColumns;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kde.kdeconnect.NetworkPacket;
 
 import java.io.File;
@@ -38,33 +26,20 @@ import java.io.InputStream;
 import java.util.Arrays;
 
 public class FilesHelper {
-
     public static final String LOG_TAG = "SendFileActivity";
 
-    private static String getFileExt(String filename) {
-        //return MimeTypeMap.getFileExtensionFromUrl(filename);
-        return filename.substring((filename.lastIndexOf(".") + 1));
-    }
-
-    public static String getFileNameWithoutExt(String filename) {
-        int dot = filename.lastIndexOf(".");
-        return (dot < 0) ? filename : filename.substring(0, dot);
-    }
-
     public static String getMimeTypeFromFile(String file) {
-        String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(getFileExt(file));
-        if (mime == null) mime = "*/*";
-        return mime;
+        String mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(FilenameUtils.getExtension(file));
+        return StringUtils.defaultString(mime, "*/*");
     }
 
     public static String findNonExistingNameForNewFile(String path, String filename) {
-        int dot = filename.lastIndexOf(".");
-        String name = (dot < 0) ? filename : filename.substring(0, dot);
-        String ext = (dot < 0) ? "" : filename.substring(filename.lastIndexOf("."));
+        String name = FilenameUtils.getBaseName(filename);
+        String ext = FilenameUtils.getExtension(filename);
 
         int num = 1;
         while (new File(path + "/" + filename).exists()) {
-            filename = name + " (" + num + ")" + ext;
+            filename = name + " (" + num + ")." + ext;
             num++;
         }
 

@@ -1,26 +1,11 @@
 /*
- * Copyright 2014 Ahmed I. Khalil <ahmedibrahimkhali@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Ahmed I. Khalil <ahmedibrahimkhali@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.MousePadPlugin;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,11 +19,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.UserInterface.ThemeUtil;
 import com.zorinos.zorin_connect.R;
 
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.Objects;
 
 public class MousePadActivity extends AppCompatActivity implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener, MousePadGestureDetector.OnGestureListener {
     private String deviceId;
@@ -90,6 +78,10 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
 
         setContentView(R.layout.activity_mousepad);
 
+        setSupportActionBar(findViewById(R.id.toolbar));
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         deviceId = getIntent().getStringExtra("deviceId");
 
         getWindow().getDecorView().setHapticFeedbackEnabled(true);
@@ -103,9 +95,9 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.getBoolean(getString(R.string.mousepad_scroll_direction), false)) {
-            scrollDirection = 1;
-        } else {
             scrollDirection = -1;
+        } else {
+            scrollDirection = 1;
         }
         String doubleTapSetting = prefs.getString(getString(R.string.mousepad_double_tap_key),
                 getString(R.string.mousepad_default_double));
@@ -368,7 +360,7 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
 
     //TODO: Does not work on KitKat with or without requestFocus()
     private void showKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = ContextCompat.getSystemService(this, InputMethodManager.class);
         keyListenerView.requestFocus();
         imm.toggleSoftInputFromWindow(keyListenerView.getWindowToken(), 0, 0);
     }

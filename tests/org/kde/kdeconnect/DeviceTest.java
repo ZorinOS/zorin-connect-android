@@ -1,21 +1,7 @@
 /*
- * Copyright 2015 Vineet Garg <grg.vineet@gmail.com>
+ * SPDX-FileCopyrightText: 2015 Vineet Garg <grg.vineet@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect;
@@ -27,6 +13,8 @@ import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 
+import androidx.core.content.ContextCompat;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +22,7 @@ import org.kde.kdeconnect.Backends.BasePairingHandler;
 import org.kde.kdeconnect.Backends.LanBackend.LanLink;
 import org.kde.kdeconnect.Backends.LanBackend.LanLinkProvider;
 import org.kde.kdeconnect.Backends.LanBackend.LanPairingHandler;
+import org.kde.kdeconnect.Helpers.DeviceHelper;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.RsaHelper;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
@@ -56,7 +45,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Matchers.eq;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({Base64.class, Log.class, PreferenceManager.class})
+@PrepareForTest({Base64.class, Log.class, PreferenceManager.class, ContextCompat.class})
 public class DeviceTest {
 
     private Context context;
@@ -111,7 +100,8 @@ public class DeviceTest {
         PowerMockito.when(PreferenceManager.getDefaultSharedPreferences(any())).thenReturn(defaultSettings);
         RsaHelper.initialiseRsaKeys(context);
 
-        Mockito.when(context.getSystemService(eq(Context.NOTIFICATION_SERVICE))).thenReturn(Mockito.mock(NotificationManager.class));
+        PowerMockito.mockStatic(ContextCompat.class);
+        PowerMockito.when(ContextCompat.getSystemService(context, NotificationManager.class)).thenReturn(Mockito.mock(NotificationManager.class));
     }
 
     @Test
@@ -142,7 +132,7 @@ public class DeviceTest {
         NetworkPacket fakeNetworkPacket = new NetworkPacket(NetworkPacket.PACKET_TYPE_IDENTITY);
         fakeNetworkPacket.set("deviceId", "unpairedTestDevice");
         fakeNetworkPacket.set("deviceName", "Unpaired Test Device");
-        fakeNetworkPacket.set("protocolVersion", NetworkPacket.ProtocolVersion);
+        fakeNetworkPacket.set("protocolVersion", DeviceHelper.ProtocolVersion);
         fakeNetworkPacket.set("deviceType", Device.DeviceType.Phone.toString());
 
         LanLinkProvider linkProvider = Mockito.mock(LanLinkProvider.class);
@@ -188,7 +178,7 @@ public class DeviceTest {
         NetworkPacket fakeNetworkPacket = new NetworkPacket(NetworkPacket.PACKET_TYPE_IDENTITY);
         fakeNetworkPacket.set("deviceId", "unpairedTestDevice");
         fakeNetworkPacket.set("deviceName", "Unpaired Test Device");
-        fakeNetworkPacket.set("protocolVersion", NetworkPacket.ProtocolVersion);
+        fakeNetworkPacket.set("protocolVersion", DeviceHelper.ProtocolVersion);
         fakeNetworkPacket.set("deviceType", Device.DeviceType.Phone.toString());
         fakeNetworkPacket.set("certificate",
             "MIIDVzCCAj+gAwIBAgIBCjANBgkqhkiG9w0BAQUFADBVMS8wLQYDVQQDDCZfZGExNzlhOTFfZjA2\n" +

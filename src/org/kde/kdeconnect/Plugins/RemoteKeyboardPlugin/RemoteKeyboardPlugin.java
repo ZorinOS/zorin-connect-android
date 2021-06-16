@@ -1,25 +1,12 @@
 /*
- * Copyright 2017 Holger Kaelberer <holger.k@elberer.de>
+ * SPDX-FileCopyrightText: 2017 Holger Kaelberer <holger.k@elberer.de>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.RemoteKeyboardPlugin;
 
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
@@ -47,7 +34,7 @@ import androidx.core.util.Pair;
 import androidx.fragment.app.DialogFragment;
 
 @PluginFactory.LoadablePlugin
-public class RemoteKeyboardPlugin extends Plugin {
+public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private final static String PACKET_TYPE_MOUSEPAD_REQUEST = "kdeconnect.mousepad.request";
     private final static String PACKET_TYPE_MOUSEPAD_ECHO = "kdeconnect.mousepad.echo";
@@ -126,6 +113,13 @@ public class RemoteKeyboardPlugin extends Plugin {
         }
         if (RemoteKeyboardService.instance != null)
             RemoteKeyboardService.instance.handler.post(() -> RemoteKeyboardService.instance.updateInputView());
+
+        PreferenceManager.getDefaultSharedPreferences(context).registerOnSharedPreferenceChangeListener(this);
+
+        final boolean editingOnly = PreferenceManager.getDefaultSharedPreferences(context).getBoolean(context.getString(R.string.remotekeyboard_editing_only), true);
+        if (RemoteKeyboardService.instance != null)
+            notifyKeyboardState(editingOnly ? RemoteKeyboardService.instance.visible : true);
+
         return true;
     }
 
@@ -157,7 +151,7 @@ public class RemoteKeyboardPlugin extends Plugin {
 
     @Override
     public Drawable getIcon() {
-        return ContextCompat.getDrawable(context, R.drawable.ic_action_keyboard);
+        return ContextCompat.getDrawable(context, R.drawable.ic_action_keyboard_24dp);
     }
 
     @Override
@@ -414,5 +408,13 @@ public class RemoteKeyboardPlugin extends Plugin {
                 .setStartForResult(true)
                 .setRequestCode(MainActivity.RESULT_NEEDS_RELOAD)
                 .create();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (key.equals(context.getString(R.string.remotekeyboard_editing_only))) {
+            final boolean editingOnly = sharedPreferences.getBoolean(context.getString(R.string.remotekeyboard_editing_only), true);
+            notifyKeyboardState(editingOnly ? RemoteKeyboardService.instance.visible : true);
+        }
     }
 }

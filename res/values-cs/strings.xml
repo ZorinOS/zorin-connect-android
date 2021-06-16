@@ -3,14 +3,18 @@
   <string name="kde_connect">Zorin Connect</string>
   <string name="foreground_notification_no_devices">Žádná připojená zařízení</string>
   <string name="foreground_notification_devices">Připojen k: %s</string>
+  <string name="foreground_notification_send_clipboard">Poslat schránku</string>
   <string name="pref_plugin_telephony">Upozornění telefonie</string>
   <string name="pref_plugin_telephony_desc">Posílat upozornění na příchozí hovory</string>
   <string name="pref_plugin_battery">Hlášení baterie</string>
   <string name="pref_plugin_battery_desc">Periodicky hlásit stav baterky</string>
+  <string name="pref_plugin_connectivity_report">Hlášení spojení</string>
+  <string name="pref_plugin_connectivity_report_desc">Nahlásit stav a sílu signálu sítě</string>
   <string name="pref_plugin_sftp">Přístup k souborovému systému</string>
   <string name="pref_plugin_sftp_desc">Umožní vám vzdáleně prohlížet souborový systém tohoto zařízení</string>
   <string name="pref_plugin_clipboard">Synchronizace schránky</string>
   <string name="pref_plugin_clipboard_desc">Sdílet obsah schránky</string>
+  <string name="pref_plugin_clipboard_sent">Schránka poslána</string>
   <string name="pref_plugin_mousepad">Vzdálený vstup</string>
   <string name="pref_plugin_mousepad_desc">Používejte svůj telefon nebo tablet jako touchpad a klávesnici</string>
   <string name="pref_plugin_presenter">Ovladač promítání</string>
@@ -72,6 +76,21 @@
     <item>Silná</item>
     <item>Nejsilnější</item>
   </string-array>
+  <string name="sendkeystrokes_send_to">Posílat úhozy kláves na</string>
+  <string name="sendkeystrokes_textbox_hint">Posílat úhozy kláves na hostitele</string>
+  <string name="sendkeystrokes_disabled_toast">Odesílání stisků klávesnice je zakázáno - povolte jej v nastavení</string>
+  <string name="sendkeystrokes_wrong_data">Neplatný typ MIME - musí být \'text/x-keystrokes\'</string>
+  <string name="sendkeystrokes_sent_text">Poslat %1s na zařízení %2s</string>
+  <string name="sendkeystrokes_pref_category_summary">Tento modul umožňuje ostatním aplikacím sdílet kusy textu jako úhozy kláves, které budou odeslány na jiný připojený stroj</string>
+  <string name="sendkeystrokes_pref_category_title">Posílat úhozy kláves</string>
+  <string name="sendkeystrokes_pref_enabled">Povolit odesílání úhozů kláves</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Naslouchat datům s typem MIME \'text/x-keystrokes\'</string>
+  <string name="sendkeystrokes_safe_text_enabled">Poslat bezpečný text ihned</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Poslat krátké číselné řetězce bez potvrzení</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Posílat jako úhozy kláves</string>
+  <string name="mouse_receiver_plugin_description">Přijímat vzdálený pohyb myši</string>
+  <string name="mouse_receiver_plugin_name">Příjemce myši</string>
+  <string name="mouse_receiver_no_permissions">Musíte povolit Službu Zpřístupnění.</string>
   <string name="category_connected_devices">Připojená zařízení</string>
   <string name="category_not_paired_devices">Dostupná zařízení</string>
   <string name="category_remembered_devices">Zapamatovaná zařízení</string>
@@ -87,8 +106,8 @@
   <string name="error_canceled_by_other_peer">Přerušeno druhým uživatelem</string>
   <string name="encryption_info_title">Informace o šifrování</string>
   <string name="encryption_info_msg_no_ssl">Druhé zařízení nepoužívá poslední verzi Zorin Connect. Bude použita stará metoda šifrování.</string>
-  <string name="my_device_fingerprint">Otisk SHA1 certifikátu vašeho zařízení je:</string>
-  <string name="remote_device_fingerprint">Otisk SHA1 certifikátu vzdáleného zařízení je:</string>
+  <string name="my_device_fingerprint">Otisk SHA256 certifikátu vašeho zařízení je:</string>
+  <string name="remote_device_fingerprint">Otisk certifikátu SHA256 vzdáleného zařízení je:</string>
   <string name="pair_requested">Bylo vyžádáno párování</string>
   <string name="pairing_request_from">Požadavek o párování z %1s</string>
   <plurals name="incoming_file_title">
@@ -139,6 +158,7 @@
     <item quantity="many">Odesílání %2$d souborů z %3$d na %1$s selhalo</item>
     <item quantity="other"/>
   </plurals>
+  <string name="tap_to_open">Ťukněte pro otevření</string>
   <string name="received_file_text">Ťukněte pro otevření \'%1s\'</string>
   <string name="cannot_create_file">Nelze vytvořit soubor %s</string>
   <string name="tap_to_answer">Ťukněte pro odpovězení</string>
@@ -226,6 +246,8 @@
   <string name="no_file_browser">Není nainstalován žádný prohlížeč souborů.</string>
   <string name="pref_plugin_telepathy">Poslat SMS</string>
   <string name="pref_plugin_telepathy_desc">Posílejte zprávy ze své pracovní plochy</string>
+  <string name="pref_plugin_telepathy_mms">Poslat MMS</string>
+  <string name="pref_plugin_telepathy_mms_desc">Abyste mohli posílat MMS pomocí Zorin Connect jej musíte nastavit jako výchozí aplikaci na SMS.</string>
   <string name="findmyphone_title">Najít můj telefon</string>
   <string name="findmyphone_title_tablet">Najít můj tablet</string>
   <string name="findmyphone_title_tv">Najít mou TV</string>
@@ -237,7 +259,7 @@
   <string name="permission_explanation">Tento modul potřebuje pro práci povolení</string>
   <string name="optional_permission_explanation">Pro zpřístupnění všech funkcí potřebujete další oprávnění</string>
   <string name="plugins_need_optional_permission">Některé moduly mají vypnuté vlastnosti, kvůli nedostatečným oprávněním (ťukněte pro více informací):</string>
-  <string name="share_optional_permission_explanation">Pro sdílení souborů mezi telefonem a počítačem potřebujete udělit oprávnění k úložišti telefonu</string>
+  <string name="share_optional_permission_explanation">Pro příjem souborů je potřeba vybrat cílový adresář</string>
   <string name="telepathy_permission_explanation">Pro čtení a psaní SMS z počítače musíte udělit oprávnění k SMS</string>
   <string name="telephony_permission_explanation">Pro zobrazení telefonátů v počítači musíte udělit oprávnění k záznamům telefonování a stavu telefonu</string>
   <string name="telephony_optional_permission_explanation">Pro zobrazení jména kontaktu u telefonního čísla je potřeba udělit oprávnění ke kontaktům v telefonu</string>
@@ -262,6 +284,7 @@
   <string name="notification_channel_media_control">Ovládání médií</string>
   <string name="notification_channel_filetransfer">Přenos souboru</string>
   <string name="notification_channel_high_priority">Vysoká priorita</string>
+  <string name="notification_channel_sms_mms">Nová zpráva</string>
   <string name="mpris_stop">Zastavit současný přehrávač</string>
   <string name="copy_url_to_clipboard">Kopírovat URL do schránky</string>
   <string name="clipboard_toast">Zkopírováno do schránky</string>
@@ -305,4 +328,44 @@
   <string name="clipboard_android_x_incompat">Android 10 odstranit přístup ke schránce pro všechny aplikace. Tento modul bude zakázán.</string>
   <string name="mpris_open_url">Pokračovat v přehrávání zde</string>
   <string name="cant_open_url">Nelze otevřít URL pro pokračování v přehrávání</string>
+  <string name="bigscreen_home">Domů</string>
+  <string name="bigscreen_up">Nahoru</string>
+  <string name="bigscreen_left">Vlevo</string>
+  <string name="bigscreen_select">Vybrat</string>
+  <string name="bigscreen_right">Vpravo</string>
+  <string name="bigscreen_down">Dolů</string>
+  <string name="bigscreen_mic">Mikrofon</string>
+  <string name="pref_plugin_bigscreen">Dálkový ovladač pro Bigscreen</string>
+  <string name="pref_plugin_bigscreen_desc">Používejte své zařízení jako ovladač pro Plasma Bigscreen</string>
+  <string name="bigscreen_optional_permission_explanation">Pro sdílení vstupu mikrofonu z vašeho telefonu je potřeba udělit přístup ke vstupnímu audio zařízení telefonu</string>
+  <string name="bigscreen_speech_extra_prompt">Mluvené slovo</string>
+  <string name="message_reply_label">ODPOVĚĎ</string>
+  <string name="mark_as_read_label">OZNAČIT JAKO PŘEČTENÉ</string>
+  <string name="user_display_name">Vy</string>
+  <string name="set_default_sms_app_title">Poslat MMS</string>
+  <string name="set_group_message_as_mms_title">Poslat skupinovou MMS</string>
+  <string name="set_long_text_as_mms_title">Poslat dlouhý text jako MMS</string>
+  <string name="convert_to_mms_after_title">Převést na MMS</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Po jedné zprávě</item>
+    <item>Po dvou zprávách</item>
+    <item>Po třech zprávách</item>
+    <item>Po čtyřech zprávách</item>
+    <item>Po pěti zprávách</item>
+  </string-array>
+  <string name="theme_dialog_title">Vyberte motiv</string>
+  <string-array name="theme_list">
+    <item>Nastaveno spořičem baterie</item>
+    <item>Lehké</item>
+    <item>Tmavé</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Výchozí systémový</item>
+    <item>Světlý</item>
+    <item>Tmavý</item>
+  </string-array>
+  <string name="report_bug">Nahlásit chybu</string>
+  <string name="donate">Přispět</string>
+  <string name="source_code">Zdrojový kód</string>
+  <string name="licenses">Licence</string>
 </resources>

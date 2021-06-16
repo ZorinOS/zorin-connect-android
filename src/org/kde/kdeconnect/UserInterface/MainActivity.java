@@ -1,29 +1,22 @@
 package org.kde.kdeconnect.UserInterface;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.android.material.navigation.NavigationView;
-
-import org.kde.kdeconnect.BackgroundService;
-import org.kde.kdeconnect.Device;
-import org.kde.kdeconnect.Helpers.DeviceHelper;
-import com.zorinos.zorin_connect.R;
-
-import java.util.Collection;
-import java.util.HashMap;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -33,8 +26,20 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.preference.PreferenceManager;
+
+import com.google.android.material.navigation.NavigationView;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.kde.kdeconnect.BackgroundService;
+import org.kde.kdeconnect.Device;
+import org.kde.kdeconnect.Helpers.DeviceHelper;
+import org.kde.kdeconnect.Plugins.SharePlugin.ShareSettingsFragment;
+import com.zorinos.zorin_connect.R;
+import com.zorinos.zorin_connect.databinding.ActivityMainBinding;
+
+import java.util.Collection;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     private static final int MENU_ENTRY_SETTINGS = 2;
     private static final int MENU_ENTRY_DEVICE_FIRST_ID = 1000; //All subsequent ids are devices in the menu
     private static final int MENU_ENTRY_DEVICE_UNKNOWN = 9999; //It's still a device, but we don't know which one yet
+    private static final int STORAGE_lOCATION_CONFIGURED = 2020;
 
     private static final String STATE_SELECTED_MENU_ENTRY = "selected_entry"; //Saved only in onSaveInstanceState
     private static final String STATE_SELECTED_DEVICE = "selected_device"; //Saved persistently in preferences
@@ -55,9 +61,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     public static final String EXTRA_DEVICE_ID = "deviceId";
 
-    @BindView(R.id.navigation_drawer) NavigationView mNavigationView;
-    @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
-    @BindView(R.id.toolbar) Toolbar mToolbar;
+    private NavigationView mNavigationView;
+    private DrawerLayout mDrawerLayout;
     private TextView mNavViewDeviceName;
 
     private String mCurrentDevice;
@@ -69,18 +74,20 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // We need to set the theme before the call to 'super.onCreate' below
         ThemeUtil.setUserPreferredTheme(this);
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        final ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        ButterKnife.bind(this);
+        mNavigationView = binding.navigationDrawer;
+        mDrawerLayout = binding.drawerLayout;
 
         View mDrawerHeader = mNavigationView.getHeaderView(0);
         mNavViewDeviceName = mDrawerHeader.findViewById(R.id.device_name);
+        ImageView mNavViewDeviceType = mDrawerHeader.findViewById(R.id.device_type);
 
-        setSupportActionBar(mToolbar);
+        setSupportActionBar(binding.toolbarLayout.toolbar);
 
         ActionBar actionBar = getSupportActionBar();
 
@@ -106,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         // it can trigger a background fetch from the internet that will eventually update the preference
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
         String deviceName = DeviceHelper.getDeviceName(this);
+        mNavViewDeviceType.setImageDrawable(DeviceHelper.getDeviceType(this).getIcon(this));
         mNavViewDeviceName.setText(deviceName);
 
         mNavigationView.setNavigationItemSelectedListener(menuItem -> {
@@ -267,11 +275,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             }
 
             MenuItem addDeviceItem = devicesMenu.add(Menu.FIRST, MENU_ENTRY_ADD_DEVICE, 1000, R.string.pair_new_device);
-            addDeviceItem.setIcon(R.drawable.ic_action_content_add_circle_outline);
+            addDeviceItem.setIcon(R.drawable.ic_action_content_add_circle_outline_32dp);
             addDeviceItem.setCheckable(true);
 
             MenuItem settingsItem = menu.add(Menu.FIRST, MENU_ENTRY_SETTINGS, 1000, R.string.settings);
-            settingsItem.setIcon(R.drawable.ic_action_settings);
+            settingsItem.setIcon(R.drawable.ic_settings_white_32dp);
             settingsItem.setCheckable(true);
 
             //Ids might have changed
@@ -355,6 +363,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 Device device = service.getDevice(mCurrentDevice);
                 device.reloadPluginsFromSettings();
             });
+        } else if (requestCode == STORAGE_lOCATION_CONFIGURED && resultCode == RESULT_OK && data != null){
+            Uri uri = data.getData();
+            ShareSettingsFragment.saveStorageLocationPreference(this, uri);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
@@ -362,14 +373,18 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        boolean grantedPermission = false;
-        for (int result : grantResults) {
-            if (result == PackageManager.PERMISSION_GRANTED) {
-                grantedPermission = true;
-                break;
+        boolean permissionsGranted = ArrayUtils.contains(grantResults, PackageManager.PERMISSION_GRANTED);
+        if (permissionsGranted) {
+            int i = ArrayUtils.indexOf(permissions, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            boolean writeStoragePermissionGranted = (i != ArrayUtils.INDEX_NOT_FOUND &&
+                    grantResults[i] == PackageManager.PERMISSION_GRANTED);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && writeStoragePermissionGranted) {
+                // To get a writeable path manually on Android 10 and later for Share and Receive Plugin.
+                // Otherwise Receiving files will keep failing until the user chooses a path manually to receive files.
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+                startActivityForResult(intent, STORAGE_lOCATION_CONFIGURED);
             }
-        }
-        if (grantedPermission) {
+
             //New permission granted, reload plugins
             BackgroundService.RunCommand(this, service -> {
                 Device device = service.getDevice(mCurrentDevice);

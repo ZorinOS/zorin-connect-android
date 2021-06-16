@@ -1,5 +1,7 @@
 package org.kde.kdeconnect.Helpers;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
@@ -29,8 +31,7 @@ public class VideoUrlsHelper {
         boolean seekUrl = false;
 
         // Override defaults if necessary
-        if (host.contains("youtube.com")
-                || host.contains("youtu.be")) {
+        if (StringUtils.containsAny(host, "youtube.com", "youtu.be")) {
             seekUrl = true;
             url = stripTimestampS(url, parameter, trailer, inQuery);
         } else if (host.contains("vimeo.com")) {

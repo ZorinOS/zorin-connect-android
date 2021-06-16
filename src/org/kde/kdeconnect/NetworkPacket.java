@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect;
@@ -23,6 +9,7 @@ package org.kde.kdeconnect;
 import android.content.Context;
 import android.util.Log;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,8 +26,6 @@ import java.util.List;
 import java.util.Set;
 
 public class NetworkPacket {
-
-    public final static int ProtocolVersion = 7;
 
     public final static String PACKET_TYPE_IDENTITY = "kdeconnect.identity";
     public final static String PACKET_TYPE_PAIR = "kdeconnect.pair";
@@ -286,7 +271,7 @@ public class NetworkPacket {
         try {
             np.mBody.put("deviceId", deviceId);
             np.mBody.put("deviceName", DeviceHelper.getDeviceName(context));
-            np.mBody.put("protocolVersion", NetworkPacket.ProtocolVersion);
+            np.mBody.put("protocolVersion", DeviceHelper.ProtocolVersion);
             np.mBody.put("deviceType", DeviceHelper.getDeviceType(context).toString());
             np.mBody.put("incomingCapabilities", new JSONArray(PluginFactory.getIncomingCapabilities()));
             np.mBody.put("outgoingCapabilities", new JSONArray(PluginFactory.getOutgoingCapabilities()));
@@ -361,9 +346,7 @@ public class NetworkPacket {
         public void close() {
             //TODO: If socket only close socket if that also closes the streams that is
             try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
+                IOUtils.close(inputStream);
             } catch(IOException ignored) {}
 
             try {

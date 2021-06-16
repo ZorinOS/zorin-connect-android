@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -46,7 +47,7 @@ public class RunCommandWidget extends AppWidgetProvider {
                     }
                 }
             });
-        } else if (intent != null && intent.getAction() != null && intent.getAction().equals(SET_CURRENT_DEVICE)) {
+        } else if (intent != null && TextUtils.equals(intent.getAction(), SET_CURRENT_DEVICE)) {
             setCurrentDevice(context);
         }
 
@@ -100,11 +101,11 @@ public class RunCommandWidget extends AppWidgetProvider {
 
             if (getCurrentDevice() == null || !getCurrentDevice().isReachable()) {
                 views.setTextViewText(R.id.runcommandWidgetTitle, context.getString(R.string.pref_plugin_runcommand));
-                views.setViewVisibility(R.id.runcommandslist, View.GONE);
+                views.setViewVisibility(R.id.run_commands_list, View.GONE);
                 views.setViewVisibility(R.id.not_reachable_message, View.VISIBLE);
             } else {
                 views.setTextViewText(R.id.runcommandWidgetTitle, getCurrentDevice().getName());
-                views.setViewVisibility(R.id.runcommandslist, View.VISIBLE);
+                views.setViewVisibility(R.id.run_commands_list, View.VISIBLE);
                 views.setViewVisibility(R.id.not_reachable_message, View.GONE);
             }
 
@@ -113,14 +114,14 @@ public class RunCommandWidget extends AppWidgetProvider {
                 intent = new Intent(context, RunCommandWidgetDataProviderService.class);
                 intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
-                views.setRemoteAdapter(R.id.runcommandslist, intent);
+                views.setRemoteAdapter(R.id.run_commands_list, intent);
 
                 intent = new Intent(context, RunCommandWidget.class);
                 pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                views.setPendingIntentTemplate(R.id.runcommandslist, pendingIntent);
+                views.setPendingIntentTemplate(R.id.run_commands_list, pendingIntent);
 
                 AppWidgetManager.getInstance(context).updateAppWidget(appWidgetId, views);
-                AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged(appWidgetId, R.id.runcommandslist);
+                AppWidgetManager.getInstance(context).notifyAppWidgetViewDataChanged(appWidgetId, R.id.run_commands_list);
 
             }
 

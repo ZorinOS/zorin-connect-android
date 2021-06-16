@@ -1,27 +1,12 @@
 /*
- * Copyright 2018 Nicolas Fella <nicolas.fella@gmx.de>
+ * SPDX-FileCopyrightText: 2018 Nicolas Fella <nicolas.fella@gmx.de>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.MprisReceiverPlugin;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.os.Build;
@@ -30,6 +15,12 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+
+import org.apache.commons.lang3.StringUtils;
 import org.kde.kdeconnect.Helpers.AppsHelper;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.NotificationsPlugin.NotificationReceiver;
@@ -41,10 +32,6 @@ import com.zorinos.zorin_connect.R;
 
 import java.util.HashMap;
 import java.util.List;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.DialogFragment;
 
 @PluginFactory.LoadablePlugin
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
@@ -65,7 +52,7 @@ public class MprisReceiverPlugin extends Plugin {
 
         players = new HashMap<>();
         try {
-            MediaSessionManager manager = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
+            MediaSessionManager manager = ContextCompat.getSystemService(context, MediaSessionManager.class);
             if (null == manager)
                 return false;
 
@@ -85,7 +72,7 @@ public class MprisReceiverPlugin extends Plugin {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        MediaSessionManager manager = (MediaSessionManager) context.getSystemService(Context.MEDIA_SESSION_SERVICE);
+        MediaSessionManager manager = ContextCompat.getSystemService(context, MediaSessionManager.class);
         if (manager != null && mediaSessionChangeListener != null) {
             manager.removeOnActiveSessionsChangedListener(mediaSessionChangeListener);
             mediaSessionChangeListener = null;
@@ -260,7 +247,7 @@ public class MprisReceiverPlugin extends Plugin {
 
     private boolean hasPermission() {
         String notificationListenerList = Settings.Secure.getString(context.getContentResolver(), "enabled_notification_listeners");
-        return (notificationListenerList != null && notificationListenerList.contains(context.getPackageName()));
+        return StringUtils.contains(notificationListenerList, context.getPackageName());
     }
 
 }

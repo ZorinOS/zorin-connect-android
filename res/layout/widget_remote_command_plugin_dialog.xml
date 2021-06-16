@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ListView
+        android:id="@+id/run_commands_device_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp"
+        android:addStatesFromChildren="true"
+        android:orientation="vertical"
+        android:divider="@null"
+        android:dividerHeight="0dp" />
+
+</LinearLayout>

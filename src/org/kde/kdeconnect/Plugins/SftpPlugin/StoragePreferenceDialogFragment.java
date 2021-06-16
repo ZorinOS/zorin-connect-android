@@ -18,23 +18,19 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.widget.TextViewCompat;
+import androidx.preference.PreferenceDialogFragmentCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.kde.kdeconnect.Helpers.StorageHelper;
 import com.zorinos.zorin_connect.R;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.preference.PreferenceDialogFragmentCompat;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
+import com.zorinos.zorin_connect.databinding.FragmentStoragePreferenceDialogBinding;
 
 public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCompat implements TextWatcher {
     private static final int REQUEST_CODE_DOCUMENT_TREE = 1001;
@@ -44,11 +40,8 @@ public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCom
     private static final String KEY_STORAGE_INFO = "StorageInfo";
     private static final String KEY_TAKE_FLAGS = "TakeFlags";
 
-    @BindView(R.id.storageLocation) TextInputEditText storageLocation;
-    @BindView(R.id.storageDisplayName) TextInputEditText storageDisplayName;
-    @BindView(R.id.storageDisplayNameInputLayout) TextInputLayout storageDisplayInputLayout;
+    private FragmentStoragePreferenceDialogBinding binding;
 
-    private Unbinder unbinder;
     private Callback callback;
     private Drawable arrowDropDownDrawable;
     private Button positiveButton;
@@ -87,7 +80,8 @@ public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCom
         Drawable drawable = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_arrow_drop_down_24px);
         if (drawable != null) {
             drawable = DrawableCompat.wrap(drawable);
-            DrawableCompat.setTint(drawable, getResources().getColor(android.R.color.darker_gray));
+            DrawableCompat.setTint(drawable, ContextCompat.getColor(requireContext(),
+                    android.R.color.darker_gray));
             drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
             arrowDropDownDrawable = drawable;
         }
@@ -114,25 +108,33 @@ public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCom
     protected void onBindDialogView(View view) {
         super.onBindDialogView(view);
 
-        unbinder = ButterKnife.bind(this, view);
+        binding = FragmentStoragePreferenceDialogBinding.bind(view);
 
-        storageDisplayName.setFilters(new InputFilter[]{new FileSeparatorCharFilter()});
-        storageDisplayName.addTextChangedListener(this);
+        binding.storageLocation.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+            //For API >= 26 we can also set Extra: DocumentsContract.EXTRA_INITIAL_URI
+            startActivityForResult(intent, REQUEST_CODE_DOCUMENT_TREE);
+        });
+
+        binding.storageDisplayName.setFilters(new InputFilter[]{new FileSeparatorCharFilter()});
+        binding.storageDisplayName.addTextChangedListener(this);
 
         if (getPreference().getKey().equals(getString(R.string.sftp_preference_key_add_storage))) {
             if (!stateRestored) {
                 enablePositiveButton = false;
-                storageLocation.setText(requireContext().getString(R.string.sftp_storage_preference_click_to_select));
+                binding.storageLocation.setText(requireContext().getString(R.string.sftp_storage_preference_click_to_select));
             }
 
-            boolean isClickToSelect = storageLocation.getText() != null && storageLocation.getText().toString().equals(getString(R.string.sftp_storage_preference_click_to_select));
+            boolean isClickToSelect = TextUtils.equals(binding.storageLocation.getText(),
+                    getString(R.string.sftp_storage_preference_click_to_select));
 
-            storageLocation.setCompoundDrawables(null, null, isClickToSelect ? arrowDropDownDrawable : null, null);
-            storageLocation.setEnabled(isClickToSelect);
-            storageLocation.setFocusable(false);
-            storageLocation.setFocusableInTouchMode(false);
+            TextViewCompat.setCompoundDrawablesRelative(binding.storageLocation, null, null,
+                    isClickToSelect ? arrowDropDownDrawable : null, null);
+            binding.storageLocation.setEnabled(isClickToSelect);
+            binding.storageLocation.setFocusable(false);
+            binding.storageLocation.setFocusableInTouchMode(false);
 
-            storageDisplayName.setEnabled(!isClickToSelect);
+            binding.storageDisplayName.setEnabled(!isClickToSelect);
         } else {
             if (!stateRestored) {
                 StoragePreference preference = (StoragePreference) getPreference();
@@ -145,20 +147,20 @@ public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCom
                 storageInfo = SftpPlugin.StorageInfo.copy(info);
 
                 if (Build.VERSION.SDK_INT < 21) {
-                    storageLocation.setText(storageInfo.uri.getPath());
+                    binding.storageLocation.setText(storageInfo.uri.getPath());
                 } else {
-                    storageLocation.setText(DocumentsContract.getTreeDocumentId(storageInfo.uri));
+                    binding.storageLocation.setText(DocumentsContract.getTreeDocumentId(storageInfo.uri));
                 }
 
-                storageDisplayName.setText(storageInfo.displayName);
+                binding.storageDisplayName.setText(storageInfo.displayName);
             }
 
-            storageLocation.setCompoundDrawables(null, null, null, null);
-            storageLocation.setEnabled(false);
-            storageLocation.setFocusable(false);
-            storageLocation.setFocusableInTouchMode(false);
+            TextViewCompat.setCompoundDrawablesRelative(binding.storageLocation, null, null, null, null);
+            binding.storageLocation.setEnabled(false);
+            binding.storageLocation.setFocusable(false);
+            binding.storageLocation.setFocusableInTouchMode(false);
 
-            storageDisplayName.setEnabled(true);
+            binding.storageDisplayName.setEnabled(true);
         }
     }
 
@@ -166,15 +168,7 @@ public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCom
     public void onDestroyView() {
         super.onDestroyView();
 
-        unbinder.unbind();
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    @OnClick(R.id.storageLocation)
-    void onSelectStorageClicked() {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
-        //For API >= 26 we can also set Extra: DocumentsContract.EXTRA_INITIAL_URI
-        startActivityForResult(intent, REQUEST_CODE_DOCUMENT_TREE);
+        binding = null;
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -203,16 +197,16 @@ public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCom
 
                     storageInfo = new SftpPlugin.StorageInfo(displayName, uri);
 
-                    storageLocation.setText(documentId);
-                    storageLocation.setCompoundDrawables(null, null, null, null);
-                    storageLocation.setError(null);
-                    storageLocation.setEnabled(false);
+                    binding.storageLocation.setText(documentId);
+                    TextViewCompat.setCompoundDrawablesRelative(binding.storageLocation, null, null, null, null);
+                    binding.storageLocation.setError(null);
+                    binding.storageLocation.setEnabled(false);
 
                     // TODO: Show name as used in android's picker app but I don't think it's possible to get that, everything I tried throws PermissionDeniedException
-                    storageDisplayName.setText(displayName);
-                    storageDisplayName.setEnabled(true);
+                    binding.storageDisplayName.setText(displayName);
+                    binding.storageDisplayName.setEnabled(true);
                 } else {
-                    storageLocation.setError(result.errorMessage);
+                    binding.storageLocation.setError(result.errorMessage);
                     setPositiveButtonEnabled(false);
                 }
                 break;
@@ -236,7 +230,7 @@ public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCom
     @Override
     public void onDialogClosed(boolean positiveResult) {
         if (positiveResult) {
-            storageInfo.displayName = storageDisplayName.getText().toString();
+            storageInfo.displayName = binding.storageDisplayName.getText().toString();
 
             if (getPreference().getKey().equals(getString(R.string.sftp_preference_key_add_storage))) {
                 callback.addNewStoragePreference(storageInfo, takeFlags);
@@ -270,7 +264,7 @@ public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCom
                 setPositiveButtonEnabled(true);
             } else {
                 setPositiveButtonEnabled(false);
-                storageDisplayName.setError(result.errorMessage);
+                binding.storageDisplayName.setError(result.errorMessage);
             }
         }
     }

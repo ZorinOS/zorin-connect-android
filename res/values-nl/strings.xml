@@ -3,14 +3,18 @@
   <string name="kde_connect">Zorin Connect</string>
   <string name="foreground_notification_no_devices">Niet verbonden met enig apparaat</string>
   <string name="foreground_notification_devices">Verbonden met: %s</string>
+  <string name="foreground_notification_send_clipboard">Klembord verzenden</string>
   <string name="pref_plugin_telephony">Telefoniemelder</string>
   <string name="pref_plugin_telephony_desc">Stuur meldingen voor inkomende oproepen</string>
   <string name="pref_plugin_battery">Batterijrapportage</string>
   <string name="pref_plugin_battery_desc">Rapporteer periodiek de status van de batterij</string>
+  <string name="pref_plugin_connectivity_report">Rapport over connectiviteit</string>
+  <string name="pref_plugin_connectivity_report_desc">Signaalsterkte en status van netwerk rapporteren</string>
   <string name="pref_plugin_sftp">Bestandssysteem blootstellen</string>
   <string name="pref_plugin_sftp_desc">Het bladeren in het bestandssysteem van het apparaat op afstand toestaan</string>
   <string name="pref_plugin_clipboard">Klembordsynchronisatie</string>
   <string name="pref_plugin_clipboard_desc">De inhoud van het klembord delen</string>
+  <string name="pref_plugin_clipboard_sent">Klembord verzonden</string>
   <string name="pref_plugin_mousepad">Invoer op afstand</string>
   <string name="pref_plugin_mousepad_desc">Uw telefoon of tablet gebruiken als een touchpad en toetsenbord</string>
   <string name="pref_plugin_presenter">Diavoorstelling op afstand</string>
@@ -72,6 +76,21 @@
     <item>Sterker</item>
     <item>Sterkst</item>
   </string-array>
+  <string name="sendkeystrokes_send_to">Toetsaanslagen verzenden naar</string>
+  <string name="sendkeystrokes_textbox_hint">Toetsaanslagen verzenden naar host</string>
+  <string name="sendkeystrokes_disabled_toast">Verzenden van toetsaanslagen is uitgeschakeld - schakel het in in de instellingen</string>
+  <string name="sendkeystrokes_wrong_data">Ongeldig mime-type - moet \'text/x-keystrokes\' zijn</string>
+  <string name="sendkeystrokes_sent_text">%1s verzenden naar apparaat %2s</string>
+  <string name="sendkeystrokes_pref_category_summary">Deze module biedt andere toepassingen om tekstsegmenten als toetsaanslagen te delen die verzonden gaan worden naar de verbonden host</string>
+  <string name="sendkeystrokes_pref_category_title">Toetsaanslagen verzenden</string>
+  <string name="sendkeystrokes_pref_enabled">Toetsaanslagen verzenden inschakelen</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Luister naar gegevens met mime-type \'text/x-keystrokes\'</string>
+  <string name="sendkeystrokes_safe_text_enabled">Stuur tekst voor opslag onmiddellijk</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Stuur korte alleen-numerieke tekenreeks zonder confirmatie</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Als toetsaanslagen verzenden</string>
+  <string name="mouse_receiver_plugin_description">Muisbewegingen van afstand ontvangen</string>
+  <string name="mouse_receiver_plugin_name">Muisontvanger</string>
+  <string name="mouse_receiver_no_permissions">U moet service toegankelijkheid inschakelen</string>
   <string name="category_connected_devices">Verbonden apparaten</string>
   <string name="category_not_paired_devices">Beschikbare apparaten</string>
   <string name="category_remembered_devices">Onthouden apparaten</string>
@@ -87,8 +106,8 @@
   <string name="error_canceled_by_other_peer">Geannuleerd door andere kant</string>
   <string name="encryption_info_title">Versleutelde informatie</string>
   <string name="encryption_info_msg_no_ssl">Het andere apparaat gebruikt geen recente versie van Zorin Connect, de verouderde versleutelingsmethode zal worden gebruikt.</string>
-  <string name="my_device_fingerprint">De SHA1 vingerafdruk van het certificaat van uw apparaat is:</string>
-  <string name="remote_device_fingerprint">De SHA1 vingerafdruk van het certificaat van het apparaat op afstand is:</string>
+  <string name="my_device_fingerprint">De SHA256 vingerafdruk van het certificaat van uw apparaat is:</string>
+  <string name="remote_device_fingerprint">De SHA256 vingerafdruk van het certificaat van het apparaat op afstand is:</string>
   <string name="pair_requested">Paarvorming gevraagd</string>
   <string name="pairing_request_from">Verzoek om een paar te maken van %1s</string>
   <plurals name="incoming_file_title">
@@ -211,6 +230,8 @@
   <string name="no_file_browser">Er zijn geen bestandsbrowsers geïnstalleerd.</string>
   <string name="pref_plugin_telepathy">SMS verzenden</string>
   <string name="pref_plugin_telepathy_desc">Stuur tekstberichten van uw bureaublad</string>
+  <string name="pref_plugin_telepathy_mms">MMS verzenden</string>
+  <string name="pref_plugin_telepathy_mms_desc">Om MMS te kunnen verzenden vanuit Zorin Connect moet u het als de standaard SMS-app instellen.</string>
   <string name="findmyphone_title">Zoek mijn telefoon</string>
   <string name="findmyphone_title_tablet">Zoek mijn tablet</string>
   <string name="findmyphone_title_tv">Zoek mijn tv</string>
@@ -222,7 +243,7 @@
   <string name="permission_explanation">Deze plug-in heeft toestemming nodig om te werken</string>
   <string name="optional_permission_explanation">U moet toestemming geven om alle functies in te schakelen</string>
   <string name="plugins_need_optional_permission">Sommige plug-ins hebben functies uitgeschakeld vanwege ontbrekende toestemming (tik voor meer informatie):</string>
-  <string name="share_optional_permission_explanation">Om bestanden tussen uw telefoon en uw bureaublad te delen moet u toegang geven tot de opslag van uw telefoon</string>
+  <string name="share_optional_permission_explanation">Om gedeelde bestanden te ontvangen moet u een bestemmingsmap kiezen</string>
   <string name="telepathy_permission_explanation">Om een SMS te lezen of te schrijven vanaf uw bureaublad moet u toestemming geven tot SMS</string>
   <string name="telephony_permission_explanation">Om telefoonoproepen te zien op het bureaublad moet u toestemming geven tot telefoonoproeplogs en telefoonstatus</string>
   <string name="telephony_optional_permission_explanation">Om een naam van een contactpersoon te zien in plaats van een telefoonnummer moet u toegang geven tot de contacten in uw telefoon</string>
@@ -247,6 +268,7 @@
   <string name="notification_channel_media_control">Besturing van media</string>
   <string name="notification_channel_filetransfer">Bestandsoverdracht</string>
   <string name="notification_channel_high_priority">Hoge prioriteit</string>
+  <string name="notification_channel_sms_mms">Nieuw bericht</string>
   <string name="mpris_stop">Stop de huidige speler</string>
   <string name="copy_url_to_clipboard">URL-adres kopiëren naar klembord</string>
   <string name="clipboard_toast">Gekopieerd naar klembord</string>
@@ -296,6 +318,38 @@
   <string name="bigscreen_select">Selecteren</string>
   <string name="bigscreen_right">Rechts</string>
   <string name="bigscreen_down">Omlaag</string>
+  <string name="bigscreen_mic">Mic</string>
   <string name="pref_plugin_bigscreen">Bigscreen op afstand</string>
   <string name="pref_plugin_bigscreen_desc">Gebruik uw apparaat als een Bigscreen op afstand</string>
+  <string name="bigscreen_optional_permission_explanation">Om microfooninvoer vanaf uw telefoon te delen moet u toegang geven tot de geluidsinvoer van de telefoon</string>
+  <string name="bigscreen_speech_extra_prompt">Spraak</string>
+  <string name="message_reply_label">BEANTWOORDEN</string>
+  <string name="mark_as_read_label">MARKEREN ALS GELEZEN</string>
+  <string name="user_display_name">U</string>
+  <string name="set_default_sms_app_title">MMS verzenden</string>
+  <string name="set_group_message_as_mms_title">MMS verzenden naar groep</string>
+  <string name="set_long_text_as_mms_title">Lange tekst als MMS verzenden</string>
+  <string name="convert_to_mms_after_title">Naar MMS converteren</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Na één bericht</item>
+    <item>Na twee berichten</item>
+    <item>Na drie berichten</item>
+    <item>Na vier berichten</item>
+    <item>Na vijf berichten</item>
+  </string-array>
+  <string name="theme_dialog_title">Thema kiezen</string>
+  <string-array name="theme_list">
+    <item>Op batterijbesparing instellen</item>
+    <item>Licht</item>
+    <item>Donker</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Systeemstandaard</item>
+    <item>Licht</item>
+    <item>Donker</item>
+  </string-array>
+  <string name="report_bug">Bug rapporteren</string>
+  <string name="donate">Doneren</string>
+  <string name="source_code">Broncode</string>
+  <string name="licenses">Licenties</string>
 </resources>

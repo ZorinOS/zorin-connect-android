@@ -1,28 +1,16 @@
 /*
- * Copyright 2018 Erik Duisters <e.duisters1@gmail.com>
+ * SPDX-FileCopyrightText: 2018 Erik Duisters <e.duisters1@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.SftpPlugin;
 
 import android.content.Context;
 import android.net.Uri;
+import android.util.Log;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.sshd.common.file.nativefs.NativeSshFile;
 import org.kde.kdeconnect.Helpers.MediaStoreHelper;
 
@@ -33,7 +21,7 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 
 class AndroidSshFile extends NativeSshFile {
-    private final static String TAG = AndroidSshFile.class.getSimpleName();
+    private static final String TAG = AndroidSshFile.class.getSimpleName();
     final private Context context;
     final private File file;
 
@@ -97,15 +85,11 @@ class AndroidSshFile extends NativeSshFile {
         if (!exists) {
             // file.exists() returns false when we don't have read permission
             // try to figure out if it really does not exist
-            File parentFile = file.getParentFile();
-            File[] children = parentFile.listFiles();
-            if (children != null) {
-                for (File child : children) {
-                    if (file.equals(child)) {
-                        exists = true;
-                        break;
-                    }
-                }
+            try {
+                exists = FileUtils.directoryContains(file.getParentFile(), file);
+            } catch (IOException | IllegalArgumentException e) {
+                // An IllegalArgumentException is thrown if the parent is null or not a directory.
+                Log.d(TAG, "Exception: ", e);
             }
         }
 

@@ -1,22 +1,8 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
- * Copyright 2018 Simon Redman <simon@ergotech.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2018 Simon Redman <simon@ergotech.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect.Helpers;
@@ -36,19 +22,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import java.io.BufferedReader;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
+import kotlin.text.Charsets;
 
 public class ContactsHelper {
 
@@ -95,13 +83,9 @@ public class ContactsHelper {
         Uri photoUri = Uri.parse(photoId);
 
         ByteArrayOutputStream encodedPhoto = new ByteArrayOutputStream();
-        try (InputStream input = context.getContentResolver().openInputStream(photoUri); Base64OutputStream output = new Base64OutputStream(encodedPhoto, Base64.DEFAULT)) {
-            byte[] buffer = new byte[1024];
-            int len;
-            //noinspection ConstantConditions
-            while ((len = input.read(buffer)) != -1) {
-                output.write(buffer, 0, len);
-            }
+        try (InputStream input = context.getContentResolver().openInputStream(photoUri);
+             Base64OutputStream output = new Base64OutputStream(encodedPhoto, Base64.DEFAULT)) {
+            IOUtils.copy(input, output, 1024);
             return encodedPhoto.toString();
         } catch (Exception ex) {
             Log.e(LOG_TAG, ex.toString());
@@ -173,21 +157,11 @@ public class ContactsHelper {
             Uri vcardURI = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI, lookupKey);
 
             try (InputStream input = context.getContentResolver().openInputStream(vcardURI)) {
-
-                if (input == null)
-                {
+                if (input == null) {
                     throw new NullPointerException("ContentResolver did not give us a stream for the VCard for uID " + ID);
                 }
-
-                BufferedReader bufferedInput = new BufferedReader(new InputStreamReader(input));
-
-                StringBuilder vcard = new StringBuilder();
-                String line;
-                while ((line = bufferedInput.readLine()) != null) {
-                    vcard.append(line).append('\n');
-                }
-
-                toReturn.put(ID, new VCardBuilder(vcard.toString()));
+                final List<String> lines = IOUtils.readLines(input, Charsets.UTF_8);
+                toReturn.put(ID, new VCardBuilder(StringUtils.join(lines, '\n')));
             } catch (IOException e) {
                 // If you are experiencing this, please open a bug report indicating how you got here
                 Log.e("Contacts", "Exception while fetching vcards", e);

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/on_secondary"
+    android:theme="@style/KdeConnectTheme"
     android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/runcommandWidgetTitleHeader"
@@ -29,7 +30,7 @@
 
     </LinearLayout>
     <ListView
-        android:id="@+id/runcommandslist"
+        android:id="@+id/run_commands_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="4dp"
@@ -41,11 +42,12 @@
         android:id="@+id/not_reachable_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:drawableLeft="@drawable/ic_error_outline_black_48dp"
+        android:drawableStart="@drawable/ic_error_outline_48dp"
+        android:drawableLeft="@drawable/ic_error_outline_48dp"
         android:drawablePadding="8dip"
-        android:paddingLeft="8dip"
-        android:drawableStart="@drawable/ic_error_outline_black_48dp"
         android:gravity="center_vertical"
+        android:paddingStart="8dip"
+        android:paddingLeft="8dip"
         android:text="@string/unreachable_description"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 </LinearLayout>

@@ -1,45 +1,50 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="kde_connect">Zorin Connect</string>
-  <string name="foreground_notification_no_devices">Niepodłączony do żadnego urządzenia</string>
-  <string name="foreground_notification_devices">Podłączony do: %s</string>
-  <string name="pref_plugin_telephony">Powiadomienia telefonu</string>
-  <string name="pref_plugin_telephony_desc">Wysyła powiadomienia o rozmowach przychodzących</string>
-  <string name="pref_plugin_battery">Stan baterii</string>
-  <string name="pref_plugin_battery_desc">Okresowo powiadamia o stanie baterii</string>
+  <string name="foreground_notification_no_devices">Niepołączony z żadnym urządzeniem</string>
+  <string name="foreground_notification_devices">Połączony z: %s</string>
+  <string name="foreground_notification_send_clipboard">Wysyłanie schowka</string>
+  <string name="pref_plugin_telephony">Powiadomienia o dzwonieniu</string>
+  <string name="pref_plugin_telephony_desc">Wysyła na inne urządzenie powiadomienia o rozmowach przychodzących na to urządzenie</string>
+  <string name="pref_plugin_battery">Zgłaszanie stanu baterii</string>
+  <string name="pref_plugin_battery_desc">Okresowo zgłasza stan naładowania baterii</string>
+  <string name="pref_plugin_connectivity_report">Zgłaszanie łączności</string>
+  <string name="pref_plugin_connectivity_report_desc">Zgłasza siłę i stanu sygnału sieciowego</string>
   <string name="pref_plugin_sftp">Udostępnianie systemu plików</string>
-  <string name="pref_plugin_sftp_desc">Daje dostęp do plików innemu urządzeniu</string>
-  <string name="pref_plugin_clipboard">Synchronizacja schowka</string>
-  <string name="pref_plugin_clipboard_desc">Udostępnia zawartość schowka</string>
-  <string name="pref_plugin_mousepad">Sterowanie z urządzenia przenośnego</string>
-  <string name="pref_plugin_mousepad_desc">Telefon lub tablet służy jako gładzik i klawiatura</string>
+  <string name="pref_plugin_sftp_desc">Umożliwia przeglądanie systemu plików tego urządzenia z innego urządzenia</string>
+  <string name="pref_plugin_clipboard">Współdzielenie schowka</string>
+  <string name="pref_plugin_clipboard_desc">Współdzieli schowek między urządzeniami</string>
+  <string name="pref_plugin_clipboard_sent">Wysłano ze schowka</string>
+  <string name="pref_plugin_mousepad">Obsługa zdalna</string>
+  <string name="pref_plugin_mousepad_desc">Umożliwia użycie telefonu lub tabletu jako gładzika i klawiatury</string>
   <string name="pref_plugin_presenter">Sterowanie prezentacją</string>
-  <string name="pref_plugin_presenter_desc">Przełącza przeźrocza przy użyciu telefonu</string>
-  <string name="pref_plugin_remotekeyboard">Odbieranie zdalnych naciśnięć klawiszy</string>
+  <string name="pref_plugin_presenter_desc">Przełącza strony przy użyciu telefonu</string>
+  <string name="pref_plugin_remotekeyboard">Odbieranie naciśnięć klawiszy</string>
   <string name="pref_plugin_remotekeyboard_desc">Odbiera naciśnięcia klawiszy z innego urządzenia</string>
-  <string name="pref_plugin_mpris">Sterowanie multimediami</string>
-  <string name="pref_plugin_mpris_desc">Steruje odtwarzaczem multimedialnym</string>
+  <string name="pref_plugin_mpris">Sterowanie odtwarzaczem</string>
+  <string name="pref_plugin_mpris_desc">Steruje odtwarzaczami z tego urządzenia na innym urządzeniu</string>
   <string name="pref_plugin_runcommand">Wykonywanie poleceń</string>
-  <string name="pref_plugin_runcommand_desc">Wykonuje zdalne polecenia z telefonu lub tabletu</string>
-  <string name="pref_plugin_contacts">Synchronizacja kontaktów</string>
-  <string name="pref_plugin_contacts_desc">Synchronizuje książkę kontaktów urządzenia</string>
-  <string name="pref_plugin_ping">Ping</string>
-  <string name="pref_plugin_ping_desc">Wysyła i odbiera pingi</string>
-  <string name="pref_plugin_notifications">Synchronizacja powiadomień</string>
+  <string name="pref_plugin_runcommand_desc">Wykonuje polecenia na innym urządzeniu z tego urządzenia</string>
+  <string name="pref_plugin_contacts">Współdzielenie kontaktów</string>
+  <string name="pref_plugin_contacts_desc">Współdzieli książkę kontaktów między urządzeniami</string>
+  <string name="pref_plugin_ping">Wysłanie pingów</string>
+  <string name="pref_plugin_ping_desc">Odbiera i wysyła pingi między urządzeniami</string>
+  <string name="pref_plugin_notifications">Współdzielenie powiadomień</string>
   <string name="pref_plugin_notifications_desc">Wysyła powiadomienia na inne urządzenia</string>
   <string name="pref_plugin_receive_notifications">Odbieranie powiadomień</string>
-  <string name="pref_plugin_receive_notifications_desc">Odbiera powiadomienia z innych urządzeń</string>
+  <string name="pref_plugin_receive_notifications_desc">Odbiera powiadomienia z innych urządzeń na to urządzenie</string>
   <string name="pref_plugin_sharereceiver">Udostępnianie i pobieranie</string>
   <string name="pref_plugin_sharereceiver_desc">Udostępnia pliki i adresy URL pomiędzy urządzeniami</string>
   <string name="device_list_empty">Brak urządzeń</string>
   <string name="ok">OK</string>
+  <string name="sad_ok">OK :(</string>
   <string name="cancel">Anuluj</string>
   <string name="open_settings">Otwórz ustawienia</string>
   <string name="no_permissions">Aby uzyskać dostęp do powiadomień, należy przydzielić uprawnienia</string>
-  <string name="no_permission_mprisreceiver">Aby móc sterować odtwarzaczami multimedialnymi, należy udzielić dostępu powiadomieniom</string>
+  <string name="no_permission_mprisreceiver">Aby móc sterować odtwarzaczami na tym urządzeniu, należy udzielić dostępu do powiadomień</string>
   <string name="no_permissions_remotekeyboard">Aby otrzymywać naciśnięcia klawiszy, należy włączyć zdalną klawiaturę Zorin Connect</string>
   <string name="send_ping">Wyślij ping</string>
-  <string name="open_mpris_controls">Sterowanie multimediami</string>
+  <string name="open_mpris_controls">Sterowanie odtwarzaczem</string>
   <string name="remotekeyboard_editing_only_title">Obsługuj zdalne naciśnięcia klawiszy tylko podczas edycji</string>
   <string name="remotekeyboard_not_connected">Nie istnieje połączenie zdalnej klawiatury, nawiąż takie połączenie w Zorin Connect</string>
   <string name="remotekeyboard_connected">Połączenie zdalnej klawiatury jest nawiązane</string>
@@ -71,6 +76,21 @@
     <item>Silniejsze</item>
     <item>Najsilniejsze</item>
   </string-array>
+  <string name="sendkeystrokes_send_to">Wyślij naciśnięcia klawiszy do</string>
+  <string name="sendkeystrokes_textbox_hint">Wyślij naciśnięcia klawiszy do gospodarza</string>
+  <string name="sendkeystrokes_disabled_toast">Wysyłanie naciśnięć klawiszy jest wyłączone - włącz je w ustawieniach</string>
+  <string name="sendkeystrokes_wrong_data">Nieprawidłowy rodzaj mime - musi być \'text/x-keystrokes\'</string>
+  <string name="sendkeystrokes_sent_text">Wysłano %1s na urządzenie %2s</string>
+  <string name="sendkeystrokes_pref_category_summary">Ten moduł umożliwia innym programom współdzielenie odcinków tekstu jako naciśnięć klawiszy, które będą wysyłane do podłączonego gospodarza</string>
+  <string name="sendkeystrokes_pref_category_title">Wysyłanie naciśnięć klawiszy</string>
+  <string name="sendkeystrokes_pref_enabled">Włącz wysyłanie naciśnięć klawiszy</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Nasłuchuj danych o rodzaju mime \'text/x-keystrokes\'</string>
+  <string name="sendkeystrokes_safe_text_enabled">Wyślij bezpieczny tekst natychmiastowo</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Wyślij krótkie, liczbowe ciągi znaków, bez potwierdzenia</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Wysyłaj jako naciśnięcia klawiszy</string>
+  <string name="mouse_receiver_plugin_description">Odbieranie ruchów myszy</string>
+  <string name="mouse_receiver_plugin_name">Odbiornik myszy</string>
+  <string name="mouse_receiver_no_permissions">Musisz włączyć usługę dostępności</string>
   <string name="category_connected_devices">Podłączone urządzenia</string>
   <string name="category_not_paired_devices">Dostępne urządzenia</string>
   <string name="category_remembered_devices">Zapamiętane urządzenia</string>
@@ -86,14 +106,14 @@
   <string name="error_canceled_by_other_peer">Inny uczestnik zaniechał</string>
   <string name="encryption_info_title">Dane o szyfrowaniu</string>
   <string name="encryption_info_msg_no_ssl">Drugie urządzenie nie używa ostatniej wersji Zorin Connect, użyto przestarzałego szyfrowania.</string>
-  <string name="my_device_fingerprint">Odcisk palca SHA1 certyfikatu twojego urządzenia to:</string>
-  <string name="remote_device_fingerprint">Odcisk palca SHA1 certyfikatu twojego zdalnego urządzenia to:</string>
+  <string name="my_device_fingerprint">Odcisk palca SHA256 certyfikatu twojego urządzenia to:</string>
+  <string name="remote_device_fingerprint">Odcisk palca SHA256 certyfikatu twojego zdalnego urządzenia to:</string>
   <string name="pair_requested">Zażądano parowania</string>
   <string name="pairing_request_from">Żądanie parowania z %1s</string>
   <plurals name="incoming_file_title">
-    <item quantity="one">Odbieranie %1$d pliku od %2$s</item>
-    <item quantity="few">Odbieranie %1$d plików od %2$s</item>
-    <item quantity="many">Odbieranie %1$d plików od %2$s</item>
+    <item quantity="one">Pobieranie %1$d pliku z %2$s</item>
+    <item quantity="few">Pobieranie %1$d plików z %2$s</item>
+    <item quantity="many">Pobieranie %1$d plików z %2$s</item>
     <item quantity="other"/>
   </plurals>
   <plurals name="incoming_files_text">
@@ -138,6 +158,7 @@
     <item quantity="many">Nie udało się wysłać %2$d z %3$d plików do %1$s</item>
     <item quantity="other"/>
   </plurals>
+  <string name="tap_to_open">Stuknij, aby otworzyć</string>
   <string name="received_file_text">Stuknij, aby otworzyć \'%1s\'</string>
   <string name="cannot_create_file">Nie można utworzyć pliku %s</string>
   <string name="tap_to_answer">Stuknij, aby odpowiedzieć</string>
@@ -167,15 +188,15 @@
   </string-array>
   <string name="mpris_notification_settings_title">Pokaż powiadomienia sterowania mediami</string>
   <string name="mpris_notification_settings_summary">Steruje odtwarzaczami bez otwierania Zorin Connect</string>
-  <string name="share_to">Współdziel z...</string>
+  <string name="share_to">Udostępnij urządzeniu...</string>
   <string name="protocol_version_newer">Urządzenie to używa nowszej wersji protokołu</string>
   <string name="plugin_settings_with_name">Ustawienia %s</string>
   <string name="invalid_device_name">Nieprawidłowa nazwa urządzenia</string>
   <string name="shareplugin_text_saved">Otrzymano tekst, zapisano do schowka</string>
   <string name="custom_devices_settings">Lista własnych urządzeń</string>
-  <string name="custom_device_list">Dodaj urządzenia po numerze IP</string>
+  <string name="custom_device_list">Dodaj urządzenie po numerze IP</string>
   <string name="custom_device_deleted">Usunięto własne urządzenie</string>
-  <string name="custom_device_list_help">Jeśli twoje urządzenie nie zostało samo wykryte, to możesz dodać jego adres IP lub nazwę gospodarza klikając na pływającym przycisku działania</string>
+  <string name="custom_device_list_help">Jeśli twoje urządzenie nie zostało samo wykryte, to możesz dodać jego adres IP lub nazwę gospodarza, po dotknięciu pływającego przycisku dodawania</string>
   <string name="custom_device_fab_hint">Dodaj urządzenie</string>
   <string name="undo">Cofnij</string>
   <string name="share_notification_preference">Hałaśliwe powiadomienia</string>
@@ -187,12 +208,12 @@
   <string name="share">Udostępnij</string>
   <string name="share_received_file">Udostępnij \"%s\"</string>
   <string name="title_activity_notification_filter">Filtr powiadomień</string>
-  <string name="filter_apps_info">Powiadomienia zostaną zsynchronizowane z wybranymi aplikacjami.</string>
+  <string name="filter_apps_info">Współdzieli powiadomienia wybranych programów między urządzeniami.</string>
   <string name="sftp_sdcard_num">Karta SD %d</string>
   <string name="sftp_sdcard">Karta SD</string>
   <string name="sftp_readonly">(tylko do odczytu)</string>
   <string name="sftp_camera">Zdjęcia z aparatu</string>
-  <string name="add_device_dialog_title">Dodaj urządzenie</string>
+  <string name="add_device_dialog_title">Dodawanie urządzenia</string>
   <string name="add_device_hint">Nazwa gospodarza lub adres IP</string>
   <string name="sftp_preference_detected_sdcards">Wykryte karty SD</string>
   <string name="sftp_preference_edit_sdcard_title">Edytuj kartę SD</string>
@@ -212,33 +233,37 @@
   <string name="sftp_no_sdcard_detected">Nie wykryto żadnej karty SD</string>
   <string name="sftp_no_storage_locations_configured">Nie ustawiono miejsc w pamięci</string>
   <string name="sftp_saf_permission_explanation">Aby przeglądać pliki zdalnie, należy ustawić miejsca w pamięci</string>
-  <string name="no_players_connected">Nie znaleziono żadnego odtwarzacza</string>
+  <string name="no_players_connected">Nie znaleziono żadnych odtwarzaczy</string>
   <string name="send_files">Wysyłanie plików</string>
   <string name="pairing_title">Urządzenia Zorin Connect</string>
-  <string name="pairing_description">Tu powinny pojawić się urządzenia podłączone do tej samej sieci i które także mają uruchomione Zorin Connect.</string>
+  <string name="pairing_description">Tu powinny pojawić się urządzenia podłączone do tej samej sieci i które także mają uruchomione Zorin Connect.</string>
   <string name="device_rename_title">Zmień nazwę urządzenia</string>
   <string name="device_rename_confirm">Zmień nazwę</string>
   <string name="refresh">Odśwież</string>
   <string name="unreachable_description">To sparowane urządzenie jest nieosiągalne. Upewnij się, że jest podłączone do tej samej sieci.</string>
   <string name="no_wifi">Brak połączenia z siecią Wi-Fi, więc może nie być widać urządzeń. Naciśnij tutaj, aby włączyć Wi-Fi.</string>
+  <string name="on_non_trusted_message">Niezaufana sieć: wyłączono samowykrywanie.</string>
   <string name="no_file_browser">Nie wgrano żadnych przeglądarek plików.</string>
   <string name="pref_plugin_telepathy">Wysyłanie SMSów</string>
   <string name="pref_plugin_telepathy_desc">Wysyła wiadomości tekstowe z komputera</string>
+  <string name="pref_plugin_telepathy_mms">Wyślij MMSa</string>
+  <string name="pref_plugin_telepathy_mms_desc">Aby móc wysyłać MMSa z Zorin Connect, musisz ustawić go jako domyślny program do SMSów</string>
   <string name="findmyphone_title">Poszukiwania telefonu</string>
   <string name="findmyphone_title_tablet">Poszukiwania tabletu</string>
   <string name="findmyphone_title_tv">Poszukiwania telewizora</string>
-  <string name="findmyphone_description">Dzwoni na dane urządzenie, aby można je odnaleźć.</string>
+  <string name="findmyphone_description">Dzwoni z innego urządzenia na to urządzenie</string>
+  <string name="findmyphone_found">Znaleziony</string>
   <string name="open">Otwórz</string>
   <string name="close">Zamknij</string>
   <string name="plugins_need_permission">Niektóre wtyczki wymagają uprawnień do swojego działania (stuknij, aby dowiedzieć się więcej)</string>
   <string name="permission_explanation">Ta wtyczka wymaga uprawnień do działania</string>
   <string name="optional_permission_explanation">Musisz przydzielić dodatkowe uprawnienia, aby włączyć wszystkie funkcje</string>
   <string name="plugins_need_optional_permission">Niektóre wtyczki mają ograniczone możliwości ze względu na ograniczone uprawnienia (stuknij, aby dowiedzieć się więcej)</string>
-  <string name="share_optional_permission_explanation">Aby udostępniać pliki z twojego telefonu na twoim komputerze, należy zezwolić na dostęp do pamięci telefonu</string>
-  <string name="telepathy_permission_explanation">Aby odbierać i wysyłać esemesy z pulpitu, należy nadać uprawnienia do esemesów</string>
-  <string name="telephony_permission_explanation">Aby widzieć rozmowy telefoniczne na pulpicie, należy nadać uprawnienia do dziennika rozmów i stanu telefonu</string>
+  <string name="share_optional_permission_explanation">Aby odbierać udostępnianie pliki, musisz wskazać katalog docelowy na nie</string>
+  <string name="telepathy_permission_explanation">Aby czytać i pisać esemesy na innym urządzeniu, należy nadać uprawnienia do esemesów</string>
+  <string name="telephony_permission_explanation">Aby widzieć rozmowy telefoniczne na innym urządzeniu, należy nadać uprawnienia do dziennika rozmów i stanu telefonu</string>
   <string name="telephony_optional_permission_explanation">Aby widzieć nazwę kontaktu zamiast numeru telefonu, należy zezwolić na dostęp do kontaktów telefonu</string>
-  <string name="contacts_permission_explanation">Aby współdzielić swoją książkę adresową z komputerem musisz udzielić uprawnień do kontaktów</string>
+  <string name="contacts_permission_explanation">Aby współdzielić swoją książkę adresową z innym urządzeniem, musisz nadać uprawnienia do kontaktów</string>
   <string name="select_ringtone">Wybierz dzwonek</string>
   <string name="telephony_pref_blocked_title">Zablokowane numery</string>
   <string name="telephony_pref_blocked_dialog_desc">Nie pokazuj rozmów, ani SMSów z tych numerów. Podawaj jeden numer na wiersz</string>
@@ -247,17 +272,19 @@
   <string name="settings_icon_description">Ikona ustawień</string>
   <string name="presenter_fullscreen">Pełny ekran</string>
   <string name="presenter_exit">Zakończ prezentację</string>
-  <string name="presenter_lock_tip">Możesz zablokować swoje urządzenie i używać przycisków głośności, aby przejść do kolejnego/poprzedniego przeźrocza</string>
+  <string name="presenter_lock_tip">Możesz zablokować swoje urządzenie i używać przycisków głośności, aby przejść do kolejnej/poprzedniej strony</string>
   <string name="add_command">Dodaj polecenie</string>
   <string name="addcommand_explanation">Nie zarejestrowano żadnych poleceń</string>
   <string name="addcommand_explanation2">Nowe polecenie można dodać w ustawieniach systemowych Zorin Connect</string>
   <string name="add_command_description">Możesz dodawać polecenia na pulpicie</string>
-  <string name="pref_plugin_mprisreceiver">Sterowanie odtwarzaczem mediów</string>
-  <string name="pref_plugin_mprisreceiver_desc">Sterowanie odtwarzaczami multimedialnymi z innego urządzenia</string>
+  <string name="pref_plugin_mprisreceiver">Sterowanie odtwarzaczem</string>
+  <string name="pref_plugin_mprisreceiver_desc">Steruje odtwarzaczami z innego urządzenia na tym urządzeniu</string>
   <string name="notification_channel_default">Inne powiadomienia</string>
   <string name="notification_channel_persistent">Nieznikający wskaźnik</string>
   <string name="notification_channel_media_control">Sterowanie multimediami</string>
   <string name="notification_channel_filetransfer">Przesyłanie plików</string>
+  <string name="notification_channel_high_priority">Wysoki priorytet</string>
+  <string name="notification_channel_sms_mms">Nowa wiadomość</string>
   <string name="mpris_stop">Zatrzymaj bieżący odtwarzacz</string>
   <string name="copy_url_to_clipboard">Skopiuj adres URL do schowka</string>
   <string name="clipboard_toast">Skopiowano do schowka</string>
@@ -265,11 +292,11 @@
   <string name="runcommand_notpaired">Urządzenie jest niesparowane</string>
   <string name="runcommand_nosuchdevice">Nie ma takiego urządzenia</string>
   <string name="runcommand_noruncommandplugin">To urządzenie nie ma włączonej wtyczki wykonywania poleceń</string>
-  <string name="pref_plugin_findremotedevice">Poszukiwania urządzenia przenośnego</string>
-  <string name="pref_plugin_findremotedevice_desc">Dzwoni na urządzenie przenośne</string>
+  <string name="pref_plugin_findremotedevice">Poszukiwania innego urządzenia</string>
+  <string name="pref_plugin_findremotedevice_desc">Dzwoni z tego urządzenia na inne urządzenie</string>
   <string name="ring">Zadzwoń</string>
-  <string name="pref_plugin_systemvolume">Głośność systemowa</string>
-  <string name="pref_plugin_systemvolume_desc">Sterowanie głośnością systemu zdalnego urządzenia</string>
+  <string name="pref_plugin_systemvolume">Głośność innego urządzenia</string>
+  <string name="pref_plugin_systemvolume_desc">Steruje głośnością innego urządzenia z tego urządzenia</string>
   <string name="mute">Wycisz</string>
   <string name="all">Wszystkie</string>
   <string name="devices">Urządzenia</string>
@@ -280,15 +307,65 @@
   <string name="setting_persistent_notification">Pokaż nieznikające powiadomienie</string>
   <string name="setting_persistent_notification_oreo">Nieznikające powiadomienie</string>
   <string name="setting_persistent_notification_description">Stuknij, aby je ustawić w ustawieniach powiadamiania</string>
-  <string name="extra_options">Opcje dodatkowe</string>
-  <string name="privacy_options">Opcje prywatności</string>
-  <string name="set_privacy_options">Ustaw swoje opcje prywatności</string>
+  <string name="extra_options">Ustawienia dodatkowe</string>
+  <string name="privacy_options">Ustawienia prywatności</string>
+  <string name="set_privacy_options">Ustaw swoją prywatność</string>
   <string name="block_contents">Blokuj treści w powiadomieniach</string>
   <string name="block_images">Blokuj obrazy w powiadomieniach</string>
   <string name="notification_channel_receivenotification">Powiadomienia z innych urządzeń</string>
-  <string name="take_picture">Uruchom aparat</string>
-  <string name="plugin_photo_desc">Uruchom aplikację aparatu, aby ułatwić robienie i przesyłanie zdjęć</string>
+  <string name="take_picture">Uruchamianie aparatu</string>
+  <string name="plugin_photo_desc">Zezwala na uruchomienie aparatu do łatwego robienia i przesyłanie zdjęć</string>
   <string name="no_app_for_opening">Nie znaleziono aplikacji do otwarcia tego pliku</string>
   <string name="remote_keyboard_service">Zdalna klawiatura Zorin Connect</string>
   <string name="presenter_pointer">Wskaźnik</string>
+  <string name="trusted_networks">Sieci zaufane</string>
+  <string name="trusted_networks_desc">Ogranicz samowykrywanie do znanych sieci</string>
+  <string name="add_trusted_network">Dodaj %1s</string>
+  <string name="empty_trusted_networks_list_text">Nie dodałeś jeszcze żadnej zaufanej sieci</string>
+  <string name="allow_all_networks_text">Zezwól wszystkim</string>
+  <string name="location_permission_needed_title">Wymagana zgoda</string>
+  <string name="location_permission_needed_desc">Android wymaga pozwolenia na dostęp do położenia, aby móc rozpoznać twoją sieć WiFi</string>
+  <string name="clipboard_android_x_incompat">Android 10 odebrał dostęp do schowka wszystkim programom. Ta wtyczka pozostanie wyłączona.</string>
+  <string name="mpris_open_url">Kontynuuj odtwarzanie tutaj</string>
+  <string name="cant_open_url">Nie można otworzyć adresu URL, aby kontynuować odtwarzanie</string>
+  <string name="bigscreen_home">Dom</string>
+  <string name="bigscreen_up">Góra</string>
+  <string name="bigscreen_left">Lewo</string>
+  <string name="bigscreen_select">Wybierz</string>
+  <string name="bigscreen_right">Prawo</string>
+  <string name="bigscreen_down">Dół</string>
+  <string name="bigscreen_mic">Mikrofon</string>
+  <string name="pref_plugin_bigscreen">Sterowanie Dużym Ekranem</string>
+  <string name="pref_plugin_bigscreen_desc">Steruje Dużym Ekranem Plazmy</string>
+  <string name="bigscreen_optional_permission_explanation">Aby zezwolić na używanie mikrofonu twojego telefonu, musisz udzielić do niego dostępu na telefonie</string>
+  <string name="bigscreen_speech_extra_prompt">Mowa</string>
+  <string name="message_reply_label">ODPOWIEDZ</string>
+  <string name="mark_as_read_label">OZNACZ JAKO PRZECZYTANĄ</string>
+  <string name="user_display_name">Ty</string>
+  <string name="set_default_sms_app_title">Wyślij SMSa</string>
+  <string name="set_group_message_as_mms_title">Wyślij MMSa do grupy</string>
+  <string name="set_long_text_as_mms_title">Wyślij długi tekst jako MMS</string>
+  <string name="convert_to_mms_after_title">Przekształć na MMS</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Po jednej wiadomości</item>
+    <item>Po dwóch wiadomościach</item>
+    <item>Po trzech wiadomościach</item>
+    <item>Po czterech wiadomościach</item>
+    <item>Po pięciu wiadomościach</item>
+  </string-array>
+  <string name="theme_dialog_title">Wybierz tryb</string>
+  <string-array name="theme_list">
+    <item>Ustaw przy oszczędzaniu energii</item>
+    <item>Jasny</item>
+    <item>Ciemny</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Domyślne systemowe</item>
+    <item>Jasny</item>
+    <item>Ciemny</item>
+  </string-array>
+  <string name="report_bug">Zgłoś błąd</string>
+  <string name="donate">Darowizna</string>
+  <string name="source_code">Kod źródłowy</string>
+  <string name="licenses">Licencje</string>
 </resources>

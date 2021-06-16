@@ -1,22 +1,8 @@
 /*
- * Copyright 2014 Achilleas Koutsou <achilleas.k@gmail.com>
- * Copyright 2019 Erik Duisters <e.duisters1@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Achilleas Koutsou <achilleas.k@gmail.com>
+ * SPDX-FileCopyrightText: 2019 Erik Duisters <e.duisters1@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect.UserInterface;
@@ -28,26 +14,23 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
-
-import org.kde.kdeconnect.BackgroundService;
-import com.zorinos.zorin_connect.R;
-
-import java.util.ArrayList;
-import java.util.Collections;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+
+import com.zorinos.zorin_connect.R;
+import com.zorinos.zorin_connect.databinding.ActivityCustomDevicesBinding;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Objects;
 
 //TODO: Require wifi connection so entries can be verified
 //TODO: Resolve to ip address and don't allow unresolvable or duplicates based on ip address
@@ -59,13 +42,10 @@ public class CustomDevicesActivity extends AppCompatActivity implements CustomDe
     private static final String IP_DELIM = ",";
     private static final String KEY_EDITING_DEVICE_AT_POSITION = "EditingDeviceAtPosition";
 
-    @BindView(R.id.recyclerView) RecyclerView recyclerView;
-    @BindView(R.id.emptyListMessage) TextView emptyListMessage;
-    @BindView(R.id.floatingActionButton) FloatingActionButton fab;
+    private RecyclerView recyclerView;
+    private TextView emptyListMessage;
 
     private ArrayList<String> customDeviceList;
-    private boolean dialogAlreadyShown = false;
-    private Unbinder unbinder;
     private EditTextAlertDialogFragment addDeviceDialog;
     private SharedPreferences sharedPreferences;
     private CustomDevicesAdapter customDevicesAdapter;
@@ -77,9 +57,19 @@ public class CustomDevicesActivity extends AppCompatActivity implements CustomDe
         ThemeUtil.setUserPreferredTheme(this);
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_custom_devices);
+        final ActivityCustomDevicesBinding binding = ActivityCustomDevicesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        unbinder = ButterKnife.bind(this);
+        recyclerView = binding.recyclerView;
+        emptyListMessage = binding.emptyListMessage;
+        final FloatingActionButton fab = binding.floatingActionButton;
+
+        setSupportActionBar(binding.toolbarLayout.toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        fab.setOnClickListener(v -> showEditTextDialog(""));
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         customDeviceList = getCustomDeviceList(sharedPreferences);
@@ -109,25 +99,14 @@ public class CustomDevicesActivity extends AppCompatActivity implements CustomDe
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         outState.putInt(KEY_EDITING_DEVICE_AT_POSITION, editingDeviceAtPosition);
     }
 
-    @Override
-    protected void onDestroy() {
-        unbinder.unbind();
-        super.onDestroy();
-    }
-
     private void showEmptyListMessageIfRequired() {
         emptyListMessage.setVisibility(customDeviceList.isEmpty() ? View.VISIBLE : View.GONE);
-    }
-
-    @OnClick(R.id.floatingActionButton)
-    void onFabClicked() {
-        showEditTextDialog("");
     }
 
     private void showEditTextDialog(@NonNull String text) {

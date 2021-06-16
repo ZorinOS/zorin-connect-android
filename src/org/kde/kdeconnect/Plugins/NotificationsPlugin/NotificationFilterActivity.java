@@ -1,21 +1,7 @@
 /*
- * Copyright 2015 Vineet Garg <grg.vineet@gmail.com>
+ * SPDX-FileCopyrightText: 2015 Vineet Garg <grg.vineet@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.NotificationsPlugin;
@@ -38,21 +24,22 @@ import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
 
-import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.UserInterface.ThemeUtil;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.widget.TextViewCompat;
+
 import com.zorinos.zorin_connect.R;
+import com.zorinos.zorin_connect.databinding.ActivityNotificationFilterBinding;
 
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import java.util.Objects;
 
 //TODO: Turn this into a PluginSettingsFragment
 public class NotificationFilterActivity extends AppCompatActivity {
-
+    private ActivityNotificationFilterBinding binding;
     private AppDatabase appDatabase;
-    private ListView listView;
 
     static class AppListInfo {
 
@@ -89,10 +76,10 @@ public class NotificationFilterActivity extends AppCompatActivity {
             CheckedTextView checkedTextView = (CheckedTextView) view;
             if (position == 0) {
                 checkedTextView.setText(R.string.all);
-                checkedTextView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+                TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(checkedTextView, null, null, null, null);
             } else {
                 checkedTextView.setText(apps[position - 1].name);
-                checkedTextView.setCompoundDrawablesWithIntrinsicBounds(apps[position - 1].icon, null, null, null);
+                TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(checkedTextView, apps[position - 1].icon, null, null, null);
                 checkedTextView.setCompoundDrawablePadding((int) (8 * getResources().getDisplayMetrics().density));
             }
 
@@ -105,11 +92,16 @@ public class NotificationFilterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ThemeUtil.setUserPreferredTheme(this);
-        setContentView(R.layout.activity_notification_filter);
+
+        binding = ActivityNotificationFilterBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         appDatabase = new AppDatabase(NotificationFilterActivity.this, false);
 
-        new Thread(() -> {
+        setSupportActionBar(binding.toolbarLayout.toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        new Thread(() -> {
             PackageManager packageManager = getPackageManager();
             List<ApplicationInfo> appList = packageManager.getInstalledApplications(0);
             int count = appList.size();
@@ -132,16 +124,13 @@ public class NotificationFilterActivity extends AppCompatActivity {
     }
 
     private void displayAppList() {
-
-        listView = findViewById(R.id.lvFilterApps);
+        final ListView listView = binding.lvFilterApps;
         AppListAdapter adapter = new AppListAdapter();
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setLongClickable(true);
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
-
             if (i == 0) {
-
                 boolean enabled = listView.isItemChecked(0);
                 for (int j = 0; j < apps.length; j++) {
                     listView.setItemChecked(j, enabled);
@@ -214,8 +203,7 @@ public class NotificationFilterActivity extends AppCompatActivity {
         }
 
         listView.setVisibility(View.VISIBLE);
-        findViewById(R.id.spinner).setVisibility(View.GONE);
-
+        binding.spinner.setVisibility(View.GONE);
     }
 
     private Drawable resizeIcon(Drawable icon, int maxSize) {

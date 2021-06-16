@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  <string name="kde_connect">Zorin 連線</string>
+  <string name="kde_connect">Zorin Connect</string>
   <string name="foreground_notification_no_devices">沒有連線到任何裝置</string>
   <string name="foreground_notification_devices">已連線到：%s</string>
+  <string name="foreground_notification_send_clipboard">傳送剪貼簿</string>
   <string name="pref_plugin_telephony">電話通知器</string>
   <string name="pref_plugin_telephony_desc">傳送未接來電的通知</string>
   <string name="pref_plugin_battery">電池報告</string>
@@ -11,6 +12,7 @@
   <string name="pref_plugin_sftp_desc">同意讓遠端可以瀏覽檔案系統</string>
   <string name="pref_plugin_clipboard">同步剪貼簿</string>
   <string name="pref_plugin_clipboard_desc">分享剪貼簿的內容</string>
+  <string name="pref_plugin_clipboard_sent">已傳送剪貼簿</string>
   <string name="pref_plugin_mousepad">遠端輸入</string>
   <string name="pref_plugin_mousepad_desc">使用您的智慧型手機或者平板來模擬觸碰板與鍵盤</string>
   <string name="pref_plugin_presenter">遠端投影片</string>
@@ -38,7 +40,7 @@
   <string name="open_settings">開啟設定</string>
   <string name="no_permissions">您需要授予存取通知的權限</string>
   <string name="no_permission_mprisreceiver">為了要能控制您的媒體播放器，您需要提供「通知」的權限</string>
-  <string name="no_permissions_remotekeyboard">若要接收鍵盤按鍵事件，您需要啟用 Zorin 連線遠端鍵盤功能</string>
+  <string name="no_permissions_remotekeyboard">若要接收鍵盤按鍵事件，您需要啟用 Zorin Connect 遠端鍵盤功能</string>
   <string name="send_ping">傳送 Ping 回應封包</string>
   <string name="open_mpris_controls">多媒體控制</string>
   <string name="remotekeyboard_editing_only_title">當編輯時只處理遠端按鍵</string>
@@ -86,9 +88,7 @@
   <string name="error_canceled_by_user">使用者中斷</string>
   <string name="error_canceled_by_other_peer">被其他同等功能應用中斷</string>
   <string name="encryption_info_title">加密資訊</string>
-  <string name="encryption_info_msg_no_ssl">其他的裝置沒有使用新版本的Zorin連線，使用傳統的加密模式。</string>
-  <string name="my_device_fingerprint">您裝置憑證的 SHA1 指紋是：</string>
-  <string name="remote_device_fingerprint">您遠端裝置憑證的 SHA1 指紋是：</string>
+  <string name="encryption_info_msg_no_ssl">其他的裝置沒有使用新版本的 Zorin Connect，使用傳統的加密模式。</string>
   <string name="pair_requested">已請求配對</string>
   <string name="pairing_request_from">來自 %1s 的配對請求</string>
   <plurals name="incoming_file_title">
@@ -115,6 +115,7 @@
   <plurals name="send_files_fail_title">
     <item quantity="other">無法將第 %2$d (共 %3$d) 個檔案傳送至 %1$s</item>
   </plurals>
+  <string name="tap_to_open">按一下開啟</string>
   <string name="received_file_text">按一下開啟 \'%1s\'</string>
   <string name="cannot_create_file">無法建立 %s 檔案</string>
   <string name="tap_to_answer">按一下即可回應</string>
@@ -143,7 +144,7 @@
     <item>2 分鐘</item>
   </string-array>
   <string name="mpris_notification_settings_title">顯示媒體控制項通知</string>
-  <string name="mpris_notification_settings_summary">允許控制您的媒體播放器而不需要開啟 Zorin 連線</string>
+  <string name="mpris_notification_settings_summary">允許控制您的媒體播放器而不需要開啟 Zorin Connect</string>
   <string name="share_to">分享給…</string>
   <string name="protocol_version_newer">此裝置使用較新的通訊協定</string>
   <string name="plugin_settings_with_name">%s 設定</string>
@@ -191,8 +192,8 @@
   <string name="sftp_saf_permission_explanation">若要遠端存取檔案，您需先設定儲存空間位置</string>
   <string name="no_players_connected">沒有發現播放器</string>
   <string name="send_files">傳送檔案</string>
-  <string name="pairing_title">Zorin 連線裝置</string>
-  <string name="pairing_description">在您相同網域當中，有其他有執行Zorin連線的裝置會出現在這裡。</string>
+  <string name="pairing_title">Zorin Connect 裝置</string>
+  <string name="pairing_description">在您相同網域當中，有其他有執行 Zorin Connect 的裝置會出現在這裡。</string>
   <string name="device_rename_title">重新命名裝置</string>
   <string name="device_rename_confirm">變更名稱</string>
   <string name="refresh">重新整理</string>
@@ -213,7 +214,6 @@
   <string name="permission_explanation">這外掛程式需要權限以運作</string>
   <string name="optional_permission_explanation">你需要授予延伸的權限以啟用所有的功能</string>
   <string name="plugins_need_optional_permission">部份的外掛程式因為缺乏權限，而導致功能被停用。（按一下以了解更多資訊）：</string>
-  <string name="share_optional_permission_explanation">為了要在您的手機與電腦之間分享檔案，你需要同意存取手機的儲存空間。</string>
   <string name="telepathy_permission_explanation">為了要在您的個人電腦上讀取與撰寫簡訊，你需要提供簡訊的權限。</string>
   <string name="telephony_permission_explanation">為了要在桌面上檢視手機通話，您需要提供手機通話記錄及手機狀態的權限。</string>
   <string name="telephony_optional_permission_explanation">為了要讓聯絡人名稱取代手機號碼，您需要提供手機通訊錄的權限。</string>
@@ -229,7 +229,7 @@
   <string name="presenter_lock_tip">您能鎖定裝置並使用音量鍵前往上 / 下一張投影片</string>
   <string name="add_command">增加一行指令</string>
   <string name="addcommand_explanation">沒有註冊的指令</string>
-  <string name="addcommand_explanation2">您現在可以在 Zorin 連線系統設定增加新的指令</string>
+  <string name="addcommand_explanation2">您現在可以在 Zorin Connect 系統設定增加新的指令</string>
   <string name="add_command_description">您可以在電腦上增加指令</string>
   <string name="pref_plugin_mprisreceiver">控制媒體播放器</string>
   <string name="pref_plugin_mprisreceiver_desc">從另外一個裝置操控您手機的媒體播放器</string>
@@ -269,7 +269,7 @@
   <string name="take_picture">啟動相機</string>
   <string name="plugin_photo_desc">開啟相機應用程式以輕鬆拍攝並傳輸相片</string>
   <string name="no_app_for_opening">找不到適合用來開啟此檔案的應用程式</string>
-  <string name="remote_keyboard_service">Zorin 連線遠端鍵盤</string>
+  <string name="remote_keyboard_service">Zorin Connect 遠端鍵盤</string>
   <string name="presenter_pointer">指標裝置</string>
   <string name="trusted_networks">信任網路</string>
   <string name="trusted_networks_desc">限制只對已知網路自動探索</string>
@@ -289,4 +289,17 @@
   <string name="bigscreen_down">下</string>
   <string name="pref_plugin_bigscreen">Bigscreen 遠端</string>
   <string name="pref_plugin_bigscreen_desc">將您的裝置用作 Plasma Bigscreen 的遠端</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>After one message</item>
+    <item>After two messages</item>
+    <item>After three messages</item>
+    <item>After four messages</item>
+    <item>After five messages</item>
+  </string-array>
+  <string name="theme_dialog_title">選擇主題</string>
+  <string-array name="theme_list">
+    <item>由省電工具設定</item>
+    <item>亮色</item>
+    <item>暗色</item>
+  </string-array>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="kde_connect">Zorin Connect</string>
-  <string name="foreground_notification_no_devices">Nun se coneutó con nengún preséu</string>
+  <string name="foreground_notification_no_devices">Nun se conectó con nengún preséu</string>
   <string name="foreground_notification_devices">Coneutóse con %s</string>
   <string name="pref_plugin_telephony">Avisador telefónicu</string>
   <string name="pref_plugin_telephony_desc">Unvia avisos de les llamaes entrantes</string>
@@ -12,7 +12,9 @@
   <string name="pref_plugin_clipboard">Sincronización del cartafueyu</string>
   <string name="pref_plugin_clipboard_desc">Comparte\'l conteníu del cartafueyu</string>
   <string name="pref_plugin_mousepad">Entrada remota</string>
-  <string name="pref_plugin_mousepad_desc">Usa\'l preséu como panel táutil y tecláu</string>
+  <string name="pref_plugin_mousepad_desc">Usa\'l preséu como panel táctil y tecláu</string>
+  <string name="pref_plugin_presenter">Mandu pa presentaciones de diapositives</string>
+  <string name="pref_plugin_presenter_desc">Usa esti preséu pa cambiar de diapositives nuna presentación</string>
   <string name="pref_plugin_remotekeyboard">Receición de calcos de tecles remotos</string>
   <string name="pref_plugin_mpris">Controles multimedia</string>
   <string name="pref_plugin_runcommand">Execución de comandos</string>
@@ -22,27 +24,31 @@
   <string name="pref_plugin_ping">Ping</string>
   <string name="pref_plugin_ping_desc">Unviu y receición de pings</string>
   <string name="pref_plugin_notifications">Sincronización d\'avisos</string>
-  <string name="pref_plugin_notifications_desc">Accede a los avisos n\'otros preseos</string>
+  <string name="pref_plugin_notifications_desc">Accede a los avisos d\'otros preseos</string>
   <string name="pref_plugin_receive_notifications">Receición d\'avisos</string>
   <string name="pref_plugin_receive_notifications_desc">Recibe los avisos d\'otros preseos y amúesalos n\'Android</string>
   <string name="pref_plugin_sharereceiver">Compartición y receición</string>
   <string name="pref_plugin_sharereceiver_desc">Comparte ficheros y URLs ente preseos</string>
   <string name="device_list_empty">Nun hai preseos</string>
   <string name="ok">Aceutar</string>
+  <string name="sad_ok">Val :(</string>
   <string name="cancel">Encaboxar</string>
+  <string name="no_permissions">Precises conceder l\'accesu a los avisos</string>
   <string name="no_permission_mprisreceiver">Pa ser a controlar reproductores multimedia precises conceder l\'accesu a los avisos</string>
   <string name="no_permissions_remotekeyboard">Pa recibir calcos de tecles precises activar el tecláu remotu de Zorin Connect</string>
   <string name="send_ping">Unviar un ping</string>
   <string name="open_mpris_controls">Mandu multimedia</string>
   <string name="remotekeyboard_editing_only_title">Remanar les tecles remotes namás al editar</string>
+  <string name="remotekeyboard_connected">La conexón col tecláu remotu ta activa</string>
   <string name="open_mousepad">Entrada remota</string>
-  <string name="mousepad_info">Movi un deu pela pantalla pa mover el mur. Con un toque faes un clic esquierdu y teniendo primío faes l\'aición d\'arrastrar y soltar, col toque de dos deos simules un clic drechu y col toque de tres simules un clic col botón d\'en mediu del mur. Esliza dos deos pela pantalla pa desplazate.</string>
+  <string name="mousepad_info">Movi un deu pela pantalla pa mover el mur. Con un toque faes un clic esquierdu y teniendo primío faes l\'aición d\'arrastrar y soltar, col toque de dos deos simules un clic derechu y col toque de tres simules un clic col botón d\'en mediu del mur. Esliza dos deos pela pantalla pa desplazate.</string>
   <string name="mousepad_double_tap_settings_title">Aición al tocar con dos deos</string>
   <string name="mousepad_triple_tap_settings_title">Aición al tocar con tres deos</string>
-  <string name="mousepad_sensitivity_settings_title">Sensibilidá del panel táutil</string>
+  <string name="mousepad_sensitivity_settings_title">Sensibilidá del panel táctil</string>
+  <string name="mousepad_acceleration_profile_settings_title">Aceleración del punteru</string>
   <string name="mousepad_scroll_direction_title">Direición de desplazamientu inversa</string>
   <string-array name="mousepad_tap_entries">
-    <item>Clic drechu</item>
+    <item>Clic derechu</item>
     <item>Clic d\'en mediu</item>
     <item>Nada</item>
   </string-array>
@@ -54,14 +60,14 @@
     <item>Perrápida</item>
   </string-array>
   <string-array name="mousepad_acceleration_profile_entries">
-    <item>Ensin aceleración</item>
-    <item>Weakest</item>
-    <item>Weaker</item>
+    <item>Nenguna</item>
+    <item>Perpoca</item>
+    <item>Poca</item>
     <item>Normal</item>
-    <item>Fuerte</item>
-    <item>Perfuerte</item>
+    <item>Muncha</item>
+    <item>Permuncha</item>
   </string-array>
-  <string name="category_connected_devices">Preseos coneutaos</string>
+  <string name="category_connected_devices">Preseos conectaos</string>
   <string name="category_not_paired_devices">Preseos disponibles</string>
   <string name="category_remembered_devices">Preseos recordaos</string>
   <string name="device_menu_plugins">Axustes de plugins</string>
@@ -71,8 +77,8 @@
   <string name="error_timed_out">Escosó\'l tiempu d\'espera</string>
   <string name="encryption_info_title">Información del cifráu</string>
   <string name="encryption_info_msg_no_ssl">L\'otru preséu nun executa una versión recién de Zorin Connect y usa\'l métodu heredáu de cifráu.</string>
-  <string name="my_device_fingerprint">La buelga SHA1 d\'esti preséu ye:</string>
-  <string name="remote_device_fingerprint">La buelga SHA1 del preséu remotu ye:</string>
+  <string name="my_device_fingerprint">La buelga SHA256 d\'esti preséu ye:</string>
+  <string name="remote_device_fingerprint">La buelga SHA256 del certificáu del preséu remotu:</string>
   <string name="pair_requested">Solicitóse l\'empareyamientu</string>
   <string name="pairing_request_from">Solicitú d\'empareyamientu de %1s</string>
   <plurals name="incoming_file_title">
@@ -110,7 +116,7 @@
   <string name="received_file_text">Toca p\'abrir «%1s»</string>
   <string name="cannot_create_file">Nun pue crease\'l ficheru %s</string>
   <string name="tap_to_answer">Toca pa responder</string>
-  <string name="right_click">Unviar un clic drechu</string>
+  <string name="right_click">Unviar un clic derechu</string>
   <string name="middle_click">Unviar un clic d\'en mediu</string>
   <string name="show_keyboard">Amosar el tecláu</string>
   <string name="device_not_paired">Nun s\'empareyó\'l preséu</string>
@@ -128,6 +134,7 @@
     <item>1 minutu</item>
     <item>2 minutos</item>
   </string-array>
+  <string name="mpris_notification_settings_title">Amosar l\'avisu del mandu multimedia</string>
   <string name="mpris_notification_settings_summary">Permite\'l control de reproductores multimedia ensin abrir Zorin Connect</string>
   <string name="share_to">Compartir con…</string>
   <string name="protocol_version_newer">Esti preséu una versión nueva del protocolu</string>
@@ -135,7 +142,7 @@
   <string name="custom_devices_settings">Llista de preseos personalizada</string>
   <string name="custom_device_list">Amestar preseos pola IP</string>
   <string name="custom_device_deleted">Desanicióse\'l preséu personalizáu</string>
-  <string name="custom_device_list_help">Si\'l preséu nun se deteuta automáticamente, pues amestar la so direición IP o nome d\'agospiu calcando nel botón flotante d\'aición</string>
+  <string name="custom_device_list_help">Si\'l preséu nun se detecta automáticamente, pues amestar la so direición IP o nome d\'agospiu calcando nel botón flotante d\'aición</string>
   <string name="undo">Desfacer</string>
   <string name="share_notification_preference">Avisos sonoros</string>
   <string name="share_notification_preference_summary">Fai que\'l teléfonu vibre y reproduza un soníu al recibir un ficheru</string>
@@ -161,29 +168,32 @@
   <string name="sftp_action_mode_menu_delete">Desaniciar</string>
   <string name="sftp_no_storage_locations_configured">Nun se configuraron allugamientos d\'almacenamientu</string>
   <string name="sftp_saf_permission_explanation">P\'acceder remotamente a los ficheros tienes de configurar allugamientos d\'almacenamientu</string>
-  <string name="no_players_connected">Nun s\'alcontraron reproductores</string>
+  <string name="no_players_connected">Nun s\'atoparon reproductores</string>
   <string name="send_files">Unviar ficheros</string>
   <string name="pairing_title">Preseos con Zorin Connect</string>
   <string name="pairing_description">Equí deberíen apaecer los demás preseos que tean executando Zorin Connect na mesma rede.</string>
   <string name="device_rename_title">Renomáu del preséu</string>
   <string name="device_rename_confirm">Renomar</string>
   <string name="refresh">Refrescar</string>
-  <string name="unreachable_description">Esti preséu empareyáu nun ye algamable. Asegúrate de que ta coneutáu a la mesma rede que tu.</string>
-  <string name="no_wifi">Nun tas coneutáu a una rede Wi-Fi polo que nun vas ser a ver nengún preséu. Calca equí p\'activar el Wi-Fi.</string>
+  <string name="unreachable_description">Esti preséu empareyáu nun ye algamable. Asegúrate de que ta conectáu a la mesma rede que tu.</string>
+  <string name="no_wifi">Nun tas conectáu a una rede Wi-Fi polo que nun vas ser a ver nengún preséu. Calca equí p\'activar el Wi-Fi.</string>
   <string name="on_non_trusted_message">Nun tas nuna rede d\'enfotu. Desactivóse la descubrición automática.</string>
   <string name="no_file_browser">Nun hai nengún restolador de ficheros instaláu.</string>
   <string name="pref_plugin_telepathy">Unviu de SMS</string>
   <string name="pref_plugin_telepathy_desc">Unvia SMS dende l\'ordenador</string>
-  <string name="findmyphone_description">Fai qu\'esti preséu suene pa que pueas alcontralu</string>
-  <string name="findmyphone_found">Alcontrélu</string>
+  <string name="findmyphone_description">Fai qu\'esti preséu suene pa que pueas atopalu</string>
+  <string name="findmyphone_found">Atopélu</string>
   <string name="plugins_need_permission">Dalgunos plugins precisen permisos pa funcionar (tócalos pa más información):</string>
   <string name="permission_explanation">Esti plugin precisa permisos pa funcionar</string>
   <string name="optional_permission_explanation">Precises conceder permisos adicionales p\'activar toles funciones</string>
   <string name="plugins_need_optional_permission">Dalgunos plugins tienen carauterísiques desactivaes pola falta de permisos (tócalos pa más información):</string>
   <string name="select_ringtone">Timbre</string>
   <string name="telephony_pref_blocked_title">Númberos bloquiaos</string>
+  <string name="telephony_pref_blocked_dialog_desc">Nun s\'amuesen les llamaes nin SMS de los númberos que configures. Especifica un númberu per llinia.</string>
   <string name="presenter_fullscreen">Pantalla completa</string>
   <string name="presenter_exit">Colar de la presentación</string>
+  <string name="presenter_lock_tip">Pues bloquiar esti preséu y usar les tecles de volume pa dir a la diapositiva anterior/siguiente</string>
+  <string name="add_command">Amiestu d\'un comandu</string>
   <string name="addcommand_explanation">Nun hai comandos rexistraos.</string>
   <string name="addcommand_explanation2">Pues amestar más nos axustes de Zorin Connect del ordenador</string>
   <string name="add_command_description">Pues amestar más comandos nel ordenador</string>
@@ -193,8 +203,12 @@
   <string name="notification_channel_persistent">Indicador permanente</string>
   <string name="notification_channel_media_control">Mandu multimedia</string>
   <string name="notification_channel_filetransfer">Tresferencia de ficheros</string>
+  <string name="notification_channel_high_priority">Prioridá alta</string>
+  <string name="notification_channel_sms_mms">Mensaxes nuevos</string>
   <string name="copy_url_to_clipboard">Copiar la URL al cartafueyu</string>
   <string name="clipboard_toast">Copióse al cartafueyu</string>
+  <string name="runcommand_notreachable">El preséu nun ye algamable</string>
+  <string name="runcommand_notpaired">El preséu nun ta empareyáu</string>
   <string name="runcommand_noruncommandplugin">Esti preséu nun tien activáu\'l plugin Execución de comandos</string>
   <string name="pref_plugin_findremotedevice_desc">Fai que\'l preséu remotu suene</string>
   <string name="ring">Facer sonar</string>
@@ -216,8 +230,9 @@
   <string name="notification_channel_receivenotification">Avisos d\'otros preseos</string>
   <string name="take_picture">Llanzamientu de la cámara</string>
   <string name="plugin_photo_desc">Llanza l\'aplicación de la cámara p\'acenciellar la fechura y tresferencia de semeyes</string>
-  <string name="no_app_for_opening">Nun alcontró nenguna aplicación afayadiza p\'abrir esti ficheru.</string>
+  <string name="no_app_for_opening">Nun atopó nenguna aplicación afayadiza p\'abrir esti ficheru.</string>
   <string name="remote_keyboard_service">Tecláu remotu de Zorin Connect</string>
+  <string name="presenter_pointer">Punteru</string>
   <string name="trusted_networks">Redes d\'enfotu</string>
   <string name="trusted_networks_desc">Torga la descubrición automática en redes conocíes</string>
   <string name="empty_trusted_networks_list_text">Entá nun amestesti nenguna rede d\'enfotu</string>
@@ -225,4 +240,28 @@
   <string name="location_permission_needed_title">Ríquese un permisu</string>
   <string name="location_permission_needed_desc">Android rique\'l permisu Allugamientu pa indentificar redes Wi-Fi</string>
   <string name="clipboard_android_x_incompat">Android 10 quitó l\'accesu al cartafueyu en toles aplicaciones. Esti plugin va desactivase.</string>
+  <string name="cant_open_url">Nun pue abrise la URL pa siguir cola reproducción</string>
+  <string name="bigscreen_optional_permission_explanation">Pa compartir la entrada del micrófonu del preséu precises dar accesu a la entrada d\'audiu del preséu</string>
+  <string name="message_reply_label">RESPONDER</string>
+  <string name="user_display_name">Tu</string>
+  <string name="set_long_text_as_mms_title">Unviar testos llargos como MMS</string>
+  <string name="convert_to_mms_after_title">Conversión a MMS</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Dempués d\'un mensaxes</item>
+    <item>Dempués de dos mensaxes</item>
+    <item>Dempués de tres mensaxes</item>
+    <item>Dempués de cuatro mensaxes</item>
+    <item>Dempués de cinco mensaxes</item>
+  </string-array>
+  <string name="theme_dialog_title">Estilu de l\'aplicación</string>
+  <string-array name="theme_list">
+    <item>Set by Battery Saver</item>
+    <item>Claridá</item>
+    <item>Escuridá</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>System Default</item>
+    <item>Claridá</item>
+    <item>Escuridá</item>
+  </string-array>
 </resources>

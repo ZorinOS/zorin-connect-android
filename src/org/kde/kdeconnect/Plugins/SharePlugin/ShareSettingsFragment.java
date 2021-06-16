@@ -1,21 +1,7 @@
 /*
- * Copyright 2016 Richard Wagler <riwag@posteo.de>
+ * SPDX-FileCopyrightText: 2016 Richard Wagler <riwag@posteo.de>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.SharePlugin;
@@ -138,17 +124,21 @@ public class ShareSettingsFragment extends PluginSettingsFragment {
         if (requestCode == RESULT_PICKER
                 && resultCode == Activity.RESULT_OK
                 && resultData != null) {
-
             Uri uri = resultData.getData();
-
-            requireContext().getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION |
-                    Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            saveStorageLocationPreference(requireContext(), uri);
 
             Preference filePicker = findPreference("share_destination_folder_preference");
             filePicker.setSummary(uri.getPath());
-
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(requireContext());
-            prefs.edit().putString(PREFERENCE_DESTINATION, uri.toString()).apply();
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public static void saveStorageLocationPreference(Context context, Uri uri) {
+        context.getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION |
+                Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        prefs.edit().putString(PREFERENCE_DESTINATION, uri.toString()).apply();
+        prefs.edit().putBoolean(PREFERENCE_CUSTOMIZE_DESTINATION, true).apply();
     }
 }

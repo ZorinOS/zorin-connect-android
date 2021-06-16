@@ -3,14 +3,18 @@
   <string name="kde_connect">Zorin Connect</string>
   <string name="foreground_notification_no_devices">Non connesso ad alcun dispositivo</string>
   <string name="foreground_notification_devices">Connesso a: %s</string>
+  <string name="foreground_notification_send_clipboard">Invia appunti</string>
   <string name="pref_plugin_telephony">Notifiche telefoniche</string>
   <string name="pref_plugin_telephony_desc">Invia notifiche per le chiamate in ingresso</string>
   <string name="pref_plugin_battery">Livello batteria</string>
   <string name="pref_plugin_battery_desc">Comunica periodicamente lo stato della batteria</string>
+  <string name="pref_plugin_connectivity_report">Indicatore di connettività</string>
+  <string name="pref_plugin_connectivity_report_desc">Riporta la potenza e lo stato del segnale di rete</string>
   <string name="pref_plugin_sftp">Esposizione filesystem</string>
   <string name="pref_plugin_sftp_desc">Consente di navigare da remoto il filesystem del dispositivo</string>
   <string name="pref_plugin_clipboard">Sincronizzazione appunti</string>
   <string name="pref_plugin_clipboard_desc">Condividi il contenuto degli appunti</string>
+  <string name="pref_plugin_clipboard_sent">Appunti inviati</string>
   <string name="pref_plugin_mousepad">Impulso remoto</string>
   <string name="pref_plugin_mousepad_desc">Usa il tuo telefono o il tablet come touchpad e tastiera</string>
   <string name="pref_plugin_presenter">Telecomando della presentazione</string>
@@ -72,6 +76,21 @@
     <item>Più forte</item>
     <item>La più forte</item>
   </string-array>
+  <string name="sendkeystrokes_send_to">Invia combinazioni di tasti a</string>
+  <string name="sendkeystrokes_textbox_hint">Invia combinazioni di tasti all\'host</string>
+  <string name="sendkeystrokes_disabled_toast">L\'invio di combinazioni di tasti è disabilitato: abilitalo nelle impostazioni</string>
+  <string name="sendkeystrokes_wrong_data">Tipo MIME non valido: deve essere «text/x-keystrokes»</string>
+  <string name="sendkeystrokes_sent_text">Inviato %1s al dispositivo %2s</string>
+  <string name="sendkeystrokes_pref_category_summary">Questo modulo consente ad altre applicazioni di condividere segmenti di testo come sequenze di tasti che saranno inviate all\'host connesso</string>
+  <string name="sendkeystrokes_pref_category_title">Invia combinazioni di tasti</string>
+  <string name="sendkeystrokes_pref_enabled">Abilita l\'invio di combinazioni di tasti</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Intercetta i dati con il tipo MIME «text/x-keystrokes»</string>
+  <string name="sendkeystrokes_safe_text_enabled">Invia subito un testo sicuro</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Invia brevi stringhe composte da soli numeriche senza conferma</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Invia come combinazioni di tasti</string>
+  <string name="mouse_receiver_plugin_description">Ricevi i movimenti remoti del mouse</string>
+  <string name="mouse_receiver_plugin_name">Ricevitore del mouse</string>
+  <string name="mouse_receiver_no_permissions">Devi abilitare Servizio di accessibilità</string>
   <string name="category_connected_devices">Dispositivi connessi</string>
   <string name="category_not_paired_devices">Dispositivi disponibili</string>
   <string name="category_remembered_devices">Dispositivi memorizzati</string>
@@ -87,8 +106,8 @@
   <string name="error_canceled_by_other_peer">Annullata dal dispositivo remoto</string>
   <string name="encryption_info_title">Informazioni di cifratura</string>
   <string name="encryption_info_msg_no_ssl">L\'altro dispositivo non utilizza una versione recente di Zorin Connect, utilizzando il metodo di cifratura precedente.</string>
-  <string name="my_device_fingerprint">L\'impronta digitale SHA1 del certificato di dispositivo è:</string>
-  <string name="remote_device_fingerprint">L\'impronta digitale SHA1 del certificato di dispositivo remoto è:</string>
+  <string name="my_device_fingerprint">L\'impronta digitale SHA256 del certificato di dispositivo è:</string>
+  <string name="remote_device_fingerprint">L\'impronta digitale SHA256 del certificato del dispositivo remoto è:</string>
   <string name="pair_requested">Richiesta di associazione</string>
   <string name="pairing_request_from">Richiesta associazione da %1s</string>
   <plurals name="incoming_file_title">
@@ -123,6 +142,7 @@
     <item quantity="one">Invio del file a %1$s non riuscito</item>
     <item quantity="other">Invio di %2$d di %3$d file a %1$s non riuscito</item>
   </plurals>
+  <string name="tap_to_open">Tocca per aprire</string>
   <string name="received_file_text">Tocca per aprire «%1s»</string>
   <string name="cannot_create_file">Impossibile creare il file %s</string>
   <string name="tap_to_answer">Tocca per rispondere</string>
@@ -210,6 +230,8 @@
   <string name="no_file_browser">Non ci sono navigatori di file installati.</string>
   <string name="pref_plugin_telepathy">Invia SMS</string>
   <string name="pref_plugin_telepathy_desc">Invia messaggi di testo dal tuo desktop</string>
+  <string name="pref_plugin_telepathy_mms">Invia MMS</string>
+  <string name="pref_plugin_telepathy_mms_desc">Per poter inviare MMS da Zorin Connect, devi impostarlo come applicazione di SMS predefinita.</string>
   <string name="findmyphone_title">Trova il mio telefono</string>
   <string name="findmyphone_title_tablet">Trova il mio tablet</string>
   <string name="findmyphone_title_tv">Trova il mio televisore</string>
@@ -221,7 +243,7 @@
   <string name="permission_explanation">Questa estensione ha bisogno di permessi per funzionare</string>
   <string name="optional_permission_explanation">Devi concedere permessi aggiuntivi per abilitare tutte le funzioni</string>
   <string name="plugins_need_optional_permission">Alcune estensioni hanno funzioni disabilitate per una mancanza di permessi (tocca per maggiori informazioni):</string>
-  <string name="share_optional_permission_explanation">Per condividere i file tra il telefono e il tuo desktop devi dare accesso alla memoria del telefono</string>
+  <string name="share_optional_permission_explanation">Per ricevere file condivisi è necessario scegliere una cartella di destinazione</string>
   <string name="telepathy_permission_explanation">Per leggere e scrivere SMS dal tuo desktop, devi concedere l\'autorizzazione per SMS</string>
   <string name="telephony_permission_explanation">Per vedere le chiamate telefoniche dal desktop devi dare l\'autorizzazione per accedere al registro delle chiamate e allo stato del telefono</string>
   <string name="telephony_optional_permission_explanation">Per vedere il nome di un contatto invece del numero di telefono devi dare accesso alla rubrica del telefono</string>
@@ -246,6 +268,7 @@
   <string name="notification_channel_media_control">Controllo multimediale</string>
   <string name="notification_channel_filetransfer">Trasferimento file</string>
   <string name="notification_channel_high_priority">Priorità alta</string>
+  <string name="notification_channel_sms_mms">Nuovo messaggio</string>
   <string name="mpris_stop">Ferma il lettore attuale</string>
   <string name="copy_url_to_clipboard">Copia l\'URL negli appunti</string>
   <string name="clipboard_toast">Copiato negli appunti</string>
@@ -295,6 +318,38 @@
   <string name="bigscreen_select">Seleziona</string>
   <string name="bigscreen_right">A destra</string>
   <string name="bigscreen_down">Giù</string>
+  <string name="bigscreen_mic">Mic</string>
   <string name="pref_plugin_bigscreen">Telecomando Bigscreen</string>
   <string name="pref_plugin_bigscreen_desc">Utilizza il tuo dispositivo come telecomando per Plasma Bigscreen</string>
+  <string name="bigscreen_optional_permission_explanation">Per condividere l\'ingresso del microfono dal telefono è necessario consentire l\'accesso all\'ingresso audio del telefono</string>
+  <string name="bigscreen_speech_extra_prompt">Parlato</string>
+  <string name="message_reply_label">RISPONDI</string>
+  <string name="mark_as_read_label">MARCA COME LETTO</string>
+  <string name="user_display_name">Tu</string>
+  <string name="set_default_sms_app_title">Invia MMS</string>
+  <string name="set_group_message_as_mms_title">Invia MMS di gruppo</string>
+  <string name="set_long_text_as_mms_title">Invia testo lungo come MMS</string>
+  <string name="convert_to_mms_after_title">Converti in MMS</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Dopo un messaggio</item>
+    <item>Dopo due messaggi</item>
+    <item>Dopo tre messaggi</item>
+    <item>Dopo quattro messaggi</item>
+    <item>Dopo cinque messaggi</item>
+  </string-array>
+  <string name="theme_dialog_title">Scegli il tema</string>
+  <string-array name="theme_list">
+    <item>Impostato dal risparmio batteria</item>
+    <item>Chiaro</item>
+    <item>Scuro</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Predefinito di sistema</item>
+    <item>Chiaro</item>
+    <item>Scuro</item>
+  </string-array>
+  <string name="report_bug">Segnala un errore</string>
+  <string name="donate">Fai una donazione</string>
+  <string name="source_code">Codice sorgente</string>
+  <string name="licenses">Licenze</string>
 </resources>

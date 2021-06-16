@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="kde_connect">Zorin Connect</string>
     <string name="foreground_notification_no_devices">Not connected to any device</string>
     <string name="foreground_notification_devices">Connected to: %s</string>
@@ -9,6 +8,8 @@
     <string name="pref_plugin_telephony_desc">Send notifications for incoming calls</string>
     <string name="pref_plugin_battery">Battery report</string>
     <string name="pref_plugin_battery_desc">Periodically report battery status</string>
+    <string name="pref_plugin_connectivity_report">Connectivity report</string>
+    <string name="pref_plugin_connectivity_report_desc">Report network signal strength and status</string>
     <string name="pref_plugin_sftp">Filesystem expose</string>
     <string name="pref_plugin_sftp_desc">Allows to browse this device\'s filesystem remotely</string>
     <string name="pref_plugin_clipboard">Clipboard sync</string>
@@ -105,6 +106,29 @@
         <item>strong</item>
         <item>stronger</item>
     </string-array>
+
+    <string name="sendkeystrokes_send_to">Send keystrokes to</string>
+    <string name="sendkeystrokes_textbox_hint">Send keystrokes to host</string>
+    <string name="sendkeystrokes_disabled_toast">Sending keystrokes is disabled - enable it in the settings</string>
+    <string name="sendkeystrokes_wrong_data"><![CDATA[Invalid mime type - needs to be \'text/x-keystrokes\']]></string>
+    <string name="sendkeystrokes_sent_text">Sent %1s to device %2s</string>
+
+    <string name="sendkeystrokes_pref_category_summary">This module allows other apps to share text segments as keystrokes which will get send to the connected host</string>
+    <string name="sendkeystrokes_pref_category_title">Send Keystrokes</string>
+    <string name="sendkeystrokes_pref_enabled">Enable Keystrokes sending</string>
+    <string name="sendkeystrokes_pref_enabled_summary"><![CDATA[Listen for data with mime type \'text/x-keystrokes\']]></string>
+    <string name="sendkeystrokes_safe_text_enabled">Send safe text immediately</string>
+    <string name="sendkeystrokes_safe_text_enabled_summary">Send short only-numeric strings without confirmation</string>
+
+
+    <string name="pref_plugin_mousepad_send_keystrokes">Send as keystrokes</string>
+    <string name="sendkeystrokes_pref_category" translatable="false">category_send_keystrokes</string>
+    <string name="pref_sendkeystrokes_enabled" translatable="false">pref_sendkeystrokes_enabled</string>
+    <string name="pref_send_safe_text_immediately" translatable="false">pref_send_safe_text_immediately</string>
+
+    <string name="mouse_receiver_plugin_description">Receive remote mouse movement</string>
+    <string name="mouse_receiver_plugin_name">Mouse receiver</string>
+    <string name="mouse_receiver_no_permissions">You need to enable Accessibility Service</string>
     <string name="category_connected_devices">Connected devices</string>
     <string name="category_not_paired_devices">Available devices</string>
     <string name="category_remembered_devices">Remembered devices</string>
@@ -120,10 +144,11 @@
     <string name="error_canceled_by_other_peer">Canceled by other peer</string>
     <string name="encryption_info_title">Encryption Info</string>
     <string name="encryption_info_msg_no_ssl">The other device doesn\'t use a recent version of Zorin Connect, using the legacy encryption method.</string>
-    <string name="my_device_fingerprint">SHA1 fingerprint of your device certificate is:</string>
-    <string name="remote_device_fingerprint">SHA1 fingerprint of remote device certificate is:</string>
+    <string name="my_device_fingerprint">SHA256 fingerprint of your device certificate is:</string>
+    <string name="remote_device_fingerprint">SHA256 fingerprint of remote device certificate is:</string>
     <string name="pair_requested">Pair requested</string>
     <string name="pairing_request_from">Pairing request from %1s</string>
+    <string name="pairing_verification_code" translatable="false">🔑%1s...</string>
     <plurals name="incoming_file_title">Receiving file from %1s>
         <item quantity="one">Receiving %1$d file from %2$s</item>
         <item quantity="other">Receiving %1$d files from %2$s</item>
@@ -260,6 +285,8 @@
     <string name="no_file_browser">There are no file browsers installed.</string>
     <string name="pref_plugin_telepathy">Send SMS</string>
     <string name="pref_plugin_telepathy_desc">Send text messages from your desktop</string>
+    <string name="pref_plugin_telepathy_mms">Send MMS</string>
+    <string name="pref_plugin_telepathy_mms_desc">To be able to send MMS from Zorin Connect you need to set it as the default SMS app.</string>
     <string name="findmyphone_title">Find my phone</string>
     <string name="findmyphone_title_tablet">Find my tablet</string>
     <string name="findmyphone_title_tv">Find my TV</string>
@@ -273,7 +300,7 @@
     <string name="permission_explanation">This plugin needs permissions to work</string>
     <string name="optional_permission_explanation">You need to grant extra permissions to enable all functions</string>
     <string name="plugins_need_optional_permission">Some plugins have features disabled because of lack of permission (tap for more info):</string>
-    <string name="share_optional_permission_explanation">To share files between your phone and your desktop you need to give access to the phone\'s storage</string>
+    <string name="share_optional_permission_explanation">To receive shared files you need to choose a destination directory</string>
     <string name="telepathy_permission_explanation">To read and write SMS from your desktop you need to give permission to SMS</string>
     <string name="telephony_permission_explanation">To see phone calls on the desktop you need to give permission to phone call logs and phone state</string>
     <string name="telephony_optional_permission_explanation">To see a contact name instead of a phone number you need to give access to the phone\'s contacts</string>
@@ -301,6 +328,7 @@
     <string name="notification_channel_media_control">Media control</string>
     <string name="notification_channel_filetransfer">File transfer</string>
     <string name="notification_channel_high_priority">High priority</string>
+    <string name="notification_channel_sms_mms">New Message</string>
 
     <string name="mpris_stop">Stop the current player</string>
     <string name="copy_url_to_clipboard">Copy URL to clipboard</string>
@@ -361,6 +389,62 @@
     <string name="bigscreen_select">Select</string>
     <string name="bigscreen_right">Right</string>
     <string name="bigscreen_down">Down</string>
+    <string name="bigscreen_mic">Mic</string>
     <string name="pref_plugin_bigscreen">Bigscreen remote</string>
     <string name="pref_plugin_bigscreen_desc">Use your device as a remote for Plasma Bigscreen</string>
+    <string name="bigscreen_optional_permission_explanation">To share microphone input from your phone you need to give access to the phone\'s audio input</string>
+    <string name="bigscreen_speech_extra_prompt">Speech</string>
+
+    <string name="message_reply_label">REPLY</string>
+    <string name="mark_as_read_label">MARK AS READ</string>
+    <string name="user_display_name">You</string>
+    <string name="set_default_sms_app_title">Send MMS</string>
+    <string name="set_group_message_as_mms_title">Send group MMS</string>
+    <string name="set_group_message_as_mms" translatable="false">set_group_message_as_mms</string>
+    <string name="set_long_text_as_mms_title">Send long text as MMS</string>
+    <string name="set_long_text_as_mms" translatable="false">set_long_text_as_mms</string>
+    <string name="convert_to_mms_after_title">Convert to MMS</string>
+    <string name="convert_to_mms_after" translatable="false">convert_to_mms_after</string>
+    <string name="convert_to_mms_after_default" translatable="false">3</string>
+    <string-array name="convert_to_mms_after_entries">
+        <item>After one message</item>
+        <item>After two messages</item>
+        <item>After three messages</item>
+        <item>After four messages</item>
+        <item>After five messages</item>
+    </string-array>
+    <string-array name="convert_to_mms_after_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="theme_dialog_title">Choose theme</string>
+    <string-array name="theme_list">
+      <item>Set by Battery Saver</item>
+      <item>Light</item>
+      <item>Dark</item>
+    </string-array>
+
+    <string-array name="theme_list_v28">
+      <item>System Default</item>
+      <item>Light</item>
+      <item>Dark</item>
+    </string-array>
+
+    <string-array name="theme_list_values" translatable="false">
+      <item>default</item>
+      <item>light</item>
+      <item>dark</item>
+    </string-array>
+    <string name="report_bug">Report Bug</string>
+    <string name="report_bug_url" translatable="false">https://github.com/ZorinOS/zorin-connect-android/issues/new</string>
+    <string name="donate">Donate</string>
+    <string name="donate_url" translatable="false">https://zorinos.com/about/#funding</string>
+    <string name="source_code">Source Code</string>
+    <string name="source_code_url" translatable="false">https://github.com/ZorinOS/zorin-connect-android/</string>
+    <string name="licenses">Licenses</string>
+
 </resources>

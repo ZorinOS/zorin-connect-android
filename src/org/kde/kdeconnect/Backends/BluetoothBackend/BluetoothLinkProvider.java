@@ -1,21 +1,7 @@
 /*
- * Copyright 2016 Saikrishna Arcot <saiarcot895@gmail.com>
+ * SPDX-FileCopyrightText: 2016 Saikrishna Arcot <saiarcot895@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect.Backends.BluetoothBackend;
@@ -33,6 +19,7 @@ import android.os.Build;
 import android.os.Parcelable;
 import android.util.Log;
 
+import org.apache.commons.io.IOUtils;
 import org.kde.kdeconnect.Backends.BaseLinkProvider;
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.NetworkPacket;
@@ -46,6 +33,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+
+import kotlin.text.Charsets;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class BluetoothLinkProvider extends BaseLinkProvider {
@@ -186,27 +175,32 @@ public class BluetoothLinkProvider extends BaseLinkProvider {
                 }
             }
 
-            ConnectionMultiplexer connection = null;
+            Log.i("BTLinkProvider/Server", "Received connection from " + socket.getRemoteDevice().getAddress());
+
+            //Delay to let bluetooth initialize stuff correctly
             try {
-                Log.i("BTLinkProvider/Server", "Received connection from " + socket.getRemoteDevice().getAddress());
-
-                //Delay to let bluetooth initialize stuff correctly
                 Thread.sleep(500);
+            } catch (Exception e) {
+                synchronized (sockets) {
+                    sockets.remove(socket.getRemoteDevice());
+                }
+                throw e;
+            }
 
-                connection = new ConnectionMultiplexer(socket);
+            try (ConnectionMultiplexer connection = new ConnectionMultiplexer(socket)) {
                 OutputStream outputStream = connection.getDefaultOutputStream();
                 InputStream inputStream = connection.getDefaultInputStream();
 
                 NetworkPacket np = NetworkPacket.createIdentityPacket(context);
-                byte[] message = np.serialize().getBytes("UTF-8");
+                byte[] message = np.serialize().getBytes(Charsets.UTF_8);
                 outputStream.write(message);
                 outputStream.flush();
 
-                Log.i("BTLinkProvider/Server", "Sent identity package");
+                Log.i("BTLinkProvider/Server", "Sent identity packet");
 
                 // Listen for the response
                 StringBuilder sb = new StringBuilder();
-                Reader reader = new InputStreamReader(inputStream, "UTF-8");
+                Reader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
                 int charsRead;
                 char[] buf = new char[512];
                 while (sb.lastIndexOf("\n") == -1 && (charsRead = reader.read(buf)) != -1) {
@@ -217,11 +211,11 @@ public class BluetoothLinkProvider extends BaseLinkProvider {
                 final NetworkPacket identityPacket = NetworkPacket.unserialize(response);
 
                 if (!identityPacket.getType().equals(NetworkPacket.PACKET_TYPE_IDENTITY)) {
-                    Log.e("BTLinkProvider/Server", "2 Expecting an identity package");
+                    Log.e("BTLinkProvider/Server", "2 Expecting an identity packet");
                     return;
                 }
 
-                Log.i("BTLinkProvider/Server", "Received identity package");
+                Log.i("BTLinkProvider/Server", "Received identity packet");
 
                 BluetoothLink link = new BluetoothLink(context, connection,
                         inputStream, outputStream, socket.getRemoteDevice(),
@@ -230,7 +224,6 @@ public class BluetoothLinkProvider extends BaseLinkProvider {
             } catch (Exception e) {
                 synchronized (sockets) {
                     sockets.remove(socket.getRemoteDevice());
-                    if (connection != null) connection.close();
                 }
                 throw e;
             }
@@ -363,12 +356,12 @@ public class BluetoothLinkProvider extends BaseLinkProvider {
                 final NetworkPacket identityPacket = NetworkPacket.unserialize(message);
 
                 if (!identityPacket.getType().equals(NetworkPacket.PACKET_TYPE_IDENTITY)) {
-                    Log.e("BTLinkProvider/Client", "1 Expecting an identity package");
+                    Log.e("BTLinkProvider/Client", "1 Expecting an identity packet");
                     socket.close();
                     return;
                 }
 
-                Log.i("BTLinkProvider/Client", "Received identity package");
+                Log.i("BTLinkProvider/Client", "Received identity packet");
 
                 String myId = NetworkPacket.createIdentityPacket(context).getString("deviceId");
                 if (identityPacket.getString("deviceId").equals(myId)) {
@@ -381,7 +374,7 @@ public class BluetoothLinkProvider extends BaseLinkProvider {
                     return;
                 }
 
-                Log.i("BTLinkProvider/Client", "Identity package received, creating link");
+                Log.i("BTLinkProvider/Client", "identity packet received, creating link");
 
                 final BluetoothLink link = new BluetoothLink(context, connection, inputStream, outputStream,
                         socket.getRemoteDevice(), identityPacket.getString("deviceId"), BluetoothLinkProvider.this);

@@ -1,21 +1,7 @@
 /*
- * Copyright 2017 Matthijs Tijink <matthijstijink@gmail.com>
+ * SPDX-FileCopyrightText: 2017 Matthijs Tijink <matthijstijink@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.Plugins.MprisPlugin;
@@ -48,6 +34,7 @@ import java.util.HashSet;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
+import androidx.core.content.ContextCompat;
 import androidx.media.app.NotificationCompat.MediaStyle;
 
 /**
@@ -374,7 +361,6 @@ public class MprisMediaSession implements SharedPreferences.OnSharedPreferenceCh
                     .setContentIntent(piOpenActivity)
                     .setSmallIcon(R.drawable.ic_play_white)
                     .setShowWhen(false)
-                    .setColor(service.getResources().getColor(R.color.primary))
                     .setVisibility(androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC)
                     .setSubText(service.getDevice(notificationDevice).getName());
 
@@ -461,14 +447,14 @@ public class MprisMediaSession implements SharedPreferences.OnSharedPreferenceCh
 
             //Display the notification
             mediaSession.setActive(true);
-            final NotificationManager nm = (NotificationManager) service.getSystemService(Context.NOTIFICATION_SERVICE);
+            final NotificationManager nm = ContextCompat.getSystemService(context, NotificationManager.class);
             nm.notify(MPRIS_MEDIA_NOTIFICATION_ID, notification.build());
         });
     }
 
     public void closeMediaNotification() {
         //Remove the notification
-        NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager nm = ContextCompat.getSystemService(context, NotificationManager.class);
         nm.cancel(MPRIS_MEDIA_NOTIFICATION_ID);
 
         //Clear the current player and media session

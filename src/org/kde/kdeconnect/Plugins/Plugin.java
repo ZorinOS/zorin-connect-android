@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect.Plugins;
@@ -27,12 +13,14 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.UserInterface.AlertDialogFragment;
@@ -202,8 +190,30 @@ public abstract class Plugin {
     }
 
     /**
+     * Determine whether we should avoid loading this Plugin for {@link #device}.
+     * <p>
+     *     Called after {@link #setContext(Context, Device)} but before {@link #onCreate()}.
+     * </p>
+     * <p>
+     *     By default, this just checks if {@link #getMinSdk()} is greater than the
+     *     {@link Build.VERSION#SDK_INT SDK version} of this Android device.
+     * </p>
+     *
+     * @return false if it makes sense to call {@link #onCreate()}, true otherwise
+     */
+    @CallSuper
+    public boolean isIncompatible() {
+        return getMinSdk() > Build.VERSION.SDK_INT;
+    }
+
+    /**
      * Initialize the listeners and structures in your plugin.
-     * Should return true if initialization was successful.
+     * <p>
+     *     If {@link #isIncompatible()} returns false, this will <em>not</em>
+     *     be called.
+     * </p>
+     *
+     * @return true if initialization was successful, false otherwise
      */
     public boolean onCreate() {
         return true;
@@ -236,11 +246,11 @@ public abstract class Plugin {
     public abstract String[] getOutgoingPacketTypes();
 
     protected String[] getRequiredPermissions() {
-        return new String[0];
+        return ArrayUtils.EMPTY_STRING_ARRAY;
     }
 
     protected String[] getOptionalPermissions() {
-        return new String[0];
+        return ArrayUtils.EMPTY_STRING_ARRAY;
     }
 
     //Permission from Manifest.permission.*

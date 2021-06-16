@@ -86,8 +86,6 @@
   <string name="error_canceled_by_other_peer">Cancelouse remotamente</string>
   <string name="encryption_info_title">Información do cifrado</string>
   <string name="encryption_info_msg_no_ssl">O outro dispositivo non usa unha versión recente de Zorin Connect, usarase un método obsoleto de cifrado.</string>
-  <string name="my_device_fingerprint">A pegada SHA1 do certificado do seu dispositivo é:</string>
-  <string name="remote_device_fingerprint">A pegada SHA1 do certificado do dispositivo remoto é:</string>
   <string name="pair_requested">Solicitude de emparellamento</string>
   <string name="pairing_request_from">Solicitude de emparellamento de %1s.</string>
   <plurals name="incoming_file_title">
@@ -218,7 +216,6 @@
   <string name="permission_explanation">Este complemento necesita permisos para funcionar.</string>
   <string name="optional_permission_explanation">Ten que conceder permisos adicionais para activar todas as funcións.</string>
   <string name="plugins_need_optional_permission">Algúns complementos teñen funcionalidades desactivadas por mor dunha falta de permisos (toque para máis información):</string>
-  <string name="share_optional_permission_explanation">Para compartir ficheiros entre o teléfono e o escritorio ten que dar acceso ao almacenamento do teléfono.</string>
   <string name="telepathy_permission_explanation">Para ler e escribir SMS desde o escritorio ten que dar permiso de SMS.</string>
   <string name="telephony_permission_explanation">Para ver as chamadas de teléfono no escritorio ten que dar permiso aos rexistros de chamadas telefónicas e ao estado do teléfono</string>
   <string name="telephony_optional_permission_explanation">Para ver o nome dun contacto en vez dun número de teléfono ten que dar acceso aos contactos do teléfono.</string>
@@ -275,4 +272,21 @@
   <string name="no_app_for_opening">Non se atopou ningún aplicativo axeitado para abrir este ficheiro</string>
   <string name="remote_keyboard_service">Teclado remoto de Zorin Connect</string>
   <string name="presenter_pointer">Punteiro</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>After one message</item>
+    <item>After two messages</item>
+    <item>After three messages</item>
+    <item>After four messages</item>
+    <item>After five messages</item>
+  </string-array>
+  <string-array name="theme_list">
+    <item>Set by Battery Saver</item>
+    <item/>
+    <item>Dark</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item/>
+    <item/>
+    <item>Dark</item>
+  </string-array>
 </resources>

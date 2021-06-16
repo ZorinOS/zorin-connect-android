@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect.Backends.LanBackend;
@@ -23,12 +9,13 @@ package org.kde.kdeconnect.Backends.LanBackend;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.WorkerThread;
+
 import org.json.JSONObject;
 import org.kde.kdeconnect.Backends.BaseLink;
 import org.kde.kdeconnect.Backends.BasePairingHandler;
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.SslHelper;
-import org.kde.kdeconnect.Helpers.StringsHelper;
 import org.kde.kdeconnect.NetworkPacket;
 
 import java.io.BufferedReader;
@@ -45,7 +32,7 @@ import java.nio.channels.NotYetConnectedException;
 import javax.net.ssl.SSLHandshakeException;
 import javax.net.ssl.SSLSocket;
 
-import androidx.annotation.WorkerThread;
+import kotlin.text.Charsets;
 
 public class LanLink extends BaseLink {
 
@@ -92,7 +79,7 @@ public class LanLink extends BaseLink {
         //Create a thread to take care of incoming data for the new socket
         new Thread(() -> {
             try {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(newSocket.getInputStream(), StringsHelper.UTF8));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(newSocket.getInputStream(), Charsets.UTF_8));
                 while (true) {
                     String packet;
                     try {
@@ -114,6 +101,7 @@ public class LanLink extends BaseLink {
                 try { Thread.sleep(300); } catch (InterruptedException ignored) {} // Wait a bit because we might receive a new socket meanwhile
                 boolean thereIsaANewSocket = (newSocket != socket);
                 if (!thereIsaANewSocket) {
+                    Log.i("LanLink", "Socket closed and there's no new socket, disconnecting device");
                     callback.linkDisconnected(LanLink.this);
                 }
             }
@@ -167,7 +155,7 @@ public class LanLink extends BaseLink {
             //Send body of the network package
             try {
                 OutputStream writer = socket.getOutputStream();
-                writer.write(np.serialize().getBytes(StringsHelper.UTF8));
+                writer.write(np.serialize().getBytes(Charsets.UTF_8));
                 writer.flush();
             } catch (Exception e) {
                 disconnect(); //main socket is broken, disconnect

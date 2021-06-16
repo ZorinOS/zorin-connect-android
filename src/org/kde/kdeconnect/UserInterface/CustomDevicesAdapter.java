@@ -1,21 +1,7 @@
 /*
- * Copyright 2019 Erik Duisters <e.duisters1@gmail.com>
+ * SPDX-FileCopyrightText: 2019 Erik Duisters <e.duisters1@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.UserInterface;
@@ -26,20 +12,18 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.TextView;
-
-import com.zorinos.zorin_connect.R;
-
-import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.widget.TextViewCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
+import com.zorinos.zorin_connect.R;
+import com.zorinos.zorin_connect.databinding.CustomDeviceItemBinding;
+
+import java.util.ArrayList;
 
 public class CustomDevicesAdapter extends RecyclerView.Adapter<CustomDevicesAdapter.ViewHolder> {
     private ArrayList<String> customDevices;
@@ -69,9 +53,10 @@ public class CustomDevicesAdapter extends RecyclerView.Adapter<CustomDevicesAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_device_item, parent, false);
+        CustomDeviceItemBinding itemBinding =
+                CustomDeviceItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
 
-        return new ViewHolder(v);
+        return new ViewHolder(itemBinding);
     }
 
     @Override
@@ -85,30 +70,29 @@ public class CustomDevicesAdapter extends RecyclerView.Adapter<CustomDevicesAdap
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements SwipeableViewHolder {
-        @BindView(R.id.deviceNameOrIPBackdrop) TextView deviceNameOrIPBackdrop;
-        @BindView(R.id.swipeableView) FrameLayout swipeableView;
-        @BindView(R.id.deviceNameOrIP) TextView deviceNameOrIP;
+        private final CustomDeviceItemBinding itemBinding;
 
-        ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            ButterKnife.bind(this, itemView);
+        ViewHolder(@NonNull CustomDeviceItemBinding itemBinding) {
+            super(itemBinding.getRoot());
+            this.itemBinding = itemBinding;
 
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                Drawable deleteDrawable = AppCompatResources.getDrawable(itemView.getContext(), R.drawable.ic_delete);
-                deviceNameOrIPBackdrop.setCompoundDrawablesWithIntrinsicBounds(deleteDrawable, null, deleteDrawable, null);
+                Drawable deleteDrawable = AppCompatResources.getDrawable(itemBinding.getRoot().getContext(),
+                        R.drawable.ic_delete);
+                TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(itemBinding.deviceNameOrIPBackdrop,
+                        deleteDrawable, null, deleteDrawable, null);
             }
 
-            deviceNameOrIP.setOnClickListener(v -> callback.onCustomDeviceClicked(customDevices.get(getAdapterPosition())));
+            itemBinding.deviceNameOrIP.setOnClickListener(v -> callback.onCustomDeviceClicked(customDevices.get(getAdapterPosition())));
         }
 
         void bind(String customDevice) {
-            deviceNameOrIP.setText(customDevice);
+            itemBinding.deviceNameOrIP.setText(customDevice);
         }
 
         @Override
         public View getSwipeableView() {
-            return swipeableView;
+            return itemBinding.swipeableView;
         }
     }
 

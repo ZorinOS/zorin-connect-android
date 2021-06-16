@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect;
@@ -28,7 +14,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
@@ -39,8 +24,12 @@ import androidx.annotation.WorkerThread;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import org.apache.commons.collections4.MultiValuedMap;
+import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
+import org.apache.commons.lang3.StringUtils;
 import org.kde.kdeconnect.Backends.BaseLink;
 import org.kde.kdeconnect.Backends.BasePairingHandler;
+import org.kde.kdeconnect.Helpers.DeviceHelper;
 import org.kde.kdeconnect.Helpers.NotificationHelper;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.SslHelper;
 import org.kde.kdeconnect.Plugins.Plugin;
@@ -86,7 +75,7 @@ public class Device implements BaseLink.PacketReceiver {
     private final ConcurrentHashMap<String, Plugin> plugins = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, Plugin> pluginsWithoutPermissions = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, Plugin> pluginsWithoutOptionalPermissions = new ConcurrentHashMap<>();
-    private Map<String, ArrayList<String>> pluginsByIncomingInterface = new HashMap<>();
+    private MultiValuedMap<String, String> pluginsByIncomingInterface = new ArrayListValuedHashMap<>();
 
     private final SharedPreferences settings;
 
@@ -94,7 +83,11 @@ public class Device implements BaseLink.PacketReceiver {
     private Set<String> incomingCapabilities = new HashSet<>();
 
     public boolean supportsPacketType(String type) {
-        return incomingCapabilities.contains(type);
+        if (incomingCapabilities == null) {
+            return true;
+        } else {
+            return incomingCapabilities.contains(type);
+        }
     }
 
     public interface PluginsChangedListener {
@@ -112,7 +105,7 @@ public class Device implements BaseLink.PacketReceiver {
         Computer,
         Tv;
 
-        static DeviceType FromString(String s) {
+        static public DeviceType FromString(String s) {
             if ("tablet".equals(s)) return Tablet;
             if ("phone".equals(s)) return Phone;
             if ("tv".equals(s)) return Tv;
@@ -130,6 +123,24 @@ public class Device implements BaseLink.PacketReceiver {
                 default:
                     return "desktop";
             }
+        }
+
+        public Drawable getIcon(Context context) {
+            int drawableId;
+            switch (this) {
+                case Phone:
+                    drawableId = R.drawable.ic_device_phone_32dp;
+                    break;
+                case Tablet:
+                    drawableId = R.drawable.ic_device_tablet_32dp;
+                    break;
+                case Tv:
+                    drawableId = R.drawable.ic_device_tv_32dp;
+                    break;
+                default:
+                    drawableId = R.drawable.ic_device_laptop_32dp;
+            }
+            return ContextCompat.getDrawable(context, drawableId);
         }
     }
 
@@ -153,7 +164,7 @@ public class Device implements BaseLink.PacketReceiver {
         this.deviceId = deviceId;
         this.name = settings.getString("deviceName", context.getString(R.string.unknown_device));
         this.pairStatus = PairStatus.Paired;
-        this.protocolVersion = NetworkPacket.ProtocolVersion; //We don't know it yet
+        this.protocolVersion = DeviceHelper.ProtocolVersion; //We don't know it yet
         this.deviceType = DeviceType.FromString(settings.getString("deviceType", "desktop"));
 
         //Assume every plugin is supported until addLink is called and we can get the actual list
@@ -181,25 +192,11 @@ public class Device implements BaseLink.PacketReceiver {
     }
 
     public String getName() {
-        return name != null ? name : context.getString(R.string.unknown_device);
+        return StringUtils.defaultString(name, context.getString(R.string.unknown_device));
     }
 
     public Drawable getIcon() {
-        int drawableId;
-        switch (deviceType) {
-            case Phone:
-                drawableId = R.drawable.ic_device_phone;
-                break;
-            case Tablet:
-                drawableId = R.drawable.ic_device_tablet;
-                break;
-            case Tv:
-                drawableId = R.drawable.ic_device_tv;
-                break;
-            default:
-                drawableId = R.drawable.ic_device_laptop;
-        }
-        return ContextCompat.getDrawable(context, drawableId);
+        return deviceType.getIcon(context);
     }
 
     public DeviceType getDeviceType() {
@@ -216,7 +213,7 @@ public class Device implements BaseLink.PacketReceiver {
 
     //Returns 0 if the version matches, < 0 if it is older or > 0 if it is newer
     public int compareProtocolVersion() {
-        return protocolVersion - NetworkPacket.ProtocolVersion;
+        return protocolVersion - DeviceHelper.ProtocolVersion;
     }
 
 
@@ -396,16 +393,17 @@ public class Device implements BaseLink.PacketReceiver {
 
         Resources res = getContext().getResources();
 
-        final NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        final NotificationManager notificationManager = ContextCompat.getSystemService(getContext(), NotificationManager.class);
+
+        String verificationKeyShort = SslHelper.getVerificationKey(SslHelper.certificate, certificate).substring(8);
 
         Notification noti = new NotificationCompat.Builder(getContext(), NotificationHelper.Channels.DEFAULT)
                 .setContentTitle(res.getString(R.string.pairing_request_from, getName()))
-                .setContentText(res.getString(R.string.tap_to_answer))
-                .setContentIntent(pendingIntent)
+                .setContentText(res.getString(R.string.pairing_verification_code, verificationKeyShort))
                 .setTicker(res.getString(R.string.pair_requested))
                 .setSmallIcon(R.drawable.ic_notification)
-                .addAction(R.drawable.ic_accept_pairing, res.getString(R.string.pairing_accept), acceptedPendingIntent)
-                .addAction(R.drawable.ic_reject_pairing, res.getString(R.string.pairing_reject), rejectedPendingIntent)
+                .addAction(R.drawable.ic_accept_pairing_24dp, res.getString(R.string.pairing_accept), acceptedPendingIntent)
+                .addAction(R.drawable.ic_reject_pairing_24dp, res.getString(R.string.pairing_reject), rejectedPendingIntent)
                 .setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .build();
@@ -414,7 +412,8 @@ public class Device implements BaseLink.PacketReceiver {
     }
 
     public void hidePairingNotification() {
-        final NotificationManager notificationManager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        final NotificationManager notificationManager = ContextCompat.getSystemService(getContext(),
+                NotificationManager.class);
         notificationManager.cancel(notificationId);
     }
 
@@ -557,7 +556,6 @@ public class Device implements BaseLink.PacketReceiver {
                 }
             }
         } else if (isPaired()) {
-
             // pluginsByIncomingInterface may not be built yet
             if(pluginsByIncomingInterface.isEmpty()) {
                 reloadPluginsFromSettings();
@@ -565,7 +563,7 @@ public class Device implements BaseLink.PacketReceiver {
 
             //If capabilities are not supported, iterate all plugins
             Collection<String> targetPlugins = pluginsByIncomingInterface.get(np.getType());
-            if (targetPlugins != null && !targetPlugins.isEmpty()) {
+            if (!targetPlugins.isEmpty()) {
                 for (String pluginKey : targetPlugins) {
                     Plugin plugin = plugins.get(pluginKey);
                     try {
@@ -588,9 +586,11 @@ public class Device implements BaseLink.PacketReceiver {
 
             unpair();
 
-            //If capabilities are not supported, iterate all plugins
+            //If capabilities are not supported, iterate through all plugins.
             Collection<String> targetPlugins = pluginsByIncomingInterface.get(np.getType());
-            if (targetPlugins != null && !targetPlugins.isEmpty()) {
+            // When a mapping doesn't exist, an empty collection is added to the map and
+            // then returned, so a null check is not necessary.
+            if (!targetPlugins.isEmpty()) {
                 for (String pluginKey : targetPlugins) {
                     Plugin plugin = plugins.get(pluginKey);
                     try {
@@ -603,7 +603,6 @@ public class Device implements BaseLink.PacketReceiver {
                 Log.e("Device", "Ignoring packet with type " + np.getType() + " because no plugin can handle it");
             }
         }
-
     }
 
     public static abstract class SendPacketStatusCallback {
@@ -728,8 +727,8 @@ public class Device implements BaseLink.PacketReceiver {
         Plugin existing = plugins.get(pluginKey);
         if (existing != null) {
 
-            if (existing.getMinSdk() > Build.VERSION.SDK_INT) {
-                Log.i("KDE/addPlugin", "Min API level not fulfilled " + pluginKey);
+            if (existing.isIncompatible()) {
+                Log.i("KDE/addPlugin", "Minimum requirements (e.g. API level) not fulfilled " + pluginKey);
                 return false;
             }
 
@@ -750,17 +749,9 @@ public class Device implements BaseLink.PacketReceiver {
             return false;
         }
 
-        if (plugin.getMinSdk() > Build.VERSION.SDK_INT) {
-            Log.i("KDE/addPlugin", "Min API level not fulfilled" + pluginKey);
+        if (plugin.isIncompatible()) {
+            Log.i("KDE/addPlugin", "Minimum requirements (e.g. API level) not fulfilled " + pluginKey);
             return false;
-        }
-
-        boolean success;
-        try {
-            success = plugin.onCreate();
-        } catch (Exception e) {
-            success = false;
-            Log.e("KDE/addPlugin", "plugin failed to load " + pluginKey, e);
         }
 
         plugins.put(pluginKey, plugin);
@@ -769,11 +760,10 @@ public class Device implements BaseLink.PacketReceiver {
             Log.e("KDE/addPlugin", "No permission " + pluginKey);
             plugins.remove(pluginKey);
             pluginsWithoutPermissions.put(pluginKey, plugin);
-            success = false;
+            return false;
         } else {
             Log.i("KDE/addPlugin", "Permissions OK " + pluginKey);
             pluginsWithoutPermissions.remove(pluginKey);
-
             if (plugin.checkOptionalPermissions()) {
                 Log.i("KDE/addPlugin", "Optional Permissions OK " + pluginKey);
                 pluginsWithoutOptionalPermissions.remove(pluginKey);
@@ -783,7 +773,12 @@ public class Device implements BaseLink.PacketReceiver {
             }
         }
 
-        return success;
+        try {
+            return plugin.onCreate();
+        } catch (Exception e) {
+            Log.e("KDE/addPlugin", "plugin failed to load " + pluginKey, e);
+            return false;
+        }
     }
 
     private synchronized boolean removePlugin(String pluginKey) {
@@ -815,11 +810,9 @@ public class Device implements BaseLink.PacketReceiver {
     }
 
     public void reloadPluginsFromSettings() {
-
-        HashMap<String, ArrayList<String>> newPluginsByIncomingInterface = new HashMap<>();
+        MultiValuedMap<String, String> newPluginsByIncomingInterface = new ArrayListValuedHashMap<>();
 
         for (String pluginKey : supportedPlugins) {
-
             PluginFactory.PluginInfo pluginInfo = PluginFactory.getPluginInfo(pluginKey);
 
             boolean pluginEnabled = false;
@@ -832,16 +825,14 @@ public class Device implements BaseLink.PacketReceiver {
                 boolean success = addPlugin(pluginKey);
                 if (success) {
                     for (String packageType : pluginInfo.getSupportedPacketTypes()) {
-                        ArrayList<String> plugins = newPluginsByIncomingInterface.get(packageType);
-                        if (plugins == null) plugins = new ArrayList<>();
-                        plugins.add(pluginKey);
-                        newPluginsByIncomingInterface.put(packageType, plugins);
+                        newPluginsByIncomingInterface.put(packageType, pluginKey);
                     }
+                } else {
+                    removePlugin(pluginKey);
                 }
             } else {
                 removePlugin(pluginKey);
             }
-
         }
 
         pluginsByIncomingInterface = newPluginsByIncomingInterface;

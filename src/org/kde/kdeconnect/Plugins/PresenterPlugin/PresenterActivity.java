@@ -1,26 +1,11 @@
 /*
- * Copyright 2014 Ahmed I. Khalil <ahmedibrahimkhali@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Ahmed I. Khalil <ahmedibrahimkhali@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect.Plugins.PresenterPlugin;
 
-import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -36,14 +21,19 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.media.VolumeProviderCompat;
+
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.UserInterface.ThemeUtil;
 import com.zorinos.zorin_connect.R;
+import com.zorinos.zorin_connect.databinding.ActivityPresenterBinding;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.media.VolumeProviderCompat;
+import java.util.Objects;
 
 public class PresenterActivity extends AppCompatActivity implements SensorEventListener {
+    private ActivityPresenterBinding binding;
 
     private MediaSessionCompat mMediaSession;
 
@@ -75,9 +65,9 @@ public class PresenterActivity extends AppCompatActivity implements SensorEventL
         if (sensorManager != null) {
             return; //Already enabled
         }
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        findViewById(R.id.pointer_button).setVisibility(View.VISIBLE);
-        findViewById(R.id.pointer_button).setOnTouchListener((v, event) -> {
+        sensorManager = ContextCompat.getSystemService(this, SensorManager.class);
+        binding.pointerButton.setVisibility(View.VISIBLE);
+        binding.pointerButton.setOnTouchListener((v, event) -> {
             if(event.getAction() == MotionEvent.ACTION_DOWN){
                 sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE), SensorManager.SENSOR_DELAY_GAME);
                 v.performClick(); // The linter complains if this is not called
@@ -95,14 +85,19 @@ public class PresenterActivity extends AppCompatActivity implements SensorEventL
         super.onCreate(savedInstanceState);
         ThemeUtil.setUserPreferredTheme(this);
 
-        setContentView(R.layout.activity_presenter);
+        binding = ActivityPresenterBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        setSupportActionBar(binding.toolbarLayout.toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         final String deviceId = getIntent().getStringExtra("deviceId");
 
         BackgroundService.RunWithPlugin(this, deviceId, PresenterPlugin.class, plugin -> runOnUiThread(() -> {
             this.plugin = plugin;
-            findViewById(R.id.next_button).setOnClickListener(v -> plugin.sendNext());
-            findViewById(R.id.previous_button).setOnClickListener(v -> plugin.sendPrevious());
+            binding.nextButton.setOnClickListener(v -> plugin.sendNext());
+            binding.previousButton.setOnClickListener(v -> plugin.sendPrevious());
             if (plugin.isPointerSupported()) {
                 enablePointer();
             }
@@ -149,7 +144,7 @@ public class PresenterActivity extends AppCompatActivity implements SensorEventL
         }
 
         if (mMediaSession != null) {
-            PowerManager pm = (PowerManager) this.getSystemService(Context.POWER_SERVICE);
+            PowerManager pm = ContextCompat.getSystemService(this, PowerManager.class);
             boolean screenOn;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
                 screenOn = pm.isInteractive();

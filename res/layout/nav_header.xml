@@ -1,36 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
-    android:background="@drawable/drawer_header"
-    android:gravity="bottom"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/kdeconnect_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="48dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="48dp"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:text="@string/kde_connect"
-        android:textColor="#FFF"
-        android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/nav_header_horizontal_margin"
+        android:paddingLeft="@dimen/nav_header_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingEnd="@dimen/nav_header_horizontal_margin"
+        android:paddingRight="@dimen/nav_header_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
 
-    <TextView
-        android:id="@+id/device_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:paddingBottom="16dp"
-        android:paddingEnd="48dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="48dp"
-        android:paddingStart="16dp"
-        android:paddingTop="4dp"
-        android:text="My device"
-        android:textColor="#fff" />
+        <ImageView
+            android:id="@+id/device_type"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_gravity="top"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:paddingBottom="4dp"
+            android:tint="?android:attr/textColorSecondary"
+            tools:srcCompat="@drawable/ic_device_phone_32dp" />
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/kdeconnect_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kde_connect"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <TextView
+                android:id="@+id/device_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="?android:attr/textColorSecondary"
+                tools:text="My device" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -1,21 +1,7 @@
 /*
- * Copyright 2019 Erik Duisters <e.duisters1@gmail.com>
+ * SPDX-FileCopyrightText: 2019 Erik Duisters <e.duisters1@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
 package org.kde.kdeconnect.UserInterface;
@@ -23,23 +9,22 @@ package org.kde.kdeconnect.UserInterface;
 import android.app.Dialog;
 import android.os.Bundle;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
-import com.zorinos.zorin_connect.R;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
+import com.google.android.material.textfield.TextInputEditText;
+
+import com.zorinos.zorin_connect.R;
+import com.zorinos.zorin_connect.databinding.EditTextAlertDialogViewBinding;
 
 public class EditTextAlertDialogFragment extends AlertDialogFragment {
     private static final String KEY_HINT_RES_ID = "HintResId";
     private static final String KEY_TEXT = "Text";
 
-    @BindView(R.id.textInputLayout) TextInputLayout textInputLayout;
-    @BindView(R.id.textInputEditText) TextInputEditText editText;
+    private EditTextAlertDialogViewBinding binding;
+    TextInputEditText editText;
+
     private @StringRes int hintResId;
     private String text;
 
@@ -49,10 +34,12 @@ public class EditTextAlertDialogFragment extends AlertDialogFragment {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
         dialog.setOnShowListener(dialogInterface -> {
             dialog.setOnShowListener(null);
-            ButterKnife.bind(EditTextAlertDialogFragment.this, dialog);
 
-            textInputLayout.setHintEnabled(true);
-            textInputLayout.setHint(getString(hintResId));
+            binding = EditTextAlertDialogViewBinding.bind(dialog.getWindow().getDecorView());
+            editText = binding.textInputEditText;
+
+            binding.textInputLayout.setHintEnabled(true);
+            binding.textInputLayout.setHint(getString(hintResId));
             editText.setText(text);
         });
 

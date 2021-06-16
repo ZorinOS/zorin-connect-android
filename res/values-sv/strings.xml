@@ -3,14 +3,18 @@
   <string name="kde_connect">Zorin Connect</string>
   <string name="foreground_notification_no_devices">Inte ansluten till någon apparat</string>
   <string name="foreground_notification_devices">Ansluten till: %s</string>
+  <string name="foreground_notification_send_clipboard">Skicka klippbordet</string>
   <string name="pref_plugin_telephony">Telefonunderrättelser</string>
   <string name="pref_plugin_telephony_desc">Skicka underrättelser för inkommande samtal</string>
   <string name="pref_plugin_battery">Batterirapport</string>
   <string name="pref_plugin_battery_desc">Rapportera periodiskt batteriets status</string>
+  <string name="pref_plugin_connectivity_report">Anslutningsrapport</string>
+  <string name="pref_plugin_connectivity_report_desc">Rapportera nätverkssignalstyrka och status</string>
   <string name="pref_plugin_sftp">Exponera filsystem</string>
   <string name="pref_plugin_sftp_desc">Gör det möjligt att bläddra i apparatens filsystem från annan apparat</string>
   <string name="pref_plugin_clipboard">Synkronisera klippbord</string>
   <string name="pref_plugin_clipboard_desc">Dela klippbordets innehåll</string>
+  <string name="pref_plugin_clipboard_sent">Klippbordet skickat</string>
   <string name="pref_plugin_mousepad">Extern inmatning</string>
   <string name="pref_plugin_mousepad_desc">Använd telefonen eller surfplattan som mus och tangentbord</string>
   <string name="pref_plugin_presenter">Fjärrbildspel</string>
@@ -38,7 +42,7 @@
   <string name="open_settings">Öppna inställningarna</string>
   <string name="no_permissions">Du måste ge rättighet att komma åt underrättelser</string>
   <string name="no_permission_mprisreceiver">För att kunna styra mediaspelare måste du ge tillgång till underrättelser</string>
-  <string name="no_permissions_remotekeyboard">Zorin Connect fjärrtangentbord måste aktiveras för att ta emot tangentnedtryckningar</string>
+  <string name="no_permissions_remotekeyboard">Zorin Connects fjärrtangentbord måste aktiveras för att ta emot tangentnedtryckningar</string>
   <string name="send_ping">Skicka ping</string>
   <string name="open_mpris_controls">Kontroll av multimedia</string>
   <string name="remotekeyboard_editing_only_title">Hantera bara externa tangenter vid redigering</string>
@@ -72,6 +76,21 @@
     <item>Större</item>
     <item>Störst</item>
   </string-array>
+  <string name="sendkeystrokes_send_to">Skicka tangentnedtryckningar till</string>
+  <string name="sendkeystrokes_textbox_hint">Skicka tangentnedtryckningar till värddator</string>
+  <string name="sendkeystrokes_disabled_toast">Skicka tangentnedtryckningar är inaktiverat: aktivera det i inställningarna</string>
+  <string name="sendkeystrokes_wrong_data">Ogiltig Mime-type, måste vara \'text/x-keystrokes\'</string>
+  <string name="sendkeystrokes_sent_text">Skickade %1s till enhet %2s</string>
+  <string name="sendkeystrokes_pref_category_summary">Modulen låter andra program att dela textsegment som tangentnedtryckningar vilka skickas till den anslutna värddatorn</string>
+  <string name="sendkeystrokes_pref_category_title">Skicka tangentnedtryckningar</string>
+  <string name="sendkeystrokes_pref_enabled">Aktivera skicka tangentnedtryckningar</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Lyssna på data med Mime-typen \'text/x-keystrokes\'</string>
+  <string name="sendkeystrokes_safe_text_enabled">Skicka säker text omedelbart</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Skicka bara korta numeriska strängar utan att bekräfta</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Skicka som tangentnedtryckningar</string>
+  <string name="mouse_receiver_plugin_description">Ta emot externa musrörelser</string>
+  <string name="mouse_receiver_plugin_name">Musmottagare</string>
+  <string name="mouse_receiver_no_permissions">Du måste aktivera åtkomsttjänsten</string>
   <string name="category_connected_devices">Anslutna apparater</string>
   <string name="category_not_paired_devices">Tillgängliga apparater</string>
   <string name="category_remembered_devices">Ihågkomna apparater</string>
@@ -87,8 +106,8 @@
   <string name="error_canceled_by_other_peer">Avbruten av motparten</string>
   <string name="encryption_info_title">Krypteringsinformation</string>
   <string name="encryption_info_msg_no_ssl">Den andra apparaten använder inte en aktuell version av Zorin Connect. Använder den föråldrade krypteringsmetoden.</string>
-  <string name="my_device_fingerprint">SHA1-fingeravtryck för din apparats certifikat är:</string>
-  <string name="remote_device_fingerprint">SHA1-fingeravtryck för den andra apparatens certifikat är:</string>
+  <string name="my_device_fingerprint">SHA256-fingeravtryck för din apparats certifikat är:</string>
+  <string name="remote_device_fingerprint">SHA256-fingeravtryck för den andra apparatens certifikat är:</string>
   <string name="pair_requested">Ihopparning begärd</string>
   <string name="pairing_request_from">Begäran om ihopparning från %1s</string>
   <plurals name="incoming_file_title">
@@ -123,6 +142,7 @@
     <item quantity="one">Misslyckades skicka fil till %1$s</item>
     <item quantity="other">Misslyckades skicka %2$d av %3$d filer till %1$s</item>
   </plurals>
+  <string name="tap_to_open">Rör för att öppna</string>
   <string name="received_file_text">Rör för att öppna \'%1s\'</string>
   <string name="cannot_create_file">Kan inte skapa filen %s</string>
   <string name="tap_to_answer">Rör för att svara</string>
@@ -210,6 +230,8 @@
   <string name="no_file_browser">Det finns inga filbläddrare installerade.</string>
   <string name="pref_plugin_telepathy">Skicka SMS</string>
   <string name="pref_plugin_telepathy_desc">Skicka textmeddelanden från skrivbordet</string>
+  <string name="pref_plugin_telepathy_mms">Skicka MMS</string>
+  <string name="pref_plugin_telepathy_mms_desc">För att kunna skicka MMS från Zorin Connect måste det anges som standardprogram för SMS.</string>
   <string name="findmyphone_title">Hitta min telefon</string>
   <string name="findmyphone_title_tablet">Hitta min surfplatta</string>
   <string name="findmyphone_title_tv">Hitta min tv</string>
@@ -221,7 +243,7 @@
   <string name="permission_explanation">Insticksprogrammet behöver rättigheter för att fungera</string>
   <string name="optional_permission_explanation">Du måste ge extra rättigheter för att aktivera alla funktioner</string>
   <string name="plugins_need_optional_permission">Vissa insticksprogram har inaktiverade funktioner på grund av att rättigheter saknas (rör för mer information):</string>
-  <string name="share_optional_permission_explanation">För att dela filer mellan telefonen och skrivbordet behöver du ge tillgång till telefonens lagringsutrymme</string>
+  <string name="share_optional_permission_explanation">För att ta emot delade filer måste du välja en målkatalog</string>
   <string name="telepathy_permission_explanation">För att läsa och skriva SMS från skrivbordet måste du ge rättigheter för SMS</string>
   <string name="telephony_permission_explanation">För att se telefonsamtal på skrivbordet måste du ge rättigheter för telefonsamtalsloggar och telefontillstånd</string>
   <string name="telephony_optional_permission_explanation">För att se ett kontaktnamn istället för ett telefonnummer måste du ge tillgång till telefonens kontakter</string>
@@ -237,7 +259,7 @@
   <string name="presenter_lock_tip">Apparaten kan låsas och volymtangenterna användas för att gå till föregående eller nästa bild</string>
   <string name="add_command">Lägg till ett kommando</string>
   <string name="addcommand_explanation">Det finns inga kommandon registrerade</string>
-  <string name="addcommand_explanation2">Du kan lägga till nya kommandon i Zorin Connect systeminställningar</string>
+  <string name="addcommand_explanation2">Du kan lägga till nya kommandon i Zorin Connects systeminställningar</string>
   <string name="add_command_description">Du kan lägga till kommandon på skrivbordet</string>
   <string name="pref_plugin_mprisreceiver">Styrning av mediaspelare</string>
   <string name="pref_plugin_mprisreceiver_desc">Styr telefonens mediaspelare från en annan apparat</string>
@@ -246,6 +268,7 @@
   <string name="notification_channel_media_control">Kontroll av media</string>
   <string name="notification_channel_filetransfer">Filöverföring</string>
   <string name="notification_channel_high_priority">Hög prioritet</string>
+  <string name="notification_channel_sms_mms">Nytt meddelande</string>
   <string name="mpris_stop">Stoppa aktuell spelare</string>
   <string name="copy_url_to_clipboard">Kopiera webbadress till klippbordet</string>
   <string name="clipboard_toast">Kopierad till klippbordet</string>
@@ -295,6 +318,38 @@
   <string name="bigscreen_select">Markera</string>
   <string name="bigscreen_right">Höger</string>
   <string name="bigscreen_down">Neråt</string>
+  <string name="bigscreen_mic">Mikrofon</string>
   <string name="pref_plugin_bigscreen">Fjärrkontroll för storskärm</string>
   <string name="pref_plugin_bigscreen_desc">Använd apparaten som en fjärrkontroll för Plasma storskärm</string>
+  <string name="bigscreen_optional_permission_explanation">För att dela mikrofoningången från telefonen måste du ge tillgång till telefonens ljudingång</string>
+  <string name="bigscreen_speech_extra_prompt">Tal</string>
+  <string name="message_reply_label">SVARA</string>
+  <string name="mark_as_read_label">MARKERA SOM LÄST</string>
+  <string name="user_display_name">Du</string>
+  <string name="set_default_sms_app_title">Skicka MMS</string>
+  <string name="set_group_message_as_mms_title">Skicka grupp-MMS</string>
+  <string name="set_long_text_as_mms_title">Skicka lång text som MMS</string>
+  <string name="convert_to_mms_after_title">Konvertera till MMS</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Efter ett meddelande</item>
+    <item>Efter två meddelanden</item>
+    <item>Efter tre meddelanden</item>
+    <item>Efter fyra meddelanden</item>
+    <item>Efter fem meddelanden</item>
+  </string-array>
+  <string name="theme_dialog_title">Välj tema</string>
+  <string-array name="theme_list">
+    <item>Inställt för att spara batteri</item>
+    <item>Ljus</item>
+    <item>Mörk</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Systemstandard</item>
+    <item>Ljus</item>
+    <item>Mörk</item>
+  </string-array>
+  <string name="report_bug">Rapportera fel</string>
+  <string name="donate">Ge ett bidrag</string>
+  <string name="source_code">Källkod</string>
+  <string name="licenses">Licenser</string>
 </resources>

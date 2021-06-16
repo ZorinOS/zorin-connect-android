@@ -1,21 +1,7 @@
 /*
- * Copyright 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of
- * the License or (at your option) version 3 or any later version
- * accepted by the membership of KDE e.V. (or its successor approved
- * by the membership of KDE e.V.), which shall act as a proxy
- * defined in Section 14 of version 3 of the license.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>. 
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
 package org.kde.kdeconnect;
@@ -37,6 +23,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import org.kde.kdeconnect.Backends.BaseLink;
 import org.kde.kdeconnect.Backends.BaseLinkProvider;
@@ -141,7 +128,7 @@ public class BackgroundService extends Service {
 
         if (NotificationHelper.isPersistentNotificationEnabled(this)) {
             //Update the foreground notification with the currently connected device list
-            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationManager nm = ContextCompat.getSystemService(this, NotificationManager.class);
             nm.notify(FOREGROUND_NOTIFICATION_ID, createForegroundNotification());
         }
     }
@@ -316,7 +303,7 @@ public class BackgroundService extends Service {
     }
 
     public void changePersistentNotificationVisibility(boolean visible) {
-        NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager nm = ContextCompat.getSystemService(this, NotificationManager.class);
         if (visible) {
             nm.notify(FOREGROUND_NOTIFICATION_ID, createForegroundNotification());
         } else {
@@ -329,7 +316,21 @@ public class BackgroundService extends Service {
 
         //Why is this needed: https://developer.android.com/guide/components/services#Foreground
 
+        ArrayList<String> connectedDevices = new ArrayList<>();
+        ArrayList<String> connectedDeviceIds = new ArrayList<>();
+        for (Device device : getDevices().values()) {
+            if (device.isReachable() && device.isPaired()) {
+                connectedDeviceIds.add(device.getDeviceId());
+                connectedDevices.add(device.getName());
+            }
+        }
+
         Intent intent = new Intent(this, MainActivity.class);
+        if (connectedDeviceIds.size() == 1) {
+            // Force open screen of the only connected device
+            intent.putExtra(MainActivity.EXTRA_DEVICE_ID, connectedDeviceIds.get(0));
+        }
+
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, NotificationHelper.Channels.PERSISTENT);
         notification
@@ -344,15 +345,6 @@ public class BackgroundService extends Service {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             //Pre-oreo, the notification will have an empty title line without this
             notification.setContentTitle(getString(R.string.kde_connect));
-        }
-
-        ArrayList<String> connectedDevices = new ArrayList<>();
-        ArrayList<String> connectedDeviceIds = new ArrayList<>();
-        for (Device device : getDevices().values()) {
-            if (device.isReachable() && device.isPaired()) {
-                connectedDeviceIds.add(device.getDeviceId());
-                connectedDevices.add(device.getName());
-            }
         }
 
         if (connectedDevices.isEmpty()) {
@@ -454,12 +446,7 @@ public class BackgroundService extends Service {
                     mutex.unlock();
                 }
             }
-            Intent serviceIntent = new Intent(c, BackgroundService.class);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                c.startForegroundService(serviceIntent);
-            } else {
-                c.startService(serviceIntent);
-            }
+            ContextCompat.startForegroundService(c, new Intent(c, BackgroundService.class));
         }).start();
     }
 
