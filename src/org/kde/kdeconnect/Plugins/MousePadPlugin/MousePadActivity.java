@@ -6,6 +6,7 @@
 
 package org.kde.kdeconnect.Plugins.MousePadPlugin;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
@@ -55,10 +56,12 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
     private KeyListenerView keyListenerView;
 
     enum ClickType {
-        RIGHT, MIDDLE, NONE;
+        LEFT, RIGHT, MIDDLE, NONE;
 
         static ClickType fromString(String s) {
             switch (s) {
+                case "left":
+                    return LEFT;
                 case "right":
                     return RIGHT;
                 case "middle":
@@ -69,7 +72,7 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
         }
     }
 
-    private ClickType doubleTapAction, tripleTapAction;
+    private ClickType singleTapAction, doubleTapAction, tripleTapAction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,8 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
         } else {
             scrollDirection = 1;
         }
+        String singleTapSetting = prefs.getString(getString(R.string.mousepad_single_tap_key),
+                getString(R.string.mousepad_default_single));
         String doubleTapSetting = prefs.getString(getString(R.string.mousepad_double_tap_key),
                 getString(R.string.mousepad_default_double));
         String tripleTapSetting = prefs.getString(getString(R.string.mousepad_triple_tap_key),
@@ -111,6 +116,7 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
 
         mPointerAccelerationProfile = PointerAccelerationProfileFactory.getProfileWithName(accelerationProfileName);
 
+        singleTapAction = ClickType.fromString(singleTapSetting);
         doubleTapAction = ClickType.fromString(doubleTapSetting);
         tripleTapAction = ClickType.fromString(tripleTapSetting);
 
@@ -177,18 +183,24 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_right_click:
-                sendRightClick();
-                return true;
-            case R.id.menu_middle_click:
-                sendMiddleClick();
-                return true;
-            case R.id.menu_show_keyboard:
-                showKeyboard();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        if (id == R.id.menu_right_click) {
+            sendRightClick();
+            return true;
+        } else if (id == R.id.menu_middle_click) {
+            sendMiddleClick();
+            return true;
+        } else if (id == R.id.menu_show_keyboard) {
+            showKeyboard();
+            return true;
+        // Disabled for now as it only seems to send the first character in composition
+        //} else if (id == R.id.menu_open_compose_send) {
+        //    Intent intent = new Intent(this, ComposeSendActivity.class);
+        //    intent.putExtra("org.kde.kdeconnect.Plugins.MousePadPlugin.deviceId", deviceId);
+        //    startActivity(intent);
+        //    return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 
@@ -302,7 +314,18 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
-        BackgroundService.RunWithPlugin(this, deviceId, MousePadPlugin.class, MousePadPlugin::sendSingleClick);
+        switch (singleTapAction) {
+            case LEFT:
+                sendLeftClick();
+                break;
+            case RIGHT:
+                sendRightClick();
+                break;
+            case MIDDLE:
+                sendMiddleClick();
+                break;
+            default:
+        }
         return true;
     }
 
@@ -320,6 +343,9 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
     @Override
     public boolean onTripleFingerTap(MotionEvent ev) {
         switch (tripleTapAction) {
+            case LEFT:
+                sendLeftClick();
+                break;
             case RIGHT:
                 sendRightClick();
                 break;
@@ -334,6 +360,9 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
     @Override
     public boolean onDoubleFingerTap(MotionEvent ev) {
         switch (doubleTapAction) {
+            case LEFT:
+                sendLeftClick();
+                break;
             case RIGHT:
                 sendRightClick();
                 break;
@@ -345,6 +374,10 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
         return true;
     }
 
+
+    private void sendLeftClick() {
+        BackgroundService.RunWithPlugin(this, deviceId, MousePadPlugin.class, MousePadPlugin::sendLeftClick);
+    }
 
     private void sendMiddleClick() {
         BackgroundService.RunWithPlugin(this, deviceId, MousePadPlugin.class, MousePadPlugin::sendMiddleClick);
@@ -365,5 +398,10 @@ public class MousePadActivity extends AppCompatActivity implements GestureDetect
         imm.toggleSoftInputFromWindow(keyListenerView.getWindowToken(), 0, 0);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        return true;
+    }
 }
 

@@ -57,9 +57,10 @@
   <string name="mousepad_acceleration_profile_settings_title">Vel peikarakselerasjon</string>
   <string name="mousepad_scroll_direction_title">Omvend rulleretning</string>
   <string-array name="mousepad_tap_entries">
-    <item>Høgreklikk</item>
-    <item>Midtklikk</item>
-    <item>Ingenting</item>
+    <item>Left click</item>
+    <item>Right click</item>
+    <item>Middle click</item>
+    <item>Nothing</item>
   </string-array>
   <string-array name="mousepad_sensitivity_entries">
     <item>Saktast</item>
@@ -80,7 +81,6 @@
   <string name="sendkeystrokes_textbox_hint">Send tastetrykk til verten</string>
   <string name="sendkeystrokes_disabled_toast">Sending av tastetrykk er slått av. Du kan slå det på i innstillingane.</string>
   <string name="sendkeystrokes_wrong_data">Ugyldig MIME-type – må vera «text/x-keystrokes»</string>
-  <string name="sendkeystrokes_sent_text">Sende %1s til eininga %2s</string>
   <string name="sendkeystrokes_pref_category_summary">Lèt andre appar dela tekstbitar som tastetrykk, som vert sende til den tilkopla verten</string>
   <string name="sendkeystrokes_pref_category_title">Send tastetrykk</string>
   <string name="sendkeystrokes_pref_enabled">Slå på sending av tastetrykk</string>

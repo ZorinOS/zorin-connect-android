@@ -56,11 +56,6 @@
   <string name="mousepad_sensitivity_settings_title">Stabilește sensibilitatea zonei tactile</string>
   <string name="mousepad_acceleration_profile_settings_title">Stabilește accelerația indicatorului</string>
   <string name="mousepad_scroll_direction_title">Inversează direcția derulării</string>
-  <string-array name="mousepad_tap_entries">
-    <item>Clic-dreapta</item>
-    <item>Clic-mijloc</item>
-    <item>Nimic</item>
-  </string-array>
   <string-array name="mousepad_sensitivity_entries">
     <item>Cea mai lentă</item>
     <item>Mai puțin lentă</item>
@@ -80,7 +75,6 @@
   <string name="sendkeystrokes_textbox_hint">Trimite apăsări de taste către gazdă</string>
   <string name="sendkeystrokes_disabled_toast">Trimiterea de apăsări de taste e dezactivată – activați-o în configurări</string>
   <string name="sendkeystrokes_wrong_data">Tip MIME nevalid – trebuie să fie „text/x-keystrokes”</string>
-  <string name="sendkeystrokes_sent_text">Trimis %1s către dispozitivul %2s</string>
   <string name="sendkeystrokes_pref_category_summary">Acest modul permite altor aplicații să partajeze fragmente de text ca apăsări de taste ce vor fi trimise către gazda conectată</string>
   <string name="sendkeystrokes_pref_category_title">Trimite apăsări de taste</string>
   <string name="sendkeystrokes_pref_enabled">Activează trimiterea de apăsări de taste</string>
@@ -168,6 +162,8 @@
   <string name="mpris_rew">Rebobinează</string>
   <string name="mpris_ff">Derulează rapid înainte</string>
   <string name="mpris_next">Următor</string>
+  <string name="mpris_loop">Buclă</string>
+  <string name="mpris_shuffle">Amestecă</string>
   <string name="mpris_volume">Volum</string>
   <string name="mpris_time_settings_title">Butoane pentru derulare/rebobinare</string>
   <string name="mpris_time_settings_summary">Ajustează durata de derulat/rebobinat rapid la apăsare</string>

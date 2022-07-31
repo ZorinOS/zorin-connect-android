@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">Lähetä laitteeseen</string>
   <string name="foreground_notification_no_devices">Ei laiteyhteyttä</string>
   <string name="foreground_notification_devices">Yhdistetty laitteeseen: %s</string>
   <string name="foreground_notification_send_clipboard">Lähetä leikepöytä</string>
@@ -8,6 +9,8 @@
   <string name="pref_plugin_telephony_desc">Lähetä ilmoitukset saapuvista puheluista</string>
   <string name="pref_plugin_battery">Akkuraportti</string>
   <string name="pref_plugin_battery_desc">Raportoi akun tila säännöllisesti</string>
+  <string name="pref_plugin_connectivity_report">Verkkoyhteysraportti</string>
+  <string name="pref_plugin_connectivity_report_desc">Ilmoita kentän voimakkuus ja tila</string>
   <string name="pref_plugin_sftp">Tiedostojärjestelmän paljastaminen</string>
   <string name="pref_plugin_sftp_desc">Mahdollistaa tämän laitteen tiedostojärjestelmän etäselaamisen</string>
   <string name="pref_plugin_clipboard">Leikepöydän synkronointi</string>
@@ -54,11 +57,6 @@
   <string name="mousepad_sensitivity_settings_title">Aseta kosketuslevyn herkkyys</string>
   <string name="mousepad_acceleration_profile_settings_title">Aseta osoittimen kiihdytys</string>
   <string name="mousepad_scroll_direction_title">Käänteinen vierityssuunta</string>
-  <string-array name="mousepad_tap_entries">
-    <item>Oikea napsautus</item>
-    <item>Keskinapsautus</item>
-    <item>Ei toimintoa</item>
-  </string-array>
   <string-array name="mousepad_sensitivity_entries">
     <item>Hitain</item>
     <item>Hitainta suurempi</item>
@@ -74,6 +72,26 @@
     <item>Vahvempi</item>
     <item>Vahvin</item>
   </string-array>
+  <string name="sendkeystrokes_send_to">Lähetä näppäinpainallukset…</string>
+  <string name="sendkeystrokes_textbox_hint">Lähetä näppäinpainallukset koneelle</string>
+  <string name="sendkeystrokes_disabled_toast">Näppäinpainallusten lähetys ei ole käytössä: ota se käyttöön asetuksista</string>
+  <string name="sendkeystrokes_wrong_data">Virheellinen MIME-tyyppi: vaaditaan ”text/x-keystrokes”</string>
+  <string name="sendkeystrokes_sent_text">Lähetettiin %1$s laitteelle %2$s</string>
+  <string name="sendkeystrokes_pref_category_summary">Tällä moduulilla muut sovellukset voivat jakaa tekstikatkelmia yhdistetylle koneelle lähetettyinä näppäinpainalluksina</string>
+  <string name="sendkeystrokes_pref_category_title">Lähetä näppäinpainalluksia</string>
+  <string name="sendkeystrokes_pref_enabled">Salli näppäinpainallusten lähettäminen</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Kuuntele dataa, jonka MIME-tyyppi on ”text/x-keystrokes”</string>
+  <string name="sendkeystrokes_safe_text_enabled">Lähetä turvallinen teksti välittömästi</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Lähetä lyhyet vain numeeriset jonot vahvistuksetta</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Lähetä näppäinpainalluksina</string>
+  <string name="mouse_receiver_plugin_description">Vastaanota etähiiren liike</string>
+  <string name="mouse_receiver_plugin_name">Hiirivastaanotin</string>
+  <string name="mouse_receiver_no_permissions">Esteettömyyspalvelu on otettava käyttöön</string>
+  <string name="view_status_title">Tila</string>
+  <string name="battery_status_format">Varaus: %d %%</string>
+  <string name="battery_status_low_format">Varaus: %d %%, vähissä</string>
+  <string name="battery_status_charging_format">Varaus: %d %%, latautuu</string>
+  <string name="battery_status_unknown">Varaustietoa ei ole saatavilla</string>
   <string name="category_connected_devices">Yhdistetyt laitteet</string>
   <string name="category_not_paired_devices">Saatavilla olevat laitteet</string>
   <string name="category_remembered_devices">Muistetut laitteet</string>
@@ -89,6 +107,7 @@
   <string name="error_canceled_by_other_peer">Vertaiskäyttäjä perui</string>
   <string name="encryption_info_title">Salaustiedot</string>
   <string name="encryption_info_msg_no_ssl">Toinen laite ei käytä Zorin Connectin uudehkoa versiota, joten käytetään vanhaa salausmenetelmää.</string>
+  <string name="my_device_fingerprint">Laitevarmenteen SHA256-sormenjälki on:</string>
   <string name="remote_device_fingerprint">Etälaitteen varmenteen SHA256-sormenjälki on:</string>
   <string name="pair_requested">Paripyyntö</string>
   <string name="pairing_request_from">Paripyyntö laitteesta %1s</string>
@@ -142,6 +161,8 @@
   <string name="mpris_rew">Kelaa takaisin</string>
   <string name="mpris_ff">Pikakelaa</string>
   <string name="mpris_next">Seuraava</string>
+  <string name="mpris_loop">Silmukka</string>
+  <string name="mpris_shuffle">Sekoita</string>
   <string name="mpris_volume">Äänenvoimakkuus</string>
   <string name="mpris_time_settings_title">Kelauspainikkeet</string>
   <string name="mpris_time_settings_summary">Säädä painettaessa tapahtuvan kelauksen kestoa</string>
@@ -175,6 +196,7 @@
   <string name="share_received_file">Jaa ”%s”</string>
   <string name="title_activity_notification_filter">Ilmoitussuodatin</string>
   <string name="filter_apps_info">Valittujen sovellusten ilmoitukset synkronoidaan.</string>
+  <string name="show_notification_if_screen_off">Lähetä ilmoitukset vain näyttö ei ole käytössä</string>
   <string name="sftp_sdcard_num">SD-kortti %d</string>
   <string name="sftp_sdcard">SD-kortti</string>
   <string name="sftp_readonly">(vain luku)</string>
@@ -330,4 +352,34 @@
     <item>Vaalea</item>
     <item>Tumma</item>
   </string-array>
+  <string name="report_bug">Ilmoita ohjelmavirheestä</string>
+  <string name="donate">Lahjoita</string>
+  <string name="source_code">Lähdekoodi</string>
+  <string name="licenses">Lisenssit</string>
+  <string name="website">Sivusto</string>
+  <string name="about">Tietoa</string>
+  <string name="authors">Tekijät</string>
+  <string name="thanks_to">Kiitokset</string>
+  <string name="easter_egg">Yllätysmuna</string>
+  <string name="email_contributor">Sähköpostiavustaja\n%s</string>
+  <string name="visit_contributors_homepage">Käy avustajan sivustolla\n%s</string>
+  <string name="version">Versio %s</string>
+  <string name="about_kde">Tietoa KDE:stä</string>
+  <string name="kde_be_free">KDE – Ole vapaa!</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">Nouse ylemmäs</string>
+  <string name="rise_down">Laskeudu alemmas</string>
+  <string name="app_description">Usean alustan sovellus, jolla laitteet (esim. puhelin ja tietokone) voivat viestiä keskenään</string>
+  <string name="maintainer_and_developer">Ylläpitäjä ja kehittäjä</string>
+  <string name="developer">Kehittäjä</string>
+  <string name="apple_support">macOS-tuki. Työn alla iOS-tuki</string>
+  <string name="bug_fixes_and_general_improvements">Virhekorjauksia ja yleisparannuksia</string>
+  <string name="samoilenko_yuri_task">SFTP-toteutus, virheenkorjaukset ja yleisparannukset</string>
+  <string name="aniket_kumar_task">Tekstiviestiliitännäisen parannukset</string>
+  <string name="alex_fiestas_task">Yhteystietoliitännäisen parannukset</string>
+  <string name="maxim_leshchenko_task">Käyttöliittymäparannukset ja tämä tietosivu</string>
+  <string name="holger_kaelberer_task">Etänäppäimistöliitännäinen ja virheenkorjaukset</string>
+  <string name="saikrishna_arcot_task">Tuki näppäimistön käytölle etäsyöteliitännäisessä, virheenkorjaukset ja yleisparannukset</string>
+  <string name="everyone_else">Kaikki muut vuosien varrella Zorin Connectia avustaneet</string>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="kde_connect">Zorin Connect</string>
+    <string name="manifest_label_share">Send to Device</string>
     <string name="foreground_notification_no_devices">Not connected to any device</string>
     <string name="foreground_notification_devices">Connected to: %s</string>
     <string name="foreground_notification_send_clipboard">Send Clipboard</string>
@@ -17,7 +18,7 @@
     <string name="pref_plugin_clipboard_sent">Clipboard Sent</string>
     <string name="pref_plugin_mousepad">Remote input</string>
     <string name="pref_plugin_mousepad_desc">Use your phone or tablet as a touchpad and keyboard</string>
-    <string name="pref_plugin_presenter">Slideshow remote</string>
+    <string name="pref_plugin_presenter">Slideshow Remote</string>
     <string name="pref_plugin_presenter_desc">Use your device to change slides in a presentation</string>
     <string name="pref_plugin_remotekeyboard">Receive remote keypresses</string>
     <string name="pref_plugin_remotekeyboard_desc">Receive keypress events from remote devices</string>
@@ -25,7 +26,7 @@
     <string name="pref_plugin_mpris_desc">Provides a remote control for your media player</string>
     <string name="pref_plugin_runcommand">Run Command</string>
     <string name="pref_plugin_runcommand_desc">Trigger remote commands from your phone or tablet</string>
-    <string name="pref_plugin_contacts">Contacts Synchronizer</string>
+    <string name="pref_plugin_contacts">Contacts synchronizer</string>
     <string name="pref_plugin_contacts_desc">Allow synchronizing the device\'s contacts book</string>
     <string name="pref_plugin_ping">Ping</string>
     <string name="pref_plugin_ping_desc">Send and receive pings</string>
@@ -44,18 +45,20 @@
     <string name="no_permission_mprisreceiver">To be able to control your media players you need to grant access to the notifications</string>
     <string name="no_permissions_remotekeyboard">To receive keypresses you need to activate the Zorin Connect Remote Keyboard</string>
     <string name="send_ping">Send ping</string>
-    <string name="open_mpris_controls">Multimedia control</string>
+    <string name="open_mpris_controls">Multimedia Control</string>
     <string name="remotekeyboard_editing_only" translatable="false">remotekeyboard_editing_only</string>
     <string name="remotekeyboard_editing_only_title" translatable="true">Handle remote keys only when editing</string>
     <string name="remotekeyboard_not_connected" translatable="true">There is no active remote keyboard connection, establish one in Zorin Connect</string>
     <string name="remotekeyboard_connected" translatable="true">Remote keyboard connection is active</string>
     <string name="remotekeyboard_multiple_connections" translatable="true">There is more than one remote keyboard connection, select the device to configure</string>
-    <string name="open_mousepad">Remote input</string>
+    <string name="open_mousepad">Remote Input</string>
     <string name="mousepad_info">Move a finger on the screen to move the mouse cursor. Tap for a click, and use two/three fingers for right and middle buttons. Use 2 fingers to scroll. Use a long press to drag\'n drop.</string>
+    <string name="mousepad_single_tap_settings_title">Set one finger tap action</string>
     <string name="mousepad_double_tap_settings_title">Set two finger tap action</string>
     <string name="mousepad_triple_tap_settings_title">Set three finger tap action</string>
     <string name="mousepad_sensitivity_settings_title">Set touchpad sensitivity</string>
     <string name="mousepad_acceleration_profile_settings_title">Set pointer acceleration</string>
+    <string name="mousepad_single_tap_key" translatable="false">mousepad_single_tap_key</string>
     <string name="mousepad_double_tap_key" translatable="false">mousepad_double_tap_key</string>
     <string name="mousepad_triple_tap_key" translatable="false">mousepad_triple_tap_key</string>
     <string name="mousepad_sensitivity_key" translatable="false">mousepad_sensitivity_key</string>
@@ -63,15 +66,18 @@
     <string name="mousepad_scroll_direction_title">Reverse Scrolling Direction</string>
     <string name="mousepad_scroll_direction" translatable="false">mousepad_scroll_direction</string>
     <string-array name="mousepad_tap_entries">
+        <item>Left click</item>
         <item>Right click</item>
         <item>Middle click</item>
         <item>Nothing</item>
     </string-array>
+    <string name="mousepad_default_single" translatable="false">left</string>
     <string name="mousepad_default_double" translatable="false">right</string>
     <string name="mousepad_default_triple" translatable="false">middle</string>
     <string name="mousepad_default_sensitivity" translatable="false">default</string>
     <string name="mousepad_default_acceleration_profile" translatable="false">medium</string>
     <string-array name="mousepad_tap_values" translatable="false">
+        <item>left</item>
         <item>right</item>
         <item>middle</item>
         <item>none</item>
@@ -111,7 +117,7 @@
     <string name="sendkeystrokes_textbox_hint">Send keystrokes to host</string>
     <string name="sendkeystrokes_disabled_toast">Sending keystrokes is disabled - enable it in the settings</string>
     <string name="sendkeystrokes_wrong_data"><![CDATA[Invalid mime type - needs to be \'text/x-keystrokes\']]></string>
-    <string name="sendkeystrokes_sent_text">Sent %1s to device %2s</string>
+    <string name="sendkeystrokes_sent_text">Sent %1$s to device %2$s</string>
 
     <string name="sendkeystrokes_pref_category_summary">This module allows other apps to share text segments as keystrokes which will get send to the connected host</string>
     <string name="sendkeystrokes_pref_category_title">Send Keystrokes</string>
@@ -129,6 +135,13 @@
     <string name="mouse_receiver_plugin_description">Receive remote mouse movement</string>
     <string name="mouse_receiver_plugin_name">Mouse receiver</string>
     <string name="mouse_receiver_no_permissions">You need to enable Accessibility Service</string>
+
+    <string name="view_status_title">Status</string>
+    <string name="battery_status_format">Battery: %d%%</string>
+    <string name="battery_status_low_format">Battery: %d%% Low Battery</string>
+    <string name="battery_status_charging_format">Battery: %d%% charging</string>
+    <string name="battery_status_unknown">Battery information not available</string>
+
     <string name="category_connected_devices">Connected devices</string>
     <string name="category_not_paired_devices">Available devices</string>
     <string name="category_remembered_devices">Remembered devices</string>
@@ -199,6 +212,8 @@
     <string name="mpris_rew">Rewind</string>
     <string name="mpris_ff">Fast-forward</string>
     <string name="mpris_next">Next</string>
+    <string name="mpris_loop">Loop</string>
+    <string name="mpris_shuffle">Shuffle</string>
     <string name="mpris_volume">Volume</string>
     <string name="mpris_time_settings_title">Forward/rewind buttons</string>
     <string name="mpris_time_settings_summary">Adjust the time to fast forward/rewind when pressed</string>
@@ -242,6 +257,8 @@
     <string name="share_received_file">Share \"%s\"</string>
     <string name="title_activity_notification_filter">Notification filter</string>
     <string name="filter_apps_info">Notifications will be synchronized for the selected apps.</string>
+    <string name="show_notification_if_screen_off">Send notifications only if the screen is off</string>
+    <string name="screen_off_notification_state" translatable="false">pref_notification_screen_off</string>
     <string name="sftp_sdcard_num">SD card %d</string>
     <string name="sftp_sdcard">SD card</string>
     <string name="sftp_readonly">(read only)</string>
@@ -272,7 +289,7 @@
     <string name="sftp_no_storage_locations_configured">No storage locations configured</string>
     <string name="sftp_saf_permission_explanation">To access files remotely you have to configure storage locations</string>
     <string name="no_players_connected">No players found</string>
-    <string name="send_files">Send files</string>
+    <string name="send_files">Send Files</string>
 
     <string name="pairing_title">Zorin Connect Devices</string>
     <string name="pairing_description">Other devices running Zorin Connect in your same network should appear here.</string>
@@ -320,7 +337,7 @@
     <string name="addcommand_explanation">There are no commands registered</string>
     <string name="addcommand_explanation2">You can add new commands in the Zorin Connect System Settings</string>
     <string name="add_command_description">You can add commands on the desktop</string>
-    <string name="pref_plugin_mprisreceiver">Media Player Control</string>
+    <string name="pref_plugin_mprisreceiver">Media player control</string>
     <string name="pref_plugin_mprisreceiver_desc">Control your phone\'s media players from another device</string>
 
     <string name="notification_channel_default">Other notifications</string>
@@ -442,9 +459,80 @@
     <string name="report_bug">Report Bug</string>
     <string name="report_bug_url" translatable="false">https://github.com/ZorinOS/zorin-connect-android/issues/new</string>
     <string name="donate">Donate</string>
-    <string name="donate_url" translatable="false">https://zorinos.com/about/#funding</string>
+    <string name="donate_url" translatable="false">https://zorin.com/about/#funding</string>
     <string name="source_code">Source Code</string>
     <string name="source_code_url" translatable="false">https://github.com/ZorinOS/zorin-connect-android/</string>
     <string name="licenses">Licenses</string>
+    <string name="website">Website</string>
+    <string name="website_url" translatable="false">https://zorin.com/os/</string>
+
+    <string name="copyright_statement" translatable="false">© 2022 The Zorin Connect developers</string>
+
+    <string name="about">About</string>
+    <string name="authors">Authors</string>
+    <string name="thanks_to">Thanks To</string>
+    <string name="easter_egg">Easter Egg</string>
+    <string name="email_contributor">Email contributor\n%s</string>
+    <string name="visit_contributors_homepage">Visit contributor\'s homepage\n%s</string>
+    <string name="version">Version %s</string>
+    <string name="about_kde">About KDE</string>
+    <string name="kde_be_free">KDE - Be Free!</string>
+    <string name="kde">KDE</string>
+    <string name="konqi">Konqi</string>
+    <string name="rise_up">Rise Up</string>
+    <string name="rise_down">Rise Down</string>
+
+  <string name="click_here_to_type">Tap here to type</string>
+  <string name="clear_compose">Clear</string>
+  <string name="send_compose">Send</string>
+  <string name="open_compose_send">Compose text</string>
+
+    <string name="app_description">Connect your computer with your mobile device.</string>
+
+    <string name="about_kde_about"><![CDATA[
+      <h1>About</h1>
+      <p>KDE is a world-wide community of software engineers, artists, writers, translators and creators who are committed to <a href="https://www.gnu.org/philosophy/free-sw.html">Free Software</a> development. KDE produces the Plasma desktop environment, hundreds of applications, and the many software libraries that support them.</p>
+      <p>KDE is a cooperative enterprise: no single entity controls its direction or products. Instead, we work together to achieve the common goal of building the world\'s finest Free Software. Everyone is welcome to <a href="https://community.kde.org/Get_Involved">join and contribute</a> to KDE, including you.</p>
+      Visit <a href="https://www.kde.org/">https://www.kde.org/</a> for more information about the KDE community and the software we produce.
+      ]]></string>
+
+    <string name="about_kde_report_bugs_or_wishes"><![CDATA[
+      <h1>Report Bugs or Wishes</h1>
+      <p>Software can always be improved, and the KDE team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.</p>
+      <p>KDE has a bug tracking system. Visit <a href="https://bugs.kde.org/">https://bugs.kde.org/</a> or use the \"Report Bug\" button from the about screen to report bugs.</p>
+      If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish. Make sure you use the severity called \"Wishlist\".
+      ]]></string>
+
+    <string name="about_kde_join_kde"><![CDATA[
+      <h1>Join KDE</h1>
+      <p>You do not have to be a software developer to be a member of the KDE team. You can join the national teams that translate program interfaces. You can provide graphics, themes, sounds, and improved documentation. You decide!</p>
+      <p>Visit <a href="https://community.kde.org/Get_Involved">https://community.kde.org/Get_Involved</a> for information on some projects in which you can participate.</p>
+      If you need more information or documentation, then a visit to <a href="https://techbase.kde.org/">https://techbase.kde.org/</a> will provide you with what you need.
+      ]]></string>
+
+    <string name="about_kde_support_kde"><![CDATA[
+      <h1>Support KDE</h1>
+      <p>KDE software is and will always be available free of charge, however creating it is not free.</p>
+      <p>To support development the KDE community has formed the KDE e.V., a non-profit organization legally founded in Germany. KDE e.V. represents the KDE community in legal and financial matters. See <a href="https://ev.kde.org/">https://ev.kde.org/</a> for information on KDE e.V.</p>
+      <p>KDE benefits from many kinds of contributions, including financial. We use the funds to reimburse members and others for expenses they incur when contributing. Further funds are used for legal support and organizing conferences and meetings.</p>
+      <p>We would like to encourage you to support our efforts with a financial donation, using one of the ways described at <a href="https://www.kde.org/community/donations/">https://www.kde.org/community/donations/</a>.</p>
+      Thank you very much in advance for your support.
+      ]]></string>
+
+    <!-- Authors tasks -->
+    <string name="maintainer_and_developer">Maintainer and developer</string>
+    <string name="developer">Developer</string>
+    <string name="apple_support">macOS support. Working on iOS support</string>
+    <string name="bug_fixes_and_general_improvements">Bug fixes and general improvements</string>
+    <string name="samoilenko_yuri_task">SFTP implementation, bug fixes and general improvements</string>
+    <string name="aniket_kumar_task">SMS plugin improvements</string>
+    <string name="alex_fiestas_task">Contacts plugin improvements</string>
+    <string name="maxim_leshchenko_task">UI improvements and this about page</string>
+    <string name="holger_kaelberer_task">Remote keyboard plugin and bug fixes</string>
+    <string name="saikrishna_arcot_task">Support for using the keyboard in the remote input plugin, bug fixes and general improvements</string>
+    <string name="everyone_else">Everyone else who has contributed to Zorin Connect over the years</string>
+
+    <string name="send_clipboard">Send Clipboard</string>
+    <string name="tap_to_execute">Tap to execute</string>
 
 </resources>

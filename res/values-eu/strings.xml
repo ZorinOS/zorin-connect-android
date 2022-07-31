@@ -8,6 +8,8 @@
   <string name="pref_plugin_telephony_desc">Bidali jakinarazpenak sarrerako deietarako</string>
   <string name="pref_plugin_battery">Bateriaren txostena</string>
   <string name="pref_plugin_battery_desc">Bidali bateriaren egoera aldiro</string>
+  <string name="pref_plugin_connectivity_report">Konektagarritasun txostena</string>
+  <string name="pref_plugin_connectivity_report_desc">Eman sareko seinale-sendotasunaren eta egoeraren berri</string>
   <string name="pref_plugin_sftp">Fitxategi-sistemaren esposaketa</string>
   <string name="pref_plugin_sftp_desc">Gailu honen fitxategi-sistema urrunetik arakatzea ahalbidetzen du</string>
   <string name="pref_plugin_clipboard">Arbelaren sinkronizazioa</string>
@@ -54,11 +56,6 @@
   <string name="mousepad_sensitivity_settings_title">Ezarri ukimen-saguaren sentikortasuna</string>
   <string name="mousepad_acceleration_profile_settings_title">Ezarri erakuslearen azelerazio</string>
   <string name="mousepad_scroll_direction_title">Alderantzikatu korritzearen norabidea</string>
-  <string-array name="mousepad_tap_entries">
-    <item>Eskumako klik</item>
-    <item>Erdiko klik</item>
-    <item>Ezer ez</item>
-  </string-array>
   <string-array name="mousepad_sensitivity_entries">
     <item>Motelena</item>
     <item>Motelena baino azkarrago</item>
@@ -74,6 +71,26 @@
     <item>Sendoagoa</item>
     <item>Sendoena</item>
   </string-array>
+  <string name="sendkeystrokes_send_to">Bidali tekla-joaldiak hona</string>
+  <string name="sendkeystrokes_textbox_hint">Bidali tekla-joaldiak ostalarira</string>
+  <string name="sendkeystrokes_disabled_toast">Tekla-joaldiak bidaltzea ezgaituta dago - gaitu ezazu ezarpenetan</string>
+  <string name="sendkeystrokes_wrong_data">MIME-mota baliogabea - \'text/x-keystrokes\' izan behar da</string>
+  <string name="sendkeystrokes_sent_text">%1$s %2$s gailura bidali da</string>
+  <string name="sendkeystrokes_pref_category_summary">Modulu honek, beste aplikazioei, konektatutako ostalarira tekla-joaldi gisa bidaliko diren testu-segmentuak partekatzeko aukera eskaintzen die</string>
+  <string name="sendkeystrokes_pref_category_title">Bidali tekla-joaldiak</string>
+  <string name="sendkeystrokes_pref_enabled">Gaitu tekla-joaldiak bidaltzea</string>
+  <string name="sendkeystrokes_pref_enabled_summary">\'text/x-keystrokes\' MIME-motako datuak entzutea</string>
+  <string name="sendkeystrokes_safe_text_enabled">Bidali testu segurua berehala</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Bidali zenbakizko kate laburrak berrespenik gabe</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Bidali tekla-joaldi gisa</string>
+  <string name="mouse_receiver_plugin_description">Jaso urrutiko saguaren mugimenduak</string>
+  <string name="mouse_receiver_plugin_name">Sagu jasotzailea</string>
+  <string name="mouse_receiver_no_permissions">Irisgarritasun zerbitzua gaitu behar duzu</string>
+  <string name="view_status_title">Egoera</string>
+  <string name="battery_status_format">Bateria: %%%d</string>
+  <string name="battery_status_low_format">Bateria: %%%d bateria baxu</string>
+  <string name="battery_status_charging_format">Bateria: %%%d kargatzen</string>
+  <string name="battery_status_unknown">Bateriari buruzko informazioa ez dago erabilgarri</string>
   <string name="category_connected_devices">Konektatutako gailuak</string>
   <string name="category_not_paired_devices">Gailu eskuragarriak</string>
   <string name="category_remembered_devices">Gogoratutako gailuak</string>
@@ -89,6 +106,7 @@
   <string name="error_canceled_by_other_peer">Beste kideak utzita</string>
   <string name="encryption_info_title">Zifratze informazioa</string>
   <string name="encryption_info_msg_no_ssl">Beste gailuak ez du oraintsuko Zorin Connect bertsio bat erabiltzen, erabili aurreko bertsioetako metodoa.</string>
+  <string name="my_device_fingerprint">Zure gailuaren ziurtagiriaren SHA256 hatz-marka:</string>
   <string name="remote_device_fingerprint">Urruneko gailuaren ziurtagiriaren SHA256 hatz-marka hau da:</string>
   <string name="pair_requested">Parekatzea eskatu da</string>
   <string name="pairing_request_from">Parekatzeko eskaria %1s-tik</string>
@@ -142,6 +160,8 @@
   <string name="mpris_rew">Atzera eraman</string>
   <string name="mpris_ff">Aurrera eraman</string>
   <string name="mpris_next">Hurrengoa</string>
+  <string name="mpris_loop">Begizta</string>
+  <string name="mpris_shuffle">Nahasi</string>
   <string name="mpris_volume">Bolumena</string>
   <string name="mpris_time_settings_title">Atzera eraman / Aurrera eraman botoiak</string>
   <string name="mpris_time_settings_summary">Doitu sakatzean aurrera/atzera azkar egin beharreko denbora</string>
@@ -330,4 +350,38 @@
     <item>Argia</item>
     <item>Iluna</item>
   </string-array>
+  <string name="report_bug">Akats baten berri eman</string>
+  <string name="donate">Egin dohaintza</string>
+  <string name="source_code">Sorburu kodea</string>
+  <string name="licenses">Lizentziak</string>
+  <string name="website">Webgunea</string>
+  <string name="about">Honi buruz</string>
+  <string name="authors">Egileak</string>
+  <string name="thanks_to">Eskerrak ondokoei</string>
+  <string name="easter_egg">Pazkoko arrautza</string>
+  <string name="email_contributor">Bidali e-posta kolaboratzaileari\n%s</string>
+  <string name="visit_contributors_homepage">Bisitatu kolaboratzailearen orri nagusia\n%s</string>
+  <string name="version">%s bertsioa</string>
+  <string name="about_kde">KDEri buruz</string>
+  <string name="kde_be_free">KDE - Izan aske!</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">Igo</string>
+  <string name="rise_down">Jaitsi</string>
+  <string name="app_description">Zure gailuei haien artean komunikatzen uzten dien plataforma askotariko aplikazioa (adib., zure telefonoa eta zure ordenagailua)</string>
+  <string name="about_kde_about">"&lt;h1&gt;Honi buruz&lt;/h1&gt; &lt;p&gt;KDE &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Software Askearen&lt;/a&gt; garapenarekin engaiatutako mundu osoko software ingeniari, artista, idazle, itzultzaile eta sortzaile elkarte bat da. KDEk Plasma mahaigain ingurunea, ehunka aplikazio, eta haiei euskarria ematen dieten liburutegi ugariak ekoizten ditu. &lt;/p&gt; &lt;p&gt;KDE ekimen kooperatibo bat da: ez dago bere norabidea eta produktuak kontrolatzen dituen erakunderik. Aldiz, elkarrekin lan egiten dugu guztiok partekatzen dugun helburu bera lortzeko, munduko Software Aske bikainena eraikitzearena alegia. Jende oro ongi etorria da  KDErekin &lt;a href=https://community.kde.org/Get_Involved&gt;elkartu eta laguntza ematera&lt;/a&gt;, zu barne. &lt;/p&gt; Bisitatu &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; , KDE elkartearen eta ekoizten dugun softwarearen gaineko informazio zabalagoa eskuratzeko."</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Akatsen edo nahien berri ematea&lt;/h1&gt; &lt;p&gt;Softwarea beti hobetu daiteke, eta KDE taldea horretarako prest dago. Hala ere, zuk - erabiltzailea zaren horrek - zerbait behar bezala ez dabilenean edo hobeto egin daitekeenean esan egin behar diguzu.&lt;/p&gt; &lt;p&gt;KDEk programa-akatsen gaineko jarraipena egiteko sistema bat du. Bisitatu &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; edo erabili Honi buruz pantailako «Akatsa jakinarazi» botoia.&lt;/p&gt; Hobetzeko iradokizunik baduzu, akatsen jarraipen sisteman zure nahia erregistratzera gonbidatzen zaitugu. Larritasun maila bezala \"Wishlist\" (nahien zerrenda) erabil ezazu horretarako.</string>
+  <string name="about_kde_join_kde">"&lt;h1&gt;Zatoz KDEra&lt;/h1&gt; &lt;p&gt;Ez duzu software garatzailea izan behar KDEren taldeko kide izateko. Programen interfazeak itzultzen dituzten hizkuntzen taldeetara batu zaitezke. Grafikoak, gaiak, soinuak, eta dokumentazio hobetua eskain ditzakezu. Zeuk erabaki!&lt;/p&gt; &lt;p&gt;Bisitatu &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt;  parte hartu dezakezun proiektuen informazioa eskuratzeko.&lt;/p&gt; Informazio edo dokumentazio gehiago behar baduzu, &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; bisitatuz behar duzuna eskuratuko duzu."</string>
+  <string name="about_kde_support_kde">"&lt;h1&gt;Babestu KDE&lt;/h1&gt; &lt;p&gt;KDE softwarea doan eskura daiteke eta beti hala izango da, hala ere hura sortzea ez da doan.&lt;/p&gt; &lt;p&gt;Garapenari sostengua emateko KDE elkarteak KDE e.V. sortu du, irabazi asmorik gabeko erakunde bat legalki Alemanian fundatua. KDE e.V. erakundeak KDE proiektua ordezkatzen du gai legal eta finantzakoetan. Begiratu &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; KDE e.V. gaineko informaziorako.&lt;/p&gt; &lt;p&gt;KDE kolaborazio mota askoren onuradun da, finantzetakoa barne. Funtsa partaideek laguntzerakoan jasaten dituzten gastuak ordaintzeko erabiltzen dugu. Funtsaren gainerakoa sostengu legalerako eta konferentziak eta topaketak antolatzeko erabiltzen da.&lt;/p&gt; &lt;p&gt;Gure esfortzuak finantza dohaintza batekin babes ematera animatu nahi zaitugu, hauetan,  &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt; azaltzen diren moduetako bat erabiliz.&lt;/p&gt; Aurrez esker mila zure babesagatik"</string>
+  <string name="maintainer_and_developer">Arduraduna eta garatzailea</string>
+  <string name="developer">Garatzailea</string>
+  <string name="apple_support">macOS-ren euskarria. iOS-en euskarria lantzen</string>
+  <string name="bug_fixes_and_general_improvements">Akatsen konponketa eta hobekuntza orokorrak</string>
+  <string name="samoilenko_yuri_task">SFTP inplementatzea, akatsen konponketa eta hobekuntza orokorrak</string>
+  <string name="aniket_kumar_task">SMS pluginaren hobekuntzak</string>
+  <string name="alex_fiestas_task">Kontaktuen pluginaren hobekuntzak</string>
+  <string name="maxim_leshchenko_task">Erabiltzaile-interfazean hobekuntzak eta Honi buru orria hau</string>
+  <string name="holger_kaelberer_task">Urruneko teklatuaren plugina eta akatsen konponketa</string>
+  <string name="saikrishna_arcot_task">Urruneko sarrerako pluginean teklatua erabiltzeko euskarria, akatsen konponketa eta hobekuntza orokorrak</string>
+  <string name="everyone_else">Urteetan Zorin Connect-ekin lagundu duten gainerako guztiak</string>
 </resources>

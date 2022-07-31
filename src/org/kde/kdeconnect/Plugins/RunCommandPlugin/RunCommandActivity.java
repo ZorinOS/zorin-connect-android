@@ -129,6 +129,7 @@ public class RunCommandActivity extends AppCompatActivity {
             cm.setText(url);
             Toast toast = Toast.makeText(this, R.string.clipboard_toast, Toast.LENGTH_SHORT);
             toast.show();
+            return true;
         }
         return false;
     }
@@ -145,5 +146,11 @@ public class RunCommandActivity extends AppCompatActivity {
         super.onPause();
 
         BackgroundService.RunWithPlugin(this, deviceId, RunCommandPlugin.class, plugin -> plugin.removeCommandsUpdatedCallback(commandsChangedCallback));
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        return true;
     }
 }

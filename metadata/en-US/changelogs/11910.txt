@@ -1,0 +1,8 @@
+- Display your computer's battery status
+- Send your phone's clipboard with one tap from the home screen
+- Option to show notifications on your computer only if the phone's screen is off
+- Add loop and shuffle controls to Multimedia Control (for supported media players)
+- Allow configuring the action for left clicks in Remote Input
+- Run commands from the Android power menu (on Android 11 and newer)
+- New About screen
+- Bug fixes and performance improvements

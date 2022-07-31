@@ -22,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -35,16 +34,20 @@ import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Helpers.DeviceHelper;
 import org.kde.kdeconnect.Plugins.SharePlugin.ShareSettingsFragment;
+import org.kde.kdeconnect.UserInterface.About.AboutFragment;
+import org.kde.kdeconnect.UserInterface.About.ApplicationAboutDataKt;
 import com.zorinos.zorin_connect.R;
 import com.zorinos.zorin_connect.databinding.ActivityMainBinding;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final int MENU_ENTRY_ADD_DEVICE = 1; //0 means no-selection
     private static final int MENU_ENTRY_SETTINGS = 2;
+    private static final int MENU_ENTRY_ABOUT = 3;
     private static final int MENU_ENTRY_DEVICE_FIRST_ID = 1000; //All subsequent ids are devices in the menu
     private static final int MENU_ENTRY_DEVICE_UNKNOWN = 9999; //It's still a device, but we don't know which one yet
     private static final int STORAGE_lOCATION_CONFIGURED = 2020;
@@ -74,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ThemeUtil.setUserPreferredTheme(this);
         super.onCreate(savedInstanceState);
+        ThemeUtil.setUserPreferredTheme(this); // Workaround: If the activity starts in landscape orientation and we call this before super.onCreate, the PluginItem entries appears with white on white background
 
         final ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -128,6 +131,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                     mCurrentDevice = null;
                     preferences.edit().putString(STATE_SELECTED_DEVICE, null).apply();
                     setContentFragment(new SettingsFragment());
+                    break;
+                case MENU_ENTRY_ABOUT:
+                    mCurrentDevice = null;
+                    preferences.edit().putString(STATE_SELECTED_DEVICE, null).apply();
+                    setContentFragment(AboutFragment.newInstance(Objects.requireNonNull(ApplicationAboutDataKt.getApplicationAboutData(this))));
                     break;
                 default:
                     String deviceId = mMapMenuToDeviceId.get(menuItem);
@@ -187,6 +195,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         } else {
             if (mCurrentMenuEntry == MENU_ENTRY_SETTINGS) {
                 setContentFragment(new SettingsFragment());
+            } else if (mCurrentMenuEntry == MENU_ENTRY_ABOUT) {
+                setContentFragment(AboutFragment.newInstance(Objects.requireNonNull(ApplicationAboutDataKt.getApplicationAboutData(this))));
             } else {
                 setContentFragment(new PairingFragment());
             }
@@ -281,6 +291,10 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             MenuItem settingsItem = menu.add(Menu.FIRST, MENU_ENTRY_SETTINGS, 1000, R.string.settings);
             settingsItem.setIcon(R.drawable.ic_settings_white_32dp);
             settingsItem.setCheckable(true);
+
+            MenuItem aboutItem = menu.add(Menu.FIRST, MENU_ENTRY_ABOUT, 1000, R.string.about);
+            aboutItem.setIcon(R.drawable.ic_baseline_info_24);
+            aboutItem.setCheckable(true);
 
             //Ids might have changed
             if (mCurrentMenuEntry >= MENU_ENTRY_DEVICE_FIRST_ID) {

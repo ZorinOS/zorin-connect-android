@@ -8,7 +8,6 @@ package org.kde.kdeconnect.UserInterface;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -19,30 +18,29 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import com.klinker.android.send_message.Utils;
-
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.SslHelper;
-import org.kde.kdeconnect.Helpers.TelephonyHelper;
+import org.kde.kdeconnect.Plugins.BatteryPlugin.BatteryPlugin;
+import org.kde.kdeconnect.Plugins.BatteryPlugin.DeviceBatteryInfo;
 import org.kde.kdeconnect.Plugins.Plugin;
-import org.kde.kdeconnect.Plugins.SMSPlugin.SMSPlugin;
 import org.kde.kdeconnect.UserInterface.List.FailedPluginListItem;
 import org.kde.kdeconnect.UserInterface.List.ListAdapter;
 import org.kde.kdeconnect.UserInterface.List.PluginItem;
 import org.kde.kdeconnect.UserInterface.List.PluginListHeaderItem;
-import org.kde.kdeconnect.UserInterface.List.SetDefaultAppPluginListItem;
 import com.zorinos.zorin_connect.R;
 import com.zorinos.zorin_connect.databinding.ActivityDeviceBinding;
+import com.zorinos.zorin_connect.databinding.ViewPairErrorBinding;
+import com.zorinos.zorin_connect.databinding.ViewPairRequestBinding;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -63,7 +61,24 @@ public class DeviceFragment extends Fragment {
 
     private ArrayList<ListAdapter.Item> pluginListItems;
 
-    private ActivityDeviceBinding binding;
+    /**
+     * Top-level ViewBinding for this fragment.
+     *
+     * Host for {@link #pluginListItems}.
+     */
+    private ActivityDeviceBinding deviceBinding;
+    /**
+     * Not-yet-paired ViewBinding.
+     *
+     * Used to start and retry pairing.
+     */
+    private ViewPairRequestBinding binding;
+    /**
+     * Cannot-communicate ViewBinding.
+     *
+     * Used when the remote device is unreachable.
+     */
+    private ViewPairErrorBinding errorBinding;
 
     public DeviceFragment() {
     }
@@ -99,7 +114,12 @@ public class DeviceFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = ActivityDeviceBinding.inflate(inflater, container, false);
+        deviceBinding = ActivityDeviceBinding.inflate(inflater, container, false);
+
+        // Inner binding for the layout shown when we're not paired yet...
+        binding = deviceBinding.pairRequest;
+        // ...and for when pairing doesn't (or can't) work
+        errorBinding = deviceBinding.pairError;
 
         binding.pairButton.setOnClickListener(v -> {
             binding.pairButton.setVisibility(View.GONE);
@@ -148,7 +168,7 @@ public class DeviceFragment extends Fragment {
 
         });
 
-        return binding.getRoot();
+        return deviceBinding.getRoot();
     }
 
     String getDeviceId() { return mDeviceId; }
@@ -249,7 +269,7 @@ public class DeviceFragment extends Fragment {
     }
 
     private void refreshUI() {
-        if (device == null || binding.getRoot() == null) {
+        if (device == null || binding == null) {
             return;
         }
 
@@ -272,8 +292,9 @@ public class DeviceFragment extends Fragment {
                     boolean reachable = device.isReachable();
 
                     binding.pairingButtons.setVisibility(paired ? View.GONE : View.VISIBLE);
-                    binding.errorMessageContainer.setVisibility((paired && !reachable) ? View.VISIBLE : View.GONE);
-                    binding.notReachableMessage.setVisibility((paired && !reachable) ? View.VISIBLE : View.GONE);
+                    errorBinding.errorMessageContainer.setVisibility((paired && !reachable) ? View.VISIBLE : View.GONE);
+                    errorBinding.notReachableMessage.setVisibility((paired && !reachable) ? View.VISIBLE : View.GONE);
+                    deviceBinding.viewStatusContainer.setVisibility((paired && reachable) ? View.VISIBLE : View.GONE);
 
                     try {
                         pluginListItems = new ArrayList<>();
@@ -300,10 +321,12 @@ public class DeviceFragment extends Fragment {
                                     dialog.show(getChildFragmentManager(), null);
                                 }
                             });
+
+                            DeviceFragment.this.displayBatteryInfoIfPossible();
                         }
 
                         ListAdapter adapter = new ListAdapter(mActivity, pluginListItems);
-                        binding.buttonsList.setAdapter(adapter);
+                        deviceBinding.buttonsList.setAdapter(adapter);
 
                         mActivity.invalidateOptionsMenu();
 
@@ -335,7 +358,7 @@ public class DeviceFragment extends Fragment {
         @Override
         public void pairingFailed(final String error) {
             mActivity.runOnUiThread(() -> {
-                if (binding.getRoot() == null) return;
+                if (binding == null) return;
                 binding.pairMessage.setText(error);
                 binding.pairVerification.setText("");
                 binding.pairVerification.setVisibility(View.GONE);
@@ -349,7 +372,7 @@ public class DeviceFragment extends Fragment {
         @Override
         public void unpaired() {
             mActivity.runOnUiThread(() -> {
-                if (binding.getRoot() == null) return;
+                if (binding == null) return;
                 binding.pairMessage.setText(R.string.device_not_paired);
                 binding.pairVerification.setVisibility(View.GONE);
                 binding.pairProgress.setVisibility(View.GONE);
@@ -371,6 +394,52 @@ public class DeviceFragment extends Fragment {
                 continue;
             }
             pluginListItems.add(new FailedPluginListItem(plugin, action));
+        }
+    }
+
+    /**
+     * This method tries to display battery info for the remote device. Includes
+     * <ul>
+     *     <li>Current charge as a percentage</li>
+     *     <li>Whether the remote device is low on power</li>
+     *     <li>Whether the remote device is currently charging</li>
+     * </ul>
+     * <p>
+     *     This will show a simple message on the view instead if we don't have
+     *     accurate info right now.
+     * </p>
+     */
+    private void displayBatteryInfoIfPossible() {
+        boolean canDisplayBatteryInfo = false;
+        BatteryPlugin batteryPlugin = (BatteryPlugin) device.getLoadedPlugins().get(
+                Plugin.getPluginKey(BatteryPlugin.class)
+        );
+
+        if (batteryPlugin != null) {
+            DeviceBatteryInfo info = batteryPlugin.getRemoteBatteryInfo();
+            if (info != null) {
+                canDisplayBatteryInfo = true;
+
+                Context ctx = deviceBinding.viewBatteryStatus.getContext();
+
+                boolean isCharging = info.isCharging();
+                @StringRes
+                int resId;
+                if (isCharging) {
+                    resId = R.string.battery_status_charging_format;
+                } else if (BatteryPlugin.isLowBattery(info))  {
+                    resId = R.string.battery_status_low_format;
+                } else {
+                    resId = R.string.battery_status_format;
+                }
+
+                deviceBinding.viewBatteryStatus.setChecked(isCharging);
+                deviceBinding.viewBatteryStatus.setText(ctx.getString(resId, info.getCurrentCharge()));
+            }
+        }
+
+        if (!canDisplayBatteryInfo) {
+            deviceBinding.viewBatteryStatus.setText(R.string.battery_status_unknown);
         }
     }
 }

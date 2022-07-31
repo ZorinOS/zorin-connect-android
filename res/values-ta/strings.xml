@@ -31,7 +31,7 @@
   <string name="pref_plugin_ping_desc">பிங்குகளை (ping) அனுப்பு மற்றும் பெறு</string>
   <string name="pref_plugin_notifications">அறிவிப்பு ஒத்திசைவு</string>
   <string name="pref_plugin_notifications_desc">உங்கள் அறிவிப்புகளை மற்ற சாதனங்களிலிருந்து அணுகுங்கள்</string>
-  <string name="pref_plugin_receive_notifications">அறிவிப்புகளை பேறு</string>
+  <string name="pref_plugin_receive_notifications">அறிவிப்புகளை பெறு</string>
   <string name="pref_plugin_receive_notifications_desc">இன்னொரு சாதனத்திலிருந்து அறிவிப்புகளை பெற்று அவற்றை ஆண்ட்ராய்டில் காட்டும்</string>
   <string name="pref_plugin_sharereceiver">பகிர் மற்றும் பேறு</string>
   <string name="pref_plugin_sharereceiver_desc">சாதனங்களுக்கு இடையில் கோப்புகள் மற்றும் முகவரிகளை பகிருங்கள்</string>
@@ -50,17 +50,12 @@
   <string name="remotekeyboard_connected">தொலை விசைப்பலகை இணைப்பு செயலில் உள்ளது</string>
   <string name="remotekeyboard_multiple_connections">பல தொலை விசைப்பலகை இணைப்புகள் உள்ளன. அமைக்க வேண்டிய சாதனத்தை தேர்ந்தெடுங்கள்</string>
   <string name="open_mousepad">தொலை உள்ளீடு</string>
-  <string name="mousepad_info">சுட்டுக்குறியை நகர்த்த ஒரு விரலை திரையில் நகர்த்தவும். \'க்ளிக்\' செய்வதற்கு தட்டுங்கள். வலது/நடு சுட்டி பட்டன்களுக்கு இரண்டு/மூன்று விரல்களை பயன்படுத்தவும். இரண்டு விரல்களைக் கொண்டு உருளவும். இழுத்து போடுவதற்கு நீண்ட அழுத்தத்தை பயன்படுத்தவும்.</string>
+  <string name="mousepad_info">சுட்டிக்குறியை நகர்த்த ஒரு விரலை திரையில் நகர்த்தவும். \'க்ளிக்\' செய்வதற்கு தட்டுங்கள். வலது/நடு சுட்டி பட்டன்களுக்கு இரண்டு/மூன்று விரல்களை பயன்படுத்தவும். இரண்டு விரல்களைக் கொண்டு உருளவும். இழுத்து போடுவதற்கு நீண்ட அழுத்தத்தை பயன்படுத்தவும்.</string>
   <string name="mousepad_double_tap_settings_title">இரண்டு விரல்களால் தட்டுவதற்குரிய செயலை அமை</string>
   <string name="mousepad_triple_tap_settings_title">மூன்று விரல்களால் தட்டுவதற்குரிய செயலை அமை</string>
   <string name="mousepad_sensitivity_settings_title">தொடுபலகையின் உணர்வுத்திறத்தை அமை</string>
-  <string name="mousepad_acceleration_profile_settings_title">சுட்டுக்குறியின் வேகவளர்ச்சியை அமை</string>
+  <string name="mousepad_acceleration_profile_settings_title">சுட்டிக்குறியின் வேகவளர்ச்சியை அமை</string>
   <string name="mousepad_scroll_direction_title">உருளல் திசையை புரட்டு</string>
-  <string-array name="mousepad_tap_entries">
-    <item>வலது க்ளிக்</item>
-    <item>நடு க்ளிக்</item>
-    <item>ஏதுமில்லை</item>
-  </string-array>
   <string-array name="mousepad_sensitivity_entries">
     <item>மிக மெதுவானது</item>
     <item>மெதுவானது</item>
@@ -80,7 +75,7 @@
   <string name="sendkeystrokes_textbox_hint">விசைகளை புரவனுக்கு அனுப்பு</string>
   <string name="sendkeystrokes_disabled_toast">விசைகளை அனுப்புதல் முடங்கியுள்ளது - அமைப்புகளில் இதை இயக்குங்கள்</string>
   <string name="sendkeystrokes_wrong_data">செல்லுபடியாகாத மைம் வகை - \'text/x-keystrokes\'-ஆக இருக்க வேண்டும்</string>
-  <string name="sendkeystrokes_sent_text">%1s என்பது %2s என்ற சாதனத்துக்கு அனுப்பப்பட்டது</string>
+  <string name="sendkeystrokes_sent_text">%1$s என்பது %2$s என்ற சாதனத்துக்கு அனுப்பப்பட்டது</string>
   <string name="sendkeystrokes_pref_category_summary">மற்ற செயலிகள் பகிரும் சொற்றொடர்களை இணைக்கப்பட்ட புரவனுக்கு விசைகளாக இந்த கூறு அனுப்பும்</string>
   <string name="sendkeystrokes_pref_category_title">விசைகளை அனுப்பு</string>
   <string name="sendkeystrokes_pref_enabled">விசைகள் அனுப்புதலை இயக்கு</string>
@@ -91,6 +86,11 @@
   <string name="mouse_receiver_plugin_description">தொலை சுட்டி அசைவைப் பெறு</string>
   <string name="mouse_receiver_plugin_name">சுட்டி பெறுநர்</string>
   <string name="mouse_receiver_no_permissions">அணுகல்தன்மை சேவையை நீங்கள் இயக்க வேண்டும்</string>
+  <string name="view_status_title">நிலை</string>
+  <string name="battery_status_format">மின்கலம்: %d%%</string>
+  <string name="battery_status_low_format">மின்கலம்: %d%% குறைந்த ஆற்றல்</string>
+  <string name="battery_status_charging_format">மின்கலம்: %d%% ஆற்றல் ஏறுகிறது</string>
+  <string name="battery_status_unknown">மின்கல விவரங்கள் கிடைக்கவில்லை</string>
   <string name="category_connected_devices">இணைக்கப்பட்ட சாதனங்கள்</string>
   <string name="category_not_paired_devices">கிட்டுகின்ற சாதனங்கள்</string>
   <string name="category_remembered_devices">நினைவுள்ள சாதனங்கள்</string>
@@ -160,6 +160,8 @@
   <string name="mpris_rew">பின்னோக்கி செல்</string>
   <string name="mpris_ff">வேகமாக முன்னோக்கி செல்</string>
   <string name="mpris_next">அடுத்தது</string>
+  <string name="mpris_loop">சுழற்று</string>
+  <string name="mpris_shuffle">கலக்கு</string>
   <string name="mpris_volume">ஒலி அளவு</string>
   <string name="mpris_time_settings_title">பின்னோக்கி/முன்னோக்கி செல்வதற்கான பட்டன்கள்</string>
   <string name="mpris_time_settings_summary">அழுத்தும்போது எவ்வளவு நேரம் பின்னோக்கி/முன்னோக்கி செல்ல வேண்டும் என்று தேர்வு செய்யுங்கள்</string>
@@ -264,7 +266,7 @@
   <string name="pref_plugin_mprisreceiver">ஊடக இயக்கி கட்டுப்பாடு</string>
   <string name="pref_plugin_mprisreceiver_desc">இன்னொரு சாதனத்திலிருந்து உங்கள் திறன்பேசியின் ஊடக இயக்கிகளை கட்டுப்படுத்துங்கள்</string>
   <string name="notification_channel_default">மற்ற அறிவிப்புகள்</string>
-  <string name="notification_channel_persistent">விடாப்பிடியான அறிவிப்பு</string>
+  <string name="notification_channel_persistent">விடாப்பிடி அறிவிப்பு</string>
   <string name="notification_channel_media_control">ஊடக கட்டுப்பாடு</string>
   <string name="notification_channel_filetransfer">கோப்பு இடமாற்றம்</string>
   <string name="notification_channel_high_priority">அதிக முக்கியத்துவம்</string>
@@ -285,7 +287,7 @@
   <string name="all">அனைத்து</string>
   <string name="devices">சாதனங்கள்</string>
   <string name="settings_rename">சாதனத்தின் பெயர்</string>
-  <string name="settings_dark_mode">கருமையான திட்டமுறை</string>
+  <string name="settings_dark_mode">கருமையான நிறத்திட்டம்</string>
   <string name="settings_more_settings_title">மேலும் அமைப்புகள்</string>
   <string name="settings_more_settings_text">தனிப்பட்ட சாதனங்களுக்குரிய அமைப்புகள், ஒவ்வொரு சாதனத்துக்கான \'செருகுநிரல் அமைப்புகள்\' தனில் இருக்கும்.</string>
   <string name="setting_persistent_notification">விடாப்பிடியான அறிவிப்பைக் காட்டவும்</string>
@@ -337,7 +339,7 @@
     <item>நான்கு செய்திகளுக்கு பிறகு</item>
     <item>ஐந்து செய்திகளுக்கு பிறகு</item>
   </string-array>
-  <string name="theme_dialog_title">திட்டமுறையை அமை</string>
+  <string name="theme_dialog_title">நிறத்திட்டத்தை அமை</string>
   <string-array name="theme_list">
     <item>மின்கல சேமிப்பை பொறுத்து அமை</item>
     <item>வெளிர்ந்தது</item>
@@ -352,4 +354,29 @@
   <string name="donate">நன்கொடை அளியுங்கள்</string>
   <string name="source_code">மூல குறியீடு</string>
   <string name="licenses">உரிமங்கள்</string>
+  <string name="website">இணையதளம்</string>
+  <string name="about">பற்றி</string>
+  <string name="authors">இயற்றியவர்கள்</string>
+  <string name="thanks_to">இவர்களுக்கு நன்றி</string>
+  <string name="easter_egg">எதிர்பார்க்கப்படாத வேடிக்கையான அம்சங்கள்</string>
+  <string name="email_contributor">பங்களிப்பாளருக்கு மின்னஞ்சல் அனுப்பு\n%s</string>
+  <string name="visit_contributors_homepage">பங்களிப்பாளரது முதற்பக்கத்துக்கு செல்\n%s</string>
+  <string name="version">பதிப்பு %s</string>
+  <string name="about_kde">கே.டீ.யீ. பற்றி</string>
+  <string name="kde_be_free">கே.டீ.யீ. — சுதந்திரமாக இரு!</string>
+  <string name="kde">கே.டீ.யீ.</string>
+  <string name="app_description">பல இயக்குதளங்களில் இயங்கி உங்கள் சாதனங்களை இணைக்கும் (எ.கா. திறன்பேசியையும் கணினியையும்) செயலி</string>
+  <string name="about_kde_about">"&lt;h1&gt;பற்றி&lt;/h1&gt; &lt;p&gt;கே.டீ.யீ. என்பது, &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;கட்டற்ற மென்பொருள்&lt;/a&gt; உருவாக்கத்திற்கு அர்பணிப்புக் கொண்ட மென்பொருள் பொறிஞர்கள், கலைஞர்கள், எழுத்தாளர்கள், மொழிபெயர்ப்பாளர்கள் மற்றும் படைப்பாலிகளைக் கொண்ட உலகளாவிய குழு ஆகும். பிளாஸ்மா பணிமேடை சூழல், நூற்றுக்கணக்கானசெயலிகள், மற்றும் அவற்றை ஆதரிக்கும் பல நிரலகங்களை கே.டீ.யீ. உருவாக்குகிறது.&lt;/p&gt; &lt;p&gt;கே.டீ.யீ. ஒரு கூட்டுறவு அமைப்பாகும்: எந்தவொரு தனிப்பட்ட நிறுவனமோ நபரோ அதன் நோக்கத்தையோ படைப்புக்களையோ கட்டுப்படுத்துவதில்லை. கே.டீ.யீ.-யில் நீங்கள் உட்பட எவரேனும்  &lt;a href=https://community.kde.org/Get_Involved&gt;இணைந்து பங்களிக்கலாம்&lt;/a&gt;. &lt;/p&gt; கே.டீ.யீ. சமூகத்தை பற்றியும் நாங்கள் உருவாக்கும் மென்பொருட்களை பற்றியும் அறிய &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; என்ற பக்கத்தை அணுகுங்கள்."</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;பிழைகளையோ விருப்பங்களையோ தாக்கல் செய்யுங்கள்&lt;/h1&gt; &lt;p&gt;எந்த மென்பொருளும் மேம்படுத்த தக்கதே. கே.டீ.யீ. குழு அதனைச் செய்ய தயாராக உள்ளது. ஆயினும் பயனராகிய நீங்கள், எதிர்பார்த்த படி பணிசெய்யாதவை குறித்தும், இன்னும் சிறப்பாகச் செய்யக்கூடியவை குறித்தும் எங்களுக்கு தெரியப்படுத்த வேண்டும். &lt;/p&gt; &lt;p&gt;கே.டீ.யீ.க்கு, பிழைகளை கண்காணிக்கும் அமைப்பொன்று உள்ளது. &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; என்ற பக்கத்தை அணுகவும், அல்லது \"உதவி\" பட்டியிலுள்ள \"பிழையைத் தெரிவி...\" என்ற சாளரத்தை பயன்படுத்தவும்.&lt;/p&gt; நீங்கள் விரும்பும் மாற்றங்களை பரிந்துரைக்கக் கூட பிழைகளை கண்காணிக்கும் அமைப்பினைப் பயன்படுத்தலாம். அப்படி தெரிவிக்கும்போது, \"Wishlist\" என்ற முக்கியத்துவத்தை தேர்ந்தெடுங்கள்.</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;கே.டீ.யீ.-யில் சேருங்கள்&lt;/h1&gt; &lt;p&gt;கே.டீ.யீ. குழுவில் சேர, நீங்கள் நிரலாளராக இருக்க வேண்டாம். நிரல் இடைமுகப்புகளை மொழிபெயர்க்கும் குழுக்களில் நீங்கள் சேரலாம்.வரைகலை, ஒலிகள், தோற்ற திட்டமுறைகள், மற்றும் மேம்படுத்தப்பட்ட கையேடுகளை நீங்கள் வழங்கலாம். நீங்களே முடிவு செய்யுங்கள்!&lt;/p&gt; &lt;p&gt; நீங்கள் பங்கேற்கக்கூடிய சில திட்டப்பணிகளைப் பற்றிய தகவல்களைப் பெற &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; என்ற பக்கத்தை அணுகுங்கள்.&lt;/p&gt; மேலும் விவரங்கள் வேண்டுமெனில், &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; என்ற பக்கத்துக்கு செல்லுங்கள்.</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;கே.டீ.யீ.-ஐ ஆதரியுங்கள்&lt;/h1&gt; &lt;p&gt;கே.டீ.யீ. மென்பொருட்கள் இலவசமாகக் கிடைக்கிறது, மேலும் எப்பொழுதும் இலவசமாகவே கிடைக்கும். ஆனால் அதனை உருவாக்குவது இலவசமல்ல.&lt;/p&gt; &lt;p&gt;உருவாக்கத்தினை தொடர்ந்து ஆதரிக்க, கே.டீ.யீ. சமூகம், KDE e.V. எனும் லாப நோக்கற்ற அமைப்பை ஜெர்மனியில் சட்டபூர்வமாக தொடங்கியுள்ளது. KDE e.V. ஆனது கே.டீ.யீ. சமூகத்தை சட்ட பூர்வமான மற்றும் நிதி ரீதியான விஷயங்களில் பிரதிபலிக்கிறது. KDE e.V. பற்றி அறிந்து கொள்ள &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; என்ற பக்கத்தை பார்க்கவும். &lt;/p&gt; &lt;p&gt;நிதி உள்ளிட்ட பல்வேறு பங்களிப்புகளால் கே.டீ.யீ. பயனடைகிறது. நாங்கள் இந்நிதியினை பங்களிக்கும் போது ஏற்படும் செலவுகளுக்காக உறுப்பினர்களுக்கும் மற்றோருக்கும் பயன்படுத்துகிறோம்.எஞ்சியிருக்கும் நிதி, சட்ட ஆதரவிற்கும் மாநாடுகளை நடத்தவும் பயன்படுத்தப்படுகிறது. &lt;/p&gt; &lt;p&gt; எங்களது முயற்சிகளுக்கு&lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt;-இல் குறிப்பிடப்பட்டுள்ளது போல் நிதியளித்து ஆதரிக்க உங்களை ஊக்குவிக்க விரும்புகிறோம். முன்கூட்டியே உங்களுடைய ஆதரவிற்கு நன்றி.</string>
+  <string name="maintainer_and_developer">பராமரிப்பாளரும் நிரலாளரும்</string>
+  <string name="developer">நிரலாளர்</string>
+  <string name="apple_support">macOS ஆதரவு. iOS ஆதரவை வழங்கவும் முயற்சிக்கிறார்</string>
+  <string name="bug_fixes_and_general_improvements">பிழைதிருத்தங்களும் பொதுவான மேம்பாடுகளும்</string>
+  <string name="aniket_kumar_task">SMS செருகுநிரலை மேம்படுத்துதல்</string>
+  <string name="alex_fiestas_task">தொடர்புகள் செருகுநிரலை மேம்படுத்துதல்</string>
+  <string name="maxim_leshchenko_task">இடைமுகப்பு மேம்பாடுகளும் இப்பக்கமும்</string>
+  <string name="holger_kaelberer_task">தொலை விசைப்பலகை செருகுநிரலும் பிழைதிருத்தங்களும்</string>
+  <string name="everyone_else">கடந்த ஆண்டுகளில் Zorin கனெக்டிற்கு பங்களித்த மற்றவர்கள்</string>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">发送到设备</string>
   <string name="foreground_notification_no_devices">未连接到任何设备</string>
   <string name="foreground_notification_devices">已连接到：%s</string>
   <string name="foreground_notification_send_clipboard">发送剪贴板</string>
@@ -51,16 +52,11 @@
   <string name="remotekeyboard_multiple_connections">发现多个远程键盘连接，请选择要配置的设备</string>
   <string name="open_mousepad">远程输入</string>
   <string name="mousepad_info">在屏幕上移动手指来移动光标。轻击代表左键，双指或三指点击代表右键或中键。用双指滚动。用长按来拖放。</string>
-  <string name="mousepad_double_tap_settings_title">设置双指点击动作</string>
-  <string name="mousepad_triple_tap_settings_title">设置三指点击动作</string>
+  <string name="mousepad_double_tap_settings_title">设置双指点击操作</string>
+  <string name="mousepad_triple_tap_settings_title">设置三指点击操作</string>
   <string name="mousepad_sensitivity_settings_title">设置触摸板灵敏度</string>
   <string name="mousepad_acceleration_profile_settings_title">设置指针加速度</string>
   <string name="mousepad_scroll_direction_title">反转滚动方向</string>
-  <string-array name="mousepad_tap_entries">
-    <item>右键点击</item>
-    <item>中键点击</item>
-    <item>无</item>
-  </string-array>
   <string-array name="mousepad_sensitivity_entries">
     <item>最慢</item>
     <item>高于最慢</item>
@@ -80,7 +76,7 @@
   <string name="sendkeystrokes_textbox_hint">发送按键到主机</string>
   <string name="sendkeystrokes_disabled_toast">发送按键已禁用 - 请在设置中启用它</string>
   <string name="sendkeystrokes_wrong_data">无效的 MIME 类型 - 需要为“text/x-keystrokes”</string>
-  <string name="sendkeystrokes_sent_text">发送 %1s 到设备 %2s</string>
+  <string name="sendkeystrokes_sent_text">发送 %1$s 到设备 %2$s</string>
   <string name="sendkeystrokes_pref_category_summary">此模块允许其他应用共享文本段作为按键发送到连接的主机</string>
   <string name="sendkeystrokes_pref_category_title">发送按键</string>
   <string name="sendkeystrokes_pref_enabled">启用按键发送</string>
@@ -91,7 +87,12 @@
   <string name="mouse_receiver_plugin_description">接收远程鼠标移动</string>
   <string name="mouse_receiver_plugin_name">鼠标接收器</string>
   <string name="mouse_receiver_no_permissions">您需要启用无障碍模式</string>
-  <string name="category_connected_devices">连接的设备</string>
+  <string name="view_status_title">状态</string>
+  <string name="battery_status_format">电池：%d%%</string>
+  <string name="battery_status_low_format">电池：%d%% 低电量</string>
+  <string name="battery_status_charging_format">电池：%d%% 正在充电</string>
+  <string name="battery_status_unknown">电池信息不可用</string>
+  <string name="category_connected_devices">已连接设备</string>
   <string name="category_not_paired_devices">可用的设备</string>
   <string name="category_remembered_devices">记住的设备</string>
   <string name="device_menu_plugins">插件设置</string>
@@ -152,6 +153,8 @@
   <string name="mpris_rew">倒退</string>
   <string name="mpris_ff">快进</string>
   <string name="mpris_next">下一曲</string>
+  <string name="mpris_loop">循环播放</string>
+  <string name="mpris_shuffle">随机播放</string>
   <string name="mpris_volume">音量</string>
   <string name="mpris_time_settings_title">快进/倒退按钮</string>
   <string name="mpris_time_settings_summary">当按下时调整快进或倒退的时间</string>
@@ -172,7 +175,7 @@
   <string name="custom_devices_settings">自定义设备列表</string>
   <string name="custom_device_list">通过 IP 添加设备</string>
   <string name="custom_device_deleted">自定义设备已删除</string>
-  <string name="custom_device_list_help">如果您的设备未被自动检测到，您点击浮动动作按钮可以添加它的 IP 地址或主机名。</string>
+  <string name="custom_device_list_help">如果您的设备未被自动检测到，您点击浮动操作按钮可以添加它的 IP 地址或主机名。</string>
   <string name="custom_device_fab_hint">添加设备</string>
   <string name="undo">撤销</string>
   <string name="share_notification_preference">出声通知</string>
@@ -185,6 +188,7 @@
   <string name="share_received_file">分享 \"%s\"</string>
   <string name="title_activity_notification_filter">通知过滤器</string>
   <string name="filter_apps_info">所选软件的通知将会被同步。</string>
+  <string name="show_notification_if_screen_off">仅在屏幕关闭时发送通知</string>
   <string name="sftp_sdcard_num">SD 卡 %d</string>
   <string name="sftp_sdcard">SD 卡</string>
   <string name="sftp_readonly">(只读)</string>
@@ -277,7 +281,7 @@
   <string name="all">全部</string>
   <string name="devices">设备</string>
   <string name="settings_rename">设备名</string>
-  <string name="settings_dark_mode">暗色主题</string>
+  <string name="settings_dark_mode">深色主题</string>
   <string name="settings_more_settings_title">更多设置</string>
   <string name="settings_more_settings_text">每个设备的独立设置可以在设备页内的“插件设置”下找到。</string>
   <string name="setting_persistent_notification">启用常驻通知栏</string>
@@ -337,11 +341,41 @@
   </string-array>
   <string-array name="theme_list_v28">
     <item>系统默认</item>
-    <item>亮色</item>
+    <item>浅色</item>
     <item>深色</item>
   </string-array>
   <string name="report_bug">报告缺陷</string>
   <string name="donate">捐款</string>
   <string name="source_code">源代码</string>
   <string name="licenses">许可证</string>
+  <string name="website">网站</string>
+  <string name="about">关于</string>
+  <string name="authors">作者</string>
+  <string name="thanks_to">致谢</string>
+  <string name="easter_egg">彩蛋</string>
+  <string name="email_contributor">写信给贡献者\n%s</string>
+  <string name="visit_contributors_homepage">访问贡献者主页\n%s</string>
+  <string name="version">版本 %s</string>
+  <string name="about_kde">关于 KDE</string>
+  <string name="kde_be_free">KDE - 为自由而生！</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">上升</string>
+  <string name="rise_down">下降</string>
+  <string name="app_description">用于在不同设备之间通信的多平台应用 (例如手机和电脑)</string>
+  <string name="about_kde_about">&lt;h1&gt;关于&lt;/h1&gt; &lt;p&gt;KDE 是由一群致力于&lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;自由软件&lt;/a&gt;事业的人们所组成的全球性协作社区。它的成员包括了来自世界各地的软件工程师、艺术工作者、文字工作者、翻译人员和其他创意人员。KDE 社区开发了 Plasma 桌面环境、数百款功能各异的应用软件、以及用于支持它们的大量程序库。&lt;/p&gt; &lt;p&gt;KDE 是一项立足于协作精神的事业，它的运作和产出不受任何单一个人或者机构的控制。我们的共同目标是为全世界带来高品质的自由软件。不管您来自何方，我们都欢迎您&lt;a href=https://community.kde.org/Get_Involved&gt;加入 KDE 并做出贡献&lt;/a&gt;。&lt;/p&gt;请访问 &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; 来了解 KDE 社区和软件的更多信息。</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;报告程序缺陷和需求&lt;/h1&gt; &lt;p&gt;KDE 团队一直致力于改进软件的品质。为了做到这一点，倾听来自用户的反馈非常重要。如果您遇到了软件不能正常工作的情况，请务必告诉我们。如果您有关于改进软件的想法，也请与我们分享。&lt;/p&gt; &lt;p&gt;KDE 建有程序缺陷跟踪系统，请访问 &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; 或者使用“帮助”菜单中的“报告缺陷”对话框填写报告。&lt;/p&gt;如果您想要提出改进建议而不是报告程序缺陷，请确保在表格的 Severity (严重程度) 选单中选择“Wishlist (需求)”。</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;加入 KDE&lt;/h1&gt; &lt;p&gt;即使您不是软件开发人员，我们也欢迎您加入 KDE 的队伍！您可以加入各国语言的翻译团队来翻译软件的界面，您还可以制作图像、主题、音效，或者改进软件配套的文档……您的角色您来定！&lt;/p&gt; &lt;p&gt;请访问 &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; 来物色您感兴趣的项目。&lt;/p&gt;如需了解更多相关信息和文档，请访问 &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt;。</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;支持 KDE&lt;/h1&gt; &lt;p&gt;KDE 开发的软件是自由且免费的，但是开发这些软件必须投入大量人力物力。&lt;/p&gt; &lt;p&gt;为了支持软件的开发工作，KDE 社区成立了非营利机构 KDE e.V. ，它是在德国合法注册的协会组织。KDE e.V. 代表 KDE 社区进行法务和财务工作。如需了解 KDE e.V. 的更多信息，请访问 &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt;。&lt;/p&gt; &lt;p&gt;KDE 的正常运作需要来自各方面的支持，其中资金支持也是必不可少的。我们的经费主要用于补贴团队成员和其他人员在为 KDE 进行贡献时的开支，其次则是满足法务支持和组织活动所需的开支。&lt;/p&gt; &lt;p&gt;我们期待您能通过捐助资金的方式来支持 KDE 的运作和发展。如需了解具体的捐助途径，请访问 &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;。&lt;/p&gt;您的慷慨支持，我们必当涌泉相报。</string>
+  <string name="maintainer_and_developer">维护者和开发者</string>
+  <string name="developer">开发者</string>
+  <string name="apple_support">macOS 支持。iOS 支持功能正在开发</string>
+  <string name="bug_fixes_and_general_improvements">程序缺陷修正和常规改进</string>
+  <string name="samoilenko_yuri_task">SFTP 实现、程序缺陷修正和常规改进</string>
+  <string name="aniket_kumar_task">短消息插件改进</string>
+  <string name="alex_fiestas_task">联系人插件改进</string>
+  <string name="maxim_leshchenko_task">界面改进和此关于页面</string>
+  <string name="holger_kaelberer_task">远程键盘插件和程序缺陷修正</string>
+  <string name="saikrishna_arcot_task">支持在远程输入插件中使用键盘、程序缺陷修正和常规改进</string>
+  <string name="everyone_else">以及多年来为 Zorin Connect 作出过贡献的其他所有人</string>
 </resources>

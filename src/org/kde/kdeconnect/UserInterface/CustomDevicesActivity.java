@@ -214,7 +214,7 @@ public class CustomDevicesActivity extends AppCompatActivity implements CustomDe
         }
     }
 
-    private class DeletedCustomDevice {
+    private static class DeletedCustomDevice {
         @NonNull String hostnameOrIP;
         int position;
 
@@ -222,5 +222,11 @@ public class CustomDevicesActivity extends AppCompatActivity implements CustomDe
             this.hostnameOrIP = hostnameOrIP;
             this.position = position;
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        return true;
     }
 }

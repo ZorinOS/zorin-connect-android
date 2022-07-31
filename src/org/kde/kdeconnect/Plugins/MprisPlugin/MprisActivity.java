@@ -77,9 +77,7 @@ public class MprisActivity extends AppCompatActivity {
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
                 activityMprisBinding.mprisTabs,
                 activityMprisBinding.mprisPager,
-                (tab, position) -> {
-                    tab.setText(mprisPagerAdapter.getTitle(position));
-                }
+                (tab, position) -> tab.setText(mprisPagerAdapter.getTitle(position))
         );
 
         activityMprisBinding.mprisTabs.getSelectedTabPosition();
@@ -140,5 +138,11 @@ public class MprisActivity extends AppCompatActivity {
                 ((VolumeKeyListener) requestedFragment).onVolumeDown();
             }
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        return true;
     }
 }

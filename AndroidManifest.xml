@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zorinos.zorin_connect"
-    android:versionCode="11700"
-    android:versionName="1.17.0">
+    android:versionCode="11910"
+    android:versionName="1.19.1">
 
     <supports-screens
         android:anyDensity="true"
@@ -42,6 +42,7 @@
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
 
 
@@ -97,12 +98,6 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
         <activity
@@ -173,13 +168,11 @@
             android:theme="@style/Theme.Transparent"
             android:excludeFromRecents="true"/>
 
-        <!-- Switching to landscape causes the app to crash, so made it portrait-only -->
         <activity
             android:name="org.kde.kdeconnect.Plugins.MprisPlugin.MprisActivity"
             android:label="@string/open_mpris_controls"
             android:launchMode="singleTop"
             android:theme="@style/KdeConnectTheme.NoActionBar"
-            android:screenOrientation="portrait"
             android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -255,10 +248,19 @@
         <activity
             android:name="org.kde.kdeconnect.Plugins.MousePadPlugin.MousePadActivity"
             android:label="@string/pref_plugin_mousepad"
+            android:launchMode="singleTop"
             android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.Plugins.MousePadPlugin.ComposeSendActivity"
+            android:label="Compose send"
+            android:parentActivityName="org.kde.kdeconnect.Plugins.MousePadPlugin.MousePadActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.Plugins.MousePadPlugin.MousePadActivity" />
         </activity>
         <activity
             android:name="org.kde.kdeconnect.Plugins.MousePadPlugin.SendKeystrokesToHostActivity"
@@ -286,7 +288,7 @@
         </activity>
         <activity
             android:name="org.kde.kdeconnect.Plugins.SharePlugin.ShareActivity"
-            android:label="Zorin Connect">
+            android:label="@string/manifest_label_share">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
 
@@ -368,7 +370,49 @@
                 android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
         </activity>
 
+        <activity
+            android:name="org.kde.kdeconnect.UserInterface.About.EasterEggActivity"
+            android:label="@string/easter_egg"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
 
+        <activity
+            android:name="org.kde.kdeconnect.UserInterface.About.AboutKDEActivity"
+            android:label="@string/about_kde"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
+
+        <activity
+            android:name="org.kde.kdeconnect.UserInterface.About.LicensesActivity"
+            android:label="@string/licenses"
+            android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.UserInterface.MainActivity" />
+        </activity>
+
+        <service
+            android:name="org.kde.kdeconnect.Plugins.ClibpoardPlugin.ClipboardTileService"
+            android:icon="@drawable/ic_baseline_content_paste_24"
+            android:label="@string/send_clipboard"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <service android:name="org.kde.kdeconnect.Plugins.RunCommandPlugin.RunCommandControlsProviderService" android:label="@string/kde_connect"
+            android:permission="android.permission.BIND_CONTROLS">
+            <intent-filter>
+                <action android:name="android.service.controls.ControlsProviderService" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

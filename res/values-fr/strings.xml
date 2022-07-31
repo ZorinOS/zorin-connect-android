@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">Envoyer vers un périphérique</string>
   <string name="foreground_notification_no_devices">Aucun périphérique connecté</string>
   <string name="foreground_notification_devices">Connecté à : %s</string>
   <string name="foreground_notification_send_clipboard">Envoyer le presse-papier</string>
@@ -51,12 +52,14 @@
   <string name="remotekeyboard_multiple_connections">Plusieurs connexions à des claviers sans fil sont disponibles, sélectionnez le périphérique à configurer</string>
   <string name="open_mousepad">Contrôle distant</string>
   <string name="mousepad_info">Faites glisser votre doigt sur l\'écran pour déplacer le pointeur de la souris. Appuyez pour cliquer et utilisez deux/trois doigts pour les clic droit et centre. Utilisez 2 doigts pour faire défiler. Appuyez longtemps pour faire un glisser-déposer.</string>
+  <string name="mousepad_single_tap_settings_title">Définir une action pour tapotage avec un doigt</string>
   <string name="mousepad_double_tap_settings_title">Action pour l\'appui à deux doigts</string>
   <string name="mousepad_triple_tap_settings_title">Action pour l\'appui à trois doigts</string>
   <string name="mousepad_sensitivity_settings_title">Définir la sensibilité du pavé tactile</string>
   <string name="mousepad_acceleration_profile_settings_title">Définir l\'accélération du pointeur</string>
   <string name="mousepad_scroll_direction_title">Inverser la direction du défilement</string>
   <string-array name="mousepad_tap_entries">
+    <item>Clic gauche</item>
     <item>Clic droit</item>
     <item>Clic central</item>
     <item>Rien</item>
@@ -80,7 +83,7 @@
   <string name="sendkeystrokes_textbox_hint">Envoyez les appuis de touches vers l\'hôte</string>
   <string name="sendkeystrokes_disabled_toast">L\'envoi des appuis de touches est désactivé. Veuillez l\'activer dans la configuration.</string>
   <string name="sendkeystrokes_wrong_data">Type « MIME » non valable. Doit être « text/x-keystrokes »</string>
-  <string name="sendkeystrokes_sent_text">Envoi de %1s vers le périphérique %2s</string>
+  <string name="sendkeystrokes_sent_text">%1s envoyés vers le périphérique %2s</string>
   <string name="sendkeystrokes_pref_category_summary">Ce module permet aux autres applications de partager des portions de texte comme des appuis de touches, qui seront envoyées vers l\'hôte connecté.</string>
   <string name="sendkeystrokes_pref_category_title">Envoyez les appuis de touches</string>
   <string name="sendkeystrokes_pref_enabled">Autoriser l\'envoi des appuis de touches</string>
@@ -91,6 +94,11 @@
   <string name="mouse_receiver_plugin_description">Recevoir les mouvements de la souri distante</string>
   <string name="mouse_receiver_plugin_name">Récepteur de souris</string>
   <string name="mouse_receiver_no_permissions">Vous avez besoin d\'accéder au service « Accessibilité »</string>
+  <string name="view_status_title">État</string>
+  <string name="battery_status_format">Batterie : %d %%</string>
+  <string name="battery_status_low_format">Batterie : %d %% Batterie faible</string>
+  <string name="battery_status_charging_format">Battery: %d%% en charge</string>
+  <string name="battery_status_unknown">Informations de batterie non disponibles</string>
   <string name="category_connected_devices">Périphériques connectés</string>
   <string name="category_not_paired_devices">Périphériques disponibles</string>
   <string name="category_remembered_devices">Périphériques mémorisés</string>
@@ -160,6 +168,8 @@
   <string name="mpris_rew">Retour rapide</string>
   <string name="mpris_ff">Avance rapide</string>
   <string name="mpris_next">Suivant</string>
+  <string name="mpris_loop">En boucle</string>
+  <string name="mpris_shuffle">Mélanger</string>
   <string name="mpris_volume">Volume</string>
   <string name="mpris_time_settings_title">Boutons avance / retour rapide.</string>
   <string name="mpris_time_settings_summary">Ajustez le temps pour l\'avance ou retour rapide.</string>
@@ -193,6 +203,7 @@
   <string name="share_received_file">Partager « %s »</string>
   <string name="title_activity_notification_filter">Filtre des notifications</string>
   <string name="filter_apps_info">Les notifications seront synchronisées pour les applications sélectionnées.</string>
+  <string name="show_notification_if_screen_off">Envoyer des notifications uniquement si l\'écran est éteint.</string>
   <string name="sftp_sdcard_num">Carte SD %d</string>
   <string name="sftp_sdcard">Carte SD</string>
   <string name="sftp_readonly">(lecture seule)</string>
@@ -352,4 +363,40 @@
   <string name="donate">Faire un don</string>
   <string name="source_code">Code source</string>
   <string name="licenses">Licences</string>
+  <string name="website">Site Internet</string>
+  <string name="about">À propos</string>
+  <string name="authors">Auteurs</string>
+  <string name="thanks_to">Remerciements à</string>
+  <string name="easter_egg">Œuf de Pâques</string>
+  <string name="email_contributor">Envoyer un courriel au contributeur\n%s</string>
+  <string name="visit_contributors_homepage">Visiter la page d\'accueil du contributeur\n%s</string>
+  <string name="version">Version %s</string>
+  <string name="about_kde">À propos de KDE</string>
+  <string name="kde_be_free">KDE - Soyez libre !</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">Debout !</string>
+  <string name="rise_down">Se lever</string>
+  <string name="click_here_to_type">Tapotez ici pour effectuer une saisie</string>
+  <string name="clear_compose">Effacer</string>
+  <string name="send_compose">Envoyer</string>
+  <string name="open_compose_send">Composer du texte</string>
+  <string name="app_description">Application multi-plate-forme permettant à vos périphériques de communiquer (Par exemple, votre téléphone et votre ordinateur)</string>
+  <string name="about_kde_about">&lt;h1&gt;A propos&lt;/h1&gt; &lt;p&gt;KDE est une communauté mondiale d\'ingénieurs en logiciel, d\'artistes d\'ingénieurs logiciels, d\'artistes, d\'écrivains, de traducteurs et de créateurs s\'engageant pour le développement de &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Logiciels libres&lt;/a&amp;gt. KDE développe l\'environnement de bureau Plasma, des centaines d\'applications, et les nombreuses bibliothèques logicielles les prenant en charge. KDE est une entreprise coopérative : aucune entité centrale ne contrôle sa direction ou ses produits. Au contraire, nous travaillons tous ensemble pour atteindre un objectif commun : construire le meilleur logiciel libre au monde. Tout le monde est est le bienvenu pour &lt;a href=https://community.kde.org/Get_Involved&gt;rejoindre et contribuer&lt;/a&gt; à KDE, y compris vous. &lt;/p&gt; Visitez &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; pour de plus amples informations sur la communauté KDE et les logiciels que nous développons.</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Signaler des bogues ou des souhaits&lt;/h1&gt; &lt;p&gt; Les logiciels peuvent toujours être améliorés et l\'équipe KDE est prête à le faire. Cependant, vous - l\'utilisateur / trice - devez nous dire quand quelque chose ne fonctionne pas comme prévu ou pourrait être mieux fait. KDE dispose d\'un système de suivi des bogues. Visitez &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; ou utilisez le bouton bouton « Signaler un bogue » de la page « A propos » pour signaler les bogues. Si vous avez une suggestion d\'amélioration, vous pouvez aussi utiliser le système de suivi des bogues pour enregistrer votre souhait. Veuillez vous assurer de bien utiliser le niveau de gravité appelée « Liste de souhaits ».</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Rejoignez KDE&lt;/h1&gt; &lt;p&gt;Vous n\'avez pas besoin d\'être un développeur de logiciels pour être membre de l\'équipe KDE. Vous pouvez rejoindre les équipes nationales qui traduisent les interfaces des programmes. Vous pouvez fournir des graphiques, des thèmes, des sons, et des améliorations de la documentation. À vous de décider ! &lt;/p&gt; &lt;p&gt;Visitez &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; pour obtenir des informations sur certains projets auxquels vous pouvez participer.&lt;/p&gt; Si vous avez besoin de plus d\'informations ou de documentation, alors une visite sur &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; vous fournira ce dont vous avez besoin.</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;Soutenir KDE&lt;/h1&gt; &lt;p&gt; Les logiciels de KDE sont et seront toujours disponibles gratuitement. Cependant, leur création n\'est pas gratuite. &lt;p&gt;Pour soutenir le développement, la communauté KDE a créée KDE e.V., une organisation à but non lucratif, légalement fondée en Allemagne. KDE e.V. représente la communauté KDE pour les questions juridiques et financières. Veuillez consulter la page &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; pour plus d\'informations sur KDE e.V.&lt;/p&gt; &lt;p&gt;KDE bénéficie de plusieurs types de contributions, y compris financières. Nous utilisons les fonds pour rembourser les membres et d\'autres personnes pour les dépenses qu\'ils engagent pour leurs contributions. D\'autres fonds sont utilisés pour le soutien juridique et l\'organisation de conférences et de réunions. Nous aimerions vous encourager à soutenir nos efforts par un don financier, en utilisant l\'un des moyens décrits sur la page &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;. &lt;/p&gt; Nous vous remercions par avance pour votre soutien.</string>
+  <string name="maintainer_and_developer">Mainteneur et développeur</string>
+  <string name="developer">Développeur</string>
+  <string name="apple_support">Prise en charge de MacOs. Travail en cours sur la prise en charge de iOS.</string>
+  <string name="bug_fixes_and_general_improvements">Correction de bogues et améliorations générales</string>
+  <string name="samoilenko_yuri_task">Implémentation de SFTP, corrections de bogues et améliorations générales</string>
+  <string name="aniket_kumar_task">Améliorations du module externe pour SMS</string>
+  <string name="alex_fiestas_task">Améliorations du module externe pour les contacts</string>
+  <string name="maxim_leshchenko_task">Améliorations de l\'interface utilisateur et de cette page d\'à propos</string>
+  <string name="holger_kaelberer_task">Corrections du module externe de clavier sans fil et de bogues</string>
+  <string name="saikrishna_arcot_task">Prise en charge de l\'utilisation du clavier dans le module d\'entrée à distance, corrections de bogues et améliorations générales</string>
+  <string name="everyone_else">Toutes les autres personnes ayant contribué à « Zorin Connect » depuis plusieurs années</string>
+  <string name="send_clipboard">Envoyer le presse-papier</string>
+  <string name="tap_to_execute">Tapotez pour lancer</string>
 </resources>

@@ -8,6 +8,15 @@ package org.kde.kdeconnect.Plugins.ClibpoardPlugin;
 
 
 
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.widget.Toast;
+
+import androidx.core.content.ContextCompat;
+
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
@@ -111,5 +120,34 @@ public class ClipboardPlugin extends Plugin {
         return new String[]{PACKET_TYPE_CLIPBOARD, PACKET_TYPE_CLIPBOARD_CONNECT};
     }
 
+    @Override
+    public String getActionName() {
+        return context.getString(R.string.send_clipboard);
+    }
+
+    @Override
+    public boolean hasMainActivity() {
+        return Build.VERSION.SDK_INT > Build.VERSION_CODES.P;
+    }
+
+    @Override
+    public Drawable getIcon() {
+        return ContextCompat.getDrawable(context, R.drawable.ic_baseline_content_paste_24);
+    }
+
+    @Override
+    public void startMainActivity(Activity activity) {
+        if (device != null) {
+            ClipboardManager clipboardManager = ContextCompat.getSystemService(this.context,
+                    ClipboardManager.class);
+            ClipData.Item item;
+            if (clipboardManager.hasPrimaryClip()) {
+                item = clipboardManager.getPrimaryClip().getItemAt(0);
+                String content = item.coerceToText(this.context).toString();
+                this.propagateClipboard(content);
+                Toast.makeText(this.context, R.string.pref_plugin_clipboard_sent, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
 }

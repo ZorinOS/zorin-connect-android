@@ -41,6 +41,10 @@ public class MprisPlugin extends Plugin {
         private String album = "";
         private String albumArtUrl = "";
         private String url = "";
+        private String loopStatus = "";
+        private boolean loopStatusAllowed = false;
+        private boolean shuffle = false;
+        private boolean shuffleAllowed = false;
         private int volume = 50;
         private long length = -1;
         private long lastPosition = 0;
@@ -76,7 +80,15 @@ public class MprisPlugin extends Plugin {
         }
 
         boolean isSpotify() {
-            return getPlayer().toLowerCase().equals("spotify");
+            return getPlayer().equalsIgnoreCase("spotify");
+        }
+
+        public String getLoopStatus() {
+            return loopStatus;
+        }
+
+        public boolean getShuffle() {
+            return shuffle;
         }
 
         public int getVolume() {
@@ -129,8 +141,16 @@ public class MprisPlugin extends Plugin {
             return url;
         }
 
+        public boolean isLoopStatusAllowed() {
+            return loopStatusAllowed && !isSpotify();
+        }
+
+        public boolean isShuffleAllowed() {
+            return shuffleAllowed && !isSpotify();
+        }
+
         public boolean isSetVolumeAllowed() {
-            return !isSpotify();
+            return !isSpotify() && (getVolume() > -1);
         }
 
         public long getPosition() {
@@ -173,6 +193,14 @@ public class MprisPlugin extends Plugin {
             if (isGoNextAllowed()) {
                 MprisPlugin.this.sendCommand(getPlayer(), "action", "Next");
             }
+        }
+
+        public void setLoopStatus(String loopStatus) {
+            MprisPlugin.this.sendCommand(getPlayer(), "setLoopStatus", loopStatus);
+        }
+
+        public void setShuffle(boolean shuffle) {
+            MprisPlugin.this.sendCommand(getPlayer(), "setShuffle", shuffle);
         }
 
         public void setVolume(int volume) {
@@ -253,6 +281,13 @@ public class MprisPlugin extends Plugin {
         device.sendPacket(np);
     }
 
+    private void sendCommand(String player, String method, boolean value) {
+        NetworkPacket np = new NetworkPacket(PACKET_TYPE_MPRIS_REQUEST);
+        np.set("player", player);
+        np.set(method, value);
+        device.sendPacket(np);
+    }
+
     private void sendCommand(String player, String method, int value) {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_MPRIS_REQUEST);
         np.set("player", player);
@@ -276,6 +311,14 @@ public class MprisPlugin extends Plugin {
                 playerStatus.artist = np.getString("artist", playerStatus.artist);
                 playerStatus.album = np.getString("album", playerStatus.album);
                 playerStatus.url = np.getString("url", playerStatus.url);
+                if (np.has("loopStatus")) {
+                    playerStatus.loopStatus = np.getString("loopStatus", playerStatus.loopStatus);
+                    playerStatus.loopStatusAllowed = true;
+                }
+                if (np.has("shuffle")) {
+                    playerStatus.shuffle = np.getBoolean("shuffle", playerStatus.shuffle);
+                    playerStatus.shuffleAllowed = true;
+                }
                 playerStatus.volume = np.getInt("volume", playerStatus.volume);
                 playerStatus.length = np.getLong("length", playerStatus.length);
                 if (np.has("pos")) {

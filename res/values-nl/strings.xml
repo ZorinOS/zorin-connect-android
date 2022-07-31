@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">Naar apparaat verzenden</string>
   <string name="foreground_notification_no_devices">Niet verbonden met enig apparaat</string>
   <string name="foreground_notification_devices">Verbonden met: %s</string>
   <string name="foreground_notification_send_clipboard">Klembord verzenden</string>
@@ -51,12 +52,14 @@
   <string name="remotekeyboard_multiple_connections">Er is meer dan een verbinding met een toetsenbord op afstand, selecteer het te configureren apparaat</string>
   <string name="open_mousepad">Invoer op afstand</string>
   <string name="mousepad_info">Veeg met een vinger op het scherm om de muiscursor te verplaatsen. Tik om te klikken en gebruik twee/drie vingers voor rechter en middelste knop. Twee vingers gebruiken voor schuiven. Druk lang voor slepen en loslaten.</string>
+  <string name="mousepad_single_tap_settings_title">Tikactie met één vinger instellen</string>
   <string name="mousepad_double_tap_settings_title">Tikactie met twee vingers instellen</string>
   <string name="mousepad_triple_tap_settings_title">Tikactie met drie vingers instellen</string>
   <string name="mousepad_sensitivity_settings_title">Gevoeligheid van touchpad instellen</string>
   <string name="mousepad_acceleration_profile_settings_title">Aanwijzerversnelling instellen</string>
   <string name="mousepad_scroll_direction_title">Schuifrichting omdraaien</string>
   <string-array name="mousepad_tap_entries">
+    <item>Linker muisklik</item>
     <item>Rechter muisklik</item>
     <item>Middelste muisklik</item>
     <item>Niets</item>
@@ -80,7 +83,7 @@
   <string name="sendkeystrokes_textbox_hint">Toetsaanslagen verzenden naar host</string>
   <string name="sendkeystrokes_disabled_toast">Verzenden van toetsaanslagen is uitgeschakeld - schakel het in in de instellingen</string>
   <string name="sendkeystrokes_wrong_data">Ongeldig mime-type - moet \'text/x-keystrokes\' zijn</string>
-  <string name="sendkeystrokes_sent_text">%1s verzenden naar apparaat %2s</string>
+  <string name="sendkeystrokes_sent_text">%1$s verzenden naar apparaat %2$s</string>
   <string name="sendkeystrokes_pref_category_summary">Deze module biedt andere toepassingen om tekstsegmenten als toetsaanslagen te delen die verzonden gaan worden naar de verbonden host</string>
   <string name="sendkeystrokes_pref_category_title">Toetsaanslagen verzenden</string>
   <string name="sendkeystrokes_pref_enabled">Toetsaanslagen verzenden inschakelen</string>
@@ -91,6 +94,11 @@
   <string name="mouse_receiver_plugin_description">Muisbewegingen van afstand ontvangen</string>
   <string name="mouse_receiver_plugin_name">Muisontvanger</string>
   <string name="mouse_receiver_no_permissions">U moet service toegankelijkheid inschakelen</string>
+  <string name="view_status_title">Status</string>
+  <string name="battery_status_format">Batterij: %d%%</string>
+  <string name="battery_status_low_format">Batterij: %d%% lage batterij</string>
+  <string name="battery_status_charging_format">Batterij: %d%% opladen</string>
+  <string name="battery_status_unknown">Batterij-informatie niet beschikbaar</string>
   <string name="category_connected_devices">Verbonden apparaten</string>
   <string name="category_not_paired_devices">Beschikbare apparaten</string>
   <string name="category_remembered_devices">Onthouden apparaten</string>
@@ -160,6 +168,8 @@
   <string name="mpris_rew">Terugspoelen</string>
   <string name="mpris_ff">Snel vooruit</string>
   <string name="mpris_next">Volgende</string>
+  <string name="mpris_loop">Lus</string>
+  <string name="mpris_shuffle">Willekeurig afspelen</string>
   <string name="mpris_volume">Volume</string>
   <string name="mpris_time_settings_title">Knoppen vooruit/terug</string>
   <string name="mpris_time_settings_summary">Pas de tijd aan om snel voorwaarts/terug te gaan bij indrukken</string>
@@ -193,6 +203,7 @@
   <string name="share_received_file">\"%s\" delen</string>
   <string name="title_activity_notification_filter">Filter voor meldingen</string>
   <string name="filter_apps_info">Meldingen zullen gesynchroniseerd worden voor de geselecteerde apps.</string>
+  <string name="show_notification_if_screen_off">Meldingen alleen sturen als het scherm uit staat</string>
   <string name="sftp_sdcard_num">SD-kaartje %d</string>
   <string name="sftp_sdcard">SD-kaartje</string>
   <string name="sftp_readonly">(alleen-lezen)</string>
@@ -352,4 +363,40 @@
   <string name="donate">Doneren</string>
   <string name="source_code">Broncode</string>
   <string name="licenses">Licenties</string>
+  <string name="website">Website</string>
+  <string name="about">Info over</string>
+  <string name="authors">Auteurs</string>
+  <string name="thanks_to">Met dank aan</string>
+  <string name="easter_egg">Paasei</string>
+  <string name="email_contributor">E-mail medewerkers\n%s</string>
+  <string name="visit_contributors_homepage">Homepage van medewerker bezoeken\n%s</string>
+  <string name="version">Versie %s</string>
+  <string name="about_kde">Over KDE</string>
+  <string name="kde_be_free">KDE - Wees vrij!</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">Opkomen</string>
+  <string name="rise_down">Neergaan</string>
+  <string name="click_here_to_type">Tik hier om te typen</string>
+  <string name="clear_compose">Wissen</string>
+  <string name="send_compose">Verzenden</string>
+  <string name="open_compose_send">Tekst opstellen</string>
+  <string name="app_description">Multi-platform toepassing die uw apparaten met elkaar laat communiceren (bijv., uw telefoon en uw computer)</string>
+  <string name="about_kde_about">&lt;h1&gt;Info over&lt;/h1&gt; &lt;p&gt;KDE is een wereldwijde gemeenschap van software ingenieurs, artiesten, schrijvers, vertalers en makers die toegewijd zijn aan &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Vrije software&lt;/a&gt; ontwikkeling. KDE produceert de Plasma bureaubladomgeving, honderden toepassingen en de vele software bibliotheken die deze ondersteunen.&lt;/p&gt; &lt;p&gt;KDE is een coöperatieve onderneming: geen enkele entiteit controleert zijn richting of producten. In plaats daarvan werken we samen om het gemeenschappelijke doel te bereiken van het bouwen van de \'s werelds mooiste Vrije software. Iedereen is welkom om &lt;a href=https://community.kde.org/Get_Involved&gt;mee te doen en bij te dragen&lt;/a&gt; aan KDE, inclusief u.&lt;/p&gt; Bezoek &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; voor meer informatie over de KDE gemeenschap en de software die we produceren.</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Bugs of wensen rapporteren&lt;/h1&gt; &lt;p&gt;Software kan altijd verbeterd worden en het KDE team is gereed om dat te doen. Echter, u - de gebruiker - moet ons vertellen wanneer iets niet werkt zoals verwacht of beter gedaan kan worden.&lt;/p&gt; &lt;p&gt;KDE heeft een bugvolgsysteem. Bezoek &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; of gebruik de knop \"Bug rapporteren\" uit het Info over scherm om bugs te rapporteren.&lt;/p&gt; Als u een suggestie voor verbetering dan bent u welkom om het bugvolgsysteem te gebruiken om uw wens te registreren. Ga na dat u de ernst genaamd \"Wishlist\" gebruikt.</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Mee doen met KDE&lt;/h1&gt; &lt;p&gt;U hoeft geen software ontwerper te zijn om een lid van het KDE-team te worden. U kunt meedoen met een nationaal team dat programmainterfaces vertaalt. U kunt illustraties, thema\'s, geluiden en verbeterde documentatie leveren. U beslist!&lt;/p&gt; &lt;p&gt;Bezoek &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; voor informatie over projecten waarin u kunt participeren.&lt;/p&gt; Als u meer informatie of documentatie nodig hebt, dan kan een bezoek aan &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; u alles wat u nodig hebt leveren.</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;KDE ondersteunen&lt;/h1&gt; &lt;p&gt;KDE software is en zal altijd zonder kosten beschikbaar zijn, echter het maken is niet zonder kosten.&lt;/p&gt; &lt;p&gt;Om te ontwikkelen heeft de KDE gemeenschap de KDE e.V. opgericht, een niet-voor-winst organisatie met een wettelijke basis in Duitsland. KDE e.V. representeert de KDE gemeenschap in juridische en financiële zaken. Zie &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; voor informatie over KDE e.V.&lt;/p&gt; &lt;p&gt;KDE heeft inkomsten uit vele soorten bijdragen, inclusief financiële. We gebruiken de fondsen om leden en anderen te compenseren voor uitgaven die ze doen wanneer ze bijdragen. Verdere fondsen worden gebruikt voor juridische ondersteuning en het organiseren van conferenties en meetings.&lt;/p&gt; &lt;p&gt;We zouden u willen aanmoedigen om onze inspanningen met een financiële donatie te ondersteunen, met gebruik van een van de manieren beschreven in &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Bij voorbaat hartelijk dank voor uw ondersteuning.</string>
+  <string name="maintainer_and_developer">Onderhouder en ontwikkelaar</string>
+  <string name="developer">Ontwikkelaar</string>
+  <string name="apple_support">macOS ondersteuning. Werken aan iOS ondersteuning</string>
+  <string name="bug_fixes_and_general_improvements">Bugreparaties en algemene verbeteringen</string>
+  <string name="samoilenko_yuri_task">SFTP implementatie, reparaties van bugs en algemene verbeteringen</string>
+  <string name="aniket_kumar_task">Verbeteringen aan SMS-plug-in</string>
+  <string name="alex_fiestas_task">Verbeteringen aan contactpersoon-plug-in</string>
+  <string name="maxim_leshchenko_task">Verbeteringen aan UI en deze info over pagina</string>
+  <string name="holger_kaelberer_task">"Plug-in voor toetsenbord op afstand  en reparaties"</string>
+  <string name="saikrishna_arcot_task">Ondersteuning voor gebruik van toetsenbord in de plug-in voor invoer op afstand, bugreparaties en algemene verbeteringen</string>
+  <string name="everyone_else">Ieder ander die over de jaren heeft bijgedragen aan Zorin Connect</string>
+  <string name="send_clipboard">Klembord verzenden</string>
+  <string name="tap_to_execute">Tik om uit te voeren</string>
 </resources>

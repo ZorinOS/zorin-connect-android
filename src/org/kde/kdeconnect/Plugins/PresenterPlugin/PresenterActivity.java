@@ -41,7 +41,7 @@ public class PresenterActivity extends AppCompatActivity implements SensorEventL
 
     private SensorManager sensorManager;
 
-    static final float SENSITIVITY = 0.05f; //TODO: Make configurable?
+    static final float SENSITIVITY = 0.04f; //TODO: Make configurable?
 
     public void gyroscopeEvent(SensorEvent event) {
         float xPos = -event.values[2] * SENSITIVITY;
@@ -112,15 +112,15 @@ public class PresenterActivity extends AppCompatActivity implements SensorEventL
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.fullscreen:
-                plugin.sendFullscreen();
-                return true;
-            case R.id.exit_presentation:
-                plugin.sendEsc();
-                return true;
-            default:
-                return super.onContextItemSelected(item);
+        int id = item.getItemId();
+        if (id == R.id.fullscreen) {
+            plugin.sendFullscreen();
+            return true;
+        } else if (id == R.id.exit_presentation) {
+            plugin.sendEsc();
+            return true;
+        } else {
+            return super.onContextItemSelected(item);
         }
     }
 
@@ -185,5 +185,10 @@ public class PresenterActivity extends AppCompatActivity implements SensorEventL
         };
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        super.onBackPressed();
+        return true;
+    }
 }
 

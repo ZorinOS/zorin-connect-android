@@ -8,6 +8,8 @@
   <string name="pref_plugin_telephony_desc">Αποστολή ειδοποιήσεων για εισερχόμενες κλήσεις</string>
   <string name="pref_plugin_battery">Αναφορά μπαταρίας</string>
   <string name="pref_plugin_battery_desc">Περιοδική αναφορά κατάστασης μπαταρίας</string>
+  <string name="pref_plugin_connectivity_report">Αναφορά συνδεσιμότητας</string>
+  <string name="pref_plugin_connectivity_report_desc">Αναφορά ισχύος δικτυακού σήματος και κατάστασης</string>
   <string name="pref_plugin_sftp">Αποκάλυψη συστήματος αρχείων</string>
   <string name="pref_plugin_sftp_desc">Επιτρέπει την απομακρυσμένη περιήγηση του συστήματος αρχείων του κινητού</string>
   <string name="pref_plugin_clipboard">Συγχρονισμός προχείρου</string>
@@ -54,11 +56,6 @@
   <string name="mousepad_sensitivity_settings_title">Ρύθμιση ευαισθησίας της οθόνης αφής</string>
   <string name="mousepad_acceleration_profile_settings_title">Ρύθμιση επιτάχυνσης δείκτη</string>
   <string name="mousepad_scroll_direction_title">Κατεύθυνση ανάστροφης κύλησης</string>
-  <string-array name="mousepad_tap_entries">
-    <item>Δεξί κλικ</item>
-    <item>Μεσαίο κλικ</item>
-    <item>Τίποτα</item>
-  </string-array>
   <string-array name="mousepad_sensitivity_entries">
     <item>Το πιο αργό</item>
     <item>Πάνω από το πιο αργό</item>
@@ -74,6 +71,26 @@
     <item>Πιο δυνατή</item>
     <item>Η πιο δυνατή</item>
   </string-array>
+  <string name="sendkeystrokes_send_to">Αποστολή πληκτρολογήσεων στο</string>
+  <string name="sendkeystrokes_textbox_hint">Αποστολή πληκτρολογήσεων στον υπολογιστή</string>
+  <string name="sendkeystrokes_disabled_toast">Η αποστολή πληκτρολογήσεων είναι ανενεργή - ενεργοποιήστε την στις ρυθμίσεις</string>
+  <string name="sendkeystrokes_wrong_data">Μη έγκυρος τύπος mime - χρειάζεται να γίνει \'text/x-keystrokes\'</string>
+  <string name="sendkeystrokes_sent_text">Εστάλησαν %1$s στη συσκευή %2$s</string>
+  <string name="sendkeystrokes_pref_category_summary">Αυτό το άρθρωμα επιτρέπει σε άλλες εφαρμογές να μοιράζονται τμήματα κειμένου ως πληκτρολογήσεις οι οποίες θα αποστέλονται στον συνδεδεμένο υπολογιστή</string>
+  <string name="sendkeystrokes_pref_category_title">Αποστολή πληκτρολογήσεων</string>
+  <string name="sendkeystrokes_pref_enabled">ενεργοποίηση αποστολής πληκτρολογήσεων</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Ετοιμότητα για δεδομένα με mime τύπο \'text/x-keystrokes\'</string>
+  <string name="sendkeystrokes_safe_text_enabled">Άμεση αποστολή ασφαλούς κειμένου</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Αποστολή σύντομων αριθμητικών-μόνο συμβολοσειρών χωρίς επιβεβαίωση</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Αποστολή ως πληκτρολογήσεις</string>
+  <string name="mouse_receiver_plugin_description">Λήψη απομακρυσμένων κινήσεων του ποντικιού</string>
+  <string name="mouse_receiver_plugin_name">Δέκτης ποντικιού</string>
+  <string name="mouse_receiver_no_permissions">Απαιτείται η ενεργοποίηση της υπηρεσίας προσβασιμότητας</string>
+  <string name="view_status_title">Κατάσταση</string>
+  <string name="battery_status_format">Μπαταρία: %d%%</string>
+  <string name="battery_status_low_format">Μπαταρία: %d%% Χαμηλή συάθμη</string>
+  <string name="battery_status_charging_format">Μπαταρία: %d%% φόρτιση</string>
+  <string name="battery_status_unknown">Πληροφορίες για τη μπαταρία δεν είναι διαθέσιμες</string>
   <string name="category_connected_devices">Συνδεδεμένες συσκευές</string>
   <string name="category_not_paired_devices">Διαθέσιμες συσκευές</string>
   <string name="category_remembered_devices">Συσκευές στη μνήμη</string>
@@ -89,6 +106,7 @@
   <string name="error_canceled_by_other_peer">Ακυρώθηκε από άλλον χρήστη</string>
   <string name="encryption_info_title">Πληροφορίες κρυπτογράφησης</string>
   <string name="encryption_info_msg_no_ssl">Η άλλη συσκευή δεν χρησιμοποιεί μια πρόσφατη έκδοση του Zorin Connect, θα χρησιμοποιηθεί η παλαιά μέθοδος κρυπτογράφησης.</string>
+  <string name="my_device_fingerprint">Το ίχνος SHA256 του πιστοποιητικού της συσκευής σας είναι:</string>
   <string name="remote_device_fingerprint">Το ίχνος SHA256 του πιστοποιητικού της απομακρυσμένης συσκευής είναι:</string>
   <string name="pair_requested">Ζητήθηκε σύζευξη</string>
   <string name="pairing_request_from">Αίτημα σύζευξης από %1s</string>
@@ -142,6 +160,8 @@
   <string name="mpris_rew">Ταχεία ώθηση όπισθεν</string>
   <string name="mpris_ff">Ταχεία προώθηση</string>
   <string name="mpris_next">Επόμενο</string>
+  <string name="mpris_loop">Βρόχος</string>
+  <string name="mpris_shuffle">Ανάμιξη</string>
   <string name="mpris_volume">Τόμος</string>
   <string name="mpris_time_settings_title">Κουμπιά ταχείας ώθησης</string>
   <string name="mpris_time_settings_summary">Χρονική προσαρμογή ταχείας ώθησης ανάλογα με την πίεση</string>
@@ -330,4 +350,38 @@
     <item>Φωτεινό</item>
     <item>Σκούρο</item>
   </string-array>
+  <string name="report_bug">Αναφορά σφάλματος</string>
+  <string name="donate">Δωρεές</string>
+  <string name="source_code">Πηγαίος κώδικας</string>
+  <string name="licenses">Άδειες χρήσης</string>
+  <string name="website">Ιστότοπος</string>
+  <string name="about">Σχετικά</string>
+  <string name="authors">Συγγραφείς</string>
+  <string name="thanks_to">Ευχαριστίες</string>
+  <string name="easter_egg">Πασχαλινό αυγό</string>
+  <string name="email_contributor">Email συμβαλλόμενου\n%s</string>
+  <string name="visit_contributors_homepage">Επισκεφθείτε τη σελίδα του συμβαλλόμενου\n%s</string>
+  <string name="version">Έκδοση %s</string>
+  <string name="about_kde">Σχετικά με το KDE</string>
+  <string name="kde_be_free">KDE - Απελευθερωθείτε!</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">Άνοδος</string>
+  <string name="rise_down">Κάθοδος</string>
+  <string name="app_description">Εφαρμογή γα πολλές πλατφόρμες που επιτρέπει στις συσκευές σας να επικοινωνούν (π.χ. το κινητό με τον υπολογιστή)</string>
+  <string name="about_kde_about">&lt;h1&gt;Σχετικά&lt;/h1&gt; &lt;p&gt;Το KDE είναι μια παγκόσμια κοινότητα μηχανικών λογισμικού, καλλιτεχνών, συγγραφέων, μεταφραστών και δημιουργών οι οποίοι είναι αφοσιωμένοι στην ανάπτυξη του &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Ελεύθερου Λογισμικού&lt;/a&gt;. Το KDE παράγει το περιβάλλον γραφείου Plasma, εκατοντάδες εφαρμογές και πολλές βιβλιοθήκες που τις υποστηρίζουν.&lt;/p&gt; &lt;p&gt;Το KDE είναι ένα συνεργατικό εγχείρημα: καμιά οντότητα από μόνη της δεν ελέγχει την κατεύθυνση ή τα προϊόντα του. Αντίθετα, συνεργαζόμαστε για να επιτύχουμε τον κοινό στόχο της κατασκευής του πληρέστερου στον κόσμο Ελεύθερου Λογισμικού. Οποιοσδήποτε είναι ευπρόσδεκτος να &lt;a href=https://community.kde.org/Get_Involved&gt;γίνει μέλος και να συμβάλει&lt;/a&gt; στο KDE, και εσείς φυσικά.&lt;/p&gt; Επισκεφθείτε το &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; για περισσότερες πληροφορίες σχετικά με την κοινότητα του KDE και το λογισμικό που παράγουμε.</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Αναφέρετε σφάλματα ή επιθυμίες στο&lt;/h1&gt; &lt;p&gt;Το Λογισμικό μπορεί πάντα να βελτιώνεται και η ομάδα του KDE είναι έτοιμη γι\' αυτό. Ωστόσο, εσείς - ο χρήστης - πρέπει να μας ενημερώνετε αν κάτι δεν λειτουργεί όπως θα έπρεπε ή αν θα μπορούσε να γίνει καλύτερο.&lt;/p&gt; &lt;p&gt;Το KDE έχει ένα σύστημα ανίχνευσης σφαλμάτων. Επισκεφθείτε το &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; ή χρησιμοποιήστε το κουμπί «Αναφορά σφάλματος» από την οθόνη Σχετικά για να αναφέρετε σφάλματα.&lt;/p&gt; Αν έχετε κάποια πρόταση για βελτίωση, χρησιμοποιήστε το σύστημα ανίχνευσης σφαλμάτων για να εγγράψετε την επιθυμία σας. Βεβαιωθείτε ότι χρησιμοποιείτε τη «Λίστα επιθυμιών».</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Γίνετε μέλη του KDE&lt;/h1&gt; &lt;p&gt;Δεν χρειάζεται να είστε προγραμματιστής για να γίνετε μέλος της ομάδας του KDE. Μπορείτε να ενταχθείτε στις εθνικές ομάδες που μεταφράζουν τις διεπαφές των εφαρμογών. Μπορείτε να παρέχετε γραφικά, θέματα, ήχους και να βελτιώσετε την τεκμηρίωση. Εσείς αποφασίζετε!&lt;/p&gt; &lt;p&gt;Επισκεφθείτε το &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; για πληροφρίες σε ορισμένα έργα στα οποία μπορείτε να δηλώσετε συμμετοχή.&lt;/p&gt; Αν χρειάζεστε πρόσθετη πληροφόρηση ή τεκμηρίωση, μια επίσκεψη στο &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; θα σας παρέχει ό,τι χρειάζεστε.</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;Υποστηρίξτε το KDE&lt;/h1&gt; &lt;p&gt;Το λογισμικό του KDE είναι και θα είναι πάντα διαθέσιμο δωρεάν, ωστόσο η δημιουργία του δεν είναι δωρεάν.&lt;/p&gt; &lt;p&gt;Για να υποστηρίξετε την ανάπτυξη η κοινότητα του KDE έχει δημιουργήσει στη Γερμανία το KDE e.V., έναν μη-κερδοσκοπικό οργανισμό. Το KDE e.V. εκπροσωπεί την κοινότητα του KDE σε νομικά και χρηματοοικονομικά θέματα. Δείτε το&lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; για πληροφορίες για το KDE e.V.&lt;/p&gt; &lt;p&gt;Το KDE ωφελείται από πολλά είδη συνεισφορών, και οικονομικών. Χρησιμοποιούμε τους οικονομικούς πόρους για αμοιβές μελών και άλλων για έξοδα που παρουσιάζονται όταν συμμετέχουν. Άλλα κονδύλια χρησιμοποιούνται για τη νομική υποστήριξη και τη διοργάνωση συνεδρίων και συναντήσεων.&lt;/p&gt; &lt;p&gt;Θα θέλαμε να σας ενθαρρύνουμε να υποστηρίξετε τις προσπάθειές μας με μια δωρεά, με έναν από τους τρόπους που περιγράφονται στο &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Σας ευχαριστούμε πολύ εκ των προτέρων για την υποστήριξή σας.</string>
+  <string name="maintainer_and_developer">Συντηρητής και προγραμματιστής</string>
+  <string name="developer">Προγραμματιστής</string>
+  <string name="apple_support">Υποστήριξη macos. Εργασία υποστήριξης iOS</string>
+  <string name="bug_fixes_and_general_improvements">Διόρθωση σφαλμάτων και γενικές βελτιώσεις</string>
+  <string name="samoilenko_yuri_task">Υλοποίηση SFTP, διόρθωση σφαλμάτων και γενικές βελτιώσεις</string>
+  <string name="aniket_kumar_task">Βελτιώσεις πρόσθετου SMS</string>
+  <string name="alex_fiestas_task">Βελτιώσεις πρόσθετου επαφών</string>
+  <string name="maxim_leshchenko_task">Βελτιώσεις γραφικού περιβάλλοντος και της σελίδας του περιγράμματος</string>
+  <string name="holger_kaelberer_task">Πρόσθετο απομακρυσμένου πληκτρολπγίου και διορθώσεις σφαλμάτων</string>
+  <string name="saikrishna_arcot_task">Υποστήριξη της χρήσης του πληκτρολογίου στο πρόσθετο απομακρυσμένης σύνδεσης, διορθώσεις σφαλμάτων και γενικές βελτιώσεις</string>
+  <string name="everyone_else">Οποιοσδήποτε άλλος έχει συμβάλλει στο παρελθόν στο Zorin Connect</string>
 </resources>

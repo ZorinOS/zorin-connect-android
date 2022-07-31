@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">Cihaza göndərin</string>
   <string name="foreground_notification_no_devices">Hər hansı bir cihaz qoşulmayıb</string>
   <string name="foreground_notification_devices">Qoşulub: %s</string>
   <string name="foreground_notification_send_clipboard">Mübadilə buferindəkini göndərmək</string>
@@ -51,15 +52,17 @@
   <string name="remotekeyboard_multiple_connections">Birdən çox uzaq klaviatura bağlantısı var, tənzimləmək üçün cihazı seçin</string>
   <string name="open_mousepad">Məsafədən giriş</string>
   <string name="mousepad_info">Siçan kursorunu hərəkət etdirmək üçün barmağı ekranda sürüşdürün. Klik üçün ekrana vurun, sağ və orta siçan düymələri üçün iki/üç barmaqla toxunuş edin. Sürüşdürmək üçün iki barmaqdan istifadə edin. Tutub saxlamaq üçün basın saxlayın.</string>
+  <string name="mousepad_single_tap_settings_title">Bir barmaq toxunuşu əməlini təyin edin</string>
   <string name="mousepad_double_tap_settings_title">İki barmaq toxunuşu əməlini təyin edin</string>
   <string name="mousepad_triple_tap_settings_title">Üç barmaq toxunuşu əməlini təyin edin</string>
   <string name="mousepad_sensitivity_settings_title">Toxunma panelinin həsassləğını təyin edin</string>
   <string name="mousepad_acceleration_profile_settings_title">Kursorun sürətini təyin edin</string>
   <string name="mousepad_scroll_direction_title">Sürüşdürmənin əks istiqaməti</string>
   <string-array name="mousepad_tap_entries">
-    <item>Sağ klik</item>
-    <item>Orta klik</item>
-    <item>Heç biri</item>
+    <item>Sol toxunuş</item>
+    <item>Sağ toxunuş</item>
+    <item>Orta toxunuş</item>
+    <item>Heç nə</item>
   </string-array>
   <string-array name="mousepad_sensitivity_entries">
     <item>Ən yavaş</item>
@@ -80,7 +83,7 @@
   <string name="sendkeystrokes_textbox_hint">Düyməyə vurulmanı ana komputerə göndərin</string>
   <string name="sendkeystrokes_disabled_toast">Düyməə vuruşun göndərilməsi söndürülüb - onu ayarlardan aktiv edin</string>
   <string name="sendkeystrokes_wrong_data">Səhv mime növü - \'text/x-keystrokes\' üçün lazımdır</string>
-  <string name="sendkeystrokes_sent_text">%2s cihazına %1s göndərin</string>
+  <string name="sendkeystrokes_sent_text">%2s cihazına %1s göndərildi</string>
   <string name="sendkeystrokes_pref_category_summary">Bu modul, düyməyə vurmaqla, qoşulmuş ana komputerə göndərərərk başqa tətbiqlərin mətn hissəsininlərini mübadilə etməyə imkan verir</string>
   <string name="sendkeystrokes_pref_category_title">Düymələrə vuruşları göndərin</string>
   <string name="sendkeystrokes_pref_enabled">Düyməyə vuruşun göndərilməsini aktiv edin</string>
@@ -91,6 +94,11 @@
   <string name="mouse_receiver_plugin_description">Uzaqdakı siçanın hərəkətini qəbul etmək</string>
   <string name="mouse_receiver_plugin_name">Siçanı qəbul edən</string>
   <string name="mouse_receiver_no_permissions">Xüsusi İmkanlarda xidməti aktiv etməlisiniz</string>
+  <string name="view_status_title">Vəziyyət</string>
+  <string name="battery_status_format">Batareya: %d%%</string>
+  <string name="battery_status_low_format">Batareya: %d%% Zəif batareya</string>
+  <string name="battery_status_charging_format">Batareya: %d%% doldurulur</string>
+  <string name="battery_status_unknown">Batareya haqqında məlumat əlçatan deyil</string>
   <string name="category_connected_devices">Qoşulmuş cihazlar</string>
   <string name="category_not_paired_devices">Mövcud cihazlar</string>
   <string name="category_remembered_devices">Yadda saxlanılan cihazlar</string>
@@ -160,6 +168,8 @@
   <string name="mpris_rew">Geri almaq</string>
   <string name="mpris_ff">Sürətli irəli</string>
   <string name="mpris_next">Sonrakı</string>
+  <string name="mpris_loop">Dairəvi</string>
+  <string name="mpris_shuffle">Qarışıq</string>
   <string name="mpris_volume">Səs səviyyəsi</string>
   <string name="mpris_time_settings_title">İrəli/Geri düymələri</string>
   <string name="mpris_time_settings_summary">Basıldığında sürətli irəli/geriyə üçün vaxtı ayarlamaq</string>
@@ -193,6 +203,7 @@
   <string name="share_received_file">\"%s\" paylaşmaq</string>
   <string name="title_activity_notification_filter">Bildiriş filtri</string>
   <string name="filter_apps_info">Bildirişlər seçilmiş tətbiqlər üçün eyniləşdiriləcəkdir</string>
+  <string name="show_notification_if_screen_off">Yalnız ekran söndükdə bildiriş göndərmək</string>
   <string name="sftp_sdcard_num">SD kart %d</string>
   <string name="sftp_sdcard">SD kart</string>
   <string name="sftp_readonly">(yalnız oxumaq)</string>
@@ -352,4 +363,40 @@
   <string name="donate">Maddi Dəstək</string>
   <string name="source_code">Qaynaq Kodu</string>
   <string name="licenses">Lisenziyalar</string>
+  <string name="website">Veb sayt</string>
+  <string name="about">Haqqında</string>
+  <string name="authors">Müəlliflər</string>
+  <string name="thanks_to">Minəttdarlıq</string>
+  <string name="easter_egg">Pasxa yumurtası</string>
+  <string name="email_contributor">Əməkdaşın e-poçt ünvanı\n%s</string>
+  <string name="visit_contributors_homepage">Əməkdaşın ev səhifəsinə baxın\n%s</string>
+  <string name="version">Versiya %s</string>
+  <string name="about_kde">KDE haqqında</string>
+  <string name="kde_be_free">KDE - Sərbəst olun!</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">Qalxmaq</string>
+  <string name="rise_down">Aşağı enmək</string>
+  <string name="click_here_to_type">Yazmaq üçün toxunun</string>
+  <string name="clear_compose">Təmizləmək</string>
+  <string name="send_compose">Göndərin</string>
+  <string name="open_compose_send">Mətn yazın</string>
+  <string name="app_description">Cihazlarınızı (məs., telefonunuz və ya kompyuteriniz) arasında əlaqə yaratmaq üçün çox platformalı tətbiq.</string>
+  <string name="about_kde_about">&lt;h1&gt;Haqqında&lt;/h1&gt; &lt;p&gt;KDE, özlərini &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Azad Proqram Təminatı&lt;/a&gt; tərtibatına həsr etmiş, proqram təminatı üzrə mühəndislərdən, rəssamlardan, yazıçılardan, tərcüməçilərdən və yaradıcılardan ibarət dünya miqyasında bir cəmiyyətdir. KDE, Plasma İş masası mühiti, yüzlərlə tətbiqlər və onları dəstəkləyən proqram təminatı kitabxanaları nəşr edir. &lt;/p&gt; &lt;p&gt;KDE kooperativ bir müəssisədir: heç bir müəssisə onun işinə və məhsullarına nəzarət etmir. Bunun əvəzinə, dünyanın ən yaxşı Proqram Təminatını yaratmaq məsədimizə çatmaq üçün birlikdə çalışırıq. &lt;a href=https://community.kde.org/Get_Involved&gt;KDE\'yə qoşulmaq və işimizə töhvə vermək istəyən, &lt;/a&gt; siz də daxil olmaqla&lt;/p&gt; hər kəsi salamlayırıq. &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; saytına daxil olun ki, KDE cəmiyyəti və bizim proqram təminatı və məhsullarımız haqqında daha çox məlumat əldə edə biləsiniz.</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Səhvləri və Arzularınızı bildirin&lt;/h1&gt; &lt;p&gt;Proqram təminatı hər zaman təkmilləşdirilə bilər və KDE komandası buna hazırdır. Lakin siz - istifadəçi - , nə isə gözlənildiyi kimi düzgün işləmədikdə və ya bundan daha yaxşısını yaratmaq barədə təklifiniz olduqda bizə bildirməlisiniz.&lt;/p&gt; &lt;p&gt;KDE\'nin xətaları izləmə sistemi var. &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; ziyarət edin və ya xətalar haqında hesabat vermək üçün ekrandakı \"Xətaları bildirin\" düyməsindən istifadə edin.&lt;/p&gt; Əgər təkmilləşdirmə üçün bir təklifiniz varsa, bu istəyinizi bildirmək üçün xətaları izləmə sistemində qeyd edə bilərsiniz. \"İstəklər siyahısı\" ciddilik səviyyəsindən istifadə etdiyinizə əmin olun.</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;KDE\'yə qoşulun&lt;/h1&gt; &lt;p&gt;KDE komandasının üzvü olmaq üçün proqram tərtibatçısı olmanız vacib deyil. Sİz proqram interfeysini tərcümə etmək üçün milli komandanıza da qoşula bilərsiniz. Siz, həmçinin qrafiklər, mövzular, səslər və təkmilləşdirilmiş sənədləşmələr təqdim edə bilərsiniz. Siz, &lt;/p&gt; &lt;p&gt;buradan - &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; - üzərində çalışmağa qərar verdiyiniz bəzi layihələr haqqında məlumat ala bilərsiniz.&lt;/p&gt; Daha çox məlumat əldə etmək istəsəniz, lazım lazım olan nə varsa tapa biləcəyiniz bu sayta daxil olun: &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt;.</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;KDE\'yə dəstək&lt;/h1&gt; &lt;p&gt;KDE tətbiqləri pulsuzdur və bu hər zaman belə olacaqdır, lakin onların yaradılması pulsuz deyil.&lt;/p&gt; &lt;p&gt;KDE Cəmiyyətini dəstəkləmək üçün Almaniyada qanuni olaraq yaradılmış, qeyri-kommersiya təşkilatı olan KDE e.V formalaşdırlıb. KDE e.V., KDE Cəmiyyətinə maddi və hüquqi yardım göstərir. Da çox məlumat üçün: &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; KDE e.V. baxın&lt;/p&gt; &lt;p&gt;KDE ona göstərilən malliyə da daxil olmaqla bir çox yardımlardan faydalanır. Vəsaitlər, üzvlərə və başqalarına töhfə verərkən çəkdikləri xərcləri ödəmək üçün xərclənir. Əlavə vəsait, hüquqi dəstək üçün və konfrans və görüşlərin təşkili üçün istifadə olunur.&lt;/p&gt; &lt;p&gt;Biz sizi, aşağıda göstərilən yollardan istifadə etməklə bizə maddi dəstəyinizi göztərməyə dəvət edirik: &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Göstərdiyiniz və göstərəcəyiniz hər hansı dəstək üçün sizə təşəkkür edirik.</string>
+  <string name="maintainer_and_developer">Müşayətçi və tərtibatçı</string>
+  <string name="developer">Tərtibatçı</string>
+  <string name="apple_support">macOS dəstəyi. İOS dəstəklənməsi üzərində işləyirik</string>
+  <string name="bug_fixes_and_general_improvements">Xəta sazlamaları və əsas yaxşılaşdırmalar</string>
+  <string name="samoilenko_yuri_task">SFTP tətbiqi, xəta sazlamaları və əsas yaxşılaşdırmalar</string>
+  <string name="aniket_kumar_task">SMS əlavəsi yaxşılaşdırılması</string>
+  <string name="alex_fiestas_task">Əlaqələr əlavəsi yaxşılaşdırılması</string>
+  <string name="maxim_leshchenko_task">İİ yaxşılaşdırmaları və bu haqda səhifə</string>
+  <string name="holger_kaelberer_task">Uzaq klaviatura əlavəsi və xəta sazlamaları</string>
+  <string name="saikrishna_arcot_task">Uzaq daxiletmə əlavəsində klaviaturanın istifadəsini dəstəklənməsi, xəta sazlamaları və əsas yaxşılaşdırmalar</string>
+  <string name="everyone_else">İllər boyu Zorin Connect\'ə töhfə verən hər kəs</string>
+  <string name="send_clipboard">Mübadilə buferinə göndərin</string>
+  <string name="tap_to_execute">İcra etmək üçün vurun</string>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">Wyślij na urządzenie</string>
   <string name="foreground_notification_no_devices">Niepołączony z żadnym urządzeniem</string>
   <string name="foreground_notification_devices">Połączony z: %s</string>
   <string name="foreground_notification_send_clipboard">Wysyłanie schowka</string>
@@ -11,28 +12,28 @@
   <string name="pref_plugin_connectivity_report">Zgłaszanie łączności</string>
   <string name="pref_plugin_connectivity_report_desc">Zgłasza siłę i stanu sygnału sieciowego</string>
   <string name="pref_plugin_sftp">Udostępnianie systemu plików</string>
-  <string name="pref_plugin_sftp_desc">Umożliwia przeglądanie systemu plików tego urządzenia z innego urządzenia</string>
+  <string name="pref_plugin_sftp_desc">Udostępnia systemu plików tego urządzenia innemu urządzeniu do przeglądania</string>
   <string name="pref_plugin_clipboard">Współdzielenie schowka</string>
   <string name="pref_plugin_clipboard_desc">Współdzieli schowek między urządzeniami</string>
   <string name="pref_plugin_clipboard_sent">Wysłano ze schowka</string>
   <string name="pref_plugin_mousepad">Obsługa zdalna</string>
-  <string name="pref_plugin_mousepad_desc">Umożliwia użycie telefonu lub tabletu jako gładzika i klawiatury</string>
+  <string name="pref_plugin_mousepad_desc">Używa telefonu lub tabletu jako gładzika i klawiatury do sterowania innym urządzeniem</string>
   <string name="pref_plugin_presenter">Sterowanie prezentacją</string>
   <string name="pref_plugin_presenter_desc">Przełącza strony przy użyciu telefonu</string>
-  <string name="pref_plugin_remotekeyboard">Odbieranie naciśnięć klawiszy</string>
-  <string name="pref_plugin_remotekeyboard_desc">Odbiera naciśnięcia klawiszy z innego urządzenia</string>
+  <string name="pref_plugin_remotekeyboard">Odbieranie klawiszy</string>
+  <string name="pref_plugin_remotekeyboard_desc">Odbiera naciśnięcia klawiszy z innego urządzenia do sterowania tym urządzeniem</string>
   <string name="pref_plugin_mpris">Sterowanie odtwarzaczem</string>
-  <string name="pref_plugin_mpris_desc">Steruje odtwarzaczami z tego urządzenia na innym urządzeniu</string>
+  <string name="pref_plugin_mpris_desc">Steruje odtwarzaczami tego urządzenia z innego urządzenia</string>
   <string name="pref_plugin_runcommand">Wykonywanie poleceń</string>
   <string name="pref_plugin_runcommand_desc">Wykonuje polecenia na innym urządzeniu z tego urządzenia</string>
-  <string name="pref_plugin_contacts">Współdzielenie kontaktów</string>
-  <string name="pref_plugin_contacts_desc">Współdzieli książkę kontaktów między urządzeniami</string>
+  <string name="pref_plugin_contacts">Udostępnianie kontaktów</string>
+  <string name="pref_plugin_contacts_desc">Udostępnia książkę kontaktów tego urządzenia innemu urządzeniu</string>
   <string name="pref_plugin_ping">Wysłanie pingów</string>
   <string name="pref_plugin_ping_desc">Odbiera i wysyła pingi między urządzeniami</string>
-  <string name="pref_plugin_notifications">Współdzielenie powiadomień</string>
+  <string name="pref_plugin_notifications">Wysyłanie powiadomień</string>
   <string name="pref_plugin_notifications_desc">Wysyła powiadomienia na inne urządzenia</string>
   <string name="pref_plugin_receive_notifications">Odbieranie powiadomień</string>
-  <string name="pref_plugin_receive_notifications_desc">Odbiera powiadomienia z innych urządzeń na to urządzenie</string>
+  <string name="pref_plugin_receive_notifications_desc">Odbiera powiadomienia z innych urządzeń</string>
   <string name="pref_plugin_sharereceiver">Udostępnianie i pobieranie</string>
   <string name="pref_plugin_sharereceiver_desc">Udostępnia pliki i adresy URL pomiędzy urządzeniami</string>
   <string name="device_list_empty">Brak urządzeń</string>
@@ -51,12 +52,14 @@
   <string name="remotekeyboard_multiple_connections">Nawiązano więcej niż jedno połączenie zdalnej klawiatury, wybierz urządzenie do ustawienia</string>
   <string name="open_mousepad">Zdalne sterowanie</string>
   <string name="mousepad_info">Przesuwanie palcem po ekranie przesuwa wskaźnik myszy. Stuknięcie jednym, dwoma i trzema palcami wywołuje odpowiednio naciśnięcie lewym, prawym i środkowym przyciskiem myszy. Dwa palce przewijają. Długie naciśnięcie rozpoczyna czynność przeciągania i upuszczania.</string>
-  <string name="mousepad_double_tap_settings_title">Ustaw działanie po dwukrotnym stuknięciu palcem</string>
-  <string name="mousepad_triple_tap_settings_title">Ustaw działanie po trzykrotnym stuknięciu palcem</string>
+  <string name="mousepad_single_tap_settings_title">Ustaw działanie po stuknięciu jednym palcem</string>
+  <string name="mousepad_double_tap_settings_title">Ustaw działanie po stuknięciu dwoma palcami</string>
+  <string name="mousepad_triple_tap_settings_title">Ustaw działanie po stuknięciu trzema palcami</string>
   <string name="mousepad_sensitivity_settings_title">Ustaw czułość gładzika</string>
   <string name="mousepad_acceleration_profile_settings_title">Ustaw przyspieszenie wskaźnika</string>
   <string name="mousepad_scroll_direction_title">Odwróć stronę przewijania</string>
   <string-array name="mousepad_tap_entries">
+    <item>Kliknięcie lewym</item>
     <item>Kliknięcie prawym</item>
     <item>Kliknięcie środkowym</item>
     <item>Nic</item>
@@ -80,17 +83,22 @@
   <string name="sendkeystrokes_textbox_hint">Wyślij naciśnięcia klawiszy do gospodarza</string>
   <string name="sendkeystrokes_disabled_toast">Wysyłanie naciśnięć klawiszy jest wyłączone - włącz je w ustawieniach</string>
   <string name="sendkeystrokes_wrong_data">Nieprawidłowy rodzaj mime - musi być \'text/x-keystrokes\'</string>
-  <string name="sendkeystrokes_sent_text">Wysłano %1s na urządzenie %2s</string>
+  <string name="sendkeystrokes_sent_text">Wysłano %1$s na urządzenie %2$s</string>
   <string name="sendkeystrokes_pref_category_summary">Ten moduł umożliwia innym programom współdzielenie odcinków tekstu jako naciśnięć klawiszy, które będą wysyłane do podłączonego gospodarza</string>
-  <string name="sendkeystrokes_pref_category_title">Wysyłanie naciśnięć klawiszy</string>
-  <string name="sendkeystrokes_pref_enabled">Włącz wysyłanie naciśnięć klawiszy</string>
+  <string name="sendkeystrokes_pref_category_title">Wysyłanie klawiszy</string>
+  <string name="sendkeystrokes_pref_enabled">Wysyła naciśnięcia klawiszy z tego urządzenia do sterowania innym urządzeniem</string>
   <string name="sendkeystrokes_pref_enabled_summary">Nasłuchuj danych o rodzaju mime \'text/x-keystrokes\'</string>
   <string name="sendkeystrokes_safe_text_enabled">Wyślij bezpieczny tekst natychmiastowo</string>
   <string name="sendkeystrokes_safe_text_enabled_summary">Wyślij krótkie, liczbowe ciągi znaków, bez potwierdzenia</string>
   <string name="pref_plugin_mousepad_send_keystrokes">Wysyłaj jako naciśnięcia klawiszy</string>
-  <string name="mouse_receiver_plugin_description">Odbieranie ruchów myszy</string>
-  <string name="mouse_receiver_plugin_name">Odbiornik myszy</string>
+  <string name="mouse_receiver_plugin_description">Odbiera ruchy myszy z innego urządzenia do sterowania tym urządzeniem</string>
+  <string name="mouse_receiver_plugin_name">Odbieranie myszy</string>
   <string name="mouse_receiver_no_permissions">Musisz włączyć usługę dostępności</string>
+  <string name="view_status_title">Stan</string>
+  <string name="battery_status_format">Bateria: %d%%</string>
+  <string name="battery_status_low_format">Bateria: %d%% niski poziom</string>
+  <string name="battery_status_charging_format">Bateria: %d%% ładowanie</string>
+  <string name="battery_status_unknown">Dane o baterii są niedostępne</string>
   <string name="category_connected_devices">Podłączone urządzenia</string>
   <string name="category_not_paired_devices">Dostępne urządzenia</string>
   <string name="category_remembered_devices">Zapamiętane urządzenia</string>
@@ -159,7 +167,7 @@
     <item quantity="other"/>
   </plurals>
   <string name="tap_to_open">Stuknij, aby otworzyć</string>
-  <string name="received_file_text">Stuknij, aby otworzyć \'%1s\'</string>
+  <string name="received_file_text">Stuknij, aby otworzyć „%1s”</string>
   <string name="cannot_create_file">Nie można utworzyć pliku %s</string>
   <string name="tap_to_answer">Stuknij, aby odpowiedzieć</string>
   <string name="right_click">Wyślij naciskając prawym</string>
@@ -176,6 +184,8 @@
   <string name="mpris_rew">Przewiń</string>
   <string name="mpris_ff">Przewiń do przodu</string>
   <string name="mpris_next">Następny</string>
+  <string name="mpris_loop">Zapętlij</string>
+  <string name="mpris_shuffle">Wymieszaj</string>
   <string name="mpris_volume">Głośność</string>
   <string name="mpris_time_settings_title">Przyciski naprzód/wstecz</string>
   <string name="mpris_time_settings_summary">Dostosuj czas do przewijania wprzód lub wstecz po naciśnięciu</string>
@@ -194,9 +204,9 @@
   <string name="invalid_device_name">Nieprawidłowa nazwa urządzenia</string>
   <string name="shareplugin_text_saved">Otrzymano tekst, zapisano do schowka</string>
   <string name="custom_devices_settings">Lista własnych urządzeń</string>
-  <string name="custom_device_list">Dodaj urządzenie po numerze IP</string>
+  <string name="custom_device_list">Dodaj urządzenie po adresie IP</string>
   <string name="custom_device_deleted">Usunięto własne urządzenie</string>
-  <string name="custom_device_list_help">Jeśli twoje urządzenie nie zostało samo wykryte, to możesz dodać jego adres IP lub nazwę gospodarza, po dotknięciu pływającego przycisku dodawania</string>
+  <string name="custom_device_list_help">Jeśli twoje urządzenie nie zostało wykryte samoczynnie, to możesz ręcznie dodać jego adres IP lub nazwę gospodarza, naciskając pomarańczowy przycisk u dołu ekranu</string>
   <string name="custom_device_fab_hint">Dodaj urządzenie</string>
   <string name="undo">Cofnij</string>
   <string name="share_notification_preference">Hałaśliwe powiadomienia</string>
@@ -209,6 +219,7 @@
   <string name="share_received_file">Udostępnij \"%s\"</string>
   <string name="title_activity_notification_filter">Filtr powiadomień</string>
   <string name="filter_apps_info">Współdzieli powiadomienia wybranych programów między urządzeniami.</string>
+  <string name="show_notification_if_screen_off">Wyślij powiadomienia tylko gdy ekran jest wyłączony</string>
   <string name="sftp_sdcard_num">Karta SD %d</string>
   <string name="sftp_sdcard">Karta SD</string>
   <string name="sftp_readonly">(tylko do odczytu)</string>
@@ -241,16 +252,16 @@
   <string name="device_rename_confirm">Zmień nazwę</string>
   <string name="refresh">Odśwież</string>
   <string name="unreachable_description">To sparowane urządzenie jest nieosiągalne. Upewnij się, że jest podłączone do tej samej sieci.</string>
-  <string name="no_wifi">Brak połączenia z siecią Wi-Fi, więc może nie być widać urządzeń. Naciśnij tutaj, aby włączyć Wi-Fi.</string>
+  <string name="no_wifi">Nie jesteś połączony z siecią Wi-Fi, więc nie będziesz widział żadnych. Naciśnij tutaj, aby włączyć Wi-Fi.</string>
   <string name="on_non_trusted_message">Niezaufana sieć: wyłączono samowykrywanie.</string>
   <string name="no_file_browser">Nie wgrano żadnych przeglądarek plików.</string>
   <string name="pref_plugin_telepathy">Wysyłanie SMSów</string>
-  <string name="pref_plugin_telepathy_desc">Wysyła wiadomości tekstowe z komputera</string>
+  <string name="pref_plugin_telepathy_desc">Wysyła wiadomości tekstowe z innego urządzenia poprzez to urządzenie</string>
   <string name="pref_plugin_telepathy_mms">Wyślij MMSa</string>
   <string name="pref_plugin_telepathy_mms_desc">Aby móc wysyłać MMSa z Zorin Connect, musisz ustawić go jako domyślny program do SMSów</string>
-  <string name="findmyphone_title">Poszukiwania telefonu</string>
-  <string name="findmyphone_title_tablet">Poszukiwania tabletu</string>
-  <string name="findmyphone_title_tv">Poszukiwania telewizora</string>
+  <string name="findmyphone_title">Poszukiwania tego telefonu</string>
+  <string name="findmyphone_title_tablet">Poszukiwania tego tabletu</string>
+  <string name="findmyphone_title_tv">Poszukiwania tego telewizora</string>
   <string name="findmyphone_description">Dzwoni z innego urządzenia na to urządzenie</string>
   <string name="findmyphone_found">Znaleziony</string>
   <string name="open">Otwórz</string>
@@ -278,7 +289,7 @@
   <string name="addcommand_explanation2">Nowe polecenie można dodać w ustawieniach systemowych Zorin Connect</string>
   <string name="add_command_description">Możesz dodawać polecenia na pulpicie</string>
   <string name="pref_plugin_mprisreceiver">Sterowanie odtwarzaczem</string>
-  <string name="pref_plugin_mprisreceiver_desc">Steruje odtwarzaczami z innego urządzenia na tym urządzeniu</string>
+  <string name="pref_plugin_mprisreceiver_desc">Steruje odtwarzaczami innego urządzenia z tego urządzenia</string>
   <string name="notification_channel_default">Inne powiadomienia</string>
   <string name="notification_channel_persistent">Nieznikający wskaźnik</string>
   <string name="notification_channel_media_control">Sterowanie multimediami</string>
@@ -303,7 +314,7 @@
   <string name="settings_rename">Nazwa urządzenia</string>
   <string name="settings_dark_mode">Ciemny wygląd</string>
   <string name="settings_more_settings_title">Więcej ustawień</string>
-  <string name="settings_more_settings_text">Ustawienia nadawane urządzeniu można znaleźć w \'Ustawienia wtyczek\' w danym urządzeniu.</string>
+  <string name="settings_more_settings_text">Ustawienia danego urządzeniu można znaleźć w „Ustawienia wtyczek” na urządzeniu.</string>
   <string name="setting_persistent_notification">Pokaż nieznikające powiadomienie</string>
   <string name="setting_persistent_notification_oreo">Nieznikające powiadomienie</string>
   <string name="setting_persistent_notification_description">Stuknij, aby je ustawić w ustawieniach powiadamiania</string>
@@ -353,14 +364,14 @@
     <item>Po czterech wiadomościach</item>
     <item>Po pięciu wiadomościach</item>
   </string-array>
-  <string name="theme_dialog_title">Wybierz tryb</string>
+  <string name="theme_dialog_title">Wybierz wygląd</string>
   <string-array name="theme_list">
     <item>Ustaw przy oszczędzaniu energii</item>
     <item>Jasny</item>
     <item>Ciemny</item>
   </string-array>
   <string-array name="theme_list_v28">
-    <item>Domyślne systemowe</item>
+    <item>Zgodny z systemowym</item>
     <item>Jasny</item>
     <item>Ciemny</item>
   </string-array>
@@ -368,4 +379,40 @@
   <string name="donate">Darowizna</string>
   <string name="source_code">Kod źródłowy</string>
   <string name="licenses">Licencje</string>
+  <string name="website">Strona sieciowa</string>
+  <string name="about">O programie</string>
+  <string name="authors">Autorzy</string>
+  <string name="thanks_to">Podziękowania</string>
+  <string name="easter_egg">Jajka wielkanocne</string>
+  <string name="email_contributor">Napisz do twórcy\n%s</string>
+  <string name="visit_contributors_homepage">Odwiedź stronę twórcy\n%s</string>
+  <string name="version">Wersja %s</string>
+  <string name="about_kde">O KDE</string>
+  <string name="kde_be_free">KDE - Bądź wolny!</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">Podnieś</string>
+  <string name="rise_down">Obniż</string>
+  <string name="click_here_to_type">Stuknij tutaj, aby wpisać</string>
+  <string name="clear_compose">Wyczyść</string>
+  <string name="send_compose">Wyślij</string>
+  <string name="open_compose_send">Napisz tekst</string>
+  <string name="app_description">"Wieloplatformowa aplikacja, która umożliwia twoim urządzeniom porozumiewanie się (np. twojemu telefonowi i komputerowi). "</string>
+  <string name="about_kde_about">"&lt;h1&gt;O programie&lt;/h1&gt; &lt;p&gt;KDE to światowa społeczność inżynierów oprogramowania, artystów, pisarzy, tłumaczy i twórców, którzy są częścią rozwoju &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Wolnego Oprogramowania&lt;/a&gt;. KDE tworzy środowisko pulpitu Plazmy, setki aplikacji  i wiele bibliotek programistycznych, aby je wspierać.&lt;/p&gt; &lt;p&gt;KDE jest przedsięwzięciem istniejącym ze współpracy; jego ruchami, czy produktami, nie steruje żaden pojedynczy byt. Pracujemy razem, aby osiągnąć wspólny cel, czyli budowę najlepszego Wolnego Oprogramowania na świecie. Każdy jest mile wiedziany, żeby &lt;a href=https://community.kde.org/Get_Involved&gt;dołączył i zaczął współtworzyć&lt;/a&gt; KDE, włączając w to ciebie.&lt;/p&gt; Odwiedź &lt; href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; po więcej szczegółów nt. społeczności KDE i oprogramowania, które tworzymy."</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Zgłaszaj błędy lub życzenia&lt;/h1&gt; &lt;p&gt;Oprogramowanie zawsze można ulepszyć, a zespół KDE jest gotowy, aby to robić. Jednakże ty - użytkownik - musisz nam powiedzieć o tym, co nie działa jak powinno lub co można zrobić lepiej.&lt;/p&gt; &lt;p&gt;KDE ma system obsługi błędów. Odwiedź &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; lub użyj przycisku \"Zgłoś błąd\" z ekranu o programie do zgłaszania błędów.&lt;/p&gt; Jeśli masz sugestie nt. usprawnień, to także możesz ją zarejestrować w naszym systemie obsługi błędów. Upewnij się, że użyjesz ważności o nazwie \"Lista życzeń\".</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Dołącz do KDE&lt;/h1&gt; &lt;p&gt;Nie musisz być programistą, aby być członkiem zespołu KDE. Możesz dołączyć do narodowych zespołów, które tłumaczą oprogramowanie. Możesz dostarczać grafikę, zestawy wyglądu, dźwięki i ulepszać dokumentację. To ty decydujesz!&lt;/p&gt; &lt;p&gt;odwiedź &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; po szczegóły nt. projektów, w których możesz wziąć udział .&lt;/p&gt; Jeśli potrzebujesz więcej szczegółów lub dokumentacji, to odwiedziny na &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; dadzą ci to, czego chcesz.</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;Wesprzyj KDE&lt;/h1&gt; &lt;p&gt;Oprogramowanie KDE jest i zawsze będzie dostępne za darmo, jednakże tworzenie go nie jest darmowe.&lt;/p&gt; &lt;p&gt;Aby wesprzeć rozwój, społeczność KDE założyła KDE e.V., organizację non-profit prawnie założoną w Niemczech. KDE e.V. stanowi społeczność KDE w sprawach prawnych i finansowych. Zajrzyj na &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; po więcej szczegółów o KDE e.V.&lt;/p&gt; &lt;p&gt;KDE korzysta z wielu rodzajów pomocy, w tym także finansowej. Używamy środków do zwracania członkom i innym wydatków, które ponoszą podczas tworzenia. Dalsze środki są używane na wsparcie prawne oraz organizowanie konferencji i spotkań.&lt;/p&gt; &lt;p&gt;Zachęcamy do wspierania naszego wysiłku poprzez darowizny, przy użyciu jednego ze sposobów wymienionych na &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Dzięki z góry za twoje wsparcie.</string>
+  <string name="maintainer_and_developer">Opiekun i programista</string>
+  <string name="developer">Programista</string>
+  <string name="apple_support">Obsługa macOS. Praca nad obsługą iOS</string>
+  <string name="bug_fixes_and_general_improvements">Usuwanie błędów i poprawki</string>
+  <string name="samoilenko_yuri_task">Implementacja SFTP, usuwanie błędów i ogólne usprawnienia</string>
+  <string name="aniket_kumar_task">Usprawnienia we wtyczce do SMSów</string>
+  <string name="alex_fiestas_task">Usprawnienia we wtyczce kontaktów</string>
+  <string name="maxim_leshchenko_task">Usprawnienia do interfejsu i strony o programie</string>
+  <string name="holger_kaelberer_task">Wtyczka zdalnej klawiatury i usuwanie błędów</string>
+  <string name="saikrishna_arcot_task">Wsparcie do obsługi klawiatury we wtyczce zdalnego wprowadzania, usuwanie błędów i ogólne usprawnienia</string>
+  <string name="everyone_else">Inni którzy współtworzyli Zorin Connect na przestrzeni lat</string>
+  <string name="send_clipboard">Wysyłanie schowka</string>
+  <string name="tap_to_execute">Stuknij, aby wykonać</string>
 </resources>

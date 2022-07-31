@@ -1,6 +1,5 @@
 package org.kde.kdeconnect.UserInterface;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -31,33 +30,6 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
-
-    private static class LicenseTextSingleton {
-        private static volatile String licenseText;
-
-        // Need these separate methods because Context is required to load the string
-        // Mixing Context and static here is fine because the license
-        // is a pure function of the project directory (i.e. doesn't depend on language, etc.)
-
-        static synchronized String getOrLoadLicenseText(Context context) {
-            String licenseText = LicenseTextSingleton.licenseText;
-            if (licenseText != null) {
-                return licenseText;
-            }
-            try (InputStream is = context.getResources().openRawResource(R.raw.license)) {
-                licenseText = IOUtils.toString(is, Charset.defaultCharset());
-            } catch (IOException ie) {
-                throw new RuntimeException(ie);
-            }
-            return LicenseTextSingleton.licenseText = licenseText;
-        }
-
-        static synchronized void startLoadingLicenseText(Context context) {
-            if (licenseText == null) {
-                new Thread(() -> getOrLoadLicenseText(context)).start();
-            }
-        }
-    }
 
     private EditTextPreference renameDevice;
 
@@ -186,26 +158,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         moreSettingsText.setTitle(R.string.settings_more_settings_title);
         moreSettingsText.setSummary(R.string.settings_more_settings_text);
         screen.addPreference(moreSettingsText);
-
-        Preference source = new Preference(context);
-        source.setTitle(R.string.source_code);
-        source.setPersistent(false);
-        source.setIcon(R.drawable.ic_baseline_code_24);
-        source.setIntent(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.source_code_url))));
-        screen.addPreference(source);
-
-        Preference licences = new Preference(context);
-        licences.setTitle(R.string.licenses);
-        licences.setPersistent(false);
-        licences.setIcon(R.drawable.ic_baseline_gavel_24);
-        licences.setOnPreferenceClickListener(preference -> {
-            new AlertDialog.Builder(context)
-                    .setMessage(LicenseTextSingleton.getOrLoadLicenseText(context))
-                    .create().show();
-            return true;
-        });
-        LicenseTextSingleton.startLoadingLicenseText(context);
-        screen.addPreference(licences);
 
         setPreferenceScreen(screen);
 
