@@ -173,6 +173,7 @@
             android:label="@string/open_mpris_controls"
             android:launchMode="singleTop"
             android:theme="@style/KdeConnectTheme.NoActionBar"
+            android:screenOrientation="portrait"
             android:parentActivityName="org.kde.kdeconnect.UserInterface.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
