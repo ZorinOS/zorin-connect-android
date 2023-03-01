@@ -26,7 +26,7 @@
   <string name="pref_plugin_mpris_desc">Media oynadıcınızı idarə etməyə imkan verir</string>
   <string name="pref_plugin_runcommand">Əmr başlatmaq</string>
   <string name="pref_plugin_runcommand_desc">Əmrləri telefon və ya planşetiniz ilə məsafədən başlatmaq</string>
-  <string name="pref_plugin_contacts">Kontaktları eyniləşdirmək</string>
+  <string name="pref_plugin_contacts">Əlaqələri eyniləşdirin</string>
   <string name="pref_plugin_contacts_desc">Cihazın kontak kitabçasını eyniləşdirməyə icazə vermək</string>
   <string name="pref_plugin_ping">Dümsükləmək</string>
   <string name="pref_plugin_ping_desc">Siqnal göndərmək və almaq</string>
@@ -52,6 +52,7 @@
   <string name="remotekeyboard_multiple_connections">Birdən çox uzaq klaviatura bağlantısı var, tənzimləmək üçün cihazı seçin</string>
   <string name="open_mousepad">Məsafədən giriş</string>
   <string name="mousepad_info">Siçan kursorunu hərəkət etdirmək üçün barmağı ekranda sürüşdürün. Klik üçün ekrana vurun, sağ və orta siçan düymələri üçün iki/üç barmaqla toxunuş edin. Sürüşdürmək üçün iki barmaqdan istifadə edin. Tutub saxlamaq üçün basın saxlayın.</string>
+  <string name="mousepad_keyboard_input_not_supported">Qoşulmuş cihaz üçün klaviatura ilə daxiletmə dəstəklənmir</string>
   <string name="mousepad_single_tap_settings_title">Bir barmaq toxunuşu əməlini təyin edin</string>
   <string name="mousepad_double_tap_settings_title">İki barmaq toxunuşu əməlini təyin edin</string>
   <string name="mousepad_triple_tap_settings_title">Üç barmaq toxunuşu əməlini təyin edin</string>
@@ -257,8 +258,8 @@
   <string name="share_optional_permission_explanation">Paylaşılan faylları qəbul etmək üçün saxlama qovluğu seçməlisiniz</string>
   <string name="telepathy_permission_explanation">İş Masanızdan telefonunuzdakı SMS\'ləri oxumaq və SMS göndərmək üçün SMS\'ə girişə icazə verməlisiniz</string>
   <string name="telephony_permission_explanation">İş Masanızda telefon zənglərini görmək üçün Zəng Tarixçəsinə və Zəng yığımı vəziyyətinə icazə verməlisiniz</string>
-  <string name="telephony_optional_permission_explanation">Telefon nömrəsi əvəzinə kontaktın adını görmək üçün Kontakt Kitabçasına girişə icazə verməlisiniz</string>
-  <string name="contacts_permission_explanation">İş Masası vasitəsi ilə kontaktlar kitabçasını paylaşmaq üçün kontaktlara girişə icazə verməlisiniz</string>
+  <string name="telephony_optional_permission_explanation">Telefon nömrəsi əvəzinə əlaqənin adını görmək üçün Əlaqə Kitabçasına girişə icazə verməlisiniz</string>
+  <string name="contacts_permission_explanation">İş masası vasitəsi ilə əlaqələr kitabçasını paylaşmaq üçün əlaqələra girişə icazə verməlisiniz</string>
   <string name="select_ringtone">Zəng səsini seçmək</string>
   <string name="telephony_pref_blocked_title">Əngəllənmiş nömrələr</string>
   <string name="telephony_pref_blocked_dialog_desc">Bu nömrədən SMS və zənglər göstərilməsin. Hər sətirdə bir nömrə göstərin</string>
@@ -271,11 +272,11 @@
   <string name="add_command">Əmr əlavə etmək</string>
   <string name="addcommand_explanation">Əmrlər qeyd edilməyib</string>
   <string name="addcommand_explanation2">Sİz Zorin Connect sistem ayarlarında yeni əmrlər əlavə edə bilərsiniz</string>
-  <string name="add_command_description">İş Masasında yeni əmr əlavə edə bilərsiniz</string>
+  <string name="add_command_description">İş masasında yeni əmr əlavə edə bilərsiniz</string>
   <string name="pref_plugin_mprisreceiver">Media Pleyer İdarəsi</string>
   <string name="pref_plugin_mprisreceiver_desc">Telefonunuzun media pleyerlərini digər cihazdan idarə edin</string>
   <string name="notification_channel_default">Digər bildirişlər</string>
-  <string name="notification_channel_persistent">Daimi göstərici</string>
+  <string name="notification_channel_persistent">"Daimi  göstərici"</string>
   <string name="notification_channel_media_control">Media İdarəsi</string>
   <string name="notification_channel_filetransfer">Fayl göndərişi</string>
   <string name="notification_channel_high_priority">Yüksək üstünlük</string>
@@ -319,7 +320,7 @@
   <string name="empty_trusted_networks_list_text">Hələlik hər hansı bir etibarlı şəbəkə əlavə edilməyib</string>
   <string name="allow_all_networks_text">Hamısına icazə vermək</string>
   <string name="location_permission_needed_title">İcazə tələb edlir</string>
-  <string name="location_permission_needed_desc">Android, Sizin WiFi şəbəkənizi müəyyənləşdirmək üçün icazə tələb edir</string>
+  <string name="location_permission_needed_desc">Zorin Connect üçün, hətta tətbiq arxa fonda işlədikdə belə qoşulduğunuz Wi-Fi şəbəkəsini tanımaq üçün ona arxa planda məkandan istifadə etmə icazəsi tələb olunur. Bu onunla bağlıdır ki, hətta Zorin Connect bunu istifadə etməsə də ətrafınızdakı Wi-Fi şəbəkəsi ilə yerinizi təyin etmək üçün istifadə edə biləsiniz.</string>
   <string name="clipboard_android_x_incompat">Android 10 bütün tətbiqlər üçün mübadilə buferinə girişi aradan qaldırıb. Bu qoşma söndürüləcək.</string>
   <string name="mpris_open_url">Burada oxutmağa davam edin</string>
   <string name="cant_open_url">Oxutmanı davam etdirmək üçün URL açıla bilmir</string>

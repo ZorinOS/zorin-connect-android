@@ -144,21 +144,15 @@ public class PairingFragment extends Fragment implements PairingDeviceItem.Callb
         updateDeviceList();
         BackgroundService.RunCommand(mActivity, BackgroundService::onNetworkChange);
         devicesListBinding.refreshListLayout.setRefreshing(true);
-        new Thread(() -> {
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException ignored) {
+
+        devicesListBinding.refreshListLayout.postDelayed(() -> {
+            // the view might be destroyed by now
+            if (devicesListBinding == null) {
+                return;
             }
-            mActivity.runOnUiThread(() ->{
 
-                // the view might be destroyed by now
-                if (devicesListBinding == null) {
-                    return;
-                }
-
-                devicesListBinding.refreshListLayout.setRefreshing(false);
-            });
-        }).start();
+            devicesListBinding.refreshListLayout.setRefreshing(false);
+        }, 1500);
     }
 
     private void updateDeviceList() {
@@ -259,8 +253,8 @@ public class PairingFragment extends Fragment implements PairingDeviceItem.Callb
                 listRefreshCalledThisFrame = false;
             }
 
-    }));
-}
+        }));
+    }
 
     @Override
     public void onStart() {

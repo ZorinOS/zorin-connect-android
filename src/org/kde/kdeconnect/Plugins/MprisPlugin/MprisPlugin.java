@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
+import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import com.zorinos.zorin_connect.R;
 
 import java.net.MalformedURLException;
@@ -120,7 +121,7 @@ public class MprisPlugin extends Plugin {
         }
 
         public boolean isSeekAllowed() {
-            return seekAllowed && getLength() >= 0 && getPosition() >= 0 && !isSpotify();
+            return seekAllowed && getLength() >= 0 && getPosition() >= 0;
         }
 
         public boolean hasAlbumArt() {
@@ -142,15 +143,15 @@ public class MprisPlugin extends Plugin {
         }
 
         public boolean isLoopStatusAllowed() {
-            return loopStatusAllowed && !isSpotify();
+            return loopStatusAllowed;
         }
 
         public boolean isShuffleAllowed() {
-            return shuffleAllowed && !isSpotify();
+            return shuffleAllowed;
         }
 
         public boolean isSetVolumeAllowed() {
-            return !isSpotify() && (getVolume() > -1);
+            return getVolume() > -1;
         }
 
         public long getPosition() {
@@ -252,6 +253,11 @@ public class MprisPlugin extends Plugin {
     @Override
     public boolean hasSettings() {
         return true;
+    }
+
+    @Override
+    public PluginSettingsFragment getSettingsFragment(Activity activity) {
+        return PluginSettingsFragment.newInstance(getPluginKey(), R.xml.mprisplugin_preferences);
     }
 
     @Override

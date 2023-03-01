@@ -22,6 +22,7 @@ import android.os.Looper;
 import android.provider.Telephony;
 import android.telephony.PhoneNumberUtils;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,14 +52,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
 
 import kotlin.text.Charsets;
 
@@ -106,7 +110,6 @@ public class SMSHelper {
         return Uri.parse("content://mms-sms/conversations?simple=true");
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.FROYO)
     private static Uri getCompleteConversationsUri() {
         // This glorious - but completely undocumented - content URI gives us all messages, both MMS and SMS,
         // in all conversations
@@ -418,60 +421,120 @@ public class SMSHelper {
     }
 
     /**
-     * Get the last message from each conversation. Can use those thread_ids to look up more
-     * messages in those conversations
+     * Get the last message from each conversation. Can use the thread_ids in those messages to look
+     * up more messages in those conversations
+     *
+     * Returns values ordered from most-recently-touched conversation to oldest, if possible.
+     * Otherwise ordering is undefined.
      *
      * @param context android.content.Context running the request
-     * @return Mapping of thread_id to the first message in each thread
+     * @return Non-blocking iterable of the first message in each conversation
      */
-    public static Map<ThreadID, Message> getConversations(
+    public static Iterable<Message> getConversations(
             @NonNull Context context
     ) {
         Uri uri = SMSHelper.getConversationUri();
 
+        // Used to avoid spewing logs in case there is an overall problem with fetching thread IDs
+        boolean warnedForNullThreadIDs = false;
+
+        // Used to avoid spewing logs in case the date column doesn't return anything.
+        boolean warnedForUnorderedOutputs = false;
+
         // Step 1: Populate the list of all known threadIDs
-        HashSet<Long> threadIds = new HashSet<>();
+        // This is basically instantaneous even with lots of conversations because we only make one
+        // query. If someone wanted to squeeze better UI performance out of this method, they could
+        // iterate over the threadIdCursor instead of getting all the threads before beginning to
+        // return conversations, but I doubt anyone will ever find it necessary.
+        List<ThreadID> threadIds;
         try (Cursor threadIdCursor = context.getContentResolver().query(
                 uri,
                 null,
                 null,
                 null,
                 null)) {
+            List<Pair<ThreadID, Long>> threadTimestampPair = new ArrayList<>();
             while (threadIdCursor != null && threadIdCursor.moveToNext()) {
                 // The "_id" column returned from the `content://sms-mms/conversations?simple=true` URI
                 // is actually what the rest of the world calls a thread_id.
                 // In my limited experimentation, the other columns are not populated, so don't bother
                 // looking at them here.
                 int idColumn = threadIdCursor.getColumnIndex("_id");
+                int dateColumn = threadIdCursor.getColumnIndex("date");
+
+                ThreadID threadID = null;
+                long messageDate = -1;
                 if (!threadIdCursor.isNull(idColumn)) {
-                    threadIds.add(threadIdCursor.getLong(idColumn));
+                    threadID = new ThreadID(threadIdCursor.getLong(idColumn));
                 }
+                if (!threadIdCursor.isNull(dateColumn)) {
+                    // I think the presence of the "date" column depends on the specifics of the
+                    // device. If it's there, we'll use it to return threads in a sorted order.
+                    // If it's not there, we'll return them unsorted (maybe you get lucky and the
+                    // conversations URI returns sorted anyway).
+                    messageDate = threadIdCursor.getLong(dateColumn);
+                }
+
+                if (messageDate <= 0) {
+                    if (!warnedForUnorderedOutputs) {
+                        Log.w("SMSHelper", "Got no value for date of thread. Return order of results is undefined.");
+                        warnedForUnorderedOutputs = true;
+                    }
+                }
+
+                if (threadID == null) {
+                    if (!warnedForNullThreadIDs) {
+                        Log.w("SMSHelper", "Got null for some thread IDs. If these were valid threads, they will not be returned.");
+                        warnedForNullThreadIDs = true;
+                    }
+                    continue;
+                }
+
+                threadTimestampPair.add(new Pair<>(threadID, messageDate));
             }
+
+            threadIds = threadTimestampPair.stream()
+                    .sorted((left, right) -> right.second.compareTo(left.second)) // Sort most-recent to least-recent (largest to smallest)
+                    .map(threadTimestampPairElement -> threadTimestampPairElement.first).collect(Collectors.toList());
         }
 
         // Step 2: Get the actual message object from each thread ID
-        Map<ThreadID, Message> firstMessageByThread = new HashMap<>();
+        // Do this in an iterator, so that the caller can choose to interrupt us as frequently as
+        // desired
+        return new Iterable<Message>() {
+            @NonNull
+            @Override
+            public Iterator<Message> iterator() {
+                return new Iterator<Message>() {
+                    int threadIdsIndex = 0;
 
-        for (Long rawThreadId : threadIds) {
-            ThreadID threadId = new ThreadID(rawThreadId);
+                    @Override
+                    public boolean hasNext() {
+                        return threadIdsIndex < threadIds.size();
+                    }
 
-            List<Message> firstMessage = getMessagesInThread(context, threadId, 1L);
+                    @Override
+                    public Message next() {
+                        ThreadID nextThreadId = threadIds.get(threadIdsIndex);
+                        threadIdsIndex++;
 
-            if (firstMessage.size() > 1) {
-                Log.w("SMSHelper", "getConversations got two messages for the same ThreadID: " + threadId);
+                        List<Message> firstMessage = getMessagesInThread(context, nextThreadId, 1L);
+
+                        if (firstMessage.size() > 1) {
+                            Log.w("SMSHelper", "getConversations got two messages for the same ThreadID: " + nextThreadId);
+                        }
+
+                        if (firstMessage.size() == 0)
+                        {
+                            Log.e("SMSHelper", "ThreadID: " + nextThreadId + " did not return any messages");
+                            // This is a strange issue, but I don't know how to say what is wrong, so just continue along
+                            return this.next();
+                        }
+                        return firstMessage.get(0);
+                    }
+                };
             }
-
-            if (firstMessage.size() == 0)
-            {
-                Log.e("SMSHelper", "ThreadID: " + threadId + " did not return any messages");
-                // This is a strange issue, but I don't know how to say what is wrong, so just continue along
-                continue;
-            }
-
-            firstMessageByThread.put(threadId, firstMessage.get(0));
-        }
-
-        return firstMessageByThread;
+        };
     }
 
     private static int addEventFlag(
@@ -492,13 +555,30 @@ public class SMSHelper {
         event = addEventFlag(event, Message.EVENT_TEXT_MESSAGE);
 
         @NonNull List<Address> address = Collections.singletonList(new Address(messageInfo.get(Telephony.Sms.ADDRESS)));
-        @NonNull String body = messageInfo.get(Message.BODY);
-        long date = Long.parseLong(messageInfo.get(Message.DATE));
-        int type = Integer.parseInt(messageInfo.get(Message.TYPE));
-        int read = Integer.parseInt(messageInfo.get(Message.READ));
-        @NonNull ThreadID threadID = new ThreadID(Long.parseLong(messageInfo.get(Message.THREAD_ID)));
-        long uID = Long.parseLong(messageInfo.get(Message.U_ID));
-        int subscriptionID = NumberUtils.toInt(messageInfo.get(Message.SUBSCRIPTION_ID));
+        @Nullable String maybeBody = messageInfo.getOrDefault(Message.BODY, "");
+        @NonNull String body = maybeBody != null ? maybeBody : "";
+        long date = NumberUtils.toLong(messageInfo.getOrDefault(Message.DATE, null));
+        int type = NumberUtils.toInt(messageInfo.getOrDefault(Message.TYPE, null));
+        int read = NumberUtils.toInt(messageInfo.getOrDefault(Message.READ, null));
+        @NonNull ThreadID threadID = new ThreadID(NumberUtils.toLong(messageInfo.getOrDefault(Message.THREAD_ID, null), ThreadID.invalidThreadId.threadID));
+        long uID = NumberUtils.toLong(messageInfo.getOrDefault(Message.U_ID, null));
+        int subscriptionID = NumberUtils.toInt(messageInfo.getOrDefault(Message.SUBSCRIPTION_ID, null));
+
+        // Examine all the required SMS columns and emit a log if something seems amiss
+        boolean anyNulls = Arrays.stream(new String[] {
+                        Telephony.Sms.ADDRESS,
+                        Message.BODY,
+                        Message.DATE,
+                        Message.TYPE,
+                        Message.READ,
+                        Message.THREAD_ID,
+                        Message.U_ID })
+                .map(key -> messageInfo.getOrDefault(key, null))
+                .anyMatch(Objects::isNull);
+        if (anyNulls)
+        {
+            Log.e("parseSMS", "Some fields were invalid. This indicates either a corrupted SMS database or an unsupported device.");
+        }
 
         return new Message(
                 address,
@@ -528,9 +608,9 @@ public class SMSHelper {
         @NonNull String body = "";
         long date;
         int type;
-        int read = Integer.parseInt(messageInfo.get(Message.READ));
-        @NonNull ThreadID threadID = new ThreadID(Long.parseLong(messageInfo.get(Message.THREAD_ID)));
-        long uID = Long.parseLong(messageInfo.get(Message.U_ID));
+        int read = NumberUtils.toInt(messageInfo.get(Message.READ));
+        @NonNull ThreadID threadID = new ThreadID(NumberUtils.toLong(messageInfo.getOrDefault(Message.THREAD_ID, null), ThreadID.invalidThreadId.threadID));
+        long uID = NumberUtils.toLong(messageInfo.get(Message.U_ID));
         int subscriptionID = NumberUtils.toInt(messageInfo.get(Message.SUBSCRIPTION_ID));
         List<Attachment> attachments = new ArrayList<>();
 
@@ -608,7 +688,7 @@ public class SMSHelper {
         }
 
         // Determine whether the message was in- our out- bound
-        long messageBox = Long.parseLong(messageInfo.get(Telephony.Mms.MESSAGE_BOX));
+        long messageBox = NumberUtils.toLong(messageInfo.get(Telephony.Mms.MESSAGE_BOX));
         if (messageBox == Telephony.Mms.MESSAGE_BOX_INBOX) {
             type = Telephony.Sms.MESSAGE_TYPE_INBOX;
         } else if (messageBox == Telephony.Mms.MESSAGE_BOX_SENT) {
@@ -618,7 +698,7 @@ public class SMSHelper {
             // are the same as Sms.MESSAGE_TYPE_* of the same type. So by default let's just use
             // the value we've got.
             // This includes things like drafts, which are a far-distant plan to support
-            type = Integer.parseInt(messageInfo.get(Telephony.Mms.MESSAGE_BOX));
+            type = NumberUtils.toInt(messageInfo.get(Telephony.Mms.MESSAGE_BOX));
         }
 
         // Get address(es) of the message
@@ -636,11 +716,11 @@ public class SMSHelper {
         }
 
         if (to != null) {
-            for (Address address : to) {
-                boolean isLocalPhoneNumber = userPhoneNumbers.stream().anyMatch(localPhoneNumber -> localPhoneNumber.isMatchingPhoneNumber(address.address));
+            for (Address toAddress : to) {
+                boolean isLocalPhoneNumber = userPhoneNumbers.stream().anyMatch(localPhoneNumber -> localPhoneNumber.isMatchingPhoneNumber(toAddress.address));
 
-                if (!isLocalPhoneNumber && !from.toString().equals("insert-address-token")) {
-                    addresses.add(address);
+                if (!isLocalPhoneNumber && !toAddress.toString().equals("insert-address-token")) {
+                    addresses.add(toAddress);
                 }
             }
         }
@@ -656,7 +736,7 @@ public class SMSHelper {
 
         // Canonicalize the date field
         // SMS uses epoch milliseconds, MMS uses epoch seconds. Standardize on milliseconds.
-        long rawDate = Long.parseLong(messageInfo.get(Message.DATE));
+        long rawDate = NumberUtils.toLong(messageInfo.get(Message.DATE));
         date = rawDate * 1000;
 
         return new Message(
@@ -739,6 +819,12 @@ public class SMSHelper {
     public static class ThreadID {
         final long threadID;
         static final String lookupColumn = Telephony.Sms.THREAD_ID;
+
+        /**
+         * Define a value against which we can compare others, which should never be returned from
+         * a valid thread.
+         */
+        public static final ThreadID invalidThreadId = new ThreadID(-1);
 
         public ThreadID(long threadID) {
             this.threadID = threadID;
@@ -859,6 +945,7 @@ public class SMSHelper {
             return json;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return address;
@@ -1062,6 +1149,7 @@ public class SMSHelper {
             return json;
         }
 
+        @NonNull
         @Override
         public String toString() {
             return body;

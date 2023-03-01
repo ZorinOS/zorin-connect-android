@@ -52,6 +52,7 @@
   <string name="remotekeyboard_multiple_connections">Існує декілька з’єднань із віддаленою клавіатурою. Виберіть пристрій для налаштовування.</string>
   <string name="open_mousepad">Дистанційне введення</string>
   <string name="mousepad_info">Проведіть по екрану пальцем, щоб пересунути вказівник миші. Дотик одним пальцем означатиме клацання, дотиком двома або трьома пальцями можна імітувати праву і середню кнопки. Гортання відбувається за допомогою двох пальців. Для перетягування зі скиданням скористайтеся тривалим натисканням.</string>
+  <string name="mousepad_keyboard_input_not_supported">Підтримки введення з клавіатури на пов\'язаному пристрої не передбачено</string>
   <string name="mousepad_single_tap_settings_title">Встановлення дії для торкання одним пальцем</string>
   <string name="mousepad_double_tap_settings_title">Встановлення дії для торкання двома пальцями</string>
   <string name="mousepad_triple_tap_settings_title">Встановлення дії для торкання трьома пальцями</string>
@@ -335,7 +336,7 @@
   <string name="empty_trusted_networks_list_text">Вами ще не додано надійних мереж</string>
   <string name="allow_all_networks_text">Дозволити всі</string>
   <string name="location_permission_needed_title">Потрібні права доступу</string>
-  <string name="location_permission_needed_desc">Android потрібні права доступу до даних місця перебування для ідентифікації вашої мережі WiFi</string>
+  <string name="location_permission_needed_desc">Zorin Connect потрібні права на визначення місця перебування у фоновому режимі для роботи з мережею Wi-Fi, з якою встановлено з\'єднання, навіть якщо програма працює у фоновому режимі. Причина полягає у тому, що назви сусідніх мереж Wi-Fi може бути використано для визначення місця перебування, навіть якщо це не робить сама Zorin Connect.</string>
   <string name="clipboard_android_x_incompat">У Android 10 вилучено доступ до буфера даних для усіх програм. Цей додаток буде вимкнено.</string>
   <string name="mpris_open_url">Продовжити відтворення тут</string>
   <string name="cant_open_url">Не вдалося відкрити адресу для продовження відтворення</string>

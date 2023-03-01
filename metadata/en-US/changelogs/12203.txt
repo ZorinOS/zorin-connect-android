@@ -1,0 +1,6 @@
+- Automatically reconnect to trusted networks in the background on Android 10+
+- More playback controls for Spotify on your computer
+- Preserve the last modified time on files received from your computer
+- Themed icon now available on Android 13+
+- Various quality-of-life improvements throughout the app
+- Bug fixes and performance improvements

@@ -52,6 +52,7 @@
   <string name="remotekeyboard_multiple_connections">Obstaja več kot ena povezava na oddaljeno tipkovnico, izberite napravo in nastavitve</string>
   <string name="open_mousepad">Oddaljeni input</string>
   <string name="mousepad_info">Premaknite prst po zaslonu da bi premikali miško. Tapnite za klik in uporabite dva/tri prste za desni in srednji gumb. Za pomikanje uporabite dva prsta. Uporabite dolg pritisk za povleci in spusti.</string>
+  <string name="mousepad_keyboard_input_not_supported">Vnos s tipkovnice ni podprt na sparjeni napravi</string>
   <string name="mousepad_single_tap_settings_title">Nastavite akcijo tapkanja enega prsta</string>
   <string name="mousepad_double_tap_settings_title">Nastavite akcijo tapkanja dveh prstov</string>
   <string name="mousepad_triple_tap_settings_title">Nastavite akcijo tapkanja treh prstov</string>
@@ -178,7 +179,7 @@
   <string name="pairing_accept">Sprejmi</string>
   <string name="pairing_reject">Zavrni</string>
   <string name="settings">Nastavitve</string>
-  <string name="mpris_play">Zaigraj</string>
+  <string name="mpris_play">Predvajaj</string>
   <string name="mpris_pause">Premor</string>
   <string name="mpris_previous">Prejšnji</string>
   <string name="mpris_rew">Previj</string>
@@ -244,7 +245,7 @@
   <string name="sftp_no_sdcard_detected">Ni naznane kartice SD</string>
   <string name="sftp_no_storage_locations_configured">Lokacije shranjevanja niso nastavljene</string>
   <string name="sftp_saf_permission_explanation">Za dostop do datotek na daljavo morate nastaviti lokacije za shranjevanje</string>
-  <string name="no_players_connected">Ni najdenih igralcev</string>
+  <string name="no_players_connected">Ni najdenih predvajalnikov</string>
   <string name="send_files">Pošlji datoteke</string>
   <string name="pairing_title">Naprave Zorin Connect</string>
   <string name="pairing_description">Tu bi se morale prikazati druge naprave, ki poganjajo Zorin Connect v istem omrežju.</string>
@@ -291,7 +292,7 @@
   <string name="pref_plugin_mprisreceiver">Nadzor predvajalnika medijev</string>
   <string name="pref_plugin_mprisreceiver_desc">Upravljajte predstavnostne predvajalnike telefona iz druge naprave</string>
   <string name="notification_channel_default">Ostala obvestila</string>
-  <string name="notification_channel_persistent">Obstojni indikator</string>
+  <string name="notification_channel_persistent">Trajni indikator</string>
   <string name="notification_channel_media_control">Nadzor medija</string>
   <string name="notification_channel_filetransfer">Prenos datotek</string>
   <string name="notification_channel_high_priority">Visoka prednost</string>
@@ -335,9 +336,9 @@
   <string name="empty_trusted_networks_list_text">Niste še dodali nobenega zaupanja vrednega omrežja</string>
   <string name="allow_all_networks_text">Dovoli vse</string>
   <string name="location_permission_needed_title">Zahtevano dovoljenje</string>
-  <string name="location_permission_needed_desc">Android potrebuje dovoljenje za lokacijo, da prepozna vaše omrežje WiFi</string>
+  <string name="location_permission_needed_desc">"Zorin Connect potrebuje dovoljenje omrežja, da pozna Wi-Fi omrežje, s katerim ste povezani, tudi če je aplikacija v ozadju. To je zato, ker se ime omrežja Wi-Fi lahko uporabi za iskanje svoje lokacije, četudi to ne počne Zorin Connect."</string>
   <string name="clipboard_android_x_incompat">Android 10 je odstranil dostop do odložišča za vse aplikacije. Ta vtičnik bo onemogočen.</string>
-  <string name="mpris_open_url">Nadaljujte z igranjem tukaj</string>
+  <string name="mpris_open_url">Nadaljuj s predvajanjem tukaj</string>
   <string name="cant_open_url">Ne morem odpreti spletnega naslova za nadaljevanje predvajanja</string>
   <string name="bigscreen_home">Domov</string>
   <string name="bigscreen_up">Gor</string>

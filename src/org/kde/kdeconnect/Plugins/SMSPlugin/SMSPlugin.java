@@ -8,6 +8,7 @@
 
 package org.kde.kdeconnect.Plugins.SMSPlugin;
 
+import android.app.Activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
@@ -36,11 +37,12 @@ import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
 import org.kde.kdeconnect.Plugins.TelephonyPlugin.TelephonyPlugin;
+import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import com.zorinos.zorin_connect.BuildConfig;
 import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
@@ -50,7 +52,6 @@ import androidx.core.content.ContextCompat;
 
 import com.klinker.android.send_message.ApnUtils;
 import com.klinker.android.send_message.Transaction;
-import com.klinker.android.send_message.Utils;
 import com.klinker.android.logger.Log;
 
 import static org.kde.kdeconnect.Plugins.TelephonyPlugin.TelephonyPlugin.PACKET_TYPE_TELEPHONY;
@@ -278,8 +279,8 @@ public class SMSPlugin extends Plugin {
 
         long newMostRecentTimestamp = mostRecentTimestamp;
         for (SMSHelper.Message message : messages) {
-            if (message == null || message.date <= newMostRecentTimestamp) {
-                newMostRecentTimestamp = message.date;
+            if (message == null || message.date >= newMostRecentTimestamp) {
+                  newMostRecentTimestamp = message.date;
             }
         }
 
@@ -462,7 +463,7 @@ public class SMSPlugin extends Plugin {
      * @param messages Messages to include in the packet
      * @return NetworkPacket of type PACKET_TYPE_SMS_MESSAGE
      */
-    private static NetworkPacket constructBulkMessagePacket(Collection<SMSHelper.Message> messages) {
+    private static NetworkPacket constructBulkMessagePacket(Iterable<SMSHelper.Message> messages) {
         NetworkPacket reply = new NetworkPacket(PACKET_TYPE_SMS_MESSAGE);
 
         JSONArray body = new JSONArray();
@@ -489,21 +490,19 @@ public class SMSPlugin extends Plugin {
      * Send one packet of type PACKET_TYPE_SMS_MESSAGE with the first message in all conversations
      */
     private boolean handleRequestAllConversations(NetworkPacket packet) {
-        Map<SMSHelper.ThreadID, SMSHelper.Message> conversations = SMSHelper.getConversations(this.context);
+        Iterable<SMSHelper.Message> conversations = SMSHelper.getConversations(this.context);
 
         // Prepare the mostRecentTimestamp counter based on these messages, since they are the most
         // recent in every conversation
         mostRecentTimestampLock.lock();
-        for (SMSHelper.Message message : conversations.values()) {
+        for (SMSHelper.Message message : conversations) {
             if (message.date > mostRecentTimestamp) {
                 mostRecentTimestamp = message.date;
             }
+            NetworkPacket partialReply = constructBulkMessagePacket(Collections.singleton(message));
+            device.sendPacket(partialReply);
         }
         mostRecentTimestampLock.unlock();
-
-        NetworkPacket reply = constructBulkMessagePacket(conversations.values());
-
-        device.sendPacket(reply);
 
         return true;
     }
@@ -558,6 +557,11 @@ public class SMSPlugin extends Plugin {
     @Override
     public boolean hasSettings() {
         return true;
+    }
+
+    @Override
+    public PluginSettingsFragment getSettingsFragment(Activity activity) {
+        return PluginSettingsFragment.newInstance(getPluginKey(), R.xml.smsplugin_preferences);
     }
 
     @Override

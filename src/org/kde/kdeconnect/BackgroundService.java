@@ -6,6 +6,7 @@
 
 package org.kde.kdeconnect;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,7 +15,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkRequest;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
@@ -31,6 +35,7 @@ import org.kde.kdeconnect.Backends.LanBackend.LanLinkProvider;
 import org.kde.kdeconnect.Helpers.NotificationHelper;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.RsaHelper;
 import org.kde.kdeconnect.Helpers.SecurityHelpers.SslHelper;
+import org.kde.kdeconnect.Helpers.ThreadHelper;
 import org.kde.kdeconnect.Plugins.ClibpoardPlugin.ClipboardFloatingActivity;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
@@ -158,17 +163,20 @@ public class BackgroundService extends Service {
     }
 
     public Device getDevice(String id) {
+        if (id == null) {
+            return null;
+        }
         return devices.get(id);
     }
 
     private void cleanDevices() {
-        new Thread(() -> {
+        ThreadHelper.execute(() -> {
             for (Device d : devices.values()) {
                 if (!d.isPaired() && !d.isPairRequested() && !d.isPairRequestedByPeer() && !d.deviceShouldBeKeptAlive()) {
                     d.disconnect();
                 }
             }
-        }).start();
+        });
     }
 
     private final BaseLinkProvider.ConnectionReceiver deviceListener = new BaseLinkProvider.ConnectionReceiver() {
@@ -256,10 +264,26 @@ public class BackgroundService extends Service {
         // Register screen on listener
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         // See: https://developer.android.com/reference/android/net/ConnectivityManager.html#CONNECTIVITY_ACTION
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
             filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         }
         registerReceiver(new KdeConnectBroadcastReceiver(), filter);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkRequest.Builder builder = new NetworkRequest.Builder();
+            cm.registerNetworkCallback(builder.build(), new ConnectivityManager.NetworkCallback() {
+                @Override
+                public void onAvailable(Network network) {
+                    onDeviceListChanged();
+                    onNetworkChange();
+                }
+                @Override
+                public void onLost(Network network) {
+                    onDeviceListChanged();
+                }
+           });
+        }
 
         Log.i("KDE/BackgroundService", "Service not started yet, initializing...");
 
@@ -331,7 +355,7 @@ public class BackgroundService extends Service {
             intent.putExtra(MainActivity.EXTRA_DEVICE_ID, connectedDeviceIds.get(0));
         }
 
-        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pi = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
         NotificationCompat.Builder notification = new NotificationCompat.Builder(this, NotificationHelper.Channels.PERSISTENT);
         notification
                 .setSmallIcon(R.drawable.ic_notification)
@@ -353,30 +377,32 @@ public class BackgroundService extends Service {
             notification.setContentText(getString(R.string.foreground_notification_devices, TextUtils.join(", ", connectedDevices)));
 
             // Adding an action button to send clipboard manually in Android 10 and later.
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                Intent sendClipboard = new Intent(this, ClipboardFloatingActivity.class);
-                sendClipboard.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                sendClipboard.putExtra("connectedDeviceIds", connectedDeviceIds);
-                PendingIntent sendPendingClipboard = PendingIntent.getActivity(this, 3, sendClipboard, PendingIntent.FLAG_UPDATE_CURRENT);
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P &&
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.READ_LOGS) == PackageManager.PERMISSION_DENIED) {
+                Intent sendClipboard = ClipboardFloatingActivity.getIntent(this, true);
+                PendingIntent sendPendingClipboard = PendingIntent.getActivity(this, 3, sendClipboard, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
                 notification.addAction(0, getString(R.string.foreground_notification_send_clipboard), sendPendingClipboard);
             }
 
             if (connectedDeviceIds.size() == 1) {
-                // Adding two action buttons only when there is a single device connected.
-                // Setting up Send File Intent.
-                Intent sendFile = new Intent(this, SendFileActivity.class);
-                sendFile.putExtra("deviceId", connectedDeviceIds.get(0));
-                PendingIntent sendPendingFile = PendingIntent.getActivity(this, 1, sendFile, PendingIntent.FLAG_UPDATE_CURRENT);
-                notification.addAction(0, getString(R.string.send_files), sendPendingFile);
+                String deviceId = connectedDeviceIds.get(0);
+                Device device = getDevice(deviceId);
+                if (device != null) {
+                    // Adding two action buttons only when there is a single device connected.
+                    // Setting up Send File Intent.
+                    Intent sendFile = new Intent(this, SendFileActivity.class);
+                    sendFile.putExtra("deviceId", deviceId);
+                    PendingIntent sendPendingFile = PendingIntent.getActivity(this, 1, sendFile, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+                    notification.addAction(0, getString(R.string.send_files), sendPendingFile);
 
-                // Checking if there are registered commands and adding the button.
-                Device device = getDevice(connectedDeviceIds.get(0));
-                RunCommandPlugin plugin = (RunCommandPlugin) device.getPlugin("RunCommandPlugin");
-                if (plugin != null && !plugin.getCommandList().isEmpty()) {
-                    Intent runCommand = new Intent(this, RunCommandActivity.class);
-                    runCommand.putExtra("deviceId", connectedDeviceIds.get(0));
-                    PendingIntent runPendingCommand = PendingIntent.getActivity(this, 2, runCommand, PendingIntent.FLAG_UPDATE_CURRENT);
-                    notification.addAction(0, getString(R.string.pref_plugin_runcommand), runPendingCommand);
+                    // Checking if there are registered commands and adding the button.
+                    RunCommandPlugin plugin = (RunCommandPlugin) device.getPlugin("RunCommandPlugin");
+                    if (plugin != null && !plugin.getCommandList().isEmpty()) {
+                        Intent runCommand = new Intent(this, RunCommandActivity.class);
+                        runCommand.putExtra("deviceId", connectedDeviceIds.get(0));
+                        PendingIntent runPendingCommand = PendingIntent.getActivity(this, 2, runCommand, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+                        notification.addAction(0, getString(R.string.pref_plugin_runcommand), runPendingCommand);
+                    }
                 }
             }
         }
@@ -437,7 +463,7 @@ public class BackgroundService extends Service {
     }
 
     public static void RunCommand(final Context c, final InstanceCallback callback) {
-        new Thread(() -> {
+        ThreadHelper.execute(() -> {
             if (callback != null) {
                 mutex.lock();
                 try {
@@ -447,7 +473,7 @@ public class BackgroundService extends Service {
                 }
             }
             ContextCompat.startForegroundService(c, new Intent(c, BackgroundService.class));
-        }).start();
+        });
     }
 
     public static <T extends Plugin> void RunWithPlugin(final Context c, final String deviceId, final Class<T> pluginClass, final PluginCallback<T> cb) {

@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">Отправить на устройство</string>
   <string name="foreground_notification_no_devices">Не подключено ни к одному устройству</string>
   <string name="foreground_notification_devices">Подключено к: %s</string>
   <string name="foreground_notification_send_clipboard">Передать буфер обмена</string>
@@ -51,11 +52,19 @@
   <string name="remotekeyboard_multiple_connections">Подключено более одной удалённой клавиатуры, выберите устройство для настройки</string>
   <string name="open_mousepad">Удалённый ввод</string>
   <string name="mousepad_info">Перемещайте палец по экрану для перемещения курсора мыши. Коснитесь для нажатия, используйте касание двумя/тремя пальцами для правой и средней кнопок. Для выполнения прокрутки используйте два пальца, для перетаскивания — долгое нажатие.</string>
+  <string name="mousepad_keyboard_input_not_supported">Ввод с клавиатуры не поддерживается сопряжённым устройством</string>
+  <string name="mousepad_single_tap_settings_title">Действие при касании одним пальцем</string>
   <string name="mousepad_double_tap_settings_title">Действие при касании двумя пальцами</string>
   <string name="mousepad_triple_tap_settings_title">Действие при касании тремя пальцами</string>
   <string name="mousepad_sensitivity_settings_title">Чувствительность сенсорной панели</string>
   <string name="mousepad_acceleration_profile_settings_title">Настройка ускорения курсора</string>
   <string name="mousepad_scroll_direction_title">Инвертировать направление прокрутки</string>
+  <string-array name="mousepad_tap_entries">
+    <item>Нажатие левой кнопки</item>
+    <item>Нажатие правой кнопки</item>
+    <item>Нажатие средней кнопки</item>
+    <item>Ничего не делать</item>
+  </string-array>
   <string-array name="mousepad_sensitivity_entries">
     <item>Самая низкая</item>
     <item>Низкая</item>
@@ -75,6 +84,7 @@
   <string name="sendkeystrokes_textbox_hint">Посылать нажатия клавиш на хост</string>
   <string name="sendkeystrokes_disabled_toast">Отсылка нажатий клавиш отключена: включите её в параметрах</string>
   <string name="sendkeystrokes_wrong_data">Недопустимый тип mime, тип должен быть «text/x-keystrokes»</string>
+  <string name="sendkeystrokes_sent_text">Передать %1$s на устройство %2$s</string>
   <string name="sendkeystrokes_pref_category_summary">Данный модуль позволяет другим приложениям делиться фрагментами текста в виде нажатий клавиш, которые будут затем посылаться на подключённый хост.</string>
   <string name="sendkeystrokes_pref_category_title">Послать нажатия клавиш</string>
   <string name="sendkeystrokes_pref_enabled">Включить отсылку нажатий клавиш</string>
@@ -85,6 +95,11 @@
   <string name="mouse_receiver_plugin_description">Получать движения удалённой мыши</string>
   <string name="mouse_receiver_plugin_name">Инструмент получения движений мыши</string>
   <string name="mouse_receiver_no_permissions">Включите службу специальных возможностей</string>
+  <string name="view_status_title">Состояние</string>
+  <string name="battery_status_format">Заряд батареи: %d%%</string>
+  <string name="battery_status_low_format">Заряд батареи: %d%% (низкий уровень)</string>
+  <string name="battery_status_charging_format">Заряд батареи: %d%% (заряжается)</string>
+  <string name="battery_status_unknown">Информация о заряде батареи недоступна</string>
   <string name="category_connected_devices">Подключённые устройства</string>
   <string name="category_not_paired_devices">Доступные устройства</string>
   <string name="category_remembered_devices">Известные устройства</string>
@@ -204,7 +219,8 @@
   <string name="share">Совместное использование</string>
   <string name="share_received_file">Совместное использование «%s»</string>
   <string name="title_activity_notification_filter">Фильтр уведомлений</string>
-  <string name="filter_apps_info">Для выбранных приложений уведомления будут синхронизированы.</string>
+  <string name="filter_apps_info">Выберите приложения для передачи их уведомлений на ПК</string>
+  <string name="show_notification_if_screen_off">Только при выключенном экране</string>
   <string name="sftp_sdcard_num">Карта SD %d</string>
   <string name="sftp_sdcard">Карта SD</string>
   <string name="sftp_readonly">(только чтение)</string>
@@ -276,7 +292,7 @@
   <string name="pref_plugin_mprisreceiver">Управление медиапроигрывателем</string>
   <string name="pref_plugin_mprisreceiver_desc">Управление воспроизведением на телефоне с другого устройства</string>
   <string name="notification_channel_default">Прочие уведомления</string>
-  <string name="notification_channel_persistent">Постоянный индикатор</string>
+  <string name="notification_channel_persistent">Постоянное уведомление</string>
   <string name="notification_channel_media_control">Управление воспроизведением</string>
   <string name="notification_channel_filetransfer">Передача файлов</string>
   <string name="notification_channel_high_priority">Высокий приоритет</string>
@@ -320,7 +336,7 @@
   <string name="empty_trusted_networks_list_text">Ещё не было добавлено ни одной доверенной сети</string>
   <string name="allow_all_networks_text">Разрешить во всех сетях</string>
   <string name="location_permission_needed_title">Требуется разрешение</string>
-  <string name="location_permission_needed_desc">Для идентификации сети WiFi системе Android требуется разрешение на доступ к местоположению</string>
+  <string name="location_permission_needed_desc">Для получения информации о подключении к сети Wi-Fi приложению Zorin Connect требуется разрешение на доступ в сведениям о местоположении, даже когда оно работает в фоновом режиме. Необходимость предоставления такого разрешения связана с тем, что сведения о доступных сетях Wi-Fi могут использоваться для определения местоположения.</string>
   <string name="clipboard_android_x_incompat">В ОС Android версии 10 для всех приложений был запрещён доступ к буферу. Этот подключаемый модуль будет отключён.</string>
   <string name="mpris_open_url">Продолжить воспроизведения отсюда</string>
   <string name="cant_open_url">Не удалось открыть URL для продолжения воспроизведения</string>
@@ -368,13 +384,36 @@
   <string name="about">О программе</string>
   <string name="authors">Авторы</string>
   <string name="thanks_to">Благодарности</string>
+  <string name="easter_egg">Пасхальное яйцо</string>
+  <string name="email_contributor">Написать участнику по эл. почте:\n%s</string>
+  <string name="visit_contributors_homepage">Посетить домашнюю страницу участника:\n%s</string>
+  <string name="version">Версия %s</string>
+  <string name="about_kde">О KDE</string>
   <string name="kde_be_free">Будьте свободными!</string>
   <string name="kde">KDE</string>
   <string name="konqi">Konqi</string>
+  <string name="rise_up">Прокрутить вверх</string>
+  <string name="rise_down">Прокрутить вниз</string>
+  <string name="click_here_to_type">Вводите текст в этой области</string>
+  <string name="clear_compose">Очистить</string>
+  <string name="send_compose">Отправить</string>
+  <string name="open_compose_send">Написание текста</string>
+  <string name="app_description">Приложение для подключения устройств (к примеру, телефона и компьютера)</string>
+  <string name="about_kde_about">&lt;h1&gt;О программе&lt;/h1&gt; &lt;p&gt;KDE — сообщество разработчиков, художников, писателей и переводчиков со всего мира, вносящих вклад в разработку &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;свободного программного обеспечения&lt;/a&gt;. KDE выпускает рабочую среду Plasma, сотни прикладных программ, а также множество необходимых для них программных библиотек&lt;/p&gt; &lt;p&gt;Не существует группы или организации, держащей под исключительным контролем действия или направления развития продуктов KDE. Вместо централизованного подхода мы стремимся к общей цели — созданию лучшего в мире свободного ПО. Мы будем рады каждому, кто захочет &lt;a href=https://community.kde.org/Get_Involved&gt;внести свой вклад&lt;/a&gt; в развитие KDE.&lt;/p&gt; Для того чтобы больше узнать о проекте, зайдите на сайт &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt;.</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Ошибки и пожелания&lt;/h1&gt; &lt;p&gt;Программное обеспечение всегда можно улучшить, и команда KDE готова этим заниматься. Однако, для этого надо, чтобы вы, обычный пользователь, сообщили нам о том, что не соответствует вашим ожиданиям и что можно было бы улучшить.&lt;/p&gt; &lt;p&gt;В рамках проекта KDE создана система учёта ошибок и пожеланий. Для того чтобы сообщить об ошибке, зайдите на сайт &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; или используйте пункт «Сообщить об ошибке...» из меню «О программе».&lt;/p&gt; При регистрации пожеланий не забудьте установить уровень важности «Wishlist» (пожелание).&lt;/p&gt; Для связи с командой перевода KDE на русский язык используйте контакты, указанные на странице &lt;a href=\"https://kde.ru/translation\"&gt;kde.ru/translation</string>.
+  <string name="about_kde_join_kde">&lt;h1&gt;Присоединиться к сообществу KDE&lt;/h1&gt; &lt;p&gt;Для того чтобы включиться в разработку KDE, не обязательно быть программистом. Вы можете помочь в переводе KDE на родной язык, создавать графику, стили, звуки, улучшать документацию — то есть тем, чем вы сами хотите заниматься.&lt;/p&gt; &lt;p&gt;Список проектов, в которых вы могли бы принять участие, приведён на сайте &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt;/.&lt;/p&gt; Вполне возможно, какой-то из них вас заинтересует. Более подробные сведения и документацию можно найти на сайте &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt;.</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;Поддержать KDE&lt;/h1&gt; &lt;p&gt;Среда KDE распространяется бесплатно, но её создание требует затрат.&lt;/p&gt; &lt;p&gt;Поэтому команда KDE основала Ассоциацию KDE, некоммерческую организацию, которая зарегистрирована в Германии. Ассоциация KDE представляет проект KDE в правовом и финансовом аспектах. Посетите &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; для получения более подробной информации об Ассоциации KDE.&lt;/p&gt; &lt;p&gt;Финансовая поддержка идёт на благо KDE. Большая часть средств используется для возмещения расходов участников проекта, которые они несут при разработке KDE. Остальные средства используются для юридической поддержки и организации конференций и встреч. Вы можете поддержать KDE финансовым пожертвованием, которое может быть внесено одним из способов, описанных на странице &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt;Заранее благодарим за поддержку!</string>
+  <string name="maintainer_and_developer">Сопровождающий и разработчик</string>
   <string name="developer">Разработчик</string>
+  <string name="apple_support">Поддержка macOS, работа над поддержкой iOS.</string>
   <string name="bug_fixes_and_general_improvements">Исправления и улучшения</string>
+  <string name="samoilenko_yuri_task">Реализация поддержки протокола SFTP, исправления и улучшения</string>
   <string name="aniket_kumar_task">Улучшения модуля SMS</string>
   <string name="alex_fiestas_task">Улучшения модуля «контакты»</string>
   <string name="maxim_leshchenko_task">Улучшения интерфейса и страница «О программе\"</string>
   <string name="holger_kaelberer_task">Модуль «удалённая клавиатура» и исправления ошибок</string>
+  <string name="saikrishna_arcot_task">Поддержка использования клавиатуры для удалённого ввода, исправления и улучшения</string>
+  <string name="everyone_else">Все остальные участники проекта Zorin Connect за несколько лет</string>
+  <string name="send_clipboard">Передать буфер обмена</string>
+  <string name="tap_to_execute">Коснитесь, чтобы выполнить действие</string>
 </resources>

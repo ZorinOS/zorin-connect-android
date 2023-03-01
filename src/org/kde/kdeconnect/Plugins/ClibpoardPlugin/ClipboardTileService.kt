@@ -19,10 +19,14 @@ class ClipboardTileService : TileService() {
 
         startActivityAndCollapse(Intent(this, ClipboardFloatingActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            putExtra("connectedDeviceIds", ArrayList(BackgroundService.getInstance().devices.values
-                .filter { it.isReachable && it.isPaired }
-                .map { it.deviceId })
-            )
+            var ids : List<String> = emptyList()
+            val service = BackgroundService.getInstance()
+            if (service != null) {
+                ids = service.devices.values
+                    .filter { it.isReachable && it.isPaired }
+                    .map { it.deviceId }
+            }
+            putExtra("connectedDeviceIds", ArrayList(ids))
         })
     }
 }

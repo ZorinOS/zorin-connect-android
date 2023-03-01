@@ -6,7 +6,6 @@
 
 package org.kde.kdeconnect.Helpers;
 
-import android.app.Activity;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -30,7 +29,7 @@ public class IntentHelper {
      */
     public static void startActivityFromBackground(Context context, Intent intent, String title) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && !MyApplication.isInForeground()) {
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_MUTABLE);
             Notification notification = new NotificationCompat
                     .Builder(context, NotificationHelper.Channels.HIGHPRIORITY)
                     .setContentIntent(pendingIntent)

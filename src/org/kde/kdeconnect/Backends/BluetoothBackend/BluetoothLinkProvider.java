@@ -19,9 +19,9 @@ import android.os.Build;
 import android.os.Parcelable;
 import android.util.Log;
 
-import org.apache.commons.io.IOUtils;
 import org.kde.kdeconnect.Backends.BaseLinkProvider;
 import org.kde.kdeconnect.Device;
+import org.kde.kdeconnect.Helpers.ThreadHelper;
 import org.kde.kdeconnect.NetworkPacket;
 
 import java.io.IOException;
@@ -94,11 +94,11 @@ public class BluetoothLinkProvider extends BaseLinkProvider {
 
         //This handles the case when I'm the existing device in the network and receive a hello package
         clientRunnable = new ClientRunnable();
-        new Thread(clientRunnable).start();
+        ThreadHelper.execute(clientRunnable);
 
         // I'm on a new network, let's be polite and introduce myself
         serverRunnable = new ServerRunnable();
-        new Thread(serverRunnable).start();
+        ThreadHelper.execute(serverRunnable);
     }
 
     @Override

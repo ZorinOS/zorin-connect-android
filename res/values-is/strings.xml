@@ -1,0 +1,356 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">Senda til tækis</string>
+  <string name="foreground_notification_no_devices">Ekki tengt við nein tæki</string>
+  <string name="foreground_notification_devices">Tengt við: %s</string>
+  <string name="foreground_notification_send_clipboard">Senda klippispjald</string>
+  <string name="pref_plugin_telephony">Símatilkynningar</string>
+  <string name="pref_plugin_telephony_desc">Birta tilkynningar fyrir innhringingar</string>
+  <string name="pref_plugin_battery">Staða rafhlöðu</string>
+  <string name="pref_plugin_battery_desc">Tilkynnir reglulega um stöðu rafhlöðu</string>
+  <string name="pref_plugin_connectivity_report">Staða tenginga</string>
+  <string name="pref_plugin_connectivity_report_desc">Tilkynnir reglulega um styrk merkis og ástand</string>
+  <string name="pref_plugin_sftp">Skoðun skráakerfis</string>
+  <string name="pref_plugin_sftp_desc">Gerir kleift að fletta upp í skráakerfi þessa tækis</string>
+  <string name="pref_plugin_clipboard">Samstilling klippispjalda</string>
+  <string name="pref_plugin_clipboard_desc">Deildu innihaldi klippispjaldsins</string>
+  <string name="pref_plugin_clipboard_sent">Klippispjald sent</string>
+  <string name="pref_plugin_mousepad">Fjartengd ritun</string>
+  <string name="pref_plugin_mousepad_desc">Notaðu símann þinn eða spjaldtölvu sem snertiplatta og lyklaborð</string>
+  <string name="pref_plugin_presenter">Fjarstýring skyggnusýninga</string>
+  <string name="pref_plugin_presenter_desc">Notaðu tækið þitt til að skipta á milli skyggna í kynningum</string>
+  <string name="pref_plugin_remotekeyboard">"Tekur á móti  fjartengdum innslætti"</string>
+  <string name="pref_plugin_remotekeyboard_desc">Taktu á móti lyklainnslætti frá fjartengdum tækjum</string>
+  <string name="pref_plugin_mpris">Margmiðlunarstýringar</string>
+  <string name="pref_plugin_mpris_desc">Er með fjarstýringu fyrir margmiðlunarspilara</string>
+  <string name="pref_plugin_runcommand">Keyra skipun</string>
+  <string name="pref_plugin_runcommand_desc">Settu fjartengt í gang skipanir frá símanum þínum eða spjaldtölvu</string>
+  <string name="pref_plugin_contacts">Samstilling tengiliða</string>
+  <string name="pref_plugin_contacts_desc">Gerir kleift að samstilla við tengiliðaskrá tækisins</string>
+  <string name="pref_plugin_ping">Ping-skipun</string>
+  <string name="pref_plugin_ping_desc">Senda og taka við ping-merkjum</string>
+  <string name="pref_plugin_notifications">Samstilling tilkynninga</string>
+  <string name="pref_plugin_notifications_desc">Fáðu aðgang að tilkynningum frá öðrum tækjum</string>
+  <string name="pref_plugin_receive_notifications">Taka á móti tilkynningum</string>
+  <string name="pref_plugin_receive_notifications_desc">Taktu á móti tilkynningum frá hinu tækinu og birtu þær á Android</string>
+  <string name="pref_plugin_sharereceiver">Senda og taka við</string>
+  <string name="pref_plugin_sharereceiver_desc">Deildu skrám og slóðum á milli tækja</string>
+  <string name="device_list_empty">Engin tæki</string>
+  <string name="ok">Í lagi</string>
+  <string name="sad_ok">Í lagi :(</string>
+  <string name="cancel">Hætta við</string>
+  <string name="open_settings">Opna stillingar</string>
+  <string name="no_permissions">Þú verður að gefa heimild til að fá aðgang að tilkynningum</string>
+  <string name="send_ping">"Senda ping-beiðni "</string>
+  <string name="open_mpris_controls">Margmiðlunarstýring</string>
+  <string name="remotekeyboard_editing_only_title">Aðeins meðhöndla fjartengda lykla við breytingar/ritun</string>
+  <string name="remotekeyboard_not_connected">Engin fjartenging lyklaborðs er virk, virkjaðu eina slíka í Zorin Connect</string>
+  <string name="remotekeyboard_connected">Fjartenging lyklaborðs er virk</string>
+  <string name="open_mousepad">Fjartengd ritun</string>
+  <string name="mousepad_info">Færðu fingur á skjánum til að færa bendilinn. Pikkaðu til að smella og notaðu tvo/þrjá fingur sem hægri- og miðjuhnappa. Notaðu tvo fingur til að skruna. Ýttu lengi til að draga-sleppa.</string>
+  <string name="mousepad_single_tap_settings_title">Stilla aðgerð við pikk með einum fingri</string>
+  <string name="mousepad_double_tap_settings_title">Stilla aðgerð við pikk með tveimur fingrum</string>
+  <string name="mousepad_triple_tap_settings_title">Stilla aðgerð við pikk með þremur fingrum</string>
+  <string name="mousepad_sensitivity_settings_title">Stilla næmni snertiplatta</string>
+  <string name="mousepad_acceleration_profile_settings_title">Stilla hröðun bendils</string>
+  <string name="mousepad_scroll_direction_title">Öfug skrunstefna</string>
+  <string-array name="mousepad_tap_entries">
+    <item>Vinstri músarsmellur</item>
+    <item>Hægri músarsmellur</item>
+    <item>Miðjumúsarsmellur</item>
+    <item>Ekkert</item>
+  </string-array>
+  <string-array name="mousepad_sensitivity_entries">
+    <item>Hægast</item>
+    <item>Hraðar en hægast</item>
+    <item>Sjálfgefið</item>
+    <item>Hraðar en sjálfgefið</item>
+    <item>Hraðasta</item>
+  </string-array>
+  <string-array name="mousepad_acceleration_profile_entries">
+    <item>Engin hröðun</item>
+    <item>Veikast</item>
+    <item>Veikara</item>
+    <item>Miðlungs</item>
+    <item>Sterkara</item>
+    <item>Sterkast</item>
+  </string-array>
+  <string name="sendkeystrokes_send_to">Senda lyklaáslátt til</string>
+  <string name="sendkeystrokes_textbox_hint">Senda lyklaáslátt til hýsilvélar</string>
+  <string name="sendkeystrokes_disabled_toast">Sending lyklaásláttar er ekki virkt, virkjaðu það í stillingunum</string>
+  <string name="sendkeystrokes_sent_text">Sendi %1$s til tækisins %2$s</string>
+  <string name="sendkeystrokes_pref_category_title">Senda lyklaáslátt</string>
+  <string name="sendkeystrokes_pref_enabled">Virkja sendingu lyklaásláttar</string>
+  <string name="sendkeystrokes_safe_text_enabled">Senda öruggan texta strax</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Senda stutta strengi einungis með tölum án staðfestingar</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Senda sem lyklaáslátt</string>
+  <string name="mouse_receiver_plugin_description">"Taka á móti  fjartengdum músarhreyfingum"</string>
+  <string name="mouse_receiver_plugin_name">Móttakari músarmerkja</string>
+  <string name="mouse_receiver_no_permissions">Þú þarft að virkja þjónustuna fyrir aukið aðgengi</string>
+  <string name="view_status_title">Staða</string>
+  <string name="battery_status_format">Rafhlaða: %d%%</string>
+  <string name="battery_status_low_format">Rafhlaða: %d%% lítil hleðsla</string>
+  <string name="battery_status_charging_format">Rafhlaða: %d%% í hleðslu</string>
+  <string name="battery_status_unknown">Upplýsingar um rafhlöðu ekki tiltækar</string>
+  <string name="category_connected_devices">Tengd tæki</string>
+  <string name="category_not_paired_devices">Tiltæk tæki</string>
+  <string name="category_remembered_devices">Munuð tæki</string>
+  <string name="device_menu_plugins">Stillingar á forritsviðbót</string>
+  <string name="device_menu_unpair">Afpara</string>
+  <string name="pair_new_device">Para nýtt tæki</string>
+  <string name="unknown_device">Óþekkt tæki</string>
+  <string name="error_not_reachable">Tæki er ekki aðgengilegt</string>
+  <string name="error_already_paired">Tæki er þegar parað</string>
+  <string name="error_could_not_send_package">Gat ekki sent pakka</string>
+  <string name="error_timed_out">Féll á tíma</string>
+  <string name="error_canceled_by_user">Hætt við af notanda</string>
+  <string name="error_canceled_by_other_peer">Hætt við af hinum notandanum</string>
+  <string name="encryption_info_title">Upplýsingar um dulritun</string>
+  <string name="my_device_fingerprint">SHA256-fingrafar af skilríki tækisins þíns er:</string>
+  <string name="remote_device_fingerprint">SHA256-fingrafar af skilríki fjartengda tækisins er:</string>
+  <string name="pair_requested">Beðið um pörun</string>
+  <string name="pairing_request_from">Beiðni um pörun frá %1s</string>
+  <plurals name="incoming_file_title">
+    <item quantity="one">Tek á móti %1$d skrá frá %2$s</item>
+    <item quantity="other">Tek á móti %1$d skrám frá %2$s</item>
+  </plurals>
+  <plurals name="incoming_files_text">
+    <item quantity="one">Skrá: %1s</item>
+    <item quantity="other">(Skrá %2$d af %3$d) : %1$s</item>
+  </plurals>
+  <plurals name="outgoing_file_title">
+    <item quantity="one">Sendi %1$d skrá til %2$s</item>
+    <item quantity="other">Sendi %1$d skrár til %2$s</item>
+  </plurals>
+  <plurals name="outgoing_files_text">
+    <item quantity="one">Skrá: %1$s</item>
+    <item quantity="other">(Skrá %2$d af %3$d) : %1$s</item>
+  </plurals>
+  <plurals name="received_files_title">
+    <item quantity="one">Tók við skrá frá %1$s</item>
+    <item quantity="other">Tók við %2$d skrám frá %1$s</item>
+  </plurals>
+  <plurals name="received_files_fail_title">
+    <item quantity="one">Mistókst að taka við skrá frá %1$s</item>
+    <item quantity="other">Mistókst að taka við %2$d af %3$d skrám frá %1$s</item>
+  </plurals>
+  <plurals name="sent_files_title">
+    <item quantity="one">Sendi skrá til %1$s</item>
+    <item quantity="other">Sendi %2$d skrár til %1$s</item>
+  </plurals>
+  <plurals name="send_files_fail_title">
+    <item quantity="one">Mistókst að senda skrá til %1$s</item>
+    <item quantity="other">Mistókst að senda %2$d af %3$d skrám til %1$s</item>
+  </plurals>
+  <string name="tap_to_open">Pikkaðu til að opna</string>
+  <string name="received_file_text">Pikkaðu til að opna \'%1s\'</string>
+  <string name="cannot_create_file">Get ekki búið til skrána %s</string>
+  <string name="tap_to_answer">Pikkaðu til að svara</string>
+  <string name="right_click">Senda hægri músarsmell</string>
+  <string name="middle_click">Senda miðjumúsarsmell</string>
+  <string name="show_keyboard">Birta lyklaborð</string>
+  <string name="device_not_paired">Tæki er ekki parað</string>
+  <string name="request_pairing">Biðja um pörun</string>
+  <string name="pairing_accept">Samþykkja</string>
+  <string name="pairing_reject">Hafna</string>
+  <string name="settings">Stillingar</string>
+  <string name="mpris_play">Spila</string>
+  <string name="mpris_pause">Í bið</string>
+  <string name="mpris_previous">Fyrra</string>
+  <string name="mpris_rew">Spóla til baka</string>
+  <string name="mpris_ff">Spóla áfram</string>
+  <string name="mpris_next">Næsta</string>
+  <string name="mpris_loop">Endurtaka</string>
+  <string name="mpris_shuffle">Stokka</string>
+  <string name="mpris_volume">Hljóðstyrkur</string>
+  <string name="mpris_time_settings_title">Áfram- og afturábak-hnappar</string>
+  <string name="mpris_time_settings_summary">Aðlagaðu tímann þegar ýtt er á hraðspólun/spóla til baka</string>
+  <string-array name="mpris_time_entries">
+    <item>10 sekúndur</item>
+    <item>20 sekúndur</item>
+    <item>30 sekúndur</item>
+    <item>1 mínúta</item>
+    <item>2 mínútur</item>
+  </string-array>
+  <string name="share_to">Deila með…</string>
+  <string name="protocol_version_newer">Þetta tæki notar nýrri útgáfu samskiptastaðals</string>
+  <string name="plugin_settings_with_name">Stillingar %s</string>
+  <string name="invalid_device_name">Ógilt heiti tækis</string>
+  <string name="shareplugin_text_saved">Tók við texta, vistaði á klippispjald</string>
+  <string name="custom_devices_settings">Listi yfir sérsniðin tæki</string>
+  <string name="custom_device_list">Bæta við tækjum eftir auðkennum</string>
+  <string name="custom_device_deleted">Sérsniðnu tæki eytt</string>
+  <string name="custom_device_fab_hint">Bæta við tæki</string>
+  <string name="undo">Afturkalla</string>
+  <string name="share_notification_preference">Háværar tilkynningar</string>
+  <string name="share_notification_preference_summary">Titra og spila hljóð þegar tekið er á móti skrá</string>
+  <string name="share_destination_customize">Sérsníða móttökumöppu</string>
+  <string name="share_destination_customize_summary_disabled">Mótteknar skrár munu birtast í niðurhalsmöppu</string>
+  <string name="share_destination_customize_summary_enabled">Skrár verða geymdar í möppunni hér fyrir neðan</string>
+  <string name="share_destination_folder_preference">Móttökumappa</string>
+  <string name="share">Deila</string>
+  <string name="share_received_file">Deila \"%s\"</string>
+  <string name="title_activity_notification_filter">Tilkynningasía</string>
+  <string name="sftp_sdcard_num">SD-minniskort %d</string>
+  <string name="sftp_sdcard">SD-minniskort</string>
+  <string name="sftp_readonly">(skrifvarið)</string>
+  <string name="sftp_camera">Myndir á myndavél</string>
+  <string name="add_device_dialog_title">Bæta við tæki</string>
+  <string name="add_device_hint">Vélarheiti eða IP vistfang</string>
+  <string name="sftp_preference_detected_sdcards">SD-minniskort sem hafa fundist</string>
+  <string name="sftp_preference_edit_sdcard_title">Breyta SD-minniskorti</string>
+  <string name="sftp_preference_configured_storage_locations">Stilltar geymslustaðsetningar</string>
+  <string name="sftp_preference_add_storage_location_title">Bæta við staðsetningu gagnageymslu</string>
+  <string name="sftp_preference_edit_storage_location">Breyta staðsetningu gagnageymslu</string>
+  <string name="sftp_preference_add_camera_shortcut">Bæta við flýtileið í myndavélarmöppu</string>
+  <string name="sftp_preference_add_camera_shortcut_summary_on">Bæta við flýtileið í myndavélarmöppuna</string>
+  <string name="sftp_preference_add_camera_shortcut_summary_off">Ekki bæta við flýtileið í myndavélarmöppuna</string>
+  <string name="sftp_storage_preference_storage_location">Staðsetning gagnageymslu</string>
+  <string name="sftp_storage_preference_storage_location_already_configured">Þessi staðsetning er þegar stillt.</string>
+  <string name="sftp_storage_preference_click_to_select">smelltu til að velja</string>
+  <string name="sftp_storage_preference_display_name">Birtingarnafn</string>
+  <string name="sftp_storage_preference_display_name_already_used">Birtingarnafnið er þegar í notkun</string>
+  <string name="sftp_storage_preference_display_name_cannot_be_empty">Birtingarnafn má ekki vera tómt</string>
+  <string name="sftp_action_mode_menu_delete">Eyða</string>
+  <string name="sftp_no_sdcard_detected">Ekkert SD-minniskort fannst</string>
+  <string name="sftp_no_storage_locations_configured">Engar geymslustaðsetningar stilltar</string>
+  <string name="no_players_connected">Engir spilarar fundust</string>
+  <string name="send_files">Senda skrár</string>
+  <string name="pairing_title">Zorin Connect tæki</string>
+  <string name="device_rename_title">Endurnefna tæki</string>
+  <string name="device_rename_confirm">Endurnefna</string>
+  <string name="refresh">Endurlesa</string>
+  <string name="no_file_browser">Það eru engir skráavafrar uppsettir.</string>
+  <string name="pref_plugin_telepathy">Senda SMS</string>
+  <string name="pref_plugin_telepathy_desc">Sendu textaskilaboð úr tölvunni þinni</string>
+  <string name="pref_plugin_telepathy_mms">Senda MMS</string>
+  <string name="findmyphone_title">Finna símann minn</string>
+  <string name="findmyphone_title_tablet">Finna spjaldtölvuna mína</string>
+  <string name="findmyphone_title_tv">Finna sjónvarpið mitt</string>
+  <string name="findmyphone_description">Hringir í þetta tæki svo þú getir fundið það</string>
+  <string name="findmyphone_found">Fann það</string>
+  <string name="open">Opna</string>
+  <string name="close">Loka</string>
+  <string name="select_ringtone">Veldu hringitón</string>
+  <string name="telephony_pref_blocked_title">Útilokuð símanúmer</string>
+  <string name="mpris_coverart_description">Umslagsmyndefni núverandi gagnamiðils</string>
+  <string name="device_icon_description">Táknmynd tækis</string>
+  <string name="settings_icon_description">Stillingatáknmynd</string>
+  <string name="presenter_fullscreen">Skjáfylli</string>
+  <string name="presenter_exit">Fara úr kynningu</string>
+  <string name="add_command">Bæta við skipun</string>
+  <string name="addcommand_explanation">Það eru engar skipanir skráðar</string>
+  <string name="addcommand_explanation2">Þú getur bætt við nýjum skipunum í stillingum Zorin Connect</string>
+  <string name="add_command_description">Þú getur bætt við skipunum á skjáborðinu</string>
+  <string name="pref_plugin_mprisreceiver">Margmiðlunarstýring</string>
+  <string name="notification_channel_default">Aðrar tilkynningar</string>
+  <string name="notification_channel_media_control">Margmiðlunarstýring</string>
+  <string name="notification_channel_filetransfer">Skráarflutningur</string>
+  <string name="notification_channel_high_priority">Hár forgangur</string>
+  <string name="notification_channel_sms_mms">Ný skilaboð</string>
+  <string name="mpris_stop">Stöðva virkan spilara</string>
+  <string name="copy_url_to_clipboard">Afrita slóð á klippispjaldið</string>
+  <string name="clipboard_toast">Afritað á klippispjald</string>
+  <string name="runcommand_notreachable">Tækið er ekki aðgengilegt</string>
+  <string name="runcommand_notpaired">Tækið er ekki parað</string>
+  <string name="runcommand_nosuchdevice">Það er ekkert slíkt tæki</string>
+  <string name="pref_plugin_findremotedevice">Finna fjartengt tæki</string>
+  <string name="pref_plugin_findremotedevice_desc">Hringdu fjartengda tækinu</string>
+  <string name="ring">Hringur</string>
+  <string name="pref_plugin_systemvolume">Hljóðstyrkur kerfis</string>
+  <string name="pref_plugin_systemvolume_desc">Stýrðu hljóðstyrk fjartengda tækisins</string>
+  <string name="mute">Hljóð af</string>
+  <string name="all">Allt</string>
+  <string name="devices">Tæki</string>
+  <string name="settings_rename">Heiti tækis</string>
+  <string name="settings_dark_mode">Dökkt þema</string>
+  <string name="settings_more_settings_title">Fleiri stillingar</string>
+  <string name="setting_persistent_notification">Birta viðvarandi tilkynningu</string>
+  <string name="setting_persistent_notification_oreo">Viðvarandi tilkynning</string>
+  <string name="extra_options">Fleiri valkostir</string>
+  <string name="privacy_options">Valkostir friðhelgi</string>
+  <string name="set_privacy_options">Valkostir friðhelgi þinnar</string>
+  <string name="block_contents">Loka á efni tilkynninga</string>
+  <string name="block_images">Loka á myndir í tilkynningum</string>
+  <string name="notification_channel_receivenotification">Tilkynningar frá öðrum tækjum</string>
+  <string name="take_picture">Ræsa myndavél</string>
+  <string name="no_app_for_opening">Ekkert hentugt forrit fannst til að opna þessa skrá</string>
+  <string name="remote_keyboard_service">Fjartengt lyklaborð Zorin Connect</string>
+  <string name="presenter_pointer">Bendill</string>
+  <string name="trusted_networks">Treyst netkerfi</string>
+  <string name="trusted_networks_desc">Takmarka sjálfvirka uppgötvun við þekkt netkerfi</string>
+  <string name="add_trusted_network">Bæta við %1s</string>
+  <string name="empty_trusted_networks_list_text">Þú hefur ekki ennþá bætt við neinum treystum netkerfum</string>
+  <string name="allow_all_networks_text">Leyfa allt</string>
+  <string name="location_permission_needed_title">Krafist er heimildar</string>
+  <string name="mpris_open_url">Halda áfram spilun hér</string>
+  <string name="cant_open_url">Næ ekki að opna slóð til að halda áfram spilun</string>
+  <string name="bigscreen_home">Heim</string>
+  <string name="bigscreen_up">Upp</string>
+  <string name="bigscreen_left">Vinstri</string>
+  <string name="bigscreen_select">Velja</string>
+  <string name="bigscreen_right">Hægri</string>
+  <string name="bigscreen_down">Niður</string>
+  <string name="bigscreen_mic">Hljóðnemi</string>
+  <string name="pref_plugin_bigscreen">Bigscreen-fjarstýring</string>
+  <string name="pref_plugin_bigscreen_desc">Notaðu tækið þitt sem fjarstýringu fyrir Plasma Bigscreen</string>
+  <string name="bigscreen_speech_extra_prompt">Tal</string>
+  <string name="message_reply_label">SVARA</string>
+  <string name="mark_as_read_label">MERKJA SEM LESIÐ</string>
+  <string name="user_display_name">Þú</string>
+  <string name="set_default_sms_app_title">Senda MMS</string>
+  <string name="set_group_message_as_mms_title">Senda hóp-MMS</string>
+  <string name="set_long_text_as_mms_title">Senda langan texta sem MMS</string>
+  <string name="convert_to_mms_after_title">Umbreyta í MMS</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Eftir ein skilaboð</item>
+    <item>Eftir tvenn skilaboð</item>
+    <item>Eftir þrenn skilaboð</item>
+    <item>Eftir fjögur skilaboð</item>
+    <item>Eftir fimm skilaboð</item>
+  </string-array>
+  <string name="theme_dialog_title">Veldu þema</string>
+  <string-array name="theme_list">
+    <item>Stillt af rafhlöðusparnaðarkerfi</item>
+    <item>Ljóst</item>
+    <item>Dökkt</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Sjálfgefið í kerfinu</item>
+    <item>Ljóst</item>
+    <item>Dökkt</item>
+  </string-array>
+  <string name="report_bug">Tilkynna galla</string>
+  <string name="donate">Styrkja</string>
+  <string name="source_code">Grunnkóði</string>
+  <string name="licenses">Notkunarleyfi</string>
+  <string name="website">Vefsvæði</string>
+  <string name="about">Um hugbúnaðinn</string>
+  <string name="authors">Höfundar</string>
+  <string name="thanks_to">Þakkir fá</string>
+  <string name="easter_egg">Páskaegg</string>
+  <string name="email_contributor">Senda þátttakanda tölvupóst\n%s</string>
+  <string name="visit_contributors_homepage">Fara á heimasíðu þátttakandans\n%s</string>
+  <string name="version">Útgáfa %s</string>
+  <string name="about_kde">Um KDE</string>
+  <string name="kde_be_free">KDE - Vertu frjáls!</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="click_here_to_type">Ýttu hér til að skrifa</string>
+  <string name="clear_compose">Hreinsa</string>
+  <string name="send_compose">Senda</string>
+  <string name="open_compose_send">Semja texta</string>
+  <string name="maintainer_and_developer">Umsjónarmaður og forritari</string>
+  <string name="developer">Forritari</string>
+  <string name="apple_support">Stuðningur við macOS. Unnið að stuðningi við iOS</string>
+  <string name="bug_fixes_and_general_improvements">Villuleiðréttingar og almennar endurbætur</string>
+  <string name="samoilenko_yuri_task">SFTP-innleiðing, villuleiðréttingar og almennar endurbætur</string>
+  <string name="aniket_kumar_task">Endurbætur á SMS-viðbót</string>
+  <string name="alex_fiestas_task">Endurbætur á tengiliðaviðbót</string>
+  <string name="maxim_leshchenko_task">Endurbætur á viðmóti og þessi síða</string>
+  <string name="holger_kaelberer_task">Viðbót fyrir fjartengt lyklaborð og lagfæringar á villum</string>
+  <string name="everyone_else">Allir aðrir sem hafa lagt af mörkum til Zorin Connect í gegnum árin</string>
+  <string name="send_clipboard">Senda klippispjald</string>
+  <string name="tap_to_execute">Pikkaðu til að keyra</string>
+</resources>
