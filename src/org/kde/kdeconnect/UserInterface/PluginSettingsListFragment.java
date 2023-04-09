@@ -9,17 +9,18 @@ package org.kde.kdeconnect.UserInterface;
 import android.os.Bundle;
 import android.os.Parcelable;
 
-import org.kde.kdeconnect.BackgroundService;
-import org.kde.kdeconnect.Device;
-import com.zorinos.zorin_connect.R;
-
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.kde.kdeconnect.BackgroundService;
+import org.kde.kdeconnect.Device;
+import org.kde.kdeconnect.Plugins.PluginFactory;
+import com.zorinos.zorin_connect.R;
+
+import java.util.List;
 
 public class PluginSettingsListFragment extends PreferenceFragmentCompat {
     private static final String ARG_DEVICE_ID = "deviceId";
@@ -84,6 +85,7 @@ public class PluginSettingsListFragment extends PreferenceFragmentCompat {
                 return;
             }
             List<String> plugins = device.getSupportedPlugins();
+            PluginFactory.sortPluginList(plugins);
 
             for (final String pluginKey : plugins) {
                 //TODO: Use PreferenceManagers context
@@ -93,8 +95,9 @@ public class PluginSettingsListFragment extends PreferenceFragmentCompat {
         });
     }
 
+    @NonNull
     @Override
-    protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+    protected RecyclerView.Adapter onCreateAdapter(@NonNull PreferenceScreen preferenceScreen) {
         RecyclerView.Adapter adapter = super.onCreateAdapter(preferenceScreen);
 
         /*
@@ -144,7 +147,7 @@ public class PluginSettingsListFragment extends PreferenceFragmentCompat {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         Parcelable layoutManagerState = recyclerViewLayoutManagerState;

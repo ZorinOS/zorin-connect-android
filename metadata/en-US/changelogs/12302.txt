@@ -1,0 +1,4 @@
+- Run commands on your computer from the power menu in Android 11+
+- Sort plugin settings alphabetically by name
+- Improved translations
+- Bug fixes and other enhancements

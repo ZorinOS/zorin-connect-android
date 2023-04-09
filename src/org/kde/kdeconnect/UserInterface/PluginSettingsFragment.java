@@ -18,9 +18,6 @@ import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
 import com.zorinos.zorin_connect.R;
-import android.util.Log;
-
-import java.util.Locale;
 
 public class PluginSettingsFragment extends PreferenceFragmentCompat {
     private static final String ARG_PLUGIN_KEY = "plugin_key";
@@ -60,7 +57,7 @@ public class PluginSettingsFragment extends PreferenceFragmentCompat {
         this.pluginKey = getArguments().getString(ARG_PLUGIN_KEY);
         this.layout = getArguments().getInt(ARG_LAYOUT);
         this.device = getDeviceOrThrow(getDeviceId());
-        this.plugin = device.getPlugin(pluginKey);
+        this.plugin = device.getPluginIncludingWithoutPermissions(pluginKey);
 
         super.onCreate(savedInstanceState);
     }

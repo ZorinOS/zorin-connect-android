@@ -8,9 +8,11 @@
 
 package org.kde.kdeconnect.Plugins.SMSPlugin;
 
-import android.app.Activity;
+import static org.kde.kdeconnect.Plugins.TelephonyPlugin.TelephonyPlugin.PACKET_TYPE_TELEPHONY;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +29,11 @@ import android.provider.Telephony;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
+
+import androidx.core.content.ContextCompat;
+
+import com.klinker.android.logger.Log;
+import com.klinker.android.send_message.Transaction;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,14 +54,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import androidx.core.content.ContextCompat;
-
-import com.klinker.android.send_message.ApnUtils;
-import com.klinker.android.send_message.Transaction;
-import com.klinker.android.logger.Log;
-
-import static org.kde.kdeconnect.Plugins.TelephonyPlugin.TelephonyPlugin.PACKET_TYPE_TELEPHONY;
 
 @PluginFactory.LoadablePlugin
 @SuppressLint("InlinedApi")
@@ -364,14 +363,6 @@ public class SMSPlugin extends Plugin {
         Looper helperLooper = SMSHelper.MessageLooper.getLooper();
         ContentObserver messageObserver = new MessageContentObserver(new Handler(helperLooper));
         SMSHelper.registerObserver(messageObserver, context);
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            Log.w("SMSPlugin", "This is a very old version of Android. The SMS Plugin might not function as intended.");
-        }
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            ApnUtils.initDefaultApns(context, null);
-        }
 
         // To see debug messages for Klinker library, uncomment the below line
         //Log.setDebug(true);

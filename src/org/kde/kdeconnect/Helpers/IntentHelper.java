@@ -12,11 +12,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import org.kde.kdeconnect.MyApplication;
-import com.zorinos.zorin_connect.R;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import org.kde.kdeconnect.MyApplication;
+import com.zorinos.zorin_connect.R;
 
 public class IntentHelper {
 

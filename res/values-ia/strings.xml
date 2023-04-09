@@ -69,6 +69,7 @@
     <item quantity="one">"Inviate  file a %1$s"</item>
     <item quantity="other">"Inviate %2$d  files a %1$s"</item>
   </plurals>
+  <string name="tap_to_open">Tocca per aperir</string>
   <string name="pairing_accept">Accepta</string>
   <string name="pairing_reject">Rejecta</string>
   <string name="settings">Preferentias</string>
@@ -92,9 +93,6 @@
   <string name="undo">Annulla</string>
   <string name="share">Comparti</string>
   <string name="show_notification_if_screen_off">Invia notificationes si le schermo es extinguite</string>
-  <string name="sftp_sdcard">Sd Card</string>
-  <string name="sftp_readonly">(solmente de lectura)</string>
-  <string name="sftp_camera">Photos de camera</string>
   <string name="add_device_dialog_title">Adde dispositivo</string>
   <string name="add_device_hint">Nomine de hospite o adresse IP</string>
   <string name="sftp_storage_preference_click_to_select">pulsa pro seliger</string>

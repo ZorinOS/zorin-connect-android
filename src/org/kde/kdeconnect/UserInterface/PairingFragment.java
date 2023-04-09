@@ -15,7 +15,6 @@ import android.net.LinkProperties;
 import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.NetworkRequest;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.LayoutInflater;
@@ -94,38 +93,34 @@ public class PairingFragment extends Fragment implements PairingDeviceItem.Callb
         noWifiHeader.setOnClickListener(view -> startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS)));
         devicesListBinding.devicesList.addHeaderView(headerText);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            networkChangeListener = new ConnectivityManager.NetworkCallback() {
-                @Override
-                public void onAvailable(Network network) {
-                    updateDeviceList();
-                }
+        networkChangeListener = new ConnectivityManager.NetworkCallback() {
+            @Override
+            public void onAvailable(Network network) {
+                updateDeviceList();
+            }
 
-                @Override
-                public void onLost(Network network) {
-                    updateDeviceList();
-                }
+            @Override
+            public void onLost(Network network) {
+                updateDeviceList();
+            }
 
-                @Override
-                public void onLinkPropertiesChanged(Network network, LinkProperties linkProperties) {
-                    updateDeviceList();
-                }
-            };
-            ConnectivityManager connManager = ContextCompat.getSystemService(requireContext(),
-                    ConnectivityManager.class);
-            connManager.registerNetworkCallback(new NetworkRequest.Builder().build(), (ConnectivityManager.NetworkCallback) networkChangeListener);
-        }
+            @Override
+            public void onLinkPropertiesChanged(Network network, LinkProperties linkProperties) {
+                updateDeviceList();
+            }
+        };
+        ConnectivityManager connManager = ContextCompat.getSystemService(requireContext(),
+                ConnectivityManager.class);
+        connManager.registerNetworkCallback(new NetworkRequest.Builder().build(), (ConnectivityManager.NetworkCallback) networkChangeListener);
 
         return devicesListBinding.getRoot();
     }
 
     @Override
     public void onDestroyView() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ConnectivityManager connManager = ContextCompat.getSystemService(requireContext(),
-                    ConnectivityManager.class);
-            connManager.unregisterNetworkCallback((ConnectivityManager.NetworkCallback) networkChangeListener);
-        }
+        ConnectivityManager connManager = ContextCompat.getSystemService(requireContext(),
+                ConnectivityManager.class);
+        connManager.unregisterNetworkCallback((ConnectivityManager.NetworkCallback) networkChangeListener);
 
         super.onDestroyView();
         devicesListBinding = null;
@@ -135,7 +130,7 @@ public class PairingFragment extends Fragment implements PairingDeviceItem.Callb
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mActivity = ((MainActivity) getActivity());
     }
@@ -291,7 +286,7 @@ public class PairingFragment extends Fragment implements PairingDeviceItem.Callb
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.pairing, menu);
     }
 

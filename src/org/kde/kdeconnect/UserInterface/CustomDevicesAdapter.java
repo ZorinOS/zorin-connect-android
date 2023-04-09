@@ -7,20 +7,15 @@
 package org.kde.kdeconnect.UserInterface;
 
 import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.widget.TextViewCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.zorinos.zorin_connect.R;
 import com.zorinos.zorin_connect.databinding.CustomDeviceItemBinding;
 
 import java.util.ArrayList;
@@ -75,14 +70,6 @@ public class CustomDevicesAdapter extends RecyclerView.Adapter<CustomDevicesAdap
         ViewHolder(@NonNull CustomDeviceItemBinding itemBinding) {
             super(itemBinding.getRoot());
             this.itemBinding = itemBinding;
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                Drawable deleteDrawable = AppCompatResources.getDrawable(itemBinding.getRoot().getContext(),
-                        R.drawable.ic_delete);
-                TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(itemBinding.deviceNameOrIPBackdrop,
-                        deleteDrawable, null, deleteDrawable, null);
-            }
-
             itemBinding.deviceNameOrIP.setOnClickListener(v -> callback.onCustomDeviceClicked(customDevices.get(getAdapterPosition())));
         }
 
@@ -101,7 +88,7 @@ public class CustomDevicesAdapter extends RecyclerView.Adapter<CustomDevicesAdap
     }
 
     private static class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
-        @NonNull private Callback callback;
+        @NonNull private final Callback callback;
 
         private ItemTouchHelperCallback(@NonNull Callback callback) {
             this.callback = callback;

@@ -8,11 +8,15 @@
 package org.kde.kdeconnect.Plugins.RunCommandPlugin;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
+
+import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,9 +30,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-
-import androidx.core.content.ContextCompat;
-import androidx.preference.PreferenceManager;
 
 @PluginFactory.LoadablePlugin
 public class RunCommandPlugin extends Plugin {
@@ -171,7 +172,7 @@ public class RunCommandPlugin extends Plugin {
     }
 
     @Override
-    public boolean hasMainActivity() {
+    public boolean hasMainActivity(Context context) {
         return true;
     }
 

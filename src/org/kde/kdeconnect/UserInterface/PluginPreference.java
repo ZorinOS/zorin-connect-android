@@ -4,14 +4,14 @@ import android.content.Context;
 import android.util.TypedValue;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreference;
+
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
 import com.zorinos.zorin_connect.R;
-
-import androidx.annotation.NonNull;
-import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreference;
 
 public class PluginPreference extends SwitchPreference {
     private final Device device;
@@ -30,15 +30,14 @@ public class PluginPreference extends SwitchPreference {
         PluginFactory.PluginInfo info = PluginFactory.getPluginInfo(pluginKey);
         setTitle(info.getDisplayName());
         setSummary(info.getDescription());
-setIcon(android.R.color.transparent);
+        setIcon(android.R.color.transparent);
         setChecked(device.isPluginEnabled(pluginKey));
 
-        Plugin plugin = device.getPlugin(pluginKey);
-        if (info.hasSettings() && plugin != null) {
+        if (info.hasSettings()) {
             this.listener = v -> {
-                Plugin plugin1 = device.getPlugin(pluginKey);
-                if (plugin1 != null) {
-                    callback.onStartPluginSettingsFragment(plugin1);
+                Plugin plugin = device.getPluginIncludingWithoutPermissions(pluginKey);
+                if (plugin != null) {
+                    callback.onStartPluginSettingsFragment(plugin);
                 } else { //Could happen if the device is not connected anymore
                     callback.onFinish();
                 }
@@ -49,7 +48,7 @@ setIcon(android.R.color.transparent);
     }
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
+    public void onBindViewHolder(@NonNull PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
         View.OnClickListener toggleListener = v -> {

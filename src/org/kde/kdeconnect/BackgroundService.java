@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkRequest;
@@ -269,21 +270,19 @@ public class BackgroundService extends Service {
         }
         registerReceiver(new KdeConnectBroadcastReceiver(), filter);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkRequest.Builder builder = new NetworkRequest.Builder();
-            cm.registerNetworkCallback(builder.build(), new ConnectivityManager.NetworkCallback() {
-                @Override
-                public void onAvailable(Network network) {
-                    onDeviceListChanged();
-                    onNetworkChange();
-                }
-                @Override
-                public void onLost(Network network) {
-                    onDeviceListChanged();
-                }
-           });
-        }
+        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkRequest.Builder builder = new NetworkRequest.Builder();
+        cm.registerNetworkCallback(builder.build(), new ConnectivityManager.NetworkCallback() {
+            @Override
+            public void onAvailable(Network network) {
+                onDeviceListChanged();
+                onNetworkChange();
+            }
+            @Override
+            public void onLost(Network network) {
+                onDeviceListChanged();
+            }
+        });
 
         Log.i("KDE/BackgroundService", "Service not started yet, initializing...");
 
@@ -453,7 +452,11 @@ public class BackgroundService extends Service {
         }
 
         if (NotificationHelper.isPersistentNotificationEnabled(this)) {
-            startForeground(FOREGROUND_NOTIFICATION_ID, createForegroundNotification());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                startForeground(FOREGROUND_NOTIFICATION_ID, createForegroundNotification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE);
+            } else {
+                startForeground(FOREGROUND_NOTIFICATION_ID, createForegroundNotification());
+            }
         }
         return Service.START_STICKY;
     }

@@ -6,16 +6,13 @@
 
 package org.kde.kdeconnect.Plugins.SftpPlugin;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
@@ -35,20 +32,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.Device;
-import org.kde.kdeconnect.Helpers.StorageHelper;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.UserInterface.PluginSettingsActivity;
 import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import com.zorinos.zorin_connect.R;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
-//TODO: Is it possible on API 19 to select a directory and then have write permission for everything beneath it
-//TODO: Is it necessary to check if uri permissions are still in place? If it is make the user aware of the fact (red text or something)
 public class SftpSettingsFragment
         extends PluginSettingsFragment
         implements StoragePreferenceDialogFragment.Callback,
@@ -96,11 +89,10 @@ public class SftpSettingsFragment
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         super.onCreatePreferences(savedInstanceState, rootKey);
 
+        // Can't use try-with-resources since TypedArray's close method was only added in API 31
         TypedArray ta = requireContext().obtainStyledAttributes(new int[]{R.attr.colorAccent});
         int colorAccent = ta.getColor(0, 0);
         ta.recycle();
-
-        int sdkInt = Build.VERSION.SDK_INT;
 
         storageInfoList = getStorageInfoList(requireContext(), plugin);
 
@@ -108,26 +100,10 @@ public class SftpSettingsFragment
         preferenceCategory = preferenceScreen
                 .findPreference(getString(R.string.sftp_preference_key_preference_category));
 
-        if (sdkInt <= 19) {
-            preferenceCategory.setTitle(R.string.sftp_preference_detected_sdcards);
-        } else {
-            preferenceCategory.setTitle(R.string.sftp_preference_configured_storage_locations);
-        }
-
         addStoragePreferences(preferenceCategory);
 
         Preference addStoragePreference = preferenceScreen.findPreference(getString(R.string.sftp_preference_key_add_storage));
         addStoragePreference.getIcon().setColorFilter(colorAccent, PorterDuff.Mode.SRC_IN);
-
-        if (sdkInt <= 19) {
-            addStoragePreference.setVisible(false);
-        }
-
-        Preference addCameraShortcutPreference = preferenceScreen.findPreference(getString(R.string.sftp_preference_key_add_camera_shortcut));
-
-        if (sdkInt > 19) {
-            addCameraShortcutPreference.setVisible(false);
-        }
     }
 
     private void addStoragePreferences(PreferenceCategory preferenceCategory) {
@@ -143,24 +119,19 @@ public class SftpSettingsFragment
             SftpPlugin.StorageInfo storageInfo = storageInfoList.get(i);
             StoragePreference preference = new StoragePreference(context);
             preference.setOnPreferenceChangeListener(this);
-            if (Build.VERSION.SDK_INT >= 21) {
-                preference.setOnLongClickListener(this);
-            }
+            preference.setOnLongClickListener(this);
             preference.setKey(getString(R.string.sftp_preference_key_storage_info, i));
             preference.setIcon(android.R.color.transparent);
             preference.setDefaultValue(storageInfo);
-            if (storageInfo.isFileUri()) {
-                preference.setDialogTitle(R.string.sftp_preference_edit_sdcard_title);
-            } else {
-                preference.setDialogTitle(R.string.sftp_preference_edit_storage_location);
-            }
+            preference.setDialogTitle(R.string.sftp_preference_edit_storage_location);
 
             preferenceCategory.addPreference(preference);
         }
     }
 
+    @NonNull
     @Override
-    protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+    protected RecyclerView.Adapter onCreateAdapter(@NonNull PreferenceScreen preferenceScreen) {
         if (savedActionModeState != null) {
             getListView().post(this::restoreActionMode);
         }
@@ -193,7 +164,7 @@ public class SftpSettingsFragment
     }
 
     @Override
-    public void onDisplayPreferenceDialog(Preference preference) {
+    public void onDisplayPreferenceDialog(@NonNull Preference preference) {
         if (preference instanceof StoragePreference) {
             StoragePreferenceDialogFragment fragment = StoragePreferenceDialogFragment.newInstance(preference.getKey());
             fragment.setTargetFragment(this, 0);
@@ -205,7 +176,7 @@ public class SftpSettingsFragment
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         try {
@@ -266,53 +237,9 @@ public class SftpSettingsFragment
             Log.e("SFTPSettings", "Couldn't load storage info", e);
         }
 
-        if (Build.VERSION.SDK_INT <= 19) {
-            addDetectedSDCardsToStorageInfoList(context, storageInfoList);
-        }
-
         return storageInfoList;
     }
 
-    private static void addDetectedSDCardsToStorageInfoList(@NonNull Context context, List<SftpPlugin.StorageInfo> storageInfoList) {
-        List<StorageHelper.StorageInfo> storageHelperInfoList = StorageHelper.getStorageList();
-
-        for (StorageHelper.StorageInfo info : storageHelperInfoList) {
-            // on at least API 17 emulator Environment.isExternalStorageRemovable returns false
-            if (info.removable || info.path.startsWith(Environment.getExternalStorageDirectory().getPath())) {
-                StringBuilder displayNameBuilder = new StringBuilder();
-                StringBuilder displayNameReadOnlyBuilder = new StringBuilder();
-
-                Uri sdCardUri = Uri.fromFile(new File(info.path));
-
-                if (isAlreadyConfigured(storageInfoList, sdCardUri)) {
-                    continue;
-                }
-
-                int i = 1;
-
-                do {
-                    if (i == 1) {
-                        displayNameBuilder.append(context.getString(R.string.sftp_sdcard));
-                    } else {
-                        displayNameBuilder.setLength(0);
-                        displayNameBuilder.append(context.getString(R.string.sftp_sdcard_num, i));
-                    }
-
-                    displayNameReadOnlyBuilder
-                            .append(displayNameBuilder)
-                            .append(" ")
-                            .append(context.getString(R.string.sftp_readonly));
-
-                    i++;
-                } while (!isDisplayNameUnique(storageInfoList, displayNameBuilder.toString(), displayNameReadOnlyBuilder.toString()));
-
-                String displayName = info.readonly ?
-                        displayNameReadOnlyBuilder.toString() : displayNameBuilder.toString();
-
-                storageInfoList.add(new SftpPlugin.StorageInfo(displayName, Uri.fromFile(new File(info.path))));
-            }
-        }
-    }
 
     private static boolean isDisplayNameUnique(List<SftpPlugin.StorageInfo> storageInfoList, String displayName, String displayNameReadOnly) {
         for (SftpPlugin.StorageInfo info : storageInfoList) {
@@ -378,7 +305,6 @@ public class SftpSettingsFragment
         return result;
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void addNewStoragePreference(@NonNull SftpPlugin.StorageInfo storageInfo, int takeFlags) {
         storageInfoList.add(storageInfo);
@@ -416,7 +342,7 @@ public class SftpSettingsFragment
     }
 
     @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
+    public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
         SftpPlugin.StorageInfo newStorageInfo = (SftpPlugin.StorageInfo) newValue;
 
         ListIterator<SftpPlugin.StorageInfo> it = storageInfoList.listIterator();
@@ -471,14 +397,12 @@ public class SftpSettingsFragment
                 if (preference.checkbox.isChecked()) {
                     SftpPlugin.StorageInfo info = storageInfoList.remove(i);
 
-                    if (Build.VERSION.SDK_INT >= 21) {
-                        try {
-                            // This throws when trying to release a URI we don't have access to
-                            requireContext().getContentResolver().releasePersistableUriPermission(info.uri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                        } catch (SecurityException e) {
-                            // Usually safe to ignore, but who knows?
-                            Log.e("SFTP Settings", "Exception", e);
-                        }
+                    try {
+                        // This throws when trying to release a URI we don't have access to
+                        requireContext().getContentResolver().releasePersistableUriPermission(info.uri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                    } catch (SecurityException e) {
+                        // Usually safe to ignore, but who knows?
+                        Log.e("SFTP Settings", "Exception", e);
                     }
                 }
             }

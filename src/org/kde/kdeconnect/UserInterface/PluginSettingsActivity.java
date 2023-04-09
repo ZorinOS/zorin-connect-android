@@ -9,14 +9,14 @@ package org.kde.kdeconnect.UserInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Plugins.Plugin;
 import com.zorinos.zorin_connect.R;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import java.util.Objects;
 
@@ -58,7 +58,7 @@ public class PluginSettingsActivity
             if (pluginKey != null) {
                 Device device = BackgroundService.getInstance().getDevice(deviceId);
                 if (device != null) {
-                    Plugin plugin = device.getPlugin(pluginKey);
+                    Plugin plugin = device.getPluginIncludingWithoutPermissions(pluginKey);
                     if (plugin != null) {
                         fragment = plugin.getSettingsFragment(this);
                     }

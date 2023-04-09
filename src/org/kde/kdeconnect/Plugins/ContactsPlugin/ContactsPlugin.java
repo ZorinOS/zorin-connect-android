@@ -10,14 +10,12 @@
 package org.kde.kdeconnect.Plugins.ContactsPlugin;
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.util.Log;
 
 import org.kde.kdeconnect.Helpers.ContactsHelper;
+import org.kde.kdeconnect.Helpers.ContactsHelper.ContactNotFoundException;
 import org.kde.kdeconnect.Helpers.ContactsHelper.VCardBuilder;
 import org.kde.kdeconnect.Helpers.ContactsHelper.uID;
-import org.kde.kdeconnect.Helpers.ContactsHelper.ContactNotFoundException;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
@@ -29,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 @PluginFactory.LoadablePlugin
 public class ContactsPlugin extends Plugin {
 
@@ -112,12 +109,6 @@ public class ContactsPlugin extends Plugin {
         // One day maybe we will also support WRITE_CONTACTS, but not yet
     }
 
-    @Override
-    public int getMinSdk() {
-        // Need API 18 for contact timestamps
-        return Build.VERSION_CODES.JELLY_BEAN_MR2;
-    }
-
     /**
      * Add custom fields to the vcard to keep track of KDE Connect-specific fields
      * <p>
@@ -151,7 +142,7 @@ public class ContactsPlugin extends Plugin {
      * The identifiers returned can be used in future requests to get more information
      * about the contact
      *
-     * @param np The package containing the request
+     * @param np The packet containing the request
      * @return true if successfully handled, false otherwise
      */
     @SuppressWarnings("SameReturnValue")

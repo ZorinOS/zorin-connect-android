@@ -10,7 +10,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -145,12 +144,7 @@ public class PresenterActivity extends AppCompatActivity implements SensorEventL
 
         if (mMediaSession != null) {
             PowerManager pm = ContextCompat.getSystemService(this, PowerManager.class);
-            boolean screenOn;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
-                screenOn = pm.isInteractive();
-            } else {
-                screenOn = pm.isScreenOn();
-            }
+            boolean screenOn = pm.isInteractive();
             if (screenOn) {
                 mMediaSession.release();
             } // else we are in the lockscreen, keep the mediasession
@@ -160,6 +154,7 @@ public class PresenterActivity extends AppCompatActivity implements SensorEventL
     private void createMediaSession() {
         mMediaSession = new MediaSessionCompat(this, "kdeconnect");
 
+        // Deprecated flags not required in Build.VERSION_CODES.O and later
         mMediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
                 MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
         mMediaSession.setPlaybackState(new PlaybackStateCompat.Builder()

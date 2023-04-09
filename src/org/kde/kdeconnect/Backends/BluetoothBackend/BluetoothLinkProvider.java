@@ -6,7 +6,6 @@
 
 package org.kde.kdeconnect.Backends.BluetoothBackend;
 
-import android.annotation.TargetApi;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -15,7 +14,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Parcelable;
 import android.util.Log;
 
@@ -36,7 +34,6 @@ import java.util.UUID;
 
 import kotlin.text.Charsets;
 
-@TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class BluetoothLinkProvider extends BaseLinkProvider {
 
     private static final UUID SERVICE_UUID = UUID.fromString("185f3df4-3268-4e3f-9fca-d4d5059915bd");
@@ -46,7 +43,7 @@ public class BluetoothLinkProvider extends BaseLinkProvider {
     private final Map<String, BluetoothLink> visibleComputers = new HashMap<>();
     private final Map<BluetoothDevice, BluetoothSocket> sockets = new HashMap<>();
 
-    private BluetoothAdapter bluetoothAdapter;
+    private final BluetoothAdapter bluetoothAdapter;
 
     private ServerRunnable serverRunnable;
     private ClientRunnable clientRunnable;
@@ -241,10 +238,8 @@ public class BluetoothLinkProvider extends BaseLinkProvider {
 
         @Override
         public void run() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-                IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_UUID);
-                context.registerReceiver(this, filter);
-            }
+            IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_UUID);
+            context.registerReceiver(this, filter);
 
             if (continueProcessing) {
                 connectToDevices();
@@ -254,9 +249,7 @@ public class BluetoothLinkProvider extends BaseLinkProvider {
                 }
             }
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-                context.unregisterReceiver(this);
-            }
+            context.unregisterReceiver(this);
         }
 
         private void connectToDevices() {
@@ -269,16 +262,11 @@ public class BluetoothLinkProvider extends BaseLinkProvider {
                     continue;
                 }
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-                    device.fetchUuidsWithSdp();
-                } else {
-                    connectToDevice(device);
-                }
+                device.fetchUuidsWithSdp();
             }
         }
 
         @Override
-        @TargetApi(value = Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (BluetoothDevice.ACTION_UUID.equals(action)) {

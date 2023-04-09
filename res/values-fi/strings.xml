@@ -204,20 +204,11 @@
   <string name="title_activity_notification_filter">Ilmoitussuodatin</string>
   <string name="filter_apps_info">Valittujen sovellusten ilmoitukset synkronoidaan.</string>
   <string name="show_notification_if_screen_off">Lähetä ilmoitukset vain näyttö ei ole käytössä</string>
-  <string name="sftp_sdcard_num">SD-kortti %d</string>
-  <string name="sftp_sdcard">SD-kortti</string>
-  <string name="sftp_readonly">(vain luku)</string>
-  <string name="sftp_camera">Kamerakuvat</string>
   <string name="add_device_dialog_title">Lisää laite</string>
   <string name="add_device_hint">Konenimi tai IP-osoite</string>
-  <string name="sftp_preference_detected_sdcards">Havaitut SD-kortit</string>
-  <string name="sftp_preference_edit_sdcard_title">Muokkaa SD-korttia</string>
   <string name="sftp_preference_configured_storage_locations">Asetetut tallennustilat</string>
   <string name="sftp_preference_add_storage_location_title">Lisää tallennustila</string>
   <string name="sftp_preference_edit_storage_location">Muokkaa tallennustilaa</string>
-  <string name="sftp_preference_add_camera_shortcut">Lisää oikopolku kamerakansioon</string>
-  <string name="sftp_preference_add_camera_shortcut_summary_on">Lisää oikopolku kamerakansioon</string>
-  <string name="sftp_preference_add_camera_shortcut_summary_off">Älä lisää oikopolkua kamerakansioon</string>
   <string name="sftp_storage_preference_storage_location">Tallennustila</string>
   <string name="sftp_storage_preference_storage_location_already_configured">Tämä sijainti on jo asetettu</string>
   <string name="sftp_storage_preference_click_to_select">valitse napsauttamalla</string>
@@ -225,7 +216,6 @@
   <string name="sftp_storage_preference_display_name_already_used">Tämä näyttönimi on jo käytössä</string>
   <string name="sftp_storage_preference_display_name_cannot_be_empty">Näyttönimi ei voi olla tyhjä</string>
   <string name="sftp_action_mode_menu_delete">Poista</string>
-  <string name="sftp_no_sdcard_detected">SD-kortteja ei havaittu</string>
   <string name="sftp_no_storage_locations_configured">Tallennustiloja ei ole asetettu</string>
   <string name="sftp_saf_permission_explanation">Tallennustilat on asetettava etätiedostojen käyttämiseksi</string>
   <string name="no_players_connected">Soittimia ei löytynyt</string>
@@ -254,7 +244,6 @@
   <string name="permission_explanation">Liitännäinen tarvitsee toimiakseen lisäkäyttöoikeuksia</string>
   <string name="optional_permission_explanation">Kaikkien toimintojen käyttämiseksi sinun on annettava lisäkäyttöoikeuksia</string>
   <string name="plugins_need_optional_permission">Jotkin liitännäisten ominaisuudet eivät ole käytössä puuttuvien käyttöoikeuksien takia (lisätietoa napsauttamalla):</string>
-  <string name="share_optional_permission_explanation">Jaettujen tiedostojen vastaanottamiseksi on määritettävä kohdekansio</string>
   <string name="telepathy_permission_explanation">Lukeaksesi ja lähettääksesi tekstiviestejä työpöydältä sinun on annettava käyttöoikeudet tekstiviesteihin</string>
   <string name="telephony_permission_explanation">Puhelujen näyttäminen työpöydällä vaatii käyttöoikeuden puhelulokiin ja puhelimen tilaan</string>
   <string name="telephony_optional_permission_explanation">Puhelimen yhteystietoihin on annettava käyttöoikeudet, jotta voit nähdä yhteystiedoissa nimet puhelinnumerojen sijaan</string>
@@ -275,6 +264,7 @@
   <string name="pref_plugin_mprisreceiver">Mediasoittimen hallinta</string>
   <string name="pref_plugin_mprisreceiver_desc">Hallitse puhelimesi mediasoittimia toiselta laitteelta</string>
   <string name="notification_channel_default">Muut ilmoitukset</string>
+  <string name="notification_channel_persistent">Pysyvä ilmaisin</string>
   <string name="notification_channel_media_control">Mediaohjaimet</string>
   <string name="notification_channel_filetransfer">Tiedostonsiirto</string>
   <string name="notification_channel_high_priority">Korkea etusija</string>

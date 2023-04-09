@@ -329,18 +329,12 @@ public class SMSHelper {
                     }
 
                     try {
-                        Message message;
-                        if (transportType == TransportType.SMS) {
-                            message = parseSMS(context, messageInfo);
-                        } else if (transportType == TransportType.MMS) {
-                            message = parseMMS(context, messageInfo, userPhoneNumbers);
-                        } else {
-                            // As we can see, all possible transportTypes are covered, but the compiler
-                            // requires this line anyway
-                            throw new UnsupportedOperationException("Unknown TransportType encountered");
+                        switch (transportType) {
+                            case SMS:
+                                toReturn.add(parseSMS(context, messageInfo));
+                            case MMS:
+                                toReturn.add(parseMMS(context, messageInfo, userPhoneNumbers));
                         }
-
-                        toReturn.add(message);
                     } catch (Exception e) {
                         // Swallow exceptions in case we get an error reading one message so that we
                         // might be able to read some of them
@@ -665,6 +659,7 @@ public class SMSHelper {
                     } else if (MimeType.isTypeVideo(contentType)) {
                         String fileName = data.substring(data.lastIndexOf('/') + 1);
 
+                        // Can't use try-with-resources since MediaMetadataRetriever's close method was only added in API 29
                         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
                         retriever.setDataSource(context, ContentUris.withAppendedId(getMMSPartUri(), partID));
                         Bitmap videoThumbnail = retriever.getFrameAtTime();

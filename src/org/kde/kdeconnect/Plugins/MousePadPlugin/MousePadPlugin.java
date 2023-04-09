@@ -7,16 +7,17 @@
 package org.kde.kdeconnect.Plugins.MousePadPlugin;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+
+import androidx.core.content.ContextCompat;
 
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
 import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import com.zorinos.zorin_connect.R;
-
-import androidx.core.content.ContextCompat;
 
 @PluginFactory.LoadablePlugin
 public class MousePadPlugin extends Plugin {
@@ -61,7 +62,7 @@ public class MousePadPlugin extends Plugin {
     }
 
     @Override
-    public boolean hasMainActivity() {
+    public boolean hasMainActivity(Context context) {
         return true;
     }
 

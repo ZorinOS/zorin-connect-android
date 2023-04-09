@@ -7,6 +7,7 @@
 package org.kde.kdeconnect.Plugins.RemoteKeyboardPlugin;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
@@ -20,20 +21,20 @@ import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 
+import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
+import androidx.fragment.app.DialogFragment;
+
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
 import org.kde.kdeconnect.UserInterface.MainActivity;
-import org.kde.kdeconnect.UserInterface.StartActivityAlertDialogFragment;
 import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
+import org.kde.kdeconnect.UserInterface.StartActivityAlertDialogFragment;
 import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
 import java.util.concurrent.locks.ReentrantLock;
-
-import androidx.core.content.ContextCompat;
-import androidx.core.util.Pair;
-import androidx.fragment.app.DialogFragment;
 
 @PluginFactory.LoadablePlugin
 public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -167,7 +168,7 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
     }
 
     @Override
-    public boolean hasMainActivity() {
+    public boolean hasMainActivity(Context context) {
         return false;
     }
 
@@ -350,7 +351,7 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
 
         if (!np.getType().equals(PACKET_TYPE_MOUSEPAD_REQUEST)
                 || (!np.has("key") && !np.has("specialKey"))) {  // expect at least key OR specialKey
-            Log.e("RemoteKeyboardPlugin", "Invalid package for remotekeyboard plugin!");
+            Log.e("RemoteKeyboardPlugin", "Invalid packet type for remotekeyboard plugin!");
             return false;
         }
 

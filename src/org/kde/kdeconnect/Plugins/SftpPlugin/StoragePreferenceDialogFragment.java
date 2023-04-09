@@ -1,12 +1,10 @@
 package org.kde.kdeconnect.Plugins.SftpPlugin;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.text.Editable;
@@ -105,7 +103,7 @@ public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCom
     }
 
     @Override
-    protected void onBindDialogView(View view) {
+    protected void onBindDialogView(@NonNull View view) {
         super.onBindDialogView(view);
 
         binding = FragmentStoragePreferenceDialogBinding.bind(view);
@@ -146,11 +144,7 @@ public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCom
 
                 storageInfo = SftpPlugin.StorageInfo.copy(info);
 
-                if (Build.VERSION.SDK_INT < 21) {
-                    binding.storageLocation.setText(storageInfo.uri.getPath());
-                } else {
-                    binding.storageLocation.setText(DocumentsContract.getTreeDocumentId(storageInfo.uri));
-                }
+                binding.storageLocation.setText(DocumentsContract.getTreeDocumentId(storageInfo.uri));
 
                 binding.storageDisplayName.setText(storageInfo.displayName);
             }
@@ -171,7 +165,6 @@ public class StoragePreferenceDialogFragment extends PreferenceDialogFragmentCom
         binding = null;
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

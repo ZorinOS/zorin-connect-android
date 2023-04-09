@@ -24,6 +24,12 @@ import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.TaskStackBuilder;
+import androidx.core.content.ContextCompat;
+import androidx.media.app.NotificationCompat.MediaStyle;
+
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.Helpers.NotificationHelper;
@@ -33,13 +39,6 @@ import org.kde.kdeconnect.Plugins.SystemVolumePlugin.SystemVolumeProvider;
 import com.zorinos.zorin_connect.R;
 
 import java.util.HashSet;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.TaskStackBuilder;
-import androidx.core.content.ContextCompat;
-import androidx.media.app.NotificationCompat.MediaStyle;
 
 /**
  * Controls the mpris media control notification
@@ -138,18 +137,16 @@ public class MprisMediaSession implements
         mpris.setPlayerListUpdatedHandler("media_notification", mediaNotificationHandler);
         mpris.setPlayerStatusUpdatedHandler("media_notification", mediaNotificationHandler);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            NotificationReceiver.RunCommand(context, service -> {
+        NotificationReceiver.RunCommand(context, service -> {
 
-                service.addListener(MprisMediaSession.this);
+            service.addListener(MprisMediaSession.this);
 
-                boolean serviceReady = service.isConnected();
+            boolean serviceReady = service.isConnected();
 
-                if (serviceReady) {
-                    onListenerConnected(service);
-                }
-            });
-        }
+            if (serviceReady) {
+                onListenerConnected(service);
+            }
+        });
 
         updateMediaNotification();
     }
@@ -258,8 +255,6 @@ public class MprisMediaSession implements
 
     private void updateRemoteDeviceVolumeControl() {
         // Volume control feature is only available from Lollipop onwards
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return;
-
         BackgroundService.RunWithPlugin(context, notificationDevice, SystemVolumePlugin.class, plugin -> {
             SystemVolumeProvider systemVolumeProvider = SystemVolumeProvider.fromPlugin(plugin);
             systemVolumeProvider.addStateListener(this);
@@ -292,6 +287,7 @@ public class MprisMediaSession implements
             if (mediaSession == null) {
                 mediaSession = new MediaSessionCompat(context, MPRIS_MEDIA_SESSION_TAG);
                 mediaSession.setCallback(mediaSessionCallback);
+                // Deprecated flags not required in Build.VERSION_CODES.O and later
                 mediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
             }
 
@@ -367,14 +363,9 @@ public class MprisMediaSession implements
             iOpenActivity.putExtra("deviceId", notificationDevice);
             iOpenActivity.putExtra("player", notificationPlayer.getPlayer());
 
-            /*
-                TODO: Remove when Min SDK >= 16
-                The only way the intent extra's are delivered on API 14 and 15 is by either using a different requestCode every time
-                or using PendingIntent.FLAG_CANCEL_CURRENT instead of PendingIntent.FLAG_UPDATE_CURRENT
-             */
             PendingIntent piOpenActivity = TaskStackBuilder.create(context)
                     .addNextIntentWithParentStack(iOpenActivity)
-                    .getPendingIntent(Build.VERSION.SDK_INT > 15 ? 0 : (int) System.currentTimeMillis(), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+                    .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
 
             NotificationCompat.Builder notification = new NotificationCompat.Builder(context, NotificationHelper.Channels.MEDIA_CONTROL);
 
@@ -501,7 +492,6 @@ public class MprisMediaSession implements
         updateMediaNotification();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void onNotificationPosted(StatusBarNotification n) {
         if ("com.spotify.music".equals(n.getPackageName())) {
@@ -510,7 +500,6 @@ public class MprisMediaSession implements
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void onNotificationRemoved(StatusBarNotification n) {
         if ("com.spotify.music".equals(n.getPackageName())) {
@@ -519,7 +508,6 @@ public class MprisMediaSession implements
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void onListenerConnected(NotificationReceiver service) {
         for (StatusBarNotification n : service.getActiveNotifications()) {

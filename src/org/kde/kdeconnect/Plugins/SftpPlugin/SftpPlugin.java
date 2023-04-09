@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -25,7 +24,6 @@ import org.kde.kdeconnect.UserInterface.DeviceSettingsAlertDialogFragment;
 import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import com.zorinos.zorin_connect.R;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -38,8 +36,7 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
     private final static String PACKET_TYPE_SFTP = "kdeconnect.sftp";
     private final static String PACKET_TYPE_SFTP_REQUEST = "kdeconnect.sftp.request";
 
-    static int PREFERENCE_KEY_STORAGE_INFO_LIST = R.string.sftp_preference_key_storage_info_list;
-    private static int PREFERENCE_KEY_ADD_CAMERA_SHORTCUT = R.string.sftp_preference_key_add_camera_shortcut;
+    static final int PREFERENCE_KEY_STORAGE_INFO_LIST = R.string.sftp_preference_key_storage_info_list;
 
     private static final SimpleSftpServer server = new SimpleSftpServer();
 
@@ -57,11 +54,6 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
     public boolean onCreate() {
         try {
             server.init(context, device);
-
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
-                return SftpSettingsFragment.getStorageInfoList(context, this).size() != 0;
-            }
-
             return true;
         } catch (Exception e) {
             Log.e("SFTP", "Exception in server.init()", e);
@@ -70,16 +62,12 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
     }
 
     @Override
-    public boolean checkOptionalPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            return SftpSettingsFragment.getStorageInfoList(context, this).size() != 0;
-        }
-
-        return true;
+    public boolean checkRequiredPermissions() {
+        return SftpSettingsFragment.getStorageInfoList(context, this).size() != 0;
     }
 
     @Override
-    public AlertDialogFragment getOptionalPermissionExplanationDialog() {
+    public AlertDialogFragment getPermissionExplanationDialog() {
         return new DeviceSettingsAlertDialogFragment.Builder()
                 .setTitle(getDisplayName())
                 .setMessage(R.string.sftp_saf_permission_explanation)
@@ -111,15 +99,8 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
                 getPathsAndNamesForStorageInfoList(paths, pathNames, storageInfoList);
             } else {
                 NetworkPacket np2 = new NetworkPacket(PACKET_TYPE_SFTP);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    np2.set("errorMessage", context.getString(R.string.sftp_no_storage_locations_configured));
-                } else {
-                    np2.set("errorMessage", context.getString(R.string.sftp_no_sdcard_detected));
-                }
-
+                np2.set("errorMessage", context.getString(R.string.sftp_no_storage_locations_configured));
                 device.sendPacket(np2);
-
                 return true;
             }
 
@@ -158,14 +139,6 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
         StorageInfo prevInfo = null;
         StringBuilder pathBuilder = new StringBuilder();
 
-        boolean addCameraShortcuts = false;
-
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
-            if (preferences != null) {
-                addCameraShortcuts = preferences.getBoolean(context.getString(PREFERENCE_KEY_ADD_CAMERA_SHORTCUT), true);
-            }
-        }
-
         for (StorageInfo curInfo : storageInfoList) {
             pathBuilder.setLength(0);
             pathBuilder.append("/");
@@ -188,17 +161,6 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
 
             paths.add(pathBuilder.toString());
             pathNames.add(curInfo.displayName);
-
-            if (addCameraShortcuts) {
-                if (new File(curInfo.uri.getPath(), "/DCIM/Camera").exists()) {
-                    paths.add(pathBuilder.toString() + "/DCIM/Camera");
-                    if (storageInfoList.size() > 1) {
-                        pathNames.add(context.getString(R.string.sftp_camera) + "(" + curInfo.displayName + ")");
-                    } else {
-                        pathNames.add(context.getString(R.string.sftp_camera));
-                    }
-                }
-            }
         }
     }
 
@@ -240,14 +202,11 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
     @Override
     public void copyGlobalToDeviceSpecificSettings(SharedPreferences globalSharedPreferences) {
         String KeyStorageInfoList = context.getString(PREFERENCE_KEY_STORAGE_INFO_LIST);
-        String KeyAddCameraShortcut = context.getString(PREFERENCE_KEY_ADD_CAMERA_SHORTCUT);
 
-        if (this.preferences != null &&
-                (!this.preferences.contains(KeyStorageInfoList) || !this.preferences.contains(KeyAddCameraShortcut))) {
+        if (this.preferences != null && !this.preferences.contains(KeyStorageInfoList)) {
             this.preferences
                     .edit()
                     .putString(KeyStorageInfoList, globalSharedPreferences.getString(KeyStorageInfoList, "[]"))
-                    .putBoolean(KeyAddCameraShortcut, globalSharedPreferences.getBoolean(KeyAddCameraShortcut, true))
                     .apply();
         }
     }
@@ -257,7 +216,6 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
         sharedPreferences
                 .edit()
                 .remove(context.getString(PREFERENCE_KEY_STORAGE_INFO_LIST))
-                .remove(context.getString(PREFERENCE_KEY_ADD_CAMERA_SHORTCUT))
                 .apply();
     }
 
@@ -268,8 +226,7 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(context.getString(PREFERENCE_KEY_STORAGE_INFO_LIST)) ||
-                key.equals(context.getString(PREFERENCE_KEY_ADD_CAMERA_SHORTCUT))) {
+        if (key.equals(context.getString(PREFERENCE_KEY_STORAGE_INFO_LIST))) {
             //TODO: There used to be a way to request an un-mount (see desktop SftpPlugin's Mounter::onPackageReceived) but that is not handled anymore by the SftpPlugin on KDE.
             if (server.isStarted()) {
                 server.stop();
@@ -285,8 +242,10 @@ public class SftpPlugin extends Plugin implements SharedPreferences.OnSharedPref
         private static final String KEY_DISPLAY_NAME = "DisplayName";
         private static final String KEY_URI = "Uri";
 
-        @NonNull String displayName;
-        @NonNull Uri uri;
+        @NonNull
+        String displayName;
+        @NonNull
+        final Uri uri;
 
         StorageInfo(@NonNull String displayName, @NonNull Uri uri) {
             this.displayName = displayName;

@@ -8,21 +8,22 @@
 package org.kde.kdeconnect.Plugins.BigscreenPlugin;
 
 
+import static org.kde.kdeconnect.Plugins.MousePadPlugin.KeyListenerView.SpecialKeysMap;
+
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.KeyEvent;
+
+import androidx.core.content.ContextCompat;
 
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
 import com.zorinos.zorin_connect.R;
-
-import androidx.core.content.ContextCompat;
-
-import static org.kde.kdeconnect.Plugins.MousePadPlugin.KeyListenerView.SpecialKeysMap;
 
 @PluginFactory.LoadablePlugin
 public class BigscreenPlugin extends Plugin {
@@ -67,7 +68,7 @@ public class BigscreenPlugin extends Plugin {
     }
 
     @Override
-    public boolean hasMainActivity() {
+    public boolean hasMainActivity(Context context) {
         return true;
     }
 

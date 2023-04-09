@@ -19,6 +19,7 @@ import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.AnyThread;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.core.app.NotificationCompat;
@@ -112,6 +113,7 @@ public class Device implements BaseLink.PacketReceiver {
             return Computer; //Default
         }
 
+        @NonNull
         public String toString() {
             switch (this) {
                 case Tablet:
@@ -284,8 +286,8 @@ public class Device implements BaseLink.PacketReceiver {
     }
 
     /**
-     * This method does not send an unpair package, instead it unpairs internally by deleting trusted device info. . Likely to be called after sending package from
-     * pairing handler
+     * This method does not send an unpair packet, instead it unpairs internally by deleting trusted device info.
+     * Likely to be called after sending packet from pairing handler
      */
     private void unpairInternal() {
 
@@ -546,11 +548,11 @@ public class Device implements BaseLink.PacketReceiver {
 
         if (NetworkPacket.PACKET_TYPE_PAIR.equals(np.getType())) {
 
-            Log.i("KDE/Device", "Pair package");
+            Log.i("KDE/Device", "Pair packet");
 
             for (BasePairingHandler ph : pairingHandlers.values()) {
                 try {
-                    ph.packageReceived(np);
+                    ph.packetReceived(np);
                 } catch (Exception e) {
                     Log.e("PairingPacketReceived", "Exception", e);
                 }
@@ -561,9 +563,8 @@ public class Device implements BaseLink.PacketReceiver {
                 reloadPluginsFromSettings();
             }
 
-            //If capabilities are not supported, iterate all plugins
             Collection<String> targetPlugins = pluginsByIncomingInterface.get(np.getType());
-            if (!targetPlugins.isEmpty()) {
+            if (!targetPlugins.isEmpty()) { // When a key doesn't exist the multivaluemap returns an empty collection, so we don't need to check for null
                 for (String pluginKey : targetPlugins) {
                     Plugin plugin = plugins.get(pluginKey);
                     try {
@@ -578,18 +579,16 @@ public class Device implements BaseLink.PacketReceiver {
             }
         } else {
 
-            //Log.e("KDE/onPacketReceived","Device not paired, will pass package to unpairedPacketListeners");
+            //Log.e("KDE/onPacketReceived","Device not paired, will pass packet to unpairedPacketListeners");
 
-            // If it is pair package, it should be captured by "if" at start
+            // If it is pair packet, it should be captured by "if" at start
             // If not and device is paired, it should be captured by isPaired
             // Else unpair, this handles the situation when one device unpairs, but other dont know like unpairing when wi-fi is off
 
             unpair();
 
-            //If capabilities are not supported, iterate through all plugins.
+            // The following code is NOT USED. It adds support for receiving packets from not trusted devices, but as of March 2023 no plugin implements "onUnpairedDevicePacketReceived".
             Collection<String> targetPlugins = pluginsByIncomingInterface.get(np.getType());
-            // When a mapping doesn't exist, an empty collection is added to the map and
-            // then returned, so a null check is not necessary.
             if (!targetPlugins.isEmpty()) {
                 for (String pluginKey : targetPlugins) {
                     Plugin plugin = plugins.get(pluginKey);
@@ -648,7 +647,7 @@ public class Device implements BaseLink.PacketReceiver {
     /**
      * Send a packet to the device asynchronously
      * @param np The packet
-     * @param replaceID If positive, replaces all unsent packages with the same replaceID
+     * @param replaceID If positive, replaces all unsent packets with the same replaceID
      * @param callback A callback for success/failure
      */
     @AnyThread
@@ -687,8 +686,8 @@ public class Device implements BaseLink.PacketReceiver {
 
         /*
         if (!m_outgoingCapabilities.contains(np.getType()) && !NetworkPacket.protocolPacketTypes.contains(np.getType())) {
-            Log.e("Device/sendPacket", "Plugin tried to send an undeclared package: " + np.getType());
-            Log.w("Device/sendPacket", "Declared outgoing package types: " + Arrays.toString(m_outgoingCapabilities.toArray()));
+            Log.e("Device/sendPacket", "Plugin tried to send an undeclared packet: " + np.getType());
+            Log.w("Device/sendPacket", "Declared outgoing packet types: " + Arrays.toString(m_outgoingCapabilities.toArray()));
         }
         */
 
@@ -702,7 +701,7 @@ public class Device implements BaseLink.PacketReceiver {
         }
 
         if (!success) {
-            Log.e("KDE/sendPacket", "No device link (of " + links.size() + " available) could send the package. Packet " + np.getType() + " to " + name + " lost!");
+            Log.e("KDE/sendPacket", "No device link (of " + links.size() + " available) could send the packet. Packet " + np.getType() + " to " + name + " lost!");
         }
 
         return success;
@@ -721,6 +720,15 @@ public class Device implements BaseLink.PacketReceiver {
     @Nullable
     public Plugin getPlugin(String pluginKey) {
         return plugins.get(pluginKey);
+    }
+
+    @Nullable
+    public Plugin getPluginIncludingWithoutPermissions(String pluginKey) {
+        Plugin p = plugins.get(pluginKey);
+        if (p == null) {
+            p = pluginsWithoutPermissions.get(pluginKey);
+        }
+        return p;
     }
 
     private synchronized boolean addPlugin(final String pluginKey) {
@@ -824,8 +832,8 @@ public class Device implements BaseLink.PacketReceiver {
             if (pluginEnabled) {
                 boolean success = addPlugin(pluginKey);
                 if (success) {
-                    for (String packageType : pluginInfo.getSupportedPacketTypes()) {
-                        newPluginsByIncomingInterface.put(packageType, pluginKey);
+                    for (String packetType : pluginInfo.getSupportedPacketTypes()) {
+                        newPluginsByIncomingInterface.put(packetType, pluginKey);
                     }
                 } else {
                     removePlugin(pluginKey);

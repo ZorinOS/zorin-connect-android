@@ -20,7 +20,6 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
@@ -108,7 +107,7 @@ public class FindMyPhonePlugin extends Plugin {
 
     @Override
     public boolean onPacketReceived(NetworkPacket np) {
-        if (Build.VERSION.SDK_INT < 29 || MyApplication.isInForeground()) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || MyApplication.isInForeground()) {
             Intent intent = new Intent(context, FindMyPhoneActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra(FindMyPhoneActivity.EXTRA_DEVICE_ID, device.getDeviceId());
@@ -125,7 +124,6 @@ public class FindMyPhonePlugin extends Plugin {
         return true;
     }
 
-    @RequiresApi(16)
     private void showBroadcastNotification() {
         Intent intent = new Intent(context, FindMyPhoneReceiver.class);
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);

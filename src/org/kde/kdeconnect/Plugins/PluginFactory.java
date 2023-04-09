@@ -6,6 +6,9 @@
 
 package org.kde.kdeconnect.Plugins;
 
+import static org.apache.commons.collections4.SetUtils.emptyIfNull;
+import static org.apache.commons.collections4.SetUtils.unmodifiableSet;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -15,15 +18,19 @@ import org.atteo.classindex.IndexAnnotated;
 import org.kde.kdeconnect.Device;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static org.apache.commons.collections4.SetUtils.emptyIfNull;
-import static org.apache.commons.collections4.SetUtils.unmodifiableSet;
+import java.util.stream.Collectors;
 
 public class PluginFactory {
+
+    public static void sortPluginList(List<String> plugins) {
+        plugins.sort(Comparator.comparing(o -> pluginInfo.get(o).displayName));
+    }
 
     @IndexAnnotated
     public @interface LoadablePlugin { } //Annotate plugins with this so PluginFactory finds them

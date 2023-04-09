@@ -196,20 +196,11 @@
   <string name="title_activity_notification_filter">Filter notifikasi</string>
   <string name="filter_apps_info">Notifikasi akan disinkronkan terhadap apl terpilih.</string>
   <string name="show_notification_if_screen_off">Hanya kirimkan notifikasi saja ketika layarnya mati</string>
-  <string name="sftp_sdcard_num">Kartu SD %d</string>
-  <string name="sftp_sdcard">Kartu SD</string>
-  <string name="sftp_readonly">(hanya baca)</string>
-  <string name="sftp_camera">Gambar kamera</string>
   <string name="add_device_dialog_title">Tambahkan peranti</string>
   <string name="add_device_hint">Alamat IP atau hostname</string>
-  <string name="sftp_preference_detected_sdcards">Kartu SD terdeteksi</string>
-  <string name="sftp_preference_edit_sdcard_title">Edit kartu SD</string>
   <string name="sftp_preference_configured_storage_locations">Lokasi penyimpanan terkonfigurasi</string>
   <string name="sftp_preference_add_storage_location_title">Tambahkan lokasi penyimpanan</string>
   <string name="sftp_preference_edit_storage_location">Edit lokasi penyimpanan</string>
-  <string name="sftp_preference_add_camera_shortcut">Tambahkan shortcut folder kamera</string>
-  <string name="sftp_preference_add_camera_shortcut_summary_on">Tambahkan sebuah shortcut ke folder kamera</string>
-  <string name="sftp_preference_add_camera_shortcut_summary_off">Jangan tambahkan sebuah shortcut ke folder kamera</string>
   <string name="sftp_storage_preference_storage_location">Lokasi penyimpanan</string>
   <string name="sftp_storage_preference_storage_location_already_configured">Lokasi ini sudah dikonfigurasi</string>
   <string name="sftp_storage_preference_click_to_select">klik untuk pilih</string>
@@ -217,7 +208,6 @@
   <string name="sftp_storage_preference_display_name_already_used">Tampilan nama ini sudah digunakan</string>
   <string name="sftp_storage_preference_display_name_cannot_be_empty">Tampilan nama tidak boleh kosong</string>
   <string name="sftp_action_mode_menu_delete">Hapus</string>
-  <string name="sftp_no_sdcard_detected">Tidak ada kartu SD yang terdeteksi</string>
   <string name="sftp_no_storage_locations_configured">Tidak ada lokasi penyimpanan yang dikonfigurasi</string>
   <string name="sftp_saf_permission_explanation">Untuk mengakses file secara jarak jauh, Anda harus mengkonfigurasi lokasi penyimpanan</string>
   <string name="no_players_connected">Tidak ada pemutar yang ditemukan</string>
@@ -246,7 +236,6 @@
   <string name="permission_explanation">Plugin ini perlu perizinan untuk kerja</string>
   <string name="optional_permission_explanation">Anda perlu memberikan perizinan tambahan untuk memfungsikan semua fungsi</string>
   <string name="plugins_need_optional_permission">Beberapa plugin yang memiliki fitur dinonfungsikan karena kurangnya perizinan (ketuk untuk info selebihnya):</string>
-  <string name="share_optional_permission_explanation">Untuk menerima file yang dibagikan Anda perlu memilih sebuah direktori tujuan</string>
   <string name="telepathy_permission_explanation">Untuk membaca dan menulis SMS dari desktop, Anda harus memberikan perizinan untuk SMS</string>
   <string name="telephony_permission_explanation">Untuk melihat panggilan ponsel pada desktop Anda harus memberikan perizinan untuk catatan panggilan ponsel dan keadaan ponsel</string>
   <string name="telephony_optional_permission_explanation">Untuk melihat nama kontak daripada nomor ponsel, Anda harus memberikan akses ke kontak ponsel</string>

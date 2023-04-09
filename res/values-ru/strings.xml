@@ -109,7 +109,6 @@
   <string name="unknown_device">Неизвестное устройство</string>
   <string name="error_not_reachable">Устройство недоступно</string>
   <string name="error_already_paired">Устройство уже сопряжено</string>
-  <string name="error_could_not_send_package">Не удалось отправить пакет</string>
   <string name="error_timed_out">Истекло время ожидания</string>
   <string name="error_canceled_by_user">Отменено пользователем</string>
   <string name="error_canceled_by_other_peer">Отменено другим участником</string>
@@ -221,20 +220,11 @@
   <string name="title_activity_notification_filter">Фильтр уведомлений</string>
   <string name="filter_apps_info">Выберите приложения для передачи их уведомлений на ПК</string>
   <string name="show_notification_if_screen_off">Только при выключенном экране</string>
-  <string name="sftp_sdcard_num">Карта SD %d</string>
-  <string name="sftp_sdcard">Карта SD</string>
-  <string name="sftp_readonly">(только чтение)</string>
-  <string name="sftp_camera">Фотографии с камеры</string>
   <string name="add_device_dialog_title">Добавление устройства</string>
   <string name="add_device_hint">Имя хоста или адрес IP</string>
-  <string name="sftp_preference_detected_sdcards">Обнаруженные карты SD</string>
-  <string name="sftp_preference_edit_sdcard_title">Параметры карты SD</string>
   <string name="sftp_preference_configured_storage_locations">Настроенные местоположения хранилищ</string>
   <string name="sftp_preference_add_storage_location_title">Добавить местоположение хранилища</string>
   <string name="sftp_preference_edit_storage_location">Изменить местоположение хранилища</string>
-  <string name="sftp_preference_add_camera_shortcut">Добавить ярлык для папки камеры</string>
-  <string name="sftp_preference_add_camera_shortcut_summary_on">Добавить ярлык для папки камеры</string>
-  <string name="sftp_preference_add_camera_shortcut_summary_off">Не добавлять ярлык для папки камеры</string>
   <string name="sftp_storage_preference_storage_location">Местоположение хранилища</string>
   <string name="sftp_storage_preference_storage_location_already_configured">Это местоположение уже было настроено</string>
   <string name="sftp_storage_preference_click_to_select">нажмите для выбора</string>
@@ -242,7 +232,6 @@
   <string name="sftp_storage_preference_display_name_already_used">Это отображаемое имя уже используется</string>
   <string name="sftp_storage_preference_display_name_cannot_be_empty">Отображаемое имя не может быть пустым</string>
   <string name="sftp_action_mode_menu_delete">Удалить</string>
-  <string name="sftp_no_sdcard_detected">Карт SD не обнаружено</string>
   <string name="sftp_no_storage_locations_configured">Нет настроенных хранилищ</string>
   <string name="sftp_saf_permission_explanation">Для удалённого доступа к файлам необходимо настроить местоположения хранилищ</string>
   <string name="no_players_connected">Медиапроигрывателей не найдено</string>
@@ -271,7 +260,6 @@
   <string name="permission_explanation">Этому модулю нужны разрешения для работы</string>
   <string name="optional_permission_explanation">Для включения всех функций необходимо предоставить дополнительные разрешения</string>
   <string name="plugins_need_optional_permission">Некоторые функции модулей отключены из-за отсутствия необходимых разрешений (коснитесь для просмотра подробностей):</string>
-  <string name="share_optional_permission_explanation">Для получения общих файлов нужно настроить целевой каталог</string>
   <string name="telepathy_permission_explanation">Чтобы просматривать и отправлять SMS с рабочего стола, необходимо дать разрешение на доступ к SMS</string>
   <string name="telephony_permission_explanation">Чтобы видеть телефонные звонки на рабобчем столе, необходимо дать разрешение на доступ к журналу звонков и состоянию телефона</string>
   <string name="telephony_optional_permission_explanation">Чтобы видеть имя контакта вместо номера телефона, необходимо предоставить доступ к контактам</string>

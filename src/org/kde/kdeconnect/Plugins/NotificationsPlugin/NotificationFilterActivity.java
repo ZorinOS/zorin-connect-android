@@ -23,17 +23,16 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 
-import org.kde.kdeconnect.Helpers.ThreadHelper;
-import org.kde.kdeconnect.UserInterface.ThemeUtil;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.TextViewCompat;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
+import org.kde.kdeconnect.Helpers.ThreadHelper;
+import org.kde.kdeconnect.UserInterface.ThemeUtil;
 import com.zorinos.zorin_connect.R;
 import com.zorinos.zorin_connect.databinding.ActivityNotificationFilterBinding;
 
@@ -140,12 +139,9 @@ public class NotificationFilterActivity extends AppCompatActivity {
         smScreenOffNotification.setChecked(
                 sharedPreferences.getBoolean(getString(NotificationsPlugin.PREF_NOTIFICATION_SCREEN_OFF),false)
         );
-        smScreenOffNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                sharedPreferences.edit().putBoolean(getString(NotificationsPlugin.PREF_NOTIFICATION_SCREEN_OFF),isChecked).apply();
-            }
-        });
+        smScreenOffNotification.setOnCheckedChangeListener((buttonView, isChecked) ->
+                sharedPreferences.edit().putBoolean(getString(NotificationsPlugin.PREF_NOTIFICATION_SCREEN_OFF),isChecked).apply()
+        );
     }
 
     private void displayAppList() {

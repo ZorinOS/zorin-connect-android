@@ -100,7 +100,7 @@ public class AlertDialogFragment extends DialogFragment implements DialogInterfa
     }
 
     @Override
-    public void onCancel(DialogInterface dialog) {
+    public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
 
         if (callback != null) {
@@ -109,7 +109,7 @@ public class AlertDialogFragment extends DialogFragment implements DialogInterfa
     }
 
     @Override
-    public void onDismiss(DialogInterface dialog) {
+    public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
 
         if (callback != null) {
@@ -118,7 +118,7 @@ public class AlertDialogFragment extends DialogFragment implements DialogInterfa
     }
 
     public static abstract class AbstractBuilder<B extends AbstractBuilder<B, F>, F extends DialogFragment> {
-        Bundle args;
+        final Bundle args;
 
         AbstractBuilder() {
             args = new Bundle();

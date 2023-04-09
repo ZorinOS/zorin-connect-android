@@ -7,11 +7,9 @@
 
 package org.kde.kdeconnect.Helpers;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.PhoneLookup;
 import android.util.Base64;
@@ -20,7 +18,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -43,7 +40,6 @@ public class ContactsHelper {
     /**
      * Lookup the name and photoID of a contact given a phone number
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static Map<String, String> phoneNumberLookup(Context context, String number) {
 
         Map<String, String> contactInfo = new HashMap<>();
@@ -160,10 +156,7 @@ public class ContactsHelper {
                 }
                 final List<String> lines = IOUtils.readLines(input, Charsets.UTF_8);
                 toReturn.put(ID, new VCardBuilder(StringUtils.join(lines, '\n')));
-            } catch (IOException e) {
-                // If you are experiencing this, please open a bug report indicating how you got here
-                Log.e("Contacts", "Exception while fetching vcards", e);
-            } catch (NullPointerException e) {
+            } catch (IOException | NullPointerException e) {
                 // If you are experiencing this, please open a bug report indicating how you got here
                 Log.e("Contacts", "Exception while fetching vcards", e);
             }
@@ -189,7 +182,6 @@ public class ContactsHelper {
      * @param context android.content.Context running the request
      * @return Mapping of contact uID to last-modified timestamp
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2) // Need API 18 for contact timestamps
     public static Map<uID, Long> getAllContactTimestamps(Context context) {
         String[] projection = { uID.COLUMN, ContactsContract.Contacts.CONTACT_LAST_UPDATED_TIMESTAMP };
 
@@ -215,7 +207,6 @@ public class ContactsHelper {
      * @throws ContactNotFoundException If the given ID for some reason does not match a contact
      * @return          Last-modified timestamp of the contact
      */
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2) // Need API 18 for contact timestamps
     public static Long getContactTimestamp(Context context, uID contactID) throws ContactNotFoundException {
         String[] projection = { uID.COLUMN, ContactsContract.Contacts.CONTACT_LAST_UPDATED_TIMESTAMP };
         String selection = uID.COLUMN + " = ?";

@@ -52,6 +52,7 @@
   <string name="remotekeyboard_multiple_connections">원격 키보드 연결이 여러 개 있습니다. 설정할 장치를 선택하십시오</string>
   <string name="open_mousepad">원격 입력</string>
   <string name="mousepad_info">화면에서 손가락을 움직이면 마우스 커서를 움직입니다. 화면을 누르면 왼쪽 단추를 누르고, 두 손가락과 세 손가락으로 누르면 오른쪽/가운데 단추를 누릅니다. 두 손가락을 사용하여 스크롤할 수 있습니다. 드래그 앤 드롭을 사용하려면 길게 누르십시오.</string>
+  <string name="mousepad_keyboard_input_not_supported">페어링된 장치에서 키보드 입력을 지원하지 않음</string>
   <string name="mousepad_single_tap_settings_title">한 손가락으로 눌렀을 때 동작 설정</string>
   <string name="mousepad_double_tap_settings_title">두 손가락으로 눌렀을 때 동작 설정</string>
   <string name="mousepad_triple_tap_settings_title">세 손가락으로 눌렀을 때 동작 설정</string>
@@ -196,20 +197,11 @@
   <string name="title_activity_notification_filter">알림 필터</string>
   <string name="filter_apps_info">선택한 앱의 알림을 동기화합니다.</string>
   <string name="show_notification_if_screen_off">화면이 꺼져 있을 때에만 알림 보내기</string>
-  <string name="sftp_sdcard_num">SD 카드 %d</string>
-  <string name="sftp_sdcard">SD 카드</string>
-  <string name="sftp_readonly">(읽기 전용)</string>
-  <string name="sftp_camera">카메라 사진</string>
   <string name="add_device_dialog_title">장치 추가</string>
   <string name="add_device_hint">호스트 이름이나 IP 주소</string>
-  <string name="sftp_preference_detected_sdcards">감지된 SD 카드</string>
-  <string name="sftp_preference_edit_sdcard_title">SD 카드 편집</string>
   <string name="sftp_preference_configured_storage_locations">설정된 저장소 위치</string>
   <string name="sftp_preference_add_storage_location_title">저장소 위치 추가</string>
   <string name="sftp_preference_edit_storage_location">저장소 위치 편집</string>
-  <string name="sftp_preference_add_camera_shortcut">카메라 폴더 바로 가기 추가</string>
-  <string name="sftp_preference_add_camera_shortcut_summary_on">카메라 폴더 바로 가기 추가</string>
-  <string name="sftp_preference_add_camera_shortcut_summary_off">카메라 폴더 바로 가기 추가하지 않음</string>
   <string name="sftp_storage_preference_storage_location">저장소 위치</string>
   <string name="sftp_storage_preference_storage_location_already_configured">이 위치는 이미 설정됨</string>
   <string name="sftp_storage_preference_click_to_select">클릭해서 선택</string>
@@ -217,7 +209,6 @@
   <string name="sftp_storage_preference_display_name_already_used">이 표시 이름이 이미 사용 중임</string>
   <string name="sftp_storage_preference_display_name_cannot_be_empty">표시 이름을 비워둘 수 없음</string>
   <string name="sftp_action_mode_menu_delete">삭제</string>
-  <string name="sftp_no_sdcard_detected">SD 카드가 감지되지 않았음</string>
   <string name="sftp_no_storage_locations_configured">저장소 위치가 설정되지 않았음</string>
   <string name="sftp_saf_permission_explanation">원격으로 파일에 접근하려면 저장소 위치를 설정해야 함</string>
   <string name="no_players_connected">재생기를 찾을 수 없음</string>
@@ -246,7 +237,6 @@
   <string name="permission_explanation">이 플러그인을 사용하려면 권한이 필요합니다</string>
   <string name="optional_permission_explanation">모든 기능을 사용하려면 추가 권한이 필요합니다</string>
   <string name="plugins_need_optional_permission">일부 플러그인은 권한이 없어서 비활성화되었습니다(정보를 보려면 누르기):</string>
-  <string name="share_optional_permission_explanation">공유된 파일을 받으려면 대상 디렉터리를 선택해야 합니다</string>
   <string name="telepathy_permission_explanation">데스크톱에서 문자 메시지를 읽고 보내려면 문자 메시지 접근 권한이 필요합니다</string>
   <string name="telephony_permission_explanation">데스크톱에서 통화와 문자 메시지를 보려면 통화 기록 및 휴대폰 상태 접근 권한이 필요합니다</string>
   <string name="telephony_optional_permission_explanation">전화번호 대신 연락처에 등록된 이름을 보려면 주소록 접근 권한이 필요합니다</string>
@@ -267,6 +257,7 @@
   <string name="pref_plugin_mprisreceiver">미디어 재생기 제어</string>
   <string name="pref_plugin_mprisreceiver_desc">다른 장치에서 휴대폰의 미디어 재생기 제어</string>
   <string name="notification_channel_default">기타 알림</string>
+  <string name="notification_channel_persistent">항상 표시된 표시기</string>
   <string name="notification_channel_media_control">미디어 제어</string>
   <string name="notification_channel_filetransfer">파일 전송</string>
   <string name="notification_channel_high_priority">높은 우선 순위</string>
@@ -310,6 +301,7 @@
   <string name="empty_trusted_networks_list_text">신뢰할 수 있는 네트워크를 추가하지 않았습니다</string>
   <string name="allow_all_networks_text">모두 허용</string>
   <string name="location_permission_needed_title">권한이 필요함</string>
+  <string name="location_permission_needed_desc">Zorin Connect에서 현재 연결된 Wi-Fi 네트워크 정보를 얻으려면 앱이 백그라운드에서 실행 중일 때에도 백그라운드 권한이 필요합니다. Zorin Connect에서는 사용자의 위치를 찾지 않지만, 내 주변에 있는 Wi-Fi 네트워크의 이름으로도 위치를 찾을 수 있기 때문입니다.</string>
   <string name="clipboard_android_x_incompat">안드로이드 10부터는 앱에서 클립보드에 접근할 수 없습니다. 이 플러그인이 비활성화되었습니다.</string>
   <string name="mpris_open_url">여기에서 계속 재생</string>
   <string name="cant_open_url">계속 재생할 URL을 열 수 없음</string>
@@ -353,7 +345,7 @@
   <string name="donate">기부하기</string>
   <string name="source_code">소스 코드</string>
   <string name="licenses">라이선스</string>
-  <string name="website">웹 사이트</string>
+  <string name="website">웹사이트</string>
   <string name="about">정보</string>
   <string name="authors">작성자</string>
   <string name="thanks_to">고마운 분</string>

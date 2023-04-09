@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
@@ -38,9 +37,11 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.security.KeyStore;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.Certificate;
+import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.time.Instant;
@@ -64,7 +65,23 @@ public class SslHelper {
 
     public static X509Certificate certificate; //my device's certificate
 
-    public static final BouncyCastleProvider BC = new BouncyCastleProvider();
+    public final static BouncyCastleProvider BC = new BouncyCastleProvider();
+
+    private final static TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+            return new X509Certificate[0];
+        }
+
+        @Override
+        public void checkClientTrusted(X509Certificate[] certs, String authType) {
+        }
+
+        @Override
+        public void checkServerTrusted(X509Certificate[] certs, String authType) {
+        }
+
+    }
+    };
 
     public static void initialiseCertificate(Context context) {
         PrivateKey privateKey;
@@ -190,22 +207,6 @@ public class SslHelper {
             trustManagerFactory.init(keyStore);
 
             // Setup custom trust manager if device not trusted
-            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
-                public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[0];
-                }
-
-                @Override
-                public void checkClientTrusted(X509Certificate[] certs, String authType) {
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] certs, String authType) {
-                }
-
-            }
-            };
-
             SSLContext tlsContext = SSLContext.getInstance("TLSv1"); //Newer TLS versions are only supported on API 16+
             if (isDeviceTrusted) {
                 tlsContext.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), RandomHelper.secureRandom);
@@ -221,20 +222,7 @@ public class SslHelper {
     }
 
     private static void configureSslSocket(SSLSocket socket, boolean isDeviceTrusted, boolean isClient) throws SocketException {
-
-        // These cipher suites are most common of them that are accepted by kde and android during handshake
-        ArrayList<String> supportedCiphers = new ArrayList<>();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            supportedCiphers.add("TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384");  // API 20+
-            supportedCiphers.add("TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256");  // API 20+
-            supportedCiphers.add("TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384");    // API 20+
-            supportedCiphers.add("TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256");    // API 20+
-        }
-        supportedCiphers.add("TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA");       // API 11+
-        socket.setEnabledCipherSuites(supportedCiphers.toArray(ArrayUtils.EMPTY_STRING_ARRAY));
-
-        socket.setSoTimeout(10000);
-
+       socket.setSoTimeout(10000);
         if (isClient) {
             socket.setUseClientMode(true);
         } else {
@@ -256,18 +244,17 @@ public class SslHelper {
     }
 
     public static String getCertificateHash(Certificate certificate) {
+        byte[] hash;
         try {
-            byte[] hash = MessageDigest.getInstance("SHA-256").digest(certificate.getEncoded());
-            Formatter formatter = new Formatter();
-            int i;
-            for (i = 0; i < hash.length; i++) {
-                formatter.format("%02x:", hash[i]);
-            }
-            formatter.format("%02x", hash[i]);
-            return formatter.toString();
-        } catch (Exception e) {
-            return null;
+            hash = MessageDigest.getInstance("SHA-256").digest(certificate.getEncoded());
+        } catch (NoSuchAlgorithmException | CertificateEncodingException e) {
+            throw new RuntimeException(e);
         }
+        Formatter formatter = new Formatter();
+        for (byte b : hash) {
+            formatter.format("%02x:", b);
+        }
+        return formatter.toString();
     }
 
     public static Certificate parseCertificate(byte[] certificateBytes) throws IOException, CertificateException {
@@ -300,8 +287,8 @@ public class SslHelper {
 
             byte[] hash = MessageDigest.getInstance("SHA-256").digest(concat);
             Formatter formatter = new Formatter();
-            for (int i = 0; i < hash.length; i++) {
-                formatter.format("%02x", hash[i]);
+            for (byte value : hash) {
+                formatter.format("%02x", value);
             }
             return formatter.toString();
         } catch(Exception e) {

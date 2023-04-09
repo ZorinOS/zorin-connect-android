@@ -6,10 +6,8 @@
 
 package org.kde.kdeconnect.Helpers;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.util.Log;
@@ -153,7 +151,6 @@ public class StorageHelper {
      * content://com.android.externalstorage.documents/tree/primary:DCIM          => primary:DCIM
      * content://com.android.externalstorage.documents/tree/primary:Download/bla  => primary:Download/bla
      */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static String getDisplayName(@NonNull Context context, @NonNull Uri treeUri) {
         List<String> pathSegments = treeUri.getPathSegments();
 

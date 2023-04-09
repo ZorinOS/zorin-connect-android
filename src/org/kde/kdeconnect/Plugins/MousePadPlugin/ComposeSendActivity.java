@@ -7,25 +7,21 @@
 
 package org.kde.kdeconnect.Plugins.MousePadPlugin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.UserInterface.ThemeUtil;
 import com.zorinos.zorin_connect.R;
-
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.Objects;
 
@@ -52,21 +48,17 @@ public class ComposeSendActivity extends AppCompatActivity {
         EditText editText = findViewById(R.id.compose);
 
         editText.requestFocus();
-        editText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-
-            // this is almost never used
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEND) {
-                    sendComposed();
-                    return true;
-                }
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    clear();
-                    return true;
-                }
-                return false;
+        // this is almost never used
+        editText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                sendComposed();
+                return true;
             }
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                clear();
+                return true;
+            }
+            return false;
         });
     }
 

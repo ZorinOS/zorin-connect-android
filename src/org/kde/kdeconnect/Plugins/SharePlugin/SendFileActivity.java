@@ -10,18 +10,17 @@ import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.kde.kdeconnect.BackgroundService;
 import org.kde.kdeconnect.UserInterface.ThemeUtil;
 import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 
 public class SendFileActivity extends AppCompatActivity {
@@ -37,9 +36,7 @@ public class SendFileActivity extends AppCompatActivity {
 
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("*/*");
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        }
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         try {
             startActivityForResult(
@@ -63,12 +60,10 @@ public class SendFileActivity extends AppCompatActivity {
                         uris.add(uri);
                     }
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                        ClipData clipdata = data.getClipData();
-                        if (clipdata != null) {
-                            for (int i = 0; i < clipdata.getItemCount(); i++) {
-                                uris.add(clipdata.getItemAt(i).getUri());
-                            }
+                    ClipData clipdata = data.getClipData();
+                    if (clipdata != null) {
+                        for (int i = 0; i < clipdata.getItemCount(); i++) {
+                            uris.add(clipdata.getItemAt(i).getUri());
                         }
                     }
 

@@ -9,6 +9,9 @@ package org.kde.kdeconnect.Plugins.SharePlugin;
 import android.os.Handler;
 import android.os.Looper;
 
+import androidx.annotation.GuardedBy;
+import androidx.annotation.NonNull;
+
 import org.kde.kdeconnect.Device;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.async.BackgroundJob;
@@ -16,9 +19,6 @@ import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.GuardedBy;
-import androidx.annotation.NonNull;
 
 /**
  * A type of {@link BackgroundJob} that sends Files to another device.
@@ -41,13 +41,13 @@ import androidx.annotation.NonNull;
  */
 public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
     private boolean isRunning;
-    private Handler handler;
+    private final Handler handler;
     private String currentFileName;
     private int currentFileNum;
     private boolean updatePacketPending;
     private long totalSend;
     private int prevProgressPercentage;
-    private UploadNotification uploadNotification;
+    private final UploadNotification uploadNotification;
 
     private final Object lock;                              //Use to protect concurrent access to the variables below
     @GuardedBy("lock")

@@ -6,7 +6,6 @@
 
 package org.kde.kdeconnect.Plugins.SftpPlugin;
 
-import android.annotation.TargetApi;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -37,7 +36,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@TargetApi(21)
 public class AndroidSafSshFile implements SshFile {
     private static final String TAG = AndroidSafSshFile.class.getSimpleName();
 
@@ -213,7 +211,7 @@ public class AndroidSafSshFile implements SshFile {
             String sourceTreeDocumentId = DocumentsContract.getTreeDocumentId(parentUri);
             String destTreeDocumentId = DocumentsContract.getTreeDocumentId(((AndroidSafSshFile) dest).parentUri);
 
-            if (sourceTreeDocumentId.equals(destTreeDocumentId) && Build.VERSION.SDK_INT >= 24) {
+            if (sourceTreeDocumentId.equals(destTreeDocumentId) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 try {
                     Uri newUri = DocumentsContract.moveDocument(fileSystemView.context.getContentResolver(), documentInfo.uri, parentUri, destParentUri);
                     if (newUri != null) {
@@ -332,14 +330,10 @@ public class AndroidSafSshFile implements SshFile {
                 ret = documentInfo.length;
                 break;
             case Uid:
-                ret = 1;
-                break;
-            case Owner:
-                ret = getOwner();
-                break;
             case Gid:
                 ret = 1;
                 break;
+            case Owner:
             case Group:
                 ret = getOwner();
                 break;
@@ -374,11 +368,7 @@ public class AndroidSafSshFile implements SshFile {
                         : EnumSet.copyOf(tmp);
                 break;
             case CreationTime:
-                ret = documentInfo.lastModified;
-                break;
             case LastModifiedTime:
-                ret = documentInfo.lastModified;
-                break;
             case LastAccessTime:
                 ret = documentInfo.lastModified;
                 break;
@@ -418,12 +408,8 @@ public class AndroidSafSshFile implements SshFile {
     private static class DocumentInfo {
         private Uri uri;
         private boolean exists;
-        @Nullable
-        private String documentId;
         private boolean canRead;
         private boolean canWrite;
-        @Nullable
-        private String mimeType;
         private boolean isDirectory;
         private boolean isFile;
         private long lastModified;
@@ -461,7 +447,7 @@ public class AndroidSafSshFile implements SshFile {
 
                 cursor.moveToFirst();
 
-                documentId = cursor.getString(cursor.getColumnIndex(DocumentsContract.Document.COLUMN_DOCUMENT_ID));
+                //String documentId = cursor.getString(cursor.getColumnIndex(DocumentsContract.Document.COLUMN_DOCUMENT_ID));
 
                 final boolean readPerm = c.checkCallingOrSelfUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         == PackageManager.PERMISSION_GRANTED;
@@ -472,7 +458,7 @@ public class AndroidSafSshFile implements SshFile {
                 final boolean supportsDelete = (flags & DocumentsContract.Document.FLAG_SUPPORTS_DELETE) != 0;
                 final boolean supportsCreate = (flags & DocumentsContract.Document.FLAG_DIR_SUPPORTS_CREATE) != 0;
                 final boolean supportsWrite = (flags & DocumentsContract.Document.FLAG_SUPPORTS_WRITE) != 0;
-                mimeType = cursor.getString(cursor.getColumnIndex(DocumentsContract.Document.COLUMN_MIME_TYPE));
+                String mimeType = cursor.getString(cursor.getColumnIndex(DocumentsContract.Document.COLUMN_MIME_TYPE));
                 final boolean hasMime = !TextUtils.isEmpty(mimeType);
 
                 isDirectory = DocumentsContract.Document.MIME_TYPE_DIR.equals(mimeType);
