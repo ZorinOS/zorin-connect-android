@@ -6,6 +6,7 @@ Zorin Connect provides functionality to integrate your phone and your computer:
 • Reply to messages from the Zorin OS desktop
 • Share files and links between devices
 • Use your phone as a remote control for your computer
+• Send a command from your computer to ring your phone to help you find it
 
 The app seamlessly connects your computer and your mobile device over your local network, securely with RSA encryption.
 
