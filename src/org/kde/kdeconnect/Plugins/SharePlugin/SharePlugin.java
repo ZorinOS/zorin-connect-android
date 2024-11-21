@@ -6,24 +6,29 @@
 
 package org.kde.kdeconnect.Plugins.SharePlugin;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
+import android.content.SharedPreferences;
+import android.Manifest;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.LocusIdCompat;
+import androidx.core.content.pm.ShortcutInfoCompat;
+import androidx.core.content.pm.ShortcutManagerCompat;
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.preference.PreferenceManager;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -32,13 +37,19 @@ import org.kde.kdeconnect.Helpers.IntentHelper;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
+import org.kde.kdeconnect.UserInterface.MainActivity;
 import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import org.kde.kdeconnect.async.BackgroundJob;
 import org.kde.kdeconnect.async.BackgroundJobHandler;
 import com.zorinos.zorin_connect.R;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 /**
  * A Plugin for sharing and receiving files and uris.
@@ -66,47 +77,104 @@ public class SharePlugin extends Plugin {
     private CompositeUploadFileJob uploadFileJob;
     private final Callback receiveFileJobCallback;
 
+    public static final String KEY_UNREACHABLE_URL_LIST = "key_unreachable_url_list";
+    private SharedPreferences mSharedPrefs;
+
     public SharePlugin() {
-        backgroundJobHandler = BackgroundJobHandler.newFixedThreadPoolBackgroundJobHander(5);
+        backgroundJobHandler = BackgroundJobHandler.newFixedThreadPoolBackgroundJobHandler(5);
         handler = new Handler(Looper.getMainLooper());
         receiveFileJobCallback = new Callback();
     }
 
     @Override
     public boolean onCreate() {
-        optionalPermissionExplanation = R.string.share_optional_permission_explanation;
+        super.onCreate();
+        mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        Intent shortcutIntent = new Intent(context, MainActivity.class);
+        shortcutIntent.setAction(Intent.ACTION_VIEW);
+        shortcutIntent.putExtra(MainActivity.EXTRA_DEVICE_ID, device.getDeviceId());
+
+        IconCompat icon = IconCompat.createWithResource(context, device.getDeviceType().toShortcutDrawableId());
+
+        ShortcutInfoCompat shortcut = new ShortcutInfoCompat
+                .Builder(context, device.getDeviceId())
+                .setIntent(shortcutIntent)
+                .setIcon(icon)
+                .setShortLabel(device.getName())
+                .setCategories(Set.of("org.kde.kdeconnect.category.SHARE_TARGET"))
+                .setLocusId(new LocusIdCompat(device.getDeviceId()))
+                .build();
+        ShortcutManagerCompat.pushDynamicShortcut(context, shortcut);
+
+        // Deliver URLs previously shared to this device now that it's connected
+        deliverPreviouslySentIntents();
         return true;
     }
 
     @Override
-    public String getDisplayName() {
+    public void onDestroy() {
+        ShortcutManagerCompat.removeLongLivedShortcuts(context, List.of(device.getDeviceId()));
+        super.onDestroy();
+    }
+
+    private void deliverPreviouslySentIntents() {
+        Set<String> currentUrlSet = mSharedPrefs.getStringSet(KEY_UNREACHABLE_URL_LIST + device.getDeviceId(), null);
+        if (currentUrlSet != null) {
+            for (String url : currentUrlSet) {
+                Intent intent;
+                try {
+                    intent = Intent.parseUri(url, 0);
+                } catch (URISyntaxException ex) {
+                    Log.e("SharePlugin", "Malformed URI");
+                    continue;
+                }
+                if (intent != null) {
+                    share(intent);
+                }
+            }
+            mSharedPrefs.edit().putStringSet(KEY_UNREACHABLE_URL_LIST + device.getDeviceId(), null).apply();
+        }
+    }
+
+    @Override
+    protected int getOptionalPermissionExplanation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return R.string.share_notifications_explanation;
+        } else {
+            return R.string.share_optional_permission_explanation;
+        }
+    }
+
+    @Override
+    public @NonNull String getDisplayName() {
         return context.getResources().getString(R.string.pref_plugin_sharereceiver);
     }
 
     @Override
-    public Drawable getIcon() {
-        return ContextCompat.getDrawable(context, R.drawable.share_plugin_action_24dp);
+    public @DrawableRes int getIcon() {
+        return R.drawable.share_plugin_action_24dp;
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getResources().getString(R.string.pref_plugin_sharereceiver_desc);
     }
 
     @Override
-    public boolean hasMainActivity(Context context) {
+    public boolean displayAsButton(Context context) {
         return true;
     }
 
     @Override
-    public String getActionName() {
+    public @NonNull String getActionName() {
         return context.getString(R.string.send_files);
     }
 
     @Override
     public void startMainActivity(Activity parentActivity) {
         Intent intent = new Intent(parentActivity, SendFileActivity.class);
-        intent.putExtra("deviceId", device.getDeviceId());
+        intent.putExtra("deviceId", getDevice().getDeviceId());
         parentActivity.startActivity(intent);
     }
 
@@ -117,7 +185,7 @@ public class SharePlugin extends Plugin {
 
     @Override
     @WorkerThread
-    public boolean onPacketReceived(NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull NetworkPacket np) {
         try {
             if (np.getType().equals(PACKET_TYPE_SHARE_REQUEST_UPDATE)) {
                 if (receiveFileJob != null && receiveFileJob.isRunning()) {
@@ -156,7 +224,7 @@ public class SharePlugin extends Plugin {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         browserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-        IntentHelper.startActivityFromBackground(context, browserIntent, url);
+        IntentHelper.startActivityFromBackgroundOrCreateNotification(context, browserIntent, url);
     }
 
     private void receiveText(NetworkPacket np) {
@@ -176,7 +244,7 @@ public class SharePlugin extends Plugin {
         if (hasNumberOfFiles && !isOpen && receiveFileJob != null) {
             job = receiveFileJob;
         } else {
-            job = new CompositeReceiveFileJob(device, receiveFileJobCallback);
+            job = new CompositeReceiveFileJob(getDevice(), receiveFileJobCallback);
         }
 
         if (!hasNumberOfFiles) {
@@ -203,7 +271,7 @@ public class SharePlugin extends Plugin {
         CompositeUploadFileJob job;
 
         if (uploadFileJob == null) {
-            job = new CompositeUploadFileJob(device, this.receiveFileJobCallback);
+            job = new CompositeUploadFileJob(getDevice(), this.receiveFileJobCallback);
         } else {
             job = uploadFileJob;
         }
@@ -225,69 +293,74 @@ public class SharePlugin extends Plugin {
 
     public void share(Intent intent) {
         Bundle extras = intent.getExtras();
-        if (extras != null) {
-            if (extras.containsKey(Intent.EXTRA_STREAM)) {
+        ArrayList<Uri> streams = streamsFromIntent(intent, extras);
+        if (streams != null && !streams.isEmpty()) {
+            sendUriList(streams);
+        } else if (extras != null && extras.containsKey(Intent.EXTRA_TEXT)) {
+            Log.i("SharePlugin", "Intent contains text to share");
+            String text = extras.getString(Intent.EXTRA_TEXT);
+            String subject = extras.getString(Intent.EXTRA_SUBJECT);
 
-                try {
-
-                    ArrayList<Uri> uriList;
-                    if (!Intent.ACTION_SEND.equals(intent.getAction())) {
-                        uriList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
-                    } else {
-                        Uri uri = extras.getParcelable(Intent.EXTRA_STREAM);
-                        uriList = new ArrayList<>();
-                        uriList.add(uri);
-                    }
-
-                    sendUriList(uriList);
-                } catch (Exception e) {
-                    Log.e("ShareActivity", "Exception");
-                    e.printStackTrace();
+            //Hack: Detect shared youtube videos, so we can open them in the browser instead of as text
+            if (StringUtils.endsWith(subject, "YouTube")) {
+                int index = text.indexOf(": http://youtu.be/");
+                if (index > 0) {
+                    text = text.substring(index + 2); //Skip ": "
                 }
-
-            } else if (extras.containsKey(Intent.EXTRA_TEXT)) {
-                String text = extras.getString(Intent.EXTRA_TEXT);
-                String subject = extras.getString(Intent.EXTRA_SUBJECT);
-
-                //Hack: Detect shared youtube videos, so we can open them in the browser instead of as text
-                if (StringUtils.endsWith(subject, "YouTube")) {
-                    int index = text.indexOf(": http://youtu.be/");
-                    if (index > 0) {
-                        text = text.substring(index + 2); //Skip ": "
-                    }
-                }
-
-                boolean isUrl;
-                try {
-                    new URL(text);
-                    isUrl = true;
-                } catch (Exception e) {
-                    isUrl = false;
-                }
-                NetworkPacket np = new NetworkPacket(SharePlugin.PACKET_TYPE_SHARE_REQUEST);
-                if (isUrl) {
-                    np.set("url", text);
-                } else {
-                    np.set("text", text);
-                }
-                device.sendPacket(np);
             }
+            boolean isUrl;
+            try {
+                new URL(text);
+                isUrl = true;
+            } catch (MalformedURLException e) {
+                isUrl = false;
+            }
+            NetworkPacket np = new NetworkPacket(SharePlugin.PACKET_TYPE_SHARE_REQUEST);
+            if (isUrl) {
+                np.set("url", text);
+            } else {
+                np.set("text", text);
+            }
+            getDevice().sendPacket(np);
+        } else {
+            Log.e("SharePlugin", "There's nothing we know how to share");
         }
     }
 
+    private ArrayList<Uri> streamsFromIntent(Intent intent, Bundle extras) {
+        if (extras == null || !extras.containsKey(Intent.EXTRA_STREAM)) {
+            return null;
+        }
+        Log.i("SharePlugin", "Intent contains streams to share");
+        ArrayList<Uri> uriList;
+        if (Intent.ACTION_SEND_MULTIPLE.equals(intent.getAction())) {
+            uriList = intent.getParcelableArrayListExtra(Intent.EXTRA_STREAM);
+        } else {
+            uriList = new ArrayList<>();
+            uriList.add(extras.getParcelable(Intent.EXTRA_STREAM));
+        }
+        uriList.removeAll(Collections.singleton(null));
+        if (uriList.isEmpty()) {
+            Log.w("SharePlugin", "All streams were null");
+        }
+        return uriList;
+    }
+
     @Override
-    public String[] getSupportedPacketTypes() {
+    public @NonNull String[] getSupportedPacketTypes() {
         return new String[]{PACKET_TYPE_SHARE_REQUEST, PACKET_TYPE_SHARE_REQUEST_UPDATE};
     }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
+    public @NonNull String[] getOutgoingPacketTypes() {
         return new String[]{PACKET_TYPE_SHARE_REQUEST};
     }
 
     @Override
-    public String[] getOptionalPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+    public @NonNull String[] getOptionalPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return new String[]{Manifest.permission.POST_NOTIFICATIONS};
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             return ArrayUtils.EMPTY_STRING_ARRAY;
         } else {
             return new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -328,5 +401,14 @@ public class SharePlugin extends Plugin {
                 }
             }
         }
+    }
+
+    @Override
+    public void onDeviceUnpaired(Context context, String deviceId) {
+        Log.i("KDE/SharePlugin", "onDeviceUnpaired deviceId = " + deviceId);
+        if (mSharedPrefs == null) {
+            mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        }
+        mSharedPrefs.edit().remove(KEY_UNREACHABLE_URL_LIST + deviceId).apply();
     }
 }

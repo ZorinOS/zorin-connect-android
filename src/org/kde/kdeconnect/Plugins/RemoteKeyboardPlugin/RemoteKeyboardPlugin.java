@@ -9,7 +9,6 @@ package org.kde.kdeconnect.Plugins.RemoteKeyboardPlugin;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
@@ -20,8 +19,11 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
+import android.view.inputmethod.InputMethodInfo;
+import android.view.inputmethod.InputMethodManager;
 
-import androidx.core.content.ContextCompat;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 import androidx.fragment.app.DialogFragment;
 
@@ -34,6 +36,7 @@ import org.kde.kdeconnect.UserInterface.StartActivityAlertDialogFragment;
 import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
 @PluginFactory.LoadablePlugin
@@ -107,7 +110,7 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
 
     @Override
     public boolean onCreate() {
-        Log.d("RemoteKeyboardPlugin", "Creating for device " + device.getName());
+        Log.d("RemoteKeyboardPlugin", "Creating for device " + getDevice().getName());
         acquireInstances();
         try {
             instances.add(this);
@@ -139,22 +142,22 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
             releaseInstances();
         }
 
-        Log.d("RemoteKeyboardPlugin", "Destroying for device " + device.getName());
+        Log.d("RemoteKeyboardPlugin", "Destroying for device " + getDevice().getName());
     }
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         return context.getString(R.string.pref_plugin_remotekeyboard);
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getString(R.string.pref_plugin_remotekeyboard_desc);
     }
 
     @Override
-    public Drawable getIcon() {
-        return ContextCompat.getDrawable(context, R.drawable.ic_action_keyboard_24dp);
+    public @DrawableRes int getIcon() {
+        return R.drawable.ic_action_keyboard_24dp;
     }
 
     @Override
@@ -168,17 +171,12 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
     }
 
     @Override
-    public boolean hasMainActivity(Context context) {
-        return false;
-    }
-
-    @Override
-    public String[] getSupportedPacketTypes() {
+    public @NonNull String[] getSupportedPacketTypes() {
         return new String[]{PACKET_TYPE_MOUSEPAD_REQUEST};
     }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
+    public @NonNull String[] getOutgoingPacketTypes() {
         return new String[]{PACKET_TYPE_MOUSEPAD_ECHO, PACKET_TYPE_MOUSEPAD_KEYBOARDSTATE};
     }
 
@@ -346,13 +344,30 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
                 np.getBoolean("ctrl"), np.getBoolean("alt"));
     }
 
-    @Override
-    public boolean onPacketReceived(NetworkPacket np) {
 
-        if (!np.getType().equals(PACKET_TYPE_MOUSEPAD_REQUEST)
-                || (!np.has("key") && !np.has("specialKey"))) {  // expect at least key OR specialKey
-            Log.e("RemoteKeyboardPlugin", "Invalid packet type for remotekeyboard plugin!");
+    public enum MousePadPacketType {
+        Keyboard,
+        Mouse,
+    };
+
+    public static MousePadPacketType getMousePadPacketType(NetworkPacket np) {
+        if (np.has("key") || np.has("specialKey")) {
+            return MousePadPacketType.Keyboard;
+        } else {
+            return MousePadPacketType.Mouse;
+        }
+    }
+
+    @Override
+    public boolean onPacketReceived(@NonNull NetworkPacket np) {
+
+        if (!np.getType().equals(PACKET_TYPE_MOUSEPAD_REQUEST)) {
+            Log.e("RemoteKeyboardPlugin", "Invalid packet type for RemoteKeyboardPlugin: "+np.getType());
             return false;
+        }
+
+        if (getMousePadPacketType(np) != MousePadPacketType.Keyboard) {
+            return false; // This packet will be handled by the MouseReceiverPlugin instead, silently ignore
         }
 
         if (RemoteKeyboardService.instance == null) {
@@ -383,7 +398,7 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
             if (np.has("alt"))
                 reply.set("alt", np.getBoolean("alt"));
             reply.set("isAck", true);
-            device.sendPacket(reply);
+            getDevice().sendPacket(reply);
         }
 
         return true;
@@ -393,20 +408,23 @@ public class RemoteKeyboardPlugin extends Plugin implements SharedPreferences.On
         Log.d("RemoteKeyboardPlugin", "Keyboardstate changed to " + state);
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_MOUSEPAD_KEYBOARDSTATE);
         np.set("state", state);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     String getDeviceId() {
-        return device.getDeviceId();
+        return getDevice().getDeviceId();
     }
 
     @Override
     public boolean checkRequiredPermissions() {
-        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ENABLED_INPUT_METHODS).contains("com.zorinos.zorin_connect");
+        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        List<InputMethodInfo> inputMethodList = inputMethodManager.getEnabledInputMethodList();
+        return inputMethodList.stream().anyMatch(
+                info -> context.getPackageName().equals(info.getPackageName()));
     }
 
     @Override
-    public DialogFragment getPermissionExplanationDialog() {
+    public @NonNull DialogFragment getPermissionExplanationDialog() {
         return new StartActivityAlertDialogFragment.Builder()
                 .setTitle(R.string.pref_plugin_remotekeyboard)
                 .setMessage(R.string.no_permissions_remotekeyboard)

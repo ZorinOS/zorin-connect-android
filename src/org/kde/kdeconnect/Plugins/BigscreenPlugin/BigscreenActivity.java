@@ -17,10 +17,9 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.kde.kdeconnect.BackgroundService;
+import org.kde.kdeconnect.KdeConnect;
 import org.kde.kdeconnect.UserInterface.MainActivity;
 import org.kde.kdeconnect.UserInterface.PermissionsAlertDialogFragment;
-import org.kde.kdeconnect.UserInterface.ThemeUtil;
 import com.zorinos.zorin_connect.R;
 import com.zorinos.zorin_connect.databinding.ActivityBigscreenBinding;
 
@@ -34,7 +33,6 @@ public class BigscreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThemeUtil.setUserPreferredTheme(this);
 
         final ActivityBigscreenBinding binding = ActivityBigscreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -50,28 +48,30 @@ public class BigscreenActivity extends AppCompatActivity {
             binding.micButton.setVisibility(View.INVISIBLE);
         }
 
-        BackgroundService.RunWithPlugin(this, deviceId, BigscreenPlugin.class, plugin -> runOnUiThread(() -> {
-            binding.leftButton.setOnClickListener(v -> plugin.sendLeft());
-            binding.rightButton.setOnClickListener(v -> plugin.sendRight());
-            binding.upButton.setOnClickListener(v -> plugin.sendUp());
-            binding.downButton.setOnClickListener(v -> plugin.sendDown());
-            binding.selectButton.setOnClickListener(v -> plugin.sendSelect());
-            binding.homeButton.setOnClickListener(v -> plugin.sendHome());
-            binding.micButton.setOnClickListener(v -> {
-                if (plugin.hasMicPermission()) {
-                    activateSTT();
-                } else {
-                    new PermissionsAlertDialogFragment.Builder()
-                            .setTitle(plugin.getDisplayName())
-                            .setMessage(R.string.bigscreen_optional_permission_explanation)
-                            .setPositiveButton(R.string.ok)
-                            .setNegativeButton(R.string.cancel)
-                            .setPermissions(new String[]{Manifest.permission.RECORD_AUDIO})
-                            .setRequestCode(MainActivity.RESULT_NEEDS_RELOAD)
-                            .create().show(getSupportFragmentManager(), null);
-                }
-            });
-        }));
+        BigscreenPlugin plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, BigscreenPlugin.class);
+        if (plugin == null) {
+            finish();
+            return;
+        }
+
+        binding.leftButton.setOnClickListener(v -> plugin.sendLeft());
+        binding.rightButton.setOnClickListener(v -> plugin.sendRight());
+        binding.upButton.setOnClickListener(v -> plugin.sendUp());
+        binding.downButton.setOnClickListener(v -> plugin.sendDown());
+        binding.selectButton.setOnClickListener(v -> plugin.sendSelect());
+        binding.homeButton.setOnClickListener(v -> plugin.sendHome());
+        binding.micButton.setOnClickListener(v -> {
+            if (plugin.hasMicPermission()) {
+                activateSTT();
+            } else {
+                new PermissionsAlertDialogFragment.Builder()
+                        .setTitle(plugin.getDisplayName())
+                        .setMessage(R.string.bigscreen_optional_permission_explanation)
+                        .setPermissions(new String[]{Manifest.permission.RECORD_AUDIO})
+                        .setRequestCode(MainActivity.RESULT_NEEDS_RELOAD)
+                        .create().show(getSupportFragmentManager(), null);
+            }
+        });
     }
 
     public void activateSTT() {
@@ -90,9 +90,12 @@ public class BigscreenActivity extends AppCompatActivity {
                         .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 if (result.get(0) != null) {
                     final String deviceId = getIntent().getStringExtra("deviceId");
-                    BackgroundService.RunWithPlugin(this, deviceId, BigscreenPlugin.class, plugin ->
-                            runOnUiThread(() -> plugin.sendSTT(result.get(0)))
-                    );
+                    BigscreenPlugin plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, BigscreenPlugin.class);
+                    if (plugin == null) {
+                        finish();
+                        return;
+                    }
+                    plugin.sendSTT(result.get(0));
                 }
             }
         }

@@ -6,11 +6,13 @@
 
 package org.kde.kdeconnect.Plugins.FindMyPhonePlugin;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -20,13 +22,14 @@ import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.kde.kdeconnect.Helpers.DeviceHelper;
+import org.kde.kdeconnect.Helpers.LifecycleHelper;
 import org.kde.kdeconnect.Helpers.NotificationHelper;
-import org.kde.kdeconnect.MyApplication;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
@@ -34,6 +37,7 @@ import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import com.zorinos.zorin_connect.R;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @PluginFactory.LoadablePlugin
 public class FindMyPhonePlugin extends Plugin {
@@ -47,20 +51,20 @@ public class FindMyPhonePlugin extends Plugin {
     private PowerManager powerManager;
 
     @Override
-    public String getDisplayName() {
-        switch (DeviceHelper.getDeviceType(context)) {
-            case Tv:
+    public @NonNull String getDisplayName() {
+        switch (DeviceHelper.getDeviceType()) {
+            case TV:
                 return context.getString(R.string.findmyphone_title_tv);
-            case Tablet:
+            case TABLET:
                 return context.getString(R.string.findmyphone_title_tablet);
-            case Phone:
+            case PHONE:
             default:
                 return context.getString(R.string.findmyphone_title);
         }
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getString(R.string.findmyphone_description);
     }
 
@@ -83,8 +87,13 @@ public class FindMyPhonePlugin extends Plugin {
         try {
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setDataSource(context, ringtone);
-            //TODO: Deprecated use setAudioAttributes for API > 21
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
+            AudioAttributes audioAttributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ALARM)
+                .setContentType(AudioAttributes.CONTENT_TYPE_UNKNOWN)
+                .setFlags(AudioAttributes.FLAG_AUDIBILITY_ENFORCED)
+                .build();
+            mediaPlayer.setWakeMode(context, PowerManager.SCREEN_DIM_WAKE_LOCK); // Prevent screen turning off, requires WAKE_LOCK permission
+            mediaPlayer.setAudioAttributes(audioAttributes);
             mediaPlayer.setLooping(true);
             mediaPlayer.prepare();
         } catch (Exception e) {
@@ -106,13 +115,16 @@ public class FindMyPhonePlugin extends Plugin {
     }
 
     @Override
-    public boolean onPacketReceived(NetworkPacket np) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || MyApplication.isInForeground()) {
+    public boolean onPacketReceived(@NonNull NetworkPacket np) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q || LifecycleHelper.isInForeground()) {
             Intent intent = new Intent(context, FindMyPhoneActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(FindMyPhoneActivity.EXTRA_DEVICE_ID, device.getDeviceId());
+            intent.putExtra(FindMyPhoneActivity.EXTRA_DEVICE_ID, getDevice().getDeviceId());
             context.startActivity(intent);
         } else {
+            if (!checkOptionalPermissions()) {
+                return false;
+            }
             if (powerManager.isInteractive()) {
                 startPlaying();
                 showBroadcastNotification();
@@ -120,7 +132,6 @@ public class FindMyPhonePlugin extends Plugin {
                 showActivityNotification();
             }
         }
-
         return true;
     }
 
@@ -128,18 +139,18 @@ public class FindMyPhonePlugin extends Plugin {
         Intent intent = new Intent(context, FindMyPhoneReceiver.class);
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         intent.setAction(FindMyPhoneReceiver.ACTION_FOUND_IT);
-        intent.putExtra(FindMyPhoneReceiver.EXTRA_DEVICE_ID, device.getDeviceId());
+        intent.putExtra(FindMyPhoneReceiver.EXTRA_DEVICE_ID, getDevice().getDeviceId());
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         createNotification(pendingIntent);
     }
 
     private void showActivityNotification() {
         Intent intent = new Intent(context, FindMyPhoneActivity.class);
-        intent.putExtra(FindMyPhoneActivity.EXTRA_DEVICE_ID, device.getDeviceId());
+        intent.putExtra(FindMyPhoneActivity.EXTRA_DEVICE_ID, getDevice().getDeviceId());
 
-        PendingIntent pi = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        PendingIntent pi = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         createNotification(pi);
     }
 
@@ -151,6 +162,7 @@ public class FindMyPhonePlugin extends Plugin {
                 .setFullScreenIntent(pendingIntent, true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
+                .setOngoing(true)
                 .setContentTitle(context.getString(R.string.findmyphone_found));
         notification.setGroup("BackgroundService");
 
@@ -193,12 +205,12 @@ public class FindMyPhonePlugin extends Plugin {
     }
 
     @Override
-    public String[] getSupportedPacketTypes() {
+    public @NonNull String[] getSupportedPacketTypes() {
         return new String[]{PACKET_TYPE_FINDMYPHONE_REQUEST};
     }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
+    public @NonNull String[] getOutgoingPacketTypes() {
         return ArrayUtils.EMPTY_STRING_ARRAY;
     }
 
@@ -210,5 +222,20 @@ public class FindMyPhonePlugin extends Plugin {
     @Override
     public PluginSettingsFragment getSettingsFragment(Activity activity) {
         return FindMyPhoneSettingsFragment.newInstance(getPluginKey(), R.xml.findmyphoneplugin_preferences);
+    }
+
+    @NonNull
+    @Override
+    protected String[] getRequiredPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return new String[]{Manifest.permission.POST_NOTIFICATIONS};
+        } else {
+            return ArrayUtils.EMPTY_STRING_ARRAY;
+        }
+    }
+
+    @Override
+    protected int getPermissionExplanation() {
+        return R.string.findmyphone_notifications_explanation;
     }
 }

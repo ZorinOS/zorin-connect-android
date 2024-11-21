@@ -82,12 +82,12 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
     private KeyguardManager keyguardManager;
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         return context.getResources().getString(R.string.pref_plugin_notifications);
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getResources().getString(R.string.pref_plugin_notifications_desc);
     }
 
@@ -106,19 +106,17 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
 
     @Override
     public boolean checkRequiredPermissions() {
-        //Notifications use a different kind of permission, because it was added before the current runtime permissions model
-        return hasPermission();
+        return hasNotificationsPermission();
     }
 
-    private boolean hasPermission() {
+    private boolean hasNotificationsPermission() {
+        //Notifications use a different kind of permission, because it was added before the current runtime permissions model
         String notificationListenerList = Settings.Secure.getString(context.getContentResolver(), "enabled_notification_listeners");
         return StringUtils.contains(notificationListenerList, context.getPackageName());
     }
 
     @Override
     public boolean onCreate() {
-
-        if (!hasPermission()) return false;
 
         pendingIntents = new HashMap<>();
         currentNotifications = new HashSet<>();
@@ -169,7 +167,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_NOTIFICATION);
         np.set("id", id);
         np.set("isCancel", true);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
         currentNotifications.remove(id);
     }
 
@@ -177,14 +175,16 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
     public void onNotificationPosted(StatusBarNotification statusBarNotification) {
         if (sharedPreferences != null && sharedPreferences.getBoolean(context.getString(PREF_NOTIFICATION_SCREEN_OFF),false)){
             if (keyguardManager != null && keyguardManager.inKeyguardRestrictedInputMode()){
-                sendNotification(statusBarNotification);
+                sendNotification(statusBarNotification, false);
             }
         }else {
-            sendNotification(statusBarNotification);
+            sendNotification(statusBarNotification, false);
         }
     }
 
-    private void sendNotification(StatusBarNotification statusBarNotification) {
+    // isPreexisting is true for notifications that we are sending in response to a request command
+    // and that we want to send with the "silent" flag set
+    private void sendNotification(StatusBarNotification statusBarNotification, boolean isPreexisting) {
 
         Notification notification = statusBarNotification.getNotification();
 
@@ -248,6 +248,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
         np.set("isClearable", statusBarNotification.isClearable());
         np.set("appName", StringUtils.defaultString(appName, packageName));
         np.set("time", Long.toString(statusBarNotification.getPostTime()));
+        np.set("silent", isPreexisting);
 
         if (!appDatabase.getPrivacy(packageName, AppDatabase.PrivacyOptions.BLOCK_CONTENTS)) {
             RepliableNotification rn = extractRepliableNotification(statusBarNotification);
@@ -268,7 +269,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
             np.set("text", extractText(notification, conversation));
         }
 
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     private String extractText(Notification notification, Pair<String, String> conversation) {
@@ -509,11 +510,20 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
     }
 
     private void sendCurrentNotifications(NotificationReceiver service) {
-        StatusBarNotification[] notifications = service.getActiveNotifications();
-        if (notifications != null) { //Can happen only on API 23 and lower
-            for (StatusBarNotification notification : notifications) {
-                sendNotification(notification);
-            }
+        if (!hasNotificationsPermission()) {
+            return;
+        }
+        StatusBarNotification[] notifications;
+        try {
+            notifications = service.getActiveNotifications();
+        } catch (SecurityException e) {
+            return;
+        }
+        if (notifications == null) {
+            return; //Can happen only on API 23 and lower
+        }
+        for (StatusBarNotification notification : notifications) {
+            sendNotification(notification, true);
         }
     }
 
@@ -549,7 +559,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
         } else if (np.has("cancel")) {
             final String dismissedId = np.getString("cancel");
             currentNotifications.remove(dismissedId);
-            NotificationReceiver.RunCommand(context, service -> cancelNotificationCompat(service, dismissedId));
+            NotificationReceiver.RunCommand(context, service -> service.cancelNotification(dismissedId));
         } else if (np.has("requestReplyId") && np.has("message")) {
             replyToNotification(np.getString("requestReplyId"), np.getString("message"));
         }
@@ -558,7 +568,7 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
     }
 
     @Override
-    public DialogFragment getPermissionExplanationDialog() {
+    public @NonNull DialogFragment getPermissionExplanationDialog() {
         return new StartActivityAlertDialogFragment.Builder()
                 .setTitle(R.string.pref_plugin_notifications)
                 .setMessage(R.string.no_permissions)
@@ -571,18 +581,13 @@ public class NotificationsPlugin extends Plugin implements NotificationReceiver.
     }
 
     @Override
-    public String[] getSupportedPacketTypes() {
+    public @NonNull String[] getSupportedPacketTypes() {
         return new String[]{PACKET_TYPE_NOTIFICATION_REQUEST, PACKET_TYPE_NOTIFICATION_REPLY, PACKET_TYPE_NOTIFICATION_ACTION};
     }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
+    public @NonNull String[] getOutgoingPacketTypes() {
         return new String[]{PACKET_TYPE_NOTIFICATION};
-    }
-
-    //For compat with API<21, because lollipop changed the way to cancel notifications
-    private static void cancelNotificationCompat(NotificationReceiver service, String compatKey) {
-            service.cancelNotification(compatKey);
     }
 
     private static String getNotificationKeyCompat(StatusBarNotification statusBarNotification) {

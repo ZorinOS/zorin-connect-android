@@ -6,15 +6,23 @@
 
 package org.kde.kdeconnect.UserInterface;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import org.kde.kdeconnect.BackgroundService;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import org.kde.kdeconnect.Device;
+import org.kde.kdeconnect.DeviceStats;
+import org.kde.kdeconnect.KdeConnect;
 import org.kde.kdeconnect.Plugins.Plugin;
 import com.zorinos.zorin_connect.R;
 
@@ -32,7 +40,6 @@ public class PluginSettingsActivity
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        ThemeUtil.setUserPreferredTheme(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_plugin_settings);
@@ -56,7 +63,7 @@ public class PluginSettingsActivity
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentPlaceHolder);
         if (fragment == null) {
             if (pluginKey != null) {
-                Device device = BackgroundService.getInstance().getDevice(deviceId);
+                Device device = KdeConnect.getInstance().getDevice(deviceId);
                 if (device != null) {
                     Plugin plugin = device.getPluginIncludingWithoutPermissions(pluginKey);
                     if (plugin != null) {
@@ -89,6 +96,28 @@ public class PluginSettingsActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.clear();
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.N) {
+            return false; // PacketStats not working in API < 24
+        }
+        menu.add(R.string.plugin_stats).setOnMenuItemClickListener(item -> {
+            String stats = DeviceStats.INSTANCE.getStatsForDevice(deviceId);
+            AlertDialog alertDialog = new MaterialAlertDialogBuilder(PluginSettingsActivity.this)
+                    .setTitle(R.string.plugin_stats)
+                    .setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss())
+                    .setMessage(stats)
+                    .show();
+            View messageView = alertDialog.findViewById(android.R.id.message);
+            if (messageView instanceof TextView) {
+                ((TextView) messageView).setTextIsSelectable(true);
+            }
+            return true;
+        });
+        return true;
+    }
 
     @Override
     public void onStartPluginSettingsFragment(Plugin plugin) {
@@ -121,7 +150,7 @@ public class PluginSettingsActivity
         finish();
     }
 
-    public String getDeviceId() {
+    public String getSettingsDeviceId() { // Weird name because Activity also has a getDeviceId()
         return deviceId;
     }
 }

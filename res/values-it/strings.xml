@@ -18,7 +18,7 @@
   <string name="pref_plugin_clipboard_sent">Appunti inviati</string>
   <string name="pref_plugin_mousepad">Impulso remoto</string>
   <string name="pref_plugin_mousepad_desc">Usa il tuo telefono o il tablet come touchpad e tastiera</string>
-  <string name="pref_plugin_presenter">Telecomando della presentazione</string>
+  <string name="pref_plugin_presenter">Presentazione remota</string>
   <string name="pref_plugin_presenter_desc">Utilizza il tuo dispositivo per cambiare le diapositive in una presentazione</string>
   <string name="pref_plugin_remotekeyboard">Ricevi pressioni dei tasti da remoto</string>
   <string name="pref_plugin_remotekeyboard_desc">Ricevi eventi di pressione dei tasti da dispositivi remoti</string>
@@ -51,14 +51,19 @@
   <string name="remotekeyboard_connected">La connessione della tastiera remota è attiva</string>
   <string name="remotekeyboard_multiple_connections">Ci sono più connessioni di tastiere remote, seleziona il dispositivo da configurare</string>
   <string name="open_mousepad">Impulso remoto</string>
-  <string name="mousepad_info">Muovi un dito sullo schermo per spostare il puntatore del mouse. Tocca per un clic e usa due/tre dita per i pulsanti destro e centrale. Utilizza 2 dita per scorrere. Utilizza una pressione lunga per trascinare e rilasciare.</string>
+  <string name="mousepad_info">Muovi un dito sullo schermo per spostare il puntatore del mouse. Tocca per un clic e usa due/tre dita per i pulsanti destro e centrale. Utilizza 2 dita per scorrere. Utilizza una pressione lunga per trascinare e rilasciare. È possibile abilitare la funzionalità del mouse giroscopico dalle preferenze dell\'estensione</string>
+  <string name="mousepad_info_no_gestures">Sposta un dito sullo schermo per spostare il cursore del mouse, tocca per un clic.</string>
   <string name="mousepad_keyboard_input_not_supported">Immissione da tastiera non supportata dal dispositivo associato</string>
   <string name="mousepad_single_tap_settings_title">Imposta azione per il tocco a un dito</string>
   <string name="mousepad_double_tap_settings_title">Imposta azione per il tocco a due dita</string>
   <string name="mousepad_triple_tap_settings_title">Imposta azione per il tocco a tre dita</string>
   <string name="mousepad_sensitivity_settings_title">Imposta la sensibilità del touchpad</string>
+  <string name="mousepad_mouse_buttons_title">Mostra i pulsanti del mouse</string>
   <string name="mousepad_acceleration_profile_settings_title">Imposta accelerazione del puntatore</string>
   <string name="mousepad_scroll_direction_title">Inverti direzione di scorrimento</string>
+  <string name="mousepad_scroll_sensitivity_title">Sensibilità di scorrimento</string>
+  <string name="gyro_mouse_enabled_title">Abilita il mouse giroscopico</string>
+  <string name="gyro_mouse_sensitivity_title">Sensibilità del giroscopio</string>
   <string-array name="mousepad_tap_entries">
     <item>Clic sinistro</item>
     <item>Clic destro</item>
@@ -94,31 +99,30 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Invia come combinazioni di tasti</string>
   <string name="mouse_receiver_plugin_description">Ricevi i movimenti remoti del mouse</string>
   <string name="mouse_receiver_plugin_name">Ricevitore del mouse</string>
-  <string name="mouse_receiver_no_permissions">Devi abilitare Servizio di accessibilità</string>
+  <string name="mouse_receiver_no_permissions">Per ricevere input tattili da remoto devi concedere i permessi di accessibilità per controllare completamente il tuo dispositivo</string>
   <string name="view_status_title">Stato</string>
   <string name="battery_status_format">Batteria: %d%%</string>
   <string name="battery_status_low_format">Batteria: %d%% livello basso</string>
   <string name="battery_status_charging_format">Batteria: %d%% in carica</string>
-  <string name="battery_status_unknown">Informazioni sulla batteria non disponibili</string>
   <string name="category_connected_devices">Dispositivi connessi</string>
   <string name="category_not_paired_devices">Dispositivi disponibili</string>
   <string name="category_remembered_devices">Dispositivi memorizzati</string>
   <string name="device_menu_plugins">Impostazioni estensioni</string>
   <string name="device_menu_unpair">Disassocia</string>
   <string name="pair_new_device">Associa nuovo dispositivo</string>
+  <string name="cancel_pairing">Annulla l\'associazione</string>
   <string name="unknown_device">Dispositivo sconosciuto</string>
   <string name="error_not_reachable">Dispositivo fuori portata</string>
   <string name="error_already_paired">Dispositivo già associato</string>
-  <string name="error_could_not_send_package">Impossibile inviare i dati</string>
   <string name="error_timed_out">Richiesta scaduta</string>
   <string name="error_canceled_by_user">Annullata dall\'utente</string>
   <string name="error_canceled_by_other_peer">Annullata dal dispositivo remoto</string>
   <string name="encryption_info_title">Informazioni di cifratura</string>
-  <string name="encryption_info_msg_no_ssl">L\'altro dispositivo non utilizza una versione recente di Zorin Connect, utilizzando il metodo di cifratura precedente.</string>
   <string name="my_device_fingerprint">L\'impronta digitale SHA256 del certificato di dispositivo è:</string>
   <string name="remote_device_fingerprint">L\'impronta digitale SHA256 del certificato del dispositivo remoto è:</string>
   <string name="pair_requested">Richiesta di associazione</string>
-  <string name="pairing_request_from">Richiesta associazione da %1s</string>
+  <string name="pair_succeeded">Associazione riuscita</string>
+  <string name="pairing_request_from">Richiesta di associazione da «%1s»</string>
   <plurals name="incoming_file_title">
     <item quantity="one">Ricezione di %1$d file da %2$s</item>
     <item quantity="other">Ricezione di %1$d file da %2$s</item>
@@ -155,6 +159,7 @@
   <string name="received_file_text">Tocca per aprire «%1s»</string>
   <string name="cannot_create_file">Impossibile creare il file %s</string>
   <string name="tap_to_answer">Tocca per rispondere</string>
+  <string name="left_click">Invia clic tasto sinistro</string>
   <string name="right_click">Invia clic tasto destro</string>
   <string name="middle_click">Invia clic tasto centrale</string>
   <string name="show_keyboard">Mostra tastiera</string>
@@ -181,9 +186,12 @@
     <item>1 minuto</item>
     <item>2 minuti</item>
   </string-array>
+  <string name="mpris_notifications_explanation">L\'autorizzazione alle notifiche è necessaria per mostrare i media remoti nel riquadro delle notifiche</string>
   <string name="mpris_notification_settings_title">Mostra la notifica del controllo multimediale</string>
   <string name="mpris_notification_settings_summary">Consenti di controllare i lettori multimediali senza aprire Zorin Connect</string>
   <string name="share_to">Condividi con…</string>
+  <string name="unreachable_device">%s (non raggiungibile)</string>
+  <string name="unreachable_device_url_share_text">Gli URL condivisi su un dispositivo irraggiungibile saranno recapitati una volta che sarà tornato raggiungibile.\n\n</string>
   <string name="protocol_version_newer">Questo dispositivo usa una nuova versione del protocollo di rete</string>
   <string name="plugin_settings_with_name">Impostazioni di %s</string>
   <string name="invalid_device_name">Nome dispositivo non valido</string>
@@ -219,6 +227,7 @@
   <string name="sftp_action_mode_menu_delete">Elimina</string>
   <string name="sftp_no_storage_locations_configured">Nessuna posizione di archiviazione configurata</string>
   <string name="sftp_saf_permission_explanation">Per accedere da remoto ai file, devi configurare posizioni di archiviazione</string>
+  <string name="sftp_manage_storage_permission_explanation">Per consentire l\'accesso remoto ai file su questo dispositivo devi consentire a Zorin Connect di gestire l\'archiviazione.</string>
   <string name="no_players_connected">Nessun lettore trovato</string>
   <string name="send_files">Invia file</string>
   <string name="block_notification_contents">Blocca i contenuti delle notifiche</string>
@@ -245,17 +254,20 @@
   <string name="close">Chiudi</string>
   <string name="plugins_need_permission">Alcune estensioni hanno bisogno di permessi per funzionare (tocca per maggiori informazioni):</string>
   <string name="permission_explanation">Questa estensione ha bisogno di permessi per funzionare</string>
+  <string name="all_permissions_granted">Tutti i permessi accordati 🎉</string>
   <string name="optional_permission_explanation">Devi concedere permessi aggiuntivi per abilitare tutte le funzioni</string>
   <string name="plugins_need_optional_permission">Alcune estensioni hanno funzioni disabilitate per una mancanza di permessi (tocca per maggiori informazioni):</string>
+  <string name="share_optional_permission_explanation">Per ricevere i file devi consentire l\'accesso allo spazio di archiviazione</string>
+  <string name="share_notifications_explanation">Per vedere lo stato di avanzamento durante l\'invio e la ricezione di file è necessario consentire le notifiche</string>
   <string name="telepathy_permission_explanation">Per leggere e scrivere SMS dal tuo desktop, devi concedere l\'autorizzazione per SMS</string>
   <string name="telephony_permission_explanation">Per vedere le chiamate telefoniche dal desktop devi dare l\'autorizzazione per accedere al registro delle chiamate e allo stato del telefono</string>
   <string name="telephony_optional_permission_explanation">Per vedere il nome di un contatto invece del numero di telefono devi dare accesso alla rubrica del telefono</string>
   <string name="contacts_permission_explanation">Per condividere la tua rubrica con il desktop, devi concedere l\'autorizzazione per i contatti</string>
+  <string name="contacts_per_device_confirmation">I contatti del tuo telefono saranno copiati su questo dispositivo, in modo che possano essere utilizzati dall\'applicazione Zorin Connect SMS e da altre applicazioni.</string>
   <string name="select_ringtone">Seleziona una suoneria</string>
   <string name="telephony_pref_blocked_title">Numeri bloccati</string>
   <string name="telephony_pref_blocked_dialog_desc">Non mostrare le chiamate e gli SMS da questi numeri. Specifica un numero per riga</string>
   <string name="mpris_coverart_description">Copertina del media attuale</string>
-  <string name="device_icon_description">Icona dispositivo</string>
   <string name="settings_icon_description">Icona impostazioni</string>
   <string name="presenter_fullscreen">Schermo intero</string>
   <string name="presenter_exit">Esci dalla presentazione</string>
@@ -269,9 +281,10 @@
   <string name="notification_channel_default">Altre notifiche</string>
   <string name="notification_channel_persistent">Indicatore persistente</string>
   <string name="notification_channel_media_control">Controllo multimediale</string>
-  <string name="notification_channel_filetransfer">Trasferimento file</string>
+  <string name="notification_channel_filetransfer">Trasferimento di file in arrivo</string>
+  <string name="notification_channel_filetransfer_upload">Trasferimento di file in uscita</string>
+  <string name="notification_channel_filetransfer_error">Errore di trasferimento del file</string>
   <string name="notification_channel_high_priority">Priorità alta</string>
-  <string name="notification_channel_sms_mms">Nuovo messaggio</string>
   <string name="mpris_stop">Ferma il lettore attuale</string>
   <string name="copy_url_to_clipboard">Copia l\'URL negli appunti</string>
   <string name="clipboard_toast">Copiato negli appunti</string>
@@ -279,6 +292,10 @@
   <string name="runcommand_notpaired">Il dispositivo non è associato</string>
   <string name="runcommand_nosuchdevice">Non c\'è alcun dispositivo</string>
   <string name="runcommand_noruncommandplugin">Questo dispositivo non ha l\'estensione Esegui comando abilitata</string>
+  <string name="runcommand_category_device_controls_title">Controlli del dispositivo</string>
+  <string name="runcommand_device_controls_summary">Se il tuo dispositivo supporta Controlli del dispositivo, i comandi che hai configurato appariranno qui.</string>
+  <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
+  <string name="runcommand_name_as_title_title">Mostra il nome come titolo</string>
   <string name="pref_plugin_findremotedevice">Trova il dispositivo remoto</string>
   <string name="pref_plugin_findremotedevice_desc">Fai squillare il dispositivo remoto</string>
   <string name="ring">Squilla</string>
@@ -290,7 +307,7 @@
   <string name="settings_rename">Nome dispositivo</string>
   <string name="settings_dark_mode">Tema scuro</string>
   <string name="settings_more_settings_title">Altre impostazioni</string>
-  <string name="settings_more_settings_text">Le impostazioni per dispositivo sono disponibili sotto «Impostazione estensioni» dall\'interno del dispositivo.</string>
+  <string name="settings_more_settings_text">Le impostazioni per dispositivo sono disponibili sotto «Impostazioni estensioni» dall\'interno del dispositivo.</string>
   <string name="setting_persistent_notification">Mostra notifica persistente</string>
   <string name="setting_persistent_notification_oreo">Notifica persistente</string>
   <string name="setting_persistent_notification_description">Tocca per abilitare/disabilitare nelle impostazioni delle notifiche</string>
@@ -300,8 +317,6 @@
   <string name="block_contents">Blocca i contenuti delle notifiche</string>
   <string name="block_images">Blocca le immagini nelle notifiche</string>
   <string name="notification_channel_receivenotification">Notifiche da altri dispositivi</string>
-  <string name="take_picture">Avvia fotocamera</string>
-  <string name="plugin_photo_desc">Avvia l\'applicazione della fotocamera per scattare e trasferire foto con facilità</string>
   <string name="no_app_for_opening">Nessuna applicazione appropriata trovata per aprire questo file</string>
   <string name="remote_keyboard_service">Tastiera remota di Zorin Connect</string>
   <string name="presenter_pointer">Puntatore</string>
@@ -311,6 +326,7 @@
   <string name="empty_trusted_networks_list_text">Non hai aggiunto ancora alcuna rete affidabile</string>
   <string name="allow_all_networks_text">Consenti tutte</string>
   <string name="location_permission_needed_title">Permesso richiesto</string>
+  <string name="bluetooth_permission_needed_desc">Concedi i permessi Bluetooth per rendere disponibili in Zorin Connect i dispositivi associati tramite Bluetooth.</string>
   <string name="location_permission_needed_desc">Zorin Connect necessita dell\'autorizzazione alla posizione in background per conoscere la rete Wi-Fi a cui sei connesso anche quando l\'applicazione è in esecuzione sullo sfondo. Questo perché il nome delle reti Wi-Fi nelle tue vicinanze potrebbe essere utilizzata per trovare la tua posizione, anche se questo non è un utilizzo previsto da Zorin Connect.</string>
   <string name="clipboard_android_x_incompat">Android 10 ha rimosso l\'accesso agli appunti a tutte le applicazioni. Questa estensione sarà disabilitata.</string>
   <string name="mpris_open_url">Continua qui la riproduzione</string>
@@ -372,11 +388,13 @@
   <string name="click_here_to_type">Tocca qui per scrivere</string>
   <string name="clear_compose">Pulisci</string>
   <string name="send_compose">Invia</string>
+  <string name="compose_send_title">Invio scorciatoia composita</string>
   <string name="open_compose_send">Componi il testo</string>
-  <string name="app_description">Applicazione multipiattaforma che consente ai tuoi dispositivi di comunicare (ad esempio, il tuo telefono e il tuo computer)</string>
+  <string name="double_tap_to_drag">Doppio tocco per trascinare</string>
+  <string name="hold_to_drag">Tieni premuto per trascinare</string>
   <string name="about_kde_about">&lt;h1&gt;Informazioni&lt;/h1&gt; &lt;p&gt;KDE è una comunità mondiale di ingegneri del software, artisti, scrittori, traduttori e creatori che si impegnano a sviluppare &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;software libero&lt;/a&gt;. KDE produce l\'ambiente desktop Plasma, centinaia di applicazioni e le numerose librerie software che le supportano.&lt;/p&gt; &lt;p&gt;KDE è un\'impresa cooperativa: nessuna singola entità ne controlla la direzione o i prodotti. Invece, lavoriamo insieme per raggiungere l\'obiettivo comune di costruire il miglior software libero del mondo. Tutti sono invitati a &lt;a href=https://community.kde.org/Get_Involved&gt;unirsi e contribuire&lt;/a&gt; a KDE, incluso te.&lt;/p&gt; Visita &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; per ulteriori informazioni sulla comunità KDE e sul software che produciamo.</string>
   <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Segnala bug o desideri&lt;/h1&gt; &lt;p&gt;Il software può sempre essere migliorato e il team di KDE è pronto a farlo. Tuttavia, tu - l\'utente - devi dirci quando qualcosa non funziona come previsto o potrebbe essere fatto meglio.&lt;/p&gt; &lt;p&gt;KDE ha un sistema di tracciamento dei bug. Visita &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; oppure utilizza il pulsante «Segnala bug» dalla schermata delle informazioni per segnalare i bug.&lt;/p&gt; Se hai un suggerimento per il miglioramento, puoi utilizzare il sistema di tracciamento dei bug per registrare il tuo desiderio. Assicurati di utilizzare «Wishlist» per il campo Severity.</string>
-  <string name="about_kde_join_kde">&lt;h1&gt;Unisciti a KDE&lt;/h1&gt; &lt;p&gt;Non devi essere uno sviluppatore di software per essere un membro della squadra di KDE. Puoi unirti ai gruppi nazionali che traducono le interfacce dei programmi. Puoi fornire grafica, temi, suoni e documentazione migliorata. Decidi tu!&lt;/p&gt; &lt;p&gt;Visita &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; per informazioni su alcuni progetti a cui puoi partecipare.&lt;/p&gt; Se hai bisogno di ulteriori informazioni o documentazione, visita &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; ti fornirà ciò di cui hai bisogno.</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Unisciti a KDE&lt;/h1&gt; &lt;p&gt;Non devi essere uno sviluppatore di software per essere un membro della squadra di KDE. Puoi unirti ai gruppi linguistici che traducono le interfacce dei programmi. Puoi fornire grafica, temi, suoni e documentazione migliorata. Decidi tu!&lt;/p&gt; &lt;p&gt;Visita &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; per informazioni su alcuni progetti a cui puoi partecipare.&lt;/p&gt; Se hai bisogno di ulteriori informazioni o di documentazione, visita &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; ti fornirà quello che ti serve.</string>
   <string name="about_kde_support_kde">&lt;h1&gt;Supporta KDE&lt;/h1&gt; &lt;p&gt;Il software KDE è e sarà sempre disponibile gratuitamente, tuttavia la sua creazione non è gratuita.&lt;/p&gt; &lt;p&gt;Per supportare lo sviluppo, la comunità KDE ha dato vita a KDE e.V., un\'organizzazione senza scopo di lucro fondata legalmente in Germania. KDE e.V. rappresenta la comunità KDE nelle questioni legali e finanziarie. Vedi &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; per informazioni su KDE e.V.&lt;/p&gt; &lt;p&gt;KDE beneficia di molti tipi di contributi, inclusi quelli finanziari. Usiamo i fondi per rimborsare i membri e altri per le spese che sostengono quando contribuiscono. Ulteriori fondi sono utilizzati per il supporto legale e l\'organizzazione di conferenze e riunioni.&lt;/p&gt; &lt;p&gt;Vorremmo incoraggiarti a sostenere i nostri sforzi con una donazione finanziaria, utilizzando uno dei modi descritti in &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Grazie in anticipo per il tuo supporto.</string>
   <string name="maintainer_and_developer">Responsabile e sviluppatore</string>
   <string name="developer">Sviluppatore</string>
@@ -388,7 +406,18 @@
   <string name="maxim_leshchenko_task">Miglioramenti all\'interfaccia utente e questa pagina informativa</string>
   <string name="holger_kaelberer_task">Estensione della tastiera remota e correzioni di bug</string>
   <string name="saikrishna_arcot_task">Supporto per l\'utilizzo della tastiera nell\'estensione di inserimento remoto, correzioni di bug e miglioramenti generali</string>
+  <string name="shellwen_chen_task">Migliora la sicurezza di SFTP, migliora la manutenibilità di questo progetto, correzioni di bug e miglioramenti generali</string>
   <string name="everyone_else">Tutti gli altri che hanno contribuito a Zorin Connect nel corso degli anni</string>
   <string name="send_clipboard">Invia gli appunti</string>
   <string name="tap_to_execute">Tocca per eseguire</string>
+  <string name="plugin_stats">Statistiche delle estensioni</string>
+  <string name="enable_udp_broadcast">Abilita rilevamento UDP dei dispositivi</string>
+  <string name="enable_bluetooth">Abilita bluetooth (beta)</string>
+  <string name="receive_notifications_permission_explanation">Le notifiche devono essere consentite per riceverle da altri dispositivi</string>
+  <string name="findmyphone_notifications_explanation">L\'autorizzazione alle notifiche è necessaria affinché il telefono possa squillare quando l\'applicazione è sullo sfondo</string>
+  <string name="no_notifications">Le notifiche sono disabilitate, non riceverai notifiche di associazione in arrivo.</string>
+  <string name="mpris_keepwatching">Continua la riproduzione</string>
+  <string name="mpris_keepwatching_settings_title">Continua la riproduzione</string>
+  <string name="mpris_keepwatching_settings_summary">Mostra una notifica silenziosa per continuare a giocare su questo dispositivo dopo aver chiuso il supporto multimediale</string>
+  <string name="notification_channel_keepwatching">Continua la riproduzione</string>
 </resources>

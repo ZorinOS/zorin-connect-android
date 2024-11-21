@@ -24,6 +24,10 @@ class MprisReceiverPlayer {
         this.name = name;
     }
 
+    public MediaController getController() {
+        return controller;
+    }
+
     boolean isPlaying() {
         PlaybackState state = controller.getPlaybackState();
         if (state == null) return false;
@@ -158,5 +162,9 @@ class MprisReceiverPlayer {
         if (metadata == null) return 0;
 
         return metadata.getLong(MediaMetadata.METADATA_KEY_DURATION);
+    }
+
+    MediaMetadata getMetadata() {
+        return controller.getMetadata();
     }
 }

@@ -79,17 +79,16 @@
   <string name="unknown_device">جهاز مجهول</string>
   <string name="error_not_reachable">الجهاز غير قابل الوصول</string>
   <string name="error_already_paired">الجهاز مقترن بالفعل</string>
-  <string name="error_could_not_send_package">تعذّر إرسال الحزمة</string>
   <string name="error_timed_out">انتهت المهلة</string>
   <string name="error_canceled_by_user">ألغاه المستخدم</string>
   <string name="error_canceled_by_other_peer">ألغاه ندّ آخر</string>
   <string name="encryption_info_title">معلومات التّعمية</string>
-  <string name="encryption_info_msg_no_ssl">لا يستخدم الجهاز الآخر إصدارة حديثة من «Zorin Connect»، ستُستخدم طريقة التّعمية القديمة.</string>
   <string name="pair_requested">طُلب الاقتران</string>
-  <string name="pairing_request_from">طلب اقتران من %1s</string>
+  <string name="pair_succeeded">نجح الاقتران</string>
   <string name="tap_to_open">اطرق لتفتح</string>
   <string name="received_file_text">المس لفتح \'%1s\'</string>
   <string name="tap_to_answer">المس للإجابة</string>
+  <string name="left_click">أرسل نقرة باليسار</string>
   <string name="right_click">أرسل نقرة باليمين</string>
   <string name="middle_click">أرسل نقرة بالوسط</string>
   <string name="show_keyboard">أظهر لوحة المفاتيح</string>
@@ -116,7 +115,7 @@
     <item>دقيقة واحدة</item>
     <item>دقيقتان</item>
   </string-array>
-  <string name="share_to">شارك مع...</string>
+  <string name="share_to">شارك مع…</string>
   <string name="protocol_version_newer">يستخدم هذا الجهاز إصدار ميفاق أحدث</string>
   <string name="plugin_settings_with_name">إعدادات %s</string>
   <string name="invalid_device_name">اسم جهاز غير صالح</string>
@@ -149,8 +148,10 @@
   <string name="no_file_browser">لا متصفّحات ملفّات مثبّتة.</string>
   <string name="pref_plugin_telepathy">أرسل SMS</string>
   <string name="pref_plugin_telepathy_desc">أرسل رسائل نصّيّة من سطح المكتب</string>
+  <string name="pref_plugin_telepathy_mms">أرسل رسالة قصيرة</string>
   <string name="findmyphone_title">جِد جهازي</string>
   <string name="findmyphone_title_tablet">جِد جهازي اللوحيّ</string>
+  <string name="findmyphone_title_tv">جِد تلفازي</string>
   <string name="findmyphone_description">يرّن هذا الجهاز لتجده</string>
   <string name="findmyphone_found">عثر عليه</string>
   <string name="open">افتح</string>
@@ -158,7 +159,6 @@
   <string name="select_ringtone">اختر النغمة</string>
   <string name="telephony_pref_blocked_title">أرقام محظورة</string>
   <string name="mpris_coverart_description">الصورة الفنية للوسيط الحالي</string>
-  <string name="device_icon_description">أيقونة الجهاز</string>
   <string name="settings_icon_description">أيقونة الإعدادات</string>
   <string name="presenter_fullscreen">ملء الشّاشة</string>
   <string name="presenter_exit">اخرج من العرض التقديمي</string>
@@ -167,9 +167,7 @@
   <string name="pref_plugin_mprisreceiver">متحكم الوسائط</string>
   <string name="notification_channel_default">إخطارات أخرى</string>
   <string name="notification_channel_media_control">متحكم الوسائط</string>
-  <string name="notification_channel_filetransfer">نقل الملفّات</string>
   <string name="notification_channel_high_priority">مرتفعة الأولوية</string>
-  <string name="notification_channel_sms_mms">رسالة جديدة</string>
   <string name="mpris_stop">أوقف المشغل الحالي</string>
   <string name="copy_url_to_clipboard">انسخ المسار إلى الحافظة</string>
   <string name="clipboard_toast">نُسخ إلى الحافظة</string>
@@ -190,7 +188,6 @@
   <string name="block_contents">امنح محتويات الإخطارات</string>
   <string name="block_images">امنع الصور في الإخطارات</string>
   <string name="notification_channel_receivenotification">إخطارات من أجهزة أخرى</string>
-  <string name="take_picture">شغّل الكاميرا</string>
   <string name="presenter_pointer">المؤشر</string>
   <string name="trusted_networks">الشّبكات الموثوقة</string>
   <string name="add_trusted_network">أضف %s</string>

@@ -10,12 +10,15 @@ import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
+import org.kde.kdeconnect.Plugins.RemoteKeyboardPlugin.RemoteKeyboardPlugin;
 import org.kde.kdeconnect.UserInterface.MainActivity;
 import org.kde.kdeconnect.UserInterface.StartActivityAlertDialogFragment;
 import com.zorinos.zorin_connect.R;
@@ -37,7 +40,7 @@ public class MouseReceiverPlugin extends Plugin {
     }
 
     @Override
-    public DialogFragment getPermissionExplanationDialog() {
+    public @NonNull DialogFragment getPermissionExplanationDialog() {
         return new StartActivityAlertDialogFragment.Builder()
                 .setTitle(R.string.mouse_receiver_plugin_description)
                 .setMessage(R.string.mouse_receiver_no_permissions)
@@ -50,16 +53,14 @@ public class MouseReceiverPlugin extends Plugin {
     }
 
     @Override
-    public void onDestroy() {
-        Log.e("MouseReceiverPlugin", "onDestroy()");
-        super.onDestroy();
-    }
-
-    @Override
-    public boolean onPacketReceived(NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull NetworkPacket np) {
         if (!np.getType().equals(PACKET_TYPE_MOUSEPAD_REQUEST)) {
-            Log.e("MouseReceiverPlugin", "cannot receive packets of type: " + np.getType());
+            Log.e("MouseReceiverPlugin", "Invalid packet type for MouseReceiverPlugin: " + np.getType());
             return false;
+        }
+
+        if (RemoteKeyboardPlugin.getMousePadPacketType(np) != RemoteKeyboardPlugin.MousePadPacketType.Mouse) {
+            return false; // This packet will be handled by the RemoteKeyboardPlugin instead, silently ignore
         }
 
         double dx = np.getDouble("dx", 0);
@@ -128,22 +129,22 @@ public class MouseReceiverPlugin extends Plugin {
     }
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         return context.getString(R.string.mouse_receiver_plugin_name);
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getString(R.string.mouse_receiver_plugin_description);
     }
 
     @Override
-    public String[] getSupportedPacketTypes() {
+    public @NonNull String[] getSupportedPacketTypes() {
         return new String[]{PACKET_TYPE_MOUSEPAD_REQUEST};
     }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
-        return new String[0];
+    public @NonNull String[] getOutgoingPacketTypes() {
+        return ArrayUtils.EMPTY_STRING_ARRAY;
     }
 }

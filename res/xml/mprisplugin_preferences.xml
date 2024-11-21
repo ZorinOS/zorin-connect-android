@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,11 +21,18 @@
         android:summary="@string/mpris_time_settings_summary"
         android:title="@string/mpris_time_settings_title" />
 
-    <SwitchPreferenceCompat
+    <SwitchPreference
         android:id="@+id/mpris_notification_preference"
         android:defaultValue="true"
         android:key="@string/mpris_notification_key"
         android:summary="@string/mpris_notification_settings_summary"
         android:title="@string/mpris_notification_settings_title" />
+
+    <SwitchPreference
+        android:id="@+id/mpris_keepwatching_preference"
+        android:defaultValue="true"
+        android:key="@string/mpris_keepwatching_key"
+        android:summary="@string/mpris_keepwatching_settings_summary"
+        android:title="@string/mpris_keepwatching_settings_title" />
 
 </PreferenceScreen>

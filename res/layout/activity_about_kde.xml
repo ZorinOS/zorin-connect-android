@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2021 Maxim Leshchenko <cnmaks90@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="org.kde.kdeconnect.UserInterface.About.AboutKDEActivity">
+    tools:context="org.kde.kdeconnect.UserInterface.About.AboutKDEActivity"
+    android:fitsSystemWindows="true">
 
     <include layout="@layout/toolbar" android:id="@+id/toolbar_layout" />
 
@@ -30,8 +38,7 @@
                 android:text="@string/kde_be_free"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 app:drawableLeftCompat="@drawable/ic_zorin_48dp"
-                app:drawableStartCompat="@drawable/ic_zorin_48dp"
-                app:drawableTint="@color/text_color" />
+                app:drawableStartCompat="@drawable/ic_zorin_48dp"/>
 
             <com.google.android.material.card.MaterialCardView
                 xmlns:card_view="https://schemas.android.com/apk/res-auto"
@@ -42,9 +49,7 @@
                 android:layout_marginRight="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
-                card_view:cardBackgroundColor="@color/base_color"
                 card_view:cardCornerRadius="12dp"
-                card_view:cardElevation="5dp"
                 card_view:cardUseCompatPadding="true">
 
                 <TextView
@@ -65,9 +70,7 @@
                 android:layout_marginRight="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
-                card_view:cardBackgroundColor="@color/base_color"
                 card_view:cardCornerRadius="12dp"
-                card_view:cardElevation="5dp"
                 card_view:cardUseCompatPadding="true">
 
                 <TextView
@@ -88,9 +91,7 @@
                 android:layout_marginRight="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
-                card_view:cardBackgroundColor="@color/base_color"
                 card_view:cardCornerRadius="12dp"
-                card_view:cardElevation="5dp"
                 card_view:cardUseCompatPadding="true">
 
                 <TextView
@@ -111,9 +112,7 @@
                 android:layout_marginRight="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
-                card_view:cardBackgroundColor="@color/base_color"
                 card_view:cardCornerRadius="12dp"
-                card_view:cardElevation="5dp"
                 card_view:cardUseCompatPadding="true">
 
                 <TextView

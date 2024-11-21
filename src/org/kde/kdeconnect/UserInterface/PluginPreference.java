@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
+ *
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+*/
+
 package org.kde.kdeconnect.UserInterface;
 
 import android.content.Context;
@@ -22,7 +28,7 @@ public class PluginPreference extends SwitchPreference {
                             @NonNull final Device device, @NonNull PluginPreferenceCallback callback) {
         super(context);
 
-        setLayoutResource(R.layout.preference_with_button/*R.layout.preference_with_button_androidx*/);
+        setLayoutResource(R.layout.preference_with_button);
 
         this.device = device;
         this.pluginKey = pluginKey;
@@ -30,10 +36,9 @@ public class PluginPreference extends SwitchPreference {
         PluginFactory.PluginInfo info = PluginFactory.getPluginInfo(pluginKey);
         setTitle(info.getDisplayName());
         setSummary(info.getDescription());
-        setIcon(android.R.color.transparent);
         setChecked(device.isPluginEnabled(pluginKey));
 
-        if (info.hasSettings()) {
+        if (info.getHasSettings()) {
             this.listener = v -> {
                 Plugin plugin = device.getPluginIncludingWithoutPermissions(pluginKey);
                 if (plugin != null) {

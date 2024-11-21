@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+SPDX-FileCopyrightText: 2014 Ahmed I. Khalil <ahmedibrahimkhali@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -25,15 +31,51 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:padding="12dip"
-            android:textColor="@color/text_color_secondary"
+            android:importantForAccessibility="no"
             android:text="@string/mousepad_info" />
 
-        <view
+        <org.kde.kdeconnect.Plugins.MousePadPlugin.KeyListenerView
             android:id="@+id/keyListener"
-            class="org.kde.kdeconnect.Plugins.MousePadPlugin.KeyListenerView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_above="@id/mouse_buttons"
+            android:contentDescription="@string/mousepad_info_no_gestures"
+            />
 
+        <LinearLayout
+                android:id="@+id/mouse_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true">
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mouse_click_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/left_click"
+                    android:layout_weight="3"
+                    app:icon="@drawable/left_click_48dp"
+                    style="@style/KdeConnectButton.IconButton" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mouse_click_middle"
+                    android:layout_width="wrap_content"
+                    android:contentDescription="@string/middle_click"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:cornerRadius="24dp"
+                    style="@style/KdeConnectButton.IconButton.Secondary" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mouse_click_right"
+                    android:layout_width="wrap_content"
+                    android:contentDescription="@string/right_click"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    app:icon="@drawable/right_click_48dp"
+                    style="@style/KdeConnectButton.IconButton" />
+
+        </LinearLayout>
     </RelativeLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

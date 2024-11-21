@@ -79,7 +79,7 @@ public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
         sendPacketStatusCallback = new SendPacketStatusCallback();
     }
 
-    private Device getDevice() { return requestInfo; }
+    private Device getDevice() { return getRequestInfo(); }
 
     @Override
     public void run() {
@@ -92,7 +92,7 @@ public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
         }
 
         try {
-            while (!done && !canceled) {
+            while (!done && !isCancelled()) {
                 synchronized (lock) {
                     currentNetworkPacket = networkPacketList.remove(0);
                 }
@@ -104,7 +104,9 @@ public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
 
                 addTotalsToNetworkPacket(currentNetworkPacket);
 
-                if (!getDevice().sendPacketBlocking(currentNetworkPacket, sendPacketStatusCallback)) {
+                // We set sendPayloadFromSameThread to true so this call blocks until the payload
+                // has been received by the other end,  so payloads are sent one by one.
+                if (!getDevice().sendPacketBlocking(currentNetworkPacket, sendPacketStatusCallback, true)) {
                     throw new RuntimeException("Sending packet failed");
                 }
 
@@ -113,7 +115,7 @@ public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
                 }
             }
 
-            if (canceled) {
+            if (isCancelled()) {
                 uploadNotification.cancel();
             } else {
                 uploadNotification.setFinished(getDevice().getContext().getResources().getQuantityString(R.plurals.sent_files_title, currentFileNum, getDevice().getName(), currentFileNum));
@@ -125,7 +127,7 @@ public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
             int failedFiles;
             synchronized (lock) {
                 failedFiles = (totalNumFiles - currentFileNum + 1);
-                uploadNotification.setFinished(getDevice().getContext().getResources()
+                uploadNotification.setFailed(getDevice().getContext().getResources()
                         .getQuantityString(R.plurals.send_files_fail_title, failedFiles, getDevice().getName(),
                                 failedFiles, totalNumFiles));
             }
@@ -202,7 +204,7 @@ public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
 
     private class SendPacketStatusCallback extends Device.SendPacketStatusCallback {
         @Override
-        public void onProgressChanged(int percent) {
+        public void onPayloadProgressChanged(int percent) {
             float send = totalSend + (currentNetworkPacket.getPayloadSize() * ((float)percent / 100));
             int progress = (int)((send * 100) / totalPayloadSize);
 
@@ -227,7 +229,7 @@ public class CompositeUploadFileJob extends BackgroundJob<Device, Void> {
 
         @Override
         public void onFailure(Throwable e) {
-            //Ignored
+            // Handled in the run() function when sendPacketBlocking returns false
         }
     }
 }

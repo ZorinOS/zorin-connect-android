@@ -11,13 +11,11 @@ import android.text.Html
 import android.text.Spanned
 import android.text.method.LinkMovementMethod
 import androidx.appcompat.app.AppCompatActivity
-import org.kde.kdeconnect.UserInterface.ThemeUtil
 import com.zorinos.zorin_connect.R
 import com.zorinos.zorin_connect.databinding.ActivityAboutKdeBinding
 
 class AboutKDEActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtil.setUserPreferredTheme(this)
         super.onCreate(savedInstanceState)
 
         val binding = ActivityAboutKdeBinding.inflate(layoutInflater)

@@ -18,7 +18,7 @@
   <string name="pref_plugin_clipboard_sent">클립보드 보냄</string>
   <string name="pref_plugin_mousepad">원격 입력</string>
   <string name="pref_plugin_mousepad_desc">내 휴대폰이나 태블릿을 터치패드와 키보드로 사용하기</string>
-  <string name="pref_plugin_presenter">슬라이드 쇼 리모콘</string>
+  <string name="pref_plugin_presenter">프레젠테이션 리모콘</string>
   <string name="pref_plugin_presenter_desc">내 장치로 프레젠테이션 슬라이드 전환하기</string>
   <string name="pref_plugin_remotekeyboard">원격 키 입력 받기</string>
   <string name="pref_plugin_remotekeyboard_desc">원격 장치의 키 입력 이벤트 받기</string>
@@ -51,14 +51,19 @@
   <string name="remotekeyboard_connected">원격 키보드 연결이 활성화됨</string>
   <string name="remotekeyboard_multiple_connections">원격 키보드 연결이 여러 개 있습니다. 설정할 장치를 선택하십시오</string>
   <string name="open_mousepad">원격 입력</string>
-  <string name="mousepad_info">화면에서 손가락을 움직이면 마우스 커서를 움직입니다. 화면을 누르면 왼쪽 단추를 누르고, 두 손가락과 세 손가락으로 누르면 오른쪽/가운데 단추를 누릅니다. 두 손가락을 사용하여 스크롤할 수 있습니다. 드래그 앤 드롭을 사용하려면 길게 누르십시오.</string>
+  <string name="mousepad_info">화면에서 손가락을 움직이면 마우스 커서를 움직입니다. 화면을 누르면 왼쪽 단추를 누르고, 두 손가락과 세 손가락으로 누르면 오른쪽/가운데 단추를 누릅니다. 두 손가락을 사용하여 스크롤할 수 있습니다. 드래그 앤 드롭을 사용하려면 길게 누르십시오. 플러그인 설정에서 자이로 마우스를 활성화할 수 있습니다</string>
+  <string name="mousepad_info_no_gestures">화면에서 손가락을 움직이면 마우스 커서를 움직이며, 탭하면 클릭합니다.</string>
   <string name="mousepad_keyboard_input_not_supported">페어링된 장치에서 키보드 입력을 지원하지 않음</string>
   <string name="mousepad_single_tap_settings_title">한 손가락으로 눌렀을 때 동작 설정</string>
   <string name="mousepad_double_tap_settings_title">두 손가락으로 눌렀을 때 동작 설정</string>
   <string name="mousepad_triple_tap_settings_title">세 손가락으로 눌렀을 때 동작 설정</string>
   <string name="mousepad_sensitivity_settings_title">터치패드 감도 설정</string>
+  <string name="mousepad_mouse_buttons_title">마우스 단추 표시</string>
   <string name="mousepad_acceleration_profile_settings_title">포인터 가속 설정</string>
   <string name="mousepad_scroll_direction_title">스크롤 방향 뒤집기</string>
+  <string name="mousepad_scroll_sensitivity_title">스크롤 감도</string>
+  <string name="gyro_mouse_enabled_title">자이로스코프 마우스 활성화</string>
+  <string name="gyro_mouse_sensitivity_title">자이로스코프 감도</string>
   <string-array name="mousepad_tap_entries">
     <item>왼쪽 클릭</item>
     <item>오른쪽 단추 클릭</item>
@@ -94,31 +99,30 @@
   <string name="pref_plugin_mousepad_send_keystrokes">키 입력으로 보내기</string>
   <string name="mouse_receiver_plugin_description">원격 마우스 움직임 받기</string>
   <string name="mouse_receiver_plugin_name">마우스 수신기</string>
-  <string name="mouse_receiver_no_permissions">접근성 서비스를 활성화해야 합니다</string>
+  <string name="mouse_receiver_no_permissions">원격으로 터치 입력을 받으려면 장치 제어를 위해서 접근성 권한을 허용해야 합니다</string>
   <string name="view_status_title">상태</string>
   <string name="battery_status_format">배터리: %d%%</string>
   <string name="battery_status_low_format">배터리: %d%% 배터리 부족</string>
   <string name="battery_status_charging_format">배터리: %d%% 충전 중</string>
-  <string name="battery_status_unknown">배터리 정보를 사용할 수 없음</string>
   <string name="category_connected_devices">연결된 장치</string>
   <string name="category_not_paired_devices">사용 가능한 장치</string>
   <string name="category_remembered_devices">기억하는 장치</string>
   <string name="device_menu_plugins">플러그인 설정</string>
   <string name="device_menu_unpair">연결 해제</string>
   <string name="pair_new_device">새 장치 연결</string>
+  <string name="cancel_pairing">페어링 취소</string>
   <string name="unknown_device">알 수 없는 장치</string>
   <string name="error_not_reachable">장치에 접근할 수 없음</string>
   <string name="error_already_paired">장치가 이미 연결됨</string>
-  <string name="error_could_not_send_package">패키지를 보낼 수 없음</string>
   <string name="error_timed_out">시간 초과됨</string>
   <string name="error_canceled_by_user">사용자가 취소함</string>
   <string name="error_canceled_by_other_peer">다른 쪽에서 취소함</string>
   <string name="encryption_info_title">암호화 정보</string>
-  <string name="encryption_info_msg_no_ssl">다른 장치에서 Zorin Connect의 최근 버전을 실행하고 있지 않아서 레거시 암호화를 사용합니다.</string>
   <string name="my_device_fingerprint">내 장치 인증서의 SHA256 지문:</string>
   <string name="remote_device_fingerprint">원격 장치 인증서의 SHA256 지문:</string>
   <string name="pair_requested">연결 요청됨</string>
-  <string name="pairing_request_from">%1s에서 연결 요청</string>
+  <string name="pair_succeeded">연결 성공</string>
+  <string name="pairing_request_from">\'%1s\'에서 연결 요청</string>
   <plurals name="incoming_file_title">
     <item quantity="other">%2$s에서 보낸 파일 %1$d개 받음</item>
   </plurals>
@@ -147,6 +151,7 @@
   <string name="received_file_text">\'%1s\'을(를) 열려면 누르십시오</string>
   <string name="cannot_create_file">파일 %s을(를) 만들 수 없음</string>
   <string name="tap_to_answer">눌러서 응답하기</string>
+  <string name="left_click">왼쪽 단추 클릭 신호 보내기</string>
   <string name="right_click">오른쪽 단추 클릭 신호 보내기</string>
   <string name="middle_click">가운데 단추 클릭 신호 보내기</string>
   <string name="show_keyboard">키보드 표시</string>
@@ -173,9 +178,12 @@
     <item>1분</item>
     <item>2분</item>
   </string-array>
+  <string name="mpris_notifications_explanation">알림 서랍에 원격 미디어를 표시하려면 알림 권한이 필요합니다</string>
   <string name="mpris_notification_settings_title">미디어 제어 알림 표시</string>
   <string name="mpris_notification_settings_summary">Zorin Connect를 열지 않고 미디어 재생기 제어</string>
   <string name="share_to">다음으로 공유…</string>
+  <string name="unreachable_device">%s(접근할 수 없음)</string>
+  <string name="unreachable_device_url_share_text">접근할 수 없는 장치와 공유한 URL은 장치에 다시 접근할 수 있게 될 때 전달됩니다.\n\n</string>
   <string name="protocol_version_newer">이 장치의 프로토콜 버전이 더 새롭습니다</string>
   <string name="plugin_settings_with_name">%s 설정</string>
   <string name="invalid_device_name">잘못된 장치 이름</string>
@@ -211,8 +219,11 @@
   <string name="sftp_action_mode_menu_delete">삭제</string>
   <string name="sftp_no_storage_locations_configured">저장소 위치가 설정되지 않았음</string>
   <string name="sftp_saf_permission_explanation">원격으로 파일에 접근하려면 저장소 위치를 설정해야 함</string>
+  <string name="sftp_manage_storage_permission_explanation">이 장치에 있는 파일에 원격 접근을 허용하려면 Zorin Connect에서 저장소를 관리할 수 있도록 허용해야 합니다.</string>
   <string name="no_players_connected">재생기를 찾을 수 없음</string>
   <string name="send_files">파일 보내기</string>
+  <string name="block_notification_contents">알림 내용 숨기기</string>
+  <string name="block_notification_images">알림 이미지 숨기기</string>
   <string name="pairing_title">Zorin Connect 장치</string>
   <string name="pairing_description">같은 네트워크에서 Zorin Connect를 실행하는 다른 장치가 여기에 표시됩니다.</string>
   <string name="device_rename_title">장치 이름 바꾸기</string>
@@ -235,17 +246,20 @@
   <string name="close">닫기</string>
   <string name="plugins_need_permission">권한이 필요한 플러그인(정보를 보려면 누르기):</string>
   <string name="permission_explanation">이 플러그인을 사용하려면 권한이 필요합니다</string>
+  <string name="all_permissions_granted">모든 권한 허가됨 🎉</string>
   <string name="optional_permission_explanation">모든 기능을 사용하려면 추가 권한이 필요합니다</string>
   <string name="plugins_need_optional_permission">일부 플러그인은 권한이 없어서 비활성화되었습니다(정보를 보려면 누르기):</string>
+  <string name="share_optional_permission_explanation">공유된 파일을 받으려면 저장소 접근을 허가해야 합니다</string>
+  <string name="share_notifications_explanation">파일을 보내거나 받을 때 진행 상황을 보려면 알림을 허용해야 합니다</string>
   <string name="telepathy_permission_explanation">데스크톱에서 문자 메시지를 읽고 보내려면 문자 메시지 접근 권한이 필요합니다</string>
   <string name="telephony_permission_explanation">데스크톱에서 통화와 문자 메시지를 보려면 통화 기록 및 휴대폰 상태 접근 권한이 필요합니다</string>
   <string name="telephony_optional_permission_explanation">전화번호 대신 연락처에 등록된 이름을 보려면 주소록 접근 권한이 필요합니다</string>
   <string name="contacts_permission_explanation">데스크톱과 주소록을 공유하려면 주소록 접근 권한이 필요합니다</string>
+  <string name="contacts_per_device_confirmation">휴대폰 연락처를 이 장치로 복사하여 Zorin Connect SMS 앱이나 기타 앱에서 사용할 수 있습니다.</string>
   <string name="select_ringtone">벨소리 선택</string>
   <string name="telephony_pref_blocked_title">차단된 번호</string>
   <string name="telephony_pref_blocked_dialog_desc">다음 번호에서 걸려 온 통화나 보낸 문자를 표시하지 않습니다. 한 줄당 하나의 번호를 지정하십시오</string>
   <string name="mpris_coverart_description">현재 미디어 커버 아트</string>
-  <string name="device_icon_description">장치 아이콘</string>
   <string name="settings_icon_description">설정 아이콘</string>
   <string name="presenter_fullscreen">전체 화면</string>
   <string name="presenter_exit">프레젠테이션 끝내기</string>
@@ -259,9 +273,10 @@
   <string name="notification_channel_default">기타 알림</string>
   <string name="notification_channel_persistent">항상 표시된 표시기</string>
   <string name="notification_channel_media_control">미디어 제어</string>
-  <string name="notification_channel_filetransfer">파일 전송</string>
+  <string name="notification_channel_filetransfer">받는 파일 전송 요청</string>
+  <string name="notification_channel_filetransfer_upload">보내는 파일 전송</string>
+  <string name="notification_channel_filetransfer_error">파일 전송 오류</string>
   <string name="notification_channel_high_priority">높은 우선 순위</string>
-  <string name="notification_channel_sms_mms">새 메시지</string>
   <string name="mpris_stop">현재 재생기 정지</string>
   <string name="copy_url_to_clipboard">클립보드로 URL 복사</string>
   <string name="clipboard_toast">클립보드에 복사됨</string>
@@ -269,6 +284,10 @@
   <string name="runcommand_notpaired">장치가 연결되지 않음</string>
   <string name="runcommand_nosuchdevice">장치가 없음</string>
   <string name="runcommand_noruncommandplugin">이 장치에서 명령 실행 플러그인이 활성화되어 있지 않음</string>
+  <string name="runcommand_category_device_controls_title">장치 제어</string>
+  <string name="runcommand_device_controls_summary">장치에서 장치 제어를 지원한다면 설정된 명령이 표시됩니다.</string>
+  <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
+  <string name="runcommand_name_as_title_title">이름을 제목으로 표시</string>
   <string name="pref_plugin_findremotedevice">원격 장치 찾기</string>
   <string name="pref_plugin_findremotedevice_desc">원격 장치 알림 울리기</string>
   <string name="ring">울리기</string>
@@ -290,8 +309,6 @@
   <string name="block_contents">알림 내용 숨기기</string>
   <string name="block_images">알림 이미지 숨기기</string>
   <string name="notification_channel_receivenotification">다른 장치의 알림</string>
-  <string name="take_picture">카메라 실행</string>
-  <string name="plugin_photo_desc">카메라 앱을 실행하여 쉽게 사진을 찍고 전송</string>
   <string name="no_app_for_opening">이 파일을 열 수 있는 앱을 찾을 수 없음</string>
   <string name="remote_keyboard_service">Zorin Connect 원격 키보드</string>
   <string name="presenter_pointer">포인터</string>
@@ -362,11 +379,11 @@
   <string name="click_here_to_type">입력하려면 누르십시오</string>
   <string name="clear_compose">지우기</string>
   <string name="send_compose">보내기</string>
+  <string name="compose_send_title">텍스트 보내기</string>
   <string name="open_compose_send">텍스트 작성</string>
-  <string name="app_description">장치간 통신을 지원하는 멀티 플랫폼 앱(예: 휴대폰과 컴퓨터)</string>
-  <string name="about_kde_about">&lt;h1&gt;정보&lt;h1&gt; &lt;p&gt;KDE는 &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;자유 소프트웨어&lt;/a&gt;를 개발하려고 모인 소프트웨어 개발자, 예술가, 집필가, 번역가 및 기타 인원의 모임입니다. KDE 커뮤니티에서는 Plasma 데스크톱 환경, 다양한 프로그램 및 지원 라이브러리를 개발합니다.&lt;p&gt; &lt;p&gt;KDE는 협동 조합입니다. 어떠한 단일 집단도 방향이나 제품을 결정하지 않습니다. 우리는 전 세계에서 가장 뛰어난 자유 소프트웨어 개발이라는 공통 목표를 향해 함께 힘을 모으고 있습니다. KDE에는 이 글을 읽는 여러분과 같은 누구나 &lt;a href=https://community.kde.org/Get_Involved&gt;참여하고 기여&lt;/a&gt;할 수 있습니다.&lt;p&gt; &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; 페이지를 방문하셔서 KDE 커뮤니티와 소프트웨어에 대해 알아 보십시오.</string>
+  <string name="about_kde_about">&lt;h1&gt;정보&lt;h1&gt; &lt;p&gt;KDE는 &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;자유 소프트웨어&lt;/a&gt;를 개발하려고 모인 소프트웨어 개발자, 예술가, 집필가, 번역가 및 기타 인원의 모임입니다. KDE 커뮤니티에서는 Plasma 데스크톱 환경, 다양한 앱 및 지원 라이브러리를 개발합니다.&lt;p&gt; &lt;p&gt;KDE는 협동 조합입니다. 어떠한 단일 집단도 방향이나 제품을 결정하지 않습니다. 우리는 전 세계에서 가장 뛰어난 자유 소프트웨어 개발이라는 공통 목표를 향해 함께 힘을 모으고 있습니다. KDE에는 이 글을 읽는 여러분과 같은 누구나 &lt;a href=https://community.kde.org/Get_Involved&gt;참여하고 기여&lt;/a&gt;할 수 있습니다.&lt;p&gt; &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; 페이지를 방문하셔서 KDE 커뮤니티와 소프트웨어에 대해 알아 보십시오.</string>
   <string name="about_kde_report_bugs_or_wishes">"&lt;h1&gt;버그나 요구 사항 보고&lt;/h1&gt; &lt;p&gt;소프트웨어는 항상 개선되며, KDE 팀도 그럴 준비가 되어 있습니다. 따라서 사용자 여러분은 무언가가 예상한 대로 작동하지 않거나 더 잘 작동하기를 바라면 개발자에게 알려 주십시오.&lt;/p&gt; &lt;p&gt;KDE는 버그 추적 시스템을 가지고 있습니다. &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt;를 방문하시거나 \"도움말\" 메뉴의 \"버그 보고...\" 대화 상자를 이용하셔서 버그를 보고해 주십시오.&lt;/p&gt; 개선 사항 제안을  하고 싶으시다면 버그 보고 시스템을 통해서 알려 주십시오. 이 경우 심각성  항목에서 \"Wishlist\"를 선택하셔야 합니다."</string>
-  <string name="about_kde_join_kde">&lt;h1&gt;KDE에 참여하기&lt;/h1&gt; &lt;p&gt;소프트웨어 개발자만이 KDE에 참가할 수 있는 것은 아닙니다. 프로그램 인터페이스를 번역하는 각 나라 번역팀을 도울 수도 있습니다. 또한 그래픽, 테마, 소리, 더 나은 문서 등을 기여할 수도 있습니다. 직접 결정하십시오!&lt;/p&gt; &lt;p&gt;&lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; 페이지를 방문하셔서 참여할 수 있는 프로젝트를 찾아 보십시오.&lt;/p&gt; 만약 더 많은 정보나 문서가 필요하다면, &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; 사이트를 방문하셔서 원하는 정보를 찾으십시오.</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;KDE에 참여하기&lt;/h1&gt; &lt;p&gt;소프트웨어 개발자만이 KDE에 참가할 수 있는 것은 아닙니다. 프로그램 인터페이스를 번역하는 각 언어 번역팀을 도울 수도 있습니다. 또한 그래픽, 테마, 소리, 더 나은 문서 등을 기여할 수도 있습니다. 직접 결정하십시오!&lt;/p&gt; &lt;p&gt;&lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; 페이지를 방문하셔서 참여할 수 있는 프로젝트를 찾아 보십시오.&lt;/p&gt; 만약 더 많은 정보나 문서가 필요하다면, &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; 사이트를 방문하셔서 원하는 정보를 찾으십시오.</string>
   <string name="about_kde_support_kde">"&lt;h1&gt;KDE 지원&lt;/h1&gt; &lt;p&gt;KDE는 무료로 사용 가능하지만, 만드는 것은 무료가 아닙니다.&lt;/p&gt; &lt;p&gt;따라서 KDE 커뮤니티는 독일에 비영리 재단 KDE e.V.를 설립했습니다. KDE e.V.는 KDE 커뮤니티를 법적, 재정적인 면에서 후원합니다. &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; 사이트를 방문하셔서 KDE e.V.에 관한 정보를 확인하십시오.&lt;/p&gt; &lt;p&gt;KDE는 재정적인 보조가 필요합니다. 대부분의 지원금은 구성원에게 대가를 지급하거나 KDE에 기여하는 데 드는 돈을 대는 데 사용됩니다. &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;에 있는 방법을 사용하여 재정적인 지원을 해 주십시오.&lt;/p&gt;여러분의 협조에  미리 감사드립니다."</string>
   <string name="maintainer_and_developer">관리자 및 개발자</string>
   <string name="developer">개발자</string>
@@ -378,7 +395,17 @@
   <string name="maxim_leshchenko_task">UI 개선과 정보 페이지</string>
   <string name="holger_kaelberer_task">원격 키보드 플러그인과 버그 수정</string>
   <string name="saikrishna_arcot_task">원격 입력 플러그인에서 키보드 사용 지원, 버그 수정과 개선</string>
+  <string name="shellwen_chen_task">SFTP 보안 개선, 프로젝트 관리 편의성 개선, 버그 수정과 개선</string>
   <string name="everyone_else">그 외 오랫동안 Zorin Connect에 기여한 사람들</string>
   <string name="send_clipboard">클립보드 보내기</string>
   <string name="tap_to_execute">실행하려면 누르십시오</string>
+  <string name="plugin_stats">플러그인 통계</string>
+  <string name="enable_udp_broadcast">UDP 서비스 발견 활성화</string>
+  <string name="receive_notifications_permission_explanation">다른 장치에서 알림을 받으려면 알림을 허용해야 합니다</string>
+  <string name="findmyphone_notifications_explanation">앱이 백그라운드에서 실행 중일 때 장치를 울리게 하려면 알림 권한이 필요합니다</string>
+  <string name="no_notifications">알림이 비활성화되어 있습니다. 들어오는 페어링 알림을 받을 수 없습니다</string>
+  <string name="mpris_keepwatching">계속 재생</string>
+  <string name="mpris_keepwatching_settings_title">계속 재생</string>
+  <string name="mpris_keepwatching_settings_summary">미디어를 닫은 후 이 장치에서 계속 재생할 수 있는 조용한 알림 표시</string>
+  <string name="notification_channel_keepwatching">계속 재생</string>
 </resources>

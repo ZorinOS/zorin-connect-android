@@ -1,13 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">傳送到裝置</string>
   <string name="foreground_notification_no_devices">沒有連線到任何裝置</string>
   <string name="foreground_notification_devices">已連線到：%s</string>
   <string name="foreground_notification_send_clipboard">傳送剪貼簿</string>
   <string name="pref_plugin_telephony">電話通知器</string>
-  <string name="pref_plugin_telephony_desc">傳送未接來電的通知</string>
+  <string name="pref_plugin_telephony_desc">傳送來電通知</string>
   <string name="pref_plugin_battery">電池報告</string>
   <string name="pref_plugin_battery_desc">定期回報電池狀態</string>
+  <string name="pref_plugin_connectivity_report">連線報告</string>
   <string name="pref_plugin_connectivity_report_desc">回報網路訊號強度與狀態</string>
   <string name="pref_plugin_sftp">顯示檔案系統</string>
   <string name="pref_plugin_sftp_desc">同意讓遠端可以瀏覽檔案系統</string>
@@ -16,7 +18,7 @@
   <string name="pref_plugin_clipboard_sent">已傳送剪貼簿</string>
   <string name="pref_plugin_mousepad">遠端輸入</string>
   <string name="pref_plugin_mousepad_desc">使用您的智慧型手機或者平板來模擬觸碰板與鍵盤</string>
-  <string name="pref_plugin_presenter">遠端投影片</string>
+  <string name="pref_plugin_presenter">簡報遙控</string>
   <string name="pref_plugin_presenter_desc">使用您的裝置來切換簡報中的投影片</string>
   <string name="pref_plugin_remotekeyboard">接收遠端按鍵輸入</string>
   <string name="pref_plugin_remotekeyboard_desc">從遠端裝置接收按鍵輸入活動</string>
@@ -41,7 +43,7 @@
   <string name="open_settings">開啟設定</string>
   <string name="no_permissions">您需要授予存取通知的權限</string>
   <string name="no_permission_mprisreceiver">為了要能控制您的媒體播放器，您需要提供「通知」的權限</string>
-  <string name="no_permissions_remotekeyboard">若要接收鍵盤按鍵事件，您需要啟用 Zorin Connect 遠端鍵盤功能</string>
+  <string name="no_permissions_remotekeyboard">若要接收鍵盤按鍵事件，您需要啟用 Zorin Connect遠端鍵盤功能</string>
   <string name="send_ping">傳送 Ping 回應封包</string>
   <string name="open_mpris_controls">多媒體控制</string>
   <string name="remotekeyboard_editing_only_title">當編輯時只處理遠端按鍵</string>
@@ -49,12 +51,25 @@
   <string name="remotekeyboard_connected">遠端鍵盤連線為啟用狀態</string>
   <string name="remotekeyboard_multiple_connections">這裡有兩個以上的遠端鍵盤連結，選擇一個裝置以設定。</string>
   <string name="open_mousepad">遠端輸入</string>
-  <string name="mousepad_info">在您的智慧型手機的螢幕上移動手指頭，用來控制電腦螢幕的游標。按一下表示滑鼠的左鍵，使用兩隻/三隻手指頭按一下來表示滑鼠的右鍵/中鍵。使用兩隻手指頭捲動。長按則表示要拖拉。</string>
+  <string name="mousepad_info">在您的智慧型手機的螢幕上移動手指來控制電腦螢幕的游標。按一下表示滑鼠的左鍵，使用兩隻/三隻手指頭按一下來表示滑鼠的右鍵/中鍵。使用兩隻手指頭捲動。長按則表示要拖拉。可以在外掛程式設定裡啟用陀螺儀滑鼠功能</string>
+  <string name="mousepad_info_no_gestures">在螢幕上移動手指來移動滑鼠游標，輕點來進行點擊。</string>
+  <string name="mousepad_keyboard_input_not_supported">配對裝置不支援鍵盤輸入</string>
+  <string name="mousepad_single_tap_settings_title">設定單指輕點的動作</string>
   <string name="mousepad_double_tap_settings_title">設定兩隻手指頭按一下的動作</string>
   <string name="mousepad_triple_tap_settings_title">設定三隻手指頭按一下的動作</string>
   <string name="mousepad_sensitivity_settings_title">設定觸碰板的靈敏度</string>
+  <string name="mousepad_mouse_buttons_title">顯示滑鼠按鈕</string>
   <string name="mousepad_acceleration_profile_settings_title">設定指針加速度</string>
   <string name="mousepad_scroll_direction_title">滾動方向相反</string>
+  <string name="mousepad_scroll_sensitivity_title">捲動靈敏度</string>
+  <string name="gyro_mouse_enabled_title">啟用陀螺儀滑鼠</string>
+  <string name="gyro_mouse_sensitivity_title">陀螺儀靈敏度</string>
+  <string-array name="mousepad_tap_entries">
+    <item>點擊左鍵</item>
+    <item>點擊右鍵</item>
+    <item>點擊中鍵</item>
+    <item>無</item>
+  </string-array>
   <string-array name="mousepad_sensitivity_entries">
     <item>慢</item>
     <item>最慢</item>
@@ -74,23 +89,40 @@
   <string name="sendkeystrokes_textbox_hint">傳送鍵盤輸入至主機</string>
   <string name="sendkeystrokes_disabled_toast">已停用傳送鍵盤輸入的功能——請至「設定」裡啟動</string>
   <string name="sendkeystrokes_wrong_data">無效的檔案類型——需為 text/x-keystrokes</string>
+  <string name="sendkeystrokes_sent_text">已傳送按鍵組合 %1$s 至裝置 %2$s</string>
+  <string name="sendkeystrokes_pref_category_summary">這個模組讓其他應用程式可以分享文字片段，並作為鍵盤輸入傳送至連線的主機</string>
+  <string name="sendkeystrokes_pref_category_title">傳送鍵盤輸入</string>
+  <string name="sendkeystrokes_pref_enabled">啟用鍵盤輸入傳送</string>
+  <string name="sendkeystrokes_pref_enabled_summary">接收 MIME 類型為 \'text/x-keystrokes\' 的資料</string>
+  <string name="sendkeystrokes_safe_text_enabled">馬上傳送安全文字</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">不另行確認直接傳送簡短而只有數字的字串</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">作為鍵盤輸入傳送</string>
+  <string name="mouse_receiver_plugin_description">接收遠端滑鼠移動</string>
+  <string name="mouse_receiver_plugin_name">滑鼠接收</string>
+  <string name="mouse_receiver_no_permissions">要接收遠端觸控輸入，您需要提供完全控制裝置的協助工具權限</string>
+  <string name="view_status_title">狀態</string>
+  <string name="battery_status_format">電池：%d%%</string>
+  <string name="battery_status_low_format">電池：%d%% 低電量</string>
+  <string name="battery_status_charging_format">電池：%d%% 充電中</string>
   <string name="category_connected_devices">已連結的裝置</string>
   <string name="category_not_paired_devices">可連結的裝置</string>
   <string name="category_remembered_devices">已記住的裝置</string>
   <string name="device_menu_plugins">外掛程式設定</string>
   <string name="device_menu_unpair">取消配對</string>
   <string name="pair_new_device">配對新裝置</string>
+  <string name="cancel_pairing">取消配對</string>
   <string name="unknown_device">不明的裝置</string>
   <string name="error_not_reachable">裝置無法連結</string>
   <string name="error_already_paired">裝置已經配對</string>
-  <string name="error_could_not_send_package">無法傳送封包</string>
   <string name="error_timed_out">逾時</string>
   <string name="error_canceled_by_user">使用者中斷</string>
   <string name="error_canceled_by_other_peer">被其他同等功能應用中斷</string>
   <string name="encryption_info_title">加密資訊</string>
-  <string name="encryption_info_msg_no_ssl">其他的裝置沒有使用新版本的 Zorin Connect，使用傳統的加密模式。</string>
+  <string name="my_device_fingerprint">您裝置憑證的 SHA256 指紋是：</string>
+  <string name="remote_device_fingerprint">遠端裝置憑證的 SHA256 指紋是：</string>
   <string name="pair_requested">已請求配對</string>
-  <string name="pairing_request_from">來自 %1s 的配對請求</string>
+  <string name="pair_succeeded">配對成功</string>
+  <string name="pairing_request_from">來自「%1s」的配對請求</string>
   <plurals name="incoming_file_title">
     <item quantity="other">正在從 %2$s 接收 %1$d 個檔案</item>
   </plurals>
@@ -119,6 +151,7 @@
   <string name="received_file_text">按一下開啟 \'%1s\'</string>
   <string name="cannot_create_file">無法建立 %s 檔案</string>
   <string name="tap_to_answer">按一下即可回應</string>
+  <string name="left_click">傳送左鍵按一下</string>
   <string name="right_click">傳送右鍵按一下</string>
   <string name="middle_click">傳送中鍵按一下</string>
   <string name="show_keyboard">顯示鍵盤</string>
@@ -133,6 +166,8 @@
   <string name="mpris_rew">往後</string>
   <string name="mpris_ff">快轉</string>
   <string name="mpris_next">下一首</string>
+  <string name="mpris_loop">重複播放</string>
+  <string name="mpris_shuffle">隨機播放</string>
   <string name="mpris_volume">音量</string>
   <string name="mpris_time_settings_title">往前/往後按鍵</string>
   <string name="mpris_time_settings_summary">調整按下時往前 / 往後的時間</string>
@@ -143,9 +178,12 @@
     <item>1 分鐘</item>
     <item>2 分鐘</item>
   </string-array>
+  <string name="mpris_notifications_explanation">需要通知權限來在通知欄內顯示遠端媒體</string>
   <string name="mpris_notification_settings_title">顯示媒體控制項通知</string>
   <string name="mpris_notification_settings_summary">允許控制您的媒體播放器而不需要開啟 Zorin Connect</string>
   <string name="share_to">分享給…</string>
+  <string name="unreachable_device">%s（無法連線）</string>
+  <string name="unreachable_device_url_share_text">分享給無法連線的裝置的網址會在該裝置重新連線後傳送給它。\n\n</string>
   <string name="protocol_version_newer">此裝置使用較新的通訊協定</string>
   <string name="plugin_settings_with_name">%s 設定</string>
   <string name="invalid_device_name">無效的裝置名稱</string>
@@ -166,6 +204,7 @@
   <string name="share_received_file">分享「%s」</string>
   <string name="title_activity_notification_filter">通知過濾器</string>
   <string name="filter_apps_info">將會同步選取 App 的通知。</string>
+  <string name="show_notification_if_screen_off">只在螢幕關閉時傳送通知</string>
   <string name="add_device_dialog_title">新增裝置</string>
   <string name="add_device_hint">主機名稱或 IP 位址</string>
   <string name="sftp_preference_configured_storage_locations">已設定儲存空間位置</string>
@@ -180,9 +219,12 @@
   <string name="sftp_action_mode_menu_delete">刪除</string>
   <string name="sftp_no_storage_locations_configured">未設定儲存空間位置</string>
   <string name="sftp_saf_permission_explanation">若要遠端存取檔案，您需先設定儲存空間位置</string>
+  <string name="sftp_manage_storage_permission_explanation">要允許遠端存取本裝置的檔案，您需要先允許 Zorin Connect管理儲存裝置。</string>
   <string name="no_players_connected">沒有發現播放器</string>
   <string name="send_files">傳送檔案</string>
-  <string name="pairing_title">Zorin Connect 裝置</string>
+  <string name="block_notification_contents">阻擋通知內容</string>
+  <string name="block_notification_images">阻擋通知圖片</string>
+  <string name="pairing_title">Zorin Connect裝置</string>
   <string name="pairing_description">在您相同網域當中，有其他有執行 Zorin Connect 的裝置會出現在這裡。</string>
   <string name="device_rename_title">重新命名裝置</string>
   <string name="device_rename_confirm">變更名稱</string>
@@ -193,6 +235,8 @@
   <string name="no_file_browser">沒有安裝此檔案的瀏覽程式</string>
   <string name="pref_plugin_telepathy">傳送簡訊</string>
   <string name="pref_plugin_telepathy_desc">傳送文字簡訊到您的電腦桌面</string>
+  <string name="pref_plugin_telepathy_mms">傳送 MMS</string>
+  <string name="pref_plugin_telepathy_mms_desc">要能夠從 Zorin Connect傳送 MMS 您需要先將其設為預設簡訊應用程式。</string>
   <string name="findmyphone_title">尋找我的手機</string>
   <string name="findmyphone_title_tablet">尋找我的平板</string>
   <string name="findmyphone_title_tv">尋找我的電視</string>
@@ -202,30 +246,36 @@
   <string name="close">關閉</string>
   <string name="plugins_need_permission">部份的外掛程式需要權限才能運作（按一下以取得更多資訊）</string>
   <string name="permission_explanation">這外掛程式需要權限以運作</string>
+  <string name="all_permissions_granted">已提供所有權限 🎉</string>
   <string name="optional_permission_explanation">你需要授予延伸的權限以啟用所有的功能</string>
   <string name="plugins_need_optional_permission">部份的外掛程式因為缺乏權限，而導致功能被停用。（按一下以了解更多資訊）：</string>
+  <string name="share_optional_permission_explanation">要接收檔案您需要允許存取儲存裝置</string>
+  <string name="share_notifications_explanation">要能夠看到傳送或接收檔案時的進度您需要允許通知</string>
   <string name="telepathy_permission_explanation">為了要在您的個人電腦上讀取與撰寫簡訊，你需要提供簡訊的權限。</string>
   <string name="telephony_permission_explanation">為了要在桌面上檢視手機通話，您需要提供手機通話記錄及手機狀態的權限。</string>
   <string name="telephony_optional_permission_explanation">為了要讓聯絡人名稱取代手機號碼，您需要提供手機通訊錄的權限。</string>
   <string name="contacts_permission_explanation">為了要與電腦分享您的通訊錄，您必須提供「聯絡人」的權限</string>
+  <string name="contacts_per_device_confirmation">您的電話通訊錄將會被複製到這個裝置，讓它們能夠被 Zorin Connect簡訊應用程式和其他應用程式所使用。</string>
   <string name="select_ringtone">選擇一個鈴聲</string>
   <string name="telephony_pref_blocked_title">已封鎖號碼</string>
   <string name="telephony_pref_blocked_dialog_desc">不顯示這些號碼的來電與簡訊。請在一行指定一個電話號碼。</string>
   <string name="mpris_coverart_description">目前媒體的專輯圖像</string>
-  <string name="device_icon_description">裝置圖示</string>
   <string name="settings_icon_description">設定圖示</string>
   <string name="presenter_fullscreen">全螢幕</string>
   <string name="presenter_exit">離開簡報模式</string>
   <string name="presenter_lock_tip">您能鎖定裝置並使用音量鍵前往上 / 下一張投影片</string>
   <string name="add_command">增加一行指令</string>
   <string name="addcommand_explanation">沒有註冊的指令</string>
-  <string name="addcommand_explanation2">您現在可以在 Zorin Connect 系統設定增加新的指令</string>
+  <string name="addcommand_explanation2">您現在可以在 Zorin Connect系統設定增加新的指令</string>
   <string name="add_command_description">您可以在電腦上增加指令</string>
   <string name="pref_plugin_mprisreceiver">控制媒體播放器</string>
   <string name="pref_plugin_mprisreceiver_desc">從另外一個裝置操控您手機的媒體播放器</string>
   <string name="notification_channel_default">其他通知</string>
+  <string name="notification_channel_persistent">持續性指示器</string>
   <string name="notification_channel_media_control">多媒體控制</string>
-  <string name="notification_channel_filetransfer">檔案傳輸</string>
+  <string name="notification_channel_filetransfer">檔案傳入</string>
+  <string name="notification_channel_filetransfer_upload">檔案傳出</string>
+  <string name="notification_channel_filetransfer_error">檔案傳輸錯誤</string>
   <string name="notification_channel_high_priority">高優先度</string>
   <string name="mpris_stop">停止目前播放器</string>
   <string name="copy_url_to_clipboard">複製 URL 至剪貼簿</string>
@@ -234,6 +284,10 @@
   <string name="runcommand_notpaired">裝置未配對</string>
   <string name="runcommand_nosuchdevice">此處沒有裝置</string>
   <string name="runcommand_noruncommandplugin">裝置未啟用「執行指令外掛程式」</string>
+  <string name="runcommand_category_device_controls_title">裝置控制</string>
+  <string name="runcommand_device_controls_summary">如果您的裝置支援「裝置控制」，您已設定的指令將會出現在那裡。</string>
+  <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
+  <string name="runcommand_name_as_title_title">將名稱作為標題顯示</string>
   <string name="pref_plugin_findremotedevice">尋找遠端裝置</string>
   <string name="pref_plugin_findremotedevice_desc">使遠端裝置響鈴</string>
   <string name="ring">響鈴</string>
@@ -255,10 +309,8 @@
   <string name="block_contents">阻擋通知內容</string>
   <string name="block_images">阻擋通知中的圖片</string>
   <string name="notification_channel_receivenotification">其他裝置上的通知</string>
-  <string name="take_picture">啟動相機</string>
-  <string name="plugin_photo_desc">開啟相機應用程式以輕鬆拍攝並傳輸相片</string>
   <string name="no_app_for_opening">找不到適合用來開啟此檔案的應用程式</string>
-  <string name="remote_keyboard_service">Zorin Connect 遠端鍵盤</string>
+  <string name="remote_keyboard_service">Zorin Connect遠端鍵盤</string>
   <string name="presenter_pointer">指標裝置</string>
   <string name="trusted_networks">信任網路</string>
   <string name="trusted_networks_desc">限制只對已知網路自動探索</string>
@@ -266,6 +318,7 @@
   <string name="empty_trusted_networks_list_text">您尚未加入任何信任網路</string>
   <string name="allow_all_networks_text">全部允許</string>
   <string name="location_permission_needed_title">需要權限</string>
+  <string name="location_permission_needed_desc">Zorin Connect需要背景位置權限，才能在背景執行時也能知道您目前所連線的 WiFi 網路。這是因為您週遭的 WiFi 網路名稱可以被用來推斷您的位置，即使這不是 Zorin Connect在做的事情。</string>
   <string name="clipboard_android_x_incompat">Android 10 已移除所有應用程式的剪貼簿存取權限。此外掛程式將停用。</string>
   <string name="mpris_open_url">繼續在此播放</string>
   <string name="cant_open_url">無法開啟 URL 以繼續播放</string>
@@ -280,12 +333,19 @@
   <string name="pref_plugin_bigscreen_desc">本裝置將作為 Plasma 全覽螢幕的遠端控制器</string>
   <string name="bigscreen_optional_permission_explanation">為了與電腦共享手機麥克風端的音效輸入，需要您允許本軟體存取手機的音源輸入權限</string>
   <string name="bigscreen_speech_extra_prompt">聲控功能</string>
+  <string name="message_reply_label">回覆</string>
+  <string name="mark_as_read_label">標記為已讀</string>
+  <string name="user_display_name">您</string>
+  <string name="set_default_sms_app_title">傳送 MMS</string>
+  <string name="set_group_message_as_mms_title">傳送群組 MMS</string>
+  <string name="set_long_text_as_mms_title">用 MMS 傳送較長簡訊</string>
+  <string name="convert_to_mms_after_title">轉換為 MMS</string>
   <string-array name="convert_to_mms_after_entries">
-    <item>After one message</item>
-    <item>After two messages</item>
-    <item>After three messages</item>
-    <item>After four messages</item>
-    <item>After five messages</item>
+    <item>一封訊息後</item>
+    <item>兩封訊息後</item>
+    <item>三封訊息後</item>
+    <item>四封訊息後</item>
+    <item>五封訊息後</item>
   </string-array>
   <string name="theme_dialog_title">選擇主題</string>
   <string-array name="theme_list">
@@ -293,4 +353,62 @@
     <item>亮色</item>
     <item>暗色</item>
   </string-array>
+  <string-array name="theme_list_v28">
+    <item>系統預設值</item>
+    <item>亮色</item>
+    <item>暗色</item>
+  </string-array>
+  <string name="report_bug">回報問題</string>
+  <string name="donate">贊助</string>
+  <string name="source_code">原始碼</string>
+  <string name="licenses">授權條款</string>
+  <string name="website">網站</string>
+  <string name="about">關於</string>
+  <string name="authors">作者群</string>
+  <string name="thanks_to">感謝</string>
+  <string name="easter_egg">Easter Egg</string>
+  <string name="email_contributor">發信給貢獻者\n%s</string>
+  <string name="visit_contributors_homepage">造訪貢獻者的首頁\n%s</string>
+  <string name="version">版本 %s</string>
+  <string name="about_kde">關於 KDE</string>
+  <string name="kde_be_free">KDE ─ 擁抱自由！</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">往上</string>
+  <string name="rise_down">往下</string>
+  <string name="click_here_to_type">按這裡來打字</string>
+  <string name="clear_compose">清除</string>
+  <string name="send_compose">傳送</string>
+  <string name="compose_send_title">撰寫傳送</string>
+  <string name="open_compose_send">撰寫簡訊</string>
+  <string name="double_tap_to_drag">雙擊來拖曳</string>
+  <string name="hold_to_drag">按住來拖曳</string>
+  <string name="about_kde_about">&lt;h1&gt;關於&lt;/h1&gt;&lt;p&gt;KDE 是一個由眾多軟體工程師、藝術作業者、文字作業者、翻譯人員和其他有志於&lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;自由軟體&lt;/a&gt;事業的人們組成的世界性社群。KDE 做出了 Plasma 桌面環境、數百個應用程式和支援它們的軟體函式庫。&lt;/p&gt;&lt;p&gt;KDE 團隊不受任何單獨的團體、公司或機構控制。我們的目標是一同為製作世界上最好的自由軟體而努力。我們歡迎任何人&lt;a href=https://community.kde.org/Get_Involved&gt;加入並作出貢獻&lt;/a&gt;——包含您。&lt;/p&gt;請造訪 &lt;a href=&amp;quot;https://www.kde.org/&amp;quot;&gt;https://www.kde.org/&lt;/a&gt; 來了解有關 KDE 社群與我們所做的軟體的更多資訊。</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;回報問題或希望功能&lt;/h1&gt;&lt;p&gt;軟體總是可以改善，而 KDE 團隊準備好繼續此項工作。不過您 — 作為使用者 — 需要在有東西沒有正常運作或是可以更好的時候告訴我們。&lt;/p&gt;&lt;p&gt;KDE 有一個問題追蹤系統。請造訪 &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; 或是從關於頁面使用「回報問題」按鈕來回報問題。&lt;/p&gt;如果您有改善的建議，您也可以使用問題追蹤系統來寫下您的希望。此時請使用「Wishlist」（願望清單）作為問題的嚴重程度。</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;加入 KDE&lt;/h1&gt;&lt;p&gt;您不需要是軟體工程師也能加入 KDE 團隊。您可以加入翻譯團隊來翻譯程式的介面。您可以提供圖形、佈景主題、音效，或幫忙撰寫文件，看您喜歡做哪一項。&lt;/p&gt;&lt;p&gt;請參考 &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; 上的資訊看看您能幫上什麼忙。&lt;/p&gt;如果您需要更多資訊或說明文件，請參照 &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt;，上面會有一些能幫忙您的資訊。</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;支援 KDE&lt;/h1&gt;&lt;p&gt;KDE 是可免費取得的，這件事永遠不會改變，但創造 KDE 的工作並不是免費的。&lt;/p&gt;&lt;p&gt;為了支援開發，KDE 社群組織了 KDE eV，一個在德國創辦的非營利組織。KDE e.V. 是 KDE 社群在法津和財政方面的代表。關於 KDE e.V. 的詳細資訊請參見 &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt;。&lt;/p&gt;&lt;p&gt;KDE 團隊需要各種支持，包含財政上的支持。大部分捐獻是用作補償成員和其他人在貢獻 KDE 時所用的經費，此外還有用於法律支持與大型研討會等等的經費。&lt;/p&gt;&lt;p&gt;我們鼓勵您透過捐獻來支持 KDE。捐贈方法在 &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt; 有列出。&lt;/p&gt;我們事先感謝您對 KDE 的支持。</string>
+  <string name="maintainer_and_developer">維護者和開發者</string>
+  <string name="developer">開發者</string>
+  <string name="apple_support">macOS 支援。正在開發 iOS 支援</string>
+  <string name="bug_fixes_and_general_improvements">錯誤修正與一般改進</string>
+  <string name="samoilenko_yuri_task">SFTP 的實作、錯誤修正與一般改進</string>
+  <string name="aniket_kumar_task">簡訊外掛程式的改善</string>
+  <string name="alex_fiestas_task">聯絡人外掛程式的改善</string>
+  <string name="maxim_leshchenko_task">使用者介面的改善，以及這個關於頁面</string>
+  <string name="holger_kaelberer_task">遠端鍵盤外掛程式與問題修正</string>
+  <string name="saikrishna_arcot_task">在遠端輸入外掛程式中對於鍵盤的支援、錯誤修正與一般改進</string>
+  <string name="shellwen_chen_task">改善 SFTP 的安全性、改善本專案的易維護性、錯誤修正與一般改進</string>
+  <string name="everyone_else">其他所有這些年來向 Zorin Connect貢獻的人們</string>
+  <string name="send_clipboard">傳送剪貼簿</string>
+  <string name="tap_to_execute">按一下執行</string>
+  <string name="plugin_stats">外掛程式統計</string>
+  <string name="enable_udp_broadcast">啟用 UDP 裝置探索</string>
+  <string name="enable_bluetooth">啟用藍牙 (beta)</string>
+  <string name="receive_notifications_permission_explanation">需要允許通知才能接收來自其他裝置的通知</string>
+  <string name="findmyphone_notifications_explanation">需要通知權限讓應用程式在背景時也能讓手機響鈴</string>
+  <string name="no_notifications">通知已停用，您不會接收到送來的配對請求。</string>
+  <string name="mpris_keepwatching">繼續播放</string>
+  <string name="mpris_keepwatching_settings_title">繼續播放</string>
+  <string name="mpris_keepwatching_settings_summary">關閉媒體之後在此裝置顯示繼續播放用的靜音通知</string>
+  <string name="notification_channel_keepwatching">繼續播放</string>
 </resources>

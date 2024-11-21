@@ -22,6 +22,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -33,6 +34,7 @@ import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import com.zorinos.zorin_connect.R;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -103,10 +105,11 @@ public class TelephonyPlugin extends Plugin {
 
                 String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
                 int intState = TelephonyManager.CALL_STATE_IDLE;
-                if (state.equals(TelephonyManager.EXTRA_STATE_RINGING))
+                if (TelephonyManager.EXTRA_STATE_RINGING.equals(state)) {
                     intState = TelephonyManager.CALL_STATE_RINGING;
-                else if (state.equals(TelephonyManager.EXTRA_STATE_OFFHOOK))
+                } else if (TelephonyManager.EXTRA_STATE_OFFHOOK.equals(state)) {
                     intState = TelephonyManager.CALL_STATE_OFFHOOK;
+                }
 
                 // We will get a second broadcast with the phone number https://developer.android.com/reference/android/telephony/TelephonyManager#ACTION_PHONE_STATE_CHANGED
                 if (!intent.hasExtra(TelephonyManager.EXTRA_INCOMING_NUMBER))
@@ -122,12 +125,12 @@ public class TelephonyPlugin extends Plugin {
     };
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         return context.getResources().getString(R.string.pref_plugin_telephony);
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getResources().getString(R.string.pref_plugin_telephony_desc);
     }
 
@@ -176,12 +179,12 @@ public class TelephonyPlugin extends Plugin {
             case TelephonyManager.CALL_STATE_RINGING:
                 unmuteRinger();
                 np.set("event", "ringing");
-                device.sendPacket(np);
+                getDevice().sendPacket(np);
                 break;
 
             case TelephonyManager.CALL_STATE_OFFHOOK: //Ongoing call
                 np.set("event", "talking");
-                device.sendPacket(np);
+                getDevice().sendPacket(np);
                 break;
 
             case TelephonyManager.CALL_STATE_IDLE:
@@ -189,7 +192,7 @@ public class TelephonyPlugin extends Plugin {
 
                     //Resend a cancel of the last event (can either be "ringing" or "talking")
                     lastPacket.set("isCancel", "true");
-                    device.sendPacket(lastPacket);
+                    getDevice().sendPacket(lastPacket);
 
                     if (isMuted) {
                         Timer timer = new Timer();
@@ -202,11 +205,11 @@ public class TelephonyPlugin extends Plugin {
                     }
 
                     //Emit a missed call notification if needed
-                    if ("ringing".equals(lastPacket.getString("event", null))) {
+                    if ("ringing".equals(lastPacket.getString("event"))) {
                         np.set("event", "missedCall");
-                        np.set("phoneNumber", lastPacket.getString("phoneNumber", null));
-                        np.set("contactName", lastPacket.getString("contactName", null));
-                        device.sendPacket(np);
+                        np.set("phoneNumber", lastPacket.getStringOrNull("phoneNumber"));
+                        np.set("contactName", lastPacket.getStringOrNull("contactName"));
+                        getDevice().sendPacket(np);
                     }
                 }
                 break;
@@ -240,12 +243,20 @@ public class TelephonyPlugin extends Plugin {
     }
 
     @Override
+    protected int getPermissionExplanation() {
+        return R.string.telephony_permission_explanation;
+    }
+
+    @Override
+    protected int getOptionalPermissionExplanation() {
+        return R.string.telephony_optional_permission_explanation;
+    }
+
+    @Override
     public boolean onCreate() {
         IntentFilter filter = new IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED);
         filter.setPriority(500);
         context.registerReceiver(receiver, filter);
-        permissionExplanation = R.string.telephony_permission_explanation;
-        optionalPermissionExplanation = R.string.telephony_optional_permission_explanation;
         return true;
     }
 
@@ -255,7 +266,7 @@ public class TelephonyPlugin extends Plugin {
     }
 
     @Override
-    public boolean onPacketReceived(NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull NetworkPacket np) {
 
         switch (np.getType()) {
             case PACKET_TYPE_TELEPHONY_REQUEST:
@@ -283,7 +294,7 @@ public class TelephonyPlugin extends Plugin {
     }
 
     @Override
-    public String[] getSupportedPacketTypes() {
+    public @NonNull String[] getSupportedPacketTypes() {
         return new String[]{
                 PACKET_TYPE_TELEPHONY_REQUEST,
                 PACKET_TYPE_TELEPHONY_REQUEST_MUTE,
@@ -291,14 +302,14 @@ public class TelephonyPlugin extends Plugin {
     }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
+    public @NonNull String[] getOutgoingPacketTypes() {
         return new String[]{
                 PACKET_TYPE_TELEPHONY
         };
     }
 
     @Override
-    public String[] getRequiredPermissions() {
+    public @NonNull String[] getRequiredPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return new String[]{
                     Manifest.permission.READ_PHONE_STATE,
@@ -310,7 +321,7 @@ public class TelephonyPlugin extends Plugin {
     }
 
     @Override
-    public String[] getOptionalPermissions() {
+    public @NonNull String[] getOptionalPermissions() {
         return new String[]{
                 Manifest.permission.READ_CONTACTS,
         };
@@ -322,7 +333,7 @@ public class TelephonyPlugin extends Plugin {
     }
 
     @Override
-    public PluginSettingsFragment getSettingsFragment(Activity activity) {
+    public PluginSettingsFragment getSettingsFragment(@NonNull Activity activity) {
         return PluginSettingsFragment.newInstance(getPluginKey(), R.xml.telephonyplugin_preferences);
     }
 }

@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+SPDX-FileCopyrightText: 2021 Maxim Leshchenko <cnmaks90@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
 <com.google.android.material.appbar.AppBarLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+    android:fitsSystemWindows="true">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="8dp"
-        app:title="@string/kde_connect"/>
+        tools:title="@string/kde_connect"/>
 </com.google.android.material.appbar.AppBarLayout>

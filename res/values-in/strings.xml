@@ -18,7 +18,6 @@
   <string name="pref_plugin_clipboard_sent">Papan Klip Terkirim</string>
   <string name="pref_plugin_mousepad">Masukan jarak jauh</string>
   <string name="pref_plugin_mousepad_desc">Gunakan ponsel atau tablet Anda sebagai touchpad dan keyboard</string>
-  <string name="pref_plugin_presenter">Remot salindia</string>
   <string name="pref_plugin_presenter_desc">Gunakan peranti Anda untuk mengubah slide dalam sebuah presentasi</string>
   <string name="pref_plugin_remotekeyboard">Terima penekanan tombol jarak jauh</string>
   <string name="pref_plugin_remotekeyboard_desc">Terima peristiwa penekanan tombol dari peranti jarak jauh</string>
@@ -51,13 +50,16 @@
   <string name="remotekeyboard_connected">Koneksi keyboard jarak jauh telah aktif</string>
   <string name="remotekeyboard_multiple_connections">Ada lebih dari satu koneksi keyboard jarak jauh, pilih peranti untuk diatur</string>
   <string name="open_mousepad">Masukan jarak jauh</string>
-  <string name="mousepad_info">Pindah jari pada layar untuk memindah kursor mouse. Ketuk untuk klik, dan gunakan dua/tiga jari untuk tombol kanan dan tengah. Gunakan 2 jari untuk menggulir. Gunakan tekan lama untuk seret dan taruh.</string>
-  <string name="mousepad_single_tap_settings_title">Set aksi ketuk satu jari</string>
-  <string name="mousepad_double_tap_settings_title">Set aksi ketuk dua jari</string>
-  <string name="mousepad_triple_tap_settings_title">Set aksi ketuk tiga jari</string>
-  <string name="mousepad_sensitivity_settings_title">Set kepekaan touchpad</string>
+  <string name="mousepad_info_no_gestures">Gerakkan jari pada layar untuk memindahkan kursor tetikus, ketuk untuk klik.</string>
+  <string name="mousepad_keyboard_input_not_supported">Masukan papan tik tidak didukung oleh perangkat tersanding.</string>
+  <string name="mousepad_single_tap_settings_title">Setel aksi ketuk satu jari</string>
+  <string name="mousepad_double_tap_settings_title">Setel aksi ketuk dua jari</string>
+  <string name="mousepad_triple_tap_settings_title">Setel aksi ketuk tiga jari</string>
+  <string name="mousepad_sensitivity_settings_title">Setel kepekaan touchpad</string>
+  <string name="mousepad_mouse_buttons_title">Tampilkan tombol tetikus</string>
   <string name="mousepad_acceleration_profile_settings_title">Setel akselerasi pointer</string>
   <string name="mousepad_scroll_direction_title">Arah Menggulir Terbalik</string>
+  <string name="gyro_mouse_enabled_title">Aktifkan tetikus giroskop</string>
   <string-array name="mousepad_tap_entries">
     <item>Klik kiri</item>
     <item>Klik kanan</item>
@@ -65,10 +67,10 @@
     <item>Tidak ada apa-apa</item>
   </string-array>
   <string-array name="mousepad_sensitivity_entries">
-    <item>Pelan</item>
-    <item>Agak Pelan</item>
-    <item>Normal</item>
-    <item>Agak Cepat</item>
+    <item>Lambat</item>
+    <item>Sedikit Lambat</item>
+    <item>Bawaan</item>
+    <item>Lebih Cepat</item>
     <item>Cepat</item>
   </string-array>
   <string-array name="mousepad_acceleration_profile_entries">
@@ -80,7 +82,7 @@
     <item>Sangat Kuat</item>
   </string-array>
   <string name="sendkeystrokes_send_to">Kirimkan penekanan tombol ke</string>
-  <string name="sendkeystrokes_textbox_hint">Kirimkan penekanan tombol ke host</string>
+  <string name="sendkeystrokes_textbox_hint">Kirimkan penekanan tombol ke hos</string>
   <string name="sendkeystrokes_disabled_toast">Mengirim penekanan tombol dinonaktifkan - aktifkan di pengaturan</string>
   <string name="sendkeystrokes_wrong_data">Tipe mime tidak sah - harus \'text/x-keystrokes\'</string>
   <string name="sendkeystrokes_sent_text">Terkirim %1$s ke peranti %2$s</string>
@@ -93,31 +95,27 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Kirim sebagai penekanan tombol</string>
   <string name="mouse_receiver_plugin_description">Terima penggerakan mouse jarak jauh</string>
   <string name="mouse_receiver_plugin_name">Penerima mouse</string>
-  <string name="mouse_receiver_no_permissions">Anda harus mengaktifkan Layanan Aksesibilitas</string>
+  <string name="mouse_receiver_no_permissions">Untuk menerima masukan sentuh secara jarak jauh, Anda perlu memberi izin Aksesibilitas untuk dapat mengendalikan perangkat Anda</string>
   <string name="view_status_title">Status</string>
   <string name="battery_status_format">Baterai: %d%%</string>
   <string name="battery_status_low_format">Baterai: %d%% Baterai Lemah</string>
   <string name="battery_status_charging_format">Baterai %d%% mengisi</string>
-  <string name="battery_status_unknown">Informasi baterai tidak tersedia</string>
   <string name="category_connected_devices">Perangkat terhubung</string>
   <string name="category_not_paired_devices">Perangkat tersedia</string>
   <string name="category_remembered_devices">Perangkat teringat</string>
   <string name="device_menu_plugins">Pengesetan plugin</string>
   <string name="device_menu_unpair">Leraikan</string>
   <string name="pair_new_device">Sandingkan peranti baru</string>
-  <string name="unknown_device">Perangkat tak diketahui</string>
+  <string name="unknown_device">Perangkat tidak diketahui</string>
   <string name="error_not_reachable">Peranti tidak dapat dicapai</string>
   <string name="error_already_paired">Peranti sudah disandingkan</string>
-  <string name="error_could_not_send_package">Tidak dapat mengirim paket</string>
   <string name="error_timed_out">Waktu habis</string>
   <string name="error_canceled_by_user">Dibatalkan oleh pengguna</string>
   <string name="error_canceled_by_other_peer">Dibatalkan oleh kawan lain</string>
   <string name="encryption_info_title">Info Enkripsi</string>
-  <string name="encryption_info_msg_no_ssl">Perangkat lain tidaklah menggunakan Zorin Connect yang berversi saat ini, menggunakan metode enkripsi kuno.</string>
   <string name="my_device_fingerprint">Sidik jari SHA256 pada sertifikat peranti adalah:</string>
   <string name="remote_device_fingerprint">Sidik jari SHA256 pada sertifikat peranti jarak jauh adalah:</string>
   <string name="pair_requested">Meminta sanding</string>
-  <string name="pairing_request_from">Minta penyandingan dari %1s</string>
   <plurals name="incoming_file_title">
     <item quantity="other">Menerima %1$d file dari %2$s</item>
   </plurals>
@@ -144,17 +142,17 @@
   </plurals>
   <string name="tap_to_open">Ketuk untuk membuka</string>
   <string name="received_file_text">Ketuk untuk membuka \'%1s\'</string>
-  <string name="cannot_create_file">Gak bisa menciptakan file %s</string>
+  <string name="cannot_create_file">Tidak dapat membuat file %s</string>
   <string name="tap_to_answer">Ketuk untuk menjawab</string>
   <string name="right_click">Kirim Klik Kanan</string>
   <string name="middle_click">Kirim Klik Tengah</string>
-  <string name="show_keyboard">Tampilkan Keyboard</string>
+  <string name="show_keyboard">Tampilkan Papan Tik</string>
   <string name="device_not_paired">Peranti tidak disandingkan</string>
   <string name="request_pairing">Minta penyandingan</string>
   <string name="pairing_accept">Setujui</string>
-  <string name="pairing_reject">Apkir</string>
+  <string name="pairing_reject">Tolak</string>
   <string name="settings">Pengaturan</string>
-  <string name="mpris_play">Putarkan</string>
+  <string name="mpris_play">Putar</string>
   <string name="mpris_pause">Jeda</string>
   <string name="mpris_previous">Sebelumnya</string>
   <string name="mpris_rew">Mundur</string>
@@ -172,19 +170,20 @@
     <item>1 menit</item>
     <item>2 menit</item>
   </string-array>
+  <string name="mpris_notifications_explanation">Izin notifkasi diperlukan untuk menampilkan media jarak jauh dalam bilah notifikasi</string>
   <string name="mpris_notification_settings_title">Tampilkan notifikasi kendali media</string>
   <string name="mpris_notification_settings_summary">Memungkinkan pengendalian pemutar media Anda tanpa membuka Zorin Connect</string>
-  <string name="share_to">Berbagi Ke...</string>
+  <string name="share_to">Bagikan ke…</string>
   <string name="protocol_version_newer">Perangkat ini menggunakan sebuah versi protokol baru</string>
-  <string name="plugin_settings_with_name">Pengesetan %s</string>
-  <string name="invalid_device_name">Nama peranti tak absah</string>
-  <string name="shareplugin_text_saved">Teks diterima, tersimpan ke papan-klip</string>
+  <string name="plugin_settings_with_name">Pengaturan %s</string>
+  <string name="invalid_device_name">Nama peranti tidak valid</string>
+  <string name="shareplugin_text_saved">Teks diterima, tersimpan ke papan klip</string>
   <string name="custom_devices_settings">Kustom daftar peranti</string>
   <string name="custom_device_list">Tambahkan peranti dengan IP</string>
   <string name="custom_device_deleted">Perangkat kustom yang dihapus</string>
   <string name="custom_device_list_help">Jika peranti Anda tidak terdeteksi secara otomatis, Anda dapat menambahkan alamat IP atau nama host-nya dengan mengklik Tombol Aksi Yang Mengambang</string>
   <string name="custom_device_fab_hint">Tambahkan sebuah peranti</string>
-  <string name="undo">Urung</string>
+  <string name="undo">Urungkan</string>
   <string name="share_notification_preference">Notifikasi bising</string>
   <string name="share_notification_preference_summary">Getar dan putarkan suara ketika menerima sebuah file</string>
   <string name="share_destination_customize">Menyesuaikan tujuan direktori</string>
@@ -244,7 +243,6 @@
   <string name="telephony_pref_blocked_title">Nomor yang diblokir</string>
   <string name="telephony_pref_blocked_dialog_desc">Jangan tampilkan panggilan dan SMS dari nomor tersebut. Silakan tentukan satu nomor tiap baris</string>
   <string name="mpris_coverart_description">Seni sampul media saat ini</string>
-  <string name="device_icon_description">Ikon perangkat</string>
   <string name="settings_icon_description">Ikon pengaturan</string>
   <string name="presenter_fullscreen">Layar penuh</string>
   <string name="presenter_exit">Keluarkan presentasi</string>
@@ -257,9 +255,7 @@
   <string name="pref_plugin_mprisreceiver_desc">Kendalikan pemutar media ponsel Anda dari peranti lainnya</string>
   <string name="notification_channel_default">Notifikasi lainnya</string>
   <string name="notification_channel_media_control">Kontrol multimedia</string>
-  <string name="notification_channel_filetransfer">Transfer file</string>
   <string name="notification_channel_high_priority">Prioritas tinggi</string>
-  <string name="notification_channel_sms_mms">Pesan Baru</string>
   <string name="mpris_stop">Hentikan player saat ini</string>
   <string name="copy_url_to_clipboard">Salin URL ke clipboard</string>
   <string name="clipboard_toast">Disalin ke clipboard</string>
@@ -288,8 +284,6 @@
   <string name="block_contents">Blokir konten-konten notifikasi</string>
   <string name="block_images">Blokir citra-citra dalam notifikasi</string>
   <string name="notification_channel_receivenotification">Notifikasi dari peranti lainnya</string>
-  <string name="take_picture">Luncurkan kamera</string>
-  <string name="plugin_photo_desc">Luncurkan aplikasi kamera untuk memudahkan mengambil dan mentransfer foto</string>
   <string name="no_app_for_opening">Tidak menemukan aplikasi yang dapat membuka berkas ini</string>
   <string name="remote_keyboard_service">Keyboard Remote Zorin Connect</string>
   <string name="presenter_pointer">Penunjuk</string>
@@ -351,7 +345,7 @@
   <string name="visit_contributors_homepage">Kunjungi laman kontributor\n%s</string>
   <string name="version">Versi %s</string>
   <string name="about_kde">Tentang KDE</string>
-  <string name="kde_be_free">KDE - Secara Bebas!</string>
+  <string name="kde_be_free">KDE - Bebas!</string>
   <string name="kde">KDE</string>
   <string name="konqi">Konqi</string>
   <string name="rise_up">Naik</string>
@@ -360,10 +354,8 @@
   <string name="clear_compose">Hapus</string>
   <string name="send_compose">Kirim</string>
   <string name="open_compose_send">Komposisikan teks</string>
-  <string name="app_description">Aplikasi multi-platform yang memungkinkan peranti Anda untuk berkomunikasi (mis., ponsel dan komputer Anda)</string>
   <string name="about_kde_about">&lt;h1&gt;Tentang&lt;/h1&gt; &lt;p&gt;KDE adalah komunitas seluruh dunia dari insinyur, seniman, penulis, penerjemah dan pemfasilitas perangkat lunak yang berkomitmen untuk pengembangan &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Perangkat Lunak Bebas&lt;/a&gt;. KDE memproduksi lingkungan desktop Plasma, ratusan aplikasi, dan banyak pustaka perangkat lunak yang mendukungnya.&lt;/p&gt; &lt;p&gt;KDE adalah perusahaan koperasi: di mana tiada entitas satu pun yang mengendalikan arah atau usaha. Kami bekerja bersama-sama untuk mencapai tujuan umum pembangunan dalam dunia Perangkat Lunak Bebas yang baik. Siapa pun disambut untuk &lt;a href=https://community.kde.org/Get_Involved&gt;bergabung dan berkontribusi&lt;/a&gt; untuk KDE, termasuk Anda.&lt;/p&gt; Kunjungi &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; untuk informasi tentang komunitas KDE dan perangkat lunak yang kami buat.</string>
   <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Laporkan Kutu atau Saran&lt;/h1&gt; &lt;p&gt;Perangkat lunak selalu dapat ditingkatkan, dan Tim KDE siap untuk melakukannya. Tapi, Anda - sebagai pengguna - harus memberitahu kami jika sesuatu tidak berjalan sebagaimana mestinya atau seharusnya dapat berjalan dengan lebih baik.&lt;/p&gt; &lt;p&gt;KDE memiliki sistem pelacakan kutu. Kunjungi &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; atau gunakan dialog \"Laporkan Kutu\" dari layar tentang untuk melaporkan kutu.&lt;/p&gt; Jika Anda memiliki saran untuk peningkatan maka Anda dipersilakan untuk menggunakan sistem pelacakan kutu untuk memasukkan permintaan Anda. Pastikan Anda menggunakan tingkat kegawatan yang bernama \"Senarai Permintaan\".</string>
-  <string name="about_kde_join_kde">&lt;h1&gt;Bergabung dengan KDE&lt;/ h1&gt; &lt;p&gt; Anda tidak harus menjadi pengembang perangkat lunak untuk menjadi anggota tim KDE. Anda dapat bergabung dengan tim nasional yang menerjemahkan antarmuka program. Anda dapat memberikan grafik, tema, suara, dan dokumentasi yang ditingkatkan. Anda putuskan!&lt;/p&gt; &lt;p&gt;Kunjungi&lt;a href=https://community.kde.org/Get_involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; untuk informasi tentang beberapa proyek di mana Anda dapat berpartisipasi.&lt;/p&gt; Jika Anda memerlukan informasi atau dokumentasi lebih lanjut, maka kunjungi &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; yang akan memberi Anda apa yang Anda butuhkan.</string>
   <string name="about_kde_support_kde">&lt;h1&gt;Dukung KDE&lt;/h1&gt; &lt;p&gt;Perangkat lunak KDE adalah dan akan selalu tersedia secara gratis, namun membuatnya tidak gratis.&lt;/p&gt; &lt;p&gt;Untuk mendukung pengembangan Komunitas KDE telah membentuk KDE e.V., sebuah organisasi nirlaba yang didirikan secara legal di Jerman. KDE e.V. mewakili komunitas KDE dalam masalah hukum dan keuangan. Lihat &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; untuk informasi tentang KDE e.V.&lt;/p&gt; &lt;p&gt;KDE mendapat manfaat dari berbagai macam kontribusi, termasuk keuangan. Kami menggunakan dana untuk mengganti anggota dan lainnya untuk pengeluaran yang mereka anggap ketika berkontribusi. Dana lebih lanjut digunakan untuk dukungan hukum dan pengorganisasian konferensi dan rapat.&lt;/p&gt; &lt;p&gt;Kami ingin mendorong Anda untuk mendukung upaya kami dengan sumbangan keuangan, menggunakan salah satu cara yang dijelaskan di &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Terima kasih banyak sebelumnya atas dukungan Anda.</string>
   <string name="maintainer_and_developer">Perawat dan pengembang</string>
   <string name="developer">Pengembang</string>
@@ -378,4 +370,5 @@
   <string name="everyone_else">Semua orang yang telah berkontribusi pada Zorin Connect selama bertahun-tahun</string>
   <string name="send_clipboard">Kirim papan klip</string>
   <string name="tap_to_execute">Ketuk untuk menjalankan</string>
+  <string name="enable_bluetooth">Aktifkan Bluetooth (beta)</string>
 </resources>

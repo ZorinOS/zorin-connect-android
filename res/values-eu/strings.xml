@@ -18,7 +18,7 @@
   <string name="pref_plugin_clipboard_sent">Arbelekoa bidali da</string>
   <string name="pref_plugin_mousepad">Urrutiko sarrera</string>
   <string name="pref_plugin_mousepad_desc">Erabili zure telefonoa edo tableta ukimen-sagu eta teklatu gisa</string>
-  <string name="pref_plugin_presenter">Diapositiba emanaldietarako telekomandoa</string>
+  <string name="pref_plugin_presenter">Aurkezpenetarako urruneko agintea</string>
   <string name="pref_plugin_presenter_desc">Erabili zure gailua aurkezpen bateko diapositibak aldatzeko</string>
   <string name="pref_plugin_remotekeyboard">Jaso urruneko tekla-sakatzeak</string>
   <string name="pref_plugin_remotekeyboard_desc">Jaso tekla-sakatze gertaerak urruneko gailuetatik</string>
@@ -51,14 +51,19 @@
   <string name="remotekeyboard_connected">Urruneko teklatuarekin konexioa aktibo dago</string>
   <string name="remotekeyboard_multiple_connections">Urruneko teklatuekin konexio bat baino gehiago dago, hautatu konfiguratu beharreko gailua</string>
   <string name="open_mousepad">Urruneko sarrera</string>
-  <string name="mousepad_info">Mugitu hatz bat pantailan zehar saguaren erakuslea mugitzeko. Egin tak klik baterako, eta erabili bi/hiru hatz eskuin eta erdiko botoietarako. Erabili 2 hatz labaintzeko. Erabili sakatze luze bat arrastatu eta jaregiteko.</string>
+  <string name="mousepad_info">Mugitu hatz bat pantailan zehar saguaren erakuslea mugitzeko. Egin tak klik baterako, eta erabili bi/hiru hatz eskuin eta erdiko botoietarako. Erabili 2 hatz kiribiltzeko. Erabili sakatze luze bat arrastatu eta jaregiteko. Saguaren giroskopio funtzionalitatea pluginen hobespenetatik gaitu daiteke.</string>
+  <string name="mousepad_info_no_gestures">Mugitu hatz bat pantailan kurtsorea mugitzeko, egin tak klik egiteko.</string>
   <string name="mousepad_keyboard_input_not_supported">Parekatutako gailuak ez du teklatuko sarreraren euskarririk</string>
   <string name="mousepad_single_tap_settings_title">Ezarri hatz bakarrarekin tak egitearen ekintza</string>
   <string name="mousepad_double_tap_settings_title">Ezarri bi hatzez tak egitearen ekintza</string>
   <string name="mousepad_triple_tap_settings_title">Ezarri hiru hatzez tak egitearen ekintza</string>
   <string name="mousepad_sensitivity_settings_title">Ezarri ukimen-saguaren sentikortasuna</string>
+  <string name="mousepad_mouse_buttons_title">Erakutsi saguaren botoiak</string>
   <string name="mousepad_acceleration_profile_settings_title">Ezarri erakuslearen azelerazio</string>
   <string name="mousepad_scroll_direction_title">Alderantzikatu korritzearen norabidea</string>
+  <string name="mousepad_scroll_sensitivity_title">Kiribiltze sentikortasuna</string>
+  <string name="gyro_mouse_enabled_title">Gaitu giroskopio-sagua</string>
+  <string name="gyro_mouse_sensitivity_title">Giroskopioaren sentikortasuna</string>
   <string-array name="mousepad_tap_entries">
     <item>Ezkerreko klik</item>
     <item>Eskuineko klik</item>
@@ -94,31 +99,30 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Bidali tekla-joaldi gisa</string>
   <string name="mouse_receiver_plugin_description">Jaso urrutiko saguaren mugimenduak</string>
   <string name="mouse_receiver_plugin_name">Sagu jasotzailea</string>
-  <string name="mouse_receiver_no_permissions">Irisgarritasun zerbitzua gaitu behar duzu</string>
+  <string name="mouse_receiver_no_permissions">Urrutiko ukipen sarrerak jasotzeko, zure gailua erabat agintzeko Irisgarritasun baimenak eman behar dituzu</string>
   <string name="view_status_title">Egoera</string>
   <string name="battery_status_format">Bateria: %%%d</string>
   <string name="battery_status_low_format">Bateria: %%%d bateria baxu</string>
   <string name="battery_status_charging_format">Bateria: %%%d kargatzen</string>
-  <string name="battery_status_unknown">Bateriari buruzko informazioa ez dago erabilgarri</string>
   <string name="category_connected_devices">Konektatutako gailuak</string>
   <string name="category_not_paired_devices">Gailu eskuragarriak</string>
   <string name="category_remembered_devices">Gogoratutako gailuak</string>
   <string name="device_menu_plugins">Pluginen ezarpenak</string>
   <string name="device_menu_unpair">Desparekatu</string>
   <string name="pair_new_device">Parekatu gailu berria</string>
+  <string name="cancel_pairing">Ezeztatu parekatzea</string>
   <string name="unknown_device">Gailu ezezaguna</string>
   <string name="error_not_reachable">Gailua ez dago eskuragarri</string>
   <string name="error_already_paired">Gailua dagoeneko parekatuta</string>
-  <string name="error_could_not_send_package">Ezin izan da paketea bidali</string>
   <string name="error_timed_out">Denbora-muga agortu da</string>
   <string name="error_canceled_by_user">Erabiltzaileak utzita</string>
   <string name="error_canceled_by_other_peer">Beste kideak utzita</string>
   <string name="encryption_info_title">Zifratze informazioa</string>
-  <string name="encryption_info_msg_no_ssl">Beste gailuak ez du oraintsuko Zorin Connect bertsio bat erabiltzen, erabili aurreko bertsioetako metodoa.</string>
   <string name="my_device_fingerprint">Zure gailuaren ziurtagiriaren SHA256 hatz-marka:</string>
   <string name="remote_device_fingerprint">Urruneko gailuaren ziurtagiriaren SHA256 hatz-marka hau da:</string>
   <string name="pair_requested">Parekatzea eskatu da</string>
-  <string name="pairing_request_from">Parekatzeko eskaria %1s-tik</string>
+  <string name="pair_succeeded">Parekatze arrakastatsua</string>
+  <string name="pairing_request_from">\'%1s\'(e)ren parekatzeko eskaria</string>
   <plurals name="incoming_file_title">
     <item quantity="one">%2$s(e)tik fitxategi %1$d jasotzen</item>
     <item quantity="other">%2$s(e)tik %1$d fitxategi jasotzen</item>
@@ -155,13 +159,14 @@
   <string name="received_file_text">Tak egin \'%1s\' irekitzeko</string>
   <string name="cannot_create_file">Ezin da sortu %s fitxategia</string>
   <string name="tap_to_answer">Tak egin erantzuteko</string>
+  <string name="left_click">Bidali ezkerreko klik</string>
   <string name="right_click">Bidali eskumako klik</string>
   <string name="middle_click">Bidali erdiko klik</string>
   <string name="show_keyboard">Erakutsi teklatua</string>
   <string name="device_not_paired">Gailua parekatu gabe</string>
   <string name="request_pairing">Eskatu parekatzea</string>
   <string name="pairing_accept">Onartu</string>
-  <string name="pairing_reject">Ukatu</string>
+  <string name="pairing_reject">Errefusatu</string>
   <string name="settings">Ezarpenak</string>
   <string name="mpris_play">Jo</string>
   <string name="mpris_pause">Eten</string>
@@ -181,9 +186,12 @@
     <item>minutu 1</item>
     <item>2 minutu</item>
   </string-array>
+  <string name="mpris_notifications_explanation">Urruneko euskarria jakinarazpen tiraderan erakusteko jakinarazpen-baimena behar da</string>
   <string name="mpris_notification_settings_title">Erakutsi euskarri kontrolaren jakinarazpena</string>
   <string name="mpris_notification_settings_summary">Utzi zure euskarri-jotzaileak kontrolatzen Zorin Connect ireki gabe</string>
-  <string name="share_to">Partekatu honi...</string>
+  <string name="share_to">Partekatu honekin...</string>
+  <string name="unreachable_device">%s (eskuraezin)</string>
+  <string name="unreachable_device_url_share_text">Gailu eskuraezinekin partekatutako URLak, hartara bidaliko dira eskuragarri dagoenean.\n\n</string>
   <string name="protocol_version_newer">Gailu honek protokoloaren bertsio berriago bat erabiltzen du</string>
   <string name="plugin_settings_with_name">%s ezarpenak</string>
   <string name="invalid_device_name">Gailuaren izen baliogabea</string>
@@ -219,8 +227,11 @@
   <string name="sftp_action_mode_menu_delete">Ezabatu</string>
   <string name="sftp_no_storage_locations_configured">Ez da biltegiratze kokalekurik konfiguratu</string>
   <string name="sftp_saf_permission_explanation">Fitxategiak urrunetik atzitzeko biltegiratze kokalekuak konfiguratu behar dituzu</string>
+  <string name="sftp_manage_storage_permission_explanation">gailu honetako fitxategietara urrutiko sarbidea baimentzeko, «Zorin Connect»eri biltegiratzea kudeatzeko baimena eman behar diozu.</string>
   <string name="no_players_connected">Ez da jotzailerik aurkitu</string>
   <string name="send_files">Bidali fitxategiak</string>
+  <string name="block_notification_contents">Oztopatu jakinarazpenen edukia</string>
+  <string name="block_notification_images">Oztopatu jakinarazpenen irudiak</string>
   <string name="pairing_title">Zorin Connect gailuak</string>
   <string name="pairing_description">Zorin Connect darabilten sareko beste gailuak hemen agertu beharko lirateke.</string>
   <string name="device_rename_title">Aldatu izena gailuari</string>
@@ -243,17 +254,20 @@
   <string name="close">Itxi</string>
   <string name="plugins_need_permission">Plugin batzuek jarduteko baimenak behar dituzte (tak egin informazio gehiagorako):</string>
   <string name="permission_explanation">Plugin honek baimena behar du funtzionatzeko</string>
+  <string name="all_permissions_granted">Baimen guztiak eman dira 🎉</string>
   <string name="optional_permission_explanation">Baimen gehiago eman behar dituzu funtzio guztiak gaitzeko</string>
   <string name="plugins_need_optional_permission">Plugin batzuek desgaitutako eginbideak dituzte baimenak faltan dituztelako (tak egin informazio gehiagorako):</string>
+  <string name="share_optional_permission_explanation">Fitxategiak jasotzeko biltegiratze sarbidea baimendu behar duzu</string>
+  <string name="share_notifications_explanation">Fitxategiak bidaltzean eta jasotzean aurrerapena ikusteko, jakinarazpenak baimendu behar dituzu</string>
   <string name="telepathy_permission_explanation">SMSak zure mahaigainetik bidali ahal izateko, SMSak erabiltzeko baimena eman behar duzu</string>
   <string name="telephony_permission_explanation">Telefono deiak zure mahaigainetik ikusteko, telefono deien egunkarira eta telefonoaren egoerara baimena eman behar duzu</string>
   <string name="telephony_optional_permission_explanation">Telefono zenbakiaren ordez kontaktuaren izena ikusteko telefonoko kontaktuak atzitzeko baimena eman behar duzu</string>
   <string name="contacts_permission_explanation">Zure kontaktuen liburuak mahaigainarekin partekatzeko, kontaktuetara baimena eman behar duzu</string>
+  <string name="contacts_per_device_confirmation">Zure telefonoko kontaktuak gailu honetara kopiatuko dira, «Zorin Connect SMS» aplikazioak eta beste aplikazio batzuek erabili ahal ditzaten.</string>
   <string name="select_ringtone">Hautatu dei-tonu bat</string>
   <string name="telephony_pref_blocked_title">Blokeatutako zenbakiak</string>
   <string name="telephony_pref_blocked_dialog_desc">Ez erakutsi zenbaki hauen deiak eta SMSak. Zehaztu zenbaki bat lerroko</string>
   <string name="mpris_coverart_description">Uneko euskarriaren azaleko irudia</string>
-  <string name="device_icon_description">Gailuaren ikonoa</string>
   <string name="settings_icon_description">Ezarpenen ikonoa</string>
   <string name="presenter_fullscreen">Pantaila-betea</string>
   <string name="presenter_exit">Irten aurkezpenetik</string>
@@ -267,9 +281,10 @@
   <string name="notification_channel_default">Beste jakinarazpen batzuk</string>
   <string name="notification_channel_persistent">Adierazle iraunkorra</string>
   <string name="notification_channel_media_control">Euskarrien kontrola</string>
-  <string name="notification_channel_filetransfer">Fitxategi transferentzia</string>
+  <string name="notification_channel_filetransfer">Sarrerako fitxategi transmisioa</string>
+  <string name="notification_channel_filetransfer_upload">Irteerako fitxategi transmisioa</string>
+  <string name="notification_channel_filetransfer_error">Fitxategi transmisio errorea</string>
   <string name="notification_channel_high_priority">Lehentasun handia</string>
-  <string name="notification_channel_sms_mms">Mezu berria</string>
   <string name="mpris_stop">Gelditu uneko jotzailea</string>
   <string name="copy_url_to_clipboard">Kopiatu URLa arbelera</string>
   <string name="clipboard_toast">Arbelera kopiatua</string>
@@ -277,6 +292,10 @@
   <string name="runcommand_notpaired">Gailua ez dago parekatua</string>
   <string name="runcommand_nosuchdevice">Ez dago halako gailurik</string>
   <string name="runcommand_noruncommandplugin">Gailu honek ez dauka gaituta «Exekutatu Komandoa» plugina</string>
+  <string name="runcommand_category_device_controls_title">Gailuaren aginteak</string>
+  <string name="runcommand_device_controls_summary">Zure gailuak Gailuen Aginteak onartzen baditu, konfiguratu dituzun komandoak hemen agertuko dira.</string>
+  <string name="set_runcommand_name_as_title">ezarri_exekuziokomando_izena_titulu_gisa</string>
+  <string name="runcommand_name_as_title_title">Erakutsi izena titulu gisa</string>
   <string name="pref_plugin_findremotedevice">Aurkitu urruneko gailua</string>
   <string name="pref_plugin_findremotedevice_desc">Jo zure urruneko gailuaren tonua</string>
   <string name="ring">Tonua jo</string>
@@ -298,8 +317,6 @@
   <string name="block_contents">Oztopatu jakinarazpenen edukiak</string>
   <string name="block_images">Oztopatu jakinarazpenen irudiak</string>
   <string name="notification_channel_receivenotification">Beste gailu batzuen jakinarazpenak</string>
-  <string name="take_picture">Abiarazi kamera</string>
-  <string name="plugin_photo_desc">Abiarazi kamerako aplikazioa argazkiak hartzeko eta transferitzeko</string>
   <string name="no_app_for_opening">Ez da fitxategi hau irekitzeko aplikazio egokirik aurkitu</string>
   <string name="remote_keyboard_service">Zorin Connect urruneko teklatua</string>
   <string name="presenter_pointer">Erakuslea</string>
@@ -365,13 +382,15 @@
   <string name="kde_be_free">KDE - Izan aske!</string>
   <string name="kde">KDE</string>
   <string name="konqi">Konqi</string>
-  <string name="rise_up">Igo</string>
-  <string name="rise_down">Jaitsi</string>
+  <string name="rise_up">Goratu</string>
+  <string name="rise_down">Beheratu</string>
   <string name="click_here_to_type">Tak egin hemen tekleatzeko</string>
   <string name="clear_compose">Garbitu</string>
   <string name="send_compose">Bidali</string>
+  <string name="compose_send_title">Bidalketa osatu</string>
   <string name="open_compose_send">Konposatu testua</string>
-  <string name="app_description">Zure gailuei haien artean komunikatzen uzten dien plataforma askotariko aplikazioa (adib., zure telefonoa eta zure ordenagailua)</string>
+  <string name="double_tap_to_drag">Tak bikoitza arrastatzeko</string>
+  <string name="hold_to_drag">Eutsi arrastatzeko</string>
   <string name="about_kde_about">"&lt;h1&gt;Honi buruz&lt;/h1&gt; &lt;p&gt;KDE &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Software Askearen&lt;/a&gt; garapenarekin engaiatutako mundu osoko software ingeniari, artista, idazle, itzultzaile eta sortzaile elkarte bat da. KDEk Plasma mahaigain ingurunea, ehunka aplikazio, eta haiei euskarria ematen dieten liburutegi ugariak ekoizten ditu. &lt;/p&gt; &lt;p&gt;KDE ekimen kooperatibo bat da: ez dago bere norabidea eta produktuak kontrolatzen dituen erakunderik. Aldiz, elkarrekin lan egiten dugu guztiok partekatzen dugun helburu bera lortzeko, munduko Software Aske bikainena eraikitzearena alegia. Jende oro ongi etorria da  KDErekin &lt;a href=https://community.kde.org/Get_Involved&gt;elkartu eta laguntza ematera&lt;/a&gt;, zu barne. &lt;/p&gt; Bisitatu &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; , KDE elkartearen eta ekoizten dugun softwarearen gaineko informazio zabalagoa eskuratzeko."</string>
   <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Akatsen edo nahien berri ematea&lt;/h1&gt; &lt;p&gt;Softwarea beti hobetu daiteke, eta KDE taldea horretarako prest dago. Hala ere, zuk - erabiltzailea zaren horrek - zerbait behar bezala ez dabilenean edo hobeto egin daitekeenean esan egin behar diguzu.&lt;/p&gt; &lt;p&gt;KDEk programa-akatsen gaineko jarraipena egiteko sistema bat du. Bisitatu &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; edo erabili Honi buruz pantailako «Akatsa jakinarazi» botoia.&lt;/p&gt; Hobetzeko iradokizunik baduzu, akatsen jarraipen sisteman zure nahia erregistratzera gonbidatzen zaitugu. Larritasun maila bezala \"Wishlist\" (nahien zerrenda) erabil ezazu horretarako.</string>
   <string name="about_kde_join_kde">"&lt;h1&gt;Zatoz KDEra&lt;/h1&gt; &lt;p&gt;Ez duzu software garatzailea izan behar KDEren taldeko kide izateko. Programen interfazeak itzultzen dituzten hizkuntzen taldeetara batu zaitezke. Grafikoak, gaiak, soinuak, eta dokumentazio hobetua eskain ditzakezu. Zeuk erabaki!&lt;/p&gt; &lt;p&gt;Bisitatu &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt;  parte hartu dezakezun proiektuen informazioa eskuratzeko.&lt;/p&gt; Informazio edo dokumentazio gehiago behar baduzu, &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; bisitatuz behar duzuna eskuratuko duzu."</string>
@@ -386,7 +405,18 @@
   <string name="maxim_leshchenko_task">Erabiltzaile-interfazean hobekuntzak eta Honi buru orria hau</string>
   <string name="holger_kaelberer_task">Urruneko teklatuaren plugina eta akatsen konponketa</string>
   <string name="saikrishna_arcot_task">Urruneko sarrerako pluginean teklatua erabiltzeko euskarria, akatsen konponketa eta hobekuntza orokorrak</string>
+  <string name="shellwen_chen_task">SFTPren segurtasuna hobetu, proiektu honen mantentze-gaitasuna hobetu, akatsak konpondu eta hobekuntza orokorrak</string>
   <string name="everyone_else">Urteetan Zorin Connect-ekin lagundu duten gainerako guztiak</string>
   <string name="send_clipboard">Bidali arbelekoa</string>
   <string name="tap_to_execute">Tak egin exekutatzeko</string>
+  <string name="plugin_stats">Pluginaren estatistikak</string>
+  <string name="enable_udp_broadcast">Gaitu UDP bidez gailua aurkitzea</string>
+  <string name="enable_bluetooth">Gaitu bluetooth (beta)</string>
+  <string name="receive_notifications_permission_explanation">Jakinarazpenak baimendu behar dira beste gailuetatik haiek jasotzeko</string>
+  <string name="findmyphone_notifications_explanation">Aplikazioa atzeko planoan dagoenean telefonoak jo dezan jakinarazpen-baimena behar da</string>
+  <string name="no_notifications">Jakinarazpenak ezgaituta daude, ez duzu jasoko parekatzeko sarrerako jakinarazpenik.</string>
+  <string name="mpris_keepwatching">Jarraitu jotzen</string>
+  <string name="mpris_keepwatching_settings_title">Jarraitu jotzen</string>
+  <string name="mpris_keepwatching_settings_summary">Hedabidea itxi ondoren, gailu honetan jotzen jarraitzeko jakinarazpen ixil bat erakutsi.</string>
+  <string name="notification_channel_keepwatching">Jarraitu jotzen</string>
 </resources>

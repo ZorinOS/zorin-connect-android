@@ -16,7 +16,7 @@ import org.kde.kdeconnect.Plugins.SystemVolumePlugin.SystemVolumePlugin.SinkList
 import kotlin.math.ceil
 import kotlin.math.floor
 
-internal class SystemVolumeProvider private constructor(plugin: SystemVolumePlugin) :
+class SystemVolumeProvider private constructor(plugin: SystemVolumePlugin) :
         VolumeProviderCompat(VOLUME_CONTROL_ABSOLUTE, DEFAULT_MAX_VOLUME, 0),
         SinkListener,
         UpdateListener {
@@ -32,13 +32,11 @@ internal class SystemVolumeProvider private constructor(plugin: SystemVolumePlug
 
         @JvmStatic
         fun fromPlugin(systemVolumePlugin: SystemVolumePlugin): SystemVolumeProvider {
-            if (currentProvider == null) {
-                currentProvider = SystemVolumeProvider(systemVolumePlugin)
-            }
+            val currentProvider = currentProvider ?: SystemVolumeProvider(systemVolumePlugin)
 
-            currentProvider!!.update(systemVolumePlugin)
+            currentProvider.update(systemVolumePlugin)
 
-            return currentProvider!!
+            return currentProvider
         }
 
         private fun scale(value: Int, maxValue: Int, maxScaled: Int): Int {
@@ -67,8 +65,9 @@ internal class SystemVolumeProvider private constructor(plugin: SystemVolumePlug
 
         propagateState(false)
         defaultSink = null
-        stopSinkUpdatesTracking()
+        stopListeningForSinks()
         systemVolumePlugin = plugin
+        startListeningForSinks()
     }
 
     override fun sinksChanged() {
@@ -156,18 +155,18 @@ internal class SystemVolumeProvider private constructor(plugin: SystemVolumePlug
         return sink != null
     }
 
-    fun startTrackingVolumeKeys() {
+    fun startListeningForSinks() {
         systemVolumePlugin.addSinkListener(this)
         systemVolumePlugin.requestSinkList()
     }
 
     fun release() {
-        stopSinkUpdatesTracking()
+        stopListeningForSinks()
         stateListeners.clear()
         currentProvider = null
     }
 
-    private fun stopSinkUpdatesTracking() {
+    private fun stopListeningForSinks() {
         for (sink in systemVolumePlugin.sinks) {
             sink.removeListener(this)
         }

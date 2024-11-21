@@ -17,7 +17,6 @@
   <string name="pref_plugin_clipboard_sent">Το πρόχειρο εστάλη</string>
   <string name="pref_plugin_mousepad">Απομακρυσμένη είσοδος στοιχείων</string>
   <string name="pref_plugin_mousepad_desc">Χρήση του τηλεφώνου ή της ταμπλέτας σας ως επιφάνεια αφής και πληκτρολόγιο</string>
-  <string name="pref_plugin_presenter">Απομακρυσμένος έλεγχος παρουσίασης διαφανειών</string>
   <string name="pref_plugin_presenter_desc">Χρησιμοποιήστε τη συσκευή σας για να αλλάξετε διαφάνειες σε μία παρουσίαση</string>
   <string name="pref_plugin_remotekeyboard">Λήψη απομακρυσμένων πληκτρολογήσεων</string>
   <string name="pref_plugin_remotekeyboard_desc">Λήψη συμβάντων πληκτρολόγησης από απομακρυσμένες συσκευές</string>
@@ -42,7 +41,7 @@
   <string name="open_settings">Ρυθμίσεις ανοίγματος</string>
   <string name="no_permissions">Απαιτείται παραχώρηση δικαιωμάτων για την πρόσβαση σε ειδοποιήσεις</string>
   <string name="no_permission_mprisreceiver">Για να ελέγξετε τους αναπαραγωγείς πολυμέσων απαιτείται να παραχωρήσετε πρόσβαση στις ειδοποιήσεις</string>
-  <string name="no_permissions_remotekeyboard">Για να λαμβάνετε πατήματα πλήκτρων απαιτείται να ενεργοποιήσετε το πληκτρολόγιο απομακρυσμένης σύνδεσης του Zorin Connect</string>
+  <string name="no_permissions_remotekeyboard">Για να λαμβάνετε πατήματα πλήκτρων απαιτείται να ενεργοποιήσετε το πληκτρολόγιο απομακρυσμένης σύνδεσης του Zorin</string>
   <string name="send_ping">Αποστολή ping</string>
   <string name="open_mpris_controls">Έλεγχος πολυμέσων</string>
   <string name="remotekeyboard_editing_only_title">Χειρισμός απομακρυσμένων πλήκτρων μόνο στην επεξεργασία</string>
@@ -50,7 +49,6 @@
   <string name="remotekeyboard_connected">Η σύνδεση με απομακρυσμένο πληκτρολόγιο είναι ενεργή</string>
   <string name="remotekeyboard_multiple_connections">Υπάρχουν περισσότερες της μίας συνδέσεις με απομακρυσμένο πληκτρολόγιο, επιλέξτε ποια συσκευή θα διαμορφώσετε</string>
   <string name="open_mousepad">Απομακρυσμένη είσοδος στοιχείων</string>
-  <string name="mousepad_info">Μετακινείστε το δάκτυλο στην οθόνη για να μετακινηθεί ο δρομέας του ποντικιού. Χτυπήστε για κλικ και χρησιμοποιήστε δύο/τρία δάκτυλα για δεξί και μεσαίο κλικ. Χρησιμοποιήστε 2 δάκτυλα για κύλιση. Πιέστε με διάρκεια για μετακίνηση και απόθεση.</string>
   <string name="mousepad_double_tap_settings_title">Ρύθμιση δύο δακτύλων για την ενέργεια χτυπήματος</string>
   <string name="mousepad_triple_tap_settings_title">Ρύθμιση τριών δακτύλων για την ενέργεια χτυπήματος</string>
   <string name="mousepad_sensitivity_settings_title">Ρύθμιση ευαισθησίας της οθόνης αφής</string>
@@ -85,12 +83,10 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Αποστολή ως πληκτρολογήσεις</string>
   <string name="mouse_receiver_plugin_description">Λήψη απομακρυσμένων κινήσεων του ποντικιού</string>
   <string name="mouse_receiver_plugin_name">Δέκτης ποντικιού</string>
-  <string name="mouse_receiver_no_permissions">Απαιτείται η ενεργοποίηση της υπηρεσίας προσβασιμότητας</string>
   <string name="view_status_title">Κατάσταση</string>
   <string name="battery_status_format">Μπαταρία: %d%%</string>
   <string name="battery_status_low_format">Μπαταρία: %d%% Χαμηλή συάθμη</string>
   <string name="battery_status_charging_format">Μπαταρία: %d%% φόρτιση</string>
-  <string name="battery_status_unknown">Πληροφορίες για τη μπαταρία δεν είναι διαθέσιμες</string>
   <string name="category_connected_devices">Συνδεδεμένες συσκευές</string>
   <string name="category_not_paired_devices">Διαθέσιμες συσκευές</string>
   <string name="category_remembered_devices">Συσκευές στη μνήμη</string>
@@ -100,16 +96,13 @@
   <string name="unknown_device">Άγνωστη συσκευή</string>
   <string name="error_not_reachable">Η συσκευή δεν είναι προσβάσιμη</string>
   <string name="error_already_paired">Η συσκευή ήδη συζεύχθηκε</string>
-  <string name="error_could_not_send_package">Αδυναμία αποστολής πακέτου</string>
   <string name="error_timed_out">Τέλος χρονικού ορίου</string>
   <string name="error_canceled_by_user">Ακυρώθηκε από τον χρήστη</string>
   <string name="error_canceled_by_other_peer">Ακυρώθηκε από άλλον χρήστη</string>
   <string name="encryption_info_title">Πληροφορίες κρυπτογράφησης</string>
-  <string name="encryption_info_msg_no_ssl">Η άλλη συσκευή δεν χρησιμοποιεί μια πρόσφατη έκδοση του Zorin Connect, θα χρησιμοποιηθεί η παλαιά μέθοδος κρυπτογράφησης.</string>
   <string name="my_device_fingerprint">Το ίχνος SHA256 του πιστοποιητικού της συσκευής σας είναι:</string>
   <string name="remote_device_fingerprint">Το ίχνος SHA256 του πιστοποιητικού της απομακρυσμένης συσκευής είναι:</string>
   <string name="pair_requested">Ζητήθηκε σύζευξη</string>
-  <string name="pairing_request_from">Αίτημα σύζευξης από %1s</string>
   <plurals name="incoming_file_title">
     <item quantity="one">Ελήφθη %1$d αρχείο από %2$s`</item>
     <item quantity="other">Ελήφθησαν %1$d αρχεία από %2$s</item>
@@ -174,7 +167,6 @@
   </string-array>
   <string name="mpris_notification_settings_title">Εμφάνιση ειδοποίησης κονσόλας πολυμέσων</string>
   <string name="mpris_notification_settings_summary">Να επιτρέπεται ο έλεγχος των αναπαραφωγέων πολυμέσων χωρίς άνοιγμα του Zorin Connect</string>
-  <string name="share_to">Διαμοιρασμός με…</string>
   <string name="protocol_version_newer">Η συσκευή αυτή χρησιμοποιεί νεότερη έκδοση πρωτοκόλλου</string>
   <string name="plugin_settings_with_name">%s ρυθμίσεις</string>
   <string name="invalid_device_name">Μη έγκυρο όνομα συσκευής</string>
@@ -243,7 +235,6 @@
   <string name="telephony_pref_blocked_title">Αριθμοί σε φραγή</string>
   <string name="telephony_pref_blocked_dialog_desc">Να μην εμφανίζονται κλήσεις ή SMS από αυτούς τους αριθμούς. Καθορίστε έναν αριθμό ανά γραμμή</string>
   <string name="mpris_coverart_description">Καλλιτεχνικό εξώφυλλο των πολυμέσων</string>
-  <string name="device_icon_description">Εικονίδιο συσκευής</string>
   <string name="settings_icon_description">Εικονίδιο ρυθμίσεων</string>
   <string name="presenter_fullscreen">Πλήρης οθόνη</string>
   <string name="presenter_exit">Έξοδος από την παρουσίαση</string>
@@ -256,9 +247,7 @@
   <string name="pref_plugin_mprisreceiver_desc">Ελέγξτε τους αναπαραγωγείς πολυμέσων του τηλεφώνου σας από άλλη συσκευή</string>
   <string name="notification_channel_default">Άλλες ειδοποιήσεις</string>
   <string name="notification_channel_media_control">Κονσόλα πολυμέσων</string>
-  <string name="notification_channel_filetransfer">Μεταφορά αρχείου</string>
   <string name="notification_channel_high_priority">Υψηλής προτεραιότητας</string>
-  <string name="notification_channel_sms_mms">Νέο μήνυμα</string>
   <string name="mpris_stop">Διακοπή του τρέχοντος αναπαραγωγέα</string>
   <string name="copy_url_to_clipboard">Αντιγραφή του URL στο πρόχειρο</string>
   <string name="clipboard_toast">Έγινε αντιγραφή στο πρόχειρο</string>
@@ -287,8 +276,6 @@
   <string name="block_contents">Φραγή περιεχομένου ειδοποιήσεων</string>
   <string name="block_images">Φραγή εικόνων σε ειδοποιήσεις</string>
   <string name="notification_channel_receivenotification">Ειδοποιήσεις από άλλες συσκευές</string>
-  <string name="take_picture">Εκτέλεση κάμερας</string>
-  <string name="plugin_photo_desc">Εκτέλεση της εφαρμογής κάμερας για διευκόλυνση στη λήψη και μεταφορά φωτογραφιών</string>
   <string name="no_app_for_opening">Δεν βρέθηκε κατάλληλη εφαρμογή για το άνοιγμα αυτού του αρχείου</string>
   <string name="remote_keyboard_service">Απομακρυσμένο πληκτρολόγιο Zorin Connect</string>
   <string name="presenter_pointer">Δείκτης</string>
@@ -355,10 +342,8 @@
   <string name="konqi">Konqi</string>
   <string name="rise_up">Άνοδος</string>
   <string name="rise_down">Κάθοδος</string>
-  <string name="app_description">Εφαρμογή γα πολλές πλατφόρμες που επιτρέπει στις συσκευές σας να επικοινωνούν (π.χ. το κινητό με τον υπολογιστή)</string>
   <string name="about_kde_about">&lt;h1&gt;Σχετικά&lt;/h1&gt; &lt;p&gt;Το KDE είναι μια παγκόσμια κοινότητα μηχανικών λογισμικού, καλλιτεχνών, συγγραφέων, μεταφραστών και δημιουργών οι οποίοι είναι αφοσιωμένοι στην ανάπτυξη του &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Ελεύθερου Λογισμικού&lt;/a&gt;. Το KDE παράγει το περιβάλλον γραφείου Plasma, εκατοντάδες εφαρμογές και πολλές βιβλιοθήκες που τις υποστηρίζουν.&lt;/p&gt; &lt;p&gt;Το KDE είναι ένα συνεργατικό εγχείρημα: καμιά οντότητα από μόνη της δεν ελέγχει την κατεύθυνση ή τα προϊόντα του. Αντίθετα, συνεργαζόμαστε για να επιτύχουμε τον κοινό στόχο της κατασκευής του πληρέστερου στον κόσμο Ελεύθερου Λογισμικού. Οποιοσδήποτε είναι ευπρόσδεκτος να &lt;a href=https://community.kde.org/Get_Involved&gt;γίνει μέλος και να συμβάλει&lt;/a&gt; στο KDE, και εσείς φυσικά.&lt;/p&gt; Επισκεφθείτε το &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; για περισσότερες πληροφορίες σχετικά με την κοινότητα του KDE και το λογισμικό που παράγουμε.</string>
   <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Αναφέρετε σφάλματα ή επιθυμίες στο&lt;/h1&gt; &lt;p&gt;Το Λογισμικό μπορεί πάντα να βελτιώνεται και η ομάδα του KDE είναι έτοιμη γι\' αυτό. Ωστόσο, εσείς - ο χρήστης - πρέπει να μας ενημερώνετε αν κάτι δεν λειτουργεί όπως θα έπρεπε ή αν θα μπορούσε να γίνει καλύτερο.&lt;/p&gt; &lt;p&gt;Το KDE έχει ένα σύστημα ανίχνευσης σφαλμάτων. Επισκεφθείτε το &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; ή χρησιμοποιήστε το κουμπί «Αναφορά σφάλματος» από την οθόνη Σχετικά για να αναφέρετε σφάλματα.&lt;/p&gt; Αν έχετε κάποια πρόταση για βελτίωση, χρησιμοποιήστε το σύστημα ανίχνευσης σφαλμάτων για να εγγράψετε την επιθυμία σας. Βεβαιωθείτε ότι χρησιμοποιείτε τη «Λίστα επιθυμιών».</string>
-  <string name="about_kde_join_kde">&lt;h1&gt;Γίνετε μέλη του KDE&lt;/h1&gt; &lt;p&gt;Δεν χρειάζεται να είστε προγραμματιστής για να γίνετε μέλος της ομάδας του KDE. Μπορείτε να ενταχθείτε στις εθνικές ομάδες που μεταφράζουν τις διεπαφές των εφαρμογών. Μπορείτε να παρέχετε γραφικά, θέματα, ήχους και να βελτιώσετε την τεκμηρίωση. Εσείς αποφασίζετε!&lt;/p&gt; &lt;p&gt;Επισκεφθείτε το &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; για πληροφρίες σε ορισμένα έργα στα οποία μπορείτε να δηλώσετε συμμετοχή.&lt;/p&gt; Αν χρειάζεστε πρόσθετη πληροφόρηση ή τεκμηρίωση, μια επίσκεψη στο &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; θα σας παρέχει ό,τι χρειάζεστε.</string>
   <string name="about_kde_support_kde">&lt;h1&gt;Υποστηρίξτε το KDE&lt;/h1&gt; &lt;p&gt;Το λογισμικό του KDE είναι και θα είναι πάντα διαθέσιμο δωρεάν, ωστόσο η δημιουργία του δεν είναι δωρεάν.&lt;/p&gt; &lt;p&gt;Για να υποστηρίξετε την ανάπτυξη η κοινότητα του KDE έχει δημιουργήσει στη Γερμανία το KDE e.V., έναν μη-κερδοσκοπικό οργανισμό. Το KDE e.V. εκπροσωπεί την κοινότητα του KDE σε νομικά και χρηματοοικονομικά θέματα. Δείτε το&lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; για πληροφορίες για το KDE e.V.&lt;/p&gt; &lt;p&gt;Το KDE ωφελείται από πολλά είδη συνεισφορών, και οικονομικών. Χρησιμοποιούμε τους οικονομικούς πόρους για αμοιβές μελών και άλλων για έξοδα που παρουσιάζονται όταν συμμετέχουν. Άλλα κονδύλια χρησιμοποιούνται για τη νομική υποστήριξη και τη διοργάνωση συνεδρίων και συναντήσεων.&lt;/p&gt; &lt;p&gt;Θα θέλαμε να σας ενθαρρύνουμε να υποστηρίξετε τις προσπάθειές μας με μια δωρεά, με έναν από τους τρόπους που περιγράφονται στο &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Σας ευχαριστούμε πολύ εκ των προτέρων για την υποστήριξή σας.</string>
   <string name="maintainer_and_developer">Συντηρητής και προγραμματιστής</string>
   <string name="developer">Προγραμματιστής</string>

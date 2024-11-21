@@ -1,52 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2018 Nicolas Fella <nicolas.fella@gmx.de>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@color/on_secondary"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:theme="@style/KdeConnectTheme"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="?colorSurface"
+    tools:ignore="RtlSymmetry">
+
     <LinearLayout
-        android:id="@+id/runcommandWidgetTitleHeader"
-        android:background="@color/primary"
+        android:id="@+id/widget_title_wrapper"
+        android:background="?colorSecondary"
         android:gravity="center_vertical|start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:paddingTop="6dip"
-            android:paddingBottom="6dip"
+            android:id="@+id/widget_title_icon"
+            android:padding="8dip"
+            android:paddingEnd="6dip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon"
-            android:contentDescription="@string/device_icon_description"/>
+            android:src="@drawable/ic_launcher_monochrome_48dp"
+            android:tint="?attr/colorOnSecondary"
+            android:importantForAccessibility="no"
+            tools:ignore="UseAppTint"/> <!-- can't use app:tint in RemoteView -->
 
         <TextView
-            android:id="@+id/runcommandWidgetTitle"
+            android:id="@+id/widget_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
+            android:text="@string/kde_connect"
             android:fadingEdge="horizontal"
             android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
+            android:textColor="?attr/colorOnSecondary"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
+
     <ListView
-        android:id="@+id/run_commands_list"
+        android:id="@+id/widget_command_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="4dp"
         android:addStatesFromChildren="true"
         android:visibility="gone"
         android:orientation="vertical" />
 
     <TextView
-        android:id="@+id/not_reachable_message"
+        android:id="@+id/widget_error_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:drawablePadding="8dip"
         android:gravity="center_vertical"
         android:paddingStart="8dip"
-        android:text="@string/unreachable_description"
+        android:text="@string/runcommand_notreachable"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        app:drawableStartCompat="@drawable/ic_error_outline_48dp"/>
+        android:drawableStart="@drawable/ic_error_outline_48dp"
+        tools:ignore="UseCompatTextViewDrawableXml" />  <!-- can't use app:drawableStart in RemoteView -->
 </LinearLayout>

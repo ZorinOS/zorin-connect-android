@@ -6,18 +6,24 @@
 
 package org.kde.kdeconnect.Backends;
 
-import org.kde.kdeconnect.NetworkPacket;
+import android.net.Network;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import org.kde.kdeconnect.DeviceInfo;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class BaseLinkProvider {
 
-    private final CopyOnWriteArrayList<ConnectionReceiver> connectionReceivers = new CopyOnWriteArrayList<>();
-
     public interface ConnectionReceiver {
-        void onConnectionReceived(NetworkPacket identityPacket, BaseLink link);
+        void onConnectionReceived(@NonNull final BaseLink link);
+        void onDeviceInfoUpdated(@NonNull final DeviceInfo deviceInfo);
         void onConnectionLost(BaseLink link);
     }
+
+    private final CopyOnWriteArrayList<ConnectionReceiver> connectionReceivers = new CopyOnWriteArrayList<>();
 
     public void addConnectionReceiver(ConnectionReceiver cr) {
         connectionReceivers.add(cr);
@@ -27,26 +33,39 @@ public abstract class BaseLinkProvider {
         return connectionReceivers.remove(cr);
     }
 
-    //These two should be called when the provider links to a new computer
-    protected void connectionAccepted(NetworkPacket identityPacket, BaseLink link) {
-        //Log.i("KDE/LinkProvider", "connectionAccepted");
+    /**
+     * To be called from the child classes when a link to a new device is established
+     */
+    protected void onConnectionReceived(@NonNull final BaseLink link) {
+        //Log.i("KDE/LinkProvider", "onConnectionReceived");
         for(ConnectionReceiver cr : connectionReceivers) {
-            cr.onConnectionReceived(identityPacket, link);
+            cr.onConnectionReceived(link);
         }
     }
-    protected void connectionLost(BaseLink link) {
+
+    /**
+     * To be called from the child classes when a link to an existing device is disconnected
+     */
+    public void onConnectionLost(BaseLink link) {
         //Log.i("KDE/LinkProvider", "connectionLost");
         for(ConnectionReceiver cr : connectionReceivers) {
             cr.onConnectionLost(link);
         }
     }
 
-    //To override
+    /**
+     * To be called from the child classes when we discover new DeviceInfo for an already linked device.
+     */
+    protected void onDeviceInfoUpdated(@NonNull final DeviceInfo deviceInfo) {
+        for(ConnectionReceiver cr : connectionReceivers) {
+            cr.onDeviceInfoUpdated(deviceInfo);
+        }
+    }
+
     public abstract void onStart();
     public abstract void onStop();
-    public abstract void onNetworkChange();
-
-    //public abstract int getPriority();
+    public abstract void onNetworkChange(@Nullable Network network);
     public abstract String getName();
 
+    public abstract int getPriority();
 }

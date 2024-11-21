@@ -18,7 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import org.kde.kdeconnect.UserInterface.List.ListAdapter
 import org.kde.kdeconnect.UserInterface.MainActivity
-import com.zorinos.zorin_connect.R;
+import com.zorinos.zorin_connect.R
 import com.zorinos.zorin_connect.databinding.FragmentAboutBinding
 
 class AboutFragment : Fragment() {
@@ -57,7 +57,6 @@ class AboutFragment : Fragment() {
         // Update general info
 
         binding!!.appName.text = aboutData.name
-        binding!!.appDescription.text = this.context?.let { aboutData.getDescriptionString(it) } + if (aboutData.copyrightStatement == null) "" else "\n\n" + aboutData.copyrightStatement
         binding!!.appIcon.setImageDrawable(this.context?.let { ContextCompat.getDrawable(it, aboutData.icon) })
         binding!!.appVersion.text = this.context?.getString(R.string.version, aboutData.versionName)
 

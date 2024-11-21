@@ -12,8 +12,7 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.kde.kdeconnect.BackgroundService;
-import org.kde.kdeconnect.UserInterface.ThemeUtil;
+import org.kde.kdeconnect.KdeConnect;
 import com.zorinos.zorin_connect.databinding.ActivityFindMyPhoneBinding;
 
 import java.util.Objects;
@@ -21,12 +20,11 @@ import java.util.Objects;
 public class FindMyPhoneActivity extends AppCompatActivity {
     static final String EXTRA_DEVICE_ID = "deviceId";
 
-    private FindMyPhonePlugin plugin;
+    String deviceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThemeUtil.setUserPreferredTheme(this);
 
         final ActivityFindMyPhoneBinding binding = ActivityFindMyPhoneBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -40,13 +38,14 @@ public class FindMyPhoneActivity extends AppCompatActivity {
             finish();
         }
 
-        String deviceId = getIntent().getStringExtra(EXTRA_DEVICE_ID);
-        plugin = BackgroundService.getInstance().getDevice(deviceId).getPlugin(FindMyPhonePlugin.class);
+        deviceId = getIntent().getStringExtra(EXTRA_DEVICE_ID);
 
         Window window = this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
                 WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
-                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+        );
 
         binding.bFindMyPhone.setOnClickListener(view -> finish());
     }
@@ -54,11 +53,10 @@ public class FindMyPhoneActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        /*
-           For whatever reason when Android launches this activity as a SystemAlertWindow it calls:
-           onCreate(), onStart(), onResume(), onStop(), onStart(), onResume().
-           When using BackgroundService.RunWithPlugin we get into concurrency problems and sometimes no sound will be played
-        */
+        FindMyPhonePlugin plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, FindMyPhonePlugin.class);
+        if (plugin == null) {
+            return;
+        }
         plugin.startPlaying();
         plugin.hideNotification();
     }
@@ -66,7 +64,10 @@ public class FindMyPhoneActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
+        FindMyPhonePlugin plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, FindMyPhonePlugin.class);
+        if (plugin == null) {
+            return;
+        }
         plugin.stopPlaying();
     }
 }

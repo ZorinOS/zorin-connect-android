@@ -12,6 +12,9 @@ package org.kde.kdeconnect.Plugins.ContactsPlugin;
 import android.Manifest;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
+
 import org.kde.kdeconnect.Helpers.ContactsHelper;
 import org.kde.kdeconnect.Helpers.ContactsHelper.ContactNotFoundException;
 import org.kde.kdeconnect.Helpers.ContactsHelper.VCardBuilder;
@@ -19,13 +22,10 @@ import org.kde.kdeconnect.Helpers.ContactsHelper.uID;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
+import org.kde.kdeconnect.UserInterface.AlertDialogFragment;
 import com.zorinos.zorin_connect.R;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @PluginFactory.LoadablePlugin
 public class ContactsPlugin extends Plugin {
@@ -66,17 +66,17 @@ public class ContactsPlugin extends Plugin {
     private static final String PACKET_TYPE_CONTACTS_RESPONSE_VCARDS = "kdeconnect.contacts.response_vcards";
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         return context.getResources().getString(R.string.pref_plugin_contacts);
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getResources().getString(R.string.pref_plugin_contacts_desc);
     }
 
     @Override
-    public String[] getSupportedPacketTypes() {
+    public @NonNull String[] getSupportedPacketTypes() {
         return new String[]{
                 PACKET_TYPE_CONTACTS_REQUEST_ALL_UIDS_TIMESTAMPS,
                 PACKET_TYPE_CONTACTS_REQUEST_VCARDS_BY_UIDS
@@ -84,7 +84,7 @@ public class ContactsPlugin extends Plugin {
     }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
+    public @NonNull String[] getOutgoingPacketTypes() {
         return new String[]{
                 PACKET_TYPE_CONTACTS_RESPONSE_UIDS_TIMESTAMPS,
                 PACKET_TYPE_CONTACTS_RESPONSE_VCARDS
@@ -92,10 +92,8 @@ public class ContactsPlugin extends Plugin {
     }
 
     @Override
-    public boolean onCreate() {
-        permissionExplanation = R.string.contacts_permission_explanation;
-
-        return true;
+    protected int getPermissionExplanation() {
+        return R.string.contacts_permission_explanation;
     }
 
     @Override
@@ -104,9 +102,42 @@ public class ContactsPlugin extends Plugin {
     }
 
     @Override
-    public String[] getRequiredPermissions() {
+    public @NonNull String[] getRequiredPermissions() {
         return new String[]{Manifest.permission.READ_CONTACTS};
         // One day maybe we will also support WRITE_CONTACTS, but not yet
+    }
+
+    @Override
+    public boolean checkRequiredPermissions() {
+        if (!arePermissionsGranted(getRequiredPermissions())) {
+            return false;
+        }
+        return getPreferences().getBoolean("acceptedToTransferContacts", false);
+    }
+
+    @Override
+    public boolean supportsDeviceSpecificSettings() {
+        return true;
+    }
+
+    public @NonNull DialogFragment getPermissionExplanationDialog() {
+        if (!arePermissionsGranted(getRequiredPermissions())) {
+            return super.getPermissionExplanationDialog();
+        }
+        AlertDialogFragment dialog = new AlertDialogFragment.Builder()
+                .setTitle(getDisplayName())
+                .setMessage(R.string.contacts_per_device_confirmation)
+                .setPositiveButton(R.string.ok)
+                .setNegativeButton(R.string.cancel)
+                .create();
+        dialog.setCallback(new AlertDialogFragment.Callback() {
+            @Override
+            public void onPositiveButtonClicked() {
+                Objects.requireNonNull(getPreferences()).edit().putBoolean("acceptedToTransferContacts", true).apply();
+                Objects.requireNonNull(getDevice()).reloadPluginsFromSettings();
+            }
+        });
+        return dialog;
     }
 
     /**
@@ -124,7 +155,7 @@ public class ContactsPlugin extends Plugin {
     private VCardBuilder addVCardMetadata(VCardBuilder vcard, uID uID) throws ContactNotFoundException {
         // Append the device ID line
         // Unclear if the deviceID forms a valid name per the vcard spec. Worry about that later..
-        vcard.appendLine("X-KDECONNECT-ID-DEV-" + device.getDeviceId(),
+        vcard.appendLine("X-KDECONNECT-ID-DEV-" + getDevice().getDeviceId(),
                 uID.toString());
 
         // Build the timestamp line
@@ -163,7 +194,7 @@ public class ContactsPlugin extends Plugin {
 
         reply.set("uids", uIDs);
 
-        device.sendPacket(reply);
+        getDevice().sendPacket(reply);
 
         return true;
     }
@@ -210,13 +241,13 @@ public class ContactsPlugin extends Plugin {
         // Add the valid uIDs to the packet
         reply.set("uids", uIDsAsStrings);
 
-        device.sendPacket(reply);
+        getDevice().sendPacket(reply);
 
         return true;
     }
 
     @Override
-    public boolean onPacketReceived(NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull NetworkPacket np) {
         switch (np.getType()) {
             case PACKET_TYPE_CONTACTS_REQUEST_ALL_UIDS_TIMESTAMPS:
                 return this.handleRequestAllUIDsTimestamps(np);

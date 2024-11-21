@@ -6,8 +6,9 @@
 
 package org.kde.kdeconnect.Plugins.SystemVolumePlugin;
 
-import android.content.Context;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +20,7 @@ import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
 @PluginFactory.LoadablePlugin
@@ -40,17 +42,17 @@ public class SystemVolumePlugin extends Plugin {
     }
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         return context.getResources().getString(R.string.pref_plugin_systemvolume);
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getResources().getString(R.string.pref_plugin_systemvolume_desc);
     }
 
     @Override
-    public boolean onPacketReceived(NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull NetworkPacket np) {
 
         if (np.has("sinkList")) {
             sinks.clear();
@@ -67,8 +69,10 @@ public class SystemVolumePlugin extends Plugin {
                 Log.e("KDEConnect", "Exception", e);
             }
 
-            for (SinkListener l : listeners) {
-                l.sinksChanged();
+            synchronized(listeners) {
+                for (SinkListener l : listeners) {
+                    l.sinksChanged();
+                }
             }
 
         } else {
@@ -92,46 +96,36 @@ public class SystemVolumePlugin extends Plugin {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
         np.set("volume", volume);
         np.set("name", name);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     void sendMute(String name, boolean mute) {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
         np.set("muted", mute);
         np.set("name", name);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     void sendEnable(String name) {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
         np.set("enabled", true);
         np.set("name", name);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     void requestSinkList() {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_SYSTEMVOLUME_REQUEST);
         np.set("requestSinks", true);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     @Override
-    public boolean hasMainActivity(Context context) {
-        return false;
-    }
-
-    @Override
-    public boolean displayInContextMenu() {
-        return false;
-    }
-
-    @Override
-    public String[] getSupportedPacketTypes() {
+    public @NonNull String[] getSupportedPacketTypes() {
         return new String[]{PACKET_TYPE_SYSTEMVOLUME};
     }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
+    public @NonNull String[] getOutgoingPacketTypes() {
         return new String[]{PACKET_TYPE_SYSTEMVOLUME_REQUEST};
     }
 
@@ -140,11 +134,15 @@ public class SystemVolumePlugin extends Plugin {
     }
 
     void addSinkListener(SinkListener listener) {
-        listeners.add(listener);
+        synchronized(listeners) {
+            listeners.add(listener);
+        }
     }
 
     void removeSinkListener(SinkListener listener) {
-        listeners.remove(listener);
+        synchronized(listeners) {
+            listeners.remove(listener);
+        }
     }
 
 }

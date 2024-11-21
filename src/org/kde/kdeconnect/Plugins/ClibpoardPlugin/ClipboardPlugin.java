@@ -7,23 +7,25 @@
 package org.kde.kdeconnect.Plugins.ClibpoardPlugin;
 
 
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
 import com.zorinos.zorin_connect.R;
+
+import java.util.Objects;
 
 @PluginFactory.LoadablePlugin
 public class ClipboardPlugin extends Plugin {
@@ -54,17 +56,17 @@ public class ClipboardPlugin extends Plugin {
     private final static String PACKET_TYPE_CLIPBOARD_CONNECT = "kdeconnect.clipboard.connect";
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         return context.getResources().getString(R.string.pref_plugin_clipboard);
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getResources().getString(R.string.pref_plugin_clipboard_desc);
     }
 
     @Override
-    public boolean onPacketReceived(NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull NetworkPacket np) {
         String content = np.getString("content");
         switch (np.getType()) {
             case (PACKET_TYPE_CLIPBOARD):
@@ -77,7 +79,9 @@ public class ClipboardPlugin extends Plugin {
                     return false;
                 }
 
-                ClipboardListener.instance(context).setText(content);
+                if (np.has("content")) { // change clipboard if content is in NetworkPacket
+                    ClipboardListener.instance(context).setText(content);
+                }
                 return true;
         }
         throw new UnsupportedOperationException("Unknown packet type: " + np.getType());
@@ -88,7 +92,7 @@ public class ClipboardPlugin extends Plugin {
     void propagateClipboard(String content) {
         NetworkPacket np = new NetworkPacket(ClipboardPlugin.PACKET_TYPE_CLIPBOARD);
         np.set("content", content);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     private void sendConnectPacket() {
@@ -97,7 +101,7 @@ public class ClipboardPlugin extends Plugin {
         long timestamp = ClipboardListener.instance(context).getUpdateTimestamp();
         np.set("timestamp", timestamp);
         np.set("content", content);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
 
@@ -114,34 +118,34 @@ public class ClipboardPlugin extends Plugin {
     }
 
     @Override
-    public String[] getSupportedPacketTypes() {
+    public @NonNull String[] getSupportedPacketTypes() {
         return new String[]{PACKET_TYPE_CLIPBOARD, PACKET_TYPE_CLIPBOARD_CONNECT};
     }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
+    public @NonNull String[] getOutgoingPacketTypes() {
         return new String[]{PACKET_TYPE_CLIPBOARD, PACKET_TYPE_CLIPBOARD_CONNECT};
     }
 
     @Override
-    public String getActionName() {
+    public @NonNull String getActionName() {
         return context.getString(R.string.send_clipboard);
     }
 
     @Override
-    public boolean hasMainActivity(Context context) {
+    public boolean displayAsButton(Context context) {
         return Build.VERSION.SDK_INT > Build.VERSION_CODES.P &&
                 ContextCompat.checkSelfPermission(context, Manifest.permission.READ_LOGS) == PackageManager.PERMISSION_DENIED;
     }
 
     @Override
-    public Drawable getIcon() {
-        return ContextCompat.getDrawable(context, R.drawable.ic_baseline_content_paste_24);
+    public @DrawableRes int getIcon() {
+        return R.drawable.ic_baseline_content_paste_24;
     }
 
     @Override
     public void startMainActivity(Activity activity) {
-        if (device != null) {
+        if (isDeviceInitialized()) {
             ClipboardManager clipboardManager = ContextCompat.getSystemService(this.context,
                     ClipboardManager.class);
             ClipData.Item item;

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -23,7 +30,7 @@
             android:layout_gravity="top"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:paddingBottom="4dp"
-            android:tint="?android:attr/textColorSecondary"
+            android:importantForAccessibility="no"
             tools:srcCompat="@drawable/ic_device_phone_32dp" />
 
         <LinearLayout
@@ -44,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceBody2"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="@color/material_on_surface_emphasis_medium"
                 tools:text="My device" />
         </LinearLayout>
     </LinearLayout>

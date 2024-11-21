@@ -23,9 +23,9 @@ import androidx.core.content.ContextCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.kde.kdeconnect.BackgroundService;
+import org.kde.kdeconnect.Device;
+import org.kde.kdeconnect.KdeConnect;
 import org.kde.kdeconnect.UserInterface.List.ListAdapter;
-import org.kde.kdeconnect.UserInterface.ThemeUtil;
 import com.zorinos.zorin_connect.R;
 import com.zorinos.zorin_connect.databinding.ActivityRunCommandBinding;
 
@@ -38,44 +38,46 @@ import java.util.Objects;
 public class RunCommandActivity extends AppCompatActivity {
     private ActivityRunCommandBinding binding;
     private String deviceId;
-    private final RunCommandPlugin.CommandsChangedCallback commandsChangedCallback = this::updateView;
+    private final RunCommandPlugin.CommandsChangedCallback commandsChangedCallback = () -> runOnUiThread(this::updateView);
     private List<CommandEntry> commandItems;
 
     private void updateView() {
-        BackgroundService.RunWithPlugin(this, deviceId, RunCommandPlugin.class, plugin -> runOnUiThread(() -> {
-            registerForContextMenu(binding.runCommandsList);
+        RunCommandPlugin plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, RunCommandPlugin.class);
+        if (plugin == null) {
+            finish();
+            return;
+        }
 
-            commandItems = new ArrayList<>();
-            for (JSONObject obj : plugin.getCommandList()) {
-                try {
-                    commandItems.add(new CommandEntry(obj.getString("name"),
-                            obj.getString("command"), obj.getString("key")));
-                } catch (JSONException e) {
-                    Log.e("RunCommand", "Error parsing JSON", e);
-                }
+        registerForContextMenu(binding.runCommandsList);
+
+        commandItems = new ArrayList<>();
+        for (JSONObject obj : plugin.getCommandList()) {
+            try {
+                commandItems.add(new CommandEntry(obj));
+            } catch (JSONException e) {
+                Log.e("RunCommand", "Error parsing JSON", e);
             }
+        }
 
-            Collections.sort(commandItems, Comparator.comparing(CommandEntry::getName));
+        Collections.sort(commandItems, Comparator.comparing(CommandEntry::getName));
 
-            ListAdapter adapter = new ListAdapter(RunCommandActivity.this, commandItems);
+        ListAdapter adapter = new ListAdapter(RunCommandActivity.this, commandItems);
 
-            binding.runCommandsList.setAdapter(adapter);
-            binding.runCommandsList.setOnItemClickListener((adapterView, view1, i, l) ->
-                    plugin.runCommand(commandItems.get(i).getKey()));
+        binding.runCommandsList.setAdapter(adapter);
+        binding.runCommandsList.setOnItemClickListener((adapterView, view1, i, l) ->
+                plugin.runCommand(commandItems.get(i).getKey()));
 
-            String text = getString(R.string.addcommand_explanation);
-            if (!plugin.canAddCommand()) {
-                text += "\n" + getString(R.string.addcommand_explanation2);
-            }
-            binding.addComandExplanation.setText(text);
-            binding.addComandExplanation.setVisibility(commandItems.isEmpty() ? View.VISIBLE : View.GONE);
-        }));
+        String text = getString(R.string.addcommand_explanation);
+        if (!plugin.canAddCommand()) {
+            text += "\n" + getString(R.string.addcommand_explanation2);
+        }
+        binding.addCommandExplanation.setText(text);
+        binding.addCommandExplanation.setVisibility(commandItems.isEmpty() ? View.VISIBLE : View.GONE);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThemeUtil.setUserPreferredTheme(this);
 
         binding = ActivityRunCommandBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -85,27 +87,26 @@ public class RunCommandActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         deviceId = getIntent().getStringExtra("deviceId");
-
-        boolean canAddCommands = false;
-        try {
-            canAddCommands = BackgroundService.getInstance().getDevice(deviceId).getPlugin(RunCommandPlugin.class).canAddCommand();
-        } catch (Exception ignore) {
+        Device device = KdeConnect.getInstance().getDevice(deviceId);
+        if (device != null) {
+            getSupportActionBar().setSubtitle(device.getName());
+            RunCommandPlugin plugin = device.getPlugin(RunCommandPlugin.class);
+            if (plugin != null) {
+                if (plugin.canAddCommand()) {
+                    binding.addCommandButton.show();
+                } else {
+                    binding.addCommandButton.hide();
+                }
+                binding.addCommandButton.setOnClickListener(v -> {
+                    plugin.sendSetupPacket();
+                    new AlertDialog.Builder(RunCommandActivity.this)
+                            .setTitle(R.string.add_command)
+                            .setMessage(R.string.add_command_description)
+                            .setPositiveButton(R.string.ok, null)
+                            .show();
+                });
+            }
         }
-
-        if (canAddCommands) {
-            binding.addCommandButton.show();
-        } else {
-            binding.addCommandButton.hide();
-        }
-
-        binding.addCommandButton.setOnClickListener(v -> BackgroundService.RunWithPlugin(RunCommandActivity.this, deviceId, RunCommandPlugin.class, plugin -> {
-            plugin.sendSetupPacket();
-             new AlertDialog.Builder(RunCommandActivity.this)
-                    .setTitle(R.string.add_command)
-                    .setMessage(R.string.add_command_description)
-                    .setPositiveButton(R.string.ok, null)
-                    .show();
-        }));
         updateView();
     }
 
@@ -135,14 +136,23 @@ public class RunCommandActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        BackgroundService.RunWithPlugin(this, deviceId, RunCommandPlugin.class, plugin -> plugin.addCommandsUpdatedCallback(commandsChangedCallback));
+        RunCommandPlugin plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, RunCommandPlugin.class);
+        if (plugin == null) {
+            finish();
+            return;
+        }
+        plugin.addCommandsUpdatedCallback(commandsChangedCallback);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
 
-        BackgroundService.RunWithPlugin(this, deviceId, RunCommandPlugin.class, plugin -> plugin.removeCommandsUpdatedCallback(commandsChangedCallback));
+        RunCommandPlugin plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, RunCommandPlugin.class);
+        if (plugin == null) {
+            return;
+        }
+        plugin.removeCommandsUpdatedCallback(commandsChangedCallback);
     }
 
     @Override

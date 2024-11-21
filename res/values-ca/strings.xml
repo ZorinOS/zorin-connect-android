@@ -4,7 +4,7 @@
   <string name="manifest_label_share">Envia a un dispositiu</string>
   <string name="foreground_notification_no_devices">No està connectat a cap dispositiu</string>
   <string name="foreground_notification_devices">Connectat a: %s</string>
-  <string name="foreground_notification_send_clipboard">Envia al porta-retalls</string>
+  <string name="foreground_notification_send_clipboard">Envia el porta-retalls</string>
   <string name="pref_plugin_telephony">Notificador de telefonia</string>
   <string name="pref_plugin_telephony_desc">Envia notificacions per a les trucades entrants</string>
   <string name="pref_plugin_battery">Informe de bateria</string>
@@ -18,7 +18,7 @@
   <string name="pref_plugin_clipboard_sent">S\'ha enviat al porta-retalls</string>
   <string name="pref_plugin_mousepad">Entrada remota</string>
   <string name="pref_plugin_mousepad_desc">Usa el vostre telèfon o tauleta com un ratolí tàctil i un teclat</string>
-  <string name="pref_plugin_presenter">Presentació de diapositives remota</string>
+  <string name="pref_plugin_presenter">Presentació remota</string>
   <string name="pref_plugin_presenter_desc">Usa el dispositiu per a canviar les diapositives d\'una presentació</string>
   <string name="pref_plugin_remotekeyboard">Rep les pulsacions remotes de tecles</string>
   <string name="pref_plugin_remotekeyboard_desc">Rep els esdeveniments de pulsacions de tecla des de dispositius remots</string>
@@ -41,7 +41,7 @@
   <string name="sad_ok">D\'acord :(</string>
   <string name="cancel">Cancel·la</string>
   <string name="open_settings">Obre l\'arranjament</string>
-  <string name="no_permissions">Us caldrà concedir permís per a accedir a les notificacions</string>
+  <string name="no_permissions">Us caldrà atorgar permís per a accedir a les notificacions</string>
   <string name="no_permission_mprisreceiver">Per a poder controlar els reproductors multimèdia cal atorgar accés a les notificacions</string>
   <string name="no_permissions_remotekeyboard">Per a rebre les pulsacions de tecles, haureu d\'activar el teclat remot del Zorin Connect</string>
   <string name="send_ping">Envia un ping</string>
@@ -51,14 +51,19 @@
   <string name="remotekeyboard_connected">La connexió amb el teclat remot està activa</string>
   <string name="remotekeyboard_multiple_connections">Hi ha més d\'una connexió amb un teclat remot, seleccioneu el dispositiu per a configurar-lo</string>
   <string name="open_mousepad">Entrada remota</string>
-  <string name="mousepad_info">Moveu un dit per la pantalla per a moure el cursor del ratolí. Toqueu per a un clic, i empreu dos/tres dits per als botons dret i mig. Useu 2 dits per a desplaçar. Empreu un toc llarg per a arrossegar i deixar anar.</string>
+  <string name="mousepad_info">Moveu un dit per la pantalla per a moure el cursor del ratolí. Toqueu per a un clic, i empreu dos/tres dits per als botons dret i mig. Useu 2 dits per a desplaçar. Empreu un toc llarg per a arrossegar i deixar anar. La funcionalitat giroscòpica dels ratolins es pot activar des de les preferències del connector</string>
+  <string name="mousepad_info_no_gestures">Moveu un dit a la pantalla per a moure el cursor del ratolí, toqueu per a fer un clic.</string>
   <string name="mousepad_keyboard_input_not_supported">El dispositiu aparellat no permet l\'entrada de teclat</string>
   <string name="mousepad_single_tap_settings_title">Estableix l\'acció de tocar amb un dit</string>
   <string name="mousepad_double_tap_settings_title">Estableix l\'acció de tocar amb dos dits</string>
   <string name="mousepad_triple_tap_settings_title">Estableix l\'acció de tocar amb tres dits</string>
   <string name="mousepad_sensitivity_settings_title">Estableix la sensibilitat del ratolí tàctil</string>
+  <string name="mousepad_mouse_buttons_title">Mostra els botons del ratolí</string>
   <string name="mousepad_acceleration_profile_settings_title">Estableix l\'acceleració de l\'apuntador</string>
   <string name="mousepad_scroll_direction_title">Inverteix la direcció del desplaçament</string>
+  <string name="mousepad_scroll_sensitivity_title">Sensibilitat del desplaçament</string>
+  <string name="gyro_mouse_enabled_title">Activa el ratolí giroscòpic</string>
+  <string name="gyro_mouse_sensitivity_title">Sensibilitat del giroscopi</string>
   <string-array name="mousepad_tap_entries">
     <item>Clic esquerre</item>
     <item>Clic dret</item>
@@ -94,31 +99,30 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Envia com a pulsacions de tecla</string>
   <string name="mouse_receiver_plugin_description">Rep el moviment del ratolí remot</string>
   <string name="mouse_receiver_plugin_name">Receptor del ratolí</string>
-  <string name="mouse_receiver_no_permissions">Cal que habiliteu el servei Accessibilitat</string>
+  <string name="mouse_receiver_no_permissions">Per a rebre entrades tàctils remotament cal atorgar el permís d\'Accessibilitat a control complet del vostre dispositiu</string>
   <string name="view_status_title">Estat</string>
   <string name="battery_status_format">Bateria: %d%%</string>
   <string name="battery_status_low_format">Bateria: %d%% bateria baixa</string>
   <string name="battery_status_charging_format">Bateria: %d%% està carregant</string>
-  <string name="battery_status_unknown">La informació de la bateria no està disponible</string>
   <string name="category_connected_devices">Dispositius connectats</string>
   <string name="category_not_paired_devices">Dispositius disponibles</string>
   <string name="category_remembered_devices">Dispositius recordats</string>
   <string name="device_menu_plugins">Arranjament dels connectors</string>
   <string name="device_menu_unpair">Desaparella</string>
   <string name="pair_new_device">Aparella amb un dispositiu nou</string>
+  <string name="cancel_pairing">Cancel·la l\'aparellament</string>
   <string name="unknown_device">Dispositiu desconegut</string>
   <string name="error_not_reachable">No es pot accedir al dispositiu</string>
   <string name="error_already_paired">El dispositiu ja està aparellat</string>
-  <string name="error_could_not_send_package">No s\'ha pogut enviar el paquet</string>
   <string name="error_timed_out">Ha excedit el temps</string>
   <string name="error_canceled_by_user">Cancel·lat per l\'usuari</string>
   <string name="error_canceled_by_other_peer">Cancel·lat per l\'altre parell</string>
   <string name="encryption_info_title">Informació de l\'encriptatge</string>
-  <string name="encryption_info_msg_no_ssl">L\'altre dispositiu no usa una versió recent del Zorin Connect, s\'utilitzarà el mètode d\'encriptatge antic.</string>
   <string name="my_device_fingerprint">L\'empremta digital SHA256 del certificat del vostre dispositiu és:</string>
   <string name="remote_device_fingerprint">L\'empremta digital SHA256 del certificat del dispositiu remot és:</string>
   <string name="pair_requested">S\'ha demanat aparellar</string>
-  <string name="pairing_request_from">S\'ha demanat aparellar des de %1s</string>
+  <string name="pair_succeeded">S\'ha aparellat correctament</string>
+  <string name="pairing_request_from">S\'ha demanat aparellar des de «%1s»</string>
   <plurals name="incoming_file_title">
     <item quantity="one">S\'està rebent %1$d fitxer des de %2$s</item>
     <item quantity="other">S\'estan rebent %1$d fitxers des de %2$s</item>
@@ -155,6 +159,7 @@
   <string name="received_file_text">Toqueu per a obrir «%1s»</string>
   <string name="cannot_create_file">No s\'ha pogut crear el fitxer %s</string>
   <string name="tap_to_answer">Toqueu per a respondre</string>
+  <string name="left_click">Envia un clic esquerre</string>
   <string name="right_click">Envia un clic dret</string>
   <string name="middle_click">Envia un clic del mig</string>
   <string name="show_keyboard">Mostra el teclat</string>
@@ -181,9 +186,12 @@
     <item>1 minut</item>
     <item>2 minuts</item>
   </string-array>
+  <string name="mpris_notifications_explanation">Cal el permís de notificacions per a mostrar els elements multimèdia remots al calaix de notificacions</string>
   <string name="mpris_notification_settings_title">Mostra les notificacions dels reproductors</string>
   <string name="mpris_notification_settings_summary">Permet controlar els reproductors multimèdia sense obrir el Zorin Connect</string>
   <string name="share_to">Comparteix amb…</string>
+  <string name="unreachable_device">%s (no s\'hi pot accedir)</string>
+  <string name="unreachable_device_url_share_text">Els URL compartits amb un dispositiu no accessible es lliuraran un cop s\'hi pugui accedir.\n\n</string>
   <string name="protocol_version_newer">Aquest dispositiu usa una versió nova del protocol</string>
   <string name="plugin_settings_with_name">Configuració del %s</string>
   <string name="invalid_device_name">El nom del dispositiu no és vàlid</string>
@@ -219,6 +227,7 @@
   <string name="sftp_action_mode_menu_delete">Suprimeix</string>
   <string name="sftp_no_storage_locations_configured">No s\'ha configurat cap ubicació d\'emmagatzematge</string>
   <string name="sftp_saf_permission_explanation">Per a accedir remotament als fitxers cal configurar les ubicacions d\'emmagatzematge</string>
+  <string name="sftp_manage_storage_permission_explanation">Per a permetre l\'accés remot als fitxers d\'aquest dispositiu, haureu de permetre que el Zorin Connect gestioni l\'emmagatzematge.</string>
   <string name="no_players_connected">No s\'ha trobat cap reproductor</string>
   <string name="send_files">Envia fitxers</string>
   <string name="block_notification_contents">Bloca el contingut de les notificacions</string>
@@ -235,7 +244,7 @@
   <string name="pref_plugin_telepathy">Envia un SMS</string>
   <string name="pref_plugin_telepathy_desc">Envia missatges de text des de l\'escriptori</string>
   <string name="pref_plugin_telepathy_mms">Envia un MMS</string>
-  <string name="pref_plugin_telepathy_mms_desc">Per a poder enviar MMS des del Zorin Connect cal establir-la com a aplicació predeterminada per a SMS.</string>
+  <string name="pref_plugin_telepathy_mms_desc">Per a poder enviar MMS des del Zorin Connect cal establir-la com a aplicació predeterminada d\'SMS.</string>
   <string name="findmyphone_title">Troba el meu telèfon</string>
   <string name="findmyphone_title_tablet">Troba la meva tauleta</string>
   <string name="findmyphone_title_tv">Troba el meu televisor</string>
@@ -245,18 +254,20 @@
   <string name="close">Tanca</string>
   <string name="plugins_need_permission">Alguns connectors necessiten permisos per a funcionar (toqueu per a més informació):</string>
   <string name="permission_explanation">Aquest connector necessita permisos per a funcionar</string>
-  <string name="optional_permission_explanation">Us caldrà concedir permisos extres per a accedir a totes les característiques</string>
+  <string name="all_permissions_granted">S\'han atorgat tots els permisos 🎉</string>
+  <string name="optional_permission_explanation">Us caldrà atorgar permisos extres per a accedir a totes les característiques</string>
   <string name="plugins_need_optional_permission">Alguns connectors tenen característiques desactivades per la falta de permís (toqueu per a més informació):</string>
   <string name="share_optional_permission_explanation">Per a rebre fitxers cal permetre l\'accés a l\'emmagatzematge</string>
+  <string name="share_notifications_explanation">Per a veure el progrés en enviar i rebre fitxers, heu de permetre les notificacions</string>
   <string name="telepathy_permission_explanation">Per a llegir i escriure SMS des de l\'escriptori, haureu de donar permís als SMS</string>
   <string name="telephony_permission_explanation">Per a veure les trucades telefòniques des de l\'escriptori, haureu de donar permís d\'accés al registre de trucades telefòniques i a l\'estat del telèfon</string>
   <string name="telephony_optional_permission_explanation">Per a veure un nom de contacte en comptes d\'un número de telèfon, haureu de donar permís als contactes del telèfon</string>
   <string name="contacts_permission_explanation">Per a compartir els vostres contactes amb l\'escriptori, caldrà que els hi doneu permís</string>
+  <string name="contacts_per_device_confirmation">Els contactes del telèfon es copiaran en aquest dispositiu, de manera que puguin ser utilitzats per l\'aplicació d\'SMS del Zorin Connect i altres aplicacions.</string>
   <string name="select_ringtone">Seleccioneu un to de la trucada</string>
   <string name="telephony_pref_blocked_title">Nombres blocats</string>
   <string name="telephony_pref_blocked_dialog_desc">No es mostren ni les trucades ni els SMS d\'aquests números. Especifiqueu un número per línia</string>
   <string name="mpris_coverart_description">Caràtula del fitxer multimèdia actual</string>
-  <string name="device_icon_description">Icona del dispositiu</string>
   <string name="settings_icon_description">Icona d\'arranjament</string>
   <string name="presenter_fullscreen">Pantalla completa</string>
   <string name="presenter_exit">Surt de la presentació</string>
@@ -270,16 +281,21 @@
   <string name="notification_channel_default">Altres notificacions</string>
   <string name="notification_channel_persistent">Indicador de persistència</string>
   <string name="notification_channel_media_control">Control multimèdia</string>
-  <string name="notification_channel_filetransfer">Transferència de fitxers</string>
+  <string name="notification_channel_filetransfer">Transferència de fitxer entrant</string>
+  <string name="notification_channel_filetransfer_upload">Transferència de fitxer de sortida</string>
+  <string name="notification_channel_filetransfer_error">Error de transferència de fitxer</string>
   <string name="notification_channel_high_priority">Prioritat alta</string>
-  <string name="notification_channel_sms_mms">Missatge nou</string>
   <string name="mpris_stop">Atura el reproductor actual</string>
   <string name="copy_url_to_clipboard">Copia l\'URL al porta-retalls</string>
   <string name="clipboard_toast">Copiat al porta-retalls</string>
   <string name="runcommand_notreachable">No es pot accedir al dispositiu</string>
   <string name="runcommand_notpaired">El dispositiu no està aparellat</string>
   <string name="runcommand_nosuchdevice">El dispositiu no existeix</string>
-  <string name="runcommand_noruncommandplugin">Aquest dispositiu no té el connector d\'executar ordres activat</string>
+  <string name="runcommand_noruncommandplugin">Aquest dispositiu no té activat el connector d\'executar ordres</string>
+  <string name="runcommand_category_device_controls_title">Controls del dispositiu</string>
+  <string name="runcommand_device_controls_summary">Si el vostre dispositiu admet controls de dispositiu, les ordres que hàgiu configurat apareixeran allí.</string>
+  <string name="set_runcommand_name_as_title">estableix_nom_ordre_executar_com_a_títol</string>
+  <string name="runcommand_name_as_title_title">Mostra el nom com a títol</string>
   <string name="pref_plugin_findremotedevice">Cerca el dispositiu remot</string>
   <string name="pref_plugin_findremotedevice_desc">Truca al dispositiu remot</string>
   <string name="ring">Truca</string>
@@ -301,8 +317,6 @@
   <string name="block_contents">Bloca el contingut de les notificacions</string>
   <string name="block_images">Bloca les imatges a les notificacions</string>
   <string name="notification_channel_receivenotification">Notificacions des d\'altres dispositius</string>
-  <string name="take_picture">Inicia la càmera</string>
-  <string name="plugin_photo_desc">Llança l\'aplicació de càmera per a facilitar la presa i la transferència de fotografies</string>
   <string name="no_app_for_opening">No s\'ha trobat cap aplicació adequada per a obrir aquest fitxer</string>
   <string name="remote_keyboard_service">Teclat remot del Zorin Connect</string>
   <string name="presenter_pointer">Apuntador</string>
@@ -312,7 +326,8 @@
   <string name="empty_trusted_networks_list_text">Encara no heu afegit cap xarxa de confiança</string>
   <string name="allow_all_networks_text">Permet totes</string>
   <string name="location_permission_needed_title">Es requereix permís</string>
-  <string name="location_permission_needed_desc">El Zorin Connect necessita el permís d\'ubicació en segon pla per conèixer la xarxa Wi-Fi a la qual esteu connectat fins i tot quan l\'aplicació està en segon pla. Això és perquè el nom de les xarxes Wi-Fi que hi ha al voltant es podria utilitzar per a trobar la vostra ubicació, fins i tot quan això no és el que fa el Zorin Connect.</string>
+  <string name="bluetooth_permission_needed_desc">Atorgueu els permisos de Bluetooth per a fer que els dispositius aparellats per Bluetooth estiguin disponibles al Zorin Connect.</string>
+  <string name="location_permission_needed_desc">El Zorin Connect necessita el permís d\'ubicació en segon pla per a conèixer la xarxa Wi-Fi a la qual esteu connectat fins i tot quan l\'aplicació està en segon pla. Això és perquè el nom de les xarxes Wi-Fi que hi ha al voltant es podria utilitzar per a trobar la vostra ubicació, fins i tot quan això no és el que fa el Zorin Connect.</string>
   <string name="clipboard_android_x_incompat">L\'Android 10 ha tret l\'accés al porta-retalls a totes les aplicacions. Aquest connector estarà inhabilitat.</string>
   <string name="mpris_open_url">Continua reproduint aquí</string>
   <string name="cant_open_url">No s\'ha pogut obrir l\'URL per a continuar reproduint</string>
@@ -352,7 +367,7 @@
     <item>Clar</item>
     <item>Fosc</item>
   </string-array>
-  <string name="report_bug">Informa d\'un error</string>
+  <string name="report_bug">Informeu d\'un error</string>
   <string name="donate">Donació de diners</string>
   <string name="source_code">Codi font</string>
   <string name="licenses">Llicències</string>
@@ -373,23 +388,36 @@
   <string name="click_here_to_type">Toqueu aquí per a teclejar</string>
   <string name="clear_compose">Neteja</string>
   <string name="send_compose">Envia</string>
+  <string name="compose_send_title">Títol de l\'enviament</string>
   <string name="open_compose_send">Redacta text</string>
-  <string name="app_description">Aplicació multiplataforma que permet que els dispositius es comuniquin (p. ex., el telèfon i l\'ordinador)</string>
-  <string name="about_kde_about">&lt;h1&gt;Quant al&lt;/h1&gt; &lt;p&gt;El KDE és una comunitat mundial d\'enginyers, artistes, escriptors, traductors i creadors de programari compromesos amb el desenvolupament de &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;programari lliure&lt;/a&gt;. El KDE produeix l\'entorn d\'escriptori Plasma, centenars d\'aplicacions i moltes biblioteques de programari que els donen suport.&lt;/p&gt; &lt;p&gt;El KDE és una empresa en cooperativa: cap entitat controla la seva direcció o els productes. En el seu lloc, treballem junts per a aconseguir l\'objectiu comú de construir el millor programari lliure del món. Tothom hi és benvingut a &lt;a href=https://community.kde.org/Get_Involved&gt;unir-se i contribuir&lt;/a&gt; al KDE, inclosos vosaltres.&lt;/p&gt; Visiteu &lt;a href=https://www.kde.org/ca/&gt;https://www.kde.org/ca/&lt;/a&gt; per a obtenir més informació sobre la comunitat KDE i el programari que produïm.</string>
-  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Informeu dels errors o desitjos&lt;/h1&gt; &lt;p&gt;El programari sempre es pot millorar, i l\'equip del KDE està a punt per a fer-ho. No obstant això, l\'usuari, ha de dir-nos quan alguna cosa no funciona com s\'esperava o si podria fer-se millor.&lt;/p&gt; &lt;p&gt;El KDE té un sistema de seguiment d\'errors. Per a informar-ne d\'un, visiteu &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; o useu el botó \"Informa d\'un error\" des de la pantalla Quant al.&lt;/p&gt; Si teniu un suggeriment de millora, podeu usar el sistema de seguiment d\'errors per a enregistrar el vostre desig. Assegureu-vos d\'usar la severitat anomenada \"Llista de desitjos\" (Wishlist).</string>
-  <string name="about_kde_join_kde">&lt;h1&gt;Uniu-vos al KDE&lt;/h1&gt; &lt;p&gt;No cal ser un desenvolupador de programari per a ser membre de l\'equip KDE. Podeu unir-vos als equips nacionals que tradueixen la interfície dels programes. Podeu proporcionar gràfics, temes, sons i documentació millorada. Vosaltres decidiu!&lt;/p&gt; &lt;p&gt;Visiteu &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; per a obtenir informació sobre alguns projectes en què podeu participar-hi.&lt;/p&gt; Si us cal més informació o documentació, una visita a &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; us proporcionarà el que necessiteu.</string>
-  <string name="about_kde_support_kde">&lt;h1&gt;Contribució al KDE&lt;/h1&gt; &lt;p&gt;El programari KDE està i sempre estarà disponible de forma gratuïta, però la creació no està lliure de càrrecs.&lt;/p&gt; &lt;p&gt;Per a donar suport al desenvolupament, la comunitat KDE ha format la KDE e.V., una organització sense ànim de lucre legalment fundada a Alemanya. La KDE e.V. representa a la comunitat KDE en els assumptes legals i financers. Per a obtenir informació sobre la KDE e.V., vegeu &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt;.El KDE es beneficia de molts tipus de contribucions, inclosa la financera. Usem els fons per a reemborsar als membres i altra gent per les despeses que incorren col·laborant-hi. S\'usen més fons per al suport legal i l\'organització de les conferències i reunions.&lt;/p&gt; &lt;p&gt;Us animem a ajudar al KDE mitjançant donacions monetàries, usant un dels mitjans descrits a &lt;a href=https://kde.org/ca/community/donations/&gt;https://kde.org/ca/community/donations/&lt;/a&gt;.&lt;/p&gt;. Moltes gràcies per endavant per la vostra ajuda.</string>
+  <string name="double_tap_to_drag">Dos tocs per a arrossegar</string>
+  <string name="hold_to_drag">Mantenir premut per a arrossegar</string>
+  <string name="about_kde_about">&lt;h1&gt;Quant al&lt;/h1&gt; &lt;p&gt;KDE és una comunitat mundial d\'enginyers, artistes, escriptors, traductors i creadors de programari compromesos amb el desenvolupament de &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;programari lliure&lt;/a&gt;. KDE produeix l\'entorn d\'escriptori Plasma, centenars d\'aplicacions i moltes biblioteques de programari que els donen suport.&lt;/p&gt; &lt;p&gt;KDE és una empresa en cooperativa: cap entitat controla la seva direcció o els productes. En el seu lloc, treballem junts per a aconseguir l\'objectiu comú de construir el millor programari lliure del món. Tothom hi és benvingut a &lt;a href=https://community.kde.org/Get_Involved&gt;unir-se i contribuir&lt;/a&gt; a KDE, inclosos vosaltres.&lt;/p&gt; Visiteu &lt;a href=https://www.kde.org/ca/&gt;https://www.kde.org/ca/&lt;/a&gt; per a obtenir més informació sobre la comunitat KDE i el programari que produïm.</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Informeu dels errors o desitjos&lt;/h1&gt; &lt;p&gt;El programari sempre es pot millorar, i l\'equip del KDE està a punt per a fer-ho. No obstant això, l\'usuari, ha de dir-nos quan alguna cosa no funciona com s\'esperava o si podria fer-se millor.&lt;/p&gt; &lt;p&gt;El KDE té un sistema de seguiment d\'errors. Per a informar-ne d\'un, visiteu &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; o useu el botó «Informeu d\'un error» des de la pantalla Quant al.&lt;/p&gt; Si teniu un suggeriment de millora, podeu usar el sistema de seguiment d\'errors per a enregistrar el vostre desig. Assegureu-vos d\'usar la severitat anomenada «Llista de desitjos» (Wishlist).</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Uniu-vos al KDE&lt;/h1&gt; &lt;p&gt;No cal ser un desenvolupador de programari per a ser membre de l\'equip KDE. Podeu unir-vos als equips d\'idiomes que tradueixen la interfície dels programes. Podeu proporcionar gràfics, temes, sons i documentació millorada. Vosaltres decidiu!&lt;/p&gt; &lt;p&gt;Visiteu &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; per a obtenir informació sobre alguns projectes en què podeu participar-hi.&lt;/p&gt; Si us cal més informació o documentació, una visita a &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; us proporcionarà el que necessiteu.</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;Contribució al KDE&lt;/h1&gt; &lt;p&gt;El programari KDE està i sempre estarà disponible de forma gratuïta, però la creació no està lliure de càrrecs.&lt;/p&gt; &lt;p&gt;Per a donar suport al desenvolupament, la comunitat KDE ha format la KDE e.V., una organització sense ànim de lucre legalment fundada a Alemanya. La KDE e.V. representa a la comunitat KDE en els assumptes legals i financers. Per a obtenir informació sobre la KDE e.V., vegeu &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt;.El KDE es beneficia de molts tipus de contribucions, inclosa la financera. Usem els fons per a reemborsar als membres i altra gent per les despeses que incorren col·laborant-hi. S\'usen més fons per al suport legal i l\'organització de les conferències i reunions.&lt;/p&gt; &lt;p&gt;Us animem a ajudar al KDE mitjançant donacions monetàries, usant un dels mitjans descrits a &lt;a href=https://kde.org/ca/community/donations/&gt;https://kde.org/ca/community/donations/&lt;/a&gt;.&lt;/p&gt; Moltes gràcies per endavant per la vostra ajuda.</string>
   <string name="maintainer_and_developer">Mantenidor i desenvolupador</string>
   <string name="developer">Desenvolupador</string>
   <string name="apple_support">Suport de macOS. Treballant en el suport d\'iOS</string>
   <string name="bug_fixes_and_general_improvements">Esmenes d\'errors i millores generals</string>
   <string name="samoilenko_yuri_task">Implementació d\'SFTP, esmenes d\'errors i millores generals</string>
-  <string name="aniket_kumar_task">Millores en el connector SMS</string>
+  <string name="aniket_kumar_task">Millores en el connector d\'SMS</string>
   <string name="alex_fiestas_task">Millores en el connector de contactes</string>
   <string name="maxim_leshchenko_task">Millores en la IU i ha creat aquesta pàgina</string>
   <string name="holger_kaelberer_task">Connector de teclat remot i esmenes d\'errors</string>
   <string name="saikrishna_arcot_task">Suport per a usar el teclat en el connector d\'entrada remota, esmenes d\'errors i millores generals</string>
+  <string name="shellwen_chen_task">Millorar la seguretat d\'SFTP, millorar les tasques de manteniment d\'aquest projecte, esmenes d\'errors i millores generals</string>
   <string name="everyone_else">Tothom qui ha contribuït al Zorin Connect al llarg dels anys</string>
   <string name="send_clipboard">Envia el porta-retalls</string>
   <string name="tap_to_execute">Toqueu per a executar</string>
+  <string name="plugin_stats">Estadístiques del connector</string>
+  <string name="enable_udp_broadcast">Activa el descobriment UDP de dispositius</string>
+  <string name="enable_bluetooth">Activa el Bluetooth (beta)</string>
+  <string name="receive_notifications_permission_explanation">Cal permetre que les notificacions es rebin des d\'altres dispositius</string>
+  <string name="findmyphone_notifications_explanation">Cal el permís de notificacions perquè el telèfon pugui sonar quan l\'aplicació estigui en segon pla</string>
+  <string name="no_notifications">Les notificacions estan desactivades, no rebreu notificacions entrants d\'emparellament.</string>
+  <string name="mpris_keepwatching">Continua reproduint</string>
+  <string name="mpris_keepwatching_settings_title">Continua reproduint</string>
+  <string name="mpris_keepwatching_settings_summary">Mostra una notificació silenciosa per a continuar reproduint en aquest dispositiu després de tancar l\'element multimèdia</string>
+  <string name="notification_channel_keepwatching">Continua reproduint</string>
 </resources>

@@ -33,7 +33,7 @@ class UploadNotification {
 
         notificationId = (int) System.currentTimeMillis();
         notificationManager = ContextCompat.getSystemService(device.getContext(), NotificationManager.class);
-        builder = new NotificationCompat.Builder(device.getContext(), NotificationHelper.Channels.FILETRANSFER)
+        builder = new NotificationCompat.Builder(device.getContext(), NotificationHelper.Channels.FILETRANSFER_UPLOAD)
                 .setSmallIcon(android.R.drawable.stat_sys_upload)
                 .setAutoCancel(true)
                 .setOngoing(true)
@@ -47,7 +47,7 @@ class UploadNotification {
         cancelIntent.setAction(SharePlugin.ACTION_CANCEL_SHARE);
         cancelIntent.putExtra(SharePlugin.CANCEL_SHARE_BACKGROUND_JOB_ID_EXTRA, jobId);
         cancelIntent.putExtra(SharePlugin.CANCEL_SHARE_DEVICE_ID_EXTRA, device.getDeviceId());
-        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(device.getContext(), 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(device.getContext(), 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         builder.addAction(R.drawable.ic_reject_pairing_24dp, device.getContext().getString(R.string.cancel), cancelPendingIntent);
     }
@@ -64,7 +64,7 @@ class UploadNotification {
     }
 
     public void setFinished(String message) {
-        builder = new NotificationCompat.Builder(device.getContext(), NotificationHelper.Channels.FILETRANSFER);
+        builder = new NotificationCompat.Builder(device.getContext(), NotificationHelper.Channels.FILETRANSFER_UPLOAD);
         builder.setContentTitle(message)
                 .setTicker(message)
                 .setSmallIcon(android.R.drawable.stat_sys_upload_done)
@@ -79,7 +79,8 @@ class UploadNotification {
 
     public void setFailed(String message) {
         setFinished(message);
-        builder.setSmallIcon(android.R.drawable.stat_notify_error);
+        builder.setSmallIcon(android.R.drawable.stat_notify_error)
+                .setChannelId(NotificationHelper.Channels.FILETRANSFER_ERROR);
     }
 
     public void cancel() {

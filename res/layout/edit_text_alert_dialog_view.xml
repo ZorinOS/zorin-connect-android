@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+SPDX-FileCopyrightText: 2019 Erik Duisters <e.duisters1@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,8 +21,7 @@
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:hintEnabled="false"
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+        app:hintEnabled="true">
 
         <!-- inputType="text" is needed, without it lines and maxLines is ignored https://issuetracker.google.com/issues/37118772 -->
         <com.google.android.material.textfield.TextInputEditText
@@ -25,8 +30,7 @@
             android:layout_height="wrap_content"
             android:lines="1"
             android:maxLines="1"
-            android:inputType="text"
-            style="@style/Widget.MaterialComponents.TextInputEditText.FilledBox"/>
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </FrameLayout>

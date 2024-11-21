@@ -1,24 +1,35 @@
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                           xmlns:app="http://schemas.android.com/apk/res-auto"
-                                           xmlns:tools="http://schemas.android.com/tools"
-                                           android:id="@+id/drawer_layout"
-                                           android:layout_width="match_parent"
-                                           android:layout_height="match_parent"
-                                           android:fitsSystemWindows="true">  <!-- fitSystemWindows to make the drawer slide below the Lollipop transparent status bar -->
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        tools:context="org.kde.kdeconnect.UserInterface.MainActivity">
+        tools:context="org.kde.kdeconnect.UserInterface.MainActivity"
+        android:fitsSystemWindows="true">
 
-        <include layout="@layout/toolbar" android:id="@+id/toolbar_layout" />
+        <include layout="@layout/toolbar" android:id="@+id/toolbar_layout"/>
 
         <FrameLayout
             android:id="@+id/container"
+            android:descendantFocusability="afterDescendants"
+            android:focusable="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -27,9 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/activity_background"
-        app:itemIconTint="@drawable/drawer_item_icon_color"
-        app:itemTextColor="@drawable/drawer_item_text_color"
-        app:headerLayout="@layout/nav_header" />
+        app:headerLayout="@layout/nav_header"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

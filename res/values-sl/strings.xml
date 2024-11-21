@@ -18,7 +18,7 @@
   <string name="pref_plugin_clipboard_sent">Odložišče je poslano</string>
   <string name="pref_plugin_mousepad">Oddaljeni vhod</string>
   <string name="pref_plugin_mousepad_desc">Uporabi telefon ali tablični računalnik kot sledilno ploščico in tipkovnico</string>
-  <string name="pref_plugin_presenter">Oddaljena slikovna predstavitev</string>
+  <string name="pref_plugin_presenter">Oddaljena predstavitev</string>
   <string name="pref_plugin_presenter_desc">S svojo napravo lahko menjate slike v predstavitvi</string>
   <string name="pref_plugin_remotekeyboard">Sprejem oddaljenih pritiskov tipk</string>
   <string name="pref_plugin_remotekeyboard_desc">Prejemanje dogodkov tipk od oddaljenih naprav</string>
@@ -51,14 +51,19 @@
   <string name="remotekeyboard_connected">Povezava z oddaljeno tipkovnico je dejavna</string>
   <string name="remotekeyboard_multiple_connections">Obstaja več kot ena povezava na oddaljeno tipkovnico, izberite napravo in nastavitve</string>
   <string name="open_mousepad">Oddaljeni input</string>
-  <string name="mousepad_info">Premaknite prst po zaslonu da bi premikali miško. Tapnite za klik in uporabite dva/tri prste za desni in srednji gumb. Za pomikanje uporabite dva prsta. Uporabite dolg pritisk za povleci in spusti.</string>
+  <string name="mousepad_info">Premaknite prst po zaslonu da bi premikali miško. Tapnite za klik in uporabite dva/tri prste za desni in srednji gumb. Za pomikanje uporabite dva prsta. Uporabite dolg pritisk za povleci in spusti. Žiroskopsko zmožnost miške lahko omogočite iz nastavitve vtičnika</string>
+  <string name="mousepad_info_no_gestures">Premaknite prst po zaslonu, da premaknete kazalec miške, tapnite za klik.</string>
   <string name="mousepad_keyboard_input_not_supported">Vnos s tipkovnice ni podprt na sparjeni napravi</string>
   <string name="mousepad_single_tap_settings_title">Nastavite akcijo tapkanja enega prsta</string>
   <string name="mousepad_double_tap_settings_title">Nastavite akcijo tapkanja dveh prstov</string>
   <string name="mousepad_triple_tap_settings_title">Nastavite akcijo tapkanja treh prstov</string>
   <string name="mousepad_sensitivity_settings_title">Nastavi občutljivost drsne ploščice</string>
+  <string name="mousepad_mouse_buttons_title">Prikaži miškine gumbe</string>
   <string name="mousepad_acceleration_profile_settings_title">Nastavi pospeške kazalca</string>
   <string name="mousepad_scroll_direction_title">Smer povratnega drsenja</string>
+  <string name="mousepad_scroll_sensitivity_title">Občutljivost drsenja</string>
+  <string name="gyro_mouse_enabled_title">Omogoči žiroskopsko miško</string>
+  <string name="gyro_mouse_sensitivity_title">Občutljivost žiroskopa</string>
   <string-array name="mousepad_tap_entries">
     <item>Levi klik</item>
     <item>Desni klik</item>
@@ -94,31 +99,30 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Pošlji kot pritiske tipk</string>
   <string name="mouse_receiver_plugin_description">Sprejemaj gibanje oddaljene miške</string>
   <string name="mouse_receiver_plugin_name">Sprejemnik miške</string>
-  <string name="mouse_receiver_no_permissions">Omogočiti morate storitev dostopnosti</string>
+  <string name="mouse_receiver_no_permissions">Če želite prejemati vnose dotikov na daljavo, morate podeliti dovoljenja za dostopnost za popoln nadzor vaše naprave</string>
   <string name="view_status_title">Stanje</string>
   <string name="battery_status_format">Baterija: %d%%</string>
   <string name="battery_status_low_format">Baterija: %d%% skoraj prazna</string>
   <string name="battery_status_charging_format">Baterija: %d%% se polni</string>
-  <string name="battery_status_unknown">Ni podatkov o bateriji</string>
   <string name="category_connected_devices">Povezane naprave</string>
   <string name="category_not_paired_devices">Naprave na voljo</string>
   <string name="category_remembered_devices">Naprave, ki so zapomnjene</string>
   <string name="device_menu_plugins">Nastavitve vtičnikov</string>
   <string name="device_menu_unpair">Razkleni par</string>
   <string name="pair_new_device">Upari novo napravo</string>
+  <string name="cancel_pairing">Prekliči uparjanje</string>
   <string name="unknown_device">Neznana naprava</string>
   <string name="error_not_reachable">Naprava ni dosegljiva</string>
   <string name="error_already_paired">Naprava je že uparjena</string>
-  <string name="error_could_not_send_package">Ni bilo mogoče poslati paketa</string>
   <string name="error_timed_out">Čas je potekel</string>
   <string name="error_canceled_by_user">Preklical uporabnik</string>
   <string name="error_canceled_by_other_peer">Preklican od drugega vrstnika</string>
   <string name="encryption_info_title">Informacija o šifriranju</string>
-  <string name="encryption_info_msg_no_ssl">Druga naprava ne uporablja najnovejše različice Zorin Connect, uporablja podedovano metodo šifriranja.</string>
   <string name="my_device_fingerprint">Prstni odtis SHA256 certifikata vaše naprave je:</string>
   <string name="remote_device_fingerprint">Prstni odtis SHA256 certifikata oddaljene naprave je:</string>
   <string name="pair_requested">Zahtevan je par</string>
-  <string name="pairing_request_from">Zahtevek za uparjanje od %1s</string>
+  <string name="pair_succeeded">Uparjanje je uspelo</string>
+  <string name="pairing_request_from">Zahtevek za uparjanje od \'%1s\'</string>
   <plurals name="incoming_file_title">
     <item quantity="one">Prejemanje %1$d datoteke od %2$s</item>
     <item quantity="two">Prejemanje %1$d datotek od %2$s</item>
@@ -126,14 +130,14 @@
     <item quantity="other">Prejemanje %1$d datotek od %2$s</item>
   </plurals>
   <plurals name="incoming_files_text">
-    <item quantity="one">(Datoteka %2$d od %3$d) : %1$s</item>
+    <item quantity="one">(Datotek %2$d od %3$d) : %1$s</item>
     <item quantity="two">(Datoteka %2$d od %3$d) : %1$s</item>
-    <item quantity="few">(Datoteka %2$d od %3$d) : %1$s</item>
-    <item quantity="other">(Datoteka %2$d od %3$d) : %1$s</item>
+    <item quantity="few">(Datoteki %2$d od %3$d) : %1$s</item>
+    <item quantity="other">(Datoteke %2$d od %3$d) : %1$s</item>
   </plurals>
   <plurals name="outgoing_file_title">
-    <item quantity="one">Pošiljanje %1$d datoteke na %2$s</item>
-    <item quantity="two">Pošiljanje %1$d datotek na %2$s</item>
+    <item quantity="one">Pošiljanje %1$d datotek na %2$s</item>
+    <item quantity="two">Pošiljanje %1$d datoteke na %2$s</item>
     <item quantity="few">Pošiljanje %1$d datotek na %2$s</item>
     <item quantity="other">Pošiljanje %1$d datotek na %2$s</item>
   </plurals>
@@ -171,6 +175,7 @@
   <string name="received_file_text">Tapkaj, da odpreš \'%1s\'</string>
   <string name="cannot_create_file">Ni mogoče ustvariti datoteke %s</string>
   <string name="tap_to_answer">Tapkaj za odgovor</string>
+  <string name="left_click">Pošlji levi klik</string>
   <string name="right_click">Pošlji desni klik</string>
   <string name="middle_click">Pošlji sredinski klik</string>
   <string name="show_keyboard">Pokaži tipkovnico</string>
@@ -197,9 +202,12 @@
     <item>1 minuta</item>
     <item>2 minuti</item>
   </string-array>
+  <string name="mpris_notifications_explanation">Dovoljenje za obvestila je potrebno za prikaz oddaljenih medijev v predalu za obvestila</string>
   <string name="mpris_notification_settings_title">Pokaži obvestilo o nadzoru medija</string>
   <string name="mpris_notification_settings_summary">Dovoli nadzor nad predvajalniki medijev, ne da bi odprli Zorin Connect</string>
   <string name="share_to">Deli z…</string>
+  <string name="unreachable_device">%s (Nedosegljiva)</string>
+  <string name="unreachable_device_url_share_text">URL-ji, ki so v skupni rabi z nedosegljivo napravo, ji bodo dostavljeni, ko postane dosegljiva.\n\n</string>
   <string name="protocol_version_newer">Ta naprava uporablja novejšo različico protokola</string>
   <string name="plugin_settings_with_name">Nastavitve %s</string>
   <string name="invalid_device_name">Neveljavno ime naprave</string>
@@ -235,6 +243,7 @@
   <string name="sftp_action_mode_menu_delete">Briši</string>
   <string name="sftp_no_storage_locations_configured">Lokacije shranjevanja niso nastavljene</string>
   <string name="sftp_saf_permission_explanation">Za dostop do datotek na daljavo morate nastaviti lokacije za shranjevanje</string>
+  <string name="sftp_manage_storage_permission_explanation">Da bi dovolili oddaljeni dostop do datotek na tej napravi, morate dovoliti, da Zorin Connect upravlja s hrambo.</string>
   <string name="no_players_connected">Ni najdenih predvajalnikov</string>
   <string name="send_files">Pošlji datoteke</string>
   <string name="block_notification_contents">Blokiraj vsebine obvestil</string>
@@ -261,18 +270,20 @@
   <string name="close">Zapri</string>
   <string name="plugins_need_permission">Nekateri vtičniki potrebujejo dovoljenja za delovanje (tapnite za več informacij):</string>
   <string name="permission_explanation">Ti vtičniki potrebujejo dovoljenja za delovanje</string>
+  <string name="all_permissions_granted">Podeljene vse pravice 🎉</string>
   <string name="optional_permission_explanation">Če želite omogočiti vse funkcije, morate podeliti dodatna dovoljenja</string>
   <string name="plugins_need_optional_permission">Nekateri vtičniki imajo funkcije onemogočene zaradi pomanjkanja dovoljenj (tapnite za več informacij):</string>
   <string name="share_optional_permission_explanation">Če želite prejemati datoteke, morate dovoliti dostop do hrambe</string>
+  <string name="share_notifications_explanation">Če želite videti napredek pri pošiljanju in prejemanju datotek, morate omogočiti obvestila</string>
   <string name="telepathy_permission_explanation">Če želite brati in pisati SMS z namizja, morate izdati dovoljenje za SMS</string>
   <string name="telephony_permission_explanation">Če želite videti telefonske klice na namizju, morate dati dovoljenje za dnevnike klicev in stanje telefona</string>
   <string name="telephony_optional_permission_explanation">Če želite namesto telefonske številke videti ime stika, morate omogočiti dostop do stikov telefona</string>
   <string name="contacts_permission_explanation">Če želite knjigo stikov deliti z namizjem, morate dati dovoljenje za dostop do stikov</string>
+  <string name="contacts_per_device_confirmation">Vaši telefonski stiki bodo prekopirani na to napravo, da jih lahko uporablja Zorin Connect SMS in druge aplikacije.</string>
   <string name="select_ringtone">Izberite melodijo zvonjenja</string>
   <string name="telephony_pref_blocked_title">Blokirane številke</string>
   <string name="telephony_pref_blocked_dialog_desc">Ne prikazuj klicev in SMS s teh številk. Navedite po eno telefonsko številko v vsaki vrsti</string>
   <string name="mpris_coverart_description">Naslovnica trenutnega medija</string>
-  <string name="device_icon_description">Ikona naprave</string>
   <string name="settings_icon_description">Ikona nastavitev</string>
   <string name="presenter_fullscreen">Polni zaslon</string>
   <string name="presenter_exit">Izhod iz predstavitve</string>
@@ -286,9 +297,10 @@
   <string name="notification_channel_default">Ostala obvestila</string>
   <string name="notification_channel_persistent">Trajni indikator</string>
   <string name="notification_channel_media_control">Nadzor medija</string>
-  <string name="notification_channel_filetransfer">Prenos datotek</string>
+  <string name="notification_channel_filetransfer">Prenos datotek sem</string>
+  <string name="notification_channel_filetransfer_upload">Prenos datotek tja</string>
+  <string name="notification_channel_filetransfer_error">Napaka pri prenosu datoteke</string>
   <string name="notification_channel_high_priority">Visoka prednost</string>
-  <string name="notification_channel_sms_mms">Novo sporočilo</string>
   <string name="mpris_stop">Ustavi trenutni predvajalnik</string>
   <string name="copy_url_to_clipboard">Kopiraj spletni naslov na odložišče</string>
   <string name="clipboard_toast">Kopirano na odložišče</string>
@@ -296,6 +308,10 @@
   <string name="runcommand_notpaired">Naprava ni uparjena</string>
   <string name="runcommand_nosuchdevice">Ni take naprave</string>
   <string name="runcommand_noruncommandplugin">Ta naprava nima omogočenega vtičnika za zagonski ukaz</string>
+  <string name="runcommand_category_device_controls_title">Nadzor naprave</string>
+  <string name="runcommand_device_controls_summary">Če vaša naprava podpira nadzor naprave, se tam prikažejo ukazi, ki ste jih konfigurirali.</string>
+  <string name="set_runcommand_name_as_title">nastavi_ukaz_ime_kot_naslov</string>
+  <string name="runcommand_name_as_title_title">Prikaži ime kot naslov</string>
   <string name="pref_plugin_findremotedevice">Najdi oddaljeno napravo</string>
   <string name="pref_plugin_findremotedevice_desc">Zazvonite vašo oddaljeno napravo</string>
   <string name="ring">Zazvoni</string>
@@ -317,8 +333,6 @@
   <string name="block_contents">Blokiraj vsebine obvestil</string>
   <string name="block_images">Blokiraj slike v obvestilih</string>
   <string name="notification_channel_receivenotification">Obvestila ostalih naprav</string>
-  <string name="take_picture">Zaženi kamero</string>
-  <string name="plugin_photo_desc">Zaženite aplikacijo za kamero, da olajšate fotografiranje in prenos fotografij</string>
   <string name="no_app_for_opening">Ni primerne aplikacije za odpiranje te datoteke</string>
   <string name="remote_keyboard_service">Oddaljena tipkovnica Zorin Connect</string>
   <string name="presenter_pointer">Kazalec</string>
@@ -328,7 +342,8 @@
   <string name="empty_trusted_networks_list_text">Niste še dodali nobenega zaupanja vrednega omrežja</string>
   <string name="allow_all_networks_text">Dovoli vse</string>
   <string name="location_permission_needed_title">Zahtevano dovoljenje</string>
-  <string name="location_permission_needed_desc">"Zorin Connect potrebuje dovoljenje omrežja, da pozna Wi-Fi omrežje, s katerim ste povezani, tudi če je aplikacija v ozadju. To je zato, ker se ime omrežja Wi-Fi lahko uporabi za iskanje svoje lokacije, četudi to ne počne Zorin Connect."</string>
+  <string name="bluetooth_permission_needed_desc">Dodeli dovoljenja za Bluetooth, da bodo naprave, seznanjene z Bluetoothom, na voljo v Zorin Connect.</string>
+  <string name="location_permission_needed_desc">"Zorin Connect potrebuje dovoljenje omrežja, da pozna WiFi omrežje, s katerim ste povezani, tudi če je aplikacija v ozadju. To je zato, ker se ime omrežja wifi  lahko uporabi za iskanje svoje lokacije, četudi to ne počne Zorin Connect."</string>
   <string name="clipboard_android_x_incompat">Android 10 je odstranil dostop do odložišča za vse aplikacije. Ta vtičnik bo onemogočen.</string>
   <string name="mpris_open_url">Nadaljuj s predvajanjem tukaj</string>
   <string name="cant_open_url">Ne morem odpreti spletnega naslova za nadaljevanje predvajanja</string>
@@ -389,11 +404,13 @@
   <string name="click_here_to_type">Tapkajte, tukaj za tipkanje</string>
   <string name="clear_compose">Očisti</string>
   <string name="send_compose">Pošlji</string>
+  <string name="compose_send_title">Sestavite besedilo</string>
   <string name="open_compose_send">Sestavite besedilo</string>
-  <string name="app_description">Aplikacija na več napravah, ki dovoljuje komunikacijo med napravami (npr. vaš telefon in vaš računalnik)</string>
+  <string name="double_tap_to_drag">Dvakrat tapnite za povlek</string>
+  <string name="hold_to_drag">Držite za povlek</string>
   <string name="about_kde_about">&lt;h1&gt;O programu&lt;/h1&gt; &lt;p&gt;KDE je svetovna skupnost programskih inženirjev, umetnikov, piscev, prevajalcev in ustvarjalcev, ki so podporniki razvoja &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Prostega programja&lt;/a&gt;. KDE izdeluje Namizno okolje Plasma, stotine aplikacij in veliko programskih knjižnic, ki jih podpirajo. &lt;/p&gt; &lt;p&gt;KDE je zadružno podjetje: noben deležnik posamično ne obvladuje smeri razvoja ali izdelka. Namesto tega delamo skupaj, da bi dosegli skupni cilj razvoja, da bi prišli do najboljšega prostega programja na svetu. Vsakdo je dobrodošel v skupnost &lt;a href=https://community.kde.org/Get_Involved&gt;da se pridruži in prispeva &lt;/a&gt; v KDE vključno z vami. &lt;/p&gt; Obiščite &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; za več informacij o skupnosti KDE community in programju, ki ga razvijamo.</string>
   <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Poročajte o napakah in željah&lt;/h1&gt; &lt;p&gt;Programje je vedno mogoče izboljšati in skupina KDE je vedno pripravljena na izboljšave. Vendar, vi - kot uporabnica ali uporabnik - nam morate povedati, kadar nekaj ne deluje kot pričakujete ali bi bilo lahko izdelano bolje. &lt;/p&gt; &lt;p&gt;KDE ima sistem sledenja napak. Obiščite &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; ali uporabite gumb \"Poročaj o napaki\" na zaslonu O programu za poročanje napak.&lt;/p&gt; Če imate sugestijo za izboljšanje ste povabljeni, da uporabite sistem za sledenje napakam in zabeležite vašo željo. Zagotovite, da boste resnost napake označili kot \"Seznam želja - Wishlist\".</string>
-  <string name="about_kde_join_kde">&lt;h1&gt;Pridružite se KDE&lt;/h1&gt; &lt;p&gt;Ni treba, da ste razvijalci programov, da bi bili člani skupnosti KDE. Lahko se pridružite nacionalnim skupinam za prevajanje uporabniških vmesnikov. Lahko nudite risbe, teme, zvoke in izboljšano dokumentacijo. Za odločanje&lt;/p&gt; &lt;p&gt;obiščite &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; za informacije pri nekaterih projektih, kjer lahko prispevate.&lt;/p&gt; Če potrebujete več informacij ali dokumentacije, potem obiščite &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; kjer boste dobili potrebna navodila.</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Pridružite se KDE&lt;/h1&gt; &lt;p&gt;Ni treba, da ste razvijalci programov, da bi bili člani skupnosti KDE. Lahko se pridružite jezikovnim skupinam za prevajanje uporabniških vmesnikov. Lahko prispevate risbe, teme, zvoke in izboljšano dokumentacijo. Sami se odločite!&lt;/p&gt; &lt;p&gt;Obiščite &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; za informacije o projektih, katerim lahko prispevate.&lt;/p&gt; Če potrebujete več informacij ali dokumentacije, potem obiščite &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt;, kjer boste dobili potrebna navodila.</string>
   <string name="about_kde_support_kde">&lt;h1&gt;Podprite KDE&lt;/h1&gt; &lt;p&gt;KDE programje je in bo vedno zastonj, a razvoj tega ni brez stroškov.&lt;/p&gt; &lt;p&gt;Za podporo razvoju je skupnost KDE ustanovila KDE e.V., neprofitno organizacijo legalno ustanovljeno v Nemčiji. KDE e.V. predstavlja skupnost KDE glede pravnih in finančnih vprašanj. Glejte &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; za informacije o KDE e.V.&lt;/p&gt; &lt;p&gt;KDE prejema različne vrste prispevkov vključno finančne. Te prispevke uporabljamo, da članom in ostalim povrnemo stroške, ki nastajajo ob njihovih prispevkih. We use the funds to reimburse members and others for expenses they incur when contributing. Denarna sredstva se uporabljajo tudi za pravno podporo in organiziranje konferenc in srečanj.&lt;/p&gt; &lt;p&gt;Radi bi vas spodbudili, da podprete naša prizadevanja s finančno donacijo, z uporabo enega od načinov, ki so opisani na &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Najlepša hvala vnaprej za vašo podporo.</string>
   <string name="maintainer_and_developer">Vzdrževalec in razvijalec</string>
   <string name="developer">Razvijalec</string>
@@ -405,7 +422,18 @@
   <string name="maxim_leshchenko_task">Izboljšave uporabniškega vmesnika in ta stran o programu</string>
   <string name="holger_kaelberer_task">Vtičnik za oddaljeno tipkovnico in popravki napak</string>
   <string name="saikrishna_arcot_task">Podpora za uporabo tipkovnice vtičnika za oddaljen vnos, popravki napak in splošne izboljšave</string>
+  <string name="shellwen_chen_task">Izboljšanje varnosti SFTP, izboljšanje vzdržljivosti tega projekta, popravki napak in splošne izboljšave</string>
   <string name="everyone_else">Vsi ostali, ki so prispevali za Zorin Connect v letih razvoja</string>
   <string name="send_clipboard">Pošlji odložišče</string>
   <string name="tap_to_execute">Tapkajte za izvedbo</string>
+  <string name="plugin_stats">Stanje vtičnikov</string>
+  <string name="enable_udp_broadcast">Omogoči odkrivanje naprav UDP</string>
+  <string name="enable_bluetooth">Omogoči bluetooth (beta)</string>
+  <string name="receive_notifications_permission_explanation">Morate imeti dovoljenje za obvestila, če jih želite sprejemati iz drugih naprav</string>
+  <string name="findmyphone_notifications_explanation">Potrebno je dovoljenje za obvestila, da lahko telefon zazvoni, ko je aplikacija v ozadju</string>
+  <string name="no_notifications">Obvestila so onemogočena, ne boste prejemali obvestil o dohodnih parih.</string>
+  <string name="mpris_keepwatching">Nadaljuj s predvajanjem</string>
+  <string name="mpris_keepwatching_settings_title">Nadaljuj s predvajanjem</string>
+  <string name="mpris_keepwatching_settings_summary">Pokaži tiho obvestilo za nadaljevanje predvajanja v tej napravi po zaprtju predstavnosti</string>
+  <string name="notification_channel_keepwatching">Nadaljuj s predvajanjem</string>
 </resources>

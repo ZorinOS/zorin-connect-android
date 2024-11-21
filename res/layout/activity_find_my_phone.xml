@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--
+SPDX-FileCopyrightText: 2015 David Edmundson <kde@davidedmundson.co.uk>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,13 +25,12 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bFindMyPhone"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:background="@drawable/button_ripple"
             android:text="@string/findmyphone_found"
             android:textSize="50sp" />
 

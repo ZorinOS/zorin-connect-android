@@ -18,7 +18,7 @@
   <string name="pref_plugin_clipboard_sent">Klembord verzonden</string>
   <string name="pref_plugin_mousepad">Invoer op afstand</string>
   <string name="pref_plugin_mousepad_desc">Uw telefoon of tablet gebruiken als een touchpad en toetsenbord</string>
-  <string name="pref_plugin_presenter">Diavoorstelling op afstand</string>
+  <string name="pref_plugin_presenter">Presentatie op afstand</string>
   <string name="pref_plugin_presenter_desc">Uw apparaat gebruiken om dia\'s te wisselen in een presentatie</string>
   <string name="pref_plugin_remotekeyboard">Toetsaanslagen van afstand ontvangen</string>
   <string name="pref_plugin_remotekeyboard_desc">Toetsaanslaggebeurtenissen ontvangen van externe apparaten</string>
@@ -51,14 +51,19 @@
   <string name="remotekeyboard_connected">Verbinding met toetsenbord op afstand is actief</string>
   <string name="remotekeyboard_multiple_connections">Er is meer dan een verbinding met een toetsenbord op afstand, selecteer het te configureren apparaat</string>
   <string name="open_mousepad">Invoer op afstand</string>
-  <string name="mousepad_info">Veeg met een vinger op het scherm om de muiscursor te verplaatsen. Tik om te klikken en gebruik twee/drie vingers voor rechter en middelste knop. Twee vingers gebruiken voor schuiven. Druk lang voor slepen en loslaten.</string>
+  <string name="mousepad_info">Veeg met een vinger op het scherm om de muiscursor te verplaatsen. Tik om te klikken en gebruik twee/drie vingers voor rechter en middelste knop. Twee vingers gebruiken voor schuiven. Druk lang voor slepen en loslaten. Functionaliteit van gyro-muis kan ingeschakeld worden vanuit voorkeuren in plug-in</string>
+  <string name="mousepad_info_no_gestures">Veeg met een vinger op het scherm om de muiscursor te verplaatsen, tik om te klikken</string>
   <string name="mousepad_keyboard_input_not_supported">Toetsenbordinvoer wordt niet ondersteund door het gepaarde apparaat</string>
   <string name="mousepad_single_tap_settings_title">Tikactie met één vinger instellen</string>
   <string name="mousepad_double_tap_settings_title">Tikactie met twee vingers instellen</string>
   <string name="mousepad_triple_tap_settings_title">Tikactie met drie vingers instellen</string>
   <string name="mousepad_sensitivity_settings_title">Gevoeligheid van touchpad instellen</string>
+  <string name="mousepad_mouse_buttons_title">Muisknoppen tonen</string>
   <string name="mousepad_acceleration_profile_settings_title">Aanwijzerversnelling instellen</string>
   <string name="mousepad_scroll_direction_title">Schuifrichting omdraaien</string>
+  <string name="mousepad_scroll_sensitivity_title">Gevoeligheid voor schuiven</string>
+  <string name="gyro_mouse_enabled_title">Gyroscoopmuis inschakelen</string>
+  <string name="gyro_mouse_sensitivity_title">Gyroscoopgevoeligheid</string>
   <string-array name="mousepad_tap_entries">
     <item>Linker muisklik</item>
     <item>Rechter muisklik</item>
@@ -94,31 +99,30 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Als toetsaanslagen verzenden</string>
   <string name="mouse_receiver_plugin_description">Muisbewegingen van afstand ontvangen</string>
   <string name="mouse_receiver_plugin_name">Muisontvanger</string>
-  <string name="mouse_receiver_no_permissions">U moet service toegankelijkheid inschakelen</string>
+  <string name="mouse_receiver_no_permissions">Om aanraakinvoer op afstand te ontvangen moet u toegangsrechten toekennen om uw apparaat volledig te besturen</string>
   <string name="view_status_title">Status</string>
   <string name="battery_status_format">Batterij: %d%%</string>
   <string name="battery_status_low_format">Batterij: %d%% lage batterij</string>
   <string name="battery_status_charging_format">Batterij: %d%% opladen</string>
-  <string name="battery_status_unknown">Batterij-informatie niet beschikbaar</string>
   <string name="category_connected_devices">Verbonden apparaten</string>
   <string name="category_not_paired_devices">Beschikbare apparaten</string>
   <string name="category_remembered_devices">Onthouden apparaten</string>
   <string name="device_menu_plugins">Plugin-instellingen</string>
   <string name="device_menu_unpair">Paar uit elkaar halen</string>
   <string name="pair_new_device">Nieuw apparaat paren</string>
+  <string name="cancel_pairing">Paren annuleren</string>
   <string name="unknown_device">Onbekend apparaat</string>
   <string name="error_not_reachable">Apparaat niet bereikbaar</string>
   <string name="error_already_paired">Apparaat is al gepaard</string>
-  <string name="error_could_not_send_package">Kon pakket niet verzenden</string>
   <string name="error_timed_out">Tijdslimiet overschreden</string>
   <string name="error_canceled_by_user">Geannuleerd door gebruiker</string>
   <string name="error_canceled_by_other_peer">Geannuleerd door andere kant</string>
   <string name="encryption_info_title">Versleutelde informatie</string>
-  <string name="encryption_info_msg_no_ssl">Het andere apparaat gebruikt geen recente versie van Zorin Connect, de verouderde versleutelingsmethode zal worden gebruikt.</string>
   <string name="my_device_fingerprint">De SHA256 vingerafdruk van het certificaat van uw apparaat is:</string>
   <string name="remote_device_fingerprint">De SHA256 vingerafdruk van het certificaat van het apparaat op afstand is:</string>
   <string name="pair_requested">Paarvorming gevraagd</string>
-  <string name="pairing_request_from">Verzoek om een paar te maken van %1s</string>
+  <string name="pair_succeeded">Paarvorming is gelukt</string>
+  <string name="pairing_request_from">Verzoek om een paar te maken van \'%1s\'</string>
   <plurals name="incoming_file_title">
     <item quantity="one">%1$d bestand wordt ontvangen vanaf %2$s</item>
     <item quantity="other">%1$d bestanden worden ontvangen vanaf %2$s</item>
@@ -155,6 +159,7 @@
   <string name="received_file_text">Tap om \'%1s\' te openen</string>
   <string name="cannot_create_file">Kan bestand %s niet aanmaken</string>
   <string name="tap_to_answer">Tap om te antwoorden</string>
+  <string name="left_click">Linker muisklik verzenden</string>
   <string name="right_click">Verstuur een rechter muisklik</string>
   <string name="middle_click">Verstuur een middelste muisklik</string>
   <string name="show_keyboard">Toetsenbord tonen</string>
@@ -181,9 +186,12 @@
     <item>1 minuut</item>
     <item>2 minuten</item>
   </string-array>
+  <string name="mpris_notifications_explanation">Het recht op meldingen is nodig om media op afstand te tonen in de meldingenschuiflade</string>
   <string name="mpris_notification_settings_title">Mediabesturingsmelding tonen</string>
   <string name="mpris_notification_settings_summary">Staat besturing van uw mediaspelers toe zonder Zorin Connect te openen</string>
-  <string name="share_to">Delen met...</string>
+  <string name="share_to">Delen met…</string>
+  <string name="unreachable_device">%s (niet bereikbaar)</string>
+  <string name="unreachable_device_url_share_text">URL\'s gedeeld met een niet bereikbaar apparaat zullen er afgeleverd worden wanneer deze bereikbaar wordt.\n\n</string>
   <string name="protocol_version_newer">Dit apparaat gebruikt een nieuwere protocolversie</string>
   <string name="plugin_settings_with_name">Instellingen van %s</string>
   <string name="invalid_device_name">Ongeldige apparaatnaam</string>
@@ -219,6 +227,7 @@
   <string name="sftp_action_mode_menu_delete">Verwijderen</string>
   <string name="sftp_no_storage_locations_configured">Geen opslaglocaties geconfigureerd</string>
   <string name="sftp_saf_permission_explanation">Om toegang te hebben tot bestanden op afstand moet u opslaglocaties configureren</string>
+  <string name="sftp_manage_storage_permission_explanation">Om toegang tot bestanden op dit apparaat toe te staan moet u toestaan dat Zorin Connect de opslag mag beheren.</string>
   <string name="no_players_connected">Geen spelers gevonden</string>
   <string name="send_files">Bestanden verzenden</string>
   <string name="block_notification_contents">Inhoud van meldingen blokkeren</string>
@@ -245,18 +254,20 @@
   <string name="close">Sluiten</string>
   <string name="plugins_need_permission">Sommige plug-ins hebben toestemming nodig om te werken (tik voor meer informatie):</string>
   <string name="permission_explanation">Deze plug-in heeft toestemming nodig om te werken</string>
+  <string name="all_permissions_granted">Alle toegangsrechten toegekend 🎉</string>
   <string name="optional_permission_explanation">U moet toestemming geven om alle functies in te schakelen</string>
   <string name="plugins_need_optional_permission">Sommige plug-ins hebben functies uitgeschakeld vanwege ontbrekende toestemming (tik voor meer informatie):</string>
   <string name="share_optional_permission_explanation">Om bestanden te ontvangen die u nodig hebt voor toegang tot opslag</string>
+  <string name="share_notifications_explanation">Om de voortgang te zien bij verzenden en ontvangen van bestanden moet u meldingen toestaan</string>
   <string name="telepathy_permission_explanation">Om een SMS te lezen of te schrijven vanaf uw bureaublad moet u toestemming geven tot SMS</string>
   <string name="telephony_permission_explanation">Om telefoonoproepen te zien op het bureaublad moet u toestemming geven tot telefoonoproeplogs en telefoonstatus</string>
   <string name="telephony_optional_permission_explanation">Om een naam van een contactpersoon te zien in plaats van een telefoonnummer moet u toegang geven tot de contacten in uw telefoon</string>
   <string name="contacts_permission_explanation">Om uw contactpersoennboek te delen met het bureaublad moet u contacten rechten geven</string>
+  <string name="contacts_per_device_confirmation">Uw telefooncontacten zullen gekopieerd worden naar dit apparaat, ze kunnen dus gebruikt worden door de toepassing Zorin Connect SMS en andere toepassingen.</string>
   <string name="select_ringtone">Selecteer een ringtone</string>
   <string name="telephony_pref_blocked_title">Geblokkeerde nummers</string>
   <string name="telephony_pref_blocked_dialog_desc">Geen oproepen en SMSen vanaf deze nummers tonen. Specificeer één nummer per regel</string>
   <string name="mpris_coverart_description">Cover-illustratie van huidige media</string>
-  <string name="device_icon_description">Apparaatpictogram</string>
   <string name="settings_icon_description">Pictogram voor instellingen</string>
   <string name="presenter_fullscreen">Volledig scherm</string>
   <string name="presenter_exit">Presentatie beëindigen</string>
@@ -270,9 +281,10 @@
   <string name="notification_channel_default">Overige meldingen</string>
   <string name="notification_channel_persistent">Blijvende indicator</string>
   <string name="notification_channel_media_control">Besturing van media</string>
-  <string name="notification_channel_filetransfer">Bestandsoverdracht</string>
+  <string name="notification_channel_filetransfer">Inkomende bestandsoverdracht</string>
+  <string name="notification_channel_filetransfer_upload">Uitgaande bestandsoverdracht</string>
+  <string name="notification_channel_filetransfer_error">Bestandsoverdrachtfout</string>
   <string name="notification_channel_high_priority">Hoge prioriteit</string>
-  <string name="notification_channel_sms_mms">Nieuw bericht</string>
   <string name="mpris_stop">Stop de huidige speler</string>
   <string name="copy_url_to_clipboard">URL-adres kopiëren naar klembord</string>
   <string name="clipboard_toast">Gekopieerd naar klembord</string>
@@ -280,6 +292,10 @@
   <string name="runcommand_notpaired">Apparaat is niet gepaard</string>
   <string name="runcommand_nosuchdevice">Dit apparaat bestaat niet</string>
   <string name="runcommand_noruncommandplugin">Dit apparaat heeft de \"Run Command Plugin\" niet ingeschakeld</string>
+  <string name="runcommand_category_device_controls_title">Besturing van apparaat</string>
+  <string name="runcommand_device_controls_summary">Als uw apparaat besturing ondersteunt, zullen commando\'s die u hebt geconfigureerd daar verschijnen.</string>
+  <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
+  <string name="runcommand_name_as_title_title">Naam als titel tonen</string>
   <string name="pref_plugin_findremotedevice">Apparaat op afstand zoeken</string>
   <string name="pref_plugin_findremotedevice_desc">Maak een oproep naar uw apparaat op afstand</string>
   <string name="ring">Oproep doen</string>
@@ -301,8 +317,6 @@
   <string name="block_contents">Inhoud van meldingen blokkeren</string>
   <string name="block_images">Afbeeldingen in meldingen blokkeren</string>
   <string name="notification_channel_receivenotification">Meldingen van andere apparaten</string>
-  <string name="take_picture">Start camera</string>
-  <string name="plugin_photo_desc">Start de camera-app om nemen en overdragen van afbeeldingen te vergemakkelijken</string>
   <string name="no_app_for_opening">Geen geschikte toepassing gevonden om dit bestand te openen</string>
   <string name="remote_keyboard_service">Zorin Connect Toetsenbord op afstand</string>
   <string name="presenter_pointer">Aanwijzer</string>
@@ -312,7 +326,8 @@
   <string name="empty_trusted_networks_list_text">U hebt nog geen vertrouwd netwerk toegevoegd</string>
   <string name="allow_all_networks_text">Allen toestaan</string>
   <string name="location_permission_needed_title">Toestemming vereist</string>
-  <string name="location_permission_needed_desc">Zorin Connect heeft de permissie achtergrondlocatie nodig om het Wi-Fi-netwerk te weten waarmee u bent verbonden zelfs wanneer de toepassing in de achtergrond is. Dit vanwege dat de naam van de Wi-Fi-netwerken om u heen gebruikt zouden kunnen worden om uw locatie te vinden, zelfs wanneer dit niet is wat Zorin Connect doet.</string>
+  <string name="bluetooth_permission_needed_desc">Geeft Bluetooth rechten om apparaten te laten paren met Bluetooth beschikbaar in Zorin Connect.</string>
+  <string name="location_permission_needed_desc">Zorin Connect heeft de permissie achtergrondlocatie nodig om het WiFi-netwerk te weten waarmee u bent verbonden zelfs wanneer de toepassing in de achtergrond is. Dit vanwege dat de naam van de WiFi-netwerken om u heen gebruikt zouden kunnen worden om uw locatie te vinden, zelfs wanneer dit niet is wat Zorin Connect doet.</string>
   <string name="clipboard_android_x_incompat">Android 10 heeft toegang tot het klembord naar alle toepassingen verwijderd. Deze plug-in zal uitgeschakeld worden.</string>
   <string name="mpris_open_url">Hier doorgaan met afspelen</string>
   <string name="cant_open_url">Kan URL niet openen om door te gaan met afspelen</string>
@@ -373,11 +388,13 @@
   <string name="click_here_to_type">Tik hier om te typen</string>
   <string name="clear_compose">Wissen</string>
   <string name="send_compose">Verzenden</string>
+  <string name="compose_send_title">Opstellen van verzending</string>
   <string name="open_compose_send">Tekst opstellen</string>
-  <string name="app_description">Multi-platform toepassing die uw apparaten met elkaar laat communiceren (bijv., uw telefoon en uw computer)</string>
+  <string name="double_tap_to_drag">Dubbel tikken om te slepen</string>
+  <string name="hold_to_drag">Ingedrukt houden om te slepen</string>
   <string name="about_kde_about">&lt;h1&gt;Info over&lt;/h1&gt; &lt;p&gt;KDE is een wereldwijde gemeenschap van software ingenieurs, artiesten, schrijvers, vertalers en makers die toegewijd zijn aan &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Vrije software&lt;/a&gt; ontwikkeling. KDE produceert de Plasma bureaubladomgeving, honderden toepassingen en de vele software bibliotheken die deze ondersteunen.&lt;/p&gt; &lt;p&gt;KDE is een coöperatieve onderneming: geen enkele entiteit controleert zijn richting of producten. In plaats daarvan werken we samen om het gemeenschappelijke doel te bereiken van het bouwen van de \'s werelds mooiste Vrije software. Iedereen is welkom om &lt;a href=https://community.kde.org/Get_Involved&gt;mee te doen en bij te dragen&lt;/a&gt; aan KDE, inclusief u.&lt;/p&gt; Bezoek &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; voor meer informatie over de KDE gemeenschap en de software die we produceren.</string>
   <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Bugs of wensen rapporteren&lt;/h1&gt; &lt;p&gt;Software kan altijd verbeterd worden en het KDE team is gereed om dat te doen. Echter, u - de gebruiker - moet ons vertellen wanneer iets niet werkt zoals verwacht of beter gedaan kan worden.&lt;/p&gt; &lt;p&gt;KDE heeft een bugvolgsysteem. Bezoek &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; of gebruik de knop \"Bug rapporteren\" uit het Info over scherm om bugs te rapporteren.&lt;/p&gt; Als u een suggestie voor verbetering dan bent u welkom om het bugvolgsysteem te gebruiken om uw wens te registreren. Ga na dat u de ernst genaamd \"Wishlist\" gebruikt.</string>
-  <string name="about_kde_join_kde">&lt;h1&gt;Mee doen met KDE&lt;/h1&gt; &lt;p&gt;U hoeft geen software ontwerper te zijn om een lid van het KDE-team te worden. U kunt meedoen met een nationaal team dat programmainterfaces vertaalt. U kunt illustraties, thema\'s, geluiden en verbeterde documentatie leveren. U beslist!&lt;/p&gt; &lt;p&gt;Bezoek &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; voor informatie over projecten waarin u kunt participeren.&lt;/p&gt; Als u meer informatie of documentatie nodig hebt, dan kan een bezoek aan &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; u alles wat u nodig hebt leveren.</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Mee doen met KDE&lt;/h1&gt; &lt;p&gt;U hoeft geen software ontwerper te zijn om een lid van het KDE-team te worden. U kunt meedoen met een vertaalteam dat interfaces van programma\'s vertaalt. U kunt illustraties, thema\'s, geluiden en verbeterde documentatie leveren. U beslist!&lt;/p&gt; &lt;p&gt;Bezoek &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; voor informatie over projecten waarin u kunt participeren.&lt;/p&gt; Als u meer informatie of documentatie nodig hebt, dan kan een bezoek aan &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; u alles wat u nodig hebt leveren.</string>
   <string name="about_kde_support_kde">&lt;h1&gt;KDE ondersteunen&lt;/h1&gt; &lt;p&gt;KDE software is en zal altijd zonder kosten beschikbaar zijn, echter het maken is niet zonder kosten.&lt;/p&gt; &lt;p&gt;Om te ontwikkelen heeft de KDE gemeenschap de KDE e.V. opgericht, een niet-voor-winst organisatie met een wettelijke basis in Duitsland. KDE e.V. representeert de KDE gemeenschap in juridische en financiële zaken. Zie &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; voor informatie over KDE e.V.&lt;/p&gt; &lt;p&gt;KDE heeft inkomsten uit vele soorten bijdragen, inclusief financiële. We gebruiken de fondsen om leden en anderen te compenseren voor uitgaven die ze doen wanneer ze bijdragen. Verdere fondsen worden gebruikt voor juridische ondersteuning en het organiseren van conferenties en meetings.&lt;/p&gt; &lt;p&gt;We zouden u willen aanmoedigen om onze inspanningen met een financiële donatie te ondersteunen, met gebruik van een van de manieren beschreven in &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Bij voorbaat hartelijk dank voor uw ondersteuning.</string>
   <string name="maintainer_and_developer">Onderhouder en ontwikkelaar</string>
   <string name="developer">Ontwikkelaar</string>
@@ -389,7 +406,18 @@
   <string name="maxim_leshchenko_task">Verbeteringen aan UI en deze info over pagina</string>
   <string name="holger_kaelberer_task">"Plug-in voor toetsenbord op afstand  en reparaties"</string>
   <string name="saikrishna_arcot_task">Ondersteuning voor gebruik van toetsenbord in de plug-in voor invoer op afstand, bugreparaties en algemene verbeteringen</string>
+  <string name="shellwen_chen_task">Verbeter de beveiliging van SFTP, verbeter de onderhoudbaarheid van dit project, reparaties van bugs en algemene verbeteringen</string>
   <string name="everyone_else">Ieder ander die over de jaren heeft bijgedragen aan Zorin Connect</string>
   <string name="send_clipboard">Klembord verzenden</string>
   <string name="tap_to_execute">Tik om uit te voeren</string>
+  <string name="plugin_stats">Plug-in-statistieken</string>
+  <string name="enable_udp_broadcast">Ontdekken van UDP-apparaat inschakelen</string>
+  <string name="enable_bluetooth">Bluetooth inschakelen (beta)</string>
+  <string name="receive_notifications_permission_explanation">Meldingen moeten toegestaan worden om ze te ontvangen van andere apparaten</string>
+  <string name="findmyphone_notifications_explanation">Het recht op meldingen is nodig zodat de telefoon af kan gaan wanneer de toepassing in de achtergrond is</string>
+  <string name="no_notifications">Meldingen zijn uitgeschakeld, u zult inkomende paringmeldingen ontvangen.</string>
+  <string name="mpris_keepwatching">Doorgaan met afspelen</string>
+  <string name="mpris_keepwatching_settings_title">Doorgaan met afspelen</string>
+  <string name="mpris_keepwatching_settings_summary">Een stille melding tonen om door te gaan met afspelen op dit apparaat na sluiten van het medium</string>
+  <string name="notification_channel_keepwatching">Doorgaan met afspelen</string>
 </resources>

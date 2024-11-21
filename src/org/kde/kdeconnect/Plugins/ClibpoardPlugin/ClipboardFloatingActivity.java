@@ -28,12 +28,12 @@ import com.zorinos.zorin_connect.R;
     https://www.reddit.com/r/AndroidBusters/comments/fh60lt/how_to_solve_a_problem_with_the_clipboard_on/
     Like:
     # Enable the READ_LOGS permission. There is no other way to do this for a regular user app.
-    adb -d shell pm grant org.kde.kdeconnect_tp android.permission.READ_LOGS;
+    adb -d shell pm grant com.zorinos.zorin_connect android.permission.READ_LOGS;
     # Allow "Drawing over other apps", also accessible from Settings on the phone.
     # Optional, but makes the feature much more reliable.
-    adb -d shell appops set org.kde.kdeconnect_tp SYSTEM_ALERT_WINDOW allow;
+    adb -d shell appops set com.zorinos.zorin_connect SYSTEM_ALERT_WINDOW allow;
     # Kill the app, new permissions take effect on restart.
-    adb -d shell am force-stop org.kde.kdeconnect_tp;
+    adb -d shell am force-stop com.zorinos.zorin_connect;
 
     Currently this activity is bering triggered from a button in Foreground Notification or quick settings tile.
 * */

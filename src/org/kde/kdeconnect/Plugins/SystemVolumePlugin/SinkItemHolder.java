@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2021 Art Pinch <leonardo906@mail.ru>
+ *
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+*/
+
 package org.kde.kdeconnect.Plugins.SystemVolumePlugin;
 
 import android.view.View;
@@ -11,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.kde.kdeconnect.BackgroundService;
 import com.zorinos.zorin_connect.R;
 import com.zorinos.zorin_connect.databinding.ListItemSystemvolumeBinding;
 
@@ -50,8 +55,7 @@ class SinkItemHolder extends RecyclerView.ViewHolder
     @Override
     public void onProgressChanged(final SeekBar seekBar, int i, boolean triggeredByUser) {
         if (triggeredByUser) {
-            BackgroundService.RunCommand(seekBar.getContext(),
-                    service -> plugin.sendVolume(sink.getName(), seekBar.getProgress()));
+            plugin.sendVolume(sink.getName(), seekBar.getProgress());
         }
     }
 
@@ -63,8 +67,7 @@ class SinkItemHolder extends RecyclerView.ViewHolder
     @Override
     public void onStopTrackingTouch(final SeekBar seekBar) {
         seekBarTracking.accept(false);
-        BackgroundService.RunCommand(seekBar.getContext(),
-                service -> plugin.sendVolume(sink.getName(), seekBar.getProgress()));
+        plugin.sendVolume(sink.getName(), seekBar.getProgress());
     }
 
     @Override

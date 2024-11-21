@@ -16,8 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.kde.kdeconnect.BackgroundService;
-import org.kde.kdeconnect.UserInterface.ThemeUtil;
+import org.kde.kdeconnect.KdeConnect;
 import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
@@ -30,7 +29,6 @@ public class SendFileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ThemeUtil.setUserPreferredTheme(this);
 
         mDeviceId = getIntent().getStringExtra("deviceId");
 
@@ -70,7 +68,12 @@ public class SendFileActivity extends AppCompatActivity {
                     if (uris.isEmpty()) {
                         Log.w("SendFileActivity", "No files to send?");
                     } else {
-                        BackgroundService.RunWithPlugin(this, mDeviceId, SharePlugin.class, plugin -> plugin.sendUriList(uris));
+                        SharePlugin plugin = KdeConnect.getInstance().getDevicePlugin(mDeviceId, SharePlugin.class);
+                        if (plugin == null) {
+                            finish();
+                            return;
+                        }
+                        plugin.sendUriList(uris);
                     }
                 }
                 finish();

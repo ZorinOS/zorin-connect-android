@@ -1,74 +1,44 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:descendantFocusability="afterDescendants"
+    android:focusable="false"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="org.kde.kdeconnect.UserInterface.DeviceFragment">
 
-    <!-- Layout shown when device is reachable but not yet paired -->
+    <!-- Shown when device is reachable but not yet paired -->
     <include
         android:id="@+id/pair_request"
         layout="@layout/view_pair_request"
         tools:visibility="gone"/>
 
-    <!-- Layout shown when we can't pair with device or device is not reachable -->
+    <!-- Shown when the device is paired but not reachable -->
     <include
         android:id="@+id/pair_error"
         layout="@layout/view_pair_error"
         tools:visibility="gone"/>
 
-    <!-- Layout shown when device is paired and reachable -->
-    <ListView
-        android:id="@+id/buttons_list"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/device_view"
+        android:descendantFocusability="afterDescendants"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        tools:context=".DeviceActivity"
-        tools:listitem="@layout/list_item_with_icon_entry"
-        android:layout_weight=".8"
-        android:divider="@null"
-        android:dividerHeight="0dp" />
+        android:layout_height="match_parent">
 
-    <!-- Extra information about the current device -->
-    <RelativeLayout
-        android:id="@+id/view_status_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="8dp"
-        android:paddingTop="12dp"
-        android:paddingBottom="16dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:visibility="gone"
-        android:background="@color/base_color"
-        tools:visibility="visible"
-        tools:ignore="UnusedAttribute">
+         <!-- Shown when the device is paired and reachable -->
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/device_view_compose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/view_status_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:padding="0dp"
-            android:text="@string/view_status_title"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-            android:textStyle="bold"
-            />
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>
 
-        <CheckedTextView
-            android:id="@+id/view_battery_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/view_status_title"
-            android:checkMark="@null"
-            android:clickable="false"
-            android:padding="0dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            android:text="@string/battery_status_unknown"
-            android:textColor="@color/text_color_secondary"
-            tools:text="100%"
-            />
 
-    </RelativeLayout>
-</LinearLayout>

@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import org.apache.commons.io.IOUtils
-import org.kde.kdeconnect.UserInterface.ThemeUtil
 import com.zorinos.zorin_connect.R
 import com.zorinos.zorin_connect.databinding.ActivityLicensesBinding
 import java.nio.charset.Charset
@@ -23,7 +22,6 @@ class LicensesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLicensesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtil.setUserPreferredTheme(this)
         super.onCreate(savedInstanceState)
 
         binding = ActivityLicensesBinding.inflate(layoutInflater)

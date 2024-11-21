@@ -18,15 +18,15 @@
   <string name="pref_plugin_clipboard_sent">Clipboard Sent</string>
   <string name="pref_plugin_mousepad">Remote input</string>
   <string name="pref_plugin_mousepad_desc">Use your phone or tablet as a touchpad and keyboard</string>
-  <string name="pref_plugin_presenter">Slideshow Remote</string>
+  <string name="pref_plugin_presenter">Presentation remote</string>
   <string name="pref_plugin_presenter_desc">Use your device to change slides in a presentation</string>
   <string name="pref_plugin_remotekeyboard">Receive remote keypresses</string>
   <string name="pref_plugin_remotekeyboard_desc">Receive keypress events from remote devices</string>
   <string name="pref_plugin_mpris">Multimedia controls</string>
   <string name="pref_plugin_mpris_desc">Provides a remote control for your media player</string>
-  <string name="pref_plugin_runcommand">Run Command</string>
+  <string name="pref_plugin_runcommand">Run command</string>
   <string name="pref_plugin_runcommand_desc">Trigger remote commands from your phone or tablet</string>
-  <string name="pref_plugin_contacts">Contacts synchroniser</string>
+  <string name="pref_plugin_contacts">Contacts Synchroniser</string>
   <string name="pref_plugin_contacts_desc">Allow synchronising the device\'s contacts book</string>
   <string name="pref_plugin_ping">Ping</string>
   <string name="pref_plugin_ping_desc">Send and receive pings</string>
@@ -45,20 +45,25 @@
   <string name="no_permission_mprisreceiver">To be able to control your media players you need to grant access to the notifications</string>
   <string name="no_permissions_remotekeyboard">To receive keypresses you need to activate the Zorin Connect Remote Keyboard</string>
   <string name="send_ping">Send ping</string>
-  <string name="open_mpris_controls">Multimedia Control</string>
+  <string name="open_mpris_controls">Multimedia control</string>
   <string name="remotekeyboard_editing_only_title">Handle remote keys only when editing</string>
   <string name="remotekeyboard_not_connected">There is no active remote keyboard connection, establish one in Zorin Connect</string>
   <string name="remotekeyboard_connected">Remote keyboard connection is active</string>
   <string name="remotekeyboard_multiple_connections">There is more than one remote keyboard connection, select the device to configure</string>
-  <string name="open_mousepad">Remote Input</string>
-  <string name="mousepad_info">Move a finger on the screen to move the mouse cursor. Tap for a click, and use two/three fingers for right and middle buttons. Use 2 fingers to scroll. Use a long press to drag\'n drop.</string>
+  <string name="open_mousepad">Remote input</string>
+  <string name="mousepad_info">Move a finger on the screen to move the mouse cursor. Tap for a click, and use two/three fingers for right and middle buttons. Use 2 fingers to scroll. Use a long press to drag and drop. Gyro mouse functionality can be enabled from plugin preferences</string>
+  <string name="mousepad_info_no_gestures">Move a finger on the screen to move the mouse cursor, tap for a click.</string>
   <string name="mousepad_keyboard_input_not_supported">Keyboard input not supported by the paired device</string>
   <string name="mousepad_single_tap_settings_title">Set one finger tap action</string>
   <string name="mousepad_double_tap_settings_title">Set two finger tap action</string>
   <string name="mousepad_triple_tap_settings_title">Set three finger tap action</string>
   <string name="mousepad_sensitivity_settings_title">Set touchpad sensitivity</string>
+  <string name="mousepad_mouse_buttons_title">Show mouse buttons</string>
   <string name="mousepad_acceleration_profile_settings_title">Set pointer acceleration</string>
   <string name="mousepad_scroll_direction_title">Reverse Scrolling Direction</string>
+  <string name="mousepad_scroll_sensitivity_title">Scroll sensitivity</string>
+  <string name="gyro_mouse_enabled_title">Enable gyroscope mouse</string>
+  <string name="gyro_mouse_sensitivity_title">Gyroscope sensitivity</string>
   <string-array name="mousepad_tap_entries">
     <item>Left click</item>
     <item>Right click</item>
@@ -94,31 +99,30 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Send as keystrokes</string>
   <string name="mouse_receiver_plugin_description">Receive remote mouse movement</string>
   <string name="mouse_receiver_plugin_name">Mouse receiver</string>
-  <string name="mouse_receiver_no_permissions">You need to enable Accessibility Service</string>
+  <string name="mouse_receiver_no_permissions">To receive touch inputs remotely you need to grant Accessibility permissions to fully control your device</string>
   <string name="view_status_title">Status</string>
   <string name="battery_status_format">Battery: %d%%</string>
   <string name="battery_status_low_format">Battery: %d%% Low Battery</string>
   <string name="battery_status_charging_format">Battery: %d%% charging</string>
-  <string name="battery_status_unknown">Battery information not available</string>
   <string name="category_connected_devices">Connected devices</string>
   <string name="category_not_paired_devices">Available devices</string>
   <string name="category_remembered_devices">Remembered devices</string>
   <string name="device_menu_plugins">Plugin settings</string>
   <string name="device_menu_unpair">Unpair</string>
   <string name="pair_new_device">Pair new device</string>
+  <string name="cancel_pairing">Cancel pairing</string>
   <string name="unknown_device">Unknown device</string>
   <string name="error_not_reachable">Device not reachable</string>
   <string name="error_already_paired">Device already paired</string>
-  <string name="error_could_not_send_package">Could not send package</string>
   <string name="error_timed_out">Timed out</string>
   <string name="error_canceled_by_user">Cancelled by user</string>
   <string name="error_canceled_by_other_peer">Cancelled by other peer</string>
   <string name="encryption_info_title">Encryption Info</string>
-  <string name="encryption_info_msg_no_ssl">The other device doesn\'t use a recent version of Zorin Connect, using the legacy encryption method.</string>
   <string name="my_device_fingerprint">SHA256 fingerprint of your device certificate is:</string>
   <string name="remote_device_fingerprint">SHA256 fingerprint of remote device certificate is:</string>
   <string name="pair_requested">Pair requested</string>
-  <string name="pairing_request_from">Pairing request from %1s</string>
+  <string name="pair_succeeded">Pair succeeded</string>
+  <string name="pairing_request_from">Pairing request from \'%1s\'</string>
   <plurals name="incoming_file_title">
     <item quantity="one">Receiving %1$d file from %2$s</item>
     <item quantity="other">Receiving %1$d files from %2$s</item>
@@ -155,6 +159,7 @@
   <string name="received_file_text">Tap to open \'%1s\'</string>
   <string name="cannot_create_file">Cannot create file %s</string>
   <string name="tap_to_answer">Tap to answer</string>
+  <string name="left_click">Send Left Click</string>
   <string name="right_click">Send Right Click</string>
   <string name="middle_click">Send Middle Click</string>
   <string name="show_keyboard">Show Keyboard</string>
@@ -181,9 +186,12 @@
     <item>1 minute</item>
     <item>2 minutes</item>
   </string-array>
+  <string name="mpris_notifications_explanation">The notifications permission is needed to show remote media in the notifications drawer</string>
   <string name="mpris_notification_settings_title">Show media control notification</string>
   <string name="mpris_notification_settings_summary">Allow controlling your media players without opening Zorin Connect</string>
-  <string name="share_to">Share To…</string>
+  <string name="share_to">Share to…</string>
+  <string name="unreachable_device">%s (Unreachable)</string>
+  <string name="unreachable_device_url_share_text">URLs shared to an unreachable device will be delivered to it once it becomes reachable.\n\n</string>
   <string name="protocol_version_newer">This device uses a newer protocol version</string>
   <string name="plugin_settings_with_name">%s settings</string>
   <string name="invalid_device_name">Invalid device name</string>
@@ -219,8 +227,9 @@
   <string name="sftp_action_mode_menu_delete">Delete</string>
   <string name="sftp_no_storage_locations_configured">No storage locations configured</string>
   <string name="sftp_saf_permission_explanation">To access files remotely you have to configure storage locations</string>
+  <string name="sftp_manage_storage_permission_explanation">To allow remote access to files on this device you need to allow Zorin Connect to manage the storage.</string>
   <string name="no_players_connected">No players found</string>
-  <string name="send_files">Send Files</string>
+  <string name="send_files">Send files</string>
   <string name="block_notification_contents">Block notification contents</string>
   <string name="block_notification_images">Block notification images</string>
   <string name="pairing_title">Zorin Connect Devices</string>
@@ -245,17 +254,20 @@
   <string name="close">Close</string>
   <string name="plugins_need_permission">Some Plugins need permissions to work (tap for more info):</string>
   <string name="permission_explanation">This plugin needs permissions to work</string>
+  <string name="all_permissions_granted">All permissions granted 🎉</string>
   <string name="optional_permission_explanation">You need to grant extra permissions to enable all functions</string>
   <string name="plugins_need_optional_permission">Some plugins have features disabled because of lack of permission (tap for more info):</string>
+  <string name="share_optional_permission_explanation">To receive files you need to allow storage access</string>
+  <string name="share_notifications_explanation">To see the progress when sending and receiving files you need to allow notifications</string>
   <string name="telepathy_permission_explanation">To read and write SMS from your desktop you need to give permission to SMS</string>
   <string name="telephony_permission_explanation">To see phone calls on the desktop you need to give permission to phone call logs and phone state</string>
   <string name="telephony_optional_permission_explanation">To see a contact name instead of a phone number you need to give access to the phone\'s contacts</string>
   <string name="contacts_permission_explanation">To share your contacts book with the desktop, you need to give contacts permission</string>
+  <string name="contacts_per_device_confirmation">Your phone contacts will be copied over to this device, so they can be used by the Zorin Connect SMS app and other apps.</string>
   <string name="select_ringtone">Select a ringtone</string>
   <string name="telephony_pref_blocked_title">Blocked numbers</string>
   <string name="telephony_pref_blocked_dialog_desc">Don\'t show calls and SMS from these numbers. Please specify one number per line</string>
   <string name="mpris_coverart_description">Cover art of current media</string>
-  <string name="device_icon_description">Device icon</string>
   <string name="settings_icon_description">Settings icon</string>
   <string name="presenter_fullscreen">Full-screen</string>
   <string name="presenter_exit">Exit presentation</string>
@@ -264,14 +276,15 @@
   <string name="addcommand_explanation">There are no commands registered</string>
   <string name="addcommand_explanation2">You can add new commands in the Zorin Connect System Settings</string>
   <string name="add_command_description">You can add commands on the desktop</string>
-  <string name="pref_plugin_mprisreceiver">Media player control</string>
+  <string name="pref_plugin_mprisreceiver">Media Player Control</string>
   <string name="pref_plugin_mprisreceiver_desc">Control your phone\'s media players from another device</string>
   <string name="notification_channel_default">Other notifications</string>
   <string name="notification_channel_persistent">Persistent indicator</string>
   <string name="notification_channel_media_control">Media control</string>
-  <string name="notification_channel_filetransfer">File transfer</string>
+  <string name="notification_channel_filetransfer">Incoming file transfer</string>
+  <string name="notification_channel_filetransfer_upload">Outgoing file transfer</string>
+  <string name="notification_channel_filetransfer_error">File transfer error</string>
   <string name="notification_channel_high_priority">High priority</string>
-  <string name="notification_channel_sms_mms">New Message</string>
   <string name="mpris_stop">Stop the current player</string>
   <string name="copy_url_to_clipboard">Copy URL to clipboard</string>
   <string name="clipboard_toast">Copied to clipboard</string>
@@ -279,6 +292,10 @@
   <string name="runcommand_notpaired">Device is not paired</string>
   <string name="runcommand_nosuchdevice">There is no such device</string>
   <string name="runcommand_noruncommandplugin">This device does not have the Run Command Plugin enabled</string>
+  <string name="runcommand_category_device_controls_title">Device Controls</string>
+  <string name="runcommand_device_controls_summary">If your device supports Device Controls, commands you have configured will appear there.</string>
+  <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
+  <string name="runcommand_name_as_title_title">Show name as title</string>
   <string name="pref_plugin_findremotedevice">Find remote device</string>
   <string name="pref_plugin_findremotedevice_desc">Ring your remote device</string>
   <string name="ring">Ring</string>
@@ -300,8 +317,6 @@
   <string name="block_contents">Block contents of notifications</string>
   <string name="block_images">Block images in notifications</string>
   <string name="notification_channel_receivenotification">Notifications from other devices</string>
-  <string name="take_picture">Launch camera</string>
-  <string name="plugin_photo_desc">Launch the camera app to ease taking and transferring pictures</string>
   <string name="no_app_for_opening">No suitable app found to open this file</string>
   <string name="remote_keyboard_service">Zorin Connect Remote Keyboard</string>
   <string name="presenter_pointer">Pointer</string>
@@ -311,7 +326,8 @@
   <string name="empty_trusted_networks_list_text">You have not added any trusted network yet</string>
   <string name="allow_all_networks_text">Allow all</string>
   <string name="location_permission_needed_title">Permission required</string>
-  <string name="location_permission_needed_desc">Zorin Connect needs the background location permission to know the Wi-Fi network you are connected to even when the app is in the background. This is because the name of the Wi-Fi networks around you could be used to find your location, even when this is not what Zorin Connect does.</string>
+  <string name="bluetooth_permission_needed_desc">Grant Bluetooth permissions to make devices paired using Bluetooth available in Zorin Connect.</string>
+  <string name="location_permission_needed_desc">Zorin Connect needs the background location permission to know the WiFi network you are connected to even when the app is in the background. This is because the name of the WiFi networks around you could be used to find your location, even when this is not what Zorin Connect does.</string>
   <string name="clipboard_android_x_incompat">Android 10 has removed clipboard access to all apps. This plugin will be disabled.</string>
   <string name="mpris_open_url">Continue playing here</string>
   <string name="cant_open_url">Cannot open URL to continue playing</string>
@@ -372,11 +388,13 @@
   <string name="click_here_to_type">Tap here to type</string>
   <string name="clear_compose">Clear</string>
   <string name="send_compose">Send</string>
+  <string name="compose_send_title">Compose send</string>
   <string name="open_compose_send">Compose text</string>
-  <string name="app_description">Connect your computer with your mobile device.</string>
+  <string name="double_tap_to_drag">Double tap to drag</string>
+  <string name="hold_to_drag">Hold to drag</string>
   <string name="about_kde_about">&lt;h1&gt;About&lt;/h1&gt; &lt;p&gt;KDE is a world-wide community of software engineers, artists, writers, translators and creators who are committed to &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Free Software&lt;/a&gt; development. KDE produces the Plasma desktop environment, hundreds of applications, and the many software libraries that support them.&lt;/p&gt; &lt;p&gt;KDE is a cooperative enterprise: no single entity controls its direction or products. Instead, we work together to achieve the common goal of building the world\'s finest Free Software. Everyone is welcome to &lt;a href=https://community.kde.org/Get_Involved&gt;join and contribute&lt;/a&gt; to KDE, including you.&lt;/p&gt; Visit &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; for more information about the KDE community and the software we produce.</string>
   <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Report Bugs or Wishes&lt;/h1&gt; &lt;p&gt;Software can always be improved, and the KDE team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.&lt;/p&gt; &lt;p&gt;KDE has a bug tracking system. Visit &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; or use the \"Report Bug\" button from the about screen to report bugs.&lt;/p&gt; If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish. Make sure you use the severity called \"Wishlist\".</string>
-  <string name="about_kde_join_kde">&lt;h1&gt;Join KDE&lt;/h1&gt; &lt;p&gt;You do not have to be a software developer to be a member of the KDE team. You can join the national teams that translate program interfaces. You can provide graphics, themes, sounds, and improved documentation. You decide!&lt;/p&gt; &lt;p&gt;Visit &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; for information on some projects in which you can participate.&lt;/p&gt; If you need more information or documentation, then a visit to &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; will provide you with what you need.</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Join KDE&lt;/h1&gt; &lt;p&gt;You do not have to be a software developer to be a member of the KDE team. You can join the language teams that translate program interfaces. You can provide graphics, themes, sounds, and improved documentation. You decide!&lt;/p&gt; &lt;p&gt;Visit &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; for information on some projects in which you can participate.&lt;/p&gt; If you need more information or documentation, then a visit to &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; will provide you with what you need.</string>
   <string name="about_kde_support_kde">&lt;h1&gt;Support KDE&lt;/h1&gt; &lt;p&gt;KDE software is and will always be available free of charge, however creating it is not free.&lt;/p&gt; &lt;p&gt;To support development the KDE community has formed the KDE e.V., a non-profit organisation legally founded in Germany. KDE e.V. represents the KDE community in legal and financial matters. See &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; for information on KDE e.V.&lt;/p&gt; &lt;p&gt;KDE benefits from many kinds of contributions, including financial. We use the funds to reimburse members and others for expenses they incur when contributing. Further funds are used for legal support and organising conferences and meetings.&lt;/p&gt; &lt;p&gt;We would like to encourage you to support our efforts with a financial donation, using one of the ways described at &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Thank you very much in advance for your support.</string>
   <string name="maintainer_and_developer">Maintainer and developer</string>
   <string name="developer">Developer</string>
@@ -388,7 +406,18 @@
   <string name="maxim_leshchenko_task">UI improvements and this about page</string>
   <string name="holger_kaelberer_task">Remote keyboard plugin and bug fixes</string>
   <string name="saikrishna_arcot_task">Support for using the keyboard in the remote input plugin, bug fixes and general improvements</string>
+  <string name="shellwen_chen_task">Improve the security of SFTP, improve the maintainability of this project, bug fixes and general improvements</string>
   <string name="everyone_else">Everyone else who has contributed to Zorin Connect over the years</string>
   <string name="send_clipboard">Send clipboard</string>
   <string name="tap_to_execute">Tap to execute</string>
+  <string name="plugin_stats">Plugin stats</string>
+  <string name="enable_udp_broadcast">Enable UDP device discovery</string>
+  <string name="enable_bluetooth">Enable bluetooth (beta)</string>
+  <string name="receive_notifications_permission_explanation">Notifications need to be allowed to receive them from other devices</string>
+  <string name="findmyphone_notifications_explanation">The notifications permission is needed so the phone can ring when the app is in the background</string>
+  <string name="no_notifications">Notifications are disabled, you won\'t receive incoming pair notifications.</string>
+  <string name="mpris_keepwatching">Continue playing</string>
+  <string name="mpris_keepwatching_settings_title">Continue playing</string>
+  <string name="mpris_keepwatching_settings_summary">Show a silent notification to continue playing on this device after closing media</string>
+  <string name="notification_channel_keepwatching">Continue playing</string>
 </resources>

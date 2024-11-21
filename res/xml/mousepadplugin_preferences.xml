@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2014 Rahil Momin <rahil.rules.you@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -50,11 +57,47 @@
         android:summary="%s"
         android:title="@string/mousepad_acceleration_profile_settings_title" />
 
-    <SwitchPreferenceCompat
+    <SwitchPreference
         android:id="@+id/mousepad_scroll_preference"
         android:defaultValue="false"
         android:key="@string/mousepad_scroll_direction"
         android:title="@string/mousepad_scroll_direction_title" />
+
+    <SeekBarPreference
+        android:id="@+id/mousepad_scroll_sensitivity_pref"
+        android:defaultValue="100"
+        android:key="@string/mousepad_scroll_sensitivity"
+        android:title="@string/mousepad_scroll_sensitivity_title"
+        android:layout_width="wrap_content" />
+
+
+    <SwitchPreference
+        android:id="@+id/gyro_mouse_enabled"
+        android:defaultValue="false"
+        android:key="@string/gyro_mouse_enabled"
+        android:title="@string/gyro_mouse_enabled_title" />
+
+    <SeekBarPreference
+        android:id="@+id/mousepad_gyro_sensitivity"
+        android:defaultValue="100"
+        android:key="@string/gyro_mouse_sensitivity"
+        android:title="@string/gyro_mouse_sensitivity_title"
+        android:layout_width="wrap_content" />
+
+    <SwitchPreference
+        android:id="@+id/mousepad_mouse_buttons_enabled_pref"
+        android:defaultValue="true"
+        android:key="@string/mousepad_mouse_buttons_enabled_pref"
+        android:title="@string/mousepad_mouse_buttons_title" />
+
+    <SwitchPreference
+        android:id="@+id/mousepad_double_tap_drag_enabled_pref"
+        android:defaultValue="true"
+        android:key="@string/mousepad_doubletap_drag_enabled_pref"
+        android:title="Drag and drop behavior"
+        android:summaryOn="@string/double_tap_to_drag"
+        android:summaryOff="@string/hold_to_drag"
+        />
 
 
     <org.kde.kdeconnect.Helpers.LongSummaryPreferenceCategory
@@ -62,7 +105,7 @@
         android:summary="@string/sendkeystrokes_pref_category_summary"
         android:title="@string/sendkeystrokes_pref_category_title">
 
-        <SwitchPreferenceCompat
+        <SwitchPreference
             android:id="@+id/pref_keystrokes_enable"
             android:defaultValue="true"
             android:key="@string/pref_sendkeystrokes_enabled"
@@ -70,7 +113,7 @@
             android:summary="@string/sendkeystrokes_pref_enabled_summary"
             />
 
-        <SwitchPreferenceCompat
+        <SwitchPreference
             android:id="@+id/pref_send_safe_text_immediately"
             android:defaultValue="true"
             android:key="@string/pref_send_safe_text_immediately"

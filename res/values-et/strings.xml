@@ -15,7 +15,6 @@
   <string name="pref_plugin_clipboard_sent">Lõikepuhvrist saadud</string>
   <string name="pref_plugin_mousepad">Kaugsisestus</string>
   <string name="pref_plugin_mousepad_desc">Telefoni või tahvli kasutamine puuteplaadi ja klaviatuurina</string>
-  <string name="pref_plugin_presenter">Slaidiseansi pult</string>
   <string name="pref_plugin_presenter_desc">Seadme kasutamine esitluse slaidide vahetamiseks</string>
   <string name="pref_plugin_remotekeyboard">Kaugklahvivajutuste vastuvõtmine</string>
   <string name="pref_plugin_remotekeyboard_desc">Kaugseadmete klahvivajutuste vastuvõtmine</string>
@@ -48,7 +47,6 @@
   <string name="remotekeyboard_connected">Kaugklaviatuuri ühendus on aktiivne</string>
   <string name="remotekeyboard_multiple_connections">Kaugklaviatuuri ühendusi on üle ühe, palun vali seade, mida seadistada</string>
   <string name="open_mousepad">Kaugsisestus</string>
-  <string name="mousepad_info">Hiirekursori liigutamiseks liiguta sõrme ekraanil. Koputa klõpsamiseks ja kasuta kaht või kolme sõrme parema ja keskmise nupu jaoks. Kahe sõrmega saab kerida. Pika vajutusega saab lohistada.</string>
   <string name="mousepad_double_tap_settings_title">Kahe sõrmega koputamise toimingu määramine</string>
   <string name="mousepad_triple_tap_settings_title">Kolme sõrmega koputamise toimingu määramine</string>
   <string name="mousepad_sensitivity_settings_title">Puutepadja tundlikkuse määramine</string>
@@ -78,14 +76,11 @@
   <string name="unknown_device">Tundmatu seade</string>
   <string name="error_not_reachable">Seade pole saadaval</string>
   <string name="error_already_paired">Seade on juba paaritatud</string>
-  <string name="error_could_not_send_package">Paketi saatmine nurjus</string>
   <string name="error_timed_out">Ajaületus</string>
   <string name="error_canceled_by_user">Kasutaja katkestas</string>
   <string name="error_canceled_by_other_peer">Teine pool katkestas</string>
   <string name="encryption_info_title">Krüptimise teave</string>
-  <string name="encryption_info_msg_no_ssl">Teine seade ei kasuta Zorin Connecti uusimat versiooni ja tarvitab krüptimisel pärandmeetodit.</string>
   <string name="pair_requested">Paardumise soov</string>
-  <string name="pairing_request_from">Paardumise soov seadmest %1s</string>
   <plurals name="incoming_file_title">
     <item quantity="one">Saadi %1$d fail seadmest %2$s</item>
     <item quantity="other">Saadi %1$d faili seadmest %2$s</item>
@@ -148,7 +143,6 @@
   </string-array>
   <string name="mpris_notification_settings_title">Meedia juhtimise märguannete näitamine</string>
   <string name="mpris_notification_settings_summary">Meediamängija juhtimise võimaldamine ilma Zorin Connecti avamata</string>
-  <string name="share_to">Jaga ...</string>
   <string name="protocol_version_newer">See seade kasutab uuemat protokolli versiooni</string>
   <string name="plugin_settings_with_name">%s seadistused</string>
   <string name="invalid_device_name">Vigane seadme nimi</string>
@@ -217,7 +211,6 @@
   <string name="telephony_pref_blocked_title">Blokitud numbrid</string>
   <string name="telephony_pref_blocked_dialog_desc">Neilt numbritelt tulevaid kõnesid ja SMS-e ei näidata. Palun pane iga number kirja eraldi reale</string>
   <string name="mpris_coverart_description">Aktiivse meedia kaanepilt</string>
-  <string name="device_icon_description">Seadme ikoon</string>
   <string name="settings_icon_description">Seadistuste ikoon</string>
   <string name="presenter_fullscreen">Täisekraan</string>
   <string name="presenter_exit">Välju esitlusest</string>
@@ -230,9 +223,7 @@
   <string name="pref_plugin_mprisreceiver_desc">Telefoni meediamängijate juhtimine teisest seadmest</string>
   <string name="notification_channel_default">Muud märguanded</string>
   <string name="notification_channel_media_control">Meedia juhtimine</string>
-  <string name="notification_channel_filetransfer">Failiülekanne</string>
   <string name="notification_channel_high_priority">Kõrge prioriteediga</string>
-  <string name="notification_channel_sms_mms">Uus sõnum</string>
   <string name="mpris_stop">Peata aktiivne mängija</string>
   <string name="copy_url_to_clipboard">Kopeeri URL lõikepuhvrisse</string>
   <string name="clipboard_toast">Kopeeriti lõikepuhvrisse</string>
@@ -261,8 +252,6 @@
   <string name="block_contents">Märguannete sisu blokkimine</string>
   <string name="block_images">Märguannete piltide blokkimine</string>
   <string name="notification_channel_receivenotification">Märguanded teistest seadmetest</string>
-  <string name="take_picture">Käivita kaamera</string>
-  <string name="plugin_photo_desc">Kaamerarakenduse käivitamine piltide tegemiseks ja ülekandmiseks</string>
   <string name="no_app_for_opening">Selle faili avamiseks ei leitud sobivat rakendust</string>
   <string name="remote_keyboard_service">Zorin Connecti kaugklaviatuur</string>
   <string name="presenter_pointer">Osutusseade</string>

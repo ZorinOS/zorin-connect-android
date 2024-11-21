@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2017 Zixing Liu <liushuyu@protonmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/refresh_list_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_horizontal_margin">
 
     <ListView
         android:id="@+id/devices_list"
@@ -11,8 +19,10 @@
         android:layout_height="match_parent"
         android:addStatesFromChildren="true"
         android:divider="@null"
-        android:dividerHeight="0dp"
+        android:descendantFocusability="afterDescendants"
+        android:dividerHeight="12dp"
         android:orientation="vertical"
+        tools:listitem="@layout/list_card_entry"
         tools:context=".MainActivity" />
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

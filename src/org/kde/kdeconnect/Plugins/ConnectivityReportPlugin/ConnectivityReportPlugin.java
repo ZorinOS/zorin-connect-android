@@ -16,6 +16,7 @@ import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import org.json.JSONException;
@@ -56,13 +57,6 @@ public class ConnectivityReportPlugin extends Plugin {
      */
     private final static String PACKET_TYPE_CONNECTIVITY_REPORT = "kdeconnect.connectivity_report";
 
-    /**
-     * Packet sent to request the current connectivity state
-     * <p>
-     * The request packet shall contain no body
-     */
-    private final static String PACKET_TYPE_CONNECTIVITY_REPORT_REQUEST = "kdeconnect.connectivity_report.request";
-
     private final NetworkPacket connectivityInfo = new NetworkPacket(PACKET_TYPE_CONNECTIVITY_REPORT);
 
     OnSubscriptionsChangedListener subListener = null;
@@ -70,12 +64,12 @@ public class ConnectivityReportPlugin extends Plugin {
     private final HashMap<Integer, SubscriptionState> states = new HashMap<>();
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         return context.getResources().getString(R.string.pref_plugin_connectivity_report);
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getResources().getString(R.string.pref_plugin_connectivity_report_desc);
     }
 
@@ -150,8 +144,8 @@ public class ConnectivityReportPlugin extends Plugin {
                 }
 
                 serializeSignalStrengths();
-                device.sendPacket(connectivityInfo);
-                Log.i("ConnectivityReport", "signalStrength of #" + subID + " updated to " + level);
+                getDevice().sendPacket(connectivityInfo);
+                //Log.i("ConnectivityReport", "signalStrength of #" + subID + " updated to " + level);
             }
 
             @Override
@@ -163,8 +157,8 @@ public class ConnectivityReportPlugin extends Plugin {
                 }
 
                 serializeSignalStrengths();
-                device.sendPacket(connectivityInfo);
-                Log.i("ConnectivityReport", "networkType of #" + subID + " updated to " + networkTypeToString(networkType));
+                getDevice().sendPacket(connectivityInfo);
+                //Log.i("ConnectivityReport", "networkType of #" + subID + " updated to " + networkTypeToString(networkType));
             }
         };
     }
@@ -218,38 +212,37 @@ public class ConnectivityReportPlugin extends Plugin {
         runWithLooper(() -> {
             TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                TelephonyHelper.cancelActiveSubscriptionIDsListener(context, subListener);
+                if (subListener != null) {
+                    TelephonyHelper.cancelActiveSubscriptionIDsListener(context, subListener);
+                    subListener = null;
+                }
             }
             for (Integer subID : listeners.keySet()) {
                 Log.i("ConnectivityReport", "Removed subscription ID " + subID);
                 tm.listen(listeners.get(subID), PhoneStateListener.LISTEN_NONE);
             }
+            listeners.clear();
+            states.clear();
         });
     }
 
     @Override
-    public boolean onPacketReceived(NetworkPacket np) {
-        if (PACKET_TYPE_CONNECTIVITY_REPORT_REQUEST.equals(np.getType())) {
-            Log.i("ConnectivityReport", "Requested");
-            serializeSignalStrengths();
-            device.sendPacket(connectivityInfo);
-        }
-
-        return true;
+    public boolean onPacketReceived(@NonNull NetworkPacket np) {
+        return false;
     }
 
     @Override
-    public String[] getSupportedPacketTypes() {
-        return new String[]{PACKET_TYPE_CONNECTIVITY_REPORT_REQUEST};
+    public @NonNull String[] getSupportedPacketTypes() {
+        return new String[]{};
     }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
+    public @NonNull String[] getOutgoingPacketTypes() {
         return new String[]{PACKET_TYPE_CONNECTIVITY_REPORT};
     }
 
     @Override
-    public String[] getRequiredPermissions() {
+    public @NonNull String[] getRequiredPermissions() {
         return new String[]{
                 Manifest.permission.READ_PHONE_STATE,
         };

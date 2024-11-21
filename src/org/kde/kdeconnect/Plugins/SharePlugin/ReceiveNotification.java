@@ -46,7 +46,7 @@ class ReceiveNotification {
         this.jobId = jobId;
         notificationId = (int) System.currentTimeMillis();
         notificationManager = ContextCompat.getSystemService(device.getContext(), NotificationManager.class);
-        builder = new NotificationCompat.Builder(device.getContext(), NotificationHelper.Channels.FILETRANSFER)
+        builder = new NotificationCompat.Builder(device.getContext(), NotificationHelper.Channels.FILETRANSFER_DOWNLOAD)
                 .setSmallIcon(android.R.drawable.stat_sys_download)
                 .setAutoCancel(true)
                 .setOngoing(true)
@@ -69,7 +69,7 @@ class ReceiveNotification {
         cancelIntent.setAction(SharePlugin.ACTION_CANCEL_SHARE);
         cancelIntent.putExtra(SharePlugin.CANCEL_SHARE_BACKGROUND_JOB_ID_EXTRA, jobId);
         cancelIntent.putExtra(SharePlugin.CANCEL_SHARE_DEVICE_ID_EXTRA, device.getDeviceId());
-        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(device.getContext(), 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+        PendingIntent cancelPendingIntent = PendingIntent.getBroadcast(device.getContext(), 0, cancelIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         builder.addAction(R.drawable.ic_reject_pairing_24dp, device.getContext().getString(R.string.cancel), cancelPendingIntent);
     }
@@ -86,7 +86,7 @@ class ReceiveNotification {
     }
 
     public void setFinished(String message) {
-        builder = new NotificationCompat.Builder(device.getContext(), NotificationHelper.Channels.FILETRANSFER);
+        builder = new NotificationCompat.Builder(device.getContext(), NotificationHelper.Channels.FILETRANSFER_DOWNLOAD);
         builder.setContentTitle(message)
                 .setTicker(message)
                 .setSmallIcon(android.R.drawable.stat_sys_download_done)
@@ -97,6 +97,13 @@ class ReceiveNotification {
         if (prefs.getBoolean("share_notification_preference", true)) {
             builder.setDefaults(Notification.DEFAULT_ALL);
         }
+    }
+
+    public void setFailed(String message) {
+        setFinished(message);
+        builder.setSmallIcon(android.R.drawable.stat_notify_error)
+                .setChannelId(NotificationHelper.Channels.FILETRANSFER_ERROR);
+
     }
 
     public void setURI(Uri destinationUri, String mimeType, String filename) {
@@ -153,7 +160,7 @@ class ReceiveNotification {
                 device.getContext(),
                 0,
                 intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
         );
 
         builder.setContentText(device.getContext().getResources().getString(R.string.received_file_text, filename))
@@ -162,7 +169,7 @@ class ReceiveNotification {
         shareIntent = Intent.createChooser(shareIntent,
                 device.getContext().getString(R.string.share_received_file, destinationUri.getLastPathSegment()));
         PendingIntent sharePendingIntent = PendingIntent.getActivity(device.getContext(), (int) System.currentTimeMillis(),
-                shareIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);
+                shareIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Action.Builder shareAction = new NotificationCompat.Action.Builder(
                 R.drawable.ic_share_white, device.getContext().getString(R.string.share), sharePendingIntent);
         builder.addAction(shareAction.build());

@@ -14,16 +14,18 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.KeyEvent;
 
-import androidx.core.content.ContextCompat;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 
-import org.kde.kdeconnect.Device;
+import org.kde.kdeconnect.DeviceType;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
 import com.zorinos.zorin_connect.R;
+
+import java.util.Objects;
 
 @PluginFactory.LoadablePlugin
 public class BigscreenPlugin extends Plugin {
@@ -32,29 +34,28 @@ public class BigscreenPlugin extends Plugin {
     private final static String PACKET_TYPE_BIGSCREEN_STT = "kdeconnect.bigscreen.stt";
 
     @Override
-    public boolean isIncompatible() {
-        return !device.getDeviceType().equals(Device.DeviceType.Tv) || super.isIncompatible();
+    public boolean isCompatible() {
+        return getDevice().getDeviceType().equals(DeviceType.TV) && super.isCompatible();
     }
 
     @Override
-    public boolean onCreate() {
-        optionalPermissionExplanation = R.string.bigscreen_optional_permission_explanation;
-        return true;
+    protected int getOptionalPermissionExplanation() {
+        return R.string.bigscreen_optional_permission_explanation;
     }
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         return context.getString(R.string.pref_plugin_bigscreen);
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getString(R.string.pref_plugin_bigscreen_desc);
     }
 
     @Override
-    public Drawable getIcon() {
-        return ContextCompat.getDrawable(context, R.drawable.ic_presenter_24dp);
+    public @DrawableRes int getIcon() {
+        return R.drawable.ic_presenter_24dp;
     }
 
     @Override
@@ -68,31 +69,31 @@ public class BigscreenPlugin extends Plugin {
     }
 
     @Override
-    public boolean hasMainActivity(Context context) {
+    public boolean displayAsButton(Context context) {
         return true;
     }
 
     @Override
     public void startMainActivity(Activity parentActivity) {
         Intent intent = new Intent(parentActivity, BigscreenActivity.class);
-        intent.putExtra("deviceId", device.getDeviceId());
+        intent.putExtra("deviceId", getDevice().getDeviceId());
         parentActivity.startActivity(intent);
     }
 
     @Override
-    public String[] getSupportedPacketTypes() {  return new String[]{PACKET_TYPE_BIGSCREEN_STT}; }
+    public @NonNull String[] getSupportedPacketTypes() {  return new String[]{PACKET_TYPE_BIGSCREEN_STT}; }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
+    public @NonNull String[] getOutgoingPacketTypes() {
         return new String[]{PACKET_TYPE_MOUSEPAD_REQUEST, PACKET_TYPE_BIGSCREEN_STT};
     }
 
     @Override
-    public String getActionName() {
+    public @NonNull String getActionName() {
         return context.getString(R.string.pref_plugin_bigscreen);
     }
 
-    public String[] getOptionalPermissions() {
+    public @NonNull String[] getOptionalPermissions() {
         return new String[]{Manifest.permission.RECORD_AUDIO};
     }
 
@@ -104,44 +105,44 @@ public class BigscreenPlugin extends Plugin {
     public void sendLeft() {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST);
         np.set("specialKey", SpecialKeysMap.get(KeyEvent.KEYCODE_DPAD_LEFT));
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     public void sendRight() {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST);
         np.set("specialKey", SpecialKeysMap.get(KeyEvent.KEYCODE_DPAD_RIGHT));
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     public void sendUp() {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST);
         np.set("specialKey", SpecialKeysMap.get(KeyEvent.KEYCODE_DPAD_UP));
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     public void sendDown() {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST);
         np.set("specialKey", SpecialKeysMap.get(KeyEvent.KEYCODE_DPAD_DOWN));
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     public void sendSelect() {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST);
         np.set("specialKey", SpecialKeysMap.get(KeyEvent.KEYCODE_ENTER));
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     public void sendHome() {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_MOUSEPAD_REQUEST);
         np.set("alt", true);
         np.set("specialKey", SpecialKeysMap.get(KeyEvent.KEYCODE_F4));
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     public void sendSTT(String content) {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_BIGSCREEN_STT);
         np.set("type", "stt");
         np.set("content", content);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 }

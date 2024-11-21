@@ -7,29 +7,34 @@
 
 package org.kde.kdeconnect.Plugins.RunCommandPlugin;
 
+import static org.kde.kdeconnect.Plugins.RunCommandPlugin.RunCommandWidgetProviderKt.forceRefreshWidgets;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
 
-import androidx.core.content.ContextCompat;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
+import org.apache.commons.collections4.iterators.IteratorIterable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.kde.kdeconnect.NetworkPacket;
 import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
+import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import com.zorinos.zorin_connect.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
+import java.util.Objects;
 
 @PluginFactory.LoadablePlugin
 public class RunCommandPlugin extends Plugin {
@@ -67,18 +72,29 @@ public class RunCommandPlugin extends Plugin {
     }
 
     @Override
-    public String getDisplayName() {
+    public @NonNull String getDisplayName() {
         return context.getResources().getString(R.string.pref_plugin_runcommand);
     }
 
     @Override
-    public String getDescription() {
+    public @NonNull String getDescription() {
         return context.getResources().getString(R.string.pref_plugin_runcommand_desc);
     }
 
     @Override
-    public Drawable getIcon() {
-        return ContextCompat.getDrawable(context, R.drawable.run_command_plugin_icon_24dp);
+    public boolean hasSettings() {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public PluginSettingsFragment getSettingsFragment(Activity activity) {
+        return PluginSettingsFragment.newInstance(getPluginKey(), R.xml.runcommand_preferences);
+    }
+
+    @Override
+    public @DrawableRes int getIcon() {
+        return R.drawable.run_command_plugin_icon_24dp;
     }
 
     @Override
@@ -89,27 +105,21 @@ public class RunCommandPlugin extends Plugin {
     }
 
     @Override
-    public boolean onPacketReceived(NetworkPacket np) {
+    public boolean onPacketReceived(@NonNull NetworkPacket np) {
 
         if (np.has("commandList")) {
             commandList.clear();
             try {
                 commandItems.clear();
                 JSONObject obj = new JSONObject(np.getString("commandList"));
-                Iterator<String> keys = obj.keys();
-                while (keys.hasNext()) {
-                    String s = keys.next();
+                for (String s : new IteratorIterable<>(obj.keys())) {
                     JSONObject o = obj.getJSONObject(s);
                     o.put("key", s);
                     commandList.add(o);
 
                     try {
                         commandItems.add(
-                                new CommandEntry(
-                                        o.getString("name"),
-                                        o.getString("command"),
-                                        o.getString("key")
-                                )
+                                new CommandEntry(o)
                         );
                     } catch (JSONException e) {
                         Log.e("RunCommand", "Error parsing JSON", e);
@@ -126,11 +136,12 @@ public class RunCommandPlugin extends Plugin {
                         array.put(command);
                     }
 
-                    sharedPreferences.edit().putString(KEY_COMMANDS_PREFERENCE + device.getDeviceId(), array.toString()).apply();
+                    sharedPreferences.edit()
+                            .putString(KEY_COMMANDS_PREFERENCE + getDevice().getDeviceId(), array.toString())
+                            .apply();
                 }
 
-                Intent updateWidget = new Intent(context, RunCommandWidget.class);
-                context.sendBroadcast(updateWidget);
+                forceRefreshWidgets(context);
 
             } catch (JSONException e) {
                 Log.e("RunCommand", "Error parsing JSON", e);
@@ -140,7 +151,7 @@ public class RunCommandPlugin extends Plugin {
                 aCallback.update();
             }
 
-            device.onPluginsChanged();
+            getDevice().onPluginsChanged();
 
             canAddCommand = np.getBoolean("canAddCommand", false);
 
@@ -150,52 +161,52 @@ public class RunCommandPlugin extends Plugin {
     }
 
     @Override
-    public String[] getSupportedPacketTypes() {
+    public @NonNull String[] getSupportedPacketTypes() {
         return new String[]{PACKET_TYPE_RUNCOMMAND};
     }
 
     @Override
-    public String[] getOutgoingPacketTypes() {
+    public @NonNull String[] getOutgoingPacketTypes() {
         return new String[]{PACKET_TYPE_RUNCOMMAND_REQUEST};
     }
 
     public void runCommand(String cmdKey) {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_RUNCOMMAND_REQUEST);
         np.set("key", cmdKey);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     private void requestCommandList() {
         NetworkPacket np = new NetworkPacket(PACKET_TYPE_RUNCOMMAND_REQUEST);
         np.set("requestCommandList", true);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
     @Override
-    public boolean hasMainActivity(Context context) {
+    public boolean displayAsButton(Context context) {
         return true;
     }
 
     @Override
     public void startMainActivity(Activity parentActivity) {
         Intent intent = new Intent(parentActivity, RunCommandActivity.class);
-        intent.putExtra("deviceId", device.getDeviceId());
+        intent.putExtra("deviceId", getDevice().getDeviceId());
         parentActivity.startActivity(intent);
     }
 
     @Override
-    public String getActionName() {
+    public @NonNull String getActionName() {
         return context.getString(R.string.pref_plugin_runcommand);
     }
 
-    public boolean canAddCommand(){
+    public boolean canAddCommand() {
         return canAddCommand;
     }
 
     void sendSetupPacket() {
         NetworkPacket np = new NetworkPacket(RunCommandPlugin.PACKET_TYPE_RUNCOMMAND_REQUEST);
         np.set("setup", true);
-        device.sendPacket(np);
+        getDevice().sendPacket(np);
     }
 
 }

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2021 Maxim Leshchenko <cnmaks90@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,10 +26,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            app:cardBackgroundColor="@color/base_color"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="0dp"
-            app:cardUseCompatPadding="true">
+            android:clickable="false"
+            android:focusable="false"
+            card_view:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -42,8 +48,8 @@
                         android:layout_gravity="top"
                         android:paddingTop="@dimen/nav_header_vertical_spacing"
                         android:paddingBottom="4dp"
-                        android:contentDescription="@string/kde_connect"
-                        tools:src="@mipmap/icon" />
+                        android:importantForAccessibility="no"
+                        tools:src="@drawable/icon" />
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -56,7 +62,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             tools:text="Application Name"
-                            android:textStyle="bold"
                             android:textAppearance="?attr/textAppearanceHeadline6" />
 
                         <TextView
@@ -67,13 +72,6 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/app_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textIsSelectable="true"
-                    android:layout_margin="12dp"
-                    tools:text="Application Description" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -122,10 +120,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            app:cardBackgroundColor="@color/base_color"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="0dp"
-            app:cardUseCompatPadding="true">
+            style="@style/Widget.Material3.CardView.Elevated"
+            card_view:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -138,7 +134,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/authors"
-                    android:textStyle="bold"
                     android:textAppearance="?attr/textAppearanceHeadline6" />
 
                 <org.kde.kdeconnect.UserInterface.About.AdapterLinearLayout
