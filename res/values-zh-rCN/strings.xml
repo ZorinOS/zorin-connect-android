@@ -115,6 +115,7 @@
   <string name="error_not_reachable">设备不可及</string>
   <string name="error_already_paired">设备已配对</string>
   <string name="error_timed_out">超时</string>
+  <string name="error_clocks_not_match">设备时钟不同步</string>
   <string name="error_canceled_by_user">已被用户取消</string>
   <string name="error_canceled_by_other_peer">已被其他对等点取消</string>
   <string name="encryption_info_title">加密信息</string>
@@ -184,11 +185,13 @@
   <string name="share_to">分享到…</string>
   <string name="unreachable_device">%s (无法访问)</string>
   <string name="unreachable_device_url_share_text">URL 被分享到了不可访问的设备。它将在设备能够访问时自动传输到该设备。\n</string>
+  <string name="protocol_version">协议版本：</string>
   <string name="protocol_version_newer">此设备使用较新版本的协议</string>
   <string name="plugin_settings_with_name">%s设置</string>
   <string name="invalid_device_name">无效的设备名</string>
   <string name="shareplugin_text_saved">已收到文本，存至剪贴板</string>
   <string name="custom_devices_settings">自定义设备列表</string>
+  <string name="custom_devices_settings_summary">手动添加了 %d 个设备</string>
   <string name="custom_device_list">通过 IP 添加设备</string>
   <string name="custom_device_deleted">自定义设备已删除</string>
   <string name="custom_device_list_help">如果您的设备未被自动检测到，您点击浮动操作按钮可以添加它的 IP 地址或主机名。</string>
@@ -318,7 +321,7 @@
   <string name="empty_trusted_networks_list_text">您还没有添加任何可信的网络</string>
   <string name="allow_all_networks_text">允许所有</string>
   <string name="location_permission_needed_title">需要权限</string>
-  <string name="bluetooth_permission_needed_desc">授予蓝牙权限以通过 Zorin Connect 配对可用设备。</string>
+  <string name="bluetooth_permission_needed_desc">Zorin Connect 需要权限才能使用蓝牙连接并配对附近的设备。</string>
   <string name="location_permission_needed_desc">Zorin Connect 需要后台位置权限才能在后台检测您连接到的 WiFi 网络。后台位置权限是一个敏感权限，这是因为该权限可以让应用程序通过您周围的 WiFi 网络名称来查找您的位置。尽管 Zorin Connect 申请了该权限，但它不会对您进行定位。</string>
   <string name="clipboard_android_x_incompat">Android 10 已删除所有应用的剪贴板访问权限。此插件将被禁用。</string>
   <string name="mpris_open_url">继续在此播放</string>
@@ -412,4 +415,9 @@
   <string name="mpris_keepwatching_settings_title">继续播放</string>
   <string name="mpris_keepwatching_settings_summary">关闭媒体后显示一条用于继续在此设备上播放的静音通知</string>
   <string name="notification_channel_keepwatching">继续播放</string>
+  <string name="ping_result">Ping 的响应时间是 %1$d 毫秒</string>
+  <string name="ping_failed">无法 ping 设备</string>
+  <string name="ping_in_progress">正在执行 ping 命令…</string>
+  <string name="device_host_invalid">主机无效。请使用有效的主机名、IPv4 或 IPv6 地址</string>
+  <string name="device_host_duplicate">主机已在列表中</string>
 </resources>

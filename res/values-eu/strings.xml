@@ -197,6 +197,7 @@
   <string name="invalid_device_name">Gailuaren izen baliogabea</string>
   <string name="shareplugin_text_saved">Testua jaso da, arbelean kopiatu da</string>
   <string name="custom_devices_settings">Gailuen zerrenda pertsonalizatua</string>
+  <string name="custom_devices_settings_summary">%d gailua eskuz gehitu dira</string>
   <string name="custom_device_list">Gehitu gailuak IP bidez</string>
   <string name="custom_device_deleted">Norberak finkatutako gailua ezabatu da</string>
   <string name="custom_device_list_help">Zure gailua ez bada automatikoki detektatzen bere IP helbidea edo ostalari-izena gehitu dezakezu ekintza botoi mugikorrean klik eginez</string>
@@ -326,6 +327,7 @@
   <string name="empty_trusted_networks_list_text">Oraindik ez duzu gehitu konfiantza duen sarerik</string>
   <string name="allow_all_networks_text">Baimendu guztiak</string>
   <string name="location_permission_needed_title">Baimena beharrezkoa da</string>
+  <string name="bluetooth_permission_needed_desc">Zorin Connect-ek hurbileko gailuetara konektatzeko baimena behar du, Bluetooth bidez parekatutako gailuak Zorin Connect-en erabilgarri ipintzeko.</string>
   <string name="location_permission_needed_desc">Zorin Connect-ek konektatuta zauden Wi-Fi sarea zein den jakiteko atzeko planoko kokapen baimena behar du, baita aplikazioa atzeko planoan dagoenean ere. Hori horrela da, zure inguruko Wi-Fi sareen izenak zure kokalekua aurkitzeko erabil daitezkeelako, nahiz eta hori ez izan Zorin Connect-ek egiten duena.</string>
   <string name="clipboard_android_x_incompat">Android 10ek arbela atzitzeko aukera kendu die aplikazio guztiei. Plugin hau desgaitu egingo da.</string>
   <string name="mpris_open_url">Jarraitu hemen jotzen</string>
@@ -419,4 +421,9 @@
   <string name="mpris_keepwatching_settings_title">Jarraitu jotzen</string>
   <string name="mpris_keepwatching_settings_summary">Hedabidea itxi ondoren, gailu honetan jotzen jarraitzeko jakinarazpen ixil bat erakutsi.</string>
   <string name="notification_channel_keepwatching">Jarraitu jotzen</string>
+  <string name="ping_result">«Ping» %1$d milisegundotan egin da</string>
+  <string name="ping_failed">Ezin izan dio gailuari «ping» egin</string>
+  <string name="ping_in_progress">«Ping» egiten...</string>
+  <string name="device_host_invalid">Ostalaria baliogabea da. Erabili balio duen ostalari-izen bat, IPv4, edo IPv6</string>
+  <string name="device_host_duplicate">Ostalaria jada zerrendan dago</string>
 </resources>

@@ -21,7 +21,7 @@ buildscript {
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.dependencyLicenseReport)
     alias(libs.plugins.compose.compiler)
 }
@@ -50,8 +50,11 @@ android {
     namespace = "com.zorinos.zorin_connect"
     compileSdk = 35
     defaultConfig {
+        applicationId = "com.zorinos.zorin_connect"
         minSdk = 21
         targetSdk = 35
+        versionCode = 13211
+        versionName = "1.32.11"
         proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
     }
     buildFeatures {
@@ -74,16 +77,18 @@ android {
     androidResources {
         generateLocaleConfig = true
     }
+
     sourceSets {
         getByName("main") {
-            manifest.srcFile("AndroidManifest.xml")
-            java.setSrcDirs(listOf("src"))
-            resources.setSrcDirs(listOf("resources"))
-            res.setSrcDirs(listOf(licenseResDir, "res"))
-            assets.setSrcDirs(listOf("assets"))
+            setRoot(".") // By default AGP expects all directories under src/main/...
+            java.srcDir("src") // by default is "java"
+            res.setSrcDirs(listOf(licenseResDir, "res")) // add licenseResDir
+        }
+        getByName("debug") {
+            res.srcDir("dbg-res")
         }
         getByName("test") {
-            java.setSrcDirs(listOf("tests"))
+            java.srcDir("tests")
         }
     }
 
@@ -105,6 +110,8 @@ android {
             isMinifyEnabled = false
             isShrinkResources = false
             signingConfig = signingConfigs.getByName("debug")
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-debug"
         }
         getByName("release") {
             isMinifyEnabled = true
@@ -254,6 +261,10 @@ abstract class FixCollectionsClassVisitorFactory :
     interface Params : InstrumentationParameters
 }
 
+ksp {
+    arg("com.albertvaka.classindexksp.annotations", "org.kde.kdeconnect.Plugins.PluginFactory.LoadablePlugin")
+}
+
 androidComponents {
     onVariants { variant ->
         variant.instrumentation.transformClassesWith(
@@ -307,8 +318,7 @@ dependencies {
     //implementation("com.github.bright:slf4android:0.1.6") { transitive = true } // For org.apache.sshd debugging
     implementation(libs.bcpkix.jdk15on) //For SSL certificate generation
 
-    implementation(libs.classindex)
-    kapt(libs.classindex)
+    ksp(libs.classindexksp)
 
     // The android-smsmms library is the only way I know to handle MMS in Android
     // (Shouldn't a phone OS make phone things easy?)

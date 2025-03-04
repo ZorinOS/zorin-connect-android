@@ -115,6 +115,7 @@
   <string name="error_not_reachable">Apparaat niet bereikbaar</string>
   <string name="error_already_paired">Apparaat is al gepaard</string>
   <string name="error_timed_out">Tijdslimiet overschreden</string>
+  <string name="error_clocks_not_match">Klokken op apparaten lopen niet gelijk</string>
   <string name="error_canceled_by_user">Geannuleerd door gebruiker</string>
   <string name="error_canceled_by_other_peer">Geannuleerd door andere kant</string>
   <string name="encryption_info_title">Versleutelde informatie</string>
@@ -192,11 +193,13 @@
   <string name="share_to">Delen met…</string>
   <string name="unreachable_device">%s (niet bereikbaar)</string>
   <string name="unreachable_device_url_share_text">URL\'s gedeeld met een niet bereikbaar apparaat zullen er afgeleverd worden wanneer deze bereikbaar wordt.\n\n</string>
+  <string name="protocol_version">Protocolversie:</string>
   <string name="protocol_version_newer">Dit apparaat gebruikt een nieuwere protocolversie</string>
   <string name="plugin_settings_with_name">Instellingen van %s</string>
   <string name="invalid_device_name">Ongeldige apparaatnaam</string>
   <string name="shareplugin_text_saved">Oontvangen tekst, opgeslagen op klembord</string>
   <string name="custom_devices_settings">Aangepaste lijst apparaten</string>
+  <string name="custom_devices_settings_summary">%d apparaten handmatig toegevoegd</string>
   <string name="custom_device_list">Voeg apparaten toe per IP-adres</string>
   <string name="custom_device_deleted">Aangepaste apparaat verwijderd</string>
   <string name="custom_device_list_help">Als uw apparaat niet automatisch wordt gedetecteerd kunt u zijn IP-adres of hostnaam toevoegen door te klikken op de knop Zwevende actie</string>
@@ -326,7 +329,7 @@
   <string name="empty_trusted_networks_list_text">U hebt nog geen vertrouwd netwerk toegevoegd</string>
   <string name="allow_all_networks_text">Allen toestaan</string>
   <string name="location_permission_needed_title">Toestemming vereist</string>
-  <string name="bluetooth_permission_needed_desc">Geeft Bluetooth rechten om apparaten te laten paren met Bluetooth beschikbaar in Zorin Connect.</string>
+  <string name="bluetooth_permission_needed_desc">Zorin Connect heeft rechten nodig om te verbinden met apparaten dichtbij om apparaten te laten paren met Bluetooth beschikbaar in Zorin Connect.</string>
   <string name="location_permission_needed_desc">Zorin Connect heeft de permissie achtergrondlocatie nodig om het WiFi-netwerk te weten waarmee u bent verbonden zelfs wanneer de toepassing in de achtergrond is. Dit vanwege dat de naam van de WiFi-netwerken om u heen gebruikt zouden kunnen worden om uw locatie te vinden, zelfs wanneer dit niet is wat Zorin Connect doet.</string>
   <string name="clipboard_android_x_incompat">Android 10 heeft toegang tot het klembord naar alle toepassingen verwijderd. Deze plug-in zal uitgeschakeld worden.</string>
   <string name="mpris_open_url">Hier doorgaan met afspelen</string>
@@ -420,4 +423,9 @@
   <string name="mpris_keepwatching_settings_title">Doorgaan met afspelen</string>
   <string name="mpris_keepwatching_settings_summary">Een stille melding tonen om door te gaan met afspelen op dit apparaat na sluiten van het medium</string>
   <string name="notification_channel_keepwatching">Doorgaan met afspelen</string>
+  <string name="ping_result">Ping verkregen in %1$d milliseconden</string>
+  <string name="ping_failed">Kreeg geen antwoord op ping van apparaat</string>
+  <string name="ping_in_progress">Ping wordt verstuurt</string>
+  <string name="device_host_invalid">Host is ongeldig. Gebruik een geldige hostnaam, IPv4 of IPv6</string>
+  <string name="device_host_duplicate">Host bestaat al in de lijst</string>
 </resources>

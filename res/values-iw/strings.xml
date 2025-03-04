@@ -115,6 +115,7 @@
   <string name="error_not_reachable">המכשיר לא זמין</string>
   <string name="error_already_paired">המכשיר כבר מצומד</string>
   <string name="error_timed_out">נגמר הזמן</string>
+  <string name="error_clocks_not_match">שעוני המכשירים לא תואמים</string>
   <string name="error_canceled_by_user">בוטל על ידי המשתמש</string>
   <string name="error_canceled_by_other_peer">בוטל מהצד השני</string>
   <string name="encryption_info_title">פרטי הצפנה</string>
@@ -208,11 +209,13 @@
   <string name="share_to">שיתוף אל…</string>
   <string name="unreachable_device">%s (לא נגיש)</string>
   <string name="unreachable_device_url_share_text">כתובות שותפו להתקן בלתי נגיש והן תועברנה אליו ברגע שישוב להיות נגיש.\n\n</string>
+  <string name="protocol_version">גרסת פרוטוקול:</string>
   <string name="protocol_version_newer">המכשיר משתמש בגרסה חדשה יותר</string>
   <string name="plugin_settings_with_name">הגדרות %s</string>
   <string name="invalid_device_name">שם המכשיר שגוי</string>
   <string name="shareplugin_text_saved">התקבל טקסט, נשמר ללוח הגזירים</string>
   <string name="custom_devices_settings">רשימת מכשירים מותאמת אישית</string>
+  <string name="custom_devices_settings_summary">%d התקנים נוספו ידנית</string>
   <string name="custom_device_list">הוספת מכשירים לפי IP</string>
   <string name="custom_device_deleted">מכשיר מותאם אישית נמחק</string>
   <string name="custom_device_list_help">אם המכשיר שלך לא מזוהה אוטומטית אפשר להוסיף את כתובת ה־IP או את שם המארח שלו בלחיצה על כפתור הפעולה הצף</string>
@@ -252,7 +255,7 @@
   <string name="pairing_description">מכשירים אחרים שמריצים Zorin Connect ברשת הנוכחית צריכים להופיע פה.</string>
   <string name="device_rename_title">שינוי שם מכשיר</string>
   <string name="device_rename_confirm">שינוי שם</string>
-  <string name="refresh">רענון</string>
+  <string name="refresh">ריענון</string>
   <string name="unreachable_description">ההתקן המצומד לא זמין, כדאי לוודא שהוא מחובר לאותה רשת כמוך.</string>
   <string name="no_wifi">לא התחברת לאף רשת אלחוטית, לכן אין לך אפשרות לראות מכשירים כלשהם. לחיצה כאן תפעיל את הרשת האלחוטית.</string>
   <string name="on_non_trusted_message">לא רשת מהימנה: גילוי אוטומטי מושבת.</string>
@@ -342,7 +345,7 @@
   <string name="empty_trusted_networks_list_text">עדיין לא הוספת רשתות מהימנות</string>
   <string name="allow_all_networks_text">לאפשר הכול</string>
   <string name="location_permission_needed_title">נדרשת הרשאה</string>
-  <string name="bluetooth_permission_needed_desc">יש להעניק גישה לבלוטות׳ כדי שהתקנים שצומדו עם בלוטות׳ יהיו זמינים ב־Zorin Connect.</string>
+  <string name="bluetooth_permission_needed_desc">Zorin Connect זקוק להרשאה להתחבר להתקנים קרובים כדי שהתקנים שצומדו עם בלוטות׳ יהיו זמינים ב־Zorin Connect.</string>
   <string name="location_permission_needed_desc">Zorin Connect צריך הרשאת איתור מקום ברקע כדי לדעת לאיזו רשת אלחוטית התחברת, אפילו אם היישום ברקע. מצב זה נחוץ כיוון ששם הרשתות האלחוטיות מסביבך יכולים לשמש לאיתור המקום שלך, אפילו אם זה לא מה ש־Zorin Connect תוכנן לעשות.</string>
   <string name="clipboard_android_x_incompat">ב־Android 10 הוסרה הגישה ללוח הגזירים לכל היישומונים. התוסף הזה יושבת.</string>
   <string name="mpris_open_url">להמשיך לנגן מכאן</string>
@@ -436,4 +439,9 @@
   <string name="mpris_keepwatching_settings_title">להמשיך לנגן</string>
   <string name="mpris_keepwatching_settings_summary">הצגת התראה שקטה כדי להמשיך לנגן בהתקן הזה לאחר סגירת המדיה</string>
   <string name="notification_channel_keepwatching">להמשיך לנגן</string>
+  <string name="ping_result">הפינג ארך %1$d מילישניות</string>
+  <string name="ping_failed">לא ניתן לשלוח פינג להתקן</string>
+  <string name="ping_in_progress">נשלח פינג…</string>
+  <string name="device_host_invalid">המארח שגוי. נא להשתמש בשם מארח, IPv4 או IPv6 תקניים.</string>
+  <string name="device_host_duplicate">המארח כבר קיים ברשימה</string>
 </resources>

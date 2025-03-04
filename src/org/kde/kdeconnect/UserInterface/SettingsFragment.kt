@@ -6,6 +6,7 @@
 package org.kde.kdeconnect.UserInterface
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -33,6 +34,7 @@ import org.kde.kdeconnect.Helpers.DeviceHelper.filterName
 import org.kde.kdeconnect.Helpers.DeviceHelper.getDeviceName
 import org.kde.kdeconnect.Helpers.NotificationHelper
 import org.kde.kdeconnect.UserInterface.ThemeUtil.applyTheme
+import org.kde.kdeconnect.extensions.setupBottomPadding
 import com.zorinos.zorin_connect.R
 
 class SettingsFragment : PreferenceFragmentCompat() {
@@ -59,6 +61,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         ).forEach(screen::addPreference)
 
         preferenceScreen = screen
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        listView.setupBottomPadding()
     }
 
     private fun deviceNamePref(context: Context) = EditTextPreference(context).apply {
@@ -146,19 +153,41 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setTitle(R.string.trusted_networks)
         setSummary(R.string.trusted_networks_desc)
         onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            startActivity(Intent(context, TrustedNetworksActivity::class.java))
+            startActivityForResult(Intent(context, TrustedNetworksActivity::class.java), REQUEST_REFRESH_NETWORKS)
             true
         }
     }
 
+    private val REQUEST_REFRESH_DEVICES_BY_IP = 1
+    private val REQUEST_REFRESH_NETWORKS = 2
+
+    private lateinit var devicesByIpPref : Preference
+
     /** Opens activity to configure device by IP when clicked */
     private fun devicesByIpPref(context: Context) = Preference(context).apply {
+        devicesByIpPref = this
         isPersistent = false
         setTitle(R.string.custom_device_list)
+        updateDevicesByIpSummary()
         onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            startActivity(Intent(context, CustomDevicesActivity::class.java))
+            startActivityForResult(Intent(context, CustomDevicesActivity::class.java), REQUEST_REFRESH_DEVICES_BY_IP)
             true
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            REQUEST_REFRESH_DEVICES_BY_IP -> updateDevicesByIpSummary()
+            REQUEST_REFRESH_NETWORKS -> BackgroundService.instance?.onNetworkChange(null)
+            else -> super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    private fun updateDevicesByIpSummary() {
+        devicesByIpPref.setSummary(getString(
+            R.string.custom_devices_settings_summary,
+            CustomDevicesActivity.getCustomDeviceList(context).size
+        ))
     }
 
     private fun udpBroadcastPref(context: Context) = SwitchPreference(context).apply {

@@ -18,11 +18,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import org.kde.kdeconnect.UserInterface.List.ListAdapter
 import org.kde.kdeconnect.UserInterface.MainActivity
+import org.kde.kdeconnect.extensions.setupBottomPadding
 import com.zorinos.zorin_connect.R
 import com.zorinos.zorin_connect.databinding.FragmentAboutBinding
 
 class AboutFragment : Fragment() {
-    private var binding: FragmentAboutBinding? = null
+    private var _binding: FragmentAboutBinding? = null
+    private val binding get() = _binding!!
     private lateinit var aboutData: AboutData
     private var tapCount = 0
     private var firstTapMillis: Long? = null
@@ -46,23 +48,28 @@ class AboutFragment : Fragment() {
         }
 
         aboutData = requireArguments().getParcelable("ABOUT_DATA")!!
-        binding = FragmentAboutBinding.inflate(inflater, container, false)
+        _binding = FragmentAboutBinding.inflate(inflater, container, false)
 
         updateData()
-        return binding!!.root
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.scrollView.setupBottomPadding()
     }
 
     @SuppressLint("SetTextI18n")
     fun updateData() {
         // Update general info
 
-        binding!!.appName.text = aboutData.name
-        binding!!.appIcon.setImageDrawable(this.context?.let { ContextCompat.getDrawable(it, aboutData.icon) })
-        binding!!.appVersion.text = this.context?.getString(R.string.version, aboutData.versionName)
+        binding.appName.text = aboutData.name
+        binding.appIcon.setImageDrawable(this.context?.let { ContextCompat.getDrawable(it, aboutData.icon) })
+        binding.appVersion.text = this.context?.getString(R.string.version, aboutData.versionName)
 
         // Setup Easter Egg onClickListener
 
-        binding!!.generalInfoCard.setOnClickListener {
+        binding.generalInfoCard.setOnClickListener {
             if (firstTapMillis == null) {
                 firstTapMillis = System.currentTimeMillis()
             }
@@ -80,18 +87,18 @@ class AboutFragment : Fragment() {
 
         // Update button onClickListeners
 
-        setupInfoButton(aboutData.sourceCodeURL, binding!!.sourceCodeButton)
+        setupInfoButton(aboutData.sourceCodeURL, binding.sourceCodeButton)
 
-        binding!!.licensesButton.setOnClickListener {
+        binding.licensesButton.setOnClickListener {
             startActivity(Intent(context, LicensesActivity::class.java))
         }
 
-        setupInfoButton(aboutData.websiteURL, binding!!.websiteButton)
+        setupInfoButton(aboutData.websiteURL, binding.websiteButton)
 
         // Update authors
-        binding!!.authorsList.adapter = ListAdapter(this.context, aboutData.authors.map { AboutPersonEntryItem(it) }, false)
+        binding.authorsList.adapter = ListAdapter(this.requireContext(), aboutData.authors.map { AboutPersonEntryItem(it) }, false)
         if (aboutData.authorsFooterText != null) {
-            binding!!.authorsFooterText.text = context?.getString(aboutData.authorsFooterText!!)
+            binding.authorsFooterText.text = context?.getString(aboutData.authorsFooterText!!)
         }
     }
 
@@ -107,6 +114,6 @@ class AboutFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 }

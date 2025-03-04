@@ -115,6 +115,7 @@
   <string name="error_not_reachable">Dispositivo fuori portata</string>
   <string name="error_already_paired">Dispositivo già associato</string>
   <string name="error_timed_out">Richiesta scaduta</string>
+  <string name="error_clocks_not_match">Gli orologi dei dispositivi non sono sincronizzati</string>
   <string name="error_canceled_by_user">Annullata dall\'utente</string>
   <string name="error_canceled_by_other_peer">Annullata dal dispositivo remoto</string>
   <string name="encryption_info_title">Informazioni di cifratura</string>
@@ -192,11 +193,13 @@
   <string name="share_to">Condividi con…</string>
   <string name="unreachable_device">%s (non raggiungibile)</string>
   <string name="unreachable_device_url_share_text">Gli URL condivisi su un dispositivo irraggiungibile saranno recapitati una volta che sarà tornato raggiungibile.\n\n</string>
+  <string name="protocol_version">Versione del protocollo:</string>
   <string name="protocol_version_newer">Questo dispositivo usa una nuova versione del protocollo di rete</string>
   <string name="plugin_settings_with_name">Impostazioni di %s</string>
   <string name="invalid_device_name">Nome dispositivo non valido</string>
   <string name="shareplugin_text_saved">Testo ricevuto, salvato negli appunti</string>
   <string name="custom_devices_settings">Elenco dispositivi personalizzati</string>
+  <string name="custom_devices_settings_summary">%d dispositivi aggiunti manualmente</string>
   <string name="custom_device_list">Aggiungi dispositivi per IP</string>
   <string name="custom_device_deleted">Dispositivo personalizzato eliminato</string>
   <string name="custom_device_list_help">Se il tuo dispositivo non è rilevato automaticamente, puoi aggiungere il suo indirizzo IP o il nome host facendo clic sul pulsante Azione</string>
@@ -326,7 +329,7 @@
   <string name="empty_trusted_networks_list_text">Non hai aggiunto ancora alcuna rete affidabile</string>
   <string name="allow_all_networks_text">Consenti tutte</string>
   <string name="location_permission_needed_title">Permesso richiesto</string>
-  <string name="bluetooth_permission_needed_desc">Concedi i permessi Bluetooth per rendere disponibili in Zorin Connect i dispositivi associati tramite Bluetooth.</string>
+  <string name="bluetooth_permission_needed_desc">Zorin Connect necessita dell\'autorizzazione per connettersi ai dispositivi nelle vicinanze per rendere disponibili in Zorin Connect i dispositivi associati tramite Bluetooth.</string>
   <string name="location_permission_needed_desc">Zorin Connect necessita dell\'autorizzazione alla posizione in background per conoscere la rete Wi-Fi a cui sei connesso anche quando l\'applicazione è in esecuzione sullo sfondo. Questo perché il nome delle reti Wi-Fi nelle tue vicinanze potrebbe essere utilizzata per trovare la tua posizione, anche se questo non è un utilizzo previsto da Zorin Connect.</string>
   <string name="clipboard_android_x_incompat">Android 10 ha rimosso l\'accesso agli appunti a tutte le applicazioni. Questa estensione sarà disabilitata.</string>
   <string name="mpris_open_url">Continua qui la riproduzione</string>
@@ -420,4 +423,9 @@
   <string name="mpris_keepwatching_settings_title">Continua la riproduzione</string>
   <string name="mpris_keepwatching_settings_summary">Mostra una notifica silenziosa per continuare a giocare su questo dispositivo dopo aver chiuso il supporto multimediale</string>
   <string name="notification_channel_keepwatching">Continua la riproduzione</string>
+  <string name="ping_result">Ping effettuato in %1$d millisecondi</string>
+  <string name="ping_failed">Impossibile effettuare il ping del dispositivo</string>
+  <string name="ping_in_progress">Ping in corso…</string>
+  <string name="device_host_invalid">L\'host non è valido. Utilizza un nome host valido, IPv4 o IPv6</string>
+  <string name="device_host_duplicate">L\'host esiste già nell\'elenco</string>
 </resources>

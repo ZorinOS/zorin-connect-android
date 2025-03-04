@@ -115,6 +115,7 @@
   <string name="error_not_reachable">O dispositivo está inaccesíbel.</string>
   <string name="error_already_paired">O dispositivo xa está emparellado.</string>
   <string name="error_timed_out">Esgotouse o tempo límite</string>
+  <string name="error_clocks_not_match">Os reloxos do dispositivos non están sincronizados.</string>
   <string name="error_canceled_by_user">Cancelouno a persoa usuaria.</string>
   <string name="error_canceled_by_other_peer">Cancelouse remotamente</string>
   <string name="encryption_info_title">Información do cifrado</string>
@@ -192,11 +193,13 @@
   <string name="share_to">Compartir con…</string>
   <string name="unreachable_device">%s (inaccesíbel)</string>
   <string name="unreachable_device_url_share_text">Os URL que se compartan cun dispositivo inaccesíbel entregaranse cando o dispositivo estea accesíbel.\n\n</string>
+  <string name="protocol_version">Versión do protocolo:</string>
   <string name="protocol_version_newer">Este dispositivo usa unha versión máis nova do protocolo.</string>
   <string name="plugin_settings_with_name">Configuración de %s</string>
   <string name="invalid_device_name">Nome de dispositivo incorrecto</string>
   <string name="shareplugin_text_saved">Recibiuse un texto e gardouse no portapapeis</string>
   <string name="custom_devices_settings">Lista de dispositivos personalizada</string>
+  <string name="custom_devices_settings_summary">%d dispositivos engadidos manualmente</string>
   <string name="custom_device_list">Engadir dispositivos por IP</string>
   <string name="custom_device_deleted">Eliminouse o dispositivo personalizado</string>
   <string name="custom_device_list_help">Se o seu dispositivo non se detecta automaticamente pode engadir o seu enderezo IP ou nome de máquina premendo o botón flotante de acción</string>
@@ -326,6 +329,7 @@
   <string name="empty_trusted_networks_list_text">Aínda non engadiu ningunha rede de confianza</string>
   <string name="allow_all_networks_text">Permitilas todas</string>
   <string name="location_permission_needed_title">Require permiso</string>
+  <string name="bluetooth_permission_needed_desc">Zorin Connect require permisos para conectarse a dispositivos próximos para poñer dispositivos emparellados mediante Bluetooth a disposición de Zorin Connect.</string>
   <string name="location_permission_needed_desc">Zorin Connect necesita o permiso de localización en segundo planto para saber a que rede WiFi se conectou incluso cando a aplicación está en segundo plano. Isto é porque o nome das redes WiFi ao redor seu podería usarse para descubrir a súa localización, aínda que Zorin Connect non faga tal cousa.</string>
   <string name="clipboard_android_x_incompat">Android 10 retirou o acceso ao portapapeis a todas as aplicacións. Desactivarase este complemento.</string>
   <string name="mpris_open_url">Continuar reproducindo aquí</string>
@@ -419,4 +423,9 @@
   <string name="mpris_keepwatching_settings_title">Continuar reproducindo</string>
   <string name="mpris_keepwatching_settings_summary">Amosar unha notificación silenciosa para continuar reproducindo neste dispositivo tras pechar o contido multimedia.</string>
   <string name="notification_channel_keepwatching">Continuar reproducindo</string>
+  <string name="ping_result">Enviouse un ping en %1$d milisegundos</string>
+  <string name="ping_failed">Non foi posíbel enviar un ping ao dispositivo.</string>
+  <string name="ping_in_progress">Enviando un ping…</string>
+  <string name="device_host_invalid">O servidor non é válido. Use un nome de servidor, enderezo IPv4 ou enderezo IPv6 válido.</string>
+  <string name="device_host_duplicate">O servidor xa existe na lista.</string>
 </resources>
