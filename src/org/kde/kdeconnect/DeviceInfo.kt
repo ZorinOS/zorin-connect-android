@@ -44,6 +44,7 @@ class DeviceInfo(
                 putString("certificate", encodedCertificate)
                 putString("deviceName", name)
                 putString("deviceType", type.toString())
+                putInt("protocolVersion", protocolVersion)
                 apply()
             }
         } catch (e: CertificateEncodingException) {
@@ -79,7 +80,8 @@ class DeviceInfo(
                     id = deviceId,
                     name = getString("deviceName", "unknown")!!,
                     type = DeviceType.fromString(getString("deviceType", "desktop")!!),
-                    certificate = SslHelper.getDeviceCertificate(context, deviceId)
+                    certificate = SslHelper.getDeviceCertificate(context, deviceId),
+                    protocolVersion = getInt("protocolVersion", 0),
                 )
             }
 
@@ -105,8 +107,13 @@ class DeviceInfo(
         fun isValidIdentityPacket(identityPacket: NetworkPacket): Boolean = with(identityPacket) {
             type == NetworkPacket.PACKET_TYPE_IDENTITY &&
                     DeviceHelper.filterName(getString("deviceName", "")).isNotBlank() &&
-                    getString("deviceId", "").isNotBlank()
+                    isValidDeviceId(getString("deviceId", ""));
         }
+
+        private val DEVICE_ID_REGEX = "^[a-zA-Z0-9_-]{32,38}\$".toRegex()
+
+        @JvmStatic
+        fun isValidDeviceId(deviceId: String): Boolean = deviceId.matches(DEVICE_ID_REGEX)
     }
 }
 

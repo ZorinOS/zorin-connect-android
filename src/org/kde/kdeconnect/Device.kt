@@ -150,25 +150,27 @@ class Device : PacketReceiver {
     val deviceType: DeviceType
         get() = deviceInfo.type
 
+    val protocolVersion: Int
+        get() = deviceInfo.protocolVersion
+
     val deviceId: String
         get() = deviceInfo.id
 
     val certificate: Certificate
         get() = deviceInfo.certificate
 
+    val verificationKey: String?
+        get() = pairingHandler.verificationKey()
+
     // Returns 0 if the version matches, < 0 if it is older or > 0 if it is newer
     fun compareProtocolVersion(): Int =
         deviceInfo.protocolVersion - DeviceHelper.ProtocolVersion
 
-
     val isPaired: Boolean
         get() = pairingHandler.state == PairingHandler.PairState.Paired
 
-    val isPairRequested: Boolean
-        get() = pairingHandler.state == PairingHandler.PairState.Requested
-
-    val isPairRequestedByPeer: Boolean
-        get() = pairingHandler.state == PairingHandler.PairState.RequestedByPeer
+    val pairStatus : PairingHandler.PairState
+        get() = pairingHandler.state
 
     fun addPairingCallback(callback: PairingCallback) = pairingCallbacks.add(callback)
 
@@ -286,8 +288,6 @@ class Device : PacketReceiver {
 
         val notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java)!!
 
-        val verificationKey = SslHelper.getVerificationKey(SslHelper.certificate, deviceInfo.certificate)
-
         val noti = NotificationCompat.Builder(context, NotificationHelper.Channels.DEFAULT)
             .setContentTitle(res.getString(R.string.pairing_request_from, name))
             .setContentText(res.getString(R.string.pairing_verification_code, verificationKey))
@@ -358,10 +358,11 @@ class Device : PacketReceiver {
 
     fun updateDeviceInfo(newDeviceInfo: DeviceInfo): Boolean {
         var hasChanges = false
-        if (deviceInfo.name != newDeviceInfo.name || deviceInfo.type != newDeviceInfo.type) {
+        if (deviceInfo.name != newDeviceInfo.name || deviceInfo.type != newDeviceInfo.type || deviceInfo.protocolVersion != newDeviceInfo.protocolVersion) {
             hasChanges = true
             deviceInfo.name = newDeviceInfo.name
             deviceInfo.type = newDeviceInfo.type
+            deviceInfo.protocolVersion = newDeviceInfo.protocolVersion
             if (isPaired) {
                 deviceInfo.saveInSettings(settings)
             }

@@ -6,6 +6,7 @@
 
 package org.kde.kdeconnect.Helpers.SecurityHelpers;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -62,7 +63,7 @@ import javax.security.auth.x500.X500Principal;
 public class SslHelper {
 
     public static Certificate certificate; //my device's certificate
-    private static CertificateFactory factory;
+    private static final CertificateFactory factory;
     static {
         try {
             factory = CertificateFactory.getInstance("X.509");
@@ -71,20 +72,14 @@ public class SslHelper {
         }
     }
 
-    private final static TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
-        public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-            return new X509Certificate[0];
+    @SuppressLint({"CustomX509TrustManager", "TrustAllX509TrustManager"})
+    private final static TrustManager[] trustAllCerts = new TrustManager[] {
+        new X509TrustManager() {
+            private final X509Certificate[] issuers = new X509Certificate[0];
+            @Override public X509Certificate[] getAcceptedIssuers() { return issuers; }
+            @Override public void checkClientTrusted(X509Certificate[] certs, String authType) { }
+            @Override public void checkServerTrusted(X509Certificate[] certs, String authType) { }
         }
-
-        @Override
-        public void checkClientTrusted(X509Certificate[] certs, String authType) {
-        }
-
-        @Override
-        public void checkServerTrusted(X509Certificate[] certs, String authType) {
-        }
-
-    }
     };
 
     public static void initialiseCertificate(Context context) {
@@ -287,31 +282,4 @@ public class SslHelper {
         return IETFUtils.valueToString(rdn.getFirst().getValue());
     }
 
-    public static String getVerificationKey(Certificate certificateA, Certificate certificateB) {
-        try {
-            byte[] a = certificateA.getPublicKey().getEncoded();
-            byte[] b = certificateB.getPublicKey().getEncoded();
-
-            if (Arrays.compareUnsigned(a, b) < 0) {
-                // Swap them so on both devices they are in the same order
-                byte[] aux = a;
-                a = b;
-                b = aux;
-            }
-
-            byte[] concat = new byte[a.length + b.length];
-            System.arraycopy(a, 0, concat, 0, a.length);
-            System.arraycopy(b, 0, concat, a.length, b.length);
-
-            byte[] hash = MessageDigest.getInstance("SHA-256").digest(concat);
-            Formatter formatter = new Formatter();
-            for (byte value : hash) {
-                formatter.format("%02x", value);
-            }
-            return formatter.toString().substring(0,8).toUpperCase(Locale.ROOT);
-        } catch(Exception e) {
-            e.printStackTrace();
-            return "error";
-        }
-    }
 }

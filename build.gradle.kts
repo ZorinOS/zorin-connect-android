@@ -53,8 +53,8 @@ android {
         applicationId = "com.zorinos.zorin_connect"
         minSdk = 21
         targetSdk = 35
-        versionCode = 13211
-        versionName = "1.32.11"
+        versionCode = 13301
+        versionName = "1.33.1"
         proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
     }
     buildFeatures {
@@ -315,7 +315,6 @@ dependencies {
     implementation(libs.apache.sshd.mina)
     implementation(libs.apache.mina.core)
 
-    //implementation("com.github.bright:slf4android:0.1.6") { transitive = true } // For org.apache.sshd debugging
     implementation(libs.bcpkix.jdk15on) //For SSL certificate generation
 
     ksp(libs.classindexksp)

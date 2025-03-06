@@ -1,0 +1,18 @@
+1.33.1
+- Add support for PeerTube links
+- Allow filtering notifications from work profile
+- Bug fixes
+
+1.32.9
+- Redesigned app with Material You theming
+- New features in Remote input, including gyroscope mouse option, middle-click, compose & send text, and additional settings
+- Share web links to disconnected computers, to be opened when they become available later
+- Direct Share targets in Android share dialogs
+- Send album art for playing media from phone to computer
+- Allow having different home screen widgets for different computers
+- Added the option to cancel a pairing request after sending it
+- Added more fine-grained notification channels
+- Search by app name in the notification plugin settings
+- Accessibility improvements
+- Bug fixes & performance enhancements
+- Improved translations

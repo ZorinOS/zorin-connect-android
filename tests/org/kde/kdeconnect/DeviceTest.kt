@@ -17,6 +17,7 @@ import org.junit.Test
 import org.kde.kdeconnect.Backends.LanBackend.LanLink
 import org.kde.kdeconnect.Backends.LanBackend.LanLinkProvider
 import org.kde.kdeconnect.DeviceInfo.Companion.fromIdentityPacketAndCert
+import org.kde.kdeconnect.DeviceInfo.Companion.isValidDeviceId
 import org.kde.kdeconnect.DeviceInfo.Companion.isValidIdentityPacket
 import org.kde.kdeconnect.DeviceInfo.Companion.loadFromSettings
 import org.kde.kdeconnect.DeviceType.Companion.fromString
@@ -142,12 +143,27 @@ class DeviceTest {
     }
 
     @Test
+    fun testIsValidDeviceId() {
+        Assert.assertTrue(isValidDeviceId("27456E3C_fE5C_4208_96A7_c0CAEEC5E5A0"))
+        Assert.assertTrue(isValidDeviceId("27456e3c_fe5c_4208_96a7_c0caeec5e5a0"))
+        Assert.assertTrue(isValidDeviceId("27456e3cfe5c420896a7c0caeec5e5a0"))
+        Assert.assertFalse(isValidDeviceId("7456e3cfe5c420896a7c0caeec5e5a0"))
+        Assert.assertTrue(isValidDeviceId("_27456e3c_fe5c_4208_96a7_c0caeec5e5a0_"))
+        Assert.assertTrue(isValidDeviceId("z7456e3c_fe5c_4208_96a7_c0caeec5e5a0"))
+        Assert.assertFalse(isValidDeviceId(""))
+        Assert.assertFalse(isValidDeviceId("______"))
+        Assert.assertFalse(isValidDeviceId("____"))
+        Assert.assertFalse(isValidDeviceId("potato"))
+        Assert.assertFalse(isValidDeviceId("12345"))
+    }
+
+    @Test
     fun testIsValidIdentityPacket() {
         val np = NetworkPacket(NetworkPacket.PACKET_TYPE_IDENTITY)
         Assert.assertFalse(isValidIdentityPacket(np))
 
         val validName = "MyDevice"
-        val validId = "123"
+        val validId = "27456e3c_fe5c_4208_96a7_c0caeec5e5a0"
         np["deviceName"] = validName
         np["deviceId"] = validId
         Assert.assertTrue(isValidIdentityPacket(np))

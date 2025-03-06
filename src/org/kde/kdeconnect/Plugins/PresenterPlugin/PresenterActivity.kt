@@ -70,7 +70,11 @@ class PresenterActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        plugin = KdeConnect.getInstance().getDevicePlugin(intent.getStringExtra("deviceId"), PresenterPlugin::class.java)!!
+        plugin = KdeConnect.getInstance().getDevicePlugin(intent.getStringExtra("deviceId"), PresenterPlugin::class.java)
+            ?: run {
+                finish()
+                return
+            }
         setContent { PresenterScreen() }
         createMediaSession()
     }
@@ -130,6 +134,7 @@ class PresenterActivity : AppCompatActivity(), SensorEventListener {
                         modifier = Modifier.padding(bottom = 8.dp).padding(horizontal = 16.dp),
                         style = MaterialTheme.typography.bodyLarge,
                     )
+                    @Suppress("DEPRECATION") // we explicitly want the non-mirrored version of the icons
                     Row(
                         modifier = Modifier.fillMaxSize().weight(3f),
                         horizontalArrangement = Arrangement.spacedBy(20.dp),
