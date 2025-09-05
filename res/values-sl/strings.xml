@@ -181,9 +181,11 @@
   <string name="middle_click">Pošlji sredinski klik</string>
   <string name="show_keyboard">Pokaži tipkovnico</string>
   <string name="device_not_paired">Naprava ni uparjena</string>
+  <string name="pairing_duplicate_names">POZOR: Obstaja več naprav z istim imenom.</string>
   <string name="request_pairing">Zahtevaj uparjanje</string>
   <string name="pairing_accept">Sprejmi</string>
   <string name="pairing_reject">Zavrni</string>
+  <string name="pairing_explanation">Uparjanje dveh naprav jim bo omogočilo dostop ene do druge. Uparjajte samo svoje lastne naprave.</string>
   <string name="settings">Nastavitve</string>
   <string name="mpris_play">Predvajaj</string>
   <string name="mpris_pause">Premor</string>
@@ -208,6 +210,7 @@
   <string name="mpris_notification_settings_summary">Dovoli nadzor nad predvajalniki medijev, ne da bi odprli Zorin Connect</string>
   <string name="share_to">Deli z…</string>
   <string name="unreachable_device">%s (Nedosegljiva)</string>
+  <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
   <string name="unreachable_device_url_share_text">URL-ji, ki so v skupni rabi z nedosegljivo napravo, ji bodo dostavljeni, ko postane dosegljiva.\n\n</string>
   <string name="protocol_version">Protokol različice:</string>
   <string name="protocol_version_newer">Ta naprava uporablja novejšo različico protokola</string>
@@ -325,6 +328,8 @@
   <string name="devices">Naprave</string>
   <string name="settings_rename">Ime naprave</string>
   <string name="settings_dark_mode">Temna tema</string>
+  <string name="settings_export_logs">Izvozi dnevnike Zorin Connect</string>
+  <string name="settings_export_logs_text">Ustvari datoteko z informacijami o izvajanju, ki lahko pomagajo pri odpravljanju težav.</string>
   <string name="settings_more_settings_title">Več nastavitev</string>
   <string name="settings_more_settings_text">Nastavitve posamezne naprave najdete v razdelku \'Nastavitve vtičnikov\' v napravi.</string>
   <string name="setting_persistent_notification">Prikazuj trajno obvestilo</string>

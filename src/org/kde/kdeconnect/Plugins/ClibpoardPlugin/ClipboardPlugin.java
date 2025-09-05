@@ -25,8 +25,6 @@ import org.kde.kdeconnect.Plugins.Plugin;
 import org.kde.kdeconnect.Plugins.PluginFactory;
 import com.zorinos.zorin_connect.R;
 
-import java.util.Objects;
-
 @PluginFactory.LoadablePlugin
 public class ClipboardPlugin extends Plugin {
 

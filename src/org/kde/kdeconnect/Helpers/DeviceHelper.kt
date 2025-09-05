@@ -11,7 +11,6 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
 import android.preference.PreferenceManager
-import android.provider.Settings
 import android.util.Log
 import com.univocity.parsers.common.TextParsingException
 import com.univocity.parsers.csv.CsvParser
@@ -26,9 +25,10 @@ import java.io.InputStreamReader
 import java.net.URL
 import java.nio.charset.StandardCharsets
 import java.util.UUID
+import androidx.core.content.edit
 
 object DeviceHelper {
-    const val ProtocolVersion = 8
+    const val PROTOCOL_VERSION = 8
 
     const val KEY_DEVICE_NAME_PREFERENCE = "device_name_preference"
     private const val KEY_DEVICE_NAME_FETCHED_FROM_THE_INTERNET = "device_name_downloaded_preference"
@@ -85,7 +85,7 @@ object DeviceHelper {
 
                 // If we get here we managed to download the file. Mark that as done so we don't try again even if we don't end up finding a name.
                 val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-                preferences.edit().putBoolean(KEY_DEVICE_NAME_FETCHED_FROM_THE_INTERNET, true).apply()
+                preferences.edit { putBoolean(KEY_DEVICE_NAME_FETCHED_FROM_THE_INTERNET, true) }
 
                 BufferedReader(
                     InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_16)
@@ -124,26 +124,17 @@ object DeviceHelper {
     fun setDeviceName(context: Context, name: String) {
         val filteredName = filterName(name)
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        preferences.edit().putString(KEY_DEVICE_NAME_PREFERENCE, filteredName).apply()
+        preferences.edit { putString(KEY_DEVICE_NAME_PREFERENCE, filteredName) }
     }
 
     fun initializeDeviceId(context: Context) {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        val preferenceKeys: Set<String> = preferences.all.keys
-        if (preferenceKeys.contains(KEY_DEVICE_ID_PREFERENCE)) {
+        val deviceId = preferences.getString(KEY_DEVICE_ID_PREFERENCE, "")!!
+        if (DeviceInfo.isValidDeviceId(deviceId)) {
             return // We already have an ID
         }
-        @SuppressLint("HardwareIds")
-        val deviceName = if (preferenceKeys.isEmpty()) {
-            // For new installations, use random IDs
-            Log.i("DeviceHelper","No device ID found and this looks like a new installation, creating a random ID")
-            UUID.randomUUID().toString().replace('-', '_')
-        } else {
-            // Use the ANDROID_ID as device ID for existing installations, for backwards compatibility
-            Log.i("DeviceHelper", "No device ID found but this seems an existing installation, using the Android ID")
-            Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
-        }
-        preferences.edit().putString(KEY_DEVICE_ID_PREFERENCE, deviceName).apply()
+        val deviceName = UUID.randomUUID().toString().replace("-", "")
+        preferences.edit { putString(KEY_DEVICE_ID_PREFERENCE, deviceName) }
     }
 
     @JvmStatic
@@ -159,12 +150,12 @@ object DeviceHelper {
             SslHelper.certificate,
             getDeviceName(context),
             deviceType,
-            ProtocolVersion,
+            PROTOCOL_VERSION,
             PluginFactory.incomingCapabilities,
             PluginFactory.outgoingCapabilities
         )
     }
 
     @JvmStatic
-    fun filterName(input: String): String = input.replace(NAME_INVALID_CHARACTERS_REGEX, "").take(MAX_DEVICE_NAME_LENGTH)
+    fun filterName(input: String): String = input.replace(NAME_INVALID_CHARACTERS_REGEX, "").trim().take(MAX_DEVICE_NAME_LENGTH)
 }

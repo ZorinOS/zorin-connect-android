@@ -165,9 +165,11 @@
   <string name="middle_click">Invia clic tasto centrale</string>
   <string name="show_keyboard">Mostra tastiera</string>
   <string name="device_not_paired">Dispositivo non associato</string>
+  <string name="pairing_duplicate_names">Attenzione: ci sono più dispositivi con lo stesso nome.</string>
   <string name="request_pairing">Richiedi associazione</string>
   <string name="pairing_accept">Accetta</string>
   <string name="pairing_reject">Rifiuta</string>
+  <string name="pairing_explanation">L\'associazione di due dispositivi consentirà loro l\'accesso reciproco. Associa solo i tuoi dispositivi.</string>
   <string name="settings">Impostazioni</string>
   <string name="mpris_play">Riproduci</string>
   <string name="mpris_pause">Pausa</string>
@@ -192,6 +194,7 @@
   <string name="mpris_notification_settings_summary">Consenti di controllare i lettori multimediali senza aprire Zorin Connect</string>
   <string name="share_to">Condividi con…</string>
   <string name="unreachable_device">%s (non raggiungibile)</string>
+  <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
   <string name="unreachable_device_url_share_text">Gli URL condivisi su un dispositivo irraggiungibile saranno recapitati una volta che sarà tornato raggiungibile.\n\n</string>
   <string name="protocol_version">Versione del protocollo:</string>
   <string name="protocol_version_newer">Questo dispositivo usa una nuova versione del protocollo di rete</string>
@@ -309,6 +312,8 @@
   <string name="devices">Dispositivi</string>
   <string name="settings_rename">Nome dispositivo</string>
   <string name="settings_dark_mode">Tema scuro</string>
+  <string name="settings_export_logs">Esporta i registri di Zorin Connect</string>
+  <string name="settings_export_logs_text">Genera un file con informazioni di esecuzione che possono aiutare a risolvere i problemi.</string>
   <string name="settings_more_settings_title">Altre impostazioni</string>
   <string name="settings_more_settings_text">Le impostazioni per dispositivo sono disponibili sotto «Impostazioni estensioni» dall\'interno del dispositivo.</string>
   <string name="setting_persistent_notification">Mostra notifica persistente</string>

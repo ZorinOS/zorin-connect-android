@@ -37,7 +37,6 @@ import org.kde.kdeconnect.UserInterface.PluginSettingsFragment;
 import com.zorinos.zorin_connect.R;
 
 import java.io.IOException;
-import java.util.Objects;
 
 @PluginFactory.LoadablePlugin
 public class FindMyPhonePlugin extends Plugin {

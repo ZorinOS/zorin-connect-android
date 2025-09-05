@@ -157,9 +157,11 @@
   <string name="middle_click">发送中键点击</string>
   <string name="show_keyboard">显示键盘</string>
   <string name="device_not_paired">设备未配对</string>
+  <string name="pairing_duplicate_names">注意：存在多个同名设备。</string>
   <string name="request_pairing">请求配对</string>
   <string name="pairing_accept">接受</string>
   <string name="pairing_reject">拒绝</string>
+  <string name="pairing_explanation">两个设备在配对后即可相互访问。请只配对您自己的设备。</string>
   <string name="settings">设置</string>
   <string name="mpris_play">播放</string>
   <string name="mpris_pause">暂停</string>
@@ -184,6 +186,7 @@
   <string name="mpris_notification_settings_summary">不打开 Zorin Connect 也能在常驻通知中控制媒体播放器</string>
   <string name="share_to">分享到…</string>
   <string name="unreachable_device">%s (无法访问)</string>
+  <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
   <string name="unreachable_device_url_share_text">URL 被分享到了不可访问的设备。它将在设备能够访问时自动传输到该设备。\n</string>
   <string name="protocol_version">协议版本：</string>
   <string name="protocol_version_newer">此设备使用较新版本的协议</string>
@@ -301,6 +304,8 @@
   <string name="devices">设备</string>
   <string name="settings_rename">设备名</string>
   <string name="settings_dark_mode">深色主题</string>
+  <string name="settings_export_logs">导出 Zorin Connect 日志</string>
+  <string name="settings_export_logs_text">生成一个包含程序执行信息的文件，有助于排查故障。</string>
   <string name="settings_more_settings_title">更多设置</string>
   <string name="settings_more_settings_text">每个设备的独立设置可以在设备页内的“插件设置”下找到。</string>
   <string name="setting_persistent_notification">启用常驻通知栏</string>

@@ -165,9 +165,11 @@
   <string name="middle_click">Envoyer un clic central</string>
   <string name="show_keyboard">Afficher le clavier</string>
   <string name="device_not_paired">Périphérique non associé</string>
+  <string name="pairing_duplicate_names">Attention : Il existe plusieurs périphériques portant le même nom.</string>
   <string name="request_pairing">Demande d\'association</string>
   <string name="pairing_accept">Accepter</string>
   <string name="pairing_reject">Rejeter</string>
+  <string name="pairing_explanation">L\'association de deux périphériques leur donnera un accès réciproque. Veuillez n\'associer que vos propres périphériques.</string>
   <string name="settings">Configuration</string>
   <string name="mpris_play">Lire</string>
   <string name="mpris_pause">Pause</string>
@@ -192,6 +194,7 @@
   <string name="mpris_notification_settings_summary">Vous permet de contrôler vos lecteurs multimédia sans ouvrir Zorin Connect.</string>
   <string name="share_to">Partager vers…</string>
   <string name="unreachable_device">%s (Inaccessible)</string>
+  <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
   <string name="unreachable_device_url_share_text">Les URL partagées vers un appareil inaccessible lui seront transmises une fois qu\'il re-deviendra accessible.\n\n</string>
   <string name="protocol_version">Version de protocole:</string>
   <string name="protocol_version_newer">Le périphérique utilise une version plus récente du protocole</string>
@@ -309,6 +312,8 @@
   <string name="devices">Périphériques</string>
   <string name="settings_rename">Nom du périphérique</string>
   <string name="settings_dark_mode">Thème sombre</string>
+  <string name="settings_export_logs">Exporter les journaux de Zorin Connect</string>
+  <string name="settings_export_logs_text">Générez un fichier avec des informations d\'exécution pouvant aider à résoudre les problèmes.</string>
   <string name="settings_more_settings_title">Plus de paramètres</string>
   <string name="settings_more_settings_text">Les paramètres par appareil sont disponibles dans la rubrique « Paramètres des modules externes » sur l\'appareil.</string>
   <string name="setting_persistent_notification">Afficher une notification persistante</string>

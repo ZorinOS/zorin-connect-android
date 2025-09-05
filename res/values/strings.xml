@@ -221,9 +221,11 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     <string name="middle_click">Send Middle Click</string>
     <string name="show_keyboard">Show Keyboard</string>
     <string name="device_not_paired">Device not paired</string>
+    <string name="pairing_duplicate_names">Caution: There are multiple devices with the same name.</string>
     <string name="request_pairing">Request pairing</string>
     <string name="pairing_accept">Accept</string>
     <string name="pairing_reject">Reject</string>
+    <string name="pairing_explanation">Pairing two devices will give them access to each other. Only pair together your own devices.</string>
     <string name="settings">Settings</string>
     <string name="mpris_play">Play</string>
     <string name="mpris_pause">Pause</string>
@@ -258,6 +260,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     <string name="mpris_notification_key" translatable="false">mpris_notification_enabled</string>
     <string name="share_to">Share to…</string>
     <string name="unreachable_device">%s (Unreachable)</string>
+    <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
     <string name="unreachable_device_url_share_text">URLs shared to an unreachable device will be delivered to it once it becomes reachable.\n\n</string>
     <string name="protocol_version">Protocol version:</string>
     <string name="protocol_version_newer">This device uses a newer protocol version</string>
@@ -395,6 +398,9 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 
     <string name="settings_rename">Device name</string>
     <string name="settings_dark_mode">Dark theme</string>
+    <string name="settings_export_logs">Export Zorin Connect logs</string>
+    <string name="settings_export_logs_text">Generate a file with execution information that can help troubleshoot issues.</string>
+
     <string name="settings_more_settings_title">More settings</string>
     <string name="settings_more_settings_text">Per-device settings can be found under \'Plugin settings\' from within a device.</string>
     <string name="setting_persistent_notification">Show persistent notification</string>

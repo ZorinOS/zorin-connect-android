@@ -17,7 +17,6 @@ import android.webkit.URLUtil;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import org.kde.kdeconnect.BackgroundService;
@@ -125,7 +124,7 @@ public class ShareActivity extends BaseActivity<ActivityShareBinding> {
             SharePlugin plugin = KdeConnect.getInstance().getDevicePlugin(device.getDeviceId(), SharePlugin.class);
             if (intentHasUrl && !device.isReachable()) {
                 // Store the URL to be delivered once device becomes online
-                storeUrlForFutureDelivery(device, intent.toUri(0));
+                storeUrlForFutureDelivery(device, intent.getStringExtra(Intent.EXTRA_TEXT));
             } else if (plugin != null) {
                 plugin.share(intent);
             }
@@ -188,6 +187,15 @@ public class ShareActivity extends BaseActivity<ActivityShareBinding> {
             SharePlugin plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, SharePlugin.class);
             if (plugin != null) {
                 plugin.share(intent);
+            } else {
+                Bundle extras = intent.getExtras();
+                if (extras != null && extras.containsKey(Intent.EXTRA_TEXT)) {
+                    final Device device = KdeConnect.getInstance().getDevice(deviceId);
+                    if (doesIntentContainUrl(intent) && device != null && !device.isReachable()) {
+                        final String text = extras.getString(Intent.EXTRA_TEXT);
+                        storeUrlForFutureDelivery(device, text);
+                    }
+                }
             }
             finish();
         } else {

@@ -130,7 +130,7 @@
   </plurals>
   <plurals name="incoming_files_text">
     <item quantity="one">Dosya: %1s</item>
-    <item quantity="other">(Dosya %2$d %3$d) : %1$s</item>
+    <item quantity="other">(Dosya %2$d/%3$d) : %1$s</item>
   </plurals>
   <plurals name="outgoing_file_title">
     <item quantity="one">%1$d dosya %2$s gönderiliyor</item>
@@ -165,9 +165,11 @@
   <string name="middle_click">Orta Tık Gönder</string>
   <string name="show_keyboard">Klavyeyi Göster</string>
   <string name="device_not_paired">Aygıt eşleşmemiş</string>
+  <string name="pairing_duplicate_names">Dikkat: Aynı adlı birden çok aygıt var.</string>
   <string name="request_pairing">Eşleşme isteği</string>
   <string name="pairing_accept">Onayla</string>
   <string name="pairing_reject">Reddet</string>
+  <string name="pairing_explanation">İki aygıtı eşleştirmek, onlara birbirlerine erişim hakkını verecektir. Yalnızca kendi aygıtlarınızı eşleştirin.</string>
   <string name="settings">Ayarlar</string>
   <string name="mpris_play">Oynat</string>
   <string name="mpris_pause">Duraklat</string>
@@ -192,6 +194,7 @@
   <string name="mpris_notification_settings_summary">Zorin Connect’ı açmadan ortam oynatıcılarınızı denetlemenize izin verin</string>
   <string name="share_to">Şuraya Paylaş…</string>
   <string name="unreachable_device">%s (Erişilebilir değil)</string>
+  <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
   <string name="unreachable_device_url_share_text">Erişilemeyen bir aygıta gönderilen URL’ler, aygıt erişilebilir olduğunda teslim edilir.\n\n</string>
   <string name="protocol_version">Protokol sürümü:</string>
   <string name="protocol_version_newer">Bu aygıt, daha yeni bir protokol sürümü kullanıyor</string>
@@ -309,6 +312,8 @@
   <string name="devices">Aygıtlar</string>
   <string name="settings_rename">Aygıt adı</string>
   <string name="settings_dark_mode">Karanlık tema</string>
+  <string name="settings_export_logs">Zorin Bağlan Günlüklerini Dışa Aktar</string>
+  <string name="settings_export_logs_text">Sorun tanılama konusunda yandımcı olabilecek yürütme bilgisini içeren bir dosya üretin.</string>
   <string name="settings_more_settings_title">Daha fazla ayar</string>
   <string name="settings_more_settings_text">Aygıt başına ayarlar, bir aygıt içinden “Eklenti Ayarları” altında bulunabilir.</string>
   <string name="setting_persistent_notification">Kalıcı bildirim göster</string>
@@ -427,5 +432,5 @@
   <string name="ping_failed">Aygıt pinglenemedi</string>
   <string name="ping_in_progress">Pingleniyor…</string>
   <string name="device_host_invalid">Makine geçersiz. Geçerli bir makine adı kullanın; IPv4 veya IPv6 gibi</string>
-  <string name="device_host_duplicate">Listede makine halihazırda var</string>
+  <string name="device_host_duplicate">Makine listede halihazırda var</string>
 </resources>

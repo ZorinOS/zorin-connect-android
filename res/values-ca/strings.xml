@@ -165,9 +165,11 @@
   <string name="middle_click">Envia un clic del mig</string>
   <string name="show_keyboard">Mostra el teclat</string>
   <string name="device_not_paired">El dispositiu no està aparellat</string>
+  <string name="pairing_duplicate_names">Precaució: hi ha diversos dispositius amb el mateix nom.</string>
   <string name="request_pairing">Demana aparellar</string>
   <string name="pairing_accept">Accepta</string>
   <string name="pairing_reject">Rebutja</string>
+  <string name="pairing_explanation">L\'aparellament de dos dispositius els donarà accés l\'un a l\'altre. Només aparelleu els vostres propis dispositius.</string>
   <string name="settings">Arranjament</string>
   <string name="mpris_play">Reprodueix</string>
   <string name="mpris_pause">Pausa</string>
@@ -192,6 +194,7 @@
   <string name="mpris_notification_settings_summary">Permet controlar els reproductors multimèdia sense obrir el Zorin Connect</string>
   <string name="share_to">Comparteix amb…</string>
   <string name="unreachable_device">%s (no s\'hi pot accedir)</string>
+  <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
   <string name="unreachable_device_url_share_text">Els URL compartits amb un dispositiu no accessible es lliuraran un cop s\'hi pugui accedir.\n\n</string>
   <string name="protocol_version">Versió del protocol:</string>
   <string name="protocol_version_newer">Aquest dispositiu usa una versió nova del protocol</string>
@@ -309,6 +312,8 @@
   <string name="devices">Dispositius</string>
   <string name="settings_rename">Nom del dispositiu</string>
   <string name="settings_dark_mode">Tema fosc</string>
+  <string name="settings_export_logs">Exporta els registres del Zorin Connect</string>
+  <string name="settings_export_logs_text">Genera un fitxer amb informació d\'execució que pot ajudar a resoldre problemes.</string>
   <string name="settings_more_settings_title">Més opcions</string>
   <string name="settings_more_settings_text">La configuració per dispositiu es pot trobar a «Arranjament dels connectors» des d\'un dispositiu.</string>
   <string name="setting_persistent_notification">Mostra les notificacions persistents</string>
