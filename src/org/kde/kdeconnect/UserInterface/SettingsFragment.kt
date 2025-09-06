@@ -226,7 +226,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setTitle(R.string.settings_export_logs)
         setSummary(R.string.settings_export_logs_text)
         onPreferenceClickListener = Preference.OnPreferenceClickListener {
-            exportLogs.launch(CreateFileParams("text/plain", "kdeconnect-log.txt"))
+            exportLogs.launch(CreateFileParams("text/plain", "zorin-connect-log.txt"))
             true
         }
     }
