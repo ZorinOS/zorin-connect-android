@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.text.Html;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -98,22 +99,38 @@ public class ReceiveNotificationsPlugin extends Plugin {
 
         NotificationManager notificationManager = ContextCompat.getSystemService(context, NotificationManager.class);
 
+        String rawTicker = np.getString("ticker");
+        CharSequence styledTicker = fromHtml(rawTicker);
+
         Notification noti = new NotificationCompat.Builder(context, NotificationHelper.Channels.RECEIVENOTIFICATION)
                 .setContentTitle(np.getString("appName"))
-                .setContentText(np.getString("ticker"))
+                .setContentText(styledTicker)
                 .setContentIntent(resultPendingIntent)
-                .setTicker(np.getString("ticker"))
+                .setTicker(styledTicker)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setLargeIcon(largeIcon)
                 .setAutoCancel(true)
                 .setLocalOnly(true)  // to avoid bouncing the notification back to other kdeconnect nodes
                 .setDefaults(Notification.DEFAULT_ALL)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(np.getString("ticker")))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(styledTicker))
                 .build();
 
         NotificationHelper.notifyCompat(notificationManager, "kdeconnectId:" + np.getString("id", "0"), np.getInt("id", 0), noti);
 
         return true;
+    }
+
+    @NonNull
+    static CharSequence fromHtml(@NonNull String text) {
+        if (!text.contains("<") && !text.contains("&")) {
+            return text;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT);
+        } else {
+            //noinspection deprecation
+            return Html.fromHtml(text);
+        }
     }
 
     @Override
