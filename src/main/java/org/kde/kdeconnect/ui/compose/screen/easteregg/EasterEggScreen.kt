@@ -127,7 +127,7 @@ fun EasterEggScreen() {
 
     val activity = context as? ComponentActivity
     LaunchedEffect(backgroundColor) {
-        val isDarkBackground = backgroundColor == KDE_ICON_BACKGROUND_COLOR
+        val isDarkBackground = backgroundColor == ZORIN_ICON_BACKGROUND_COLOR
         val transparentArgb = Color.Transparent.toArgb()
 
         val barStyle = if (isDarkBackground) {
