@@ -1,9 +1,9 @@
 1.35.13
 - Change slides with volume keys in Presentation remote
 - Added option to "Show keyboard initially" in Remote input
-- Turn on your phone's flashlight when using the Ring option to find it (option requires Camera permission)
+- Turn on your phone's flashlight when using the Ring option to find it (option requires camera permission)
 - Added option to skip syncing sensitive clipboard content
 - Optimized notifications
 - Bug fixes and performance enhancements
 - Improved translations
-- Request "local network" permission on Android 17
+- Request local network permission on Android 17
