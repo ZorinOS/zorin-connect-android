@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
+<resources>
+    <string name="kde_connect">Zorin Connect</string>
+    <string name="manifest_label_share">Send to Device</string>
+    <string name="foreground_notification_no_devices">Not connected to any device</string>
+    <string name="foreground_notification_devices">Connected to: %s</string>
+    <string name="foreground_notification_send_clipboard">Send Clipboard</string>
+    <string name="pref_plugin_telephony">Telephony notifier</string>
+    <string name="pref_plugin_telephony_desc">Send notifications for incoming calls</string>
+    <string name="pref_plugin_battery">Battery report</string>
+    <string name="pref_plugin_battery_desc">Periodically report battery status</string>
+    <string name="pref_plugin_connectivity_report">Connectivity report</string>
+    <string name="pref_plugin_connectivity_report_desc">Report network signal strength and status</string>
+    <string name="pref_plugin_digitizer">Drawing tablet</string>
+    <string name="pref_plugin_digitizer_desc">Use your device as a pressure sensitive drawing tablet</string>
+    <string name="pref_plugin_sftp">Filesystem access</string>
+    <string name="pref_plugin_sftp_desc">Allows to browse this device\'s filesystem remotely</string>
+    <string name="pref_plugin_clipboard">Clipboard sync</string>
+    <string name="pref_plugin_clipboard_desc">Share the clipboard content</string>
+    <string name="pref_plugin_clipboard_sent">Clipboard Sent</string>
+    <string name="clipboard_preference_key_skip_sensitive" translatable="false">clipboard_skip_sensitive_sync</string>
+    <string name="clipboard_preference_title_skip_sensitive">Skip sensitive clipboard sync</string>
+    <string name="clipboard_preference_summary_skip_sensitive">Don\'t auto-sync passwords or other content marked as sensitive</string>
+    <string name="pref_plugin_mousepad">Remote input</string>
+    <string name="pref_plugin_mousepad_desc_nontv">Use your phone or tablet as a touchpad and keyboard</string>
+    <string name="pref_plugin_mousepad_desc_tv">Use your phone or tablet as a TV remote</string>
+    <string name="pref_plugin_presenter">Presentation remote</string>
+    <string name="pref_plugin_presenter_desc">Use your device to change slides in a presentation</string>
+    <string name="pref_plugin_remotekeyboard">Receive remote keypresses</string>
+    <string name="pref_plugin_remotekeyboard_desc">Receive keypress events from remote devices</string>
+    <string name="pref_plugin_mpris">Multimedia controls</string>
+    <string name="pref_plugin_mpris_desc">Provides a remote control for your media player</string>
+    <string name="pref_plugin_runcommand">Run command</string>
+    <string name="pref_plugin_runcommand_desc">Trigger remote commands from your phone or tablet</string>
+    <string name="pref_plugin_contacts">Contacts Synchronizer</string>
+    <string name="pref_plugin_contacts_desc">Allow synchronizing the device\'s contacts book</string>
+    <string name="pref_plugin_ping">Ping</string>
+    <string name="pref_plugin_ping_desc">Send and receive pings</string>
+    <string name="pref_plugin_notifications">Notification sync</string>
+    <string name="pref_plugin_notifications_desc">Access your notifications from other devices</string>
+    <string name="pref_plugin_receive_notifications">Receive notifications</string>
+    <string name="pref_plugin_receive_notifications_desc">Receive notifications from the other device and display them on Android</string>
+    <string name="pref_plugin_sharereceiver">Share and receive</string>
+    <string name="pref_plugin_sharereceiver_desc">Share files and URLs between devices</string>
+    <string name="pref_plugin_inputdevicesreceiver">Share input devices</string>
+    <string name="pref_plugin_inputdevicesreceiver_desc">Share mouse and keyboard with the remote device</string>
+    <string name="device_list_empty">No devices</string>
+    <string name="ok">OK</string>
+    <string name="sad_ok">OK :(</string>
+    <string name="cancel">Cancel</string>
+    <string name="open_settings">Open settings</string>
+    <string name="no_permissions">You need to grant permission to access notifications</string>
+    <string name="no_permission_mprisreceiver">To be able to control your media players you need to grant access to the notifications</string>
+    <string name="no_permissions_remotekeyboard">To receive keypresses you need to activate the Zorin Connect Remote Keyboard</string>
+    <string name="send_ping">Send ping</string>
+    <string name="open_mpris_controls">Multimedia control</string>
+    <string name="remotekeyboard_editing_only" translatable="false">remotekeyboard_editing_only</string>
+    <string name="remotekeyboard_editing_only_title" translatable="true">Handle remote keys only when editing</string>
+    <string name="remotekeyboard_not_connected" translatable="true">There is no active remote keyboard connection, establish one in Zorin Connect</string>
+    <string name="remotekeyboard_connected" translatable="true">Remote keyboard connection is active</string>
+    <string name="remotekeyboard_multiple_connections" translatable="true">There is more than one remote keyboard connection, select the device to configure</string>
+    <string name="open_mousepad">Remote input</string>
+    <string name="open_mousepad_tv">TV remote</string>
+    <string name="mousepad_info">Move a finger on the screen to move the mouse cursor. Tap for a click, and use two/three fingers for right and middle buttons. Use 2 fingers to scroll. Use a long press to drag\'n drop. Gyro mouse functionality can be enabled from plugin preferences</string>
+    <string name="mousepad_info_no_gestures">Move a finger on the screen to move the mouse cursor, tap for a click.</string>
+    <string name="mousepad_keyboard_input_not_supported">Keyboard input not supported by the paired device</string>
+    <string name="mousepad_single_tap_settings_title">Set one finger tap action</string>
+    <string name="mousepad_double_tap_settings_title">Set two finger tap action</string>
+    <string name="mousepad_triple_tap_settings_title">Set three finger tap action</string>
+    <string name="mousepad_sensitivity_settings_title">Set touchpad sensitivity</string>
+    <string name="mousepad_mouse_buttons_title">Show mouse buttons</string>
+    <string name="mousepad_acceleration_profile_settings_title">Set pointer acceleration</string>
+    <string name="mousepad_single_tap_key" translatable="false">mousepad_single_tap_key</string>
+    <string name="mousepad_double_tap_key" translatable="false">mousepad_double_tap_key</string>
+    <string name="mousepad_triple_tap_key" translatable="false">mousepad_triple_tap_key</string>
+    <string name="mousepad_sensitivity_key" translatable="false">mousepad_sensitivity_key</string>
+    <string name="mousepad_acceleration_profile_key" translatable="false">mousepad_acceleration_profile_key</string>
+    <string name="mousepad_scroll_direction_title">Reverse Scrolling Direction</string>
+    <string name="mousepad_scroll_direction" translatable="false">mousepad_scroll_direction</string>
+    <string name="mousepad_scroll_sensitivity" translatable="false">mousepad_scroll_sensitivity</string>
+    <string name="mousepad_scroll_sensitivity_title">Scroll sensitivity</string>
+    <string name="gyro_mouse_enabled" translatable="false">gyro_mouse_enabled</string>
+    <string name="mousepad_mouse_buttons_enabled_pref" translatable="false">mouse_buttons_enabled</string>
+    <string name="mousepad_doubletap_drag_enabled_pref" translatable="false">doubletap_drag_enabled</string>
+    <string name="gyro_mouse_enabled_title">Enable gyroscope mouse</string>
+    <string name="gyro_mouse_sensitivity_title">Gyroscope sensitivity</string>
+    <string name="gyro_mouse_sensitivity" translatable="false">gyro_mouse_sensitivity</string>
+    <string name="bigscreen_hide_mouse_input">Hide mouse and keyboard remote input button</string>
+    <string name="bigscreen_show_home_title">Show Home button</string>
+    <string name="bigscreen_show_back_title">Show Back button</string>
+    <string name="bigscreen_show_close_title">Show Close button</string>
+    <string-array name="mousepad_tap_entries">
+        <item>Left click</item>
+        <item>Right click</item>
+        <item>Middle click</item>
+        <item>Nothing</item>
+    </string-array>
+    <string name="mousepad_default_single" translatable="false">left</string>
+    <string name="mousepad_default_double" translatable="false">right</string>
+    <string name="mousepad_default_triple" translatable="false">middle</string>
+    <string name="mousepad_default_sensitivity" translatable="false">default</string>
+    <string name="mousepad_default_acceleration_profile" translatable="false">medium</string>
+    <string-array name="mousepad_tap_values" translatable="false">
+        <item>left</item>
+        <item>right</item>
+        <item>middle</item>
+        <item>none</item>
+    </string-array>
+    <string-array name="mousepad_sensitivity_entries">
+        <item>Slowest</item>
+        <item>Above Slowest</item>
+        <item>Default</item>
+        <item>Above Default</item>
+        <item>Fastest</item>
+    </string-array>
+    <string-array name="mousepad_acceleration_profile_entries">
+        <item>No Acceleration</item>
+        <item>Weakest</item>
+        <item>Weaker</item>
+        <item>Medium</item>
+        <item>Stronger</item>
+        <item>Strongest</item>
+    </string-array>
+    <string-array name="mousepad_sensitivity_values" translatable="false">
+        <item>slowest</item>
+        <item>aboveSlowest</item>
+        <item>default</item>
+        <item>aboveDefault</item>
+        <item>fastest</item>
+    </string-array>
+    <string-array name="mousepad_acceleration_profile_values" translatable="false">
+        <item>noacceleration</item>
+        <item>weaker</item>
+        <item>weak</item>
+        <item>medium</item>
+        <item>strong</item>
+        <item>stronger</item>
+    </string-array>
+    <string name="mousepad_show_keyboard" translatable="false">Show keyboard initially</string>
+    <string name="pref_mousepad_show_keyboard" translatable="false">pref_mousepad_show_keyboard</string>
+
+    <string name="sendkeystrokes_send_to">Send keystrokes to</string>
+    <string name="sendkeystrokes_textbox_hint">Send keystrokes to host</string>
+    <string name="sendkeystrokes_disabled_toast">Sending keystrokes is disabled - enable it in the settings</string>
+    <string name="sendkeystrokes_wrong_data"><![CDATA[Invalid mime type - needs to be \'text/x-keystrokes\']]></string>
+    <string name="sendkeystrokes_sent_text">Sent %1$s to device %2$s</string>
+
+    <string name="sendkeystrokes_pref_category_summary">This module allows other apps to share text segments as keystrokes which will get send to the connected host</string>
+    <string name="sendkeystrokes_pref_category_title">Send Keystrokes</string>
+    <string name="sendkeystrokes_pref_enabled">Enable Keystrokes sending</string>
+    <string name="sendkeystrokes_pref_enabled_summary"><![CDATA[Listen for data with mime type \'text/x-keystrokes\']]></string>
+    <string name="sendkeystrokes_safe_text_enabled">Send safe text immediately</string>
+    <string name="sendkeystrokes_safe_text_enabled_summary">Send short only-numeric strings without confirmation</string>
+
+
+    <string name="pref_plugin_mousepad_send_keystrokes">Send as keystrokes</string>
+    <string name="sendkeystrokes_pref_category" translatable="false">category_send_keystrokes</string>
+    <string name="pref_sendkeystrokes_enabled" translatable="false">pref_sendkeystrokes_enabled</string>
+    <string name="pref_send_safe_text_immediately" translatable="false">pref_send_safe_text_immediately</string>
+
+    <string name="pref_bigscreen_hide_mouse_input" translatable="false">bigscreen_hide_mouse_input</string>
+    <string name="pref_bigscreen_show_home" translatable="false">bigscreen_show_home</string>
+    <string name="pref_bigscreen_show_back" translatable="false">bigscreen_show_back</string>
+    <string name="pref_bigscreen_show_close" translatable="false">bigscreen_show_close</string>
+
+    <string name="mouse_receiver_plugin_description">Receive remote mouse movement</string>
+    <string name="mouse_receiver_plugin_name">Mouse receiver</string>
+    <string name="mouse_receiver_no_permissions">To receive touch inputs remotely you need to grant Accessibility permissions to fully control your device</string>
+
+    <string name="view_status_title">Status</string>
+    <string name="battery_status_format">Battery: %d%%</string>
+    <string name="battery_status_low_format">Battery: %d%% Low Battery</string>
+    <string name="battery_status_charging_format">Battery: %d%% charging</string>
+
+    <string name="category_connected_devices">Connected devices</string>
+    <string name="category_not_paired_devices">Available devices</string>
+    <string name="category_remembered_devices">Remembered devices</string>
+    <string name="device_menu_plugins">Plugin settings</string>
+    <string name="device_menu_unpair">Unpair</string>
+    <string name="pair_new_device">Pair new device</string>
+    <string name="cancel_pairing">Cancel pairing</string>
+    <string name="unknown_device">Unknown device</string>
+    <string name="unknown_sender">Unknown sender</string>
+    <string name="error_not_reachable">Device not reachable</string>
+    <string name="error_already_paired">Device already paired</string>
+    <string name="error_timed_out">Timed out</string>
+    <string name="error_clocks_not_match">Device clocks are out of sync</string>
+    <string name="error_canceled_by_user">Canceled by user</string>
+    <string name="error_canceled_by_other_peer">Canceled by other peer</string>
+    <string name="encryption_info_title">Encryption Info</string>
+    <string name="my_device_fingerprint">SHA256 fingerprint of your device certificate is:</string>
+    <string name="remote_device_fingerprint">SHA256 fingerprint of remote device certificate is:</string>
+    <string name="pair_requested">Pair requested</string>
+    <string name="pair_succeeded">Pair succeeded</string>
+    <string name="pairing_verification_code" translatable="false">🔑 %1s</string>
+    <string name="pairing_request_from">Pairing request from \'%1s\'</string>
+    <plurals name="incoming_file_title">Receiving file from %1s>
+        <item quantity="one">Receiving %1$d file from %2$s</item>
+        <item quantity="other">Receiving %1$d files from %2$s</item>
+    </plurals>
+    <plurals name="incoming_files_text">
+        <item quantity="one">File: %1s</item>
+        <item quantity="other">(File %2$d of %3$d) : %1$s</item>
+    </plurals>
+    <plurals name="outgoing_file_title">
+        <item quantity="one">Sending %1$d file to %2$s</item>
+        <item quantity="other">Sending %1$d files to %2$s</item>
+    </plurals>
+    <plurals name="outgoing_files_text">
+        <item quantity="one">File: %1$s</item>
+        <item quantity="other">(File %2$d of %3$d) : %1$s</item>
+    </plurals>
+    <plurals name="received_files_title">
+        <item quantity="one">Received file from %1$s</item>
+        <item quantity="other">Received %2$d files from %1$s</item>
+    </plurals>
+    <plurals name="received_files_fail_title">
+        <item quantity="one">Failed receiving file from %1$s</item>
+        <item quantity="other">Failed receiving %2$d of %3$d files from %1$s</item>
+    </plurals>
+    <plurals name="sent_files_title">
+        <item quantity="one">Sent file to %1$s</item>
+        <item quantity="other">Sent %2$d files to %1$s"</item>
+    </plurals>
+    <plurals name="send_files_fail_title">
+        <item quantity="one">Failed sending file to %1$s</item>
+        <item quantity="other">Failed sending %2$d of %3$d files to %1$s</item>
+    </plurals>
+    <string name="tap_to_open">Tap to open</string>
+    <string name="received_file_text">Tap to open \'%1s\'</string>
+    <string name="cannot_create_file">Cannot create file %s</string>
+    <string name="tap_to_answer">Tap to answer</string>
+    <string name="left_click">Send Left Click</string>
+    <string name="right_click">Send Right Click</string>
+    <string name="middle_click">Send Middle Click</string>
+    <string name="show_keyboard">Show Keyboard</string>
+    <string name="show_mouse_and_keyboard">Show Mouse and Keyboard</string>
+    <string name="device_not_paired">Device not paired</string>
+    <string name="pairing_missing_local_network_permission">Missing permission to access nearby devices, the app will not work.</string>
+    <string name="pairing_duplicate_names">Caution: There are multiple devices with the same name.</string>
+    <string name="request_pairing">Request pairing</string>
+    <string name="pairing_accept">Accept</string>
+    <string name="pairing_reject">Reject</string>
+    <string name="pairing_explanation">Pairing two devices will give them access to each other. Only pair together your own devices.</string>
+    <string name="settings">Settings</string>
+    <string name="mpris_play">Play</string>
+    <string name="mpris_pause">Pause</string>
+    <string name="mpris_previous">Previous</string>
+    <string name="mpris_rew">Rewind</string>
+    <string name="mpris_ff">Fast-forward</string>
+    <string name="mpris_next">Next</string>
+    <string name="mpris_loop">Loop</string>
+    <string name="mpris_shuffle">Shuffle</string>
+    <string name="mpris_volume">Volume</string>
+    <string name="mpris_time_settings_title">Forward/rewind buttons</string>
+    <string name="mpris_time_settings_summary">Adjust the time to fast forward/rewind when pressed</string>
+    <string name="mpris_time_key" translatable="false">mpris_interval_time</string>
+    <string-array name="mpris_time_entries">
+        <item>10 seconds</item>
+        <item>20 seconds</item>
+        <item>30 seconds</item>
+        <item>1 minute</item>
+        <item>2 minutes</item>
+    </string-array>
+    <string name="mpris_time_default" translatable="false">10000000</string>
+    <string-array name="mpris_time_entries_values" translatable="false">
+        <item>10000000</item>
+        <item>20000000</item>
+        <item>30000000</item>
+        <item>60000000</item>
+        <item>120000000</item>
+    </string-array>
+    <string name="mpris_notifications_explanation">The notifications permission is needed to show remote media in the notifications drawer</string>
+    <string name="mpris_notification_settings_title">Show media control notification</string>
+    <string name="mpris_notification_settings_summary">Allow controlling your media players without opening Zorin Connect</string>
+    <string name="mpris_notification_key" translatable="false">mpris_notification_enabled</string>
+    <string name="share_to">Share to…</string>
+    <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
+    <string name="unreachable_device_url_share_text">URLs shared to an unreachable device will be delivered to it once it becomes reachable.\n\n</string>
+    <string name="unreachable_share_toast">The URL will be shared the next time the device is connected.</string>
+    <string name="protocol_version">Protocol version:</string>
+    <string name="protocol_version_newer">This device uses a newer protocol version</string>
+    <string name="plugin_settings_with_name">%s settings</string>
+    <string name="invalid_device_name">Invalid device name</string>
+    <string name="shareplugin_text_saved">Received text, saved to clipboard</string>
+    <string name="custom_devices_settings">Custom device list</string>
+    <string name="custom_devices_settings_summary">%d devices added manually</string>
+    <string name="custom_device_list">Add devices by IP</string>
+    <string name="custom_device_deleted">Custom device deleted</string>
+    <string name="custom_device_list_help">If your device is not automatically detected, you can add its IP address or hostname by clicking on the button below</string>
+    <string name="custom_device_fab_hint">Add a device</string>
+    <string name="undo">Undo</string>
+    <string name="share_notification_preference">Noisy notifications</string>
+    <string name="share_notification_preference_summary">Vibrate and play a sound when receiving a file</string>
+    <string name="share_destination_customize">Customize destination directory</string>
+    <string name="share_destination_customize_summary_disabled">Received files will appear in Downloads</string>
+    <string name="share_destination_customize_summary_enabled">Files will be stored in the directory below</string>
+    <string name="share_destination_folder_preference">Destination directory</string>
+    <string name="share">Share</string>
+    <string name="share_received_file">Share \"%s\"</string>
+    <string name="title_activity_notification_filter">Notification filter</string>
+    <string name="filter_apps_info">Notifications will be synchronized for the selected apps.</string>
+    <string name="show_notification_if_screen_off">Send notifications only if the screen is off</string>
+    <string name="add_device_dialog_title">Add device</string>
+    <string name="add_device_hint">Hostname or IP address</string>
+    <string name="sftp_preference_configured_storage_locations">Configured storage locations</string>
+    <string name="sftp_preference_add_storage_location_title">Add storage location</string>
+    <string name="sftp_preference_edit_storage_location">Edit storage location</string>
+    <string name="sftp_preference_key_preference_category" translatable="false">key_sftp_preference_category</string>
+    <string name="sftp_preference_key_add_storage" translatable="false">key_sftp_add_storage</string>
+    <string name="sftp_preference_key_storage_info" translatable="false">key_sftp_storage_info%d"</string>
+    <string name="sftp_preference_key_storage_info_list" translatable="false">key_sftp_storage_info_list</string>
+    <string name="sftp_storage_preference_storage_location">Storage location</string>
+    <string name="sftp_storage_preference_storage_location_already_configured">This location has already been configured</string>
+    <string name="sftp_storage_preference_click_to_select">click to select</string>
+    <string name="sftp_storage_preference_display_name">Display name</string>
+    <string name="sftp_storage_preference_display_name_already_used">This display name is already used</string>
+    <string name="sftp_storage_preference_display_name_cannot_be_empty">Display name cannot be empty</string>
+    <string name="sftp_action_mode_menu_delete">Delete</string>
+    <string name="sftp_no_storage_locations_configured">No storage locations configured</string>
+    <string name="sftp_saf_permission_explanation">To access files remotely you have to configure storage locations</string>
+    <string name="sftp_manage_storage_permission_explanation">To allow remote access to files on this device you need to allow Zorin Connect to manage the storage.</string>
+    <string name="sftp_missing_permission_error">Permissions missing: filesystem access</string>
+    <string name="no_players_connected">No players found</string>
+    <string name="send_files">Send files</string>
+    <string name="use_digitizer">Use as drawing tablet</string>
+    <string name="digitizer_draw_button">Draw using finger</string>
+    <string name="digitizer_preference_key_hide_draw_button" translatable="false">digitizer_hide_draw_button</string>
+    <string name="digitizer_preference_title_hide_draw_button">Hide draw button</string>
+    <string name="digitizer_preference_summary_hide_draw_button">Completely hides the draw button, making finger drawing impossible. Only enable this if your device supports stylus input.</string>
+    <string name="digitizer_preference_key_draw_button_side" translatable="false">digitizer_draw_button_side</string>
+    <string name="digitizer_preference_title_draw_button_side">Side of “Draw with finger” button</string>
+    <string name="digitizer_preference_key_enable_exit_fullscreen_gesture" translatable="false">digitizer_enable_exit_fullscreen_gesture</string>
+    <string name="digitizer_preference_title_enable_exit_fullscreen_gesture">Enable fullscreen exit gesture</string>
+    <string name="digitizer_preference_summary_enable_exit_fullscreen_gesture">If enabled, tapping and holding on the drawing pad with your finger will disable fullscreen mode.</string>
+    <string-array name="digitizer_preference_values_draw_button_side" translatable="false">
+      <item>top_left</item>
+      <item>top_right</item>
+      <item>bottom_left</item>
+      <item>bottom_right</item>
+    </string-array>
+    <string-array name="digitizer_preference_entries_draw_button_side">
+      <item>Top left</item>
+      <item>Top right</item>
+      <item>Bottom left</item>
+      <item>Bottom right</item>
+    </string-array>
+    <string name="digitizer_preference_value_default_draw_button_side" translatable="false">bottom_left</string>
+
+    <string name="block_notification_contents">Block notification contents</string>
+    <string name="block_notification_images">Block notification images</string>
+
+    <string name="pairing_title">Zorin Connect Devices</string>
+    <string name="pairing_description">Other devices running Zorin Connect in your same network should appear here.</string>
+    <string name="device_rename_title">Rename device</string>
+    <string name="device_rename_confirm">Rename</string>
+    <string name="refresh">Refresh</string>
+    <string name="unreachable_description">This paired device is not reachable. Make sure it is connected to your same network.</string>
+    <string name="no_wifi">You\'re not connected to a Wi-Fi network, so you may not be able to see any devices. Click here to enable Wi-Fi.</string>
+    <string name="on_non_trusted_message">Not on a trusted network: autodiscovery is disabled.</string>
+    <string name="no_file_browser">There are no file browsers installed.</string>
+    <string name="pref_plugin_telepathy">Send SMS</string>
+    <string name="pref_plugin_telepathy_desc">Send text messages from your desktop</string>
+    <string name="pref_plugin_telepathy_mms">Send MMS</string>
+    <string name="pref_plugin_telepathy_mms_desc">To be able to send MMS from Zorin Connect you need to set it as the default SMS app.</string>
+    <string name="findmyphone_title">Find my phone</string>
+    <string name="findmyphone_title_tablet">Find my tablet</string>
+    <string name="findmyphone_title_tv">Find my TV</string>
+    <string name="findmyphone_description">Rings this device so you can find it</string>
+    <string name="findmyphone_found">Found it</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string name="plugins_need_permission">Some Plugins need permissions to work (tap for more info):</string>
+    <string name="permission_explanation">This plugin needs permissions to work</string>
+    <string name="all_permissions_granted">All permissions granted 🎉</string>
+    <string name="optional_permission_explanation">You need to grant extra permissions to enable all functions</string>
+    <string name="plugins_need_optional_permission">Some plugins have features disabled because of lack of permission (tap for more info):</string>
+    <string name="share_optional_permission_explanation">To receive files you need to allow storage access</string>
+    <string name="share_notifications_explanation">To see the progress when sending and receiving files you need to allow notifications</string>
+    <string name="telepathy_permission_explanation">To read and write SMS from your desktop you need to give permission to SMS</string>
+    <string name="telephony_permission_explanation">To see phone calls on the desktop you need to give permission to phone call logs and phone state</string>
+    <string name="telephony_optional_permission_explanation">To see a contact name instead of a phone number you need to give access to the phone\'s contacts</string>
+    <string name="contacts_permission_explanation">To share your contacts book with the desktop, you need to give contacts permission</string>
+    <string name="contacts_per_device_confirmation">Your phone contacts will be copied over to this device, so they can be used by the Zorin Connect SMS app and other apps.</string>
+
+    <string name="select_ringtone">Select a ringtone</string>
+    <string name="telephony_pref_blocked_title">Blocked numbers</string>
+    <string name="telephony_pref_blocked_dialog_desc">Don\'t show calls and SMS from these numbers. Please specify one number per line</string>
+    <string name="mpris_coverart_description">Cover art of current media</string>
+    <string name="settings_icon_description">Settings icon</string>
+
+    <string name="presenter_fullscreen">Fullscreen</string>
+    <string name="presenter_exit">Exit presentation</string>
+    <string name="presenter_lock_tip">You can lock your device and use the volume keys to go to the previous/next slide</string>
+
+    <string name="add_command">Add a command</string>
+    <string name="addcommand_explanation">There are no commands registered</string>
+    <string name="addcommand_explanation2">You can add new commands in the Zorin Connect System Settings</string>
+    <string name="add_command_description">You can add commands on the desktop</string>
+    <string name="pref_plugin_mprisreceiver">Media player control</string>
+    <string name="pref_plugin_mprisreceiver_desc">Control your phone\'s media players from another device</string>
+
+    <string name="notification_channel_default">Other notifications</string>
+    <string name="notification_channel_persistent">Persistent indicator</string>
+    <string name="notification_channel_media_control">Media control</string>
+    <string name="notification_channel_filetransfer">Incoming file transfer</string>
+    <string name="notification_channel_filetransfer_complete">Incoming file transfer complete</string>
+    <string name="notification_channel_filetransfer_upload">Outgoing file transfer</string>
+    <string name="notification_channel_filetransfer_error">File transfer error</string>
+    <string name="notification_channel_high_priority">High priority</string>
+
+    <string name="mpris_stop">Stop the current player</string>
+    <string name="copy_url_to_clipboard">Copy URL to clipboard</string>
+    <string name="clipboard_toast">Copied to clipboard</string>
+
+    <string name="runcommand_notreachable">Device is not reachable</string>
+    <string name="runcommand_notpaired">Device is not paired</string>
+    <string name="runcommand_nosuchdevice">There is no such device</string>
+    <string name="runcommand_noruncommandplugin">This device does not have the Run Command Plugin enabled</string>
+    <string name="runcommand_category_device_controls_title">Device Controls</string>
+    <string name="runcommand_category_device_controls" translatable="false">runcommand_category_device_controls</string>
+    <string name="runcommand_device_controls_summary">If your device supports Device Controls, commands you have configured will appear there.</string>
+    <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
+    <string name="runcommand_name_as_title_title">Show name as title</string>
+
+    <string name="pref_plugin_findremotedevice">Find remote device</string>
+    <string name="pref_plugin_findremotedevice_desc">Ring your remote device</string>
+    <string name="ring">Ring</string>
+
+    <string name="pref_plugin_systemvolume">System volume</string>
+    <string name="pref_plugin_systemvolume_desc">Control the system volume of the remote device</string>
+    <string name="mute">Mute</string>
+    <string name="all">All</string>
+
+    <string name="devices">Devices</string>
+
+    <string name="settings_rename">Device name</string>
+    <string name="settings_dark_mode">Dark theme</string>
+    <string name="settings_export_logs">Export Zorin Connect logs</string>
+    <string name="settings_export_logs_text">Generate a file with execution information that can help troubleshoot issues.</string>
+
+    <string name="settings_more_settings_title">More settings</string>
+    <string name="settings_more_settings_text">Per-device settings can be found under \'Plugin settings\' from within a device.</string>
+    <string name="setting_persistent_notification">Show persistent notification</string>
+    <string name="setting_persistent_notification_oreo">Persistent notification</string>
+    <string name="setting_persistent_notification_description">Tap to enable/disable in Notification settings</string>
+
+    <string name="extra_options">Extra options</string>
+    <string name="privacy_options">Privacy options</string>
+    <string name="set_privacy_options">Set your privacy options</string>
+    <string name="block_contents">Block contents of notifications</string>
+    <string name="block_images">Block images in notifications</string>
+    <string name="notification_channel_receivenotification">Notifications from other devices</string>
+
+    <string name="findmyphone_preference_key_ringtone" translatable="false">findmyphone_ringtone</string>
+    <string name="findmyphone_preference_key_flashlight" translatable="false">findmyphone_flashlight</string>
+    <string name="findmyphone_preference_title_flashlight">Flash flashlight</string>
+
+    <string name="no_app_for_opening">No suitable app found to open this file</string>
+    <string name="remote_keyboard_service">Zorin Connect Remote Keyboard</string>
+    <string name="presenter_pointer">Pointer</string>
+
+    <string name="trusted_networks">Trusted networks</string>
+    <string name="trusted_networks_desc">Restrict autodiscovery to known networks</string>
+    <string name="add_trusted_network">Add %1s</string>
+    <string name="empty_trusted_networks_list_text">You haven\'t added any trusted network yet</string>
+    <string name="allow_all_networks_text">Allow all</string>
+
+    <string name="location_permission_needed_title">Permission required</string>
+    <string name="bluetooth_permission_needed_desc">Zorin Connect needs permission to connect to nearby devices to make devices paired using Bluetooth available in Zorin Connect.</string>
+    <string name="location_permission_needed_desc">Zorin Connect needs the background location permission to know the Wi-Fi network you are connected to even when the app is in the background. This is because the name of the Wi-Fi networks around you could be used to find your location, even when this is not what Zorin Connect does.</string>
+    <string name="clipboard_android_x_incompat">Android 10 has removed clipboard access to all apps. This plugin will be disabled.</string>
+    <string name="mpris_open_url">Continue playing here</string>
+    <string name="cant_open_url">Can\'t open URL to continue playing</string>
+
+    <string name="bigscreen_home">Home</string>
+    <string name="bigscreen_close">Close</string>
+    <string name="bigscreen_up">Up</string>
+    <string name="bigscreen_left">Left</string>
+    <string name="bigscreen_select">Select</string>
+    <string name="bigscreen_right">Right</string>
+    <string name="bigscreen_down">Down</string>
+    <string name="bigscreen_back">Back</string>
+    <string name="bigscreen_mic">Mic</string>
+    <string name="pref_plugin_bigscreen">TV remote</string>
+    <string name="pref_plugin_bigscreen_desc">Use your device as a remote for Plasma Bigscreen</string>
+    <string name="bigscreen_optional_permission_explanation">To share microphone input from your phone you need to give access to the phone\'s audio input</string>
+    <string name="bigscreen_speech_extra_prompt">Speech</string>
+
+    <string name="message_reply_label">REPLY</string>
+    <string name="mark_as_read_label">MARK AS READ</string>
+    <string name="user_display_name">You</string>
+    <string name="set_default_sms_app_title">Send MMS</string>
+    <string name="set_group_message_as_mms_title">Send group MMS</string>
+    <string name="set_group_message_as_mms" translatable="false">set_group_message_as_mms</string>
+    <string name="set_long_text_as_mms_title">Send long text as MMS</string>
+    <string name="set_long_text_as_mms" translatable="false">set_long_text_as_mms</string>
+    <string name="convert_to_mms_after_title">Convert to MMS</string>
+    <string name="convert_to_mms_after" translatable="false">convert_to_mms_after</string>
+    <string name="convert_to_mms_after_default" translatable="false">3</string>
+    <string-array name="convert_to_mms_after_entries">
+        <item>After one message</item>
+        <item>After two messages</item>
+        <item>After three messages</item>
+        <item>After four messages</item>
+        <item>After five messages</item>
+    </string-array>
+    <string-array name="convert_to_mms_after_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string name="theme_dialog_title">Choose theme</string>
+    <string-array name="theme_list">
+      <item>Set by Battery Saver</item>
+      <item>Light</item>
+      <item>Dark</item>
+    </string-array>
+
+    <string-array name="theme_list_v28">
+      <item>System Default</item>
+      <item>Light</item>
+      <item>Dark</item>
+    </string-array>
+
+    <string-array name="theme_list_values" translatable="false">
+      <item>default</item>
+      <item>light</item>
+      <item>dark</item>
+    </string-array>
+    <string name="report_bug">Report Bug</string>
+    <string name="report_bug_url" translatable="false">https://github.com/ZorinOS/zorin-connect-android/issues/new</string>
+    <string name="donate">Donate</string>
+    <string name="donate_url" translatable="false">https://zorin.com/about/#funding</string>
+    <string name="source_code">Source Code</string>
+    <string name="source_code_url" translatable="false">https://github.com/ZorinOS/zorin-connect-android/</string>
+    <string name="licenses">Licenses</string>
+    <string name="website">Website</string>
+    <string name="website_url" translatable="false">https://zorin.com/os/</string>
+
+    <string name="about">About</string>
+    <string name="authors">Authors</string>
+    <string name="thanks_to">Thanks To</string>
+    <string name="easter_egg">Easter Egg</string>
+    <string name="email_contributor">Email contributor\n%s</string>
+    <string name="visit_contributors_homepage">Visit contributor\'s homepage\n%s</string>
+    <string name="version">Version %s</string>
+    <string name="about_kde">About KDE</string>
+    <string name="kde_be_free">KDE - Be Free!</string>
+    <string name="kde">KDE</string>
+    <string name="konqi">Konqi</string>
+    <string name="rise_up">Rise Up</string>
+    <string name="rise_down">Rise Down</string>
+
+  <string name="click_here_to_type">Tap here to type</string>
+  <string name="clear_compose">Clear</string>
+  <string name="send_compose">Send</string>
+  <string name="compose_send_title">Compose send</string>
+  <string name="open_compose_send">Compose text</string>
+  <string name="double_tap_to_drag">Double tap to drag</string>
+  <string name="hold_to_drag">Hold to drag</string>
+
+    <string name="about_kde_about"><![CDATA[
+      <h1>About</h1>
+      <p>KDE is a world-wide community of software engineers, artists, writers, translators and creators who are committed to <a href="https://www.gnu.org/philosophy/free-sw.html">Free Software</a> development. KDE produces the Plasma desktop environment, hundreds of applications, and the many software libraries that support them.</p>
+      <p>KDE is a cooperative enterprise: no single entity controls its direction or products. Instead, we work together to achieve the common goal of building the world\'s finest Free Software. Everyone is welcome to <a href="https://community.kde.org/Get_Involved">join and contribute</a> to KDE, including you.</p>
+      Visit <a href="https://www.kde.org/">https://www.kde.org/</a> for more information about the KDE community and the software we produce.
+      ]]></string>
+
+    <string name="about_kde_report_bugs_or_wishes"><![CDATA[
+      <h1>Report Bugs or Wishes</h1>
+      <p>Software can always be improved, and the KDE team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.</p>
+      <p>KDE has a bug tracking system. Visit <a href="https://bugs.kde.org/">https://bugs.kde.org/</a> or use the \"Report Bug\" button from the about screen to report bugs.</p>
+      If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish. Make sure you use the severity called \"Wishlist\".
+      ]]></string>
+
+    <string name="about_kde_join_kde"><![CDATA[
+      <h1>Join KDE</h1>
+      <p>You do not have to be a software developer to be a member of the KDE team. You can join the language teams that translate program interfaces. You can provide graphics, themes, sounds, and improved documentation. You decide!</p>
+      <p>Visit <a href="https://community.kde.org/Get_Involved">https://community.kde.org/Get_Involved</a> for information on some projects in which you can participate.</p>
+      If you need more information or documentation, then a visit to <a href="https://techbase.kde.org/">https://techbase.kde.org/</a> will provide you with what you need.
+      ]]></string>
+
+    <string name="about_kde_support_kde"><![CDATA[
+      <h1>Support KDE</h1>
+      <p>KDE software is and will always be available free of charge, however creating it is not free.</p>
+      <p>To support development the KDE community has formed the KDE e.V., a non-profit organization legally founded in Germany. KDE e.V. represents the KDE community in legal and financial matters. See <a href="https://ev.kde.org/">https://ev.kde.org/</a> for information on KDE e.V.</p>
+      <p>KDE benefits from many kinds of contributions, including financial. We use the funds to reimburse members and others for expenses they incur when contributing. Further funds are used for legal support and organizing conferences and meetings.</p>
+      <p>We would like to encourage you to support our efforts with a financial donation, using one of the ways described at <a href="https://www.kde.org/community/donations/">https://www.kde.org/community/donations/</a>.</p>
+      Thank you very much in advance for your support.
+      ]]></string>
+
+    <!-- Authors tasks -->
+    <string name="maintainer_and_developer">Maintainer and developer</string>
+    <string name="developer">Developer</string>
+    <string name="apple_support">macOS support. Working on iOS support</string>
+    <string name="bug_fixes_and_general_improvements">Bug fixes and general improvements</string>
+    <string name="samoilenko_yuri_task">SFTP implementation, bug fixes and general improvements</string>
+    <string name="aniket_kumar_task">SMS plugin improvements</string>
+    <string name="alex_fiestas_task">Contacts plugin improvements</string>
+    <string name="maxim_leshchenko_task">UI improvements and this about page</string>
+    <string name="holger_kaelberer_task">Remote keyboard plugin and bug fixes</string>
+    <string name="saikrishna_arcot_task">Support for using the keyboard in the remote input plugin, bug fixes and general improvements</string>
+    <string name="shellwen_chen_task">Improve the security of SFTP, improve the maintainability of this project, bug fixes and general improvements</string>
+    <string name="everyone_else">Everyone else who has contributed to Zorin Connect over the years</string>
+
+    <string name="send_clipboard">Send clipboard</string>
+    <string name="tap_to_execute">Tap to execute</string>
+
+    <string name="plugin_stats">Plugin stats</string>
+
+    <string name="enable_udp_broadcast">Enable UDP device discovery</string>
+    <string name="enable_bluetooth">Enable bluetooth (beta)</string>
+
+    <string name="receive_notifications_permission_explanation">Notifications need to be allowed to receive them from other devices</string>
+    <string name="findmyphone_notifications_explanation">The notifications permission is needed so the phone can ring when the app is in the background</string>
+    <string name="findmyphone_camera_explanation">Camera permission allows the flashlight to flash when finding your phone</string>
+    <string name="findmyphone_open_settings_for_camera">Grant camera permission in app settings to use the flashlight</string>
+    <string name="no_notifications">Notifications are disabled, you won\'t receive incoming pairing request notifications.</string>
+
+
+    <string name="mpris_keepwatching">Continue playing</string>
+    <string name="mpris_keepwatching_key" translatable="false">mpris_keepwatching_enabled</string>
+    <string name="mpris_keepwatching_settings_title">Continue playing</string>
+    <string name="mpris_keepwatching_settings_summary">Show a silent notification to continue playing on this device after closing media</string>
+    <string name="notification_channel_keepwatching">Continue playing</string>
+
+    <string name="ping_result">Pinged in %1$d milliseconds</string>
+    <string name="ping_failed">Could not ping device</string>
+    <string name="ping_in_progress">Pinging…</string>
+
+    <string name="device_host_invalid">Host is invalid. Use a valid hostname, IPv4, or IPv6</string>
+    <string name="device_host_duplicate">Host already exists in the list</string>
+
+    <string name="enable_fullscreen">Enable fullscreen</string>
+
+    <string name="pref_presenter_enable_volume_keys" translatable="false">pref_presenter_enable_volume_keys</string>
+    <string name="pref_presenter_enable_volume_keys_title">Volume keys change slides</string>
+    <string name="pref_presenter_sensitivity" translatable="false">pref_presenter_sensitivity</string>
+    <string name="pref_presenter_sensitivity_title">Pointer sensitivity</string>
+    <string name="pref_presenter_enable_volume_keys_summary">On standby not supported on Android version between 13 and 15</string>
+    <string name="presenter_volume_keys_foreground_tip">You can leave the screen on to use the volume keys to go to the previous/next slide</string>
+    <string name="presenter_volume_keys_tip">You can leave the screen on or lock your device to use the volume keys to go to the previous/next slide</string>
+    <string name="runcommand_output_no_output_desc">The output from the commands will appear here.</string>
+    <string name="runcommand_output_no_output">No commands executed</string>
+    <string name="runcommand_stop">Stop the current command</string>
+
+    <string name="pref_mpris_volume_control_key" translatable="false">mpris_volume_control_enabled</string>
+    <string name="pref_mpris_volume_control_title">Hardware volume keys</string>
+    <string name="pref_mpris_volume_control_summary">Control the connected device\'s media volume using this phone\'s hardware buttons</string>
+</resources>

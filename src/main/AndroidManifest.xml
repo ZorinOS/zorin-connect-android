@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_LOCAL_NETWORK" />
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_MMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.READ_LOGS" tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="@string/kde_connect"
+        android:banner="@mipmap/ic_launcher_banner"
+        android:supportsRtl="true"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:theme="@style/KdeConnectTheme.NoActionBar"
+        android:name="org.kde.kdeconnect.KdeConnect"
+        android:enableOnBackInvokedCallback="true"
+        android:requestLegacyExternalStorage="true"> <!-- requestLegacyExternalStorage is only used in Android 10: https://developer.android.com/training/data-storage/use-cases#opt-out-in-production-app -->
+
+
+        <receiver
+            android:name="com.android.mms.transaction.PushReceiver"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_WAP_PUSH">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
+
+                <data android:mimeType="application/vnd.wap.mms-message" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.android.mms.transaction.TransactionService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name="org.kde.kdeconnect.BackgroundService"
+            android:foregroundServiceType="connectedDevice"
+            android:icon="@drawable/icon"
+            android:enabled="true" />
+        <service
+            android:name="org.kde.kdeconnect.plugins.remotekeyboard.RemoteKeyboardService"
+            android:label="@string/remote_keyboard_service"
+            android:exported="true"
+            android:permission="android.permission.BIND_INPUT_METHOD">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/remotekeyboardplugin_method" />
+        </service>
+
+        <activity
+            android:name="org.kde.kdeconnect.ui.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+
+            <meta-data android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.ui.PluginSettingsActivity"
+            android:label="@string/device_menu_plugins"
+            android:exported="false"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.ui.CustomDevicesActivity"
+            android:label="@string/custom_devices_settings"
+            android:exported="false"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.plugins.share.SendFileActivity"
+            android:label="Zorin Connect"
+            android:exported="true"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+
+        <receiver android:name="org.kde.kdeconnect.KdeConnectBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="org.kde.kdeconnect.plugins.findmyphone.FindMyPhoneActivity"
+            android:configChanges="orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:label="@string/findmyphone_title"
+            android:launchMode="singleInstance" />
+
+        <receiver android:name="org.kde.kdeconnect.plugins.findmyphone.FindMyPhoneReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="org.kde.kdeconnect.plugins.findmyphone.foundIt" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Plugin-related activities and services -->
+
+        <activity
+            android:name="org.kde.kdeconnect.plugins.clipboard.ClipboardFloatingActivity"
+            android:theme="@style/Theme.Transparent"
+            android:excludeFromRecents="true"/>
+
+        <activity
+            android:name="org.kde.kdeconnect.plugins.mpris.MprisActivity"
+            android:label="@string/open_mpris_controls"
+            android:launchMode="singleTop"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+
+        <receiver android:name="org.kde.kdeconnect.plugins.mpris.MprisMediaNotificationReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="org.kde.kdeconnect.plugins.runcommand.RunCommandActivity"
+            android:label="@string/pref_plugin_runcommand"
+            android:exported="false"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.plugins.runcommand.RunCommandWidgetConfigActivity"
+            android:excludeFromRecents="true"
+            android:label="@string/pref_plugin_runcommand"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:screenOrientation="user"/>
+
+        <service
+            android:name="org.kde.kdeconnect.plugins.runcommand.CommandsRemoteViewsService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <receiver
+            android:name="org.kde.kdeconnect.plugins.runcommand.RunCommandWidgetProvider"
+            android:label="@string/pref_plugin_runcommand"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="RUN_COMMAND_ACTION" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/remotecommandplugin_widget" />
+        </receiver>
+
+        <activity android:name="org.kde.kdeconnect.plugins.runcommand.RunCommandUrlActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="runcommand"
+                    android:scheme="zorinconnect" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.plugins.mousepad.BigscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/pref_plugin_bigscreen"
+            android:exported="true"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.plugins.mousepad.MousePadActivity"
+            android:label="@string/pref_plugin_mousepad"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.plugins.mousepad.ComposeSendActivity"
+            android:label="@string/compose_send_title"
+            android:exported="false"
+            android:parentActivityName="org.kde.kdeconnect.plugins.mousepad.MousePadActivity"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.plugins.mousepad.MousePadActivity" />
+        </activity>
+        <!-- TODO: Remove? This is only used by https://github.com/andOTP/andOTP, which is unmaintained since 2021. Do people use forks or can we remove this? -->
+        <activity
+            android:name="org.kde.kdeconnect.plugins.mousepad.SendKeystrokesToHostActivity"
+            android:label="@string/pref_plugin_mousepad_send_keystrokes"
+            android:exported="true"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+            <!-- Accept data with "text/x-keystrokes" to send the text to the connected host and emulate keystrokes -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/x-keystrokes"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.plugins.presenter.PresenterActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/pref_plugin_presenter"
+            android:exported="false"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+        <activity
+            android:name="org.kde.kdeconnect.plugins.share.ShareActivity"
+            android:exported="true"
+            android:label="@string/manifest_label_share">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="*/*" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.service.chooser.chooser_target_service"
+                android:value="org.kde.kdeconnect.plugins.share.ShareChooserTargetService" />
+        </activity>
+
+        <receiver android:name="org.kde.kdeconnect.plugins.share.ShareBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="org.kde.kdeconnect.plugins.share.CancelShare" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/fileprovider_paths" />
+        </provider>
+
+        <service
+            android:name="org.kde.kdeconnect.plugins.notifications.NotificationReceiver"
+            android:exported="true"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="org.kde.kdeconnect.plugins.share.ShareChooserTargetService"
+            android:exported="true"
+            android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.chooser.ChooserTargetService" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="org.kde.kdeconnect.plugins.mousereceiver.MouseReceiverService"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/mouse_receiver_service" />
+        </service>
+
+        <activity
+            android:name="org.kde.kdeconnect.plugins.notifications.NotificationFilterActivity"
+            android:label="@string/title_activity_notification_filter"
+            android:parentActivityName="org.kde.kdeconnect.ui.PluginSettingsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.PluginSettingsActivity" />
+        </activity>
+
+        <activity
+            android:name="org.kde.kdeconnect.plugins.digitizer.DigitizerActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/pref_plugin_digitizer"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+
+        <activity
+            android:name="org.kde.kdeconnect.ui.TrustedNetworksActivity"
+            android:label="@string/trusted_networks"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+
+        <activity
+            android:name="org.kde.kdeconnect.ui.about.EasterEggActivity"
+            android:label="@string/easter_egg"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+
+        <activity
+            android:name="org.kde.kdeconnect.ui.about.AboutKDEActivity"
+            android:label="@string/about_kde"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+
+        <activity
+            android:name="org.kde.kdeconnect.ui.about.LicensesActivity"
+            android:label="@string/licenses"
+            android:parentActivityName="org.kde.kdeconnect.ui.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.kde.kdeconnect.ui.MainActivity" />
+        </activity>
+
+        <service
+            android:name="org.kde.kdeconnect.plugins.clipboard.ClipboardTileService"
+            android:icon="@drawable/ic_baseline_content_paste_24"
+            android:exported="true"
+            android:label="@string/send_clipboard"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <service android:name="org.kde.kdeconnect.plugins.runcommand.RunCommandControlsProviderService"
+            android:label="@string/kde_connect"
+            android:exported="true"
+            android:permission="android.permission.BIND_CONTROLS">
+            <intent-filter>
+                <action android:name="android.service.controls.ControlsProviderService" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

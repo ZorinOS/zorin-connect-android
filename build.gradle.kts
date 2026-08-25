@@ -6,6 +6,7 @@ import com.android.build.api.instrumentation.InstrumentationScope
 import com.github.jk1.license.LicenseReportExtension
 import com.github.jk1.license.render.ReportRenderer
 import com.github.jk1.license.render.TextReportRenderer
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes.CHECKCAST
@@ -20,29 +21,29 @@ buildscript {
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dependencyLicenseReport)
     alias(libs.plugins.compose.compiler)
 }
 
-val licenseResDir = File("$projectDir/build/dependency-license-res")
+val licenseResDir = "$projectDir/build/dependency-license-res"
 
-val hashProvider = project.providers.exec {
-    workingDir = rootDir
-    commandLine("git", "rev-parse", "--short", "HEAD")
-}.standardOutput.asText.map { it.trim() }
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
+    }
+}
 
 android {
     namespace = "com.zorinos.zorin_connect"
-    compileSdk = 35
+    compileSdk = 37
     defaultConfig {
         applicationId = "com.zorinos.zorin_connect"
-        minSdk = 21
-        targetSdk = 35
-        versionCode = 13304
-        versionName = "1.33.4"
-        proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+        minSdk = 23
+        targetSdk = 37
+        versionCode = 13513
+        versionName = "1.35.13"
+        proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
     buildFeatures {
         viewBinding = true
@@ -50,33 +51,20 @@ android {
         buildConfig = true
     }
 
+    sourceSets.getByName("main") {
+        res.directories += licenseResDir
+    }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_9
-        targetCompatibility = JavaVersion.VERSION_1_9
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
 
         // Flag to enable support for the new language APIs
         isCoreLibraryDesugaringEnabled = true
     }
-    kotlinOptions {
-        jvmTarget = "9"
-    }
 
     androidResources {
         generateLocaleConfig = true
-    }
-
-    sourceSets {
-        getByName("main") {
-            setRoot(".") // By default AGP expects all directories under src/main/...
-            java.srcDir("src") // by default is "java"
-            res.setSrcDirs(listOf(licenseResDir, "res")) // add licenseResDir
-        }
-        getByName("debug") {
-            res.srcDir("dbg-res")
-        }
-        getByName("test") {
-            java.srcDir("tests")
-        }
     }
 
     packaging {
@@ -108,28 +96,6 @@ android {
     lint {
         abortOnError = false
         checkReleaseBuilds = false
-    }
-
-    applicationVariants.all {
-        val variant = this
-        logger.quiet("Found a variant called ${variant.name}")
-
-        if (variant.buildType.isDebuggable) {
-            variant.outputs.all {
-                val output = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
-                if (output.outputFile.name.endsWith(".apk")) {
-                    // Default output filename is "${project.name}-${v.name}.apk". We want
-                    // the Git commit short-hash to be added onto that default filename.
-                    try {
-                        val newName = "${project.name}-${variant.name}-${hashProvider.get()}.apk"
-                        logger.quiet("    Found an output file ${output.outputFile.name}, renaming to $newName")
-                        output.outputFileName = newName
-                    } catch (ignored: Exception) {
-                        logger.warn("Could not make use of the 'git' command-line tool. Output filenames will not be customized.")
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -218,7 +184,7 @@ abstract class FixCollectionsClassVisitorFactory :
                         descriptor: String?,
                         isInterface: Boolean
                     ) {
-                        val backportClass = "org/kde/kdeconnect/Helpers/CollectionsBackport"
+                        val backportClass = "org/kde/kdeconnect/helpers/CollectionsBackport"
 
                         if (opcode == INVOKESTATIC && type == "java/util/Collections") {
                             val replaceRules = mapOf(
@@ -248,7 +214,7 @@ abstract class FixCollectionsClassVisitorFactory :
 }
 
 ksp {
-    arg("com.albertvaka.classindexksp.annotations", "org.kde.kdeconnect.Plugins.PluginFactory.LoadablePlugin")
+    arg("com.albertvaka.classindexksp.annotations", "org.kde.kdeconnect.plugins.PluginFactory.LoadablePlugin")
 }
 
 androidComponents {
@@ -261,6 +227,30 @@ androidComponents {
             FixCollectionsClassVisitorFactory::class.java,
             InstrumentationScope.ALL
         ) { }
+
+        // When the "Generate Signed APK/Bundle" wizard is used, copy the source map to the output directory
+        val variantName = variant.name
+        val capitalized = variantName.replaceFirstChar { it.uppercase() }
+        // The 'android.injected.apk.location' property is only set when using the wizard
+        val apkLocation = providers.gradleProperty("android.injected.apk.location")
+        // Plain task with doLast (no declared outputs) so we don't clash with AGP tasks that also write into the
+        // destination folder (e.g. createReleaseApkListingFileRedirect writing output-metadata.json).
+        val mappingFile = layout.buildDirectory.file("outputs/mapping/$variantName/mapping.txt")
+        val nativeSymbolsFile = layout.buildDirectory.file("outputs/native-debug-symbols/$variantName/native-debug-symbols.zip")
+        val destDir = apkLocation.map { File(it, variantName) }
+        val copyExtras = tasks.register("copySigningExtraOutputs$capitalized") {
+            description = "Copies R8 mapping.txt and native-debug-symbols.zip next to the signed $variantName APK/bundle."
+            onlyIf { apkLocation.isPresent }
+            doLast {
+                val dest = destDir.get().apply { mkdirs() }
+                val mapping = mappingFile.get().asFile
+                if (mapping.exists()) mapping.copyTo(File(dest, "mapping.txt"), overwrite = true)
+                val symbols = nativeSymbolsFile.get().asFile
+                if (symbols.exists()) symbols.copyTo(File(dest, "native-debug-symbols.zip"), overwrite = true)
+            }
+        }
+        tasks.matching { it.name == "assemble$capitalized" || it.name == "bundle$capitalized" }
+            .configureEach { finalizedBy(copyExtras) }
     }
 }
 
@@ -272,6 +262,7 @@ dependencies {
     coreLibraryDesugaring(libs.android.desugarJdkLibsNio)
 
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.constraintlayout.compose)
@@ -291,8 +282,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.androidx.lifecycle.common.java8)
     implementation(libs.androidx.gridlayout)
-    implementation(libs.material)
-    implementation(libs.disklrucache) //For caching album art bitmaps
+    implementation(libs.google.android.material)
+    implementation(libs.disklrucache) //For caching album art bitmaps. FIXME: Not updated in 10+ years. Replace with Kache.
+    implementation(libs.slf4j.api)
     implementation(libs.slf4j.handroid)
 
     implementation(libs.apache.sshd.core)
@@ -326,8 +318,11 @@ dependencies {
 
     // Testing
     testImplementation(libs.junit)
-    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockk)
+    testImplementation(libs.slf4j.simple) // do not try to use the Android logger backend in tests
     testImplementation(libs.jsonassert)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.junit)
 
     // For device controls
     implementation(libs.reactive.streams)
@@ -340,17 +335,17 @@ licenseReport {
 }
 
 tasks.named("generateLicenseReport") {
+    val outputFile = file("$licenseResDir/raw/license")
+    val inputFiles = files(
+        layout.projectDirectory.file("COPYING"),
+        layout.buildDirectory.file("reports/dependency-license/THIRD-PARTY-NOTICES.txt")
+    )
+    outputs.file(outputFile)
     doLast {
-        val target = File(licenseResDir, "raw/license")
-        target.parentFile.mkdirs()
-        target.writeText(
-            files(
-                layout.projectDirectory.file("COPYING"),
-                layout.buildDirectory.file("reports/dependency-license/THIRD-PARTY-NOTICES.txt")
-            ).joinToString(separator = "\n") {
-                it.readText()
-            }
-        )
+        outputFile.apply {
+            parentFile.mkdirs()
+            writeText(inputFiles.joinToString(separator = "\n") { it.readText() })
+        }
     }
 }
 

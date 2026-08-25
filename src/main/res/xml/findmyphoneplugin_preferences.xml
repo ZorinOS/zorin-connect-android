@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2018 Nicolas Fella <nicolas.fella@gmx.de>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:keep="@xml/findmyphoneplugin_preferences">
+
+    <Preference
+        android:key="@string/findmyphone_preference_key_ringtone"
+        android:title="@string/select_ringtone" />
+
+    <SwitchPreference
+        android:key="@string/findmyphone_preference_key_flashlight"
+        android:title="@string/findmyphone_preference_title_flashlight"
+        android:summary="@string/findmyphone_camera_explanation"
+        android:defaultValue="false" />
+</PreferenceScreen>

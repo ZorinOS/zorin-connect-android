@@ -1,0 +1,482 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">Send til eining</string>
+  <string name="foreground_notification_no_devices">Ikkje tilkopla ei eining</string>
+  <string name="foreground_notification_devices">Kopla til: %s</string>
+  <string name="foreground_notification_send_clipboard">Send utklippstavle</string>
+  <string name="pref_plugin_telephony">Telefonvarsling</string>
+  <string name="pref_plugin_telephony_desc">Send varsling ved oppringing</string>
+  <string name="pref_plugin_battery">Batterirapport</string>
+  <string name="pref_plugin_battery_desc">Meld regelmessig frå om batteristatusen</string>
+  <string name="pref_plugin_connectivity_report">Sambandsrapport</string>
+  <string name="pref_plugin_connectivity_report_desc">Rapporter signalstyrke og status for nettverket</string>
+  <string name="pref_plugin_digitizer">Teikneplate</string>
+  <string name="pref_plugin_digitizer_desc">Bruk eininga som ei trykkfølsam teikneplate</string>
+  <string name="pref_plugin_sftp">Filsystem-tilgang</string>
+  <string name="pref_plugin_sftp_desc">Tillat lesing av filsystemet frå datamaskina</string>
+  <string name="pref_plugin_clipboard">Synkroniser utklippstavle</string>
+  <string name="pref_plugin_clipboard_desc">Del innhaldet på utklippstavla</string>
+  <string name="pref_plugin_clipboard_sent">Utklippstavle send</string>
+  <string name="clipboard_preference_title_skip_sensitive">Ikkje synkroniser sensitivt innhald</string>
+  <string name="clipboard_preference_summary_skip_sensitive">Ikkje synkroniser passord og anna innhald merkt som sensitivt</string>
+  <string name="pref_plugin_mousepad">Fjernstyring</string>
+  <string name="pref_plugin_mousepad_desc_nontv">Bruk telefonen eller nettbrettet som styreplate og tastatur</string>
+  <string name="pref_plugin_mousepad_desc_tv">Bruk telefonen eller nettbrettet som TV-fjernkontroll</string>
+  <string name="pref_plugin_presenter">Fjernkontroll av presentasjon</string>
+  <string name="pref_plugin_presenter_desc">Bruk eininga til å byta lysbilete i presentasjonar</string>
+  <string name="pref_plugin_remotekeyboard">Ta imot eksterne tastetrykk</string>
+  <string name="pref_plugin_remotekeyboard_desc">Ta imot tastetrykk frå eksterne einingar</string>
+  <string name="pref_plugin_mpris">Mediekontrollar</string>
+  <string name="pref_plugin_mpris_desc">Gje fjernkontroll til mediespelarar</string>
+  <string name="pref_plugin_runcommand">Køyr kommando</string>
+  <string name="pref_plugin_runcommand_desc">Utløys fjernkommandoar frå telefonen eller nettbrettet</string>
+  <string name="pref_plugin_contacts">Kontaktsynkronisering</string>
+  <string name="pref_plugin_contacts_desc">Tillat synkronisering av adresseboka på eininga</string>
+  <string name="pref_plugin_ping">Ping</string>
+  <string name="pref_plugin_ping_desc">Send og ta imot pingsignal</string>
+  <string name="pref_plugin_notifications">Synkroniser varslingar</string>
+  <string name="pref_plugin_notifications_desc">Få tilgang til varslingar frå andre einingar</string>
+  <string name="pref_plugin_receive_notifications">Ta imot varslingar</string>
+  <string name="pref_plugin_receive_notifications_desc">Ta imot varslingar frå den andre eininga og vis dei i Android</string>
+  <string name="pref_plugin_sharereceiver">Del og ta imot</string>
+  <string name="pref_plugin_sharereceiver_desc">Del filer og nettadresser mellom einingar</string>
+  <string name="pref_plugin_inputdevicesreceiver">Del inneiningar</string>
+  <string name="pref_plugin_inputdevicesreceiver_desc">Del mus og tastatur med ekstern eining</string>
+  <string name="device_list_empty">Ingen einingar</string>
+  <string name="ok">OK</string>
+  <string name="sad_ok">OK :(</string>
+  <string name="cancel">Avbryt</string>
+  <string name="open_settings">Opna innstillingar</string>
+  <string name="no_permissions">Du må gje tilgang til lesing av varslingar</string>
+  <string name="no_permission_mprisreceiver">Du må gje tilgang til varslingar for å kunne kontrollera mediespelarar</string>
+  <string name="no_permissions_remotekeyboard">For å ta imot tastetrykk må du slå på fjerntastaturet i Zorin Connect</string>
+  <string name="send_ping">Send pingsignal</string>
+  <string name="open_mpris_controls">Mediekontroll</string>
+  <string name="remotekeyboard_editing_only_title">Handter eksterne tastetrykk berre ved redigering</string>
+  <string name="remotekeyboard_not_connected">Det finst ikkje noko verksamt tastatursamband (må setjast opp i Zorin Connect)</string>
+  <string name="remotekeyboard_connected">Eksternt tastatursamband er verksamt</string>
+  <string name="remotekeyboard_multiple_connections">Det finst meir enn eitt eksternt tastatursamband (vel eining å setja opp)</string>
+  <string name="open_mousepad">Fjernstyring</string>
+  <string name="open_mousepad_tv">TV-fjernkontroll</string>
+  <string name="mousepad_info">Dra ein finger over skjermen for å flytta peikaren på datamaskina. Trykk for å klikka, og bruk to eller tre fingrar for høvesvis høgre- og midtknappen. Bruk to fingrar for å rulla. Trykk lenge for å dra og sleppa. Funksjonalitet for gyromus kan du slå på i programtillegg-innstillingane.</string>
+  <string name="mousepad_info_no_gestures">Flytt fingeren over skjermen for å flytta musepeikaren, og trykk for å klikka med musa.</string>
+  <string name="mousepad_keyboard_input_not_supported">Tekst frå tastaturet er ikkje støtta av den para eininga</string>
+  <string name="mousepad_single_tap_settings_title">Vel handling for éinfingertrykk</string>
+  <string name="mousepad_double_tap_settings_title">Vel handling for tofingertrykk</string>
+  <string name="mousepad_triple_tap_settings_title">Vel handling for trefingertrykk</string>
+  <string name="mousepad_sensitivity_settings_title">Vel følsemd for styreplate</string>
+  <string name="mousepad_mouse_buttons_title">Vis museknappar</string>
+  <string name="mousepad_acceleration_profile_settings_title">Vel peikarakselerasjon</string>
+  <string name="mousepad_scroll_direction_title">Omvend rulleretning</string>
+  <string name="mousepad_scroll_sensitivity_title">Rullefølsemd</string>
+  <string name="gyro_mouse_enabled_title">Slå på gyromus</string>
+  <string name="gyro_mouse_sensitivity_title">Gyroskop-følsemd</string>
+  <string name="bigscreen_hide_mouse_input">Gøym knapp for mus- og tastaturbruk på ekstern eining</string>
+  <string name="bigscreen_show_home_title">Vis heim-knapp</string>
+  <string name="bigscreen_show_back_title">Vis tilbake-knapp</string>
+  <string name="bigscreen_show_close_title">Vis lukkeknapp</string>
+  <string-array name="mousepad_tap_entries">
+    <item>Venstreklikk</item>
+    <item>Høgreklikk</item>
+    <item>Midtklikk</item>
+    <item>Ingenting</item>
+  </string-array>
+  <string-array name="mousepad_sensitivity_entries">
+    <item>Saktast</item>
+    <item>Raskare enn saktast</item>
+    <item>Standard</item>
+    <item>Raskare enn standard</item>
+    <item>Raskast</item>
+  </string-array>
+  <string-array name="mousepad_acceleration_profile_entries">
+    <item>Ingen akselerasjon</item>
+    <item>Svakast</item>
+    <item>Svakare</item>
+    <item>Middels</item>
+    <item>Sterkare</item>
+    <item>Sterkast</item>
+  </string-array>
+  <string name="sendkeystrokes_send_to">Send tastetrykk til</string>
+  <string name="sendkeystrokes_textbox_hint">Send tastetrykk til verten</string>
+  <string name="sendkeystrokes_disabled_toast">Sending av tastetrykk er slått av. Du kan slå det på i innstillingane.</string>
+  <string name="sendkeystrokes_wrong_data">Ugyldig MIME-type – må vera «text/x-keystrokes»</string>
+  <string name="sendkeystrokes_sent_text">Sende %1$s til eininga %2$s</string>
+  <string name="sendkeystrokes_pref_category_summary">Lèt andre appar dela tekstbitar som tastetrykk, som vert sende til den tilkopla verten</string>
+  <string name="sendkeystrokes_pref_category_title">Send tastetrykk</string>
+  <string name="sendkeystrokes_pref_enabled">Slå på sending av tastetrykk</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Lytt etter data med MIME-typen «text/x-keystrokes»</string>
+  <string name="sendkeystrokes_safe_text_enabled">Send sikker tekst med ein gong</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Send korte tekstar med berre siffer utan stadfesting</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Send som tastetrykk</string>
+  <string name="mouse_receiver_plugin_description">Ta imot eksterne muserørsler</string>
+  <string name="mouse_receiver_plugin_name">Muserørsle-mottakar</string>
+  <string name="mouse_receiver_no_permissions">For å kunna ta imot trykk-data, må du gje tilgjenge­løyva for å styring av heile eininga</string>
+  <string name="view_status_title">Status</string>
+  <string name="battery_status_format">Batteri: %d %%</string>
+  <string name="battery_status_low_format">Batteri: %d %% – lågt batterinivå</string>
+  <string name="battery_status_charging_format">Batteri: %d %% – ladar</string>
+  <string name="category_connected_devices">Tilkopla einingar</string>
+  <string name="category_not_paired_devices">Tilgjengelege einingar</string>
+  <string name="category_remembered_devices">Hugsa einingar</string>
+  <string name="device_menu_plugins">Programtillegg-oppsett</string>
+  <string name="device_menu_unpair">Løys paring</string>
+  <string name="pair_new_device">Par ny eining</string>
+  <string name="cancel_pairing">Avbryt paring</string>
+  <string name="unknown_device">Ukjend eining</string>
+  <string name="unknown_sender">Ukjend avsendar</string>
+  <string name="error_not_reachable">Får ikkje kontakt med eininga</string>
+  <string name="error_already_paired">Eininga er alt para</string>
+  <string name="error_timed_out">Tidsavbrot</string>
+  <string name="error_clocks_not_match">Einingsklokkene er ikkje synkroniserte</string>
+  <string name="error_canceled_by_user">Avbroten av brukar</string>
+  <string name="error_canceled_by_other_peer">Avbroten av den andre eininga</string>
+  <string name="encryption_info_title">Krypteringsinfo</string>
+  <string name="my_device_fingerprint">SHA-256-fingeravtrykket til einingssertifikatet er:</string>
+  <string name="remote_device_fingerprint">SHA-256-fingeravtrykket til fjerneiningssertifikatet er:</string>
+  <string name="pair_requested">Paringsførespurnad</string>
+  <string name="pair_succeeded">Paring fullført</string>
+  <string name="pairing_request_from">Paringsførespurnad frå «%1s»</string>
+  <plurals name="incoming_file_title">
+    <item quantity="one">Fekk %1$d fil frå %2$s</item>
+    <item quantity="other">Fekk %1$d filer frå %2$s</item>
+  </plurals>
+  <plurals name="incoming_files_text">
+    <item quantity="one">Fil: %1s</item>
+    <item quantity="other">(Fil %2$d av %3$d): %1$s</item>
+  </plurals>
+  <plurals name="outgoing_file_title">
+    <item quantity="one">Sender %1$d fil til %2$s</item>
+    <item quantity="other">Sender %1$d filer til %2$s</item>
+  </plurals>
+  <plurals name="outgoing_files_text">
+    <item quantity="one">Fil: %1$s</item>
+    <item quantity="other">(Fil %2$d av %3$d): %1$s</item>
+  </plurals>
+  <plurals name="received_files_title">
+    <item quantity="one">Fekk fil frå %1$s</item>
+    <item quantity="other">Fekk %2$d filer frå %1$s</item>
+  </plurals>
+  <plurals name="received_files_fail_title">
+    <item quantity="one">Klarte ikkje ta imot fil frå %1$s</item>
+    <item quantity="other">Klarte ikkje ta imot %2$d av %3$d filer frå %1$s</item>
+  </plurals>
+  <plurals name="sent_files_title">
+    <item quantity="one">Sende fil til %1$s</item>
+    <item quantity="other">Sende %2$d filer til %1$s</item>
+  </plurals>
+  <plurals name="send_files_fail_title">
+    <item quantity="one">Klarte ikkje senda fil til %1$s</item>
+    <item quantity="other">Klarte ikkje senda %2$d av %3$d filer til %1$s</item>
+  </plurals>
+  <string name="tap_to_open">Trykk for å opna</string>
+  <string name="received_file_text">Trykk for å opna «%1s»</string>
+  <string name="cannot_create_file">Klarte ikkje oppretta fila %s</string>
+  <string name="tap_to_answer">Trykk for å svara</string>
+  <string name="left_click">Send venstreklikk</string>
+  <string name="right_click">Send høgreklikk</string>
+  <string name="middle_click">Send midtklikk</string>
+  <string name="show_keyboard">Vis tastatur</string>
+  <string name="show_mouse_and_keyboard">Vis mus og tastatur</string>
+  <string name="device_not_paired">Eininga er ikkje para</string>
+  <string name="pairing_missing_local_network_permission">Manglar løyve for tilgang til einingar i nærleiken. Appen vil ikkje verka.</string>
+  <string name="pairing_duplicate_names">Åtvaring: Det finst fleire einingar med same namn.</string>
+  <string name="request_pairing">Be om paring</string>
+  <string name="pairing_accept">Godta</string>
+  <string name="pairing_reject">Avvis</string>
+  <string name="pairing_explanation">Ved paring av einingar, gjev du dei tilgang til kvarandre. Berre par saman einingar som du sjølv eig.</string>
+  <string name="settings">Innstillingar</string>
+  <string name="mpris_play">Spel</string>
+  <string name="mpris_pause">Pause</string>
+  <string name="mpris_previous">Førre</string>
+  <string name="mpris_rew">Spol tilbake</string>
+  <string name="mpris_ff">Spol fram</string>
+  <string name="mpris_next">Neste</string>
+  <string name="mpris_loop">Repeter</string>
+  <string name="mpris_shuffle">Stokk om</string>
+  <string name="mpris_volume">Lydstyrke</string>
+  <string name="mpris_time_settings_title">Spoleknappar</string>
+  <string name="mpris_time_settings_summary">Juster kor langt spoleknappane skal spola</string>
+  <string-array name="mpris_time_entries">
+    <item>10 sekund</item>
+    <item>20 sekund</item>
+    <item>30 sekund</item>
+    <item>1 minutt</item>
+    <item>2 minutt</item>
+  </string-array>
+  <string name="mpris_notifications_explanation">Varslingsløyvet trengst for å visa medieavspeling i varslingssenteret</string>
+  <string name="mpris_notification_settings_title">Vis varsling med avspelingskontrollar</string>
+  <string name="mpris_notification_settings_summary">Tillat å kontrollera mediespelarar utan å opna Zorin Connect</string>
+  <string name="share_to">Del til …</string>
+  <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
+  <string name="unreachable_device_url_share_text">Adresser delte til ei utilgjengeleg eining vert leverte når eininga vert tilgjengeleg att.\n\n</string>
+  <string name="unreachable_share_toast">Nettadressa vert delt neste gong eininga vert kopla til.</string>
+  <string name="protocol_version">Protokollversjon:</string>
+  <string name="protocol_version_newer">Denne eininga brukar ein nyare protokollversjon</string>
+  <string name="plugin_settings_with_name">%s-innstillingar</string>
+  <string name="invalid_device_name">Ugyldig einingsnamn</string>
+  <string name="shareplugin_text_saved">Fekk tekst, som vart lagra på utklippstavla</string>
+  <string name="custom_devices_settings">Tilpassa einingsliste</string>
+  <string name="custom_devices_settings_summary">%d lagde til manuelt</string>
+  <string name="custom_device_list">Legg til eining basert på IP</string>
+  <string name="custom_device_deleted">Tilpassa eining er sletta</string>
+  <string name="custom_device_list_help">Viss eininga ikkje vert funnen automatisk, kan du leggja til IP-adressa eller vertsnamnet til eininga ved å trykka på knappen nedanfor</string>
+  <string name="custom_device_fab_hint">Legg til eining</string>
+  <string name="undo">Angra</string>
+  <string name="share_notification_preference">Lydvarsling</string>
+  <string name="share_notification_preference_summary">Vibrer og spel ein lyd ved mottak av filer</string>
+  <string name="share_destination_customize">Sjølvvald målmappe</string>
+  <string name="share_destination_customize_summary_disabled">Mottekne filer vert lagra i nedlastingsmappa</string>
+  <string name="share_destination_customize_summary_enabled">Mottekne filer vert lagra i mappa nedanfor</string>
+  <string name="share_destination_folder_preference">Målmappe</string>
+  <string name="share">Del</string>
+  <string name="share_received_file">Del «%s»</string>
+  <string name="title_activity_notification_filter">Varslingsfilter</string>
+  <string name="filter_apps_info">Varslingar vert synkroniserte for dei valde appane.</string>
+  <string name="show_notification_if_screen_off">Send berre varslingar dersom skjermen er av</string>
+  <string name="add_device_dialog_title">Legg til eining</string>
+  <string name="add_device_hint">Vertsnamn/IP-adresse</string>
+  <string name="sftp_preference_configured_storage_locations">Oppsette lagringsområde</string>
+  <string name="sftp_preference_add_storage_location_title">Legg til lagringsområde</string>
+  <string name="sftp_preference_edit_storage_location">Rediger lagringsområde</string>
+  <string name="sftp_storage_preference_storage_location">Lagringsområde</string>
+  <string name="sftp_storage_preference_storage_location_already_configured">Dette lagringsområdet er alt sett opp</string>
+  <string name="sftp_storage_preference_click_to_select">trykk for å velja</string>
+  <string name="sftp_storage_preference_display_name">Visingsnamn</string>
+  <string name="sftp_storage_preference_display_name_already_used">Dette visingsnamnet er alt i bruk</string>
+  <string name="sftp_storage_preference_display_name_cannot_be_empty">Visiningsnamnet kan ikkje vera tomt</string>
+  <string name="sftp_action_mode_menu_delete">Slett</string>
+  <string name="sftp_no_storage_locations_configured">Ingen lagringsområde er sette opp</string>
+  <string name="sftp_saf_permission_explanation">For å få tilgang til filer over nettet må du setja opp lagringsområde.</string>
+  <string name="sftp_manage_storage_permission_explanation">For fjerntilgang til filer på denne eininga må du gje Zorin Connect tilgangsløyve til lagringsområdet.</string>
+  <string name="sftp_missing_permission_error">Manglar løyve: filsystem-tilgang</string>
+  <string name="no_players_connected">Fann ingen spelarar</string>
+  <string name="send_files">Send filer</string>
+  <string name="use_digitizer">Bruk som teikneplate</string>
+  <string name="digitizer_draw_button">Teikn med fingeren</string>
+  <string name="digitizer_preference_title_hide_draw_button">Gøym teikneknapp</string>
+  <string name="digitizer_preference_summary_hide_draw_button">Gøymer heilt teikne­knappen, slik at teikning med fingeren ikkje vert mogleg. Berre slå på dette dersom eininga støttar digitalpenn.</string>
+  <string name="digitizer_preference_title_draw_button_side">Side av «Teikn med finger»-knapp</string>
+  <string name="digitizer_preference_title_enable_exit_fullscreen_gesture">Slå på fingerrørsle for fullskjerms­avslutting</string>
+  <string name="digitizer_preference_summary_enable_exit_fullscreen_gesture">Viss det er kryssa av her, kan du avslutta fullskjerms­modus ved å trykkja og halda fast fingeren på teikneområdet.</string>
+  <string-array name="digitizer_preference_entries_draw_button_side">
+    <item>Oppe til venstre</item>
+    <item>Oppe til høgre</item>
+    <item>Nede til venstre</item>
+    <item>Nede til høgre</item>
+  </string-array>
+  <string name="block_notification_contents">Blokker varslingsinnhald</string>
+  <string name="block_notification_images">Blokker varslingsbilete</string>
+  <string name="pairing_title">Zorin Connect-einingar</string>
+  <string name="pairing_description">Andre einingar i nettverket som køyrer Zorin Connect, vil dukka opp her.</string>
+  <string name="device_rename_title">Endra namn på eining</string>
+  <string name="device_rename_confirm">Endra namn</string>
+  <string name="refresh">Oppdater</string>
+  <string name="unreachable_description">Får ikkje kontakt med den para eininga. Sjå til at ho er kopla til same nettverk.</string>
+  <string name="no_wifi">Du er ikkje kopla til eit Wi-Fi-nettverk, så du vil ikkje kunna sjå nokon einingar. Trykk her for å slå på Wi-Fi.</string>
+  <string name="on_non_trusted_message">Ikkje på eit tiltrudd nettverk: autooppdaging er slått av.</string>
+  <string name="no_file_browser">Ingen filhandsamarar er installerte.</string>
+  <string name="pref_plugin_telepathy">Send SMS</string>
+  <string name="pref_plugin_telepathy_desc">Send tekstmeldingar frå datamaskina</string>
+  <string name="pref_plugin_telepathy_mms">Send MMS</string>
+  <string name="pref_plugin_telepathy_mms_desc">Du må velja Zorin Connect som standard­app for å kunna senda MMS.</string>
+  <string name="findmyphone_title">Finn telefonen min</string>
+  <string name="findmyphone_title_tablet">Finn nettbrettet mitt</string>
+  <string name="findmyphone_title_tv">Finn TV-en min</string>
+  <string name="findmyphone_description">Spel av lydsignal på eininga, slik at du lett kan finna ho</string>
+  <string name="findmyphone_found">Fann han</string>
+  <string name="open">Opna</string>
+  <string name="close">Lukk</string>
+  <string name="plugins_need_permission">Nokre av tillegga treng utvida løyva for å fungera (trykk på dei for meir informasjon):</string>
+  <string name="permission_explanation">Dette tillegget treng utvida løyve for å fungera</string>
+  <string name="all_permissions_granted">Alle tilgangsløyva er gjevne 🎉</string>
+  <string name="optional_permission_explanation">Du må gje utvida løyve for at alle funksjonane skal fungera</string>
+  <string name="plugins_need_optional_permission">På grunn av manglande løyve vil desse funksjonane ikkje verka (trykk på dei for meir informasjon):</string>
+  <string name="share_optional_permission_explanation">For å kunna ta imot filer må du gje tilgangsløyve til lagringsområdet</string>
+  <string name="share_notifications_explanation">For å kunna sjå framdrift ved sending og mottak av filer må du gje appen varslingsløyve</string>
+  <string name="telepathy_permission_explanation">For å kunna lesa og skriva tekstmeldingar frå datamaskina må du gje appen tilgang til SMS</string>
+  <string name="telephony_permission_explanation">For å kunna sjå telefonsamtalar på datamaskina må du gje appen tilgang til samtaleloggar og telefonstatus</string>
+  <string name="telephony_optional_permission_explanation">For å kunna sjå namn på kontaktar i staden for berre telefonnummeret må du gje appen tilgang til kontaktlista di</string>
+  <string name="contacts_permission_explanation">For å kunna dela adresseboka di med datamaskina må du gje appen lese- og skriveløyve til adresseboka</string>
+  <string name="contacts_per_device_confirmation">Telefonkontaktane dine vert kopiert over til denne eininga, slik at dei kan brukast av Zorin Connect SMS-appen og andre appar.</string>
+  <string name="select_ringtone">Vel ringjetone</string>
+  <string name="telephony_pref_blocked_title">Blokkerte nummer</string>
+  <string name="telephony_pref_blocked_dialog_desc">Ikkje vis oppringingar eller SMS-ar frå desse telefonnummera. Skriv inn eitt telefonnummer per linje.</string>
+  <string name="mpris_coverart_description">Omslagsbilete til gjeldande mediefil</string>
+  <string name="settings_icon_description">Innstillingsikon</string>
+  <string name="presenter_fullscreen">Fullskjerm</string>
+  <string name="presenter_exit">Avslutt presentasjon</string>
+  <string name="presenter_lock_tip">Du kan låsa eininga og bruka lydstyrke-knappane som førre/neste-knappar</string>
+  <string name="add_command">Legg til kommando</string>
+  <string name="addcommand_explanation">Ingen kommandoar er registrerte</string>
+  <string name="addcommand_explanation2">Du kan leggja til nye kommandoar i systeminnstillingane til Zorin Connect</string>
+  <string name="add_command_description">Du kan leggja til kommandoar på skrivebordet</string>
+  <string name="pref_plugin_mprisreceiver">Mediespelarkontrollar</string>
+  <string name="pref_plugin_mprisreceiver_desc">Kontroller mediespelarar på telefonen din frå ei anna eining</string>
+  <string name="notification_channel_default">Andre varslingar</string>
+  <string name="notification_channel_persistent">Evigvarande varsling</string>
+  <string name="notification_channel_media_control">Mediestyring</string>
+  <string name="notification_channel_filetransfer">Innkommande filoverføring</string>
+  <string name="notification_channel_filetransfer_complete">Innkommande filoverføring fullført</string>
+  <string name="notification_channel_filetransfer_upload">Utgåande filoverføring</string>
+  <string name="notification_channel_filetransfer_error">Feil ved filoverføring</string>
+  <string name="notification_channel_high_priority">Høg prioritet</string>
+  <string name="mpris_stop">Stopp gjeldande avspelar</string>
+  <string name="copy_url_to_clipboard">Kopier adresse til utklippstavla</string>
+  <string name="clipboard_toast">Kopiert til utklippstavla</string>
+  <string name="runcommand_notreachable">Får ikkje kontakt med eininga</string>
+  <string name="runcommand_notpaired">Eininga er ikkje para</string>
+  <string name="runcommand_nosuchdevice">Eininga finst ikkje</string>
+  <string name="runcommand_noruncommandplugin">Eininga har ikkje «Køyr kommando»-tillegget slått på</string>
+  <string name="runcommand_category_device_controls_title">Einingsstyring</string>
+  <string name="runcommand_device_controls_summary">Vis eininga støttar einingsstyring, vil kommandoar du har sette opp, visast her.</string>
+  <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
+  <string name="runcommand_name_as_title_title">Vis namn som tittel</string>
+  <string name="pref_plugin_findremotedevice">Finn ekstern eining</string>
+  <string name="pref_plugin_findremotedevice_desc">Ring til ekstern eining</string>
+  <string name="ring">Ring</string>
+  <string name="pref_plugin_systemvolume">Systemlydstyrke</string>
+  <string name="pref_plugin_systemvolume_desc">Juster systemlydstyrken til ekstern eining</string>
+  <string name="mute">Demp lyd</string>
+  <string name="all">Alle</string>
+  <string name="devices">Einingar</string>
+  <string name="settings_rename">Einingsnamn</string>
+  <string name="settings_dark_mode">Mørkt tema</string>
+  <string name="settings_export_logs">Eksporter Zorin Connect-loggar</string>
+  <string name="settings_export_logs_text">Generer ei fil med køyre­informasjon som kan brukast til å feilsøkja problem.</string>
+  <string name="settings_more_settings_title">Fleire innstillingar</string>
+  <string name="settings_more_settings_text">Innstillingar for einskildeiningar finn du under «Programtillegg-oppsett» på kvar eining.</string>
+  <string name="setting_persistent_notification">Vis evigvarande varsling</string>
+  <string name="setting_persistent_notification_oreo">Evigvarande varsling</string>
+  <string name="setting_persistent_notification_description">Trykk for å slå på/av i varslingsinnstillingane</string>
+  <string name="extra_options">Tilleggsval</string>
+  <string name="privacy_options">Personverninstillingar</string>
+  <string name="set_privacy_options">Vel personverninnstillingar</string>
+  <string name="block_contents">Blokker varslingsinnhald</string>
+  <string name="block_images">Blokker bilete i varslingar</string>
+  <string name="notification_channel_receivenotification">Varslingar frå andre einingar</string>
+  <string name="findmyphone_preference_title_flashlight">Blink med lommelykta</string>
+  <string name="no_app_for_opening">Fann ikkje nokon app som kan opna denne fila</string>
+  <string name="remote_keyboard_service">Zorin Connect fjerntastatur</string>
+  <string name="presenter_pointer">Peikar</string>
+  <string name="trusted_networks">Tiltrudde nettverk</string>
+  <string name="trusted_networks_desc">Avgrens autooppdaging til kjende nettverk</string>
+  <string name="add_trusted_network">Legg til %1s</string>
+  <string name="empty_trusted_networks_list_text">Du har ikkje lagt til eit tiltrudd nettverk enno</string>
+  <string name="allow_all_networks_text">Tillat alle</string>
+  <string name="location_permission_needed_title">Krev utvida løyve</string>
+  <string name="bluetooth_permission_needed_desc">Zorin Connect treng løyve til å kopla til nærliggjande einingar for å kunna para med einingar via Bluetooth.</string>
+  <string name="location_permission_needed_desc">Zorin Connect treng bakgrunns­løyve til sjå den geografiske posisjonen din. Det er for å kunna veta kva Wi-Fi-nettverk du er kopla til sjølv når appen er i bakgrunnen. Ein treng dette løyvet fordi namna på Wi-Fi-nettverk rundt deg òg kan brukast til å finna posisjonen din, sjølv om dette ikkje er det Zorin Connect gjer.</string>
+  <string name="clipboard_android_x_incompat">Android 10 har fjerna tilgang til utklippstavla for alle program. Programtillegget vert derfor slått av.</string>
+  <string name="mpris_open_url">Hald fram avspeling her</string>
+  <string name="cant_open_url">Kan ikkje opna adressa for framhald av avspeling</string>
+  <string name="bigscreen_home">Heim</string>
+  <string name="bigscreen_close">Lukk</string>
+  <string name="bigscreen_up">Opp</string>
+  <string name="bigscreen_left">Venstre</string>
+  <string name="bigscreen_select">Vel</string>
+  <string name="bigscreen_right">Høgre</string>
+  <string name="bigscreen_down">Ned</string>
+  <string name="bigscreen_back">Tilbake</string>
+  <string name="bigscreen_mic">Mikrofon</string>
+  <string name="pref_plugin_bigscreen">TV-fjernkontroll</string>
+  <string name="pref_plugin_bigscreen_desc">Bruk eininga som fjernkontroll for Plasma Bigscreen</string>
+  <string name="bigscreen_optional_permission_explanation">For å kunna dela mikrofon­lyd frå telefonen må du gje appen mikrofontilgang</string>
+  <string name="bigscreen_speech_extra_prompt">Tale</string>
+  <string name="message_reply_label">SVAR</string>
+  <string name="mark_as_read_label">MERK SOM LESEN</string>
+  <string name="user_display_name">Du</string>
+  <string name="set_default_sms_app_title">Send MMS</string>
+  <string name="set_group_message_as_mms_title">Send gruppe-MMS</string>
+  <string name="set_long_text_as_mms_title">Send lang tekst som MMS</string>
+  <string name="convert_to_mms_after_title">Gjer om til MMS</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Etter éi melding</item>
+    <item>Etter to meldingar</item>
+    <item>Etter tre meldingar</item>
+    <item>Etter fire meldingar</item>
+    <item>Etter fem meldingar</item>
+  </string-array>
+  <string name="theme_dialog_title">Vel tema</string>
+  <string-array name="theme_list">
+    <item>Valt av straumsparar</item>
+    <item>Lyst</item>
+    <item>Mørkt</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Systemstandard</item>
+    <item>Lyst</item>
+    <item>Mørk</item>
+  </string-array>
+  <string name="report_bug">Meld frå om feil</string>
+  <string name="donate">Gje pengegåve</string>
+  <string name="source_code">Kjeldekode</string>
+  <string name="licenses">Lisensar</string>
+  <string name="website">Heimeside</string>
+  <string name="about">Om</string>
+  <string name="authors">Opphavspersonar</string>
+  <string name="thanks_to">Takk til</string>
+  <string name="easter_egg">Påskeegg</string>
+  <string name="email_contributor">Send e-post til bidragsytaren\n%s</string>
+  <string name="visit_contributors_homepage">Besøk heimesida til bidragsytaren\n%s</string>
+  <string name="version">Versjon %s</string>
+  <string name="about_kde">Om KDE</string>
+  <string name="kde_be_free">KDE – ver fri!</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">Hev</string>
+  <string name="rise_down">Senk</string>
+  <string name="click_here_to_type">Trykk her for å skriva</string>
+  <string name="clear_compose">Tøm</string>
+  <string name="send_compose">Send</string>
+  <string name="compose_send_title">Send tekst</string>
+  <string name="open_compose_send">Skriv tekst</string>
+  <string name="double_tap_to_drag">Dobbelttrykk for å dra</string>
+  <string name="hold_to_drag">Hald for å dra</string>
+  <string name="about_kde_about">&lt;h1&gt;Om&lt;/h1&gt; &lt;p&gt;KDE er eit verdsfemnande fellesskap av eldsjeler som programmerer, teiknar, komponerer, dokumenterer, set om eller hjelper til på andre måtar med utvikling av &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;fri programvare&lt;/a&gt;. Me har laga brukarflata Plasma, hundrevis av program og dei mange programbiblioteka desse byggjer på.&lt;/p&gt; &lt;p&gt;KDE er eit fellesskap der inga einskild gruppe, firma eller organisasjon har eigarskap til produkta eller styrer retninga den vidare utviklinga skal gå i. Derimot arbeider me saman om å oppnå vårt felles mål om å laga fri programvare i verdsklasse. Alle er &lt;a href=https://community.kde.org/Get_Involved&gt;velkomne til å bidra&lt;/a&gt; – du òg.&lt;/p&gt;Du finn meir informasjon om KDE og programma me utviklar på &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt;.</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Meld frå om feil eller ønskje&lt;/h1&gt; &lt;p&gt;Ein kan alltid forbetra programvare, og KDE-gruppa arbeider heile tida for det. Men du, som brukar, må melda frå til oss når noko ikkje verkar slik du forventar, eller når noko kunne vore gjort betre.&lt;/p&gt; &lt;p&gt;KDE har eit feilsporingssystem. Gå til &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; eller vel «Meld frå om feil» på «Om»-sida for å melda frå om feil.&lt;/p&gt; Om du har framlegg til forbetringar, kan du gjerne registrera òg desse i feilsporingssystemet. Sjå då til at du har markert feilrapporten med «Wishlist».</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Vert med i KDE&lt;/h1&gt; &lt;p&gt;Du treng ikkje vera programutviklar for å hjelpa til med KDE. Du kan arbeida med omsetjingar, laga grafikk, tema, lydar eller betre hjelpetekstar. Her er noko for alle!&lt;/p&gt; &lt;p&gt;På &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; finn du informasjon om nokre prosjekt du kan delta i.&lt;/p&gt; Om du vil ha meir informasjon eller dokumentasjon, finn du det du treng på &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt;.</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;Støtt KDE&lt;/h1&gt; &lt;p&gt;KDE-programma er, og vil alltid vera, gratis, men det er slett ikkje gratis å laga eller vedlikehalda dei.&lt;/p&gt; &lt;p&gt;For å støtta utviklingsarbeidet har KDE-fellesskapet derfor oppretta KDE e.V., ein ideell organisasjon registrert i Tyskland. KDE e.V. representerer KDE-fellesskapet i juridiske og finansielle saker. På &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; finn du meir informasjon om organisasjonen.&lt;/p&gt; &lt;p&gt;Både økonomisk og annan type støtte er til stor hjelp. Pengane går med til å dekkja utgifter medlemmane våre har ved utviklinga av KDE-programma, samt til juridisk bistand og til organisering av konferansar og møte.&lt;/p&gt; &lt;p&gt;På &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; kan du lesa om korleis du kan bidra.&lt;/p&gt; &lt;p&gt;På førehand tusen takk for støtta di.</string>
+  <string name="maintainer_and_developer">Vedlikehaldar og utviklar</string>
+  <string name="developer">Utviklar</string>
+  <string name="apple_support">Støtte for macOS – arbeider med støtte for iOS</string>
+  <string name="bug_fixes_and_general_improvements">Feilrettingar og generelle forbetringar</string>
+  <string name="samoilenko_yuri_task">SFTP-implementering, feilrettingar og generelle forbetringar</string>
+  <string name="aniket_kumar_task">Forbetringar i SMS-tillegget</string>
+  <string name="alex_fiestas_task">Forbetringar i kontakt-tillegget</string>
+  <string name="maxim_leshchenko_task">Forbetringar av brukarflata og denne «om»-sida</string>
+  <string name="holger_kaelberer_task">Fjerntastatur-tillegget og feilrettingar</string>
+  <string name="saikrishna_arcot_task">Støtte for bruk av tastaturet i fjernstyrings­tillegget, feilrettingar og generelle forbetringar</string>
+  <string name="shellwen_chen_task">Forbetra tryggleiken til SFTP, gjort prosjektet lettare å vedlikehalda, feilrettingar og generelle forbetringar</string>
+  <string name="everyone_else">Alle andre som har hjelpt til med utviklinga av Zorin Connect opp gjennom åra</string>
+  <string name="send_clipboard">Send utklippstavla</string>
+  <string name="tap_to_execute">Tapp for å utføra handlinga</string>
+  <string name="plugin_stats">Programtillegg-statistikk</string>
+  <string name="enable_udp_broadcast">Slå på einingsoppdaging via UDP</string>
+  <string name="enable_bluetooth">Bruk Bluetooth (beta)</string>
+  <string name="receive_notifications_permission_explanation">Du må tillata varslingar for å kunna frå varslingar frå andre einingar</string>
+  <string name="findmyphone_notifications_explanation">Varslingsløyvet trengst for at telefonen skal kunna ringja når appen er i bakgrunnsmodus</string>
+  <string name="findmyphone_camera_explanation">Kameraløyvet gjer det mogleg å blinka med lommelykta for å finna telefonen</string>
+  <string name="findmyphone_open_settings_for_camera">Gje kameraløyve i appinnstillingane for å kunna bruka lommelykta</string>
+  <string name="no_notifications">Varslingar er slåtte av, så du vil ikkje få varsling om parings­førespurnadar.</string>
+  <string name="mpris_keepwatching">Hald fram avspeling</string>
+  <string name="mpris_keepwatching_settings_title">Hald fram avspeling</string>
+  <string name="mpris_keepwatching_settings_summary">Vis ei stille varsling om framhald av medie­avspeling på eininga etter avspelingsstopp</string>
+  <string name="notification_channel_keepwatching">Hald fram avspeling</string>
+  <string name="ping_result">Pinga på %1$d millisekund</string>
+  <string name="ping_failed">Klarte ikkje pinga eininga</string>
+  <string name="ping_in_progress">Pingar …</string>
+  <string name="device_host_invalid">Ugyldig vert. Bruk eit gyldig vertsnamn, IPv4 eller IPv6.</string>
+  <string name="device_host_duplicate">Verten finst i lista frå før</string>
+  <string name="enable_fullscreen">Bruk fullskjerm</string>
+  <string name="pref_presenter_enable_volume_keys_title">Bruk lydstyrke-knappane for å byta lysbilete</string>
+  <string name="pref_presenter_sensitivity_title">Peikarfølsemd</string>
+  <string name="pref_presenter_enable_volume_keys_summary">Bruk i standby-modus er ikkje støtta på Android versjon 13–15</string>
+  <string name="presenter_volume_keys_foreground_tip">Du kan la skjermen stå på for å bruka lydstyrke-knappane som førre/neste-knappar</string>
+  <string name="presenter_volume_keys_tip">Du kan la skjermen stå på eller låsa eininga og bruka lydstyrke-knappane som førre/neste-knappar</string>
+  <string name="runcommand_output_no_output_desc">Utdata frå kommandoane vert viste her.</string>
+  <string name="runcommand_output_no_output">Ingen kommandoar vart køyrde</string>
+  <string name="runcommand_stop">Stopp gjeldande kommando</string>
+  <string name="pref_mpris_volume_control_title">Fysiske lydstyrke-knappar</string>
+  <string name="pref_mpris_volume_control_summary">Styr lydstyrken til den tilkopla eininga via dei fysiske lydstyrke-knappane på telefonen</string>
+</resources>

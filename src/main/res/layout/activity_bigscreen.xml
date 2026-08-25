@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2020 Sylvia van Os <sylvia@hackerchick.me>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="org.kde.kdeconnect.plugins.mousepad.BigscreenActivity">
+
+    <include layout="@layout/toolbar" android:id="@+id/toolbar_layout" />
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:useDefaultMargins="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/home_button"
+            app:layout_column="0"
+            app:layout_row="0"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:contentDescription="@string/bigscreen_home"
+            app:iconSize="32dp"
+            app:icon="@drawable/ic_home_black_24dp"
+            style="@style/KdeConnectButton.IconButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/up_button"
+            app:layout_column="1"
+            app:layout_row="0"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:contentDescription="@string/bigscreen_up"
+            app:iconSize="42dp"
+            app:icon="@drawable/outline_arrow_drop_up_24"
+            style="@style/KdeConnectButton.IconButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mic_button"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="2"
+            app:layout_rowWeight="1"
+            android:contentDescription="@string/bigscreen_mic"
+            app:iconSize="32dp"
+            app:icon="@drawable/ic_mic_black"
+            style="@style/KdeConnectButton.IconButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/left_button"
+            app:layout_column="0"
+            app:layout_row="1"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:contentDescription="@string/bigscreen_left"
+            app:iconSize="42dp"
+            app:icon="@drawable/outline_arrow_left_24"
+            style="@style/KdeConnectButton.IconButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/select_button"
+            app:layout_column="1"
+            app:layout_row="1"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:contentDescription="@string/bigscreen_select"
+            app:iconSize="32dp"
+            app:icon="@drawable/ic_keyboard_return_black_24dp"
+            style="@style/KdeConnectButton.IconButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/right_button"
+            app:layout_column="2"
+            app:layout_row="1"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:contentDescription="@string/bigscreen_right"
+            app:iconSize="42dp"
+            app:icon="@drawable/outline_arrow_right_24"
+            style="@style/KdeConnectButton.IconButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/down_button"
+            app:layout_column="1"
+            app:layout_row="2"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:contentDescription="@string/bigscreen_down"
+            app:iconSize="42dp"
+            app:icon="@drawable/outline_arrow_drop_down_24"
+            style="@style/KdeConnectButton.IconButton"  />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/back_button"
+            app:layout_column="0"
+            app:layout_row="2"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:contentDescription="@string/bigscreen_back"
+            app:iconSize="32dp"
+            app:icon="@drawable/ic_arrow_back_black_24dp"
+            style="@style/KdeConnectButton.IconButton"  />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/close_button"
+            style="@style/KdeConnectButton.IconButton"
+            android:contentDescription="@string/bigscreen_close"
+            app:icon="@drawable/ic_close"
+            app:iconSize="32dp"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="0"
+            app:layout_rowWeight="1" />
+    </androidx.gridlayout.widget.GridLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

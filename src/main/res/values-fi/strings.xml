@@ -1,0 +1,460 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">Lähetä laitteeseen</string>
+  <string name="foreground_notification_no_devices">Ei laiteyhteyttä</string>
+  <string name="foreground_notification_devices">Yhdistetty laitteeseen: %s</string>
+  <string name="foreground_notification_send_clipboard">Lähetä leikepöytä</string>
+  <string name="pref_plugin_telephony">Puhelinilmoitukset</string>
+  <string name="pref_plugin_telephony_desc">Lähetä ilmoitukset saapuvista puheluista</string>
+  <string name="pref_plugin_battery">Akkuraportti</string>
+  <string name="pref_plugin_battery_desc">Raportoi akun tila säännöllisesti</string>
+  <string name="pref_plugin_connectivity_report">Verkkoyhteysraportti</string>
+  <string name="pref_plugin_connectivity_report_desc">Ilmoita kentän voimakkuus ja tila</string>
+  <string name="pref_plugin_digitizer">Piirtopöytä</string>
+  <string name="pref_plugin_digitizer_desc">Käytä laitetta paineen tunnistavana piirtopöytänä</string>
+  <string name="pref_plugin_sftp">Tiedostojärjestelmän käyttö</string>
+  <string name="pref_plugin_sftp_desc">Mahdollistaa tämän laitteen tiedostojärjestelmän etäselaamisen</string>
+  <string name="pref_plugin_clipboard">Leikepöydän synkronointi</string>
+  <string name="pref_plugin_clipboard_desc">Jaa leikepöydän sisältö</string>
+  <string name="pref_plugin_clipboard_sent">Leikepöytä lähetetty</string>
+  <string name="pref_plugin_mousepad">Kauko-ohjaus</string>
+  <string name="pref_plugin_mousepad_desc_nontv">Käytä puhelinta tai tablettia kosketuslevynä ja näppäimistönä</string>
+  <string name="pref_plugin_mousepad_desc_tv">Käytä puhelinta tai tablettia TV-kaukosäätimenä</string>
+  <string name="pref_plugin_presenter">Esityskaukosäädin</string>
+  <string name="pref_plugin_presenter_desc">Käytä laitettasi esitysdiojen vaihtamiseen</string>
+  <string name="pref_plugin_remotekeyboard">Vastaanota etänäppäinpainallukset</string>
+  <string name="pref_plugin_remotekeyboard_desc">Vastaanottaa etälaitteiden näppäinpainallustapahtumat</string>
+  <string name="pref_plugin_mpris">Multimedian ohjaus</string>
+  <string name="pref_plugin_mpris_desc">Mahdollistaa mediasoittimen etäohjauksen</string>
+  <string name="pref_plugin_runcommand">Suorita komento</string>
+  <string name="pref_plugin_runcommand_desc">Suorita komentoja etänä puhelimelta tai tabletilta</string>
+  <string name="pref_plugin_contacts">Yhteystietosynkronointi</string>
+  <string name="pref_plugin_contacts_desc">Sallii laitteen yhteystietojen synkronoinnin</string>
+  <string name="pref_plugin_ping">Tiedustelupaketti</string>
+  <string name="pref_plugin_ping_desc">Lähetä ja vastaanota tiedustelupaketteja</string>
+  <string name="pref_plugin_notifications">Ilmoitusten synkronointi</string>
+  <string name="pref_plugin_notifications_desc">Näe ilmoituksesi muissa laitteissa</string>
+  <string name="pref_plugin_receive_notifications">Vastaanota ilmoituksia</string>
+  <string name="pref_plugin_receive_notifications_desc">Vastaanota ilmoituksia toiselta laitteelta ja näytä ne Androidissa</string>
+  <string name="pref_plugin_sharereceiver">Jako ja vastaanottaminen</string>
+  <string name="pref_plugin_sharereceiver_desc">Jaa tiedostoja ja osoitteita laitteiden välillä</string>
+  <string name="device_list_empty">Ei laitteita</string>
+  <string name="ok">OK</string>
+  <string name="sad_ok">OK :(</string>
+  <string name="cancel">Peru</string>
+  <string name="open_settings">Avaa asetukset</string>
+  <string name="no_permissions">Ilmoitusten näkemiseksi sinun on annettava käyttöoikeus ilmoituksiin</string>
+  <string name="no_permission_mprisreceiver">Hallitaksesi mediasoittimiasi sinun on annettava käyttöoikeudet ilmoituksiin</string>
+  <string name="no_permissions_remotekeyboard">Näppäinpainallusten vastaanottamiseksi Zorin Connectin etänäppäimistö on aktivoitava</string>
+  <string name="send_ping">Lähetä tiedustelupaketti</string>
+  <string name="open_mpris_controls">Multimedian ohjaus</string>
+  <string name="remotekeyboard_editing_only_title">Käsittele etänäppäimet vain muokattaessa</string>
+  <string name="remotekeyboard_not_connected">Etänäppäimistöyhteyksiä ei ole käytössä: muodosta yhteys Zorin Connectissa</string>
+  <string name="remotekeyboard_connected">Etänäppäimistöyhteys on käytössä</string>
+  <string name="remotekeyboard_multiple_connections">Etänäppäimistöyhteyksiä on useampia: valitse asetettava laite</string>
+  <string name="open_mousepad">Kauko-ohjaus</string>
+  <string name="open_mousepad_tv">TV-kaukosäädin</string>
+  <string name="mousepad_info">Siirrä hiirikohdistinta liikuttamalla sormea näytöllä. Tee hiirenpainallus napauttamalla, ja käytä kahta tai kolmea sormea oikealle ja keskipainikkeelle. Vieritä kahdella sormella. Pitkällä painalluksella voit vetää ja pudottaa. Gyrohiiritoiminnon voi ottaa käyttää liitännäisen asetuksista</string>
+  <string name="mousepad_info_no_gestures">Siirrä hiiriosoitinta liikuttamalla sormea näytöllä, napautus napsauttaa.</string>
+  <string name="mousepad_keyboard_input_not_supported">Paritettu laite ei tue näppäimistösyötettä</string>
+  <string name="mousepad_single_tap_settings_title">Aseta yhden sormen napautuksen toiminto</string>
+  <string name="mousepad_double_tap_settings_title">Aseta kahden sormen napautuksen toiminto</string>
+  <string name="mousepad_triple_tap_settings_title">Aseta kolmen sormen napautuksen toiminto</string>
+  <string name="mousepad_sensitivity_settings_title">Aseta kosketuslevyn herkkyys</string>
+  <string name="mousepad_mouse_buttons_title">Näytä hiiripainikkeet</string>
+  <string name="mousepad_acceleration_profile_settings_title">Aseta osoittimen kiihdytys</string>
+  <string name="mousepad_scroll_direction_title">Käänteinen vierityssuunta</string>
+  <string name="mousepad_scroll_sensitivity_title">Vieritysherkkyys</string>
+  <string name="gyro_mouse_enabled_title">Käytä gyroskooppihiirtä</string>
+  <string name="gyro_mouse_sensitivity_title">Gyroskoopin herkkyys</string>
+  <string name="bigscreen_hide_mouse_input">Piilota hiiren ja näppäimistön etäsyötepainike</string>
+  <string name="bigscreen_show_home_title">Näytä Koti-painike</string>
+  <string name="bigscreen_show_back_title">Näytä Takaisin-painike</string>
+  <string-array name="mousepad_tap_entries">
+    <item>Vasen napsautus</item>
+    <item>Oikea napsautus</item>
+    <item>Keskinapsautus</item>
+    <item>Ei toimintoa</item>
+  </string-array>
+  <string-array name="mousepad_sensitivity_entries">
+    <item>Hitain</item>
+    <item>Hitainta suurempi</item>
+    <item>Oletus</item>
+    <item>Oletusta suurempi</item>
+    <item>Nopein</item>
+  </string-array>
+  <string-array name="mousepad_acceleration_profile_entries">
+    <item>Ei kiihdytystä</item>
+    <item>Heikoin</item>
+    <item>Heikompi</item>
+    <item>Keskinkertainen</item>
+    <item>Vahvempi</item>
+    <item>Vahvin</item>
+  </string-array>
+  <string name="sendkeystrokes_send_to">Lähetä näppäinpainallukset…</string>
+  <string name="sendkeystrokes_textbox_hint">Lähetä näppäinpainallukset koneelle</string>
+  <string name="sendkeystrokes_disabled_toast">Näppäinpainallusten lähetys ei ole käytössä: ota se käyttöön asetuksista</string>
+  <string name="sendkeystrokes_wrong_data">Virheellinen MIME-tyyppi: vaaditaan ”text/x-keystrokes”</string>
+  <string name="sendkeystrokes_sent_text">Lähetettiin %1$s laitteelle %2$s</string>
+  <string name="sendkeystrokes_pref_category_summary">Tällä moduulilla muut sovellukset voivat jakaa tekstikatkelmia yhdistetylle koneelle lähetettyinä näppäinpainalluksina</string>
+  <string name="sendkeystrokes_pref_category_title">Lähetä näppäinpainalluksia</string>
+  <string name="sendkeystrokes_pref_enabled">Salli näppäinpainallusten lähettäminen</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Kuuntele dataa, jonka MIME-tyyppi on ”text/x-keystrokes”</string>
+  <string name="sendkeystrokes_safe_text_enabled">Lähetä turvallinen teksti välittömästi</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Lähetä lyhyet vain numeeriset jonot vahvistuksetta</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Lähetä näppäinpainalluksina</string>
+  <string name="mouse_receiver_plugin_description">Vastaanota etähiiren liike</string>
+  <string name="mouse_receiver_plugin_name">Hiirivastaanotin</string>
+  <string name="mouse_receiver_no_permissions">Etäkosketussyötteen vastaanottaminen vaatii saavutettavuuskäyttöoikeudet, jotta laitetta voi hallita</string>
+  <string name="view_status_title">Tila</string>
+  <string name="battery_status_format">Varaus: %d %%</string>
+  <string name="battery_status_low_format">Varaus: %d %%, vähissä</string>
+  <string name="battery_status_charging_format">Varaus: %d %%, latautuu</string>
+  <string name="category_connected_devices">Yhdistetyt laitteet</string>
+  <string name="category_not_paired_devices">Saatavilla olevat laitteet</string>
+  <string name="category_remembered_devices">Muistetut laitteet</string>
+  <string name="device_menu_plugins">Liitännäisten asetukset</string>
+  <string name="device_menu_unpair">Poista laitepari</string>
+  <string name="pair_new_device">Kytke uusi laite pariksi</string>
+  <string name="cancel_pairing">Peru paritus</string>
+  <string name="unknown_device">Tuntematon laite</string>
+  <string name="error_not_reachable">Laite tavoittamattomissa</string>
+  <string name="error_already_paired">Laite on jo kytketty pariksi</string>
+  <string name="error_timed_out">Aikakatkaisu</string>
+  <string name="error_clocks_not_match">Laitteiden kelloja ei ole tahdistettu</string>
+  <string name="error_canceled_by_user">Käyttäjä perui</string>
+  <string name="error_canceled_by_other_peer">Vertaiskäyttäjä perui</string>
+  <string name="encryption_info_title">Salaustiedot</string>
+  <string name="my_device_fingerprint">Laitevarmenteen SHA256-sormenjälki on:</string>
+  <string name="remote_device_fingerprint">Etälaitteen varmenteen SHA256-sormenjälki on:</string>
+  <string name="pair_requested">Paripyyntö</string>
+  <string name="pair_succeeded">Paritus onnistui</string>
+  <string name="pairing_request_from">Parituspyyntö laitteesta ”%1s”</string>
+  <plurals name="incoming_file_title">
+    <item quantity="one">Vastaanotetaan %1$d tiedosto lähettäjältä %2$s</item>
+    <item quantity="other">Vastaanotetaan %1$d tiedostoa lähettäjältä %2$s</item>
+  </plurals>
+  <plurals name="incoming_files_text">
+    <item quantity="one">Tiedosto: %1s</item>
+    <item quantity="other">(Tiedosto %2$d / %3$d) : %1$s</item>
+  </plurals>
+  <plurals name="outgoing_file_title">
+    <item quantity="one">Lähetetään %1$d tiedosto laitteeseen %2$s</item>
+    <item quantity="other">Lähetetään %1$d tiedostoa laitteeseen %2$s</item>
+  </plurals>
+  <plurals name="outgoing_files_text">
+    <item quantity="one">Tiedosto: %1$s</item>
+    <item quantity="other">(Tiedosto %2$d/%3$d) : %1$s</item>
+  </plurals>
+  <plurals name="received_files_title">
+    <item quantity="one">Vastaanotettiin tiedosto lähettäjältä %1$s</item>
+    <item quantity="other">Vastaanotettiin %2$d tiedostoa lähettäjältä %1$s</item>
+  </plurals>
+  <plurals name="received_files_fail_title">
+    <item quantity="one">Ei voitu vastaanottaa tiedostoa lähettäjältä %1$s</item>
+    <item quantity="other">Ei voitu vastaanottaa %2$d/%3$d tiedostoa lähettäjältä %1$s</item>
+  </plurals>
+  <plurals name="sent_files_title">
+    <item quantity="one">Tiedosto lähetetty laitteeseen %1$s</item>
+    <item quantity="other">%2$d tiedostoa lähetetty laitteeseen %1$s</item>
+  </plurals>
+  <plurals name="send_files_fail_title">
+    <item quantity="one">Tiedoston lähetys laitteelle %1$s epäonnistui</item>
+    <item quantity="other">%2$d/%3$d tiedoston lähetys laitteelle %1$s epäonnistui</item>
+  </plurals>
+  <string name="tap_to_open">Avaa napauttamalla</string>
+  <string name="received_file_text">Avaa ”%1s” napauttamalla</string>
+  <string name="cannot_create_file">Ei voida luoda tiedostoa %s</string>
+  <string name="tap_to_answer">Vastaa napauttamalla</string>
+  <string name="left_click">Lähetä vasemman painikkeen napsautus</string>
+  <string name="right_click">Lähetä oikean painikkeen napsautus</string>
+  <string name="middle_click">Lähetä keskipainikkeen napsautus</string>
+  <string name="show_keyboard">Näytä näppäimistö</string>
+  <string name="show_mouse_and_keyboard">Näytä hiiri ja näppäimistö</string>
+  <string name="device_not_paired">Laitetta ei ole kytketty pariksi</string>
+  <string name="pairing_duplicate_names">Varoitus: Useammalla laitteella on sama nimi.</string>
+  <string name="request_pairing">Pyydä pariksi kytkemistä</string>
+  <string name="pairing_accept">Hyväksy</string>
+  <string name="pairing_reject">Hylkää</string>
+  <string name="pairing_explanation">Laitteiden paritus sallii niiden käyttää toisiaan. Parita vain omia laitteitasi.</string>
+  <string name="settings">Asetukset</string>
+  <string name="mpris_play">Toista</string>
+  <string name="mpris_pause">Tauko</string>
+  <string name="mpris_previous">Edellinen</string>
+  <string name="mpris_rew">Kelaa takaisin</string>
+  <string name="mpris_ff">Pikakelaa</string>
+  <string name="mpris_next">Seuraava</string>
+  <string name="mpris_loop">Silmukka</string>
+  <string name="mpris_shuffle">Sekoita</string>
+  <string name="mpris_volume">Äänenvoimakkuus</string>
+  <string name="mpris_time_settings_title">Kelauspainikkeet</string>
+  <string name="mpris_time_settings_summary">Säädä painettaessa tapahtuvan kelauksen kestoa</string>
+  <string-array name="mpris_time_entries">
+    <item>10 sekuntia</item>
+    <item>20 sekuntia</item>
+    <item>30 sekuntia</item>
+    <item>1 minuutti</item>
+    <item>2 minuuttia</item>
+  </string-array>
+  <string name="mpris_notifications_explanation">Ilmoituskäyttöoikeus vaaditaan etämedian näyttämiseksi ilmoitussovelmassa</string>
+  <string name="mpris_notification_settings_title">Näytä mediasäädinilmoitukset</string>
+  <string name="mpris_notification_settings_summary">Sallii mediasoitintesi hallinnan Zorin Connectia avaamatta</string>
+  <string name="share_to">Jaa…</string>
+  <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
+  <string name="unreachable_device_url_share_text">Tavoittamattomissa olevalle laitteelle jaetut verkko-osoitteet välitetään heti kun laite tavoitetaan.\n\n</string>
+  <string name="protocol_version">Yhteyskäytäntöversio:</string>
+  <string name="protocol_version_newer">Laite käyttää uudempaa yhteyskäytäntöversiota</string>
+  <string name="plugin_settings_with_name">%s-asetukset</string>
+  <string name="invalid_device_name">Virheellinen laitenimi</string>
+  <string name="shareplugin_text_saved">Vastaanotettiin tekstiä, tallennettiin leikepöydälle</string>
+  <string name="custom_devices_settings">Omien laitteiden luettelo</string>
+  <string name="custom_devices_settings_summary">Käyttäjä lisäsi %d laitetta</string>
+  <string name="custom_device_list">Lisää laitteita IP:llä</string>
+  <string name="custom_device_deleted">Poistettiin mukautettu laite</string>
+  <string name="custom_device_list_help">Ellei laitetta tunnisteta automaattisesti, sen IP-osoitteen tai konenimen voi lisätä napsauttamalla alla olevaa painiketta</string>
+  <string name="custom_device_fab_hint">Lisää laite</string>
+  <string name="undo">Kumoa</string>
+  <string name="share_notification_preference">Äänekkäät ilmoitukset</string>
+  <string name="share_notification_preference_summary">Värise ja soita ääni tiedoston saapuessa</string>
+  <string name="share_destination_customize">Vaihda kohdekansio</string>
+  <string name="share_destination_customize_summary_disabled">Vastaanotetut tiedostot näkyvät Latauksissa</string>
+  <string name="share_destination_customize_summary_enabled">Tiedostot tallennetaan alla olevaan kansioon</string>
+  <string name="share_destination_folder_preference">Kohdekansio</string>
+  <string name="share">Jaa</string>
+  <string name="share_received_file">Jaa ”%s”</string>
+  <string name="title_activity_notification_filter">Ilmoitussuodatin</string>
+  <string name="filter_apps_info">Valittujen sovellusten ilmoitukset synkronoidaan.</string>
+  <string name="show_notification_if_screen_off">Lähetä ilmoitukset vain näyttö ei ole käytössä</string>
+  <string name="add_device_dialog_title">Lisää laite</string>
+  <string name="add_device_hint">Konenimi tai IP-osoite</string>
+  <string name="sftp_preference_configured_storage_locations">Asetetut tallennustilat</string>
+  <string name="sftp_preference_add_storage_location_title">Lisää tallennustila</string>
+  <string name="sftp_preference_edit_storage_location">Muokkaa tallennustilaa</string>
+  <string name="sftp_storage_preference_storage_location">Tallennustila</string>
+  <string name="sftp_storage_preference_storage_location_already_configured">Tämä sijainti on jo asetettu</string>
+  <string name="sftp_storage_preference_click_to_select">valitse napsauttamalla</string>
+  <string name="sftp_storage_preference_display_name">Näyttönimi</string>
+  <string name="sftp_storage_preference_display_name_already_used">Tämä näyttönimi on jo käytössä</string>
+  <string name="sftp_storage_preference_display_name_cannot_be_empty">Näyttönimi ei voi olla tyhjä</string>
+  <string name="sftp_action_mode_menu_delete">Poista</string>
+  <string name="sftp_no_storage_locations_configured">Tallennustiloja ei ole asetettu</string>
+  <string name="sftp_saf_permission_explanation">Tallennustilat on asetettava etätiedostojen käyttämiseksi</string>
+  <string name="sftp_manage_storage_permission_explanation">Tiedostojen etäkäytön sallimiseksi tällä laitteella Zorin Connectin on annettava hallita talletustilaa.</string>
+  <string name="sftp_missing_permission_error">Käyttöoikeuksia puuttuu: tiedostojärjestelmän käyttö</string>
+  <string name="no_players_connected">Soittimia ei löytynyt</string>
+  <string name="send_files">Lähetä tiedostoja</string>
+  <string name="use_digitizer">Käytä piirtopöytänä</string>
+  <string name="digitizer_draw_button">Piirrä sormella</string>
+  <string name="digitizer_preference_title_hide_draw_button">Piilota piirtämiskuvake</string>
+  <string name="digitizer_preference_summary_hide_draw_button">Piilottaa piirtämiskuvakkeen kokonaan, jolloin sormella ei voi piirtää. Käytä vain, jos laite tukee piirtokynäsyötettä.</string>
+  <string name="digitizer_preference_title_draw_button_side">”Piirrä sormella” -painikkeen kylki</string>
+  <string name="digitizer_preference_title_enable_exit_fullscreen_gesture">Salli koko näytön poistumisele</string>
+  <string name="digitizer_preference_summary_enable_exit_fullscreen_gesture">Jos käytössä, piirtopöydän napautus ja pitäminen sormella poistaa koko näytön tilan käytöstä.</string>
+  <string-array name="digitizer_preference_entries_draw_button_side">
+    <item>Ylävasen</item>
+    <item>Yläoikea</item>
+    <item>Alavasen</item>
+    <item>Alaoikea</item>
+  </string-array>
+  <string name="block_notification_contents">Estä ilmoitusten sisältö</string>
+  <string name="block_notification_images">Estä ilmoitusten kuvat</string>
+  <string name="pairing_title">Zorin Connect -laitteet</string>
+  <string name="pairing_description">Muiden samassa verkossa olevien Zorin Connectia käyttävien laitteiden pitäisi ilmestyä tähän.</string>
+  <string name="device_rename_title">Muuta laitteen nimeä</string>
+  <string name="device_rename_confirm">Muuta nimi</string>
+  <string name="refresh">Päivitä</string>
+  <string name="unreachable_description">Tämä pariksi kytketty laite ei ole tavoitettavissa. Tarkista, että se on yhteydessä samaan verkkoon.</string>
+  <string name="no_wifi">Langattomaan verkkoon ei ole yhteyttä, joten laitteita ei ehkä näy. Ota langaton verkko käyttöön napsauttamalla tästä.</string>
+  <string name="on_non_trusted_message">Ei luotetussa verkossa: automaattihaku on poistettu käytöstä.</string>
+  <string name="no_file_browser">Tiedostoselaimia ei asennettu.</string>
+  <string name="pref_plugin_telepathy">Lähetä tekstiviesti</string>
+  <string name="pref_plugin_telepathy_desc">Lähetä tekstiviestejä työpöydältäsi</string>
+  <string name="pref_plugin_telepathy_mms">Lähetä multimediaviesti</string>
+  <string name="pref_plugin_telepathy_mms_desc">Multimediaviestien lähettämiseksi Zorin Connect on asetettava oletustekstiviestisovellukseksi.</string>
+  <string name="findmyphone_title">Löydä puhelimeni</string>
+  <string name="findmyphone_title_tablet">Löydä tablettini</string>
+  <string name="findmyphone_title_tv">Etsi televeisioni</string>
+  <string name="findmyphone_description">Laittaa laitteen soimaan, jotta voit löytää sen.</string>
+  <string name="findmyphone_found">Löytyi</string>
+  <string name="open">Avaa</string>
+  <string name="close">Sulje</string>
+  <string name="plugins_need_permission">Jotkin liitännäiset vaativat toimiakseen lisäkäyttöoikeuksia (lisätietoa napsauttamalla):</string>
+  <string name="permission_explanation">Liitännäinen tarvitsee toimiakseen lisäkäyttöoikeuksia</string>
+  <string name="all_permissions_granted">Kaikki oikeudet myönnetty 🎉</string>
+  <string name="optional_permission_explanation">Kaikkien toimintojen käyttämiseksi sinun on annettava lisäkäyttöoikeuksia</string>
+  <string name="plugins_need_optional_permission">Jotkin liitännäisten ominaisuudet eivät ole käytössä puuttuvien käyttöoikeuksien takia (lisätietoa napsauttamalla):</string>
+  <string name="share_optional_permission_explanation">Talletustilan käyttö on sallittava tiedostojen vastaanottamiseksi</string>
+  <string name="share_notifications_explanation">Ilmoitukset on otetettava käyttöön, jotta tiedostojen siirron etenemisen voi näyttää</string>
+  <string name="telepathy_permission_explanation">Lukeaksesi ja lähettääksesi tekstiviestejä työpöydältä sinun on annettava käyttöoikeudet tekstiviesteihin</string>
+  <string name="telephony_permission_explanation">Puhelujen näyttäminen työpöydällä vaatii käyttöoikeuden puhelulokiin ja puhelimen tilaan</string>
+  <string name="telephony_optional_permission_explanation">Puhelimen yhteystietoihin on annettava käyttöoikeudet, jotta voit nähdä yhteystiedoissa nimet puhelinnumerojen sijaan</string>
+  <string name="contacts_permission_explanation">Käyttääksesi yhteystietoja työpöydältä sinun on annettava yhteystietojen käyttöoikeudet</string>
+  <string name="contacts_per_device_confirmation">Puhelimen yhteystiedot kopioidaan tälle laitteelle, jotta Zorin Connectin tekstiviesti- ja muut sovellukset voivat käyttää niitä.</string>
+  <string name="select_ringtone">Valitse soittoääni</string>
+  <string name="telephony_pref_blocked_title">Estetyt numerot</string>
+  <string name="telephony_pref_blocked_dialog_desc">Älä näytä soittoja äläkä tekstiviestejä näistä numeroista. Anna numero per rivi.</string>
+  <string name="mpris_coverart_description">Nykyisen median kansikuva</string>
+  <string name="settings_icon_description">Asetuskuvake</string>
+  <string name="presenter_fullscreen">Koko näyttö</string>
+  <string name="presenter_exit">Poistu esitystilasta</string>
+  <string name="presenter_lock_tip">Laitteen voi lukita ja käyttää äänenvoimakkuuspainikkeita edellinen/seuraava dia -painikkeina</string>
+  <string name="add_command">Lisää komento</string>
+  <string name="addcommand_explanation">Komentoja ei ole rekisteröity</string>
+  <string name="addcommand_explanation2">Voit lisätä uusia komentoja Zorin Connectin järjestelmäasetuksissa</string>
+  <string name="add_command_description">Voit lisätä komentoja työpöydälle</string>
+  <string name="pref_plugin_mprisreceiver">Mediasoittimen hallinta</string>
+  <string name="pref_plugin_mprisreceiver_desc">Hallitse puhelimesi mediasoittimia toiselta laitteelta</string>
+  <string name="notification_channel_default">Muut ilmoitukset</string>
+  <string name="notification_channel_persistent">Pysyvä ilmaisin</string>
+  <string name="notification_channel_media_control">Mediaohjaimet</string>
+  <string name="notification_channel_filetransfer">Saapuva tiedostonsiirto</string>
+  <string name="notification_channel_filetransfer_complete">Saapuva tiedostonsiirto valmis</string>
+  <string name="notification_channel_filetransfer_upload">Lähtevä tiedostonsiirto</string>
+  <string name="notification_channel_filetransfer_error">Tiedostonsiirtovirhe</string>
+  <string name="notification_channel_high_priority">Korkea etusija</string>
+  <string name="mpris_stop">Pysäytä nykyinen soitin</string>
+  <string name="copy_url_to_clipboard">Kopioi verkko-osoite leikepöydälle</string>
+  <string name="clipboard_toast">Kopioitu leikepöydälle</string>
+  <string name="runcommand_notreachable">Laite tavoittamattomissa</string>
+  <string name="runcommand_notpaired">Laitetta ei ole kytketty pariksi</string>
+  <string name="runcommand_nosuchdevice">Tätä laitetta ei ole</string>
+  <string name="runcommand_noruncommandplugin">Laitteen Suorita komento -liitännäinen ei ole käytössä</string>
+  <string name="runcommand_category_device_controls_title">Laiteohjaimet</string>
+  <string name="runcommand_device_controls_summary">Jos laite tukee laiteohjaimia, määrittämäsi komennot ilmestyvät tähän.</string>
+  <string name="set_runcommand_name_as_title">aseta_komennon_nimi_otsikoksi</string>
+  <string name="runcommand_name_as_title_title">Nämä otsikkona nimi</string>
+  <string name="pref_plugin_findremotedevice">Etsi etälaite</string>
+  <string name="pref_plugin_findremotedevice_desc">Soita etälaitteeseen</string>
+  <string name="ring">Soita</string>
+  <string name="pref_plugin_systemvolume">Järjestelmän äänenvoimakkuus</string>
+  <string name="pref_plugin_systemvolume_desc">Säädä etälaitteen järjestelmän äänenvoimakkuutta</string>
+  <string name="mute">Vaimenna</string>
+  <string name="all">Kaikki</string>
+  <string name="devices">Laitteet</string>
+  <string name="settings_rename">Laitenimi</string>
+  <string name="settings_dark_mode">Tumma teema</string>
+  <string name="settings_export_logs">Vie Zorin Connectin lokit</string>
+  <string name="settings_export_logs_text">Luo suoritustietotiedosto, josta voi olla apua ongelmien selvityksessä.</string>
+  <string name="settings_more_settings_title">Lisää asetuksia</string>
+  <string name="settings_more_settings_text">Laitekohtaiset asetukset löytyvät laitteen ”Liitännäisasetuksista”.</string>
+  <string name="setting_persistent_notification">Näytä pysyvä ilmoitus</string>
+  <string name="setting_persistent_notification_oreo">Pysyvä ilmoitus</string>
+  <string name="setting_persistent_notification_description">Ota käyttöön tai poista käyttöön napauttamalla ilmoitusasetuksia</string>
+  <string name="extra_options">Lisäasetukset</string>
+  <string name="privacy_options">Yksityisyysasetukset</string>
+  <string name="set_privacy_options">Aseta yksityisyysasetukset</string>
+  <string name="block_contents">Estä ilmoitusten sisältö</string>
+  <string name="block_images">Estä ilmoitusten kuvat</string>
+  <string name="notification_channel_receivenotification">Muiden laitteiden ilmoitukset</string>
+  <string name="no_app_for_opening">Tämän tiedoston avaamiseen sopivaa sovellusta ei löytynyt</string>
+  <string name="remote_keyboard_service">Zorin Connect -etänäppäimistö</string>
+  <string name="presenter_pointer">Osoitin</string>
+  <string name="trusted_networks">Luotetut verkot</string>
+  <string name="trusted_networks_desc">Rajaa automaattihaku tunnettuihin verkkoihin</string>
+  <string name="add_trusted_network">Lisää %1s</string>
+  <string name="empty_trusted_networks_list_text">Luotettuja verkkoja ei ole vielä lisätty</string>
+  <string name="allow_all_networks_text">Salli kaikki</string>
+  <string name="location_permission_needed_title">Käyttöoikeus vaaditaan</string>
+  <string name="bluetooth_permission_needed_desc">Zorin Connect vaatii oikeuden yhdistää lähellä oleviin laitteisiin, jotta voisi kytkeä niitä Bluetoothilla pariksi.</string>
+  <string name="location_permission_needed_desc">Zorin Connect tarvitsee taustasijaintioikeudet tietääkseen myös sovelluksen olleessa taustalla, mihin langattomaan verkkoon on kirjauduttu. Ympärilläsi olevien langattomien verkkojen nimiä voi käyttää sijaintisi selvittämiseen, vaikka Zorin Connect ei tietoa siihen käytäkään.</string>
+  <string name="clipboard_android_x_incompat">Android 10 on poistanut kaikkien sovellusten leikepöytäkäytön. Liitännäinen poistetaan käytöstä.</string>
+  <string name="mpris_open_url">Jatka toistoa tästä</string>
+  <string name="cant_open_url">Verkko-osoitetta ei voi avata toiston jatkamiseksi</string>
+  <string name="bigscreen_home">Koti</string>
+  <string name="bigscreen_up">Ylemmäs</string>
+  <string name="bigscreen_left">Vasemmalle</string>
+  <string name="bigscreen_select">Valitse</string>
+  <string name="bigscreen_right">Oikea</string>
+  <string name="bigscreen_down">Alemmas</string>
+  <string name="bigscreen_back">Takaisin</string>
+  <string name="bigscreen_mic">Mikrofoni</string>
+  <string name="pref_plugin_bigscreen">TV-kaukosäädin</string>
+  <string name="pref_plugin_bigscreen_desc">Käytä laitetta Plasma Bigscreen -kaukosäätimenä</string>
+  <string name="bigscreen_optional_permission_explanation">Jakaaksesi puhelimen mikrofonisyötteen puhelimen äänisyötteeseen on annettava käyttöoikeus</string>
+  <string name="bigscreen_speech_extra_prompt">Puhe</string>
+  <string name="message_reply_label">VASTAA</string>
+  <string name="mark_as_read_label">MERKITSE LUETUKSI</string>
+  <string name="user_display_name">Sinä</string>
+  <string name="set_default_sms_app_title">Lähetä multimediaviesti</string>
+  <string name="set_group_message_as_mms_title">Lähetä ryhmämultimediaviesti</string>
+  <string name="set_long_text_as_mms_title">Lähetä pitkä teksti multimediaviestinä</string>
+  <string name="convert_to_mms_after_title">Muunna multimediaviestiksi</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Yhden viestin jälkeen</item>
+    <item>Kahden viestin jälkeen</item>
+    <item>Kolmen viestin jälkeen</item>
+    <item>Neljän viestin jälkeen</item>
+    <item>Viiden viestin jälkeen</item>
+  </string-array>
+  <string name="theme_dialog_title">Valitse teema</string>
+  <string-array name="theme_list">
+    <item>Akunsäästäjän asettama</item>
+    <item>Vaalea</item>
+    <item>Tumma</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Järjestelmän oletus</item>
+    <item>Vaalea</item>
+    <item>Tumma</item>
+  </string-array>
+  <string name="report_bug">Ilmoita ohjelmavirheestä</string>
+  <string name="donate">Lahjoita</string>
+  <string name="source_code">Lähdekoodi</string>
+  <string name="licenses">Lisenssit</string>
+  <string name="website">Sivusto</string>
+  <string name="about">Tietoa</string>
+  <string name="authors">Tekijät</string>
+  <string name="thanks_to">Kiitokset</string>
+  <string name="easter_egg">Yllätysmuna</string>
+  <string name="email_contributor">Sähköpostiavustaja\n%s</string>
+  <string name="visit_contributors_homepage">Käy avustajan sivustolla\n%s</string>
+  <string name="version">Versio %s</string>
+  <string name="about_kde">Tietoa KDE:stä</string>
+  <string name="kde_be_free">KDE – Ole vapaa!</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">Nouse ylemmäs</string>
+  <string name="rise_down">Laskeudu alemmas</string>
+  <string name="click_here_to_type">Napauta ja kirjoita</string>
+  <string name="clear_compose">Tyhjennä</string>
+  <string name="send_compose">Lähetä</string>
+  <string name="compose_send_title">Kirjoita teksti</string>
+  <string name="open_compose_send">Kirjoita teksti</string>
+  <string name="double_tap_to_drag">Vedä kaksoisnapauttamalla</string>
+  <string name="hold_to_drag">Vedä pitämällä pohjassa</string>
+  <string name="about_kde_about">&lt;h1&gt;Tietoa&lt;/h1&gt; &lt;p&gt;KDE on ohjelmoijien, taiteilijoiden, kirjoittajien, kääntäjien ja muiden sisällönluojien kansainvälinen yhteisö, joka on sitoutunut &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;vapaiden ohjelmien&lt;/a&gt; kehitykseen. KDE tuottaa Plasma-työpöytäympäristöä, satoja sovelluksia ja monia niitä tukevia ohjelmakirjastoja.&lt;/p&gt; &lt;p&gt;KDE pyrkii yhteistyöhön: mikään yksittäinen toimija ei hallitse sen suuntaa tai tuotteita, vaan teemme yhdessä työtä yhteisen päämäärän hyväksi: tuottaaksemme maailman hienointa vapaata ohjelmistoa. Kaikki ovat tervetulleita &lt;a href=https://community.kde.org/Get_Involved&gt;liittymään ja avustamaan&lt;/a&gt; KDE:ta – myös sinä.&lt;/p&gt; Sivulta &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; löytyy KDE-yhteisöstä ja tuottamistamme ohjelmista lisätietoa.</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Ilmoita ohjelmavirheistä tai -toiveista&lt;/h1&gt; &lt;p&gt;Ohjelmia voi aina parantaa, ja KDE-yhteisö on siihen valmis. Sinun – käyttäjän – on kuitenkin kerrottava meille, kun jokin ei toimi odotetusti tai voisi toimia paremmin.&lt;/p&gt; &lt;p&gt;KDE:lla on virheenseurantajärjestelmä. Käy sivulla &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; tai käytä Tietoa-sivun painiketta ”Ilmoita ohjelmavirheestä”.&lt;/p&gt; Parannusehdotuksissakin olet tervetullut käyttämään virheenseurantajärjestelmää kirjataksesi toiveesi. Varmista, että käytät vakavuustasoa ”Wishlist”.</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Liity KDE:hen&lt;/h1&gt; &lt;p&gt;KDE-työryhmän jäseneksi tullakseen ei tarvitse olla ohjelmoija. Ohjelmien käyttöliittymien kääntämiseksi voi liittyä johonkin kansalliseen ryhmään, tuottaa grafiikkaa, teemoja tai ääniä tai parantaa ohjeistusta. Sinä päätät!&lt;/p&gt; &lt;p&gt;Sivulta &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; löytyy tietoa projekteista, joihin osallistua.&lt;/p&gt; Kaikki tarvittava lisätieto ja ohjeet löytyvät sivulta &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt;.</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;Tue KDE:tä&lt;/h1&gt; &lt;p&gt;KDE-ohjelmat ovat ja tulevat aina olemaan ilmaisia, mutta niiden luominen ei ole ilmaista.&lt;/p&gt; &lt;p&gt;Kehitystyön tukemiseksi KDE-yhteisö on muodostanut KDE e.V:n, voittoa tuottamattoman yhteisön, joka lain kannalta sijaitsee Saksassa. KDE e.V. edustaa KDE-yhteisöä laki- ja talousasioissa. Osoitteesta &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; löytyy KDE e.V:stä lisätietoa.&lt;/p&gt; &lt;p&gt;KDE voi hyötyä monenlaisista lahjoituksia, myös rahallisista. Varoja käytetään jäsenten ja muiden avustamiskulujen hyvittämiseen, lakitukeen ja konferenssien ja kokousten järjestämiseen.&lt;/p&gt; &lt;p&gt;Rohkaisemme sinua tukemaan pyrkimyksiämme rahalahjoituksella jollakin tavoista, jotka kuvataan osoitteessa &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Kiitoksia tuestasi etukäteen!</string>
+  <string name="maintainer_and_developer">Ylläpitäjä ja kehittäjä</string>
+  <string name="developer">Kehittäjä</string>
+  <string name="apple_support">macOS-tuki. Työn alla iOS-tuki</string>
+  <string name="bug_fixes_and_general_improvements">Virhekorjauksia ja yleisparannuksia</string>
+  <string name="samoilenko_yuri_task">SFTP-toteutus, virheenkorjaukset ja yleisparannukset</string>
+  <string name="aniket_kumar_task">Tekstiviestiliitännäisen parannukset</string>
+  <string name="alex_fiestas_task">Yhteystietoliitännäisen parannukset</string>
+  <string name="maxim_leshchenko_task">Käyttöliittymäparannukset ja tämä tietosivu</string>
+  <string name="holger_kaelberer_task">Etänäppäimistöliitännäinen ja virheenkorjaukset</string>
+  <string name="saikrishna_arcot_task">Tuki näppäimistön käytölle etäsyöteliitännäisessä, virheenkorjaukset ja yleisparannukset</string>
+  <string name="shellwen_chen_task">Parantaa SFTP:n tietoturvaa ja tämän projektin ylläpidettävyyttä, korjaa virheitä ja yleisesti parantaa asioita</string>
+  <string name="everyone_else">Kaikki muut vuosien varrella Zorin Connectia avustaneet</string>
+  <string name="send_clipboard">Lähetä leikepöytä</string>
+  <string name="tap_to_execute">Suorita napauttamalla</string>
+  <string name="plugin_stats">Liitännäisen tilastot</string>
+  <string name="enable_udp_broadcast">Käytä UDP-laitehakua</string>
+  <string name="enable_bluetooth">Käytä Bluetoothia (beeta)</string>
+  <string name="receive_notifications_permission_explanation">Ilmoitukset tulee sallia, jotta niitä voi vastaanottaa muilta laitteilta</string>
+  <string name="findmyphone_notifications_explanation">Ilmoituskäyttöoikeus vaaditaan, jotta puhelin voisi soida sovelluksen toimiessa taustalla</string>
+  <string name="no_notifications">Ilmoitukset eivät ole käytössä, joten paritusilmoituksia ei vastaanoteta.</string>
+  <string name="mpris_keepwatching">Jatka toistoa</string>
+  <string name="mpris_keepwatching_settings_title">Jatka toistoa</string>
+  <string name="mpris_keepwatching_settings_summary">Näytä hiljainen ilmoitus toiston jatkamisesta laitteella median sulkeuduttua</string>
+  <string name="notification_channel_keepwatching">Jatka toistoa</string>
+  <string name="ping_result">Pingattiin %1$d millisekunnissa</string>
+  <string name="ping_failed">Laitetta ei voitu pingata</string>
+  <string name="ping_in_progress">Pingataan…</string>
+  <string name="device_host_invalid">Konenimi on virheellinen. Käytä kelvollista konenimeä tai IPv4- tai IPv6-osoitetta.</string>
+  <string name="device_host_duplicate">Konenimi löytyy jo luettelosta</string>
+  <string name="enable_fullscreen">Käytä koko näyttöä</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2019 Erik Duisters <e.duisters1@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:keep="@xml/sftpplugin_preferences">
+    <PreferenceCategory
+        android:key="@string/sftp_preference_key_preference_category"
+        android:title="@string/sftp_preference_configured_storage_locations"
+        android:persistent="false">
+    </PreferenceCategory>
+
+    <org.kde.kdeconnect.plugins.sftp.StoragePreference
+        android:key="key_sftp_add_storage"
+        android:icon="@drawable/ic_add"
+        android:title="@string/sftp_preference_add_storage_location_title"
+        android:persistent="false"/>
+</PreferenceScreen>

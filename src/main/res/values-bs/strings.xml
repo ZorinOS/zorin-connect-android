@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="pref_plugin_telephony">Telefonski obavještavač</string>
+  <string name="pref_plugin_battery">Baterijski izvještaj</string>
+  <string name="pref_plugin_battery_desc">Periodično javi baterijski status</string>
+  <string name="pref_plugin_clipboard">Sinhronizovanje sandučića</string>
+  <string name="pref_plugin_clipboard_desc">Podijeli sadržaj sandučića</string>
+  <string name="pref_plugin_mousepad">Daljinska kontrola ulaza</string>
+  <string name="pref_plugin_ping">Ping</string>
+  <string name="pref_plugin_ping_desc">Šalji i primaj ping-ove</string>
+  <string name="pref_plugin_notifications">Sinhronizovano obavještenje</string>
+  <string name="pref_plugin_notifications_desc">Pristupite vašim notifikacijama sa drugog uređaja</string>
+  <string name="device_list_empty">Nema uređaja</string>
+  <string name="ok">OK</string>
+  <string name="cancel">Prekini</string>
+  <string name="open_settings">Otvori postavke</string>
+  <string name="no_permissions">Morate odobriti dopuštenje da pristupite notifikacijama</string>
+  <string name="send_ping">Pošalji ping</string>
+  <string name="mousepad_double_tap_settings_title">Postavite akciju tapa sa dva prsta</string>
+  <string name="mousepad_triple_tap_settings_title">Postavite akciju tapa sa tri prsta</string>
+  <string-array name="mousepad_sensitivity_entries">
+    <item>Slowest</item>
+    <item>Above Slowest</item>
+    <item>Default</item>
+    <item>Above Default</item>
+    <item>Fastest</item>
+  </string-array>
+  <string-array name="mousepad_acceleration_profile_entries">
+    <item>No Acceleration</item>
+    <item>Weakest</item>
+    <item>Weaker</item>
+    <item>Medium</item>
+    <item>Stronger</item>
+    <item>Strongest</item>
+  </string-array>
+  <string name="category_connected_devices">Spojeni uređaji</string>
+  <string name="category_not_paired_devices">Dostupni uređaji</string>
+  <string name="category_remembered_devices">Zapamćeni uređaji</string>
+  <string name="device_menu_plugins">Postavke dodatka</string>
+  <string name="device_menu_unpair">Razdvoji</string>
+  <string name="unknown_device">Nepoznat uređaj</string>
+  <string name="error_not_reachable">Uređaj nije dostupan</string>
+  <string name="error_already_paired">Uređaj već uparen</string>
+  <string name="error_timed_out">Isteklo</string>
+  <string name="error_canceled_by_user">Prekinuo korisnik</string>
+  <string name="error_canceled_by_other_peer">Prekinuo drugi korisnik</string>
+  <string name="pair_requested">Uparivanje zatraženo</string>
+  <string name="received_file_text">Kucni za otvaranje \'%1s\'</string>
+  <string name="tap_to_answer">Kucni za odgovor</string>
+  <string name="right_click">Pošalji Desni Klik</string>
+  <string name="middle_click">Pošalji Srednji Klik</string>
+  <string name="show_keyboard">Pokaži Tastaturu</string>
+  <string name="device_not_paired">Uređaj nije uparen</string>
+  <string name="request_pairing">Zatraži uparivanje</string>
+  <string name="pairing_accept">Prihvati</string>
+  <string name="pairing_reject">Odbij</string>
+  <string name="mpris_play">Reprodukuj</string>
+  <string name="mpris_previous">Prethodni</string>
+  <string name="mpris_rew">Premotaj</string>
+  <string name="mpris_ff">Ubrzano</string>
+  <string name="mpris_next">Sljedeći</string>
+  <string name="mpris_volume">Glasnoća</string>
+  <string name="mpris_time_settings_title">Dugmad za naprijed/premotavanje</string>
+  <string-array name="mpris_time_entries">
+    <item>10 sekundi</item>
+    <item>20 sekundi</item>
+    <item>30 sekundi</item>
+    <item>1 minuta</item>
+    <item>2 minute</item>
+  </string-array>
+  <string name="protocol_version_newer">Ovaj uređaj koristi noviju verziju protokola</string>
+  <string name="plugin_settings_with_name">%s Postavke</string>
+  <string name="invalid_device_name">Pogrešnan naziv uređaja</string>
+  <string name="shareplugin_text_saved">Primljeni tekst, spašen u ormarić</string>
+  <string name="custom_devices_settings">Lista vlastitih uređaja</string>
+  <string name="custom_device_list">Dodaj uređaje po IP</string>
+  <string name="share_notification_preference">Glasne notifikacije</string>
+  <string name="share_notification_preference_summary">Vibriraj i reprodukuj zvuk kad se prima datoteka</string>
+  <string name="title_activity_notification_filter">Filter napomena</string>
+  <string name="filter_apps_info">Notifikacije će biti sinhronizovane s izabranim aplikacijama.</string>
+  <string name="no_players_connected">Nema nađenih igrača</string>
+  <string-array name="digitizer_preference_entries_draw_button_side">
+    <item>Top left</item>
+    <item>Top right</item>
+    <item>Bottom left</item>
+    <item>Bottom right</item>
+  </string-array>
+  <string-array name="convert_to_mms_after_entries">
+    <item>After one message</item>
+    <item>After two messages</item>
+    <item>After three messages</item>
+    <item>After four messages</item>
+    <item>After five messages</item>
+  </string-array>
+  <string-array name="theme_list">
+    <item>Set by Battery Saver</item>
+    <item/>
+    <item>Dark</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>System Default</item>
+    <item/>
+    <item>Dark</item>
+  </string-array>
+</resources>

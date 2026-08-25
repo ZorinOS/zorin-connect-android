@@ -1,0 +1,482 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">Aygıta Gönder</string>
+  <string name="foreground_notification_no_devices">Hiçbir aygıta bağlı değil</string>
+  <string name="foreground_notification_devices">Bağlı: %s</string>
+  <string name="foreground_notification_send_clipboard">Pano Gönder</string>
+  <string name="pref_plugin_telephony">Telefon bildiricisi</string>
+  <string name="pref_plugin_telephony_desc">Gelen aramalar için bildirim gönder</string>
+  <string name="pref_plugin_battery">Pil raporu</string>
+  <string name="pref_plugin_battery_desc">Pil durumunu belirli aralıklarla raporla</string>
+  <string name="pref_plugin_connectivity_report">Bağlantı raporu</string>
+  <string name="pref_plugin_connectivity_report_desc">Ağ sinyal gücünü ve durumunu bildirin</string>
+  <string name="pref_plugin_digitizer">Çizim tableti</string>
+  <string name="pref_plugin_digitizer_desc">Aygıtınızı basınca duyarlı bir çizim tableti olarak kullanın</string>
+  <string name="pref_plugin_sftp">Dosya sistemi erişimi</string>
+  <string name="pref_plugin_sftp_desc">Bu aygıtın dosya sistemine uzaktan göz atılmasına izin verir</string>
+  <string name="pref_plugin_clipboard">Pano eşzamanlama</string>
+  <string name="pref_plugin_clipboard_desc">Pano içeriğini paylaş</string>
+  <string name="pref_plugin_clipboard_sent">Pano Gönderildi</string>
+  <string name="clipboard_preference_title_skip_sensitive">Hassas pano içeriğini eşzamanlamayı atla</string>
+  <string name="clipboard_preference_summary_skip_sensitive">Parolaları veya hassas olarak imlenmiş diğer içerikleri kendiliğinden eşzamanlamayın</string>
+  <string name="pref_plugin_mousepad">Uzaktan giriş</string>
+  <string name="pref_plugin_mousepad_desc_nontv">Telefonunuzu veya tabletinizi, dokunmatik yüzey veya klavye olarak kullanın</string>
+  <string name="pref_plugin_mousepad_desc_tv">Telefonunuzu veya tabletinizi, televizyon kumandası olarak kullanın</string>
+  <string name="pref_plugin_presenter">Sunum uzaktan kumandası</string>
+  <string name="pref_plugin_presenter_desc">Sunumdaki slaytları değiştirmek için aygıtınızı kullanın</string>
+  <string name="pref_plugin_remotekeyboard">Uzaktan düğme basımlarını al</string>
+  <string name="pref_plugin_remotekeyboard_desc">Düğme basım eylemlerini, uzak aygıtlardan getir</string>
+  <string name="pref_plugin_mpris">Çoklu ortam denetimleri</string>
+  <string name="pref_plugin_mpris_desc">Ortam oynatıcınız için uzaktan denetim sağlar</string>
+  <string name="pref_plugin_runcommand">Komut Çalıştır</string>
+  <string name="pref_plugin_runcommand_desc">Telefon veya tabletten uzak komutları tetikle</string>
+  <string name="pref_plugin_contacts">Kişiler Eşzamanlayıcısı</string>
+  <string name="pref_plugin_contacts_desc">Aygıtın rehberini eşzamanlamaya izin ver</string>
+  <string name="pref_plugin_ping">Ping</string>
+  <string name="pref_plugin_ping_desc">Ping gönder ve al</string>
+  <string name="pref_plugin_notifications">Bildirim eşzamanlama</string>
+  <string name="pref_plugin_notifications_desc">Bildirimlerinize, diğer aygıtlardan erişin</string>
+  <string name="pref_plugin_receive_notifications">Bildirimleri al</string>
+  <string name="pref_plugin_receive_notifications_desc">Bildirimleri diğer aygıtlardan al ve Android üzerinde göster</string>
+  <string name="pref_plugin_sharereceiver">Paylaş ve al</string>
+  <string name="pref_plugin_sharereceiver_desc">Dosyaları ve URL’leri aygıtlar arasında paylaş</string>
+  <string name="pref_plugin_inputdevicesreceiver">Giriş aygıtlarını paylaş</string>
+  <string name="pref_plugin_inputdevicesreceiver_desc">Fareyi ve klavyeyi uzak aygıtlarla paylaş</string>
+  <string name="device_list_empty">Aygıt yok</string>
+  <string name="ok">Tamam</string>
+  <string name="sad_ok">Tamam :(</string>
+  <string name="cancel">İptal</string>
+  <string name="open_settings">Ayarları aç</string>
+  <string name="no_permissions">Bildirimler erişebilmek için izine gereksiniminiz var</string>
+  <string name="no_permission_mprisreceiver">Ortam oynatıcılarınızı denelemek için bildirimlere erişim izni vermeniz gerekir</string>
+  <string name="no_permissions_remotekeyboard">Düğmelere basmak için Zorin Connect Uzak Klavye’yi etkinleştirmeniz gerekir</string>
+  <string name="send_ping">Ping gönder</string>
+  <string name="open_mpris_controls">Çoklu ortam denetimi</string>
+  <string name="remotekeyboard_editing_only_title">Yalnızca düzenlerken uzaktan düğmeleri işle</string>
+  <string name="remotekeyboard_not_connected">Etkin bir uzak klavye bağlantısı yok, Zorin Connect ile bir bağlantı kurun</string>
+  <string name="remotekeyboard_connected">Uzak klavye bağlantısı etkin</string>
+  <string name="remotekeyboard_multiple_connections">Birden çok uzak klavye bağlantısı mevcut, yapılandırmak istediğiniz aygıtı seçin</string>
+  <string name="open_mousepad">Uzaktan giriş</string>
+  <string name="open_mousepad_tv">TV kumandası</string>
+  <string name="mousepad_info">İmleç denetimi için parmağınızı ekranda hareket ettirin. Tıklamak için hafifçe vurun, sağ ve orta düğmeler için iki/üç parmağınızı kullanın. Sarmak için 2 parmağınızı kullanın. Bırakıp sürüklemek için uzun basın. Cayro fare işlevi, eklenti tercihlerinden etkinleştirilebilir</string>
+  <string name="mousepad_info_no_gestures">Fare imlecini hareket ettirmek için ekranda parmağınızı hareket ettirin, tıklamak için dokunun.</string>
+  <string name="mousepad_keyboard_input_not_supported">Klavye girişi, eşlenen aygıt tarafından desteklenmiyor</string>
+  <string name="mousepad_single_tap_settings_title">Tek parmak dokunma eylemini ayarla</string>
+  <string name="mousepad_double_tap_settings_title">İki parmak dokunma eylemini ayarla</string>
+  <string name="mousepad_triple_tap_settings_title">Üç parmak dokunma eylemini ayarla</string>
+  <string name="mousepad_sensitivity_settings_title">Dokunmatik yüzey duyarlılığını ayarla</string>
+  <string name="mousepad_mouse_buttons_title">Fare düğmelerini göster</string>
+  <string name="mousepad_acceleration_profile_settings_title">İşaretçi ivmesini ayarla</string>
+  <string name="mousepad_scroll_direction_title">Sarma Yönünü Tersine Çevir</string>
+  <string name="mousepad_scroll_sensitivity_title">Sarma duyarlılığı</string>
+  <string name="gyro_mouse_enabled_title">Jiroskop fareyi etkinleştir</string>
+  <string name="gyro_mouse_sensitivity_title">Jiroskop duyarlılığı</string>
+  <string name="bigscreen_hide_mouse_input">Fare ve klavye uzaktan giriş düğmesini gizle</string>
+  <string name="bigscreen_show_home_title">Ana Ekran düğmesini göster</string>
+  <string name="bigscreen_show_back_title">Geri düğmesini göster</string>
+  <string name="bigscreen_show_close_title">Kapat düğmesini göster</string>
+  <string-array name="mousepad_tap_entries">
+    <item>Sol tık</item>
+    <item>Sağ tık</item>
+    <item>Orta tık</item>
+    <item>Hiçbiri</item>
+  </string-array>
+  <string-array name="mousepad_sensitivity_entries">
+    <item>En Yavaş</item>
+    <item>En Yavaşın Üstü</item>
+    <item>Öntanımlı</item>
+    <item>Öntanımlının Üstü</item>
+    <item>En Hızlı</item>
+  </string-array>
+  <string-array name="mousepad_acceleration_profile_entries">
+    <item>Hızlandırıcı Yok</item>
+    <item>Zayıf</item>
+    <item>Güçsüz</item>
+    <item>Orta</item>
+    <item>Güçlü</item>
+    <item>Kuvvetli</item>
+  </string-array>
+  <string name="sendkeystrokes_send_to">Düğme basımlarını gönder</string>
+  <string name="sendkeystrokes_textbox_hint">Ana makineye düğme basımlarını gönder</string>
+  <string name="sendkeystrokes_disabled_toast">Düğme basımlarını gönderme devre dışı — ayarlarda etkinleştirin</string>
+  <string name="sendkeystrokes_wrong_data">Geçersiz MIME türü — “text/x-keystrokes” olmalı</string>
+  <string name="sendkeystrokes_sent_text">%2$s aygıtına %1$s gönderildi</string>
+  <string name="sendkeystrokes_pref_category_summary">Bu modül, diğer uygulamaların metin segmentlerini düğme basımları olarak bağlı olan makineye göndermelerine izin verir.</string>
+  <string name="sendkeystrokes_pref_category_title">Düğme Basımları Gönder</string>
+  <string name="sendkeystrokes_pref_enabled">Düğme basımı göndermeyi etkinleştir</string>
+  <string name="sendkeystrokes_pref_enabled_summary">“text/x-keystrokes” MIME türlü veriyi dinle</string>
+  <string name="sendkeystrokes_safe_text_enabled">Güvenli metni anında gönder</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Onay olmadan yalnızca sayısal kısa diziler gönder</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Düğme basımları olarak gönder</string>
+  <string name="mouse_receiver_plugin_description">Uzaktan fare hareketi al</string>
+  <string name="mouse_receiver_plugin_name">Fare alıcısı</string>
+  <string name="mouse_receiver_no_permissions">Dokunma girdilerini uzaktan almak için aygıtı tümüyle denetlemek üzere Erişilebilirlik izinleri sağlamanız gerekir</string>
+  <string name="view_status_title">Durum</string>
+  <string name="battery_status_format">Pil: %%%d</string>
+  <string name="battery_status_low_format">Pil: %%%d Düşük pil</string>
+  <string name="battery_status_charging_format">Pil: %%%d Şarj oluyor</string>
+  <string name="category_connected_devices">Bağlı aygıtlar</string>
+  <string name="category_not_paired_devices">Kullanılabilir aygıtlar</string>
+  <string name="category_remembered_devices">Anımsanan aygıtlar</string>
+  <string name="device_menu_plugins">Eklenti ayarları</string>
+  <string name="device_menu_unpair">Ayır</string>
+  <string name="pair_new_device">Yeni bir aygıt eşleştir</string>
+  <string name="cancel_pairing">Eşleşmeyi İptal Et</string>
+  <string name="unknown_device">Bİlinmeyen aygıt</string>
+  <string name="unknown_sender">Bİlinmeyen gönderici</string>
+  <string name="error_not_reachable">Aygıt ulaşılabilir değil</string>
+  <string name="error_already_paired">Aygıt zaten eşleşmiş</string>
+  <string name="error_timed_out">Zaman aşımı</string>
+  <string name="error_clocks_not_match">Aygıt saatleri eşzamanlı değil</string>
+  <string name="error_canceled_by_user">Kullanıcı tarafından iptal edildi</string>
+  <string name="error_canceled_by_other_peer">Diğer eş tarafından iptal edildi</string>
+  <string name="encryption_info_title">Şifreleme Bilgisi</string>
+  <string name="my_device_fingerprint">Aygıt sertifikanızın SHA256 parmak izi:</string>
+  <string name="remote_device_fingerprint">Uzak aygıt sertifikanızın SHA256 parmak izi:</string>
+  <string name="pair_requested">Eşleşme talep edildi</string>
+  <string name="pair_succeeded">Eşleşme başarılı</string>
+  <string name="pairing_request_from">“%1s” için eşleşme talebi</string>
+  <plurals name="incoming_file_title">
+    <item quantity="one">%2$s içinden %1$d dosya alınıyor</item>
+    <item quantity="other">%2$s içinden %1$d dosyalar alınıyor</item>
+  </plurals>
+  <plurals name="incoming_files_text">
+    <item quantity="one">Dosya: %1s</item>
+    <item quantity="other">(Dosya %2$d/%3$d) : %1$s</item>
+  </plurals>
+  <plurals name="outgoing_file_title">
+    <item quantity="one">%1$d dosya %2$s gönderiliyor</item>
+    <item quantity="other">%1$d dosyalar %2$s gönderiliyor</item>
+  </plurals>
+  <plurals name="outgoing_files_text">
+    <item quantity="one">Dosya: %1$s</item>
+    <item quantity="other">(Dosya %2$d %3$d) : %1$s</item>
+  </plurals>
+  <plurals name="received_files_title">
+    <item quantity="one">%1$s ögesinden alınan dosya</item>
+    <item quantity="other">%1$s içinden %2$d dosya alındı</item>
+  </plurals>
+  <plurals name="received_files_fail_title">
+    <item quantity="one">%1$s dosya alınamadı</item>
+    <item quantity="other">%1$s içindeki %2$d / %3$d dosya alınamadı</item>
+  </plurals>
+  <plurals name="sent_files_title">
+    <item quantity="one">Dosyayı şuraya gönder %1$s</item>
+    <item quantity="other">Gönder %2$d şuraya %1$s</item>
+  </plurals>
+  <plurals name="send_files_fail_title">
+    <item quantity="one">Dosya gönderilemedi %1$s</item>
+    <item quantity="other">Dosya gönderilemedi %2$d %3$d şuraya %1$s</item>
+  </plurals>
+  <string name="tap_to_open">Açmak için dokunun</string>
+  <string name="received_file_text">“%1s” açmak için dokunun</string>
+  <string name="cannot_create_file">Dosya oluşturulamıyor %s</string>
+  <string name="tap_to_answer">Cevap için dokunun</string>
+  <string name="left_click">Sol Tık Gönder</string>
+  <string name="right_click">Sağ Tık Gönder</string>
+  <string name="middle_click">Orta Tık Gönder</string>
+  <string name="show_keyboard">Klavyeyi Göster</string>
+  <string name="show_mouse_and_keyboard">Fareyi ve Klavyeyi Göster</string>
+  <string name="device_not_paired">Aygıt eşleşmemiş</string>
+  <string name="pairing_missing_local_network_permission">Yakındaki aygıtlara erişmek için gerekli izinler eksik; uygulama çalışmayacaktır.</string>
+  <string name="pairing_duplicate_names">Dikkat: Aynı adlı birden çok aygıt var.</string>
+  <string name="request_pairing">Eşleşme isteği</string>
+  <string name="pairing_accept">Onayla</string>
+  <string name="pairing_reject">Reddet</string>
+  <string name="pairing_explanation">İki aygıtı eşleştirmek, onlara birbirlerine erişim hakkını verecektir. Yalnızca kendi aygıtlarınızı eşleştirin.</string>
+  <string name="settings">Ayarlar</string>
+  <string name="mpris_play">Oynat</string>
+  <string name="mpris_pause">Duraklat</string>
+  <string name="mpris_previous">Önceki</string>
+  <string name="mpris_rew">Geri Sar</string>
+  <string name="mpris_ff">Hızlı İleri Sar</string>
+  <string name="mpris_next">Sonraki</string>
+  <string name="mpris_loop">Döngü</string>
+  <string name="mpris_shuffle">Karıştır</string>
+  <string name="mpris_volume">Ses</string>
+  <string name="mpris_time_settings_title">İleri/geri düğmeleri</string>
+  <string name="mpris_time_settings_summary">Basıldığında hızlı ileri/geri sarma süresini ayarlayın</string>
+  <string-array name="mpris_time_entries">
+    <item>10 saniye</item>
+    <item>20 saniye</item>
+    <item>30 saniye</item>
+    <item>1 dakika</item>
+    <item>2 dakika</item>
+  </string-array>
+  <string name="mpris_notifications_explanation">Bildirim izni, bildirim çekmecesinde uzak konum ortamını göstermek için gereklidir</string>
+  <string name="mpris_notification_settings_title">Ortam denetim bildirimini göster</string>
+  <string name="mpris_notification_settings_summary">Zorin Connect’ı açmadan ortam oynatıcılarınızı denetlemenize izin verin</string>
+  <string name="share_to">Şuraya Paylaş…</string>
+  <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
+  <string name="unreachable_device_url_share_text">Erişilemeyen bir aygıta gönderilen URL’ler, aygıt erişilebilir olduğunda teslim edilir.\n\n</string>
+  <string name="unreachable_share_toast">URL, aygıtın bir sonraki bağlanışında paylaşılacak.</string>
+  <string name="protocol_version">Protokol sürümü:</string>
+  <string name="protocol_version_newer">Bu aygıt, daha yeni bir protokol sürümü kullanıyor</string>
+  <string name="plugin_settings_with_name">%s ayarları</string>
+  <string name="invalid_device_name">Geçersiz aygıt adı</string>
+  <string name="shareplugin_text_saved">Gelen ileti, panoya kaydet</string>
+  <string name="custom_devices_settings">Özel aygıt listesi</string>
+  <string name="custom_devices_settings_summary">%d aygıt elle eklendi</string>
+  <string name="custom_device_list">IP’ye göre aygıtları ekle</string>
+  <string name="custom_device_deleted">Özel aygıt silindi</string>
+  <string name="custom_device_list_help">Aygıtınız kendiliğinden algılanmazsa aşağıdaki düğmeye tıklayarak IP adresini veya ana bilgisayar adını ekleyebilirsiniz</string>
+  <string name="custom_device_fab_hint">Aygıt ekle</string>
+  <string name="undo">Geri al</string>
+  <string name="share_notification_preference">Sesli bildirimler</string>
+  <string name="share_notification_preference_summary">Bir dosya alırken, ses çıkar ve titret</string>
+  <string name="share_destination_customize">Hedef dizini özelleştir</string>
+  <string name="share_destination_customize_summary_disabled">Gelen dosyalar İndirilenler’de gözükecektir</string>
+  <string name="share_destination_customize_summary_enabled">Dosyalar aşağıdaki dizinden depolanacaktır</string>
+  <string name="share_destination_folder_preference">Hedef dizin</string>
+  <string name="share">Paylaş</string>
+  <string name="share_received_file">Paylaş: “%s”</string>
+  <string name="title_activity_notification_filter">Bildirim süzgeci</string>
+  <string name="filter_apps_info">Bildirimler, seçili uygulamalar için eşzamanlanacaktır.</string>
+  <string name="show_notification_if_screen_off">Yalnızca ekran kapalıysa bildirimler gönder</string>
+  <string name="add_device_dialog_title">Aygıt ekle</string>
+  <string name="add_device_hint">Makine adı veya IP adresi</string>
+  <string name="sftp_preference_configured_storage_locations">Yapılandırılmış depolama yerleri</string>
+  <string name="sftp_preference_add_storage_location_title">Depolama yeri ekle</string>
+  <string name="sftp_preference_edit_storage_location">Depolama yerini düzenle</string>
+  <string name="sftp_storage_preference_storage_location">Depolama yeri</string>
+  <string name="sftp_storage_preference_storage_location_already_configured">Bu konum zaten yapılandırılmış</string>
+  <string name="sftp_storage_preference_click_to_select">seçmek için tıkla</string>
+  <string name="sftp_storage_preference_display_name">Ekran adı</string>
+  <string name="sftp_storage_preference_display_name_already_used">Bu görünen ad zaten kullanılıyor</string>
+  <string name="sftp_storage_preference_display_name_cannot_be_empty">Görünen ad boş olamaz</string>
+  <string name="sftp_action_mode_menu_delete">Sil</string>
+  <string name="sftp_no_storage_locations_configured">Yapılandırılmış depolama yeri yok</string>
+  <string name="sftp_saf_permission_explanation">Dosyalara uzaktan erişmek için depolama konumlarını yapılandırmanız gerekir</string>
+  <string name="sftp_manage_storage_permission_explanation">Bu aygıttaki dosyalara uzak erişime izin vermek için Zorin Connect’a depolamayı yönetmesi için izin vermeniz gerekiyor.</string>
+  <string name="sftp_missing_permission_error">Eksik izinler: Dosya sistemi erişimi</string>
+  <string name="no_players_connected">Bulunan oynatıcı yok</string>
+  <string name="send_files">Dosyaları gönder</string>
+  <string name="use_digitizer">Çizim tableti olarak kullan</string>
+  <string name="digitizer_draw_button">Parmakla çizim yap</string>
+  <string name="digitizer_preference_title_hide_draw_button">Çizim düğmesini gizle</string>
+  <string name="digitizer_preference_summary_hide_draw_button">Çizim düğmesini tümüyle gizleyerek parmakla çizim yapmayı tümüyle olanaksız kılar. Bunu yalnızca aygıtınız kalemle girişi destekliyorsa etkinleştirin.</string>
+  <string name="digitizer_preference_title_draw_button_side">“Parmakla çizim yap” düğmesinin yanı</string>
+  <string name="digitizer_preference_title_enable_exit_fullscreen_gesture">Tam ekrandan çıkış hareketini etkinleştir</string>
+  <string name="digitizer_preference_summary_enable_exit_fullscreen_gesture">Etkinleştirilmişse çizim alanına parmağınızla basıp basılı tutmak tam ekran kipinden çıkar.</string>
+  <string-array name="digitizer_preference_entries_draw_button_side">
+    <item>Sol üst</item>
+    <item>Sağ üst</item>
+    <item>Sol alt</item>
+    <item>Sağ alt</item>
+  </string-array>
+  <string name="block_notification_contents">Bildirim içeriğini engelle</string>
+  <string name="block_notification_images">Bildirim görsellerini engelle</string>
+  <string name="pairing_title">Zorin Connect Aygıtları</string>
+  <string name="pairing_description">Zorin Connect’te çalışan, aynı ağdaki diğer aygıtlar burada gözükmelidir.</string>
+  <string name="device_rename_title">Aygıtı yeniden adlandır</string>
+  <string name="device_rename_confirm">Yeniden adlandır</string>
+  <string name="refresh">Yenile</string>
+  <string name="unreachable_description">Eşleştirilmiş aygıt ulaşılabilir değil. Aynı ağa bağlı olduğundan emin olun.</string>
+  <string name="no_wifi">Bir Wi-Fi ağına bağlı değilsiniz dolayısıyla herhangi bir aygıt göremeyebilirsiniz. Wi-Fi’yi etkinleştirmek için buraya tıklayın.</string>
+  <string name="on_non_trusted_message">Güvenilir bir ağda değil: otomatik bulma devre dışı.</string>
+  <string name="no_file_browser">Kurulu bir dosya tarayıcı yok.</string>
+  <string name="pref_plugin_telepathy">SMS Gönder</string>
+  <string name="pref_plugin_telepathy_desc">Masaüstünden metin iletisi gönder</string>
+  <string name="pref_plugin_telepathy_mms">MMS Gönder</string>
+  <string name="pref_plugin_telepathy_mms_desc">Zorin Connect üzerinden MMS göndermek için onu öntanımlı SMS uygulaması olarak ayarlayın.</string>
+  <string name="findmyphone_title">Telefonumu bul</string>
+  <string name="findmyphone_title_tablet">Tabletimi bul</string>
+  <string name="findmyphone_title_tv">TV’mi bul</string>
+  <string name="findmyphone_description">Aygıtı bulmak için onu çaldır</string>
+  <string name="findmyphone_found">Bulundu</string>
+  <string name="open">Aç</string>
+  <string name="close">Kapat</string>
+  <string name="plugins_need_permission">Bazı Eklentiler çalışmak için izne gereksinim duyar (daha fazla bilgi için dokunun):</string>
+  <string name="permission_explanation">Bu eklenti, çalışmak için izne gereksinim duyuyor</string>
+  <string name="all_permissions_granted">Tüm izinler verildi 🎉</string>
+  <string name="optional_permission_explanation">Tüm işlevleri etkinleştirmek için daha fazla yetkiye gereksiniminiz var</string>
+  <string name="plugins_need_optional_permission">Bazı eklentilerin özellikleri, izin yetersizliğinden kapalı gelmektedir (daha fazla bilgi için dokunun):</string>
+  <string name="share_optional_permission_explanation">Dosyalar almak için depolama erişimini etkinleştirmelisiniz</string>
+  <string name="share_notifications_explanation">Dosyalar alırken ve gönderirken ilerlemeyi görmek için bildirimlere izin vermeniz gerekir</string>
+  <string name="telepathy_permission_explanation">Masaüstünde SMS yazma ve okuma yapmak için SMS izni gereklidir</string>
+  <string name="telephony_permission_explanation">Masaüstünde telefon görüşmelerini görmek için telefon görüşmesi kayıtlarına ve telefon durumuna izin vermeniz gerekir</string>
+  <string name="telephony_optional_permission_explanation">Telefon numarası yerine kişi adı görebilmek için telefonun kişilerine erişim gereklidir</string>
+  <string name="contacts_permission_explanation">Kişilerinizi masaüstüyle paylaşmak için kişiler izni vermeniz gerekir</string>
+  <string name="contacts_per_device_confirmation">Telefondaki kişileriniz bu aygıta kopyalanacak; böylece Zorin Connect ve başka uygulamalar tarafından kullanılabilecekler.</string>
+  <string name="select_ringtone">Bir zil sesi seç</string>
+  <string name="telephony_pref_blocked_title">Engellenen numaralar</string>
+  <string name="telephony_pref_blocked_dialog_desc">Bu numaralardan gelen aramaları ve SMS’leri göstermeyin. Lütfen her satıra bir numara belirtin</string>
+  <string name="mpris_coverart_description">Geçerli ortamın kapak resmi</string>
+  <string name="settings_icon_description">Ayarlar simgesi</string>
+  <string name="presenter_fullscreen">Tam ekran</string>
+  <string name="presenter_exit">Sunumdan çık</string>
+  <string name="presenter_lock_tip">Bir önceki/bir sonraki slayta geçmek için aygıtınızı kilitleyebilir ve ses düzeyi düğmelerini kullanabilirsiniz</string>
+  <string name="add_command">Komut ekle</string>
+  <string name="addcommand_explanation">Kayıtlı komut yok</string>
+  <string name="addcommand_explanation2">Zorin Connect Sistem Ayarlarında yeni komutlar ekleyebilirsiniz</string>
+  <string name="add_command_description">Masaüstüne komut ekleyebilirsiniz</string>
+  <string name="pref_plugin_mprisreceiver">Ortam Oynatıcısı Denetimi</string>
+  <string name="pref_plugin_mprisreceiver_desc">Telefonunuzun ortam oynatıcılarını başka bir aygıttan denetleyin</string>
+  <string name="notification_channel_default">Diğer bildirimler</string>
+  <string name="notification_channel_persistent">Kalıcı gösterge</string>
+  <string name="notification_channel_media_control">Ortam denetimi</string>
+  <string name="notification_channel_filetransfer">Gelen dosya aktarımı</string>
+  <string name="notification_channel_filetransfer_complete">Gelen dosya aktarımı tamamlandı</string>
+  <string name="notification_channel_filetransfer_upload">Giden dosya aktarımı</string>
+  <string name="notification_channel_filetransfer_error">Dosya aktarımı hatası</string>
+  <string name="notification_channel_high_priority">Yüksek öncelik</string>
+  <string name="mpris_stop">Geçerli oynatıcıyı durdur</string>
+  <string name="copy_url_to_clipboard">URL’yi panoya kopyala</string>
+  <string name="clipboard_toast">Panoya kopyalandı</string>
+  <string name="runcommand_notreachable">Aygıt erişilebilir değil</string>
+  <string name="runcommand_notpaired">Aygıt eşleştirilmedi</string>
+  <string name="runcommand_nosuchdevice">Böyle bir aygıt yok</string>
+  <string name="runcommand_noruncommandplugin">Bu aygıtta Komut Çalıştır Eklentisi etkin değil</string>
+  <string name="runcommand_category_device_controls_title">Aygıt Denetimleri</string>
+  <string name="runcommand_device_controls_summary">Aygıtınız Aygıt Denetimleri’ni destekliyorsa yapılandırdığınız komutlar orada görünür.</string>
+  <string name="set_runcommand_name_as_title">çalıştırılacak_komut_adını_başlık_olarak_ayarla</string>
+  <string name="runcommand_name_as_title_title">Adı başlık olarak göster</string>
+  <string name="pref_plugin_findremotedevice">Uzak aygıtı bul</string>
+  <string name="pref_plugin_findremotedevice_desc">Uzak aygıtı çaldır</string>
+  <string name="ring">Zil sesi</string>
+  <string name="pref_plugin_systemvolume">Sistem sesi</string>
+  <string name="pref_plugin_systemvolume_desc">Uzak aygıtın sistem sesini denetle</string>
+  <string name="mute">Sessiz</string>
+  <string name="all">Tümü</string>
+  <string name="devices">Aygıtlar</string>
+  <string name="settings_rename">Aygıt adı</string>
+  <string name="settings_dark_mode">Karanlık tema</string>
+  <string name="settings_export_logs">Zorin Connect Günlüklerini Dışa Aktar</string>
+  <string name="settings_export_logs_text">Sorun tanılama konusunda yandımcı olabilecek yürütme bilgisini içeren bir dosya üretin.</string>
+  <string name="settings_more_settings_title">Daha fazla ayar</string>
+  <string name="settings_more_settings_text">Aygıt başına ayarlar, bir aygıt içinden “Eklenti Ayarları” altında bulunabilir.</string>
+  <string name="setting_persistent_notification">Kalıcı bildirim göster</string>
+  <string name="setting_persistent_notification_oreo">Kalıcı bildirim</string>
+  <string name="setting_persistent_notification_description">Bildirim ayarlarında etkinleştirmek/devre dışı bırakmak için dokun</string>
+  <string name="extra_options">Ek seçenekler</string>
+  <string name="privacy_options">Gizlilik seçenekleri</string>
+  <string name="set_privacy_options">Gizlilik seçeneklerinizi ayarlayın</string>
+  <string name="block_contents">Bildirimlerin içeriğini engelle</string>
+  <string name="block_images">Bildirimlerde görüntüleri engelle</string>
+  <string name="notification_channel_receivenotification">Diğer aygıtlardan gelen bildirimler</string>
+  <string name="findmyphone_preference_title_flashlight">Flaşı yak</string>
+  <string name="no_app_for_opening">Bu dosyayı açmak için uygun bir uygulama bulunamadı</string>
+  <string name="remote_keyboard_service">Zorin Connect Uzaktan Klavye</string>
+  <string name="presenter_pointer">İşaretçi</string>
+  <string name="trusted_networks">Güvenilir ağlar</string>
+  <string name="trusted_networks_desc">Otomatik keşfi bilinen ağlarla kısıtla</string>
+  <string name="add_trusted_network">%1s Ekle</string>
+  <string name="empty_trusted_networks_list_text">Henüz herhangi bir güvenilen ağ eklemediniz</string>
+  <string name="allow_all_networks_text">Hepsine izin ver</string>
+  <string name="location_permission_needed_title">İzin gerekli</string>
+  <string name="bluetooth_permission_needed_desc">Zorin Connect, Bluetooth kullanarak eşleştirilmiş aygıtların Zorin Connect’da görülebilir olmasını sağlamak için yakındaki aygıtlara bağlanma iznine gereksinim duyar.</string>
+  <string name="location_permission_needed_desc">Zorin Connect, uygulama arka planda olsa bile bağlı olduğunuz Wi-Fi ağını bilmek için arka plan konumu iznine gereksinim duyar. Bunun nedeni, çevrenizdeki Wi-Fi ağlarının adının, Zorin Connect’ın yaptığı bu olmasa bile konumunuzu bulmak için kullanılabilmesidir.</string>
+  <string name="clipboard_android_x_incompat">Android 10, tüm uygulamalara pano erişimini kaldırdı. Bu eklenti devre dışı bırakılacak.</string>
+  <string name="mpris_open_url">Oynamayı burada sürdürün</string>
+  <string name="cant_open_url">Oynamayı sürdürmek için URL açılamıyor</string>
+  <string name="bigscreen_home">Başlangıç</string>
+  <string name="bigscreen_close">Kapat</string>
+  <string name="bigscreen_up">Yukarı</string>
+  <string name="bigscreen_left">Sol</string>
+  <string name="bigscreen_select">Seç</string>
+  <string name="bigscreen_right">Sağ</string>
+  <string name="bigscreen_down">Aşağı</string>
+  <string name="bigscreen_back">Geri</string>
+  <string name="bigscreen_mic">Mikrofon</string>
+  <string name="pref_plugin_bigscreen">TV kumandası</string>
+  <string name="pref_plugin_bigscreen_desc">Aygıtınızı Plasma BüyükEkran için uzaktan kumanda olarak kullanın</string>
+  <string name="bigscreen_optional_permission_explanation">Telefonunuzdan mikrofon girişini paylaşmak için telefonun ses girişine erişim izni vermeniz gerekir</string>
+  <string name="bigscreen_speech_extra_prompt">Konuşma</string>
+  <string name="message_reply_label">YANITLA</string>
+  <string name="mark_as_read_label">OKUNDU OLARAK İMLE</string>
+  <string name="user_display_name">Siz</string>
+  <string name="set_default_sms_app_title">MMS Gönder</string>
+  <string name="set_group_message_as_mms_title">Grup MMS gönder</string>
+  <string name="set_long_text_as_mms_title">Uzun metni MMS olarak gönder</string>
+  <string name="convert_to_mms_after_title">MMS’e dönüştür</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Bir iletiden sonra</item>
+    <item>İki iletiden sonra</item>
+    <item>Üç iletiden sonra</item>
+    <item>Dört iletiden sonra</item>
+    <item>Beş iletiden sonra</item>
+  </string-array>
+  <string name="theme_dialog_title">Tema seçin</string>
+  <string-array name="theme_list">
+    <item>Pil Koruyucu tarafından ayarlandı</item>
+    <item>Açık</item>
+    <item>Koyu</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Sistem Öntanımlısı</item>
+    <item>Açık</item>
+    <item>Koyu</item>
+  </string-array>
+  <string name="report_bug">Hata Bildir</string>
+  <string name="donate">Bağış yap</string>
+  <string name="source_code">Kaynak Kod</string>
+  <string name="licenses">Lisanslar</string>
+  <string name="website">Web Sitesi</string>
+  <string name="about">Hakkında</string>
+  <string name="authors">Yazarlar</string>
+  <string name="thanks_to">Teşekkürler</string>
+  <string name="easter_egg">Sürpriz Yumurta</string>
+  <string name="email_contributor">E-posta katkıcısı\n%s</string>
+  <string name="visit_contributors_homepage">Katkıcının web sayfasını ziyaret edin\n%s</string>
+  <string name="version">Sürüm %s</string>
+  <string name="about_kde">KDE Hakkında</string>
+  <string name="kde_be_free">KDE — Özgür olun!</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="rise_up">Kalk</string>
+  <string name="rise_down">İndir</string>
+  <string name="click_here_to_type">Yazmak için buraya dokunun</string>
+  <string name="clear_compose">Temiz</string>
+  <string name="send_compose">Gönder</string>
+  <string name="compose_send_title">Gönderi oluştur</string>
+  <string name="open_compose_send">Metin oluştur</string>
+  <string name="double_tap_to_drag">Sürüklemek için çift dokunun</string>
+  <string name="hold_to_drag">Sürüklemek için tutun</string>
+  <string name="about_kde_about">&lt;h1&gt;Hakkında&lt;/h1&gt; &lt;p&gt;KDE, &lt;a href=https://www.gnu.org/philosophy/free-sw.html&gt;Özgür Yazılım&lt;/a&gt; hareketine destek veren yazılım mühendislerinin, sanatçıların, yazarların, çevirmenlerin ve yaratıcıların bir araya geldiği dünya çapında bir topluluktur KDE, Plasma masaüstü ortamını, yüzlerce uygulamayı ve onları destekleyen sayısız yazılım kitaplığını üretir.&lt;/p&gt; &lt;p&gt;KDE, işbirliğine dayalı bir kuruluştur: yönünü veya ürünlerini tek başına denetleyen bir kuruluş yoktur. Bunun yerine, dünyanın en iyi Özgür Yazılımını oluşturma ortak hedefine ulaşmak için birlikte çalışıyoruz. Siz de dahil olmak üzere herkes &lt;a href=https://community.kde.org/Get_Involved&gt;katılabilir&lt;/a&gt; ve katkıda bulunabilir.&lt;/p&gt; KDE topluluğu ve ürettiğimiz yazılımlar hakkında daha fazla bilgi için &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; adresini ziyaret edin.</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Hataları veya İsteklerinizi Bildirin&lt;/h1&gt; &lt;p&gt;Yazılımlar her zaman iyileştirilebilir ve KDE takımın bunu yapmaya hazırdır. Ancak siz de bir şey beklendiği gibi gitmezse veya hata verirse bize bildirin.&lt;/p&gt; &lt;p&gt;KDE’nin bir hata takip sistemi vardır. &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; adresini ziyaret edin veya hakkında ekranının ‘Hata Bildir’ düğmesini kullanarak hataları bildirin.&lt;/p&gt; Bir iyileştirme için öneriniz varsa bunu bildirmek için hata takip sistemini kullanabilirsiniz; yalnızca “Wishlist” önceliğini kullandığınızdan emin olun.</string>
+  <string name="about_kde_join_kde">"&lt;h1&gt;KDE’ye Katılın&lt;/h1&gt; &lt;p&gt;KDE takımının bir üyesi olmak için yazılım geliştirici olmanıza gerek yoktur. Program arayüzlerini çeviren dil takımlarına katılabilirsiniz. Grafikler, temalar, sesler ve iyileştirilmiş belgelendirme sağlayabilirsiniz. Karar sizin!&lt;/p&gt; &lt;p&gt;Katılabileceğiniz bazı projeler hakkında bilgi almak için  &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt; sayfasını ziyaret edin.&lt;/p&gt; Daha fazla bilgiye veya belgeye gereksiniminiz varsa &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt; sayfasında aradığınızı bulabilirsiniz."</string>
+  <string name="about_kde_support_kde">"&lt;h1&gt;KDE’yi Destekleyin&lt;/h1&gt; &lt;p&gt;KDE yazılımları her zaman ücretsiz kalmayı sürdürecektir; ancak bunu oluşturmak bedava değildir. &lt;/p&gt; &lt;p&gt;Geliştirmeyi desteklemek için KDE topluluğu, kar amacı gütmeyen bir kuruluş olan KDE e.V.’yi kurmuştur, bu topluluk KDE topluğunu yasal ve finansal konularda temsil eder. KDE e.V. hakkında daha fazla bilgi için  &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; adresini ziyaret edin.&lt;/p&gt; &lt;p&gt;KDE, finansal da dahil olmak üzere her türlü katkıdan yarar sağlar. Maddi kaynaklarımızla, geliştiricilerimizin ve diğerlerinin katkıda bulunurken oluşan masraflarını karşılıyoruz. Ayrıca yasal destek ve konferanslar ve toplantılar için de kullanılmaktadır.&lt;/p&gt; &lt;p&gt;Emeklerimizi, finansal destekle desteklemeniz için &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt; adresinde bulunan yollardan birini kullanabilirsiniz.&lt;/p&gt; Desteğiniz için şimdiden teşekkürler."</string>
+  <string name="maintainer_and_developer">Bakımcı ve geliştirici</string>
+  <string name="developer">Geliştirici</string>
+  <string name="apple_support">macOS ve iOS desteği üzerinde çalışılmaktadır.</string>
+  <string name="bug_fixes_and_general_improvements">Hata düzeltmeleri ve genel iyileştirmeler</string>
+  <string name="samoilenko_yuri_task">SFTP desteği, hata düzeltmeleri ve genel iyileştirmeler</string>
+  <string name="aniket_kumar_task">SMS eklentisi iyileştirmeleri</string>
+  <string name="alex_fiestas_task">Kişiler eklentisi iyileştirmeleri</string>
+  <string name="maxim_leshchenko_task">Kullanıcı arabirimi iyileştirmeleri ve bu hakkında sayfası</string>
+  <string name="holger_kaelberer_task">Uzak klavye eklentisi ve hata düzeltmeleri</string>
+  <string name="saikrishna_arcot_task">Uzaktan girdi eklentisinde klavye kullanımı desteği, hata düzeltmeleri ve genel iyileştirmeler</string>
+  <string name="shellwen_chen_task">SFTP güvenliğini artır, projenin bakımını daha da kolaylaştır, hata düzeltmeleri ve genel iyileştirmeler</string>
+  <string name="everyone_else">Zorin Connect’a yıllar boyunca katkıda bulunan herkes</string>
+  <string name="send_clipboard">Pano Gönder</string>
+  <string name="tap_to_execute">Yürütmek için Dokun</string>
+  <string name="plugin_stats">Eklenti İstatistikleri</string>
+  <string name="enable_udp_broadcast">UDP Aygıt Keşfini Etkinleştir</string>
+  <string name="enable_bluetooth">Bluetooth’u Etkinleştir (Beta)</string>
+  <string name="receive_notifications_permission_explanation">Başka aygıtlardan gelen bildirimleri alabilmek için bildirimlere izin verilmesi gereklidir</string>
+  <string name="findmyphone_notifications_explanation">Uygulama arka plandayken telefonun çalabilmesi için bildirim izni gereklidir</string>
+  <string name="findmyphone_camera_explanation">Kamera izni, telefonunuzu bulmak için flaşı yakmanıza olanak tanır</string>
+  <string name="findmyphone_open_settings_for_camera">Flaşı kullanmak için uygulama ayarlarından kamera izni verin</string>
+  <string name="no_notifications">Bildirimler devre dışı; herhangi bir gelen eşleşme bildirimini almayacaksınız.</string>
+  <string name="mpris_keepwatching">Oynamayı Sürdür</string>
+  <string name="mpris_keepwatching_settings_title">Oynamayı Sürdür</string>
+  <string name="mpris_keepwatching_settings_summary">Ortamı kapattıktan sonra bu aygıtta oynatmayı sürdürmek için sessiz bir bildirim göster</string>
+  <string name="notification_channel_keepwatching">Oynamayı Sürdür</string>
+  <string name="ping_result">%1$d milisaniye içinde pinglendi</string>
+  <string name="ping_failed">Aygıt pinglenemedi</string>
+  <string name="ping_in_progress">Pingleniyor…</string>
+  <string name="device_host_invalid">Makine geçersiz. Geçerli bir makine adı kullanın; IPv4 veya IPv6 gibi</string>
+  <string name="device_host_duplicate">Makine listede hâlihazırda var</string>
+  <string name="enable_fullscreen">Tam ekranı etkinleştir</string>
+  <string name="pref_presenter_enable_volume_keys_title">Ses düzeyi düğmeleri slaydı değiştirir</string>
+  <string name="pref_presenter_sensitivity_title">İşaretçi duyarlılığı</string>
+  <string name="pref_presenter_enable_volume_keys_summary">Android’in 13. ve 15. sürümleri arasında bekleme durumunda desteklenmez.</string>
+  <string name="presenter_volume_keys_foreground_tip">Bir önceki/bir sonraki slayta geçmek için ekranı açık bırakabilir ve ses düzeyi düğmelerini kullanabilirsiniz.</string>
+  <string name="presenter_volume_keys_tip">Bir önceki/bir sonraki slayta geçmek için ekranı açık bırakabilir/kilitleyebilir ve ses düzeyi düğmelerini kullanabilirsiniz.</string>
+  <string name="runcommand_output_no_output_desc">Komutlardan alınan çıktılar burada görünür.</string>
+  <string name="runcommand_output_no_output">Yürütülen komut yok</string>
+  <string name="runcommand_stop">Geçerli komutu durdur</string>
+  <string name="pref_mpris_volume_control_title">Donanım ses düğmeleri</string>
+  <string name="pref_mpris_volume_control_summary">Bağlı aygıtın ortam ses düzeyini bu telefonun düğmelerini kullanarak denetleyin</string>
+</resources>

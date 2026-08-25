@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
+
+SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/nav_header_horizontal_margin"
+        android:paddingLeft="@dimen/nav_header_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingEnd="@dimen/nav_header_horizontal_margin"
+        android:paddingRight="@dimen/nav_header_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin">
+
+        <ImageView
+            android:id="@+id/device_type"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_gravity="top"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:paddingBottom="4dp"
+            android:importantForAccessibility="no"
+            tools:srcCompat="@drawable/ic_device_phone_32dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/kdeconnect_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kde_connect"
+                android:textAppearance="?attr/textAppearanceHeadline6" />
+
+            <TextView
+                android:id="@+id/device_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:textColor="@color/material_on_surface_emphasis_medium"
+                tools:text="My device" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

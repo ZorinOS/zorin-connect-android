@@ -1,0 +1,467 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="kde_connect">Zorin Connect</string>
+  <string name="manifest_label_share">An Gerät senden</string>
+  <string name="foreground_notification_no_devices">Keine bestehenden Verbindungen</string>
+  <string name="foreground_notification_devices">Verbunden mit: %s</string>
+  <string name="foreground_notification_send_clipboard">Zwischenablage senden</string>
+  <string name="pref_plugin_telephony">Telefon-Integration</string>
+  <string name="pref_plugin_telephony_desc">Bei eingehenden Anrufen benachrichtigen</string>
+  <string name="pref_plugin_battery">Akkubericht</string>
+  <string name="pref_plugin_battery_desc">Den Akkustand periodisch berichten</string>
+  <string name="pref_plugin_connectivity_report">Verbindungsbericht</string>
+  <string name="pref_plugin_connectivity_report_desc">Signalstärke und Status des Netzwerks anzeigen</string>
+  <string name="pref_plugin_digitizer">Zeichentablett</string>
+  <string name="pref_plugin_digitizer_desc">Verwenden Sie ihr Gerät als druckempfindliches Grafiktablett</string>
+  <string name="pref_plugin_sftp">Dateisystemzugriff</string>
+  <string name="pref_plugin_sftp_desc">Ermöglicht den verbundenen Geräten das Durchsuchen des Dateisystems dieses Geräts</string>
+  <string name="pref_plugin_clipboard">Abgleich der Zwischenablage</string>
+  <string name="pref_plugin_clipboard_desc">Den Inhalt der Zwischenablage teilen</string>
+  <string name="pref_plugin_clipboard_sent">Zwischenablage versendet</string>
+  <string name="pref_plugin_mousepad">Ferneingabe</string>
+  <string name="pref_plugin_mousepad_desc_nontv">Verwenden Sie Ihr Telefon oder Tablet als Touchpad und Tastatur</string>
+  <string name="pref_plugin_mousepad_desc_tv">Verwenden Sie Ihr Telefon oder Tablet als TV-Fernbedienung</string>
+  <string name="pref_plugin_presenter">Präsentationsfernbedienung</string>
+  <string name="pref_plugin_presenter_desc">Verwenden Sie Ihr Gerät zum Folienwechsel in einer Präsentation</string>
+  <string name="pref_plugin_remotekeyboard">Entfernte Tasteneingaben empfangen</string>
+  <string name="pref_plugin_remotekeyboard_desc">Tasteneingaben entfernter Geräte empfangen</string>
+  <string name="pref_plugin_mpris">Medienkontrolle</string>
+  <string name="pref_plugin_mpris_desc">Die Medienwiedergabe verbundener Geräte steuern</string>
+  <string name="pref_plugin_runcommand">Befehl ausführen</string>
+  <string name="pref_plugin_runcommand_desc">Konsolen-Befehle auf verbundenen Geräten ausführen</string>
+  <string name="pref_plugin_contacts">Synchronisierung der Kontakte</string>
+  <string name="pref_plugin_contacts_desc">Das Adressbuch des Geräts synchronisieren</string>
+  <string name="pref_plugin_ping">Ping</string>
+  <string name="pref_plugin_ping_desc">Pings senden und empfangen</string>
+  <string name="pref_plugin_notifications">Synchronisierung der Benachrichtigungen</string>
+  <string name="pref_plugin_notifications_desc">Von anderen Geräten auf Benachrichtigungen zugreifen</string>
+  <string name="pref_plugin_receive_notifications">Benachrichtigungen empfangen</string>
+  <string name="pref_plugin_receive_notifications_desc">Benachrichtigungen des anderen Geräts empfangen und in Android anzeigen</string>
+  <string name="pref_plugin_sharereceiver">Teilen und Empfangen</string>
+  <string name="pref_plugin_sharereceiver_desc">Dateien und Webadressen zwischen Geräten teilen</string>
+  <string name="pref_plugin_inputdevicesreceiver">Eingabegeräte teilen</string>
+  <string name="pref_plugin_inputdevicesreceiver_desc">Maus und Tastatur mit dem fernen Gerät teilen</string>
+  <string name="device_list_empty">Keine Geräte</string>
+  <string name="ok">OK</string>
+  <string name="sad_ok">OK :(</string>
+  <string name="cancel">Abbrechen</string>
+  <string name="open_settings">Einstellungen öffnen</string>
+  <string name="no_permissions">Sie müssen die Berechtigung zum Zugriff auf Benachrichtigungen erteilen</string>
+  <string name="no_permission_mprisreceiver">Um die Medienwiedergabe steuern zu können, müssen Sie Zugriff auf die Benachrichtigungen gewähren</string>
+  <string name="no_permissions_remotekeyboard">Um Tasteneingaben empfangen zu können, muss die Zorin-Connect-Tastatur aktiviert werden</string>
+  <string name="send_ping">Ping senden</string>
+  <string name="open_mpris_controls">Medienkontrolle</string>
+  <string name="remotekeyboard_editing_only_title">Entfernte Tasteneingaben nur empfangen, wenn ein Textfeld ausgewählt ist</string>
+  <string name="remotekeyboard_not_connected">Es besteht keine Verbindung zu einer entfernten Tastatur. Bitte stellen Sie eine Verbindung in Zorin Connect her.</string>
+  <string name="remotekeyboard_connected">Verbindung zu entfernter Tastatur ist aktiv</string>
+  <string name="remotekeyboard_multiple_connections">Es besteht mehr als eine Verbindung zu einer entfernten Tastatur. Um Ihre Konfiguration anzupassen, wählen Sie bitte ein Gerät aus</string>
+  <string name="open_mousepad">Ferneingabe</string>
+  <string name="open_mousepad_tv">TV-Fernbedienung</string>
+  <string name="mousepad_info">Bewegen Sie Ihren Finger über den Bildschirm, um den Mauszeiger zu bewegen. Tippen Sie auf den Bildschirm, um einen Klick zu simulieren und verwenden Sie entsprechend zwei/drei Finger für einen Rechts-/Mittelklick. Verwenden Sie zwei Finger, um zu scrollen und einen langen Druck für „Ziehen und Ablegen“. Gyroskop-Maus-Funktionen können Sie in den Modul-Einstellungen aktivieren.</string>
+  <string name="mousepad_info_no_gestures">Bewegen Sie den Finger auf dem Bildschirm, um den Mauszeiger zu bewegen. Tippen Sie, um zu klicken.</string>
+  <string name="mousepad_keyboard_input_not_supported">Das gekoppelte Gerät unterstützt keine Tasteneingaben</string>
+  <string name="mousepad_single_tap_settings_title">Aktion für Tippen mit einem Finger festlegen</string>
+  <string name="mousepad_double_tap_settings_title">Aktion für Tippen mit zwei Fingern festlegen</string>
+  <string name="mousepad_triple_tap_settings_title">Aktion für Tippen mit drei Fingern festlegen</string>
+  <string name="mousepad_sensitivity_settings_title">Empfindlichkeit des Touchpads festlegen</string>
+  <string name="mousepad_mouse_buttons_title">Maustasten anzeigen</string>
+  <string name="mousepad_acceleration_profile_settings_title">Zeigerbeschleunigung festlegen</string>
+  <string name="mousepad_scroll_direction_title">Bildlaufrichtung umkehren</string>
+  <string name="mousepad_scroll_sensitivity_title">Bildlaufgeschwindigkeit</string>
+  <string name="gyro_mouse_enabled_title">Gyroskop-Maus aktivieren</string>
+  <string name="gyro_mouse_sensitivity_title">Gyroskop-Empfindlichkeit</string>
+  <string name="bigscreen_hide_mouse_input">Knopf für entfernte Maus- und Tastatureingaben ausblenden</string>
+  <string name="bigscreen_show_home_title">Home-Knopf anzeigen</string>
+  <string name="bigscreen_show_back_title">Zurück-Knopf anzeigen</string>
+  <string-array name="mousepad_tap_entries">
+    <item>Linksklick</item>
+    <item>Rechtsklick</item>
+    <item>Mittelklick</item>
+    <item>Nichts</item>
+  </string-array>
+  <string-array name="mousepad_sensitivity_entries">
+    <item>Langsamste</item>
+    <item>Langsam</item>
+    <item>Standard</item>
+    <item>Schnell</item>
+    <item>Schnellste</item>
+  </string-array>
+  <string-array name="mousepad_acceleration_profile_entries">
+    <item>Keine Beschleunigung</item>
+    <item>Schwächste</item>
+    <item>Schwächer</item>
+    <item>Normal</item>
+    <item>Stärker</item>
+    <item>Stärkste</item>
+  </string-array>
+  <string name="sendkeystrokes_send_to">Tasteneingaben senden an</string>
+  <string name="sendkeystrokes_textbox_hint">Tasteneingaben an Rechner senden</string>
+  <string name="sendkeystrokes_disabled_toast">Das Senden von Tasteneingaben ist deaktiviert – aktivieren Sie es in den Einstellungen</string>
+  <string name="sendkeystrokes_wrong_data">Ungültiger MIME-Typ – muss „text/x-keystrokes“ sein</string>
+  <string name="sendkeystrokes_sent_text">%1$s an Gerät %2$s gesendet</string>
+  <string name="sendkeystrokes_pref_category_summary">Mit diesem Modul können andere Anwendungen Textsegmente als Tastendrücke teilen, die an den verbundenen Rechner gesendet werden</string>
+  <string name="sendkeystrokes_pref_category_title">Tasteneingaben senden</string>
+  <string name="sendkeystrokes_pref_enabled">Senden von Tasteneingaben aktivieren</string>
+  <string name="sendkeystrokes_pref_enabled_summary">Auf Daten mit dem MIME-Typ „text/x-keystrokes“ warten</string>
+  <string name="sendkeystrokes_safe_text_enabled">Sicheren Text sofort senden</string>
+  <string name="sendkeystrokes_safe_text_enabled_summary">Kurze Ziffernfolgen ohne Bestätigung senden</string>
+  <string name="pref_plugin_mousepad_send_keystrokes">Als Tasteneingaben senden</string>
+  <string name="mouse_receiver_plugin_description">Entfernte Mausbewegungen empfangen</string>
+  <string name="mouse_receiver_plugin_name">Maus-Empfänger</string>
+  <string name="mouse_receiver_no_permissions">Um entfernte Touch-Eingaben zu empfangen, müssen Sie Bedienungshilfen-Berechtigungen gewähren. Diese ermöglichen die vollständige Kontrolle über das Gerät</string>
+  <string name="view_status_title">Status</string>
+  <string name="battery_status_format">Akku: %d%%</string>
+  <string name="battery_status_low_format">Akku: %d%% Niedriger Ladestand</string>
+  <string name="battery_status_charging_format">Akku: %d%% Wird geladen</string>
+  <string name="category_connected_devices">Verbundene Geräte</string>
+  <string name="category_not_paired_devices">Verfügbare Geräte</string>
+  <string name="category_remembered_devices">Gemerkte Geräte</string>
+  <string name="device_menu_plugins">Moduleinstellungen</string>
+  <string name="device_menu_unpair">Entkoppeln</string>
+  <string name="pair_new_device">Neues Gerät koppeln</string>
+  <string name="cancel_pairing">Kopplung abbrechen</string>
+  <string name="unknown_device">Unbekanntes Gerät</string>
+  <string name="error_not_reachable">Gerät nicht erreichbar</string>
+  <string name="error_already_paired">Gerät bereits gekoppelt</string>
+  <string name="error_timed_out">Zeitüberschreitung</string>
+  <string name="error_clocks_not_match">Uhren der Geräte sind nicht synchron</string>
+  <string name="error_canceled_by_user">Abbruch durch Benutzer</string>
+  <string name="error_canceled_by_other_peer">Abbruch durch Gegenstelle</string>
+  <string name="encryption_info_title">Verschlüsselungsinformationen</string>
+  <string name="my_device_fingerprint">Der SHA256-Fingerabdruck Ihres Gerätezertifikats lautet:</string>
+  <string name="remote_device_fingerprint">Der SHA256-Fingerabdruck des Gerätezertifikats der Gegenstelle lautet:</string>
+  <string name="pair_requested">Kopplung angefordert</string>
+  <string name="pair_succeeded">Kopplung erfolgreich</string>
+  <string name="pairing_request_from">Kopplungsanfrage von „%1s“</string>
+  <plurals name="incoming_file_title">
+    <item quantity="one">%1$d Datei wird von %2$s empfangen</item>
+    <item quantity="other">%1$d Dateien werden von %2$s empfangen</item>
+  </plurals>
+  <plurals name="incoming_files_text">
+    <item quantity="one">Datei: %1s</item>
+    <item quantity="other">(Datei %2$d von %3$d) : %1$s</item>
+  </plurals>
+  <plurals name="outgoing_file_title">
+    <item quantity="one">%1$d Datei wird an %2$s gesendet</item>
+    <item quantity="other">%1$d Dateien werden an %2$s gesendet</item>
+  </plurals>
+  <plurals name="outgoing_files_text">
+    <item quantity="one">Datei: %1$s</item>
+    <item quantity="other">(Datei %2$d von %3$d) : %1$s</item>
+  </plurals>
+  <plurals name="received_files_title">
+    <item quantity="one">Datei von %1$s empfangen</item>
+    <item quantity="other">%2$d Dateien von %1$s empfangen</item>
+  </plurals>
+  <plurals name="received_files_fail_title">
+    <item quantity="one">Die Datei von %1$s wurde nicht empfangen</item>
+    <item quantity="other">%2$d der %3$d Dateien von %1$s wurden nicht empfangen</item>
+  </plurals>
+  <plurals name="sent_files_title">
+    <item quantity="one">Datei wurde an %1$s gesendet</item>
+    <item quantity="other">%2$d Dateien wurden an %1$s gesendet</item>
+  </plurals>
+  <plurals name="send_files_fail_title">
+    <item quantity="one">Die Datei kann nicht an %1$s gesendet werden</item>
+    <item quantity="other">%2$d der %3$d Dateien können nicht an %1$s gesendet werden</item>
+  </plurals>
+  <string name="tap_to_open">Zum Öffnen tippen</string>
+  <string name="received_file_text">Tippen, um „%1s“ zu öffnen</string>
+  <string name="cannot_create_file">Die Datei %s kann nicht erstellt werden</string>
+  <string name="tap_to_answer">Zum Antworten tippen</string>
+  <string name="left_click">Linksklick senden</string>
+  <string name="right_click">Rechtsklick senden</string>
+  <string name="middle_click">Mittelklick senden</string>
+  <string name="show_keyboard">Tastatur anzeigen</string>
+  <string name="show_mouse_and_keyboard">Maus und Tastatur anzeigen</string>
+  <string name="device_not_paired">Gerät nicht gekoppelt</string>
+  <string name="pairing_duplicate_names">Achtung: Es gibt mehrere Geräte mit dem gleichen Namen.</string>
+  <string name="request_pairing">Kopplung anfordern</string>
+  <string name="pairing_accept">Annehmen</string>
+  <string name="pairing_reject">Ablehnen</string>
+  <string name="pairing_explanation">Zwei Geräte zu koppeln ermöglicht diesen, auf das jeweils andere zuzugreifen. Koppeln Sie nur Ihre eigenen Geräte.</string>
+  <string name="settings">Einstellungen</string>
+  <string name="mpris_play">Wiedergabe</string>
+  <string name="mpris_pause">Anhalten</string>
+  <string name="mpris_previous">Zurück</string>
+  <string name="mpris_rew">Zurückspulen</string>
+  <string name="mpris_ff">Vorspulen</string>
+  <string name="mpris_next">Weiter</string>
+  <string name="mpris_loop">Wiederholen</string>
+  <string name="mpris_shuffle">Mischen</string>
+  <string name="mpris_volume">Lautstärke</string>
+  <string name="mpris_time_settings_title">Knöpfe für Vor–/Zurückspulen</string>
+  <string name="mpris_time_settings_summary">Sprungweite für Vor-/Zurückspulen anpassen</string>
+  <string-array name="mpris_time_entries">
+    <item>10 Sekunden</item>
+    <item>20 Sekunden</item>
+    <item>30 Sekunden</item>
+    <item>1 Minute</item>
+    <item>2 Minuten</item>
+  </string-array>
+  <string name="mpris_notifications_explanation">Die Berechtigung für Benachrichtigungen ist notwendig, um entfernte Medien im Benachrichtigungsfenster anzuzeigen.</string>
+  <string name="mpris_notification_settings_title">Benachrichtigung zur Medienkontrolle anzeigen</string>
+  <string name="mpris_notification_settings_summary">Die Steuerung der Medienwiedergabe auch dann erlauben, wenn Zorin Connect nicht geöffnet ist</string>
+  <string name="share_to">Teilen mit …</string>
+  <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
+  <string name="unreachable_device_url_share_text">URLs, die mit einem nicht erreichbaren Gerät geteilt werden, werden zugestellt, sobald es wieder erreichbar ist.\n\n</string>
+  <string name="unreachable_share_toast">Die Adresse wird geteilt, sobald das Gerät das nächste Mal verbunden ist.</string>
+  <string name="protocol_version">Protokollversion:</string>
+  <string name="protocol_version_newer">Dieses Gerät verwendet eine neuere Protokollversion</string>
+  <string name="plugin_settings_with_name">%s-Einstellungen</string>
+  <string name="invalid_device_name">Ungültiger Gerätename</string>
+  <string name="shareplugin_text_saved">Text empfangen und in die Zwischenablage kopiert</string>
+  <string name="custom_devices_settings">Benutzerdefinierte Geräteliste</string>
+  <string name="custom_devices_settings_summary">%d Geräte manuell hinzugefügt</string>
+  <string name="custom_device_list">Geräte nach IP-Adresse hinzufügen</string>
+  <string name="custom_device_deleted">Benutzerdefiniertes Gerät gelöscht</string>
+  <string name="custom_device_list_help">Falls Ihr Gerät nicht automatisch erkannt wird, können Sie es über die IP-Adresse oder den Gerätenamen hinzufügen. Klicken Sie dafür auf den Knopf unten</string>
+  <string name="custom_device_fab_hint">Ein Gerät hinzufügen</string>
+  <string name="undo">Rückgängig</string>
+  <string name="share_notification_preference">Ausführliche Benachrichtigungen</string>
+  <string name="share_notification_preference_summary">Beim Empfang einer Datei vibrieren und einen Klang abspielen</string>
+  <string name="share_destination_customize">Zielordner anpassen</string>
+  <string name="share_destination_customize_summary_disabled">Empfangene Dateien werden im Ordner „Downloads“ gespeichert</string>
+  <string name="share_destination_customize_summary_enabled">Dateien werden im folgenden Ordner gespeichert</string>
+  <string name="share_destination_folder_preference">Zielordner</string>
+  <string name="share">Teilen</string>
+  <string name="share_received_file">„%s“ teilen</string>
+  <string name="title_activity_notification_filter">Benachrichtigungsfilter</string>
+  <string name="filter_apps_info">Benachrichtigungen der ausgewählten Apps werden abgeglichen.</string>
+  <string name="show_notification_if_screen_off">Nur bei ausgeschaltetem Bildschirm Benachrichtigungen senden</string>
+  <string name="add_device_dialog_title">Gerät hinzufügen</string>
+  <string name="add_device_hint">Rechnername oder IP-Adresse</string>
+  <string name="sftp_preference_configured_storage_locations">Eingerichtete Speicherorte</string>
+  <string name="sftp_preference_add_storage_location_title">Speicherort hinzufügen</string>
+  <string name="sftp_preference_edit_storage_location">Speicherort bearbeiten</string>
+  <string name="sftp_storage_preference_storage_location">Speicherort</string>
+  <string name="sftp_storage_preference_storage_location_already_configured">Dieser Ort wurde bereits eingerichtet</string>
+  <string name="sftp_storage_preference_click_to_select">Zum Auswählen klicken</string>
+  <string name="sftp_storage_preference_display_name">Anzeigename</string>
+  <string name="sftp_storage_preference_display_name_already_used">Dieser Anzeigename wird bereits verwendet</string>
+  <string name="sftp_storage_preference_display_name_cannot_be_empty">Der Anzeigename darf nicht leer sein</string>
+  <string name="sftp_action_mode_menu_delete">Löschen</string>
+  <string name="sftp_no_storage_locations_configured">Keine Speicherorte eingerichtet</string>
+  <string name="sftp_saf_permission_explanation">Um aus der Ferne auf Ihre Dateien zugreifen zu können, müssen Sie Speicherorte einrichten</string>
+  <string name="sftp_manage_storage_permission_explanation">Um Fernzugriff auf Dateien auf diesem Gerät zu erlauben, müssen Sie Zorin Connect erlauben, den Speicher zu verwalten.</string>
+  <string name="sftp_missing_permission_error">Fehlende Berechtigung: Dateisystemzugriff</string>
+  <string name="no_players_connected">Keine Medienspieler gefunden</string>
+  <string name="send_files">Dateien senden</string>
+  <string name="use_digitizer">Als Zeichentablett verwenden</string>
+  <string name="digitizer_draw_button">Mit dem Finger zeichnen</string>
+  <string name="digitizer_preference_title_hide_draw_button">„Mit dem Finger zeichnen“-Knopf verstecken</string>
+  <string name="digitizer_preference_summary_hide_draw_button">Versteckt den „Mit dem Finger zeichnen“-Knopf vollständig, somit ist kein Zeichnen mit dem Finger mehr möglich. Aktivieren Sie diese Einstellung nur, wenn Ihr Gerät Stift-Eingaben unterstützt.</string>
+  <string name="digitizer_preference_title_draw_button_side">Seite des „Mit dem Finger zeichnen“-Knopfs</string>
+  <string name="digitizer_preference_title_enable_exit_fullscreen_gesture">Geste zum Verlassen des Vollbildmodus aktivieren</string>
+  <string name="digitizer_preference_summary_enable_exit_fullscreen_gesture">Wenn aktiviert, kann durch Tippen und Halten auf dem Zeichentablett der Vollbildmodus verlassen werden.</string>
+  <string-array name="digitizer_preference_entries_draw_button_side">
+    <item>Oben links</item>
+    <item>Oben rechts</item>
+    <item>Unten links</item>
+    <item>Unten rechts</item>
+  </string-array>
+  <string name="block_notification_contents">Benachrichtigungsinhalte blockieren</string>
+  <string name="block_notification_images">Bilder in Benachrichtigungen blockieren</string>
+  <string name="pairing_title">„Zorin Connect“-Geräte</string>
+  <string name="pairing_description">Andere Geräte im selben Netzwerk, auf denen Zorin Connect läuft, sollten hier angezeigt werden</string>
+  <string name="device_rename_title">Gerät umbenennen</string>
+  <string name="device_rename_confirm">Umbenennen</string>
+  <string name="refresh">Aktualisieren</string>
+  <string name="unreachable_description">Dieses gekoppelte Gerät ist nicht erreichbar. Stellen Sie sicher, dass es mit demselben Netzwerk verbunden ist.</string>
+  <string name="no_wifi">Sie sind nicht mit einem WLAN-Netzwerk verbunden, weshalb womöglich keine anderen Geräte angezeigt werden können. Klicken Sie hier, um WLAN zu aktivieren.</string>
+  <string name="on_non_trusted_message">Kein vertrauenswürdiges Netzwerk: Automatische Erkennung ist deaktiviert.</string>
+  <string name="no_file_browser">Es sind keine Dateiverwaltungsprogramme installiert.</string>
+  <string name="pref_plugin_telepathy">SMS senden</string>
+  <string name="pref_plugin_telepathy_desc">SMS von Ihrem Rechner senden</string>
+  <string name="pref_plugin_telepathy_mms">MMS senden</string>
+  <string name="pref_plugin_telepathy_mms_desc">Um MMS von Zorin Connect aus versenden zu können, müssen Sie es als Standard-SMS-App festlegen.</string>
+  <string name="findmyphone_title">Mein Telefon suchen</string>
+  <string name="findmyphone_title_tablet">Mein Tablet suchen</string>
+  <string name="findmyphone_title_tv">Meinen Fernseher suchen</string>
+  <string name="findmyphone_description">Lässt das Gerät klingeln, damit Sie es finden können</string>
+  <string name="findmyphone_found">Gefunden</string>
+  <string name="open">Öffnen</string>
+  <string name="close">Schließen</string>
+  <string name="plugins_need_permission">Einige Module benötigen zusätzliche Berechtigungen, tippen Sie für weitere Details:</string>
+  <string name="permission_explanation">Dieses Modul benötigt zusätzliche Berechtigungen</string>
+  <string name="all_permissions_granted">Alle Berechtigungen erteilt 🎉</string>
+  <string name="optional_permission_explanation">Es müssen weitere Berechtigungen erteilt werden, um alle Funktionen nutzen zu können</string>
+  <string name="plugins_need_optional_permission">Einige Module haben eingeschränkte Funktionen aufgrund fehlender Berechtigungen, tippen Sie für weitere Informationen:</string>
+  <string name="share_optional_permission_explanation">Um Dateien zu empfangen, müssen Sie Speicherzugriff erlauben</string>
+  <string name="share_notifications_explanation">Um den Fortschritt beim Senden und Empfangen von Dateien zu sehen, müssen Sie Benachrichtigungen erlauben</string>
+  <string name="telepathy_permission_explanation">Um SMS vom Rechner aus zu lesen und zu versenden, müssen Sie Zugriff auf die SMS-Funktion erlauben</string>
+  <string name="telephony_permission_explanation">Um eingehende Anrufe auf der Arbeitsfläche anzuzeigen, müssen Sie Zugriff auf die Anrufliste und den Telefonstatus erlauben</string>
+  <string name="telephony_optional_permission_explanation">Um einen Namen anstelle der Telefonnummer anzuzeigen, müssen Sie Zugriff auf das Adressbuch erlauben</string>
+  <string name="contacts_permission_explanation">Um Ihr Adressbuch mit der Arbeitsfläche zu teilen, müssen Sie Zugriff auf die Kontakte erlauben</string>
+  <string name="contacts_per_device_confirmation">Ihre Telefonkontakte werden auf dieses Gerät übertragen, damit sie von der „Zorin Connect“-SMS-App und anderen Apps verwendet werden können.</string>
+  <string name="select_ringtone">Einen Klingelton auswählen</string>
+  <string name="telephony_pref_blocked_title">Blockierte Nummern</string>
+  <string name="telephony_pref_blocked_dialog_desc">Keine Anrufe und SMS von diesen Telefonnummern anzeigen. Bitte geben Sie eine Nummer pro Zeile ein</string>
+  <string name="mpris_coverart_description">Coverbild des aktuellen Mediums</string>
+  <string name="settings_icon_description">Einstellungssymbol</string>
+  <string name="presenter_fullscreen">Vollbild</string>
+  <string name="presenter_exit">Präsentation beenden</string>
+  <string name="presenter_lock_tip">Sie können Ihr Gerät sperren und mithilfe der Lauter-/Leiser-Taste zur vorherigen/nächsten Folie wechseln</string>
+  <string name="add_command">Einen Befehl hinzufügen</string>
+  <string name="addcommand_explanation">Es sind keine Befehle eingerichtet</string>
+  <string name="addcommand_explanation2">Sie können in den Systemeinstellungen für Zorin Connect neue Befehle hinzufügen</string>
+  <string name="add_command_description">Sie können auf der Arbeitsfläche neue Befehle hinzufügen</string>
+  <string name="pref_plugin_mprisreceiver">Steuerung der Medienwiedergabe</string>
+  <string name="pref_plugin_mprisreceiver_desc">Ein verbundenes Gerät zum Steuern der lokalen Medienwiedergabe verwenden</string>
+  <string name="notification_channel_default">Andere Benachrichtigungen</string>
+  <string name="notification_channel_persistent">Dauerhafte Benachrichtigung</string>
+  <string name="notification_channel_media_control">Medienkontrolle</string>
+  <string name="notification_channel_filetransfer">Eingehende Dateiübertragung</string>
+  <string name="notification_channel_filetransfer_complete">Eingehende Dateiübertragung abgeschlossen</string>
+  <string name="notification_channel_filetransfer_upload">Ausgehende Dateiübertragung</string>
+  <string name="notification_channel_filetransfer_error">Datenübertragungsfehler</string>
+  <string name="notification_channel_high_priority">Hohe Priorität</string>
+  <string name="mpris_stop">Die aktuelle Medienwiedergabe beenden</string>
+  <string name="copy_url_to_clipboard">Adresse in die Zwischenablage kopieren</string>
+  <string name="clipboard_toast">In die Zwischenablage kopiert</string>
+  <string name="runcommand_notreachable">Das Gerät ist nicht erreichbar</string>
+  <string name="runcommand_notpaired">Das Gerät ist nicht gekoppelt</string>
+  <string name="runcommand_nosuchdevice">Ein solches Gerät existiert nicht</string>
+  <string name="runcommand_noruncommandplugin">Dieses Gerät hat das Modul zum Ausführen von Befehlen nicht aktiviert</string>
+  <string name="runcommand_category_device_controls_title">Gerätesteuerung</string>
+  <string name="runcommand_device_controls_summary">Wenn Ihr Gerät die Gerätesteuerung unterstützt, erscheinen Ihre eingerichteten Befehle dort.</string>
+  <string name="runcommand_name_as_title_title">Den Namen als Titel anzeigen</string>
+  <string name="pref_plugin_findremotedevice">Entferntes Gerät finden</string>
+  <string name="pref_plugin_findremotedevice_desc">Entferntes Gerät anklingeln</string>
+  <string name="ring">Klingeln</string>
+  <string name="pref_plugin_systemvolume">Systemlaustärke</string>
+  <string name="pref_plugin_systemvolume_desc">Die Systemlautstärke verbundener Geräte steuern</string>
+  <string name="mute">Stummschalten</string>
+  <string name="all">Alle</string>
+  <string name="devices">Geräte</string>
+  <string name="settings_rename">Gerätename</string>
+  <string name="settings_dark_mode">Dunkles Design</string>
+  <string name="settings_export_logs">Protokolle von Zorin Connect exportieren</string>
+  <string name="settings_export_logs_text">Erstellen Sie eine Datei mit Ausführungsinformationen, die bei der Fehlerbehebung helfen können.</string>
+  <string name="settings_more_settings_title">Weitere Einstellungen</string>
+  <string name="settings_more_settings_text">Gerätespezifische Einstellungen können über den Menüpunkt „Moduleinstellungen“ auf den jeweiligen Geräten abgerufen werden.</string>
+  <string name="setting_persistent_notification">Dauerhafte Benachrichtigung anzeigen</string>
+  <string name="setting_persistent_notification_oreo">Dauerhafte Benachrichtigung</string>
+  <string name="setting_persistent_notification_description">Tippen, um in den Benachrichtigungseinstellungen zu aktivieren/deaktivieren</string>
+  <string name="extra_options">Weitere Einstellungen</string>
+  <string name="privacy_options">Privatsphäre-Einstellungen</string>
+  <string name="set_privacy_options">Privatsphäre-Einstellungen festlegen</string>
+  <string name="block_contents">Inhalt von Benachrichtigungen blockieren</string>
+  <string name="block_images">Bilder in Benachrichtigungen blockieren</string>
+  <string name="notification_channel_receivenotification">Benachrichtigungen von anderen Geräten</string>
+  <string name="findmyphone_preference_title_flashlight">Blitz blinken lassen</string>
+  <string name="no_app_for_opening">Es wurde keine passende App zum Öffnen dieser Datei gefunden</string>
+  <string name="remote_keyboard_service">Entfernte Tastatur für Zorin Connect</string>
+  <string name="presenter_pointer">Laserpointer</string>
+  <string name="trusted_networks">Vertrauenswürdige Netzwerke</string>
+  <string name="trusted_networks_desc">Automatische Erkennung auf bekannte Netzwerke beschränken</string>
+  <string name="add_trusted_network">%1s hinzufügen</string>
+  <string name="empty_trusted_networks_list_text">Sie haben bisher noch kein vertrauenswürdiges Netzwerk hinzugefügt</string>
+  <string name="allow_all_networks_text">Alle erlauben</string>
+  <string name="location_permission_needed_title">Berechtigung erforderlich</string>
+  <string name="bluetooth_permission_needed_desc">Zorin Connect benötigt die Berechtigung, eine Verbindung zu Geräten in der Nähe aufzubauen, um per Bluetooth gekoppelte Geräte in Zorin Connect verfügbar zu machen.</string>
+  <string name="location_permission_needed_desc">Zorin Connect benötigt die Berechtigung für die Verwendung des Standorts im Hintergrund, um festzustellen, mit welchem WLAN-Netzwerk Sie verbunden sind, auch wenn die App im Hintergrund ist. Dies ist notwendig, da die Namen der WLAN-Netzwerke verwendet werden können, um Ihren Standort zu bestimmen, auch wenn Zorin Connect dies nicht tut.</string>
+  <string name="clipboard_android_x_incompat">In Android 10 wurde der Zugriff auf die Zwischenablage für alle Apps entfernt. Diese Modul wird deaktiviert.</string>
+  <string name="mpris_open_url">Wiedergabe hier fortsetzen</string>
+  <string name="cant_open_url">Die URL zum Fortsetzen der Wiedergabe kann nicht geöffnet werden</string>
+  <string name="bigscreen_home">Startseite</string>
+  <string name="bigscreen_up">Oben</string>
+  <string name="bigscreen_left">Links</string>
+  <string name="bigscreen_select">Auswählen</string>
+  <string name="bigscreen_right">Rechts</string>
+  <string name="bigscreen_down">Unten</string>
+  <string name="bigscreen_back">Zurück</string>
+  <string name="bigscreen_mic">Mikrofon</string>
+  <string name="pref_plugin_bigscreen">TV-Fernbedienung</string>
+  <string name="pref_plugin_bigscreen_desc">Verwenden Sie ihr Gerät als Fernbedienung für Plasma Bigscreen</string>
+  <string name="bigscreen_optional_permission_explanation">Um den Mikrofoneingang des Telefons freizugeben, müssen Sie den Zugriff auf den Audioeingang des Telefons erlauben</string>
+  <string name="bigscreen_speech_extra_prompt">Sprache</string>
+  <string name="message_reply_label">ANTWORTEN</string>
+  <string name="mark_as_read_label">ALS GELESEN MARKIEREN</string>
+  <string name="user_display_name">Sie</string>
+  <string name="set_default_sms_app_title">MMS senden</string>
+  <string name="set_group_message_as_mms_title">Gruppen-MMS senden</string>
+  <string name="set_long_text_as_mms_title">Langen Text als MMS senden</string>
+  <string name="convert_to_mms_after_title">In MMS umwandeln</string>
+  <string-array name="convert_to_mms_after_entries">
+    <item>Nach einer Nachricht</item>
+    <item>Nach zwei Nachrichten</item>
+    <item>Nach drei Nachrichten</item>
+    <item>Nach vier Nachrichten</item>
+    <item>Nach fünf Nachrichten</item>
+  </string-array>
+  <string name="theme_dialog_title">Design auswählen</string>
+  <string-array name="theme_list">
+    <item>Von Energiespareinstellungen festgelegt</item>
+    <item>Hell</item>
+    <item>Dunkel</item>
+  </string-array>
+  <string-array name="theme_list_v28">
+    <item>Systemvoreinstellung</item>
+    <item>Hell</item>
+    <item>Dunkel</item>
+  </string-array>
+  <string name="report_bug">Fehler melden</string>
+  <string name="donate">Spenden</string>
+  <string name="source_code">Quelltext</string>
+  <string name="licenses">Lizenzen</string>
+  <string name="website">Webseite</string>
+  <string name="about">Über</string>
+  <string name="authors">Autoren</string>
+  <string name="thanks_to">Dank an</string>
+  <string name="easter_egg">Osterei</string>
+  <string name="email_contributor">E-Mail an den Mitwirkenden senden\n%s</string>
+  <string name="visit_contributors_homepage">Internetseite des Mitwirkenden besuchen\n%s</string>
+  <string name="version">Version %s</string>
+  <string name="about_kde">Über KDE</string>
+  <string name="kde_be_free">KDE – Freiheit genießen!</string>
+  <string name="kde">KDE</string>
+  <string name="konqi">Konqi</string>
+  <string name="click_here_to_type">Hier tippen, um zu schreiben</string>
+  <string name="clear_compose">Leeren</string>
+  <string name="send_compose">Senden</string>
+  <string name="open_compose_send">Text schreiben</string>
+  <string name="double_tap_to_drag">Doppelklicken, um zu ziehen</string>
+  <string name="hold_to_drag">Halten, um zu ziehen</string>
+  <string name="about_kde_about">&lt;h1&gt;Über&lt;/h1&gt; &lt;p&gt;KDE ist eine weltweite Gemeinschaft von Softwareentwicklern, Künstlern, Autoren, Übersetzern und Kreativen, die sich für die Entwicklung &lt;a href=https://www.gnu.org/philosophy/free-sw.de.html&gt;freier Software&lt;/a&gt; einsetzen. KDE entwickelt die Plasma-Desktopumgebung, hunderte Anwendungen und die vielen dafür benötigten Softwarebibliotheken.&lt;/p&gt; &lt;p&gt;KDE ist ein gemeinschaftliches Unternehmen: Es gibt keine einzelne Macht, die seine Ausrichtung oder Produkte kontrolliert. Stattdessen arbeiten wir zusammen, um das gemeinschaftliche Ziel – die Entwicklung der weltbesten freien Software – zu erreichen. Jeder ist eingeladen, bei KDE &lt;a href=https://community.kde.org/Get_Involved&gt;mitzumachen und sich einzubringen&lt;/a&gt;, auch Sie.&lt;/p&gt; Besuchen Sie &lt;a href=https://www.kde.org/&gt;https://www.kde.org/&lt;/a&gt; für weitere Informationen über die KDE-Gemeinschaft und die Software, die wir entwickeln.</string>
+  <string name="about_kde_report_bugs_or_wishes">&lt;h1&gt;Fehler und Wünsche melden&lt;/h1&gt; &lt;p&gt;Software kann immer verbessert werden und das KDE-Team ist immer bereit, das zu tun. Jedoch müssen Sie – der Benutzer – uns sagen, wenn etwas nicht wie erwartet funktioniert oder verbessert werden könnte.&lt;/p&gt; &lt;p&gt;KDE hat ein Fehlerverfolgungssystem. Besuchen Sie &lt;a href=https://bugs.kde.org/&gt;https://bugs.kde.org/&lt;/a&gt; oder verwenden Sie den Knopf „Probleme und Wünsche berichten“ auf dem „Über“-Bildschirm, um Fehler zu melden.&lt;/p&gt; Wenn Sie Vorschläge für Verbesserungen haben, können Sie gerne das Fehlerverfolgungssystem nutzen, um Ihren Wunsch zu melden. Verwenden Sie hierzu den Schweregrad „Wunschliste“.</string>
+  <string name="about_kde_join_kde">&lt;h1&gt;Bei KDE mitmachen&lt;/h1&gt; &lt;p&gt;Sie müssen kein Programmierer sein, um Mitglied des KDE-Teams zu werden. Sie können den Sprachgruppen beitreten, die Programmoberflächen übersetzen. Sie können Grafiken, Designs, Klänge oder verbesserte Dokumentation beitragen. Entscheiden Sie selbst!&lt;/p&gt; &lt;p&gt;Besuchen Sie &lt;a href=https://community.kde.org/Get_Involved&gt;https://community.kde.org/Get_Involved&lt;/a&gt;, um Informationen über Projekte zu erhalten, an denen Sie sich beteiligen können.&lt;/p&gt; Wenn Sie weitere Informationen oder Dokumentation benötigen, besuchen Sie &lt;a href=https://techbase.kde.org/&gt;https://techbase.kde.org/&lt;/a&gt;.</string>
+  <string name="about_kde_support_kde">&lt;h1&gt;KDE unterstützen&lt;/h1&gt; &lt;p&gt;Software von KDE ist und wird immer kostenlos bleiben, allerdings kostet deren Entwicklung Geld.&lt;/p&gt; &lt;p&gt;Um die Entwicklung zu unterstützen, gründete die Gemeinschaft „KDE e. V.“, eine in Deutschland gegründete gemeinnützige Organisation. KDE e. V. repräsentiert die KDE-Gemeinschaft in rechtlichen und finanziellen Angelegenheiten. Lesen Sie &lt;a href=https://ev.kde.org/&gt;https://ev.kde.org/&lt;/a&gt; für Informationen über KDE e. V.&lt;/p&gt; &lt;p&gt;KDE profitiert von vielerlei Arten von Beiträgen, auch von finanziellen. Wir nutzen die Mittel, um Mitgliedern und anderen Personen die Ausgaben zu erstatten, die ihnen im Projekt entstehen. Weitere Mittel werden für rechtliche Unterstützung oder die Organisation von Konferenzen und Treffen verwendet.&lt;/p&gt; &lt;p&gt;Wir möchten Sie dazu ermutigen, unsere Bemühungen mit einer finanziellen Spende zu unterstützen. Dazu stehen Ihnen die hier beschriebenen Methoden zur Verfügung: &lt;a href=https://www.kde.org/community/donations/&gt;https://www.kde.org/community/donations/&lt;/a&gt;.&lt;/p&gt; Vielen Dank im Voraus für Ihre Unterstützung.</string>
+  <string name="maintainer_and_developer">Betreuer und Entwickler</string>
+  <string name="developer">Entwickler</string>
+  <string name="apple_support">macOS-Unterstützung. Arbeit an der macOS-Unterstützung</string>
+  <string name="bug_fixes_and_general_improvements">Fehlerbehebungen und allgemeine Verbesserungen</string>
+  <string name="samoilenko_yuri_task">SFTP-Implementierung, Fehlerbehebungen und allgemeine Verbesserungen</string>
+  <string name="aniket_kumar_task">Verbesserungen am SMS-Modul</string>
+  <string name="alex_fiestas_task">Verbesserungen am Kontakte-Modul</string>
+  <string name="maxim_leshchenko_task">UI-Verbesserungen und diese Infoseite</string>
+  <string name="holger_kaelberer_task">Modul „Entfernte Tastatur“ und Fehlerbehebungen</string>
+  <string name="saikrishna_arcot_task">Tastaturunterstützung im Ferneingabemodul, Fehlerbehebungen und allgemeine Verbesserungen</string>
+  <string name="shellwen_chen_task">Verbesserung der SFTP-Sicherheit und der Wartbarkeit dieses Projekts, Fehlerbehebungen und allgemeine Verbesserungen</string>
+  <string name="everyone_else">Jeder, der über die Jahre noch zu Zorin Connect beigetragen hat</string>
+  <string name="send_clipboard">Zwischenablage senden</string>
+  <string name="tap_to_execute">Tippen, um auszuführen</string>
+  <string name="plugin_stats">Modulstatistik</string>
+  <string name="enable_udp_broadcast">UDP-Geräteerkennung aktivieren</string>
+  <string name="enable_bluetooth">Bluetooth aktivieren (Beta)</string>
+  <string name="receive_notifications_permission_explanation">Benachrichtigungen müssen erlaubt sein, um sie von anderen Geräten empfangen zu können</string>
+  <string name="findmyphone_notifications_explanation">Die Berechtigung für Benachrichtigungen wird benötigt, damit das Telefon klingeln kann, wenn die App im Hintergrund ist</string>
+  <string name="findmyphone_camera_explanation">Die Kamera-Berechtigung ermöglicht es, den Blitz blinken zu lassen, wenn Sie Ihr Telefon suchen</string>
+  <string name="findmyphone_open_settings_for_camera">Erteilen Sie die Kamera-Berechtigung in den App-Einstellungen, um den Blitz verwenden zu können</string>
+  <string name="no_notifications">Benachrichtigungen sind deaktiviert, Sie erhalten keine Benachrichtigungen bei Kopplungsanfragen.</string>
+  <string name="mpris_keepwatching">Wiedergabe fortsetzen</string>
+  <string name="mpris_keepwatching_settings_title">Wiedergabe fortsetzen</string>
+  <string name="mpris_keepwatching_settings_summary">Eine stumme Benachrichtigung anzeigen, um nach dem Schließen von Medien die Wiedergabe auf diesem Gerät fortzusetzen</string>
+  <string name="notification_channel_keepwatching">Wiedergabe fortsetzen</string>
+  <string name="ping_result">Ping-Dauer: %1$d Millisekunden</string>
+  <string name="ping_failed">Gerät kann nicht angepingt werden</string>
+  <string name="ping_in_progress">Ping läuft …</string>
+  <string name="device_host_invalid">Rechnername ist ungültig. Verwenden Sie einen gültigen Rechnernamen, eine IPv4- oder IPv6-Adresse</string>
+  <string name="device_host_duplicate">Rechnername ist bereits in der Liste</string>
+  <string name="enable_fullscreen">Vollbildmodus aktivieren</string>
+  <string name="pref_presenter_enable_volume_keys_title">Lautstärketasten wechseln die Folien</string>
+  <string name="pref_presenter_sensitivity_title">Zeigerempfindlichkeit</string>
+  <string name="pref_presenter_enable_volume_keys_summary">Unter den Android-Versionen 13–15 im Standby-Modus nicht unterstützt</string>
+  <string name="presenter_volume_keys_foreground_tip">Sie können den Bildschirm aktiviert lassen, um mithilfe der Lautstärketasten zur vorherigen/nächsten Folie zu wechseln</string>
+  <string name="presenter_volume_keys_tip">Sie können Ihr Gerät sperren oder den Bildschirm aktiviert lassen, während Sie mithilfe der Lautstärketasten zur vorherigen/nächsten Folie wechseln</string>
+</resources>
