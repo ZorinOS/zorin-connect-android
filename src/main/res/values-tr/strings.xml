@@ -25,7 +25,8 @@
   <string name="pref_plugin_mousepad_desc_tv">Telefonunuzu veya tabletinizi, televizyon kumandası olarak kullanın</string>
   <string name="pref_plugin_presenter">Sunum uzaktan kumandası</string>
   <string name="pref_plugin_presenter_desc">Sunumdaki slaytları değiştirmek için aygıtınızı kullanın</string>
-  <string name="pref_plugin_remotekeyboard">Uzaktan düğme basımlarını al</string>
+  <string name="pref_plugin_remotekeyboard_ime">Klavye alıcısı (Android klavyesi ile)</string>
+  <string name="pref_plugin_remotekeyboard_accessibility">Klavye alıcısı (Erişilebilirlik sistemi ile)</string>
   <string name="pref_plugin_remotekeyboard_desc">Düğme basım eylemlerini, uzak aygıtlardan getir</string>
   <string name="pref_plugin_mpris">Çoklu ortam denetimleri</string>
   <string name="pref_plugin_mpris_desc">Ortam oynatıcınız için uzaktan denetim sağlar</string>
@@ -48,9 +49,12 @@
   <string name="sad_ok">Tamam :(</string>
   <string name="cancel">İptal</string>
   <string name="open_settings">Ayarları aç</string>
+  <string name="open_accessibility_settings">Erişilebilirlik ayarlarını aç</string>
+  <string name="open_input_settings">Klavye ayarlarını aç</string>
   <string name="no_permissions">Bildirimler erişebilmek için izine gereksiniminiz var</string>
   <string name="no_permission_mprisreceiver">Ortam oynatıcılarınızı denelemek için bildirimlere erişim izni vermeniz gerekir</string>
-  <string name="no_permissions_remotekeyboard">Düğmelere basmak için Zorin Connect Uzak Klavye’yi etkinleştirmeniz gerekir</string>
+  <string name="no_permissions_remotekeyboard_ime">Düğme basımlarını almak için Zorin Connect Uzak Klavye’yi, bir Android giriş yöntemi olarak etkinleştirmeniz gerekir.</string>
+  <string name="no_permissions_remotekeyboard_accessibility">Düğme basımlarını almak için erişilebilirlik izinlerini sağlamanız gerekir.</string>
   <string name="send_ping">Ping gönder</string>
   <string name="open_mpris_controls">Çoklu ortam denetimi</string>
   <string name="remotekeyboard_editing_only_title">Yalnızca düzenlerken uzaktan düğmeleri işle</string>
@@ -60,6 +64,7 @@
   <string name="open_mousepad">Uzaktan giriş</string>
   <string name="open_mousepad_tv">TV kumandası</string>
   <string name="mousepad_info">İmleç denetimi için parmağınızı ekranda hareket ettirin. Tıklamak için hafifçe vurun, sağ ve orta düğmeler için iki/üç parmağınızı kullanın. Sarmak için 2 parmağınızı kullanın. Bırakıp sürüklemek için uzun basın. Cayro fare işlevi, eklenti tercihlerinden etkinleştirilebilir</string>
+  <string name="mousepad_info_double_tap">İmleç denetimi için parmağınızı ekranda hareket ettirin. Tıklamak için hafifçe vurun, sağ ve orta düğmeler için iki/üç parmağınızı kullanın. Sarmak için 2 parmağınızı kullanın. Bırakıp sürüklemek için iki kez basın. Cayro fare işlevi, eklenti tercihlerinden etkinleştirilebilir</string>
   <string name="mousepad_info_no_gestures">Fare imlecini hareket ettirmek için ekranda parmağınızı hareket ettirin, tıklamak için dokunun.</string>
   <string name="mousepad_keyboard_input_not_supported">Klavye girişi, eşlenen aygıt tarafından desteklenmiyor</string>
   <string name="mousepad_single_tap_settings_title">Tek parmak dokunma eylemini ayarla</string>
@@ -111,7 +116,8 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Düğme basımları olarak gönder</string>
   <string name="mouse_receiver_plugin_description">Uzaktan fare hareketi al</string>
   <string name="mouse_receiver_plugin_name">Fare alıcısı</string>
-  <string name="mouse_receiver_no_permissions">Dokunma girdilerini uzaktan almak için aygıtı tümüyle denetlemek üzere Erişilebilirlik izinleri sağlamanız gerekir</string>
+  <string name="mouse_receiver_no_permissions">Dokunma girdilerini uzaktan almak için erişilebilirlik izinlerini sağlamanız gerekir.</string>
+  <string name="mouse_keyboard_receiver_service_description">Uzak fare hareketlerini ve klavye girişlerini al</string>
   <string name="view_status_title">Durum</string>
   <string name="battery_status_format">Pil: %%%d</string>
   <string name="battery_status_low_format">Pil: %%%d Düşük pil</string>
@@ -206,7 +212,7 @@
   </string-array>
   <string name="mpris_notifications_explanation">Bildirim izni, bildirim çekmecesinde uzak konum ortamını göstermek için gereklidir</string>
   <string name="mpris_notification_settings_title">Ortam denetim bildirimini göster</string>
-  <string name="mpris_notification_settings_summary">Zorin Connect’ı açmadan ortam oynatıcılarınızı denetlemenize izin verin</string>
+  <string name="mpris_notification_settings_summary">Zorin Connect’i açmadan ortam oynatıcılarınızı denetlemenize izin verin</string>
   <string name="share_to">Şuraya Paylaş…</string>
   <string name="unreachable_device_dynamic_shortcut">%s (✕)</string>
   <string name="unreachable_device_url_share_text">Erişilemeyen bir aygıta gönderilen URL’ler, aygıt erişilebilir olduğunda teslim edilir.\n\n</string>
@@ -231,7 +237,6 @@
   <string name="share_destination_folder_preference">Hedef dizin</string>
   <string name="share">Paylaş</string>
   <string name="share_received_file">Paylaş: “%s”</string>
-  <string name="title_activity_notification_filter">Bildirim süzgeci</string>
   <string name="filter_apps_info">Bildirimler, seçili uygulamalar için eşzamanlanacaktır.</string>
   <string name="show_notification_if_screen_off">Yalnızca ekran kapalıysa bildirimler gönder</string>
   <string name="add_device_dialog_title">Aygıt ekle</string>
@@ -248,8 +253,9 @@
   <string name="sftp_action_mode_menu_delete">Sil</string>
   <string name="sftp_no_storage_locations_configured">Yapılandırılmış depolama yeri yok</string>
   <string name="sftp_saf_permission_explanation">Dosyalara uzaktan erişmek için depolama konumlarını yapılandırmanız gerekir</string>
-  <string name="sftp_manage_storage_permission_explanation">Bu aygıttaki dosyalara uzak erişime izin vermek için Zorin Connect’a depolamayı yönetmesi için izin vermeniz gerekiyor.</string>
+  <string name="sftp_manage_storage_permission_explanation">Bu aygıttaki dosyalara uzak erişime izin vermek için Zorin Connect’e depolamayı yönetmesi için izin vermeniz gerekiyor.</string>
   <string name="sftp_missing_permission_error">Eksik izinler: Dosya sistemi erişimi</string>
+  <string name="sftp_could_not_determine_ip">Yerel IP adresi algılanamadı</string>
   <string name="no_players_connected">Bulunan oynatıcı yok</string>
   <string name="send_files">Dosyaları gönder</string>
   <string name="use_digitizer">Çizim tableti olarak kullan</string>
@@ -301,7 +307,7 @@
   <string name="contacts_per_device_confirmation">Telefondaki kişileriniz bu aygıta kopyalanacak; böylece Zorin Connect ve başka uygulamalar tarafından kullanılabilecekler.</string>
   <string name="select_ringtone">Bir zil sesi seç</string>
   <string name="telephony_pref_blocked_title">Engellenen numaralar</string>
-  <string name="telephony_pref_blocked_dialog_desc">Bu numaralardan gelen aramaları ve SMS’leri göstermeyin. Lütfen her satıra bir numara belirtin</string>
+  <string name="telephony_pref_blocked_dialog_desc">Bu numaralardan gelen aramaları göstermeyin. Lütfen satır başına bir numara belirtin.</string>
   <string name="mpris_coverart_description">Geçerli ortamın kapak resmi</string>
   <string name="settings_icon_description">Ayarlar simgesi</string>
   <string name="presenter_fullscreen">Tam ekran</string>
@@ -328,6 +334,7 @@
   <string name="runcommand_notpaired">Aygıt eşleştirilmedi</string>
   <string name="runcommand_nosuchdevice">Böyle bir aygıt yok</string>
   <string name="runcommand_noruncommandplugin">Bu aygıtta Komut Çalıştır Eklentisi etkin değil</string>
+  <string name="runcommand_widget_no_device">Bir aygıt seçmek için başlığa tıklayın.</string>
   <string name="runcommand_category_device_controls_title">Aygıt Denetimleri</string>
   <string name="runcommand_device_controls_summary">Aygıtınız Aygıt Denetimleri’ni destekliyorsa yapılandırdığınız komutlar orada görünür.</string>
   <string name="set_runcommand_name_as_title">çalıştırılacak_komut_adını_başlık_olarak_ayarla</string>
@@ -365,8 +372,8 @@
   <string name="empty_trusted_networks_list_text">Henüz herhangi bir güvenilen ağ eklemediniz</string>
   <string name="allow_all_networks_text">Hepsine izin ver</string>
   <string name="location_permission_needed_title">İzin gerekli</string>
-  <string name="bluetooth_permission_needed_desc">Zorin Connect, Bluetooth kullanarak eşleştirilmiş aygıtların Zorin Connect’da görülebilir olmasını sağlamak için yakındaki aygıtlara bağlanma iznine gereksinim duyar.</string>
-  <string name="location_permission_needed_desc">Zorin Connect, uygulama arka planda olsa bile bağlı olduğunuz Wi-Fi ağını bilmek için arka plan konumu iznine gereksinim duyar. Bunun nedeni, çevrenizdeki Wi-Fi ağlarının adının, Zorin Connect’ın yaptığı bu olmasa bile konumunuzu bulmak için kullanılabilmesidir.</string>
+  <string name="bluetooth_permission_needed_desc">Zorin Connect, Bluetooth kullanarak eşleştirilmiş aygıtların Zorin Connect’te görülebilir olmasını sağlamak için yakındaki aygıtlara bağlanma iznine gereksinim duyar.</string>
+  <string name="location_permission_needed_desc">Zorin Connect, uygulama arka planda olsa bile bağlı olduğunuz Wi-Fi ağını bilmek için arka plan konumu iznine gereksinim duyar. Bunun nedeni, çevrenizdeki Wi-Fi ağlarının adının, Zorin Connect’in yaptığı bu olmasa bile konumunuzu bulmak için kullanılabilmesidir.</string>
   <string name="clipboard_android_x_incompat">Android 10, tüm uygulamalara pano erişimini kaldırdı. Bu eklenti devre dışı bırakılacak.</string>
   <string name="mpris_open_url">Oynamayı burada sürdürün</string>
   <string name="cant_open_url">Oynamayı sürdürmek için URL açılamıyor</string>
@@ -380,7 +387,7 @@
   <string name="bigscreen_back">Geri</string>
   <string name="bigscreen_mic">Mikrofon</string>
   <string name="pref_plugin_bigscreen">TV kumandası</string>
-  <string name="pref_plugin_bigscreen_desc">Aygıtınızı Plasma BüyükEkran için uzaktan kumanda olarak kullanın</string>
+  <string name="pref_plugin_bigscreen_desc">Aygıtınızı Plasma Büyükekran için uzaktan kumanda olarak kullanın</string>
   <string name="bigscreen_optional_permission_explanation">Telefonunuzdan mikrofon girişini paylaşmak için telefonun ses girişine erişim izni vermeniz gerekir</string>
   <string name="bigscreen_speech_extra_prompt">Konuşma</string>
   <string name="message_reply_label">YANITLA</string>
@@ -448,7 +455,7 @@
   <string name="holger_kaelberer_task">Uzak klavye eklentisi ve hata düzeltmeleri</string>
   <string name="saikrishna_arcot_task">Uzaktan girdi eklentisinde klavye kullanımı desteği, hata düzeltmeleri ve genel iyileştirmeler</string>
   <string name="shellwen_chen_task">SFTP güvenliğini artır, projenin bakımını daha da kolaylaştır, hata düzeltmeleri ve genel iyileştirmeler</string>
-  <string name="everyone_else">Zorin Connect’a yıllar boyunca katkıda bulunan herkes</string>
+  <string name="everyone_else">Zorin Connect’e yıllar boyunca katkıda bulunan herkes</string>
   <string name="send_clipboard">Pano Gönder</string>
   <string name="tap_to_execute">Yürütmek için Dokun</string>
   <string name="plugin_stats">Eklenti İstatistikleri</string>
@@ -477,6 +484,7 @@
   <string name="runcommand_output_no_output_desc">Komutlardan alınan çıktılar burada görünür.</string>
   <string name="runcommand_output_no_output">Yürütülen komut yok</string>
   <string name="runcommand_stop">Geçerli komutu durdur</string>
+  <string name="runcommand_clear_output">Çıktıyı Temizle</string>
   <string name="pref_mpris_volume_control_title">Donanım ses düğmeleri</string>
   <string name="pref_mpris_volume_control_summary">Bağlı aygıtın ortam ses düzeyini bu telefonun düğmelerini kullanarak denetleyin</string>
 </resources>

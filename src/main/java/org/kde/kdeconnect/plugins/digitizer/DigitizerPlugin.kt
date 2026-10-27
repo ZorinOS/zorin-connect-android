@@ -9,8 +9,8 @@ package org.kde.kdeconnect.plugins.digitizer
 import android.app.Activity
 import android.content.Intent
 import android.util.Log
-import org.kde.kdeconnect.helpers.DeviceHelper
 import org.kde.kdeconnect.NetworkPacket
+import org.kde.kdeconnect.helpers.DeviceHelper
 import org.kde.kdeconnect.plugins.Plugin
 import org.kde.kdeconnect.plugins.PluginFactory
 import org.kde.kdeconnect.ui.PluginSettingsFragment
@@ -33,7 +33,7 @@ class DigitizerPlugin : Plugin() {
             R.drawable.ic_draw_24dp
         ) { parentActivity ->
             val intent = Intent(parentActivity, DigitizerActivity::class.java)
-            intent.putExtra("deviceId", device.deviceId)
+            intent.putExtra(DigitizerActivity.EXTRA_DEVICE_ID, device.deviceId)
             parentActivity.startActivity(intent)
         })
 
@@ -75,8 +75,12 @@ class DigitizerPlugin : Plugin() {
     }
 
     override fun hasSettings(): Boolean = true
-    override fun getSettingsFragment(activity: Activity): PluginSettingsFragment =
-        PluginSettingsFragment.newInstance(pluginKey, R.xml.digitizer_preferences)
+
+    override val settingsScope = SettingsScope.APP_WIDE
+
+    override fun getSettingsFragment(activity: Activity): PluginSettingsFragment {
+        return PluginSettingsFragment.newInstance(pluginKey, device.deviceId, R.xml.digitizer_preferences)
+    }
 
     override val supportedPacketTypes: Array<String>
         get() = arrayOf()

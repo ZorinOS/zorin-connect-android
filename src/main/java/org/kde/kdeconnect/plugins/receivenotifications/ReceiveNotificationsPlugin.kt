@@ -15,10 +15,10 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import androidx.core.graphics.scale
-import org.kde.kdeconnect.helpers.NotificationHelper
 import org.kde.kdeconnect.NetworkPacket
+import org.kde.kdeconnect.helpers.NotificationHelper
 import org.kde.kdeconnect.plugins.Plugin
 import org.kde.kdeconnect.plugins.PluginFactory.LoadablePlugin
 import org.kde.kdeconnect.ui.MainActivity
@@ -34,21 +34,16 @@ class ReceiveNotificationsPlugin : Plugin() {
 
     override val isEnabledByDefault: Boolean = false
 
-    override fun onCreate(): Boolean {
+    override fun onCreate() {
         // request all existing notifications
         val np = NetworkPacket(PACKET_TYPE_NOTIFICATION_REQUEST)
         np["request"] = true
         device.sendPacket(np)
-        return true
     }
 
     override fun onPacketReceived(np: NetworkPacket): Boolean {
         if ("ticker" !in np || "appName" !in np || "id" !in np) {
             Log.e("NotificationsPlugin", "Received notification packet lacks properties")
-            return true
-        }
-
-        if (np.getBoolean("silent", false)) {
             return true
         }
 
@@ -72,7 +67,7 @@ class ReceiveNotificationsPlugin : Plugin() {
             }
         }
 
-        val notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java) ?: return true
+        val notificationManager = context.getSystemService<NotificationManager>() ?: return true
 
         val noti =
             NotificationCompat.Builder(context, NotificationHelper.Channels.RECEIVENOTIFICATION)
@@ -85,6 +80,7 @@ class ReceiveNotificationsPlugin : Plugin() {
                 .setAutoCancel(true)
                 .setLocalOnly(true) // to avoid bouncing the notification back to other kdeconnect nodes
                 .setDefaults(Notification.DEFAULT_ALL)
+                .setSilent(np.getBoolean("silent", false))
                 .setStyle(NotificationCompat.BigTextStyle().bigText(np.getString("ticker")))
                 .build()
 

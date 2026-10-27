@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -44,8 +46,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.painterResource
@@ -56,11 +58,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.kde.kdeconnect.Device
 import org.kde.kdeconnect.ui.compose.KdeTheme
 import org.kde.kdeconnect.ui.compose.KdeTopAppBar
 import com.zorinos.zorin_connect.R
+import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun RunCommandScreen(
@@ -90,10 +94,20 @@ fun RunCommandScreen(
         }
     }
 
+    val showOutputCard = commandList.isNotEmpty() &&
+        device.canSendPacketType(RunCommandPlugin.PACKET_TYPE_RUNCOMMAND_OUTPUT)
+
     KdeTheme(context) {
         Scaffold(
             modifier = Modifier.safeDrawingPadding(),
-            topBar = { RunCommandAppBar(device.name, onBackPressedDispatcher) },
+            topBar = {
+                RunCommandAppBar(
+                    subTitle = device.name,
+                    onBackPressedDispatcher = onBackPressedDispatcher,
+                    showClearOutput = showOutputCard,
+                    onClearOutput = { plugin.clearOutput() },
+                )
+            },
             floatingActionButton = {
                 if (plugin.canAddCommand()) {
                     FloatingActionButton(onClick = {
@@ -141,7 +155,7 @@ fun RunCommandScreen(
                         .padding(it)
                         .fillMaxSize()
                 ) {
-                    if (device.canSendPacketType(RunCommandPlugin.PACKET_TYPE_RUNCOMMAND_OUTPUT)) {
+                    if (showOutputCard) {
                         item {
                             OutputCard(outputList, plugin)
                         }
@@ -165,7 +179,7 @@ fun RunCommandScreen(
                                         }
                                     }
                                     .combinedClickable(
-                                        indication = ripple(color = Color.White),
+                                        indication = ripple(),
                                         interactionSource = remember { MutableInteractionSource() },
                                         onClick = { plugin.runCommand(command.key) },
                                         onLongClick = {
@@ -221,7 +235,7 @@ fun RunCommandScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     var text = stringResource(R.string.addcommand_explanation)
-                    if (!(plugin.canAddCommand())) {
+                    if (!plugin.canAddCommand()) {
                         text += "\n" + stringResource(R.string.addcommand_explanation2)
                     }
                     Text(text)
@@ -238,7 +252,17 @@ private fun OutputCard(
 ) {
     val state = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
-    val showStopButton by remember { plugin.commandRunning }
+    val commandRunning by plugin.commandRunning
+    var showStopButton by remember { mutableStateOf(false) }
+
+    LaunchedEffect(commandRunning) {
+        if (commandRunning) {
+            delay(1.seconds)
+            showStopButton = true
+        } else {
+            showStopButton = false
+        }
+    }
 
     Card(
         modifier = Modifier
@@ -318,11 +342,36 @@ private fun OutputCard(
 }
 
 @Composable
-fun RunCommandAppBar(name: String, onBackPressedDispatcher: OnBackPressedDispatcher) {
+fun RunCommandAppBar(
+    subTitle: String,
+    onBackPressedDispatcher: OnBackPressedDispatcher,
+    showClearOutput: Boolean,
+    onClearOutput: () -> Unit,
+) {
     KdeTopAppBar(
         title = stringResource(R.string.pref_plugin_runcommand),
-        subTitle = name,
+        subTitle = subTitle,
         navIconOnClick = { onBackPressedDispatcher.onBackPressed() },
         navIconDescription = stringResource(androidx.appcompat.R.string.abc_action_bar_up_description),
+        actions = {
+            if (showClearOutput) {
+                var menuExpanded by remember { mutableStateOf(false) }
+                IconButton(onClick = { menuExpanded = true }) {
+                    Icon(Icons.Default.MoreVert, stringResource(R.string.extra_options))
+                }
+                DropdownMenu(
+                    expanded = menuExpanded,
+                    onDismissRequest = { menuExpanded = false },
+                ) {
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.runcommand_clear_output)) },
+                        onClick = {
+                            menuExpanded = false
+                            onClearOutput()
+                        },
+                    )
+                }
+            }
+        },
     )
 }

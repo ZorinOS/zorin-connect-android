@@ -7,13 +7,16 @@ package org.kde.kdeconnect.plugins.mpris
 
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.tabs.TabLayoutMediator
-import org.kde.kdeconnect.plugins.systemvolume.SystemVolumeFragment
 import org.kde.kdeconnect.base.BaseActivity
 import org.kde.kdeconnect.extensions.viewBinding
+import org.kde.kdeconnect.plugins.systemvolume.SystemVolumeFragment
+import org.kde.kdeconnect.ui.PluginSettingsActivity
 import com.zorinos.zorin_connect.R
 import com.zorinos.zorin_connect.databinding.ActivityMprisBinding
 
@@ -22,6 +25,7 @@ class MprisActivity : BaseActivity<ActivityMprisBinding>() {
     override val binding: ActivityMprisBinding by viewBinding(ActivityMprisBinding::inflate)
 
     private lateinit var mprisPagerAdapter: MprisPagerAdapter
+    private lateinit var deviceId: String
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         return when (keyCode) {
@@ -49,7 +53,7 @@ class MprisActivity : BaseActivity<ActivityMprisBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val deviceId = intent.getStringExtra(MprisPlugin.DEVICE_ID_KEY)
+        deviceId = intent.getStringExtra(EXTRA_DEVICE_ID)!!
 
         mprisPagerAdapter = MprisPagerAdapter(this, deviceId)
         binding.mprisPager.adapter = mprisPagerAdapter
@@ -68,7 +72,21 @@ class MprisActivity : BaseActivity<ActivityMprisBinding>() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    internal class MprisPagerAdapter(fragmentActivity: FragmentActivity, private val deviceId: String?) :
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menu.add(0, MENU_OPEN_SETTINGS, Menu.NONE, R.string.device_menu_plugins)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == MENU_OPEN_SETTINGS) {
+            startActivity(PluginSettingsActivity.createIntent(this, deviceId, MprisPlugin::class.java.simpleName))
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    internal class MprisPagerAdapter(fragmentActivity: FragmentActivity, private val deviceId: String) :
         ExtendedFragmentAdapter(fragmentActivity) {
         override fun createFragment(position: Int): Fragment = if (position == 1) {
             SystemVolumeFragment.newInstance(deviceId)
@@ -105,5 +123,12 @@ class MprisActivity : BaseActivity<ActivityMprisBinding>() {
     override fun onSupportNavigateUp(): Boolean {
         super.onBackPressedDispatcher.onBackPressed()
         return true
+    }
+
+    companion object {
+        const val EXTRA_DEVICE_ID: String = "deviceId"
+        const val EXTRA_PLAYER: String = "player"
+        const val MENU_OPEN_SETTINGS: Int = Menu.FIRST
+        const val MENU_OPEN_URL: Int = Menu.FIRST + 1
     }
 }

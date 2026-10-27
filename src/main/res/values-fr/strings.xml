@@ -25,7 +25,8 @@
   <string name="pref_plugin_mousepad_desc_tv">Utilisez votre téléphone ou votre tablette comme une télécommande de télévision</string>
   <string name="pref_plugin_presenter">Télécommande de présentation</string>
   <string name="pref_plugin_presenter_desc">Utilisez votre appareil pour changer les diapositives d\'une présentation</string>
-  <string name="pref_plugin_remotekeyboard">Recevoir les appuis de touches distants</string>
+  <string name="pref_plugin_remotekeyboard_ime">Récepteur clavier (Grâce à clavier Android)</string>
+  <string name="pref_plugin_remotekeyboard_accessibility">Récepteur clavier (Grâce à Accessibilité)</string>
   <string name="pref_plugin_remotekeyboard_desc">Recevoir les appuis de touches des périphériques distants</string>
   <string name="pref_plugin_mpris">Contrôles multimédia</string>
   <string name="pref_plugin_mpris_desc">Fournit une télécommande pour votre lecteur multimédia</string>
@@ -48,9 +49,12 @@
   <string name="sad_ok">Ok :(</string>
   <string name="cancel">Annuler</string>
   <string name="open_settings">Accéder aux paramètres</string>
+  <string name="open_accessibility_settings">Ouvrir la configuration pour l\'accessibilité</string>
+  <string name="open_input_settings">Ouvrir la configuration du clavier</string>
   <string name="no_permissions">Vous devez accorder la permission d\'accéder aux notifications</string>
   <string name="no_permission_mprisreceiver">Pour pouvoir contrôler vos lecteurs multimédia, veuillez permettre l\'accès aux notifications</string>
-  <string name="no_permissions_remotekeyboard">Vous devez activer le Clavier à distance Zorin Connect pour recevoir les appuis sur les touches</string>
+  <string name="no_permissions_remotekeyboard_ime">Pour recevoir des appuis de touches, vous devez activer le clavier à distance de Zorin Connect , comme méthode d\'entrée sous Android</string>
+  <string name="no_permissions_remotekeyboard_accessibility">Pour recevoir des appuis de touches, vous devez accorder des autorisations d\'accessibilité</string>
   <string name="send_ping">Envoyer un « Ping »</string>
   <string name="open_mpris_controls">Contrôles multimédia</string>
   <string name="remotekeyboard_editing_only_title">Gérer les appuis de touches à distance uniquement lors de l\'édition</string>
@@ -60,6 +64,7 @@
   <string name="open_mousepad">Contrôle distant</string>
   <string name="open_mousepad_tv">Télécommande de téléviseur</string>
   <string name="mousepad_info">Faites glisser votre doigt sur l\'écran pour déplacer le pointeur de la souris. Tapotez pour cliquer et utilisez deux / trois doigts pour les clics droit et centre. Utilisez 2 doigts pour faire un défilement. Faites un appui prolongé pour réaliser un glisser-déposer. La fonctionnalité de gyroscope de souris peut être activée à partir des préférences de module externe.</string>
+  <string name="mousepad_info_double_tap">Faites glisser votre doigt sur l\'écran pour déplacer le pointeur de la souris. Tapotez pour cliquer et utilisez deux / trois doigts pour les clics droit et central. Utilisez 2 doigts pour faire un défilement. Tapotez deux fois pour réaliser un glisser-déposer. La fonctionnalité de gyroscope de souris peut être activée à partir des préférences de module externe.</string>
   <string name="mousepad_info_no_gestures">Faites glisser un doigt sur l\'écran pour déplacer le pointeur de souris. Tapotez sur l\'écran pour effectuer un clic.</string>
   <string name="mousepad_keyboard_input_not_supported">La saisie par le clavier n\'est pas pris en charge par le périphérique associé.</string>
   <string name="mousepad_single_tap_settings_title">Définir une action pour tapotage avec un doigt</string>
@@ -111,7 +116,8 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Envoyez comme appuis de touches</string>
   <string name="mouse_receiver_plugin_description">Recevoir les mouvements de la souri distante</string>
   <string name="mouse_receiver_plugin_name">Récepteur de souris</string>
-  <string name="mouse_receiver_no_permissions">Pour recevoir des entrées tactiles à distance, vous devez accorder des autorisations d\'accessibilité pour contrôler entièrement votre périphérique</string>
+  <string name="mouse_receiver_no_permissions">Pour recevoir des entrées tactiles à distance, vous devez accorder des autorisations d\'accessibilité</string>
+  <string name="mouse_keyboard_receiver_service_description">Recevoir les mouvements de la souris distante et des entrées de clavier</string>
   <string name="view_status_title">État</string>
   <string name="battery_status_format">Batterie : %d %%</string>
   <string name="battery_status_low_format">Batterie : %d %% Batterie faible</string>
@@ -231,7 +237,6 @@
   <string name="share_destination_folder_preference">Dossier de destination</string>
   <string name="share">Partager</string>
   <string name="share_received_file">Partager « %s »</string>
-  <string name="title_activity_notification_filter">Filtre des notifications</string>
   <string name="filter_apps_info">Les notifications seront synchronisées pour les applications sélectionnées.</string>
   <string name="show_notification_if_screen_off">Envoyer des notifications uniquement si l\'écran est éteint.</string>
   <string name="add_device_dialog_title">Ajouter un périphérique</string>
@@ -250,6 +255,7 @@
   <string name="sftp_saf_permission_explanation">Vous devez configurer des emplacements de stockage pour accéder aux fichiers à distance</string>
   <string name="sftp_manage_storage_permission_explanation">Pour permettre l\'accès à distance aux fichiers sur ce périphérique, vous devez autoriser Zorin Connect à gérer l\'enregistrement.</string>
   <string name="sftp_missing_permission_error">Autorisations manquantes : accès au système de fichiers</string>
+  <string name="sftp_could_not_determine_ip">Impossible de déterminer l\'adresse IP locale</string>
   <string name="no_players_connected">Aucun lecteur trouvé</string>
   <string name="send_files">Envoyer des fichiers</string>
   <string name="use_digitizer">Utiliser comme une tablette graphique</string>
@@ -301,7 +307,7 @@
   <string name="contacts_per_device_confirmation">Vos contacts téléphoniques seront copiés sur ce périphérique. Ainsi, ils pourront être utilisés par l\'application « SMS » de Zorin Connect et d\'autres applications.</string>
   <string name="select_ringtone">Sélectionnez une sonnerie</string>
   <string name="telephony_pref_blocked_title">Numéros bloqués</string>
-  <string name="telephony_pref_blocked_dialog_desc">Ne pas afficher les appels et les SMS provenant de ces numéros. Veuillez renseigner un numéro par ligne</string>
+  <string name="telephony_pref_blocked_dialog_desc">Ne pas afficher les appels provenant de ces numéros. Veuillez renseigner un numéro par ligne</string>
   <string name="mpris_coverart_description">Illustration du média actuel</string>
   <string name="settings_icon_description">Icône des paramètres</string>
   <string name="presenter_fullscreen">Plein écran</string>
@@ -328,6 +334,7 @@
   <string name="runcommand_notpaired">Le périphérique n\'est pas associé</string>
   <string name="runcommand_nosuchdevice">Ce périphérique n\'existe pas</string>
   <string name="runcommand_noruncommandplugin">Le module externe Exécuter une commande n\'est pas activé sur ce périphérique</string>
+  <string name="runcommand_widget_no_device">Cliquez sur le titre pour sélectionner un périphérique.</string>
   <string name="runcommand_category_device_controls_title">Contrôles de périphérique</string>
   <string name="runcommand_device_controls_summary">Si votre périphérique prend en charge les commandes de périphérique, les commandes que vous avez configurées y apparaitront.</string>
   <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
@@ -456,8 +463,8 @@
   <string name="enable_bluetooth">Activer l\'interface Bluetooth (Bêta)</string>
   <string name="receive_notifications_permission_explanation">Les notifications doivent être autorisées pour en recevoir d\'autres périphériques</string>
   <string name="findmyphone_notifications_explanation">Les permissions pour les notifications sont nécessaires pour que le téléphone puisse sonner lorsque l\'application s\'exécute en tâche de fond</string>
-  <string name="findmyphone_camera_explanation">La permission pour l’appareil photo permet à la lampe de poche de clignoter lorsque vous trouvez votre téléphone</string>
-  <string name="findmyphone_open_settings_for_camera">Accorder l’autorisation à l\'appareil photo dans la confirmation de l’application pour utiliser la lampe de poche</string>
+  <string name="findmyphone_camera_explanation">La permission pour l\'appareil photo permet à la lampe de poche de clignoter lorsque vous trouvez votre téléphone</string>
+  <string name="findmyphone_open_settings_for_camera">Accorder l\'autorisation à l\'appareil photo dans la confirmation de l\'application pour utiliser la lampe de poche</string>
   <string name="no_notifications">Les notifications sont désactivées. Vous ne recevrez aucune notification pour les demandes d\'associations entrantes.</string>
   <string name="mpris_keepwatching">Continuer la lecture</string>
   <string name="mpris_keepwatching_settings_title">Continuer la lecture</string>
@@ -471,12 +478,13 @@
   <string name="enable_fullscreen">Activer le mode en plein écran</string>
   <string name="pref_presenter_enable_volume_keys_title">Les touches de volume font défiler les diapositives</string>
   <string name="pref_presenter_sensitivity_title">Sensibilité du pointeur</string>
-  <string name="pref_presenter_enable_volume_keys_summary">La mise en veille n’est pas prise en charge sur les versions Android entre 13 et 15.</string>
+  <string name="pref_presenter_enable_volume_keys_summary">La mise en veille n\'est pas prise en charge sur les versions Android entre 13 et 15.</string>
   <string name="presenter_volume_keys_foreground_tip">Vous pouvez laisser l\'écran ouvert et utiliser les touches de volume pour passer d\'une diapositive à une autre</string>
   <string name="presenter_volume_keys_tip">Vous pouvez laisser l\'écran ouvert ou verrouiller votre périphérique pour utiliser les touches de volume pour passer d\'une diapositive à une autre</string>
   <string name="runcommand_output_no_output_desc">Le résultat des commandes apparaîtra ici.</string>
   <string name="runcommand_output_no_output">Aucune commande n\'a été exécutée.</string>
   <string name="runcommand_stop">Interrompre la commande courante</string>
+  <string name="runcommand_clear_output">Effacer la sortie</string>
   <string name="pref_mpris_volume_control_title">Touches matérielles de volume</string>
   <string name="pref_mpris_volume_control_summary">Contrôler le volume multimédia du périphérique connecté à l\'aide des boutons matériels de ce téléphone</string>
 </resources>

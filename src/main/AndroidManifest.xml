@@ -108,8 +108,9 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             android:foregroundServiceType="connectedDevice"
             android:icon="@drawable/icon"
             android:enabled="true" />
+
         <service
-            android:name="org.kde.kdeconnect.plugins.remotekeyboard.RemoteKeyboardService"
+            android:name="org.kde.kdeconnect.plugins.remotekeyboardime.RemoteKeyboardService"
             android:label="@string/remote_keyboard_service"
             android:exported="true"
             android:permission="android.permission.BIND_INPUT_METHOD">
@@ -121,6 +122,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
                 android:name="android.view.im"
                 android:resource="@xml/remotekeyboardplugin_method" />
         </service>
+
 
         <activity
             android:name="org.kde.kdeconnect.ui.MainActivity"
@@ -278,7 +280,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             android:name="org.kde.kdeconnect.plugins.mousepad.BigscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/pref_plugin_bigscreen"
-            android:exported="true"
+            android:exported="false"
             android:parentActivityName="org.kde.kdeconnect.ui.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <meta-data
@@ -390,9 +392,10 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
             </intent-filter>
         </service>
         <service
-            android:name="org.kde.kdeconnect.plugins.mousereceiver.MouseReceiverService"
+            android:name="org.kde.kdeconnect.KdeConnectAccessibilityService"
             android:exported="true"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            tools:ignore="AccessibilityPolicy">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
@@ -401,14 +404,6 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
                 android:resource="@xml/mouse_receiver_service" />
         </service>
 
-        <activity
-            android:name="org.kde.kdeconnect.plugins.notifications.NotificationFilterActivity"
-            android:label="@string/title_activity_notification_filter"
-            android:parentActivityName="org.kde.kdeconnect.ui.PluginSettingsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="org.kde.kdeconnect.ui.PluginSettingsActivity" />
-        </activity>
 
         <activity
             android:name="org.kde.kdeconnect.plugins.digitizer.DigitizerActivity"

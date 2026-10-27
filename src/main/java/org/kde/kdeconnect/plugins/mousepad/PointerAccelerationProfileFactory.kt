@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2018 Chansol Yang <CosmicSubspace@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.plugins.mousepad
 
 import kotlin.math.pow
@@ -10,7 +10,6 @@ import kotlin.math.sqrt
 
 
 object PointerAccelerationProfileFactory {
-    @JvmStatic
     fun getProfileWithName(name: String): PointerAccelerationProfile = when (name) {
         "weaker" -> PolynomialProfile(0.25f)
         "weak" -> PolynomialProfile(0.5f)

@@ -25,7 +25,8 @@
   <string name="pref_plugin_mousepad_desc_tv">Скористайтеся телефоном або планшетом як пультом керування телевізором</string>
   <string name="pref_plugin_presenter">Керування презентацією</string>
   <string name="pref_plugin_presenter_desc">Скористайтеся вашим пристроєм для того, щоб змінювати слайди у презентації</string>
-  <string name="pref_plugin_remotekeyboard">Отримувати віддалені натискання клавіш</string>
+  <string name="pref_plugin_remotekeyboard_ime">Приймач клавіатури (через клавіатуру Android)</string>
+  <string name="pref_plugin_remotekeyboard_accessibility">Приймач клавіатури (через засоби доступності)</string>
   <string name="pref_plugin_remotekeyboard_desc">Отримувати події натискання клавіш з віддаленого пристрою</string>
   <string name="pref_plugin_mpris">Керування відтворенням</string>
   <string name="pref_plugin_mpris_desc">Надає можливість віддаленого керування вашим мультимедійним програвачем</string>
@@ -48,9 +49,12 @@
   <string name="sad_ok">Гаразд :(</string>
   <string name="cancel">Скасувати</string>
   <string name="open_settings">Відкрити вікно параметрів</string>
+  <string name="open_accessibility_settings">Відкрити параметри доступності</string>
+  <string name="open_input_settings">Відкрити параметри клавіатури</string>
   <string name="no_permissions">Вам слід надати доступ до сповіщень</string>
   <string name="no_permission_mprisreceiver">Щоб мати змогу керувати вашими програвачами мультимедійних даних, вам слід надати доступ до сповіщень.</string>
-  <string name="no_permissions_remotekeyboard">Щоб отримувати повідомлення щодо натискання клавіш, вам слід активувати віддалену клавіатуру Zorin Connect</string>
+  <string name="no_permissions_remotekeyboard_ime">Щоб отримувати повідомлення щодо натискання клавіш, вам слід активувати віддалену клавіатуру Zorin Connect через спосіб введення Android</string>
+  <string name="no_permissions_remotekeyboard_accessibility">Щоб отримувати натискання клавіш клавіатури, вам слід надати засобам доступності дозвіл</string>
   <string name="send_ping">Надіслати сигнал підтримання зв’язку</string>
   <string name="open_mpris_controls">Керування відтворенням</string>
   <string name="remotekeyboard_editing_only_title">Обробляти віддалені клавіші лише під час редагування</string>
@@ -60,6 +64,7 @@
   <string name="open_mousepad">Дистанційне введення</string>
   <string name="open_mousepad_tv">Пульт керування телевізором</string>
   <string name="mousepad_info">Проведіть по екрану пальцем, щоб пересунути вказівник миші. Дотик одним пальцем означатиме клацання, дотиком двома або трьома пальцями можна імітувати праву і середню кнопки. Гортання відбувається за допомогою двох пальців. Для перетягування зі скиданням скористайтеся тривалим натисканням. Можливості гіроскопічного керування вказівником миші можна увімкнути у налаштуваннях додатка.</string>
+  <string name="mousepad_info_double_tap">Проведіть по екрану пальцем, щоб пересунути вказівник миші. Дотик одним пальцем означатиме клацання, дотиком двома або трьома пальцями можна імітувати праву і середню кнопки. Гортання відбувається за допомогою двох пальців. Для перетягування зі скиданням скористайтеся подвійним торканням. Можливості гіроскопічного керування вказівником миші можна увімкнути у налаштуваннях додатка.</string>
   <string name="mousepad_info_no_gestures">Пересувайте палець екраном, щоб пересунути вказівник миші; торкніться екрана для клацання.</string>
   <string name="mousepad_keyboard_input_not_supported">Підтримки введення з клавіатури на пов\'язаному пристрої не передбачено</string>
   <string name="mousepad_single_tap_settings_title">Встановлення дії для торкання одним пальцем</string>
@@ -111,7 +116,8 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Надсилати як натискання клавіш</string>
   <string name="mouse_receiver_plugin_description">Отримувати віддалені рухи мишею</string>
   <string name="mouse_receiver_plugin_name">Отримання даних миші</string>
-  <string name="mouse_receiver_no_permissions">Щоб отримувати сигнали про торкання віддалено, вам слід надати засобам доступності дозвіл на повне керування вашим пристроєм</string>
+  <string name="mouse_receiver_no_permissions">Щоб отримувати сигнали про торкання віддалено, вам слід надати засобам доступності дозвіл</string>
+  <string name="mouse_keyboard_receiver_service_description">Отримувати віддалені рухи мишею та введення з клавіатури</string>
   <string name="view_status_title">Стан</string>
   <string name="battery_status_format">Акумулятор: %d%%</string>
   <string name="battery_status_low_format">Акумулятор: %d%%, низький заряд</string>
@@ -247,7 +253,6 @@
   <string name="share_destination_folder_preference">Каталог призначення</string>
   <string name="share">Оприлюднити</string>
   <string name="share_received_file">Оприлюднити «%s»</string>
-  <string name="title_activity_notification_filter">Фільтр сповіщень</string>
   <string name="filter_apps_info">Сповіщення буде синхронізовано для позначених програм.</string>
   <string name="show_notification_if_screen_off">Надсилати сповіщення, лише якщо екран вимкнено</string>
   <string name="add_device_dialog_title">Додавання пристрою</string>
@@ -266,6 +271,7 @@
   <string name="sftp_saf_permission_explanation">Щоб отримувати віддалений доступ до файлів, вам слід налаштувати розташування сховищ</string>
   <string name="sftp_manage_storage_permission_explanation">Щоб уможливити віддалений доступу до файлів на цьому пристрої, вам слід дозволити Zorin Connect керувати сховищем даних.</string>
   <string name="sftp_missing_permission_error">Не вистачає прав доступу: доступ до файлової системи</string>
+  <string name="sftp_could_not_determine_ip">Не вдалося визначити локальну IP-адресу</string>
   <string name="no_players_connected">Не знайдено програвачів</string>
   <string name="send_files">Надіслати файли</string>
   <string name="use_digitizer">Використати як планшет для малювання</string>
@@ -317,7 +323,7 @@
   <string name="contacts_per_device_confirmation">Записи контактів з вашого телефону буде скопійовано на цей пристрій, щоб ними можна було користуватися у програмі для надсилання SMS Zorin Connect та інших програмах.</string>
   <string name="select_ringtone">Виберіть мелодію дзвінка</string>
   <string name="telephony_pref_blocked_title">Заблоковані номери</string>
-  <string name="telephony_pref_blocked_dialog_desc">Не показувати виклики та SMS з цих номерів. Будь ласка, вказуйте кожен із номерів у окремому рядку.</string>
+  <string name="telephony_pref_blocked_dialog_desc">Не показувати виклики з цих номерів. Будь ласка, вказуйте кожен із номерів у окремому рядку.</string>
   <string name="mpris_coverart_description">Зображення обкладинки відтворюваних даних</string>
   <string name="settings_icon_description">Піктограма параметрів</string>
   <string name="presenter_fullscreen">На увесь екран</string>
@@ -344,6 +350,7 @@
   <string name="runcommand_notpaired">Пристрій не пов’язано</string>
   <string name="runcommand_nosuchdevice">Такого пристрою не існує</string>
   <string name="runcommand_noruncommandplugin">Для цього пристрою не увімкнено додаток виконання команд</string>
+  <string name="runcommand_widget_no_device">Натисніть на пункті з назвою, щоб вибрати пристрій.</string>
   <string name="runcommand_category_device_controls_title">Керування пристроєм</string>
   <string name="runcommand_device_controls_summary">Якщо на вашому пристрої передбачено підтримку засобів керування пристроєм, тут буде показано налаштовані вами команди.</string>
   <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
@@ -493,6 +500,7 @@
   <string name="runcommand_output_no_output_desc">Тут буде показано виведені командами повідомлення.</string>
   <string name="runcommand_output_no_output">Не виконано жодної команди</string>
   <string name="runcommand_stop">Зупинити виконання поточної команди</string>
+  <string name="runcommand_clear_output">Витерти виведене</string>
   <string name="pref_mpris_volume_control_title">Апаратні клавіші гучності</string>
   <string name="pref_mpris_volume_control_summary">Керування гучністю відтворення даних на з\'єднаному пристрої за допомогою апаратних кнопок телефону</string>
 </resources>

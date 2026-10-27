@@ -18,7 +18,6 @@
   <string name="pref_plugin_mousepad">Entrada remota</string>
   <string name="pref_plugin_presenter">Mando de presentación</string>
   <string name="pref_plugin_presenter_desc">Use o dispositivo para cambiar de dispositiva nunha presentación</string>
-  <string name="pref_plugin_remotekeyboard">Recibir teclas premidas remotamente.</string>
   <string name="pref_plugin_remotekeyboard_desc">Recibir eventos de teclas premidas de dispositivos remotos.</string>
   <string name="pref_plugin_mpris">Controis multimedia</string>
   <string name="pref_plugin_mpris_desc">Fornece un mando a distancia para o reprodutor.</string>
@@ -41,7 +40,6 @@
   <string name="open_settings">Abrir a configuración</string>
   <string name="no_permissions">Debe conceder permisos para acceder ás notificacións</string>
   <string name="no_permission_mprisreceiver">Para poder controlar os seus reprodutores multimedia ten que garantir acceso ás notificacións</string>
-  <string name="no_permissions_remotekeyboard">Para recibir presións de tecla ten que activar o teclado remoto de Zorin Connect</string>
   <string name="send_ping">Enviar un ping</string>
   <string name="open_mpris_controls">Control multimedia</string>
   <string name="remotekeyboard_editing_only_title">Xestionar teclas remotas só ao editar.</string>
@@ -97,7 +95,6 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Enviar como pulsacións de tecla</string>
   <string name="mouse_receiver_plugin_description">Recibir movementos de rato remotos</string>
   <string name="mouse_receiver_plugin_name">Receptor de rato</string>
-  <string name="mouse_receiver_no_permissions">Para recibir entrada táctil remota ten que garantir permisos de accesibilidade para controlar completamente o dispositivo.</string>
   <string name="view_status_title">Estado</string>
   <string name="battery_status_format">Batería: %d%%</string>
   <string name="battery_status_low_format">Batería: %d%% (baixa)</string>
@@ -212,7 +209,6 @@
   <string name="share_destination_folder_preference">Cartafol de destino</string>
   <string name="share">Compartir</string>
   <string name="share_received_file">Compartir «%s»</string>
-  <string name="title_activity_notification_filter">Filtro de notificacións</string>
   <string name="filter_apps_info">As notificacións das seguintes aplicacións sincronizaranse.</string>
   <string name="show_notification_if_screen_off">Enviar notificacións só se a pantalla está apagada</string>
   <string name="add_device_dialog_title">Engadir o dispositivo</string>
@@ -274,7 +270,6 @@
   <string name="contacts_per_device_confirmation">Os contactos do teléfono copiaranse neste dispositivo para que os poidan usar a aplicación de SMS de Zorin Connect e outras aplicacións.</string>
   <string name="select_ringtone">Seleccione un ton de chamada</string>
   <string name="telephony_pref_blocked_title">Números bloqueados</string>
-  <string name="telephony_pref_blocked_dialog_desc">Non amosar chamadas nin SMS destes números. Indique un número por liña.</string>
   <string name="mpris_coverart_description">Portada da obra actual.</string>
   <string name="settings_icon_description">Icona da configuración.</string>
   <string name="presenter_fullscreen">Pantalla completa</string>

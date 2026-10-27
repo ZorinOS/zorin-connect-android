@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2025 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect
 
 import android.app.Notification
@@ -12,31 +12,29 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.os.SystemClock
 import android.util.Log
 import androidx.annotation.AnyThread
 import androidx.annotation.DrawableRes
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.WorkerThread
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
 import androidx.core.content.edit
+import androidx.core.content.getSystemService
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
-import org.apache.commons.collections4.MultiValuedMap
-import org.apache.commons.collections4.multimap.ArrayListValuedHashMap
-import org.kde.kdeconnect.backends.BaseLink
-import org.kde.kdeconnect.backends.BaseLink.PacketReceiver
-import org.kde.kdeconnect.DeviceInfo.Companion.loadFromSettings
 import org.kde.kdeconnect.DeviceStats.countReceived
 import org.kde.kdeconnect.DeviceStats.countSent
+import org.kde.kdeconnect.PairingHandler.PairingCallback
+import org.kde.kdeconnect.backends.BaseLink
+import org.kde.kdeconnect.backends.BaseLink.PacketReceiver
 import org.kde.kdeconnect.helpers.DeviceHelper
 import org.kde.kdeconnect.helpers.NotificationHelper
 import org.kde.kdeconnect.helpers.TrustedDevices
-import org.kde.kdeconnect.PairingHandler.PairingCallback
 import org.kde.kdeconnect.plugins.Plugin
 import org.kde.kdeconnect.plugins.Plugin.Companion.getPluginKey
 import org.kde.kdeconnect.plugins.PluginFactory
@@ -44,7 +42,6 @@ import org.kde.kdeconnect.ui.MainActivity
 import com.zorinos.zorin_connect.R
 import java.io.IOException
 import java.security.cert.Certificate
-import java.util.Vector
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentMap
 import java.util.concurrent.CopyOnWriteArrayList
@@ -73,7 +70,7 @@ class Device : PacketReceiver {
     /**
      * Plugins that have matching capabilities.
      */
-    var supportedPlugins: List<String>
+    var supportedPlugins: Set<String>
         private set
 
     /**
@@ -95,7 +92,7 @@ class Device : PacketReceiver {
     /**
      * Same as loadedPlugins but indexed by incoming packet type
      */
-    private var pluginsByIncomingInterface: MultiValuedMap<String, String> = ArrayListValuedHashMap()
+    private var pluginsByIncomingInterface: Map<String, List<String>> = emptyMap()
 
     private val pairingCallbacks = CopyOnWriteArrayList<PairingCallback>()
     private val pluginsChangedListeners = CopyOnWriteArrayList<PluginsChangedListener>()
@@ -109,9 +106,9 @@ class Device : PacketReceiver {
      */
     internal constructor(context: Context, deviceId: String) {
         this.context = context
-        this.deviceInfo = loadFromSettings(context, deviceId)
+        this.deviceInfo = DeviceInfo.loadFromSettings(context, deviceId)
         this.pairingHandler = PairingHandler(this, createDefaultPairingCallback(), PairingHandler.PairState.Paired)
-        this.supportedPlugins = Vector(PluginFactory.availablePlugins) // Assume all are supported until we receive capabilities
+        this.supportedPlugins = PluginFactory.availablePlugins // Assume all are supported until we receive capabilities
         Log.i("Device", "Loading trusted device: ${deviceInfo.name}")
     }
 
@@ -124,8 +121,8 @@ class Device : PacketReceiver {
         this.context = context
         this.deviceInfo = link.deviceInfo
         this.pairingHandler = PairingHandler(this, createDefaultPairingCallback(), PairingHandler.PairState.NotPaired)
-        this.supportedPlugins = Vector(PluginFactory.availablePlugins) // Assume all are supported until we receive capabilities
-        Log.i("Device", "Creating untrusted device: " + deviceInfo.name)
+        this.supportedPlugins = PluginFactory.availablePlugins // Assume all are supported until we receive capabilities
+        Log.i("Device", "Creating untrusted device: ${deviceInfo.name}")
         addLink(link)
     }
 
@@ -247,11 +244,16 @@ class Device : PacketReceiver {
     // Notification related methods used during pairing
     //
     fun displayPairingNotification() {
+        val notificationManager = context.getSystemService<NotificationManager>()
+            ?: return
+
         hidePairingNotification()
 
-        notificationId = System.currentTimeMillis().toInt()
+        notificationId = SystemClock.elapsedRealtime().toInt()
 
         val intent = Intent(context, MainActivity::class.java).apply {
+            // PendingIntent matching ignores extras, so scope each action to this device.
+            action = "org.kde.kdeconnect.PAIRING_PENDING.$deviceId"
             putExtra(MainActivity.EXTRA_DEVICE_ID, deviceId)
             putExtra(MainActivity.PAIR_REQUEST_STATUS, MainActivity.PAIRING_PENDING)
         }
@@ -264,10 +266,12 @@ class Device : PacketReceiver {
         )
 
         val acceptIntent = Intent(context, MainActivity::class.java).apply {
+            action = "org.kde.kdeconnect.PAIRING_ACCEPTED.$deviceId"
             putExtra(MainActivity.EXTRA_DEVICE_ID, deviceId)
             putExtra(MainActivity.PAIR_REQUEST_STATUS, MainActivity.PAIRING_ACCEPTED)
         }
         val rejectIntent = Intent(context, MainActivity::class.java).apply {
+            action = "org.kde.kdeconnect.PAIRING_REJECTED.$deviceId"
             putExtra(MainActivity.EXTRA_DEVICE_ID, deviceId)
             putExtra(MainActivity.PAIR_REQUEST_STATUS, MainActivity.PAIRING_REJECTED)
         }
@@ -276,18 +280,16 @@ class Device : PacketReceiver {
             context,
             2,
             acceptIntent,
-            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
         )
         val rejectedPendingIntent = PendingIntent.getActivity(
             context,
             4,
             rejectIntent,
-            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
         )
 
         val res = context.resources
-
-        val notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java)!!
 
         val noti = NotificationCompat.Builder(context, NotificationHelper.Channels.DEFAULT)
             .setContentTitle(res.getString(R.string.pairing_request_from, name))
@@ -300,13 +302,12 @@ class Device : PacketReceiver {
             .setAutoCancel(true)
             .setDefaults(Notification.DEFAULT_ALL)
             .build()
-
         notificationManager.notify(notificationId, noti)
     }
 
     fun hidePairingNotification() {
-        val notificationManager = ContextCompat.getSystemService(context, NotificationManager::class.java)!!
-        notificationManager.cancel(notificationId)
+        context.getSystemService<NotificationManager>()
+            ?.cancel(notificationId)
     }
 
     val isReachable: Boolean
@@ -396,11 +397,9 @@ class Device : PacketReceiver {
             Log.i("updateDeviceInfo", "Updating supported plugins according to new capabilities")
             deviceInfo.outgoingCapabilities = newOutgoingCapabilities
             deviceInfo.incomingCapabilities = newIncomingCapabilities
-            supportedPlugins = Vector(
-                PluginFactory.pluginsForCapabilities(
-                    newIncomingCapabilities,
-                    newOutgoingCapabilities
-                )
+            supportedPlugins = PluginFactory.pluginsForCapabilities(
+                newIncomingCapabilities,
+                newOutgoingCapabilities
             )
         }
 
@@ -414,11 +413,6 @@ class Device : PacketReceiver {
             Log.i("KDE/Device", "Pair packet")
             pairingHandler.packetReceived(np)
             return
-        }
-
-        // pluginsByIncomingInterface may not be built yet
-        if (pluginsByIncomingInterface.isEmpty) {
-            reloadPluginsFromSettings()
         }
 
         if (!isPaired) {
@@ -437,7 +431,7 @@ class Device : PacketReceiver {
     }
 
     private fun notifyPluginPacketReceived(np: NetworkPacket) {
-        val targetPlugins = pluginsByIncomingInterface[np.type] // Returns an empty collection if the key doesn't exist
+        val targetPlugins = pluginsByIncomingInterface[np.type] ?: emptyList()
         if (targetPlugins.isEmpty()) {
             Log.w("Device", "Ignoring packet with type ${np.type} because no plugin can handle it")
 
@@ -544,6 +538,8 @@ class Device : PacketReceiver {
     //
     // Plugin-related functions
     //
+    inline fun <reified T : Plugin> getPlugin(): T? = getPlugin(T::class.java)
+
     fun <T : Plugin> getPlugin(pluginClass: Class<T>): T? {
         val plugin = getPlugin(getPluginKey(pluginClass))
         return plugin?.let(pluginClass::cast)
@@ -556,6 +552,12 @@ class Device : PacketReceiver {
     }
 
     // Helper function for reloadPluginsFromSettings(), do not call from elsewhere
+    // Places the plugin in one of these buckets:
+    // - required permissions missing: pluginsWithoutPermissions only
+    // - required permissions missing, loadPluginWhenRequiredPermissionsMissing() == true: loadedPlugins + pluginsWithoutPermissions
+    // - optional permissions missing: loadedPlugins + pluginsWithoutOptionalPermissions
+    // - all permissions granted: loadedPlugins only
+    // returns true if the plugin ended up in loadedPlugins
     private fun addPlugin(pluginKey: String): Boolean {
         val isNewPlugin = !loadedPlugins.containsKey(pluginKey)
 
@@ -571,6 +573,7 @@ class Device : PacketReceiver {
         if (!plugin.checkRequiredPermissions()) {
             Log.d("KDE/addPlugin", "No permission $pluginKey")
             pluginsWithoutPermissions[pluginKey] = plugin
+            pluginsWithoutOptionalPermissions.remove(pluginKey)
             if (plugin.loadPluginWhenRequiredPermissionsMissing()) {
                 loadedPlugins[pluginKey] = plugin
             } else {
@@ -594,20 +597,26 @@ class Device : PacketReceiver {
             return true
         }
 
-        return runCatching {
+        try {
             plugin.onCreate()
-        }.onFailure {
-            Log.e("KDE/addPlugin", "plugin failed to load $pluginKey", it)
-        }.getOrDefault(false)
+        } catch (e : Exception) {
+            Log.e("KDE/addPlugin", "plugin failed to load $pluginKey", e)
+            removePlugin(pluginKey)
+            return false
+        }
+        return true
     }
 
     // Helper function for reloadPluginsFromSettings(), do not call from elsewhere
     private fun removePlugin(pluginKey: String): Boolean {
-        val plugin = loadedPlugins.remove(pluginKey) ?: return false
+        val plugin = loadedPlugins.remove(pluginKey)
+        pluginsWithoutPermissions.remove(pluginKey)
+        pluginsWithoutOptionalPermissions.remove(pluginKey)
+        if (plugin == null) return false
 
         try {
             plugin.onDestroy()
-            // Log.e("removePlugin","removed " + pluginKey);
+            // Log.e("removePlugin","removed $pluginKey");
         } catch (e: Exception) {
             Log.e("KDE/removePlugin", "Exception calling onDestroy for plugin $pluginKey", e)
         }
@@ -647,7 +656,10 @@ class Device : PacketReceiver {
     @WorkerThread
     fun reloadPluginsFromSettings() {
         Log.i("Device", "${deviceInfo.name}: reloading plugins")
-        val newPluginsByIncomingInterface: MultiValuedMap<String, String> = ArrayListValuedHashMap()
+        val newPluginsByIncomingInterface = mutableMapOf<String, MutableList<String>>()
+
+        val existingPluginKeys = loadedPlugins.keys + pluginsWithoutPermissions.keys + pluginsWithoutOptionalPermissions.keys
+        (existingPluginKeys - supportedPlugins).forEach(::removePlugin)
 
         supportedPlugins.forEach { pluginKey ->
             val pluginInfo = PluginFactory.getPluginInfo(pluginKey)
@@ -655,9 +667,11 @@ class Device : PacketReceiver {
 
             val pluginEnabled = (isPaired || listenToUnpaired) && this.isReachable && isPluginEnabled(pluginKey)
 
-            if (pluginEnabled && addPlugin(pluginKey)) {
-                pluginInfo.supportedPacketTypes.forEach { packetType ->
-                    newPluginsByIncomingInterface.put(packetType, pluginKey)
+            if (pluginEnabled) {
+                if (addPlugin(pluginKey)) {
+                    pluginInfo.supportedPacketTypes.forEach { packetType ->
+                        newPluginsByIncomingInterface.getOrPut(packetType) { mutableListOf() }.add(pluginKey)
+                    }
                 }
             } else {
                 removePlugin(pluginKey)

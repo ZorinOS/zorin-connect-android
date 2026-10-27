@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2024 TPJ Schikhof <kde@schikhof.eu>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.helpers
 
 import android.content.Context
@@ -14,8 +14,8 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import org.kde.kdeconnect.helpers.security.SslHelper
 import org.kde.kdeconnect.MockSharedPreference
+import org.kde.kdeconnect.helpers.security.SslHelper
 import java.security.cert.X509Certificate
 import java.util.Base64
 

@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: 2020 Aniket Kumar <anikketkumar786@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.helpers
 
 import android.annotation.SuppressLint
@@ -15,18 +15,18 @@ import android.media.ThumbnailUtils
 import android.net.Uri
 import android.os.Looper
 import android.provider.Telephony
-import android.telephony.PhoneNumberUtils
-import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.core.net.toUri
 import com.google.android.mms.pdu_alt.MultimediaMessagePdu
 import com.google.android.mms.pdu_alt.PduPersister
 import com.google.android.mms.util_alt.PduCache
 import com.google.android.mms.util_alt.PduCacheEntry
-import org.apache.commons.io.IOUtils
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
 import org.kde.kdeconnect.helpers.TelephonyHelper.LocalPhoneNumber
 import org.kde.kdeconnect.plugins.sms.MimeType
 import org.kde.kdeconnect.plugins.sms.SmsMmsUtils
@@ -35,9 +35,7 @@ import java.util.SortedMap
 import java.util.TreeMap
 import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantLock
-import kotlin.text.Charsets.UTF_8
 
-@SuppressLint("InlinedApi")
 object SMSHelper {
     private const val THUMBNAIL_HEIGHT = 100
     private const val THUMBNAIL_WIDTH = 100
@@ -231,7 +229,7 @@ object SMSHelper {
         sortOrder: String?,
         numberToGet: Long?
     ): MutableList<Message> {
-        val toReturn: MutableList<Message> = ArrayList()
+        val toReturn = mutableListOf<Message>()
 
         // Get all the active phone numbers so we can filter the user out of the list of targets
         // of any MMSes
@@ -249,12 +247,12 @@ object SMSHelper {
                         val transportTypeColumn = myCursor.getColumnIndex(
                             TRANSPORT_TYPE_DISCRIMINATOR_COLUMN
                         )
-                        val transportType = if (transportTypeColumn < 0) {
-                            // The column didn't actually exist. See https://issuetracker.google.com/issues/134592631
+                        val transportType = if (transportTypeColumn < 0 || myCursor.isNull(transportTypeColumn)) {
+                            // The column didn't actually exist or is null. See https://issuetracker.google.com/issues/134592631
                             // Try to determine using other information
                             val messageBoxColumn = myCursor.getColumnIndex(Telephony.Mms.MESSAGE_BOX)
                             // MessageBoxColumn is defined for MMS only
-                            val messageBoxExists = !myCursor.isNull(messageBoxColumn)
+                            val messageBoxExists = messageBoxColumn >= 0 && !myCursor.isNull(messageBoxColumn)
                             if (messageBoxExists) {
                                 TransportType.MMS
                             } else {
@@ -299,7 +297,7 @@ object SMSHelper {
                 }
             }
         } catch (e: SQLiteException) {
-            var unfilteredColumns = arrayOf<String?>()
+            var unfilteredColumns = emptyArray<String>()
             context.contentResolver.query(uri, null, null, null, null)
                 .use { unfilteredColumnsCursor ->
                     if (unfilteredColumnsCursor != null) {
@@ -312,7 +310,7 @@ object SMSHelper {
                 throw MessageAccessException(unfilteredColumns, uri, e)
             }
         } catch (e: IllegalArgumentException) {
-            var unfilteredColumns = arrayOf<String?>()
+            var unfilteredColumns = emptyArray<String>()
             context.contentResolver.query(uri, null, null, null, null)
                 .use { unfilteredColumnsCursor ->
                     if (unfilteredColumnsCursor != null) {
@@ -348,7 +346,7 @@ object SMSHelper {
         sortOrder: String?,
         numberToGet: Long?
     ): List<Message> {
-        val allColumns: MutableSet<String> = HashSet()
+        val allColumns = HashSet<String>()
         allColumns.addAll(Message.smsColumns)
         allColumns.addAll(Message.mmsColumns)
         if (getSubscriptionIdSupport(uri, context)) {
@@ -426,7 +424,7 @@ object SMSHelper {
             null,
             null
         ).use { threadIdCursor ->
-            val threadTimestampPair: MutableList<Pair<ThreadID, Long>> = ArrayList()
+            val threadTimestampPair = mutableListOf<Pair<ThreadID, Long>>()
             while (threadIdCursor != null && threadIdCursor.moveToNext()) {
                 // The "_id" column returned from the `content://sms-mms/conversations?simple=true` URI
                 // is actually what the rest of the world calls a thread_id.
@@ -436,10 +434,10 @@ object SMSHelper {
                 val dateColumn = threadIdCursor.getColumnIndex("date")
                 var threadID: ThreadID? = null
                 var messageDate: Long = -1
-                if (!threadIdCursor.isNull(idColumn)) {
+                if (idColumn >= 0 && !threadIdCursor.isNull(idColumn)) {
                     threadID = ThreadID(threadIdCursor.getLong(idColumn))
                 }
-                if (!threadIdCursor.isNull(dateColumn)) {
+                if (dateColumn >= 0 && !threadIdCursor.isNull(dateColumn)) {
                     // I think the presence of the "date" column depends on the specifics of the
                     // device. If it's there, we'll use it to return threads in a sorted order.
                     // If it's not there, we'll return them unsorted (maybe you get lucky and the
@@ -480,7 +478,12 @@ object SMSHelper {
             while (threadIdsIndex < threadIds.size) {
                 val nextThreadId = threadIds[threadIdsIndex]
                 threadIdsIndex++
-                val firstMessage = getMessagesInThread(context, nextThreadId, 1L)
+                val firstMessage = try {
+                    getMessagesInThread(context, nextThreadId, 1L)
+                } catch (e: Exception) {
+                    Log.e("SMSHelper", "Error reading messages of ThreadID: $nextThreadId", e)
+                    continue
+                }
                 if (firstMessage.size > 1) {
                     Log.w("SMSHelper", "getConversations got two messages for the same ThreadID: $nextThreadId")
                 }
@@ -503,7 +506,7 @@ object SMSHelper {
      */
     private fun parseSMS(context: Context, messageInfo: Map<String, String?>): Message {
         return Message(
-            addresses = listOf(Address(context, messageInfo[Telephony.Sms.ADDRESS]!!)),
+            addresses = listOfNotNull(messageInfo[Telephony.Sms.ADDRESS]).map { Address(it) },
             body = messageInfo[Message.BODY] ?: "",
             date = messageInfo[Message.DATE]?.toLongOrNull() ?: 0L,
             type = messageInfo[Message.TYPE]?.toIntOrNull() ?: 0,
@@ -527,7 +530,7 @@ object SMSHelper {
         val threadID = ThreadID(messageInfo[Message.THREAD_ID]?.toLongOrNull() ?: ThreadID.invalidThreadId.threadID)
         val uID = messageInfo[Message.U_ID]?.toLongOrNull() ?: 0L
         val subscriptionID = messageInfo[Message.SUBSCRIPTION_ID]?.toIntOrNull() ?: 0
-        val attachments: MutableList<Attachment> = ArrayList()
+        val attachments = mutableListOf<Attachment>()
         val columns = arrayOf(
             Telephony.Mms.Part._ID,  // The content ID of this part
             Telephony.Mms.Part._DATA,  // The location in the filesystem of the data
@@ -649,13 +652,14 @@ object SMSHelper {
 
         // Get address(es) of the message
         val msg = getMessagePdu(context, uID)
-        val from = SmsMmsUtils.getMmsFrom(context, msg)
+        val from = SmsMmsUtils.getMmsFrom(msg)
         val to = SmsMmsUtils.getMmsTo(context, msg)
-        val addresses: MutableList<Address> = ArrayList()
+        val addresses = mutableListOf<Address>()
+        val networkCountryIso = TelephonyHelper.getNetworkCountryIso(context)
         if (from != null) {
             val isLocalPhoneNumber = userPhoneNumbers
                 .any { localPhoneNumber: LocalPhoneNumber ->
-                    localPhoneNumber.isMatchingPhoneNumber(from.getAddress())
+                    TelephonyHelper.isSamePhoneNumber(localPhoneNumber.number, from.address, networkCountryIso)
                 }
             if (!isLocalPhoneNumber && from.toString() != "insert-address-token") {
                 addresses.add(from)
@@ -665,9 +669,9 @@ object SMSHelper {
             for (toAddress in to) {
                 val isLocalPhoneNumber = userPhoneNumbers
                     .any { localPhoneNumber: LocalPhoneNumber ->
-                        localPhoneNumber.isMatchingPhoneNumber(toAddress.getAddress())
+                        TelephonyHelper.isSamePhoneNumber(localPhoneNumber.number, toAddress.address, networkCountryIso)
                     }
-                if (!isLocalPhoneNumber && toAddress.toString() != "insert-address-token") {
+                if (!isLocalPhoneNumber && toAddress.toString() != "insert-address-token" && addresses.none { TelephonyHelper.isSamePhoneNumber(it.address, toAddress.address, networkCountryIso) }) {
                     addresses.add(toAddress)
                 }
             }
@@ -724,22 +728,17 @@ object SMSHelper {
      */
     private fun getMmsText(context: Context, id: Long): String {
         val partURI = ContentUris.withAppendedId(mMSPartUri, id)
-        var body = ""
-        try {
-            context.contentResolver.openInputStream(partURI).use { stream ->
-                if (stream != null) {
-                    // The stream is buffered internally, so buffering it separately is unnecessary.
-                    body = IOUtils.toString(stream, UTF_8)
-                }
-            }
+        return try {
+            context.contentResolver.openInputStream(partURI)?.use { stream ->
+                stream.reader(Charsets.UTF_8).readText()
+            }.orEmpty()
         } catch (e: IOException) {
             throw MessageAccessException(partURI, e)
         }
-        return body
     }
 
     /**
-     * Converts a given JSONArray of attachments into List<Attachment>
+     * Converts a given JsonArray of attachments into List<Attachment>
      *
      * The structure of the input is expected to be as follows:
      * [
@@ -751,17 +750,17 @@ object SMSHelper {
      * ...
      * ]
     </String></String></String></Attachment> */
-    fun jsonArrayToAttachmentsList(jsonArray: JSONArray?): List<Attachment> {
+    fun jsonArrayToAttachmentsList(jsonArray: JsonArray?): List<Attachment> {
         if (jsonArray == null) {
             return emptyList()
         }
-        val attachedFiles: MutableList<Attachment> = ArrayList(jsonArray.length())
+        val attachedFiles: MutableList<Attachment> = ArrayList(jsonArray.size)
         try {
-            for (i in 0 until jsonArray.length()) {
-                val jsonObject = jsonArray.getJSONObject(i)
-                val base64EncodedFile = jsonObject.getString("base64EncodedFile")
-                val mimeType = jsonObject.getString("mimeType")
-                val fileName = jsonObject.getString("fileName")
+            for (element in jsonArray) {
+                val jsonObject = element.jsonObject
+                val base64EncodedFile = jsonObject.getValue("base64EncodedFile").jsonPrimitive.content
+                val mimeType = jsonObject.getValue("mimeType").jsonPrimitive.content
+                val fileName = jsonObject.getValue("fileName").jsonPrimitive.content
                 attachedFiles.add(Attachment(-1, mimeType, base64EncodedFile, fileName))
             }
         } catch (e: Exception) {
@@ -771,15 +770,14 @@ object SMSHelper {
     }
 
     /**
-     * converts a given JSONArray into List<Address>
+     * converts a given JsonArray into List<Address>
     </Address> */
-    fun jsonArrayToAddressList(context: Context, jsonArray: JSONArray): List<Address> {
-        val addresses: MutableList<Address> = ArrayList()
+    fun jsonArrayToAddressList(jsonArray: JsonArray): List<Address> {
+        val addresses = mutableListOf<Address>()
         try {
-            for (i in 0 until jsonArray.length()) {
-                val jsonObject = jsonArray.getJSONObject(i)
-                val address = jsonObject.getString("address")
-                addresses.add(Address(context, address))
+            for (element in jsonArray) {
+                val address = element.jsonObject.getValue("address").jsonPrimitive.content
+                addresses.add(Address(address))
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -790,14 +788,9 @@ object SMSHelper {
     /**
      * Represent an ID used to uniquely identify a message thread
      */
-    class ThreadID(val threadID: Long) {
+    @JvmInline
+    value class ThreadID(val threadID: Long) {
         override fun toString(): String = threadID.toString()
-
-        override fun hashCode(): Int = java.lang.Long.hashCode(threadID)
-
-        override fun equals(other: Any?): Boolean {
-            return other!!.javaClass.isAssignableFrom(ThreadID::class.java) && (other as ThreadID?)!!.threadID == threadID
-        }
 
         companion object {
 
@@ -816,16 +809,13 @@ object SMSHelper {
         val uniqueIdentifier: String
     ) {
 
-        @Throws(JSONException::class)
-        fun toJson(): JSONObject {
-            val json = JSONObject()
-            json.put(PART_ID, partID)
-            json.put(MIME_TYPE, mimeType)
+        fun toJson(): JsonObject = buildJsonObject {
+            put(PART_ID, partID)
+            put(MIME_TYPE, mimeType)
             if (base64EncodedFile != null) {
-                json.put(ENCODED_THUMBNAIL, base64EncodedFile)
+                put(ENCODED_THUMBNAIL, base64EncodedFile)
             }
-            json.put(UNIQUE_IDENTIFIER, uniqueIdentifier)
-            return json
+            put(UNIQUE_IDENTIFIER, uniqueIdentifier)
         }
 
         companion object {
@@ -839,30 +829,13 @@ object SMSHelper {
         }
     }
 
-    class Address(context: Context, private val address: String) {
-        @Throws(JSONException::class)
-        fun toJson(): JSONObject {
-            val json = JSONObject()
-            json.put(ADDRESS, address)
-            return json
+    @JvmInline
+    value class Address(val address: String) {
+        fun toJson(): JsonObject = buildJsonObject {
+            put(ADDRESS, address)
         }
-
-        fun getAddress() = address
 
         override fun toString() = address
-
-        private val networkCountryIso = (context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager).networkCountryIso
-
-        override fun equals(other: Any?) = when (other) {
-            null -> false
-            is Address -> PhoneNumberUtils.areSamePhoneNumber(address, other.address, networkCountryIso)
-            is String -> PhoneNumberUtils.areSamePhoneNumber(address, other, networkCountryIso)
-            else -> false
-        }
-
-        override fun hashCode(): Int {
-            return address.hashCode()
-        }
 
         companion object {
             /**
@@ -877,10 +850,10 @@ object SMSHelper {
      * More useful for logging than catching and handling
      */
     class MessageAccessException : RuntimeException {
-        internal constructor(uri: Uri, cause: Throwable?) : super("Error getting messages from $uri", cause)
+        internal constructor(uri: Uri, cause: Throwable) : super("Error getting messages from $uri", cause)
 
-        internal constructor(availableColumns: Array<String?>, uri: Uri, cause: Throwable?) :
-            super("Error getting messages from $uri. Available columns were: $availableColumns", cause)
+        internal constructor(availableColumns: Array<String>, uri: Uri, cause: Throwable) :
+            super("Error getting messages from $uri. Available columns were: ${availableColumns.contentToString()}", cause)
     }
 
     /**
@@ -907,30 +880,19 @@ object SMSHelper {
         private val subscriptionID: Int,
         private val attachments: List<Attachment>?
     ) {
-        @Throws(JSONException::class)
-        fun toJSONObject(): JSONObject {
-            val json = JSONObject()
-            val jsonAddresses = JSONArray()
-            for (address in addresses) {
-                jsonAddresses.put(address.toJson())
-            }
-            json.put(ADDRESSES, jsonAddresses)
-            json.put(BODY, body)
-            json.put(DATE, date)
-            json.put(TYPE, type)
-            json.put(READ, read)
-            json.put(THREAD_ID, threadID.threadID)
-            json.put(U_ID, uID)
-            json.put(SUBSCRIPTION_ID, subscriptionID)
-            json.put(EVENT, event)
+        fun toJsonObject(): JsonObject = buildJsonObject {
+            put(ADDRESSES, JsonArray(addresses.map { it.toJson() }))
+            put(BODY, body)
+            put(DATE, date)
+            put(TYPE, type)
+            put(READ, read)
+            put(THREAD_ID, threadID.threadID)
+            put(U_ID, uID)
+            put(SUBSCRIPTION_ID, subscriptionID)
+            put(EVENT, event)
             if (attachments != null) {
-                val jsonAttachments = JSONArray()
-                for (attachment in attachments) {
-                    jsonAttachments.put(attachment.toJson())
-                }
-                json.put(ATTACHMENTS, jsonAttachments)
+                put(ATTACHMENTS, JsonArray(attachments.map { it.toJson() }))
             }
-            return json
         }
 
         override fun toString() = body
@@ -1026,7 +988,6 @@ object SMSHelper {
              * Since this means a thread has to be spawned, this method might block until that thread is
              * ready to serve requests
              */
-            @JvmStatic // required for ConnectivityReportPlugin.java
             fun getLooper(): Looper? {
                 if (singleton == null) {
                     looperReadyLock.lock()

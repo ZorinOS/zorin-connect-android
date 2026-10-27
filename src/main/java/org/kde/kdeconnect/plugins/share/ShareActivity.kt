@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
+ * SPDX-FileCopyrightText: 2026 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
@@ -7,22 +7,22 @@
 package org.kde.kdeconnect.plugins.share
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import org.kde.kdeconnect.BackgroundService
 import org.kde.kdeconnect.Device
 import org.kde.kdeconnect.KdeConnect
 import org.kde.kdeconnect.base.BaseActivity
+import org.kde.kdeconnect.helpers.IntentHelper
 import org.kde.kdeconnect.ui.compose.KdeTheme
 import org.kde.kdeconnect.ui.compose.extensions.device.toUiModel
 import org.kde.kdeconnect.ui.compose.model.device.DeviceUiModel
@@ -32,8 +32,6 @@ import com.zorinos.zorin_connect.databinding.ActivityShareBinding
 
 class ShareActivity : BaseActivity<ActivityShareBinding>() {
 
-    private lateinit var mSharedPrefs: SharedPreferences
-
     override val binding: ActivityShareBinding by lazy { ActivityShareBinding.inflate(layoutInflater) }
 
     override val isScrollable: Boolean = true
@@ -41,6 +39,7 @@ class ShareActivity : BaseActivity<ActivityShareBinding>() {
     private var isRefreshing by mutableStateOf(value = false)
     private var uiDevices by mutableStateOf<List<DeviceUiModel>>(value = emptyList())
     private var intentHasUrl by mutableStateOf(value = false)
+    private var shareStarted = false
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
@@ -75,63 +74,55 @@ class ShareActivity : BaseActivity<ActivityShareBinding>() {
             return
         }
         val devices = KdeConnect.getInstance().devices.values
-        this.intentHasUrl = doesIntentContainUrl(intent)
+        this.intentHasUrl = IntentHelper.parseIntentUrls(intent).isNotEmpty()
         this.uiDevices = devices
             .filter { device -> device.isPaired && (intentHasUrl || device.isReachable) }
             .map { it.toUiModel() }
     }
 
-    private fun deviceClicked(
-        device: Device,
-        intentHasUrl: Boolean,
+    private fun shareToDeviceAndFinish(
+        deviceId: String,
         intent: Intent
     ) {
-        val plugin: SharePlugin? =
-            KdeConnect.getInstance().getDevicePlugin(
-                deviceId = device.deviceId,
-                pluginClass = SharePlugin::class.java
-            )
-        if (intentHasUrl && !device.isReachable) {
-            // Store the URL to be delivered once device becomes online
-            storeUrlForFutureDelivery(
-                device = device,
-                url = intent.getStringExtra(Intent.EXTRA_TEXT)
-            )
-        } else {
-            plugin?.share(intent)
-        }
-        finish()
-    }
+        // Prevent sharing twice
+        if (shareStarted) return
+        shareStarted = true
 
-    private fun doesIntentContainUrl(intent: Intent?): Boolean {
-        intent?.extras?.let { extras ->
-            val url = extras.getString(Intent.EXTRA_TEXT)
-            return URLUtil.isHttpUrl(url) || URLUtil.isHttpsUrl(url)
+        val device = KdeConnect.getInstance().getDevice(id = deviceId)
+        if (device == null) {
+            Toast.makeText(this, getString(R.string.unknown_device), Toast.LENGTH_LONG ).show()
+            finish()
+        } else if (!device.isReachable) {
+            // Store the URL to be delivered once device becomes online
+            val urls = IntentHelper.parseIntentUrls(intent)
+            if (urls.isNotEmpty()) {
+                storeUrlForFutureDelivery(device, urls.toSet())
+            } else {
+                Toast.makeText(this, getString(R.string.error_not_reachable), Toast.LENGTH_LONG).show()
+            }
+            finish()
+        } else {
+            device.getPlugin<SharePlugin>()?.share(intent) {
+                runOnUiThread(this::finish)
+            } ?: finish()
         }
-        return false
     }
 
     private fun storeUrlForFutureDelivery(
         device: Device,
-        url: String?
+        urls: Set<String>
     ) {
+        val mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
         val key = KEY_UNREACHABLE_URL_LIST + device.deviceId
-        val oldUrlSet = mSharedPrefs.getStringSet(key, null)
-        // According to the API docs, we should not directly modify the set returned above
-        val newUrlSet = mutableSetOf<String>()
-        url?.let { urlSet -> newUrlSet.add(urlSet) }
-        if (oldUrlSet != null) {
-            newUrlSet.addAll(oldUrlSet)
-        }
-
-        mSharedPrefs.edit().putStringSet(key, newUrlSet).apply()
+        val existingUrls = mSharedPrefs.getStringSet(key, null) ?: emptySet()
+        mSharedPrefs.edit { putStringSet(key, urls + existingUrls) }
         Toast.makeText(this, getString(R.string.unreachable_share_toast), Toast.LENGTH_LONG).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this)
+        shareStarted = savedInstanceState?.getBoolean(KEY_SHARE_STARTED) ?: false
 
         setSupportActionBar(binding.toolbarLayout.toolbar)
         supportActionBar?.apply {
@@ -148,11 +139,8 @@ class ShareActivity : BaseActivity<ActivityShareBinding>() {
                     intentHasUrl = intentHasUrl,
                     isRefreshing = isRefreshing,
                     onDeviceClick = { deviceId ->
-                        val device = KdeConnect.getInstance().getDevice(id = deviceId)
-                            ?: return@ShareScreen
-                        deviceClicked(
-                            device = device,
-                            intentHasUrl = intentHasUrl,
+                        shareToDeviceAndFinish(
+                            deviceId = deviceId,
                             intent = intent
                         )
                     },
@@ -166,32 +154,15 @@ class ShareActivity : BaseActivity<ActivityShareBinding>() {
         super.onStart()
 
         val intent = intent
-        var deviceId = intent.getStringExtra("deviceId")
+        var deviceId = intent.getStringExtra(EXTRA_DEVICE_ID)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && deviceId == null) {
             deviceId = intent.getStringExtra(Intent.EXTRA_SHORTCUT_ID)
         }
 
         if (deviceId != null) {
-            val plugin: SharePlugin? =
-                KdeConnect.getInstance().getDevicePlugin(deviceId, SharePlugin::class.java)
-            if (plugin != null) {
-                plugin.share(intent)
-            } else {
-                val extras = intent.extras
-                if (extras != null && extras.containsKey(Intent.EXTRA_TEXT)) {
-                    val device = KdeConnect.getInstance().getDevice(id = deviceId)
-                    if (doesIntentContainUrl(intent) && device != null && !device.isReachable) {
-                        val text = extras.getString(Intent.EXTRA_TEXT)
-                        storeUrlForFutureDelivery(
-                            device = device,
-                            url = text
-                        )
-                    }
-                }
-            }
-            finish()
+            shareToDeviceAndFinish(deviceId, intent)
         } else {
-            KdeConnect.getInstance().addDeviceListChangedCallback(key = "ShareActivity") {
+            KdeConnect.getInstance().addDeviceListChangedCallback("ShareActivity") {
                 runOnUiThread { updateDeviceList() }
             }
             BackgroundService.ForceRefreshConnections(context = this) // force a network re-discover
@@ -199,12 +170,19 @@ class ShareActivity : BaseActivity<ActivityShareBinding>() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(KEY_SHARE_STARTED, shareStarted)
+    }
+
     override fun onStop() {
-        KdeConnect.getInstance().removeDeviceListChangedCallback(key = "ShareActivity")
+        KdeConnect.getInstance().removeDeviceListChangedCallback("ShareActivity")
         super.onStop()
     }
 
     companion object {
+        const val EXTRA_DEVICE_ID = "deviceId"
         private const val KEY_UNREACHABLE_URL_LIST = "key_unreachable_url_list"
+        private const val KEY_SHARE_STARTED = "share_started"
     }
 }

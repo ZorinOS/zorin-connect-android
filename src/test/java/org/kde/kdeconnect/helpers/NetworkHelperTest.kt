@@ -2,16 +2,35 @@
  * SPDX-FileCopyrightText: 2024 TPJ Schikhof <kde@schikhof.eu>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.helpers
 
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
+import java.net.Inet4Address
+import java.net.Inet6Address
 import java.net.InetAddress
 
 
 internal class NetworkHelperTest {
+    @Test
+    fun testNormalizeMappedIpv4Address() {
+        val address = Inet6Address.getByAddress(null, ByteArray(16).also {
+            it[10] = 0xff.toByte()
+            it[11] = 0xff.toByte()
+            it[12] = 192.toByte()
+            it[13] = 168.toByte()
+            it[14] = 0
+            it[15] = 252.toByte()
+        }, -1)
+
+        val normalizedAddress = address.normalizedMappedIpv4Address()
+
+        assertTrue(normalizedAddress is Inet4Address)
+        assertTrue(normalizedAddress.hostAddress == "192.168.0.252")
+    }
+
     @Test
     fun testCGNATLowerBound() {
         val address = InetAddress.getByName("100.64.0.0")

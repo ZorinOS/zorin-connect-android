@@ -9,13 +9,11 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.view.KeyEvent
-import androidx.preference.PreferenceManager
 import org.kde.kdeconnect.DeviceType
 import org.kde.kdeconnect.NetworkPacket
 import org.kde.kdeconnect.plugins.Plugin
 import org.kde.kdeconnect.plugins.PluginFactory.LoadablePlugin
 import org.kde.kdeconnect.ui.PluginSettingsFragment
-import org.kde.kdeconnect.ui.PluginSettingsFragment.Companion.newInstance
 import com.zorinos.zorin_connect.R
 
 @LoadablePlugin
@@ -37,7 +35,7 @@ class MousePadPlugin : Plugin() {
             R.drawable.touchpad_plugin_action_24dp
         ) { parentActivity ->
             val intent = Intent(parentActivity, MousePadActivity::class.java)
-            intent.putExtra("deviceId", device.deviceId)
+            intent.putExtra(MousePadActivity.EXTRA_DEVICE_ID, device.deviceId)
             parentActivity.startActivity(intent)
         }
         return if (device.deviceType == DeviceType.TV) {
@@ -46,11 +44,10 @@ class MousePadPlugin : Plugin() {
                 R.drawable.tv_remote_24px
             ) { parentActivity ->
                 val intent = Intent(parentActivity, BigscreenActivity::class.java)
-                intent.putExtra("deviceId", device.deviceId)
+                intent.putExtra(BigscreenActivity.EXTRA_DEVICE_ID, device.deviceId)
                 parentActivity.startActivity(intent)
             }
-            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-            if (prefs.getBoolean(context.getString(R.string.pref_bigscreen_hide_mouse_input), false)) {
+            if (preferences.getBoolean(context.getString(R.string.pref_bigscreen_hide_mouse_input), false)) {
                 listOf(tvInput)
             } else {
                 listOf(mouseAndKeyboardInput, tvInput)
@@ -66,11 +63,13 @@ class MousePadPlugin : Plugin() {
 
     override fun hasSettings(): Boolean = true
 
-    override fun getSettingsFragment(activity: Activity): PluginSettingsFragment? {
+    override val settingsScope = SettingsScope.APP_WIDE
+
+    override fun getSettingsFragment(activity: Activity): PluginSettingsFragment {
         return if (device.deviceType == DeviceType.TV) {
-            newInstance(pluginKey, R.xml.mousepadplugin_preferences, R.xml.mousepadplugin_preferences_tv)
+            PluginSettingsFragment.newInstance(pluginKey, device.deviceId, R.xml.mousepadplugin_preferences, R.xml.mousepadplugin_preferences_tv)
         } else {
-            newInstance(pluginKey, R.xml.mousepadplugin_preferences)
+            PluginSettingsFragment.newInstance(pluginKey, device.deviceId, R.xml.mousepadplugin_preferences)
         }
     }
 

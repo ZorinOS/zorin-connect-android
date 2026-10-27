@@ -6,13 +6,14 @@
 package org.kde.kdeconnect.plugins.connectivityreport
 
 import android.Manifest
-import org.json.JSONException
-import org.json.JSONObject
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
+import kotlinx.serialization.json.putJsonObject
 import org.kde.kdeconnect.NetworkPacket
-import org.kde.kdeconnect.plugins.connectivityreport.ConnectivityListener.Companion.getInstance
-import org.kde.kdeconnect.plugins.connectivityreport.ConnectivityListener.SubscriptionState
 import org.kde.kdeconnect.plugins.Plugin
 import org.kde.kdeconnect.plugins.PluginFactory.LoadablePlugin
+import org.kde.kdeconnect.plugins.connectivityreport.ConnectivityListener.Companion.getInstance
+import org.kde.kdeconnect.plugins.connectivityreport.ConnectivityListener.SubscriptionState
 import com.zorinos.zorin_connect.R
 
 @LoadablePlugin
@@ -52,15 +53,12 @@ class ConnectivityReportPlugin : Plugin() {
             if (states.isEmpty()) {
                 return
             }
-            val signalStrengths = JSONObject()
-            states.forEach { (subID: Int, subscriptionState: SubscriptionState) ->
-                try {
-                    val subInfo = JSONObject()
-                    subInfo.put("networkType", subscriptionState.networkType)
-                    subInfo.put("signalStrength", subscriptionState.signalStrength)
-                    signalStrengths.put(subID.toString(), subInfo)
-                } catch (e: JSONException) {
-                    e.printStackTrace()
+            val signalStrengths = buildJsonObject {
+                states.forEach { (subID: Int, subscriptionState: SubscriptionState) ->
+                    putJsonObject(subID.toString()) {
+                        put("networkType", subscriptionState.networkType)
+                        put("signalStrength", subscriptionState.signalStrength)
+                    }
                 }
             }
             connectivityInfo["signalStrengths"] = signalStrengths
@@ -68,9 +66,8 @@ class ConnectivityReportPlugin : Plugin() {
         }
     }
 
-    override fun onCreate(): Boolean {
+    override fun onCreate() {
         getInstance(context).listenStateChanges(listener)
-        return true
     }
 
     override fun onDestroy() {

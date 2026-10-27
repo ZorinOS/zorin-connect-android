@@ -3,64 +3,53 @@
  * SPDX-FileCopyrightText: 2024 Rob Emery <git@mintsoft.net>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.backends.bluetooth
 
 import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.util.Log
 import androidx.annotation.WorkerThread
-import org.json.JSONException
-import org.json.JSONObject
-import org.kde.kdeconnect.backends.BaseLink
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import org.kde.kdeconnect.Device
 import org.kde.kdeconnect.DeviceInfo
 import org.kde.kdeconnect.NetworkPacket
+import org.kde.kdeconnect.backends.BaseLink
+import org.kde.kdeconnect.extensions.closeSafe
+import org.kde.kdeconnect.helpers.readLineBounded
+import java.io.BufferedInputStream
 import java.io.IOException
 import java.io.InputStream
-import java.io.InputStreamReader
 import java.io.OutputStream
-import java.io.Reader
 import java.util.UUID
-import kotlin.text.Charsets.UTF_8
 
 class BluetoothLink(
     context: Context,
     private val connection: ConnectionMultiplexer,
-    val input: InputStream,
-    val output: OutputStream,
-    val remoteAddress: BluetoothDevice,
-    val theDeviceInfo: DeviceInfo,
-    val linkProvider: BluetoothLinkProvider
+    input: InputStream,
+    private val output: OutputStream,
+    private val remoteAddress: BluetoothDevice,
+    override val deviceInfo: DeviceInfo,
+    linkProvider: BluetoothLinkProvider
 ) : BaseLink(context, linkProvider) {
+
+    override val name = "BluetoothLink"
+
     private var continueAccepting = true
     private val receivingThread = Thread(object : Runnable {
         override fun run() {
-            val sb = StringBuilder()
             try {
-                val reader: Reader = InputStreamReader(input, UTF_8)
-                val buf = CharArray(512)
+                val stream = BufferedInputStream(input)
                 while (continueAccepting) {
-                    while (sb.indexOf("\n") == -1 && continueAccepting) {
-                        var charsRead: Int
-                        if (reader.read(buf).also { charsRead = it } > 0) {
-                            sb.append(buf, 0, charsRead)
-                        }
-                        if (charsRead < 0) {
-                            disconnect()
-                            return
-                        }
-                    }
+                    val message = readLineBounded(stream, MAX_PACKET_SIZE)
                     if (!continueAccepting) break
-                    val endIndex = sb.indexOf("\n")
-                    if (endIndex != -1) {
-                        val message = sb.substring(0, endIndex + 1)
-                        sb.delete(0, endIndex + 1)
-                        processMessage(message)
-                    }
+                    processMessage(message)
                 }
             } catch (e: IOException) {
-                Log.e("BluetoothLink/receiving", "Connection to " + remoteAddress.address + " likely broken.", e)
+                Log.e("BluetoothLink/receiving", "Connection to ${remoteAddress.address} likely broken.", e)
                 disconnect()
             }
         }
@@ -68,13 +57,13 @@ class BluetoothLink(
         private fun processMessage(message: String) {
             val np = try {
                 NetworkPacket.unserialize(message)
-            } catch (e: JSONException) {
+            } catch (e: SerializationException) {
                 Log.e("BluetoothLink/receiving", "Unable to parse message.", e)
                 return
             }
             if (np.hasPayloadTransferInfo()) {
                 try {
-                    val transferUuid = UUID.fromString(np.payloadTransferInfo.getString("uuid"))
+                    val transferUuid = UUID.fromString(np.payloadTransferInfo.getValue("uuid").jsonPrimitive.content)
                     val payloadInputStream = connection.getChannelInputStream(transferUuid)
                     np.payload = NetworkPacket.Payload(payloadInputStream, np.payloadSize)
                 } catch (e: Exception) {
@@ -89,26 +78,15 @@ class BluetoothLink(
         receivingThread.start()
     }
 
-    override fun getName(): String {
-        return "BluetoothLink"
-    }
-
-    override fun getDeviceInfo(): DeviceInfo {
-        return theDeviceInfo
-    }
-
     override fun disconnect() {
         continueAccepting = false
-        try {
-            connection.close()
-        } catch (_: IOException) {
-        }
-        linkProvider.disconnectedLink(this, remoteAddress)
+        connection.closeSafe()
+        (linkProvider as BluetoothLinkProvider).disconnectedLink(this, remoteAddress)
     }
 
-    @Throws(JSONException::class, IOException::class)
+    @Throws(SerializationException::class, IOException::class)
     private fun sendMessage(np: NetworkPacket) {
-        val message = np.serialize().toByteArray(UTF_8)
+        val message = np.serialize().toByteArray(Charsets.UTF_8)
         output.write(message)
     }
 
@@ -121,9 +99,9 @@ class BluetoothLink(
             var transferUuid: UUID? = null
             if (np.hasPayload()) {
                 transferUuid = connection.newChannel()
-                val payloadTransferInfo = JSONObject()
-                payloadTransferInfo.put("uuid", transferUuid.toString())
-                np.payloadTransferInfo = payloadTransferInfo
+                np.payloadTransferInfo = buildJsonObject {
+                    put("uuid", JsonPrimitive(transferUuid.toString()))
+                }
             }
             sendMessage(np)
             if (transferUuid != null) {
@@ -131,10 +109,10 @@ class BluetoothLink(
                     connection.getChannelOutputStream(transferUuid).use { payloadStream ->
                         val BUFFER_LENGTH = 1024
                         val buffer = ByteArray(BUFFER_LENGTH)
-                        var bytesRead: Int
+                        var bytesRead = 0
                         var progress: Long = 0
                         val stream = np.payload!!.inputStream!!
-                        while (stream.read(buffer).also { bytesRead = it } != -1) {
+                        while (!np.isCanceled && stream.read(buffer).also { bytesRead = it } != -1) {
                             progress += bytesRead.toLong()
                             payloadStream.write(buffer, 0, bytesRead)
                             if (np.payloadSize > 0) {
@@ -148,11 +126,19 @@ class BluetoothLink(
                     return false
                 }
             }
-            callback.onSuccess()
+            if (!np.isCanceled) {
+                callback.onSuccess()
+            }
             true
         } catch (e: Exception) {
             callback.onFailure(e)
             false
+        } finally {
+            np.payload?.close()
         }
+    }
+
+    companion object {
+        private const val MAX_PACKET_SIZE = 32 * 1024 * 1024
     }
 }

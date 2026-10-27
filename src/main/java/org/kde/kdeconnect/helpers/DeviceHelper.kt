@@ -2,16 +2,17 @@
  * SPDX-FileCopyrightText: 2024 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.helpers
 
 import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
-import android.preference.PreferenceManager
+import android.text.SpannableStringBuilder
 import android.util.Log
 import androidx.core.content.edit
+import androidx.preference.PreferenceManager
 import com.univocity.parsers.common.TextParsingException
 import com.univocity.parsers.csv.CsvParser
 import com.univocity.parsers.csv.CsvParserSettings
@@ -51,7 +52,6 @@ object DeviceHelper {
         (uiMode and Configuration.UI_MODE_TYPE_MASK) == Configuration.UI_MODE_TYPE_TELEVISION
     }
 
-    @JvmStatic
     val deviceType: DeviceType by lazy {
         if (isTv) {
             DeviceType.TV
@@ -62,7 +62,6 @@ object DeviceHelper {
         }
     }
 
-    @JvmStatic
     fun getDeviceName(context: Context): String {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         if (!preferences.contains(KEY_DEVICE_NAME_PREFERENCE)
@@ -108,7 +107,7 @@ object DeviceHelper {
                         }
                     }
                     if (!found) {
-                        Log.e("DeviceHelper", "Didn't find a device name for " + Build.MODEL)
+                        Log.e("DeviceHelper", "Didn't find a device name for ${Build.MODEL}")
                     }
                 }
             } catch (e: IOException) {
@@ -136,13 +135,11 @@ object DeviceHelper {
         preferences.edit { putString(KEY_DEVICE_ID_PREFERENCE, deviceName) }
     }
 
-    @JvmStatic
     fun getDeviceId(context: Context): String {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         return preferences.getString(KEY_DEVICE_ID_PREFERENCE, null)!!
     }
 
-    @JvmStatic
     fun getDeviceInfo(context: Context): DeviceInfo {
         return DeviceInfo(
             getDeviceId(context),
@@ -155,10 +152,22 @@ object DeviceHelper {
         )
     }
 
-    @JvmStatic
     fun filterInvalidCharactersFromDeviceNameAndLimitLength(input: String): String = filterInvalidCharactersFromDeviceName(input).trim().take(MAX_DEVICE_NAME_LENGTH)
 
-    @JvmStatic
     fun filterInvalidCharactersFromDeviceName(input: String): String = input.replace(NAME_INVALID_CHARACTERS_REGEX, "")
+
+    /**
+     * Filter implementation suitable for [android.text.InputFilter].
+     * Returns null if no characters are stripped to accept the replacement as-is
+     * and avoid breaking IME composing state/spans (which causes text duplication in Gboard/Samsung Keyboard).
+     */
+    fun filterDeviceNameInput(source: CharSequence, start: Int, end: Int): CharSequence? {
+        val input = source.subSequence(start, end)
+        val matches = NAME_INVALID_CHARACTERS_REGEX.findAll(input).toList()
+        if (matches.isEmpty()) return null
+        return SpannableStringBuilder(input).apply {
+            matches.asReversed().forEach { delete(it.range.first, it.range.last + 1) }
+        }
+    }
 
 }

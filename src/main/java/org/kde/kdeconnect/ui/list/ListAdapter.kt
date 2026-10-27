@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.ui.list
 
 import android.content.Context
@@ -15,7 +15,6 @@ class ListAdapter : ArrayAdapter<ListAdapter.Item> {
     private val items: List<Item>
     private val isEnabled: Boolean
 
-    @JvmOverloads
     constructor(context: Context, items: List<Item>, isEnabled: Boolean = true) : super(context, 0, items) {
         this.items = items
         this.isEnabled = isEnabled

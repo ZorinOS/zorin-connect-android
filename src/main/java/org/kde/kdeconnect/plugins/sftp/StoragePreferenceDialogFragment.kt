@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2019 Erik Duisters <e.duisters1@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.plugins.sftp
 
 import android.app.Activity
@@ -21,16 +21,14 @@ import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.widget.TextViewCompat
 import androidx.preference.PreferenceDialogFragmentCompat
-import org.json.JSONException
-import org.json.JSONObject
+import kotlinx.serialization.SerializationException
 import org.kde.kdeconnect.helpers.StorageHelper
-import org.kde.kdeconnect.plugins.sftp.SftpPlugin.StorageInfo.Companion.fromJSON
 import com.zorinos.zorin_connect.R
 import com.zorinos.zorin_connect.databinding.FragmentStoragePreferenceDialogBinding
 
@@ -45,6 +43,14 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
     private var storageInfo: SftpPlugin.StorageInfo? = null
     private var takeFlags = 0
 
+    private val openDocumentTreeLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val data = result.data
+        val uri = data?.data
+        if (result.resultCode == Activity.RESULT_OK && uri != null) {
+            handleSelectedStorageUri(uri, data.flags)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,9 +62,8 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
             enablePositiveButton = savedInstanceState.getBoolean(KEY_POSITIVE_BUTTON_ENABLED)
             takeFlags = savedInstanceState.getInt(KEY_TAKE_FLAGS, 0)
             try {
-                val jsonObject = JSONObject(savedInstanceState.getString(KEY_STORAGE_INFO, "{}"))
-                storageInfo = fromJSON(jsonObject)
-            } catch (ignored: JSONException) {
+                storageInfo = SftpPlugin.StorageInfo.unserialize(savedInstanceState.getString(KEY_STORAGE_INFO, "{}"))
+            } catch (_: SerializationException) {
             }
         }
 
@@ -95,10 +100,8 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
             this.binding = it
         }
 
-        binding.storageLocation.setOnClickListener { v: View? ->
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-            // For API >= 26 we can also set Extra: DocumentsContract.EXTRA_INITIAL_URI
-            startActivityForResult(intent, REQUEST_CODE_DOCUMENT_TREE)
+        binding.storageLocation.setOnClickListener {
+            openDocumentTreeLauncher.launch(Intent(Intent.ACTION_OPEN_DOCUMENT_TREE))
         }
 
         binding.storageDisplayName.filters = arrayOf<InputFilter>(FileSeparatorCharFilter())
@@ -115,9 +118,11 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
                 getString(R.string.sftp_storage_preference_click_to_select)
             )
 
-            TextViewCompat.setCompoundDrawablesRelative(
-                binding.storageLocation, null, null,
-                if (isClickToSelect) arrowDropDownDrawable else null, null
+            binding.storageLocation.setCompoundDrawablesRelative(
+                null,
+                null,
+                if (isClickToSelect) arrowDropDownDrawable else null,
+                null
             )
             binding.storageLocation.isEnabled = isClickToSelect
             binding.storageLocation.isFocusable = false
@@ -137,8 +142,7 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
                 binding.storageDisplayName.setText(storageInfo!!.displayName)
             }
 
-            TextViewCompat.setCompoundDrawablesRelative(
-                binding.storageLocation,
+            binding.storageLocation.setCompoundDrawablesRelative(
                 null,
                 null,
                 null,
@@ -158,50 +162,32 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
         binding = null
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    private fun handleSelectedStorageUri(uri: Uri, flags: Int) {
+        takeFlags = flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
 
-        if (resultCode != Activity.RESULT_OK) {
-            return
-        }
+        val result = callback!!.isUriAllowed(uri)
 
-        when (requestCode) {
-            REQUEST_CODE_DOCUMENT_TREE -> {
-                val uri = data!!.data
-                takeFlags =
-                    data.flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+        if (result.isAllowed) {
+            val documentId = DocumentsContract.getTreeDocumentId(uri)
+            val displayName = StorageHelper.getDisplayName(uri)
 
-                if (uri == null) {
-                    return
-                }
+            storageInfo = SftpPlugin.StorageInfo(displayName, uri)
 
-                val result = callback!!.isUriAllowed(uri)
+            binding!!.storageLocation.setText(documentId)
+            binding!!.storageLocation.setCompoundDrawablesRelative(
+                null,
+                null,
+                null,
+                null
+            )
+            binding!!.storageLocation.error = null
+            binding!!.storageLocation.isEnabled = false
 
-                if (result.isAllowed) {
-                    val documentId = DocumentsContract.getTreeDocumentId(uri)
-                    val displayName = StorageHelper.getDisplayName(uri)
-
-                    storageInfo = SftpPlugin.StorageInfo(displayName, uri)
-
-                    binding!!.storageLocation.setText(documentId)
-                    TextViewCompat.setCompoundDrawablesRelative(
-                        binding!!.storageLocation,
-                        null,
-                        null,
-                        null,
-                        null
-                    )
-                    binding!!.storageLocation.error = null
-                    binding!!.storageLocation.isEnabled = false
-
-                    // TODO: Show name as used in android's picker app but I don't think it's possible to get that, everything I tried throws PermissionDeniedException
-                    binding!!.storageDisplayName.setText(displayName)
-                    binding!!.storageDisplayName.isEnabled = true
-                } else {
-                    binding!!.storageLocation.error = result.errorMessage
-                    setPositiveButtonEnabled(false)
-                }
-            }
+            binding!!.storageDisplayName.setText(displayName)
+            binding!!.storageDisplayName.isEnabled = true
+        } else {
+            binding!!.storageLocation.error = result.errorMessage
+            setPositiveButtonEnabled(false)
         }
     }
 
@@ -212,10 +198,7 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
         outState.putInt(KEY_TAKE_FLAGS, takeFlags)
 
         if (storageInfo != null) {
-            try {
-                outState.putString(KEY_STORAGE_INFO, storageInfo!!.toJSON().toString())
-            } catch (ignored: JSONException) {
-            }
+            outState.putString(KEY_STORAGE_INFO, storageInfo!!.serialize())
         }
     }
 
@@ -266,7 +249,6 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
     }
 
     private class FileSeparatorCharFilter : InputFilter {
-        // TODO: Add more chars to refuse?
         // https://www.cyberciti.biz/faq/linuxunix-rules-for-naming-file-and-directory-names/
         var notAllowed: String = "/\\><|:&?*"
 
@@ -306,9 +288,7 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
     }
 
     class CallbackResult {
-        @JvmField
         var isAllowed: Boolean = false
-        @JvmField
         var errorMessage: String? = null
     }
 
@@ -319,14 +299,11 @@ class StoragePreferenceDialogFragment : PreferenceDialogFragmentCompat(), TextWa
     }
 
     companion object {
-        private const val REQUEST_CODE_DOCUMENT_TREE = 1001
-
         // When state is restored I cannot determine if an error is going to be displayed on one of the TextInputEditText's or not so I have to remember if the dialog's positive button was enabled or not
         private const val KEY_POSITIVE_BUTTON_ENABLED = "PositiveButtonEnabled"
         private const val KEY_STORAGE_INFO = "StorageInfo"
         private const val KEY_TAKE_FLAGS = "TakeFlags"
 
-        @JvmStatic
         fun newInstance(key: String): StoragePreferenceDialogFragment {
             return StoragePreferenceDialogFragment().apply {
                 arguments = Bundle().apply {

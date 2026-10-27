@@ -2,11 +2,12 @@
  * SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.os.SystemClock
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.annotation.VisibleForTesting
@@ -24,7 +25,7 @@ object DeviceStats {
     private const val CLEANUP_INTERVAL_MILLIS = EVENT_KEEP_WINDOW_MILLIS / 4
 
     private val eventsByDevice: MutableMap<String, PacketStats> = HashMap<String, PacketStats>()
-    private var nextCleanup = System.currentTimeMillis() + CLEANUP_INTERVAL_MILLIS
+    private var nextCleanup = SystemClock.elapsedRealtime() + CLEANUP_INTERVAL_MILLIS
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     fun getStatsForDevice(deviceId: String): String {
@@ -34,7 +35,7 @@ object DeviceStats {
 
         return buildString {
             val timeInMillis =
-                minOf((System.currentTimeMillis() - packetStats.createdAtMillis), EVENT_KEEP_WINDOW_MILLIS)
+                minOf((SystemClock.elapsedRealtime() - packetStats.createdAtMillis), EVENT_KEEP_WINDOW_MILLIS)
             val hours = TimeUnit.MILLISECONDS.toHours(timeInMillis)
             val minutes = TimeUnit.MILLISECONDS.toMinutes(timeInMillis) % 60
             append("From last ")
@@ -43,9 +44,9 @@ object DeviceStats {
             append(minutes)
             append("m\n\n")
 
-            packetStats.summaries.stream().sorted { o1, o2 ->
-                o2.total compareTo o1.total // Sort them by total number of events
-            }.forEach { count ->
+            packetStats.summaries
+                .sortedByDescending { it.total }
+                .forEach { count ->
                 append(count.packetType.removePrefix("kdeconnect."))
                 append("\n• ")
                 append(count.received)
@@ -65,7 +66,7 @@ object DeviceStats {
                 .computeIfAbsent(deviceId) { PacketStats() }
                 .receivedByType
                 .computeIfAbsent(packetType) { ArrayList() }
-                .add(System.currentTimeMillis())
+                .add(SystemClock.elapsedRealtime())
         }
         cleanupIfNeeded()
     }
@@ -78,7 +79,7 @@ object DeviceStats {
                     .computeIfAbsent(deviceId) { PacketStats() }
                     .sentSuccessfulByType
                     .computeIfAbsent(packetType) { ArrayList() }
-                    .add(System.currentTimeMillis())
+                    .add(SystemClock.elapsedRealtime())
             }
         } else {
             synchronized(DeviceStats::class.java) {
@@ -86,15 +87,15 @@ object DeviceStats {
                     .computeIfAbsent(deviceId) { PacketStats() }
                     .sentFailedByType
                     .computeIfAbsent(packetType) { ArrayList() }
-                    .add(System.currentTimeMillis())
+                    .add(SystemClock.elapsedRealtime())
             }
         }
         cleanupIfNeeded()
     }
 
     private fun cleanupIfNeeded() {
-        val cutoutTimestamp = System.currentTimeMillis() - EVENT_KEEP_WINDOW_MILLIS
-        if (System.currentTimeMillis() > nextCleanup) {
+        val cutoutTimestamp = SystemClock.elapsedRealtime() - EVENT_KEEP_WINDOW_MILLIS
+        if (SystemClock.elapsedRealtime() > nextCleanup) {
             synchronized(DeviceStats::class.java) {
                 Log.i("PacketStats", "Doing periodic cleanup")
                 for (de in eventsByDevice.values) {
@@ -102,7 +103,7 @@ object DeviceStats {
                     removeOldEvents(de.sentFailedByType, cutoutTimestamp)
                     removeOldEvents(de.sentSuccessfulByType, cutoutTimestamp)
                 }
-                nextCleanup = System.currentTimeMillis() + CLEANUP_INTERVAL_MILLIS
+                nextCleanup = SystemClock.elapsedRealtime() + CLEANUP_INTERVAL_MILLIS
             }
         }
     }
@@ -128,7 +129,7 @@ object DeviceStats {
     }
 
     internal class PacketStats {
-        val createdAtMillis: Long = System.currentTimeMillis()
+        val createdAtMillis: Long = SystemClock.elapsedRealtime()
         val receivedByType: HashMap<String, ArrayList<Long>> = HashMap()
         val sentSuccessfulByType: HashMap<String, ArrayList<Long>> = HashMap()
         val sentFailedByType: HashMap<String, ArrayList<Long>> = HashMap()

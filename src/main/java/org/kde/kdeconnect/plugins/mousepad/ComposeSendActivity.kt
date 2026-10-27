@@ -18,11 +18,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import org.kde.kdeconnect.KdeConnect
 import org.kde.kdeconnect.ui.compose.KdeTextButton
@@ -30,24 +35,22 @@ import org.kde.kdeconnect.ui.compose.KdeTextField
 import org.kde.kdeconnect.ui.compose.KdeTheme
 import org.kde.kdeconnect.ui.compose.KdeTopAppBar
 import com.zorinos.zorin_connect.R
-import androidx.core.content.edit
 
 private const val INPUT_CACHE_KEY = "compose_send_input_cache"
 
 class ComposeSendActivity : AppCompatActivity() {
-    private var deviceId: String? = null
+    private lateinit var deviceId: String
     private val userInput = mutableStateOf(String())
     private val prefs by lazy { PreferenceManager.getDefaultSharedPreferences(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
 
         prefs.getString(INPUT_CACHE_KEY, null)?.let { userInput.value = it }
 
         setContent { ComposeSendScreen() }
 
-        deviceId = intent.getStringExtra("org.kde.kdeconnect.plugins.mousepad.deviceId")
+        deviceId = intent.getStringExtra(EXTRA_DEVICE_ID)!!
     }
 
     override fun onStop() {
@@ -59,7 +62,7 @@ class ComposeSendActivity : AppCompatActivity() {
     }
 
     private fun sendComposed() {
-        val plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, MousePadPlugin::class.java)
+        val plugin = KdeConnect.getInstance().getDevicePlugin<MousePadPlugin>(deviceId)
         if (plugin == null) {
             finish()
             return
@@ -74,6 +77,12 @@ class ComposeSendActivity : AppCompatActivity() {
 
     @Composable
     private fun ComposeSendScreen() {
+        val focusRequester = remember { FocusRequester() }
+
+        LaunchedEffect(Unit) {
+            focusRequester.requestFocus()
+        }
+
         KdeTheme(this) {
             Scaffold(
                 modifier = Modifier.safeDrawingPadding(),
@@ -95,6 +104,7 @@ class ComposeSendActivity : AppCompatActivity() {
                 Box(modifier = Modifier.padding(scaffoldPadding).fillMaxSize()) {
                     KdeTextField(
                         modifier = Modifier
+                            .focusRequester(focusRequester)
                             .padding(horizontal = 16.dp)
                             .padding(bottom = 80.dp)
                             .align(Alignment.BottomStart)
@@ -112,5 +122,9 @@ class ComposeSendActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    companion object {
+        const val EXTRA_DEVICE_ID = "deviceId"
     }
 }

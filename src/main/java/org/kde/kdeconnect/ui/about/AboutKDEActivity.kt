@@ -26,9 +26,8 @@ import com.zorinos.zorin_connect.R
 class AboutKDEActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
 
         setContent {
             KdeTheme(this) {

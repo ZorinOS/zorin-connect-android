@@ -26,14 +26,11 @@ class SystemVolumeProvider :
     }
 
     companion object {
-        @JvmStatic
         var currentProvider: SystemVolumeProvider? = null
             private set
 
-        @JvmStatic
         fun getInstance(): SystemVolumeProvider {
-            val currentProvider = currentProvider ?: SystemVolumeProvider()
-            return currentProvider
+            return currentProvider ?: SystemVolumeProvider().also { currentProvider = it }
         }
 
         private fun scale(value: Int, maxValue: Int, maxScaled: Int): Int {

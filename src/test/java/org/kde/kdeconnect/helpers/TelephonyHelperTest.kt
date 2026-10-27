@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2024 TPJ Schikhof <kde@schikhof.eu>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.helpers
 
 import org.junit.Assert
@@ -53,5 +53,22 @@ class TelephonyHelperTest {
             val message = "Expected $expected for $input, but got $result"
             Assert.assertEquals(message, expected, result)
         }
+    }
+
+    @Test
+    fun isPhoneNumberMatchCompat() {
+        val localNumber = "+1-202-555-0173"
+
+        // Exact match
+        Assert.assertTrue(TelephonyHelper.isPhoneNumberMatchCompat(localNumber, "+12025550173"))
+        // Different formatting of the same number
+        Assert.assertTrue(TelephonyHelper.isPhoneNumberMatchCompat(localNumber, "+1 (202) 555-0173"))
+        // Localized area-code match (10 digits >= 75% of 11 digits)
+        Assert.assertTrue(TelephonyHelper.isPhoneNumberMatchCompat(localNumber, "2025550173"))
+        // Numbers that are too short (< 75% length ratio) are discarded
+        Assert.assertFalse(TelephonyHelper.isPhoneNumberMatchCompat(localNumber, "5550173"))
+        // Non match
+        Assert.assertFalse(TelephonyHelper.isPhoneNumberMatchCompat(localNumber, "12025550199"))
+        Assert.assertFalse(TelephonyHelper.isPhoneNumberMatchCompat(localNumber, ""))
     }
 }

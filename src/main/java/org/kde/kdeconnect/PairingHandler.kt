@@ -19,7 +19,6 @@ import com.zorinos.zorin_connect.R
 import java.security.MessageDigest
 import java.security.cert.Certificate
 import java.util.Formatter
-import kotlin.math.abs
 import kotlin.time.Duration.Companion.seconds
 
 class PairingHandler(private val device: Device, private val callback: PairingCallback, var state: PairState) {
@@ -45,11 +44,13 @@ class PairingHandler(private val device: Device, private val callback: PairingCa
     private var pairingTimestamp = 0L
 
     fun packetReceived(np: NetworkPacket) {
-        cancelTimer()
         val wantsPair = np.getBoolean("pair")
         if (wantsPair) {
             when (state) {
-                PairState.Requested -> pairingDone()
+                PairState.Requested -> {
+                    cancelTimer()
+                    pairingDone()
+                }
                 PairState.RequestedByPeer -> {
                     Log.w(
                         "PairingHandler",
@@ -75,7 +76,8 @@ class PairingHandler(private val device: Device, private val callback: PairingCa
                             return
                         }
                         val currentTimestamp = System.currentTimeMillis() / 1000L
-                        if (abs(pairingTimestamp - currentTimestamp) > allowedTimestampDifferenceSeconds) {
+                        if (pairingTimestamp < currentTimestamp - allowedTimestampDifferenceSeconds
+                            || pairingTimestamp > currentTimestamp + allowedTimestampDifferenceSeconds) {
                             state = PairState.NotPaired
                             callback.pairingFailed(device.context.getString(R.string.error_clocks_not_match))
                             return
@@ -95,6 +97,7 @@ class PairingHandler(private val device: Device, private val callback: PairingCa
                 }
             }
         } else {
+            cancelTimer()
             Log.i("PairingHandler", "Unpair request received")
             when (state) {
                 PairState.NotPaired -> Log.i("PairingHandler", "Ignoring unpair request for already unpaired device")
@@ -116,7 +119,7 @@ class PairingHandler(private val device: Device, private val callback: PairingCa
     fun verificationKey(): String? {
         return if (device.protocolVersion >= 8) {
             if (state != PairState.Requested && state != PairState.RequestedByPeer) {
-                return null
+                null
             } else {
                 getVerificationKey(SslHelper.certificate, device.certificate, pairingTimestamp)
             }
@@ -130,7 +133,6 @@ class PairingHandler(private val device: Device, private val callback: PairingCa
 
         if (state == PairState.Paired) {
             Log.w("PairingHandler", "requestPairing was called on an already paired device")
-            callback.pairingFailed(device.context.getString(R.string.error_already_paired))
             return
         }
 
@@ -172,6 +174,14 @@ class PairingHandler(private val device: Device, private val callback: PairingCa
     }
 
     fun acceptPairing() {
+        if (state == PairState.Paired) {
+            return
+        }
+        if (state != PairState.RequestedByPeer) {
+            Log.w("PairingHandler", "Cannot accept pairing without a pairing request")
+            return
+        }
+
         cancelTimer()
         val stateCallback = object : Device.SendPacketStatusCallback() {
             override fun onSuccess() {
@@ -190,6 +200,11 @@ class PairingHandler(private val device: Device, private val callback: PairingCa
     }
 
     fun cancelPairing() {
+        if (state != PairState.Requested && state != PairState.RequestedByPeer) {
+            Log.w("PairingHandler", "Cannot cancel pairing when no pairing is in progress")
+            return
+        }
+
         cancelTimer()
         state = PairState.NotPaired
         val np = NetworkPacket(NetworkPacket.PACKET_TYPE_PAIR)
@@ -211,6 +226,7 @@ class PairingHandler(private val device: Device, private val callback: PairingCa
     }
 
     fun unpair() {
+        cancelTimer()
         state = PairState.NotPaired
         if (device.isReachable) {
             val np = NetworkPacket(NetworkPacket.PACKET_TYPE_PAIR)

@@ -25,7 +25,8 @@
   <string name="pref_plugin_mousepad_desc_tv">Uw telefoon of tablet gebruiken als afstandsbediening voor de TV</string>
   <string name="pref_plugin_presenter">Presentatie op afstand</string>
   <string name="pref_plugin_presenter_desc">Uw apparaat gebruiken om dia\'s te wisselen in een presentatie</string>
-  <string name="pref_plugin_remotekeyboard">Toetsaanslagen van afstand ontvangen</string>
+  <string name="pref_plugin_remotekeyboard_ime">Toetsenbordontvanger (via Android-toetsenbord)</string>
+  <string name="pref_plugin_remotekeyboard_accessibility">Toetsenbordontvanger (via toegankelijkheid)</string>
   <string name="pref_plugin_remotekeyboard_desc">Toetsaanslaggebeurtenissen ontvangen van externe apparaten</string>
   <string name="pref_plugin_mpris">Bediening van multimedia</string>
   <string name="pref_plugin_mpris_desc">Biedt een afstandsbediening voor uw mediaspeler</string>
@@ -48,9 +49,12 @@
   <string name="sad_ok">OK :(</string>
   <string name="cancel">Annuleren</string>
   <string name="open_settings">Instellingen openen</string>
+  <string name="open_accessibility_settings">Toegankelijkheidsinstellingen openen</string>
+  <string name="open_input_settings">Toetsenbordinstellingen openen</string>
   <string name="no_permissions">U moet toestemming geven voor toegang tot meldingen</string>
   <string name="no_permission_mprisreceiver">Om in staat te zijn uw mediaspelers te besturen moet u toegan geven tot de meldingen</string>
-  <string name="no_permissions_remotekeyboard">Om indrukken van toetsen te ontvangen moet u het Zorin Connect Remote Keyboard activeren</string>
+  <string name="no_permissions_remotekeyboard_ime">Om indrukken van toetsen te ontvangen moet u het Zorin Connect Remote Keyboard activeren als een Android-invoermethode</string>
+  <string name="no_permissions_remotekeyboard_accessibility">Om indrukken van toetsen te ontvangen moet u toegangsrechten toekennen</string>
   <string name="send_ping">Ping verzenden</string>
   <string name="open_mpris_controls">Bediening van multimedia</string>
   <string name="remotekeyboard_editing_only_title">Behandel toetsen op afstand alleen bij bewerken</string>
@@ -60,6 +64,7 @@
   <string name="open_mousepad">Invoer op afstand</string>
   <string name="open_mousepad_tv">TV op afstand</string>
   <string name="mousepad_info">Veeg met een vinger op het scherm om de muiscursor te verplaatsen. Tik om te klikken en gebruik twee/drie vingers voor rechter en middelste knop. Twee vingers gebruiken voor schuiven. Druk lang voor slepen en loslaten. Functionaliteit van gyro-muis kan ingeschakeld worden vanuit voorkeuren in plug-in</string>
+  <string name="mousepad_info_double_tap">Veeg met een vinger op het scherm om de muiscursor te verplaatsen. Tik om te klikken en gebruik twee/drie vingers voor rechter en middelste knop. Twee vingers gebruiken voor schuiven. tik tweemaal voor slepen en loslaten. Functionaliteit van gyro-muis kan ingeschakeld worden vanuit voorkeuren in plug-in</string>
   <string name="mousepad_info_no_gestures">Veeg met een vinger op het scherm om de muiscursor te verplaatsen, tik om te klikken</string>
   <string name="mousepad_keyboard_input_not_supported">Toetsenbordinvoer wordt niet ondersteund door het gepaarde apparaat</string>
   <string name="mousepad_single_tap_settings_title">Tikactie met één vinger instellen</string>
@@ -111,7 +116,8 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Als toetsaanslagen verzenden</string>
   <string name="mouse_receiver_plugin_description">Muisbewegingen van afstand ontvangen</string>
   <string name="mouse_receiver_plugin_name">Muisontvanger</string>
-  <string name="mouse_receiver_no_permissions">Om aanraakinvoer op afstand te ontvangen moet u toegangsrechten toekennen om uw apparaat volledig te besturen</string>
+  <string name="mouse_receiver_no_permissions">Om aanraakinvoer op afstand te ontvangen moet u toegangsrechten toekennen</string>
+  <string name="mouse_keyboard_receiver_service_description">Muisbewegingen en toetsenbordinvoer van afstand ontvangen</string>
   <string name="view_status_title">Status</string>
   <string name="battery_status_format">Batterij: %d%%</string>
   <string name="battery_status_low_format">Batterij: %d%% lage batterij</string>
@@ -231,7 +237,6 @@
   <string name="share_destination_folder_preference">Bestemmingsmap</string>
   <string name="share">Delen</string>
   <string name="share_received_file">\"%s\" delen</string>
-  <string name="title_activity_notification_filter">Filter voor meldingen</string>
   <string name="filter_apps_info">Meldingen zullen gesynchroniseerd worden voor de geselecteerde apps.</string>
   <string name="show_notification_if_screen_off">Meldingen alleen sturen als het scherm uit staat</string>
   <string name="add_device_dialog_title">Apparaat toevoegen</string>
@@ -250,6 +255,7 @@
   <string name="sftp_saf_permission_explanation">Om toegang te hebben tot bestanden op afstand moet u opslaglocaties configureren</string>
   <string name="sftp_manage_storage_permission_explanation">Om toegang tot bestanden op dit apparaat toe te staan moet u toestaan dat Zorin Connect de opslag mag beheren.</string>
   <string name="sftp_missing_permission_error">Toegangsrechten ontbreken: toegang tot bestandssysteem</string>
+  <string name="sftp_could_not_determine_ip">Kon lokaal IP-adres niet bepalen</string>
   <string name="no_players_connected">Geen spelers gevonden</string>
   <string name="send_files">Bestanden verzenden</string>
   <string name="use_digitizer">Gebruiken als tekentablet</string>
@@ -301,7 +307,7 @@
   <string name="contacts_per_device_confirmation">Uw telefooncontacten zullen gekopieerd worden naar dit apparaat, ze kunnen dus gebruikt worden door de toepassing Zorin Connect SMS en andere toepassingen.</string>
   <string name="select_ringtone">Selecteer een ringtone</string>
   <string name="telephony_pref_blocked_title">Geblokkeerde nummers</string>
-  <string name="telephony_pref_blocked_dialog_desc">Geen oproepen en SMSen vanaf deze nummers tonen. Specificeer één nummer per regel</string>
+  <string name="telephony_pref_blocked_dialog_desc">Geen oproepen vanaf deze nummers tonen. Specificeer één nummer per regel</string>
   <string name="mpris_coverart_description">Cover-illustratie van huidige media</string>
   <string name="settings_icon_description">Pictogram voor instellingen</string>
   <string name="presenter_fullscreen">Volledig scherm</string>
@@ -328,6 +334,7 @@
   <string name="runcommand_notpaired">Apparaat is niet gepaard</string>
   <string name="runcommand_nosuchdevice">Dit apparaat bestaat niet</string>
   <string name="runcommand_noruncommandplugin">Dit apparaat heeft de \"Run Command Plugin\" niet ingeschakeld</string>
+  <string name="runcommand_widget_no_device">Klik op de titel om een apparaat te selecteren.</string>
   <string name="runcommand_category_device_controls_title">Besturing van apparaat</string>
   <string name="runcommand_device_controls_summary">Als uw apparaat besturing ondersteunt, zullen commando\'s die u hebt geconfigureerd daar verschijnen.</string>
   <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
@@ -477,6 +484,7 @@
   <string name="runcommand_output_no_output_desc">De uitvoer van de opdrachten zal hier verschijnen.</string>
   <string name="runcommand_output_no_output">Geen opdrachten uitgevoerd</string>
   <string name="runcommand_stop">De huidige opdracht stoppen</string>
+  <string name="runcommand_clear_output">Uitvoer wissen</string>
   <string name="pref_mpris_volume_control_title">Sleutels van hardwarevolumes</string>
   <string name="pref_mpris_volume_control_summary">Regel het mediavolume van het verbonden apparaat met de fysieke knoppen van deze telefoon.</string>
 </resources>

@@ -12,11 +12,11 @@ import android.Manifest
 import android.util.Log
 import androidx.core.content.edit
 import androidx.fragment.app.DialogFragment
+import org.kde.kdeconnect.NetworkPacket
 import org.kde.kdeconnect.helpers.ContactsHelper
 import org.kde.kdeconnect.helpers.ContactsHelper.ContactNotFoundException
 import org.kde.kdeconnect.helpers.ContactsHelper.VCardBuilder
 import org.kde.kdeconnect.helpers.ContactsHelper.uID
-import org.kde.kdeconnect.NetworkPacket
 import org.kde.kdeconnect.plugins.Plugin
 import org.kde.kdeconnect.plugins.PluginFactory.LoadablePlugin
 import org.kde.kdeconnect.ui.AlertDialogFragment
@@ -45,10 +45,10 @@ class ContactsPlugin : Plugin() {
         if (!arePermissionsGranted(requiredPermissions)) {
             return false
         }
-        return preferences!!.getBoolean("acceptedToTransferContacts", false)
+        return preferences.getBoolean("acceptedToTransferContacts", false)
     }
 
-    override fun supportsDeviceSpecificSettings(): Boolean = true
+    override val settingsScope = SettingsScope.PER_DEVICE
 
     override val permissionExplanationDialog: DialogFragment
         get() {
@@ -62,13 +62,13 @@ class ContactsPlugin : Plugin() {
                 .setNegativeButton(R.string.cancel)
                 .create()
                 .apply {
-                    setCallback(object : AlertDialogFragment.Callback() {
+                    callback = object : AlertDialogFragment.Callback() {
                         override fun onPositiveButtonClicked(): Boolean {
-                            preferences!!.edit { putBoolean("acceptedToTransferContacts", true) }
+                            preferences.edit { putBoolean("acceptedToTransferContacts", true) }
                             device.launchBackgroundReloadPluginsFromSettings()
                             return true
                         }
-                    })
+                    }
                 }
         }
 
@@ -107,12 +107,12 @@ class ContactsPlugin : Plugin() {
      * @param np The packet containing the request
      * @return true if successfully handled, false otherwise
      */
-    private fun handleRequestAllUIDsTimestamps(@Suppress("unused") np: NetworkPacket): Boolean {
+    private fun handleRequestAllUIDsTimestamps(np: NetworkPacket): Boolean {
         val uIDsToTimestamps: Map<uID, Long> = ContactsHelper.getAllContactTimestamps(context)
         val reply = NetworkPacket(PACKET_TYPE_CONTACTS_RESPONSE_UIDS_TIMESTAMPS).apply {
             val uIDsAsString = mutableListOf<String>()
             for ((contactID: uID, timestamp: Long) in uIDsToTimestamps) {
-                set(contactID.toString(), timestamp.toString())
+                set(contactID.toString(), timestamp)
                 uIDsAsString.add(contactID.toString())
             }
             set(PACKET_UIDS_KEY, uIDsAsString)
@@ -147,7 +147,7 @@ class ContactsPlugin : Plugin() {
                     uIDsAsStrings.add(uID.toString())
                     // Add the uid -> vcard pairing to the packet
                     set(uID.toString(), vcardWithMetadata.toString())
-                } catch (e: ContactNotFoundException) {
+                } catch (_: ContactNotFoundException) {
                     Log.e("ContactsPlugin", "handleRequestVCardsByUIDs failed to find contact with uID $uID")
                 }
             }

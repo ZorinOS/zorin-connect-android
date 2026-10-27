@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.plugins
 
 import android.app.Activity
@@ -12,13 +12,14 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.annotation.CallSuper
 import androidx.annotation.DrawableRes
+import androidx.annotation.EmptySuper
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import androidx.preference.PreferenceManager
 import org.kde.kdeconnect.Device
 import org.kde.kdeconnect.NetworkPacket
 import org.kde.kdeconnect.ui.AlertDialogFragment
-import org.kde.kdeconnect.ui.MainActivity
 import org.kde.kdeconnect.ui.PermissionsAlertDialogFragment
 import org.kde.kdeconnect.ui.PluginSettingsFragment
 import com.zorinos.zorin_connect.R
@@ -30,16 +31,16 @@ abstract class Plugin {
     protected val isDeviceInitialized: Boolean
         get() = ::device.isInitialized
 
-    var preferences: SharedPreferences? = null
-        protected set
+    lateinit var preferences: SharedPreferences
+        private set
 
     fun setContext(context: Context, device: Device?) {
         this.context = context
 
         if (device != null) {
             this.device = device
-            this.preferences =
-                this.context.getSharedPreferences(this.sharedPreferencesName, Context.MODE_PRIVATE)
+            this.preferences = sharedPreferencesName?.let { context.getSharedPreferences(it, Context.MODE_PRIVATE) }
+                ?: PreferenceManager.getDefaultSharedPreferences(context)
         }
     }
 
@@ -56,21 +57,27 @@ abstract class Plugin {
      */
     open fun getUiMenuEntries(): List<PluginUiMenuEntry> = listOf()
 
-    val sharedPreferencesName: String
+    /**
+     * Name of the SharedPreferences file selected by [settingsScope],
+     * or null to use the app-wide default SharedPreferences.
+     */
+    val sharedPreferencesName: String?
         get() {
-            if (isDeviceInitialized.not()) {
+            if (!isDeviceInitialized) {
                 throw RuntimeException("You have to call setContext() before you can call getSharedPreferencesName()")
             }
-            if (this.supportsDeviceSpecificSettings()) {
-                return device.deviceId + "_" + this.pluginKey + "_preferences"
+            return when (settingsScope) {
+                SettingsScope.APP_WIDE -> null
+                SettingsScope.PER_PLUGIN -> "${pluginKey}_preferences"
+                SettingsScope.PER_DEVICE -> "${device.deviceId}_${pluginKey}_preferences"
             }
-            return pluginKey + "_preferences"
         }
 
     /**
      * To receive the network packet from the unpaired device, override
      * listensToUnpairedDevices to return true and this method.
      */
+    @EmptySuper
     open fun onUnpairedDevicePacketReceived(np: NetworkPacket): Boolean {
         return false
     }
@@ -114,14 +121,21 @@ abstract class Plugin {
      */
     open fun hasSettings(): Boolean = false
 
+    enum class SettingsScope {
+        /** Settings are stored in the app-wide default SharedPreferences, shared with other plugins */
+        @Deprecated("Use PER_PLUGIN or PER_DEVICE for new plugins")
+        APP_WIDE,
+        /** Settings are stored in a SharedPreferences file specific to this plugin */
+        PER_PLUGIN,
+        /** Settings are stored in a SharedPreferences file specific to this plugin and device */
+        PER_DEVICE,
+    }
+
     /**
-     * Called to find out if a plugin supports device-specific settings.
-     * If you return `true` your PluginSettingsFragment will use the device
-     * specific SharedPreferences to store the settings.
-     *
-     * @return true if this plugin supports device-specific settings
+     * Where this plugin's settings are stored. Both [preferences] and the
+     * PluginSettingsFragment use the SharedPreferences file this selects.
      */
-    open fun supportsDeviceSpecificSettings(): Boolean = false
+    open val settingsScope: SettingsScope = SettingsScope.PER_PLUGIN
 
     /**
      * If hasSettings returns true, this will be called when the user
@@ -130,7 +144,7 @@ abstract class Plugin {
      *
      * @return The PluginSettingsFragment used to display this plugin's settings
      */
-    open fun getSettingsFragment(activity: Activity): PluginSettingsFragment? {
+    open fun getSettingsFragment(activity: Activity): PluginSettingsFragment {
         throw RuntimeException("Plugin doesn't reimplement getSettingsFragment: $pluginKey")
     }
 
@@ -153,12 +167,10 @@ abstract class Plugin {
      *
      * If [isCompatible] or [checkRequiredPermissions] returns false, this
      * will *not* be called.
-     *
-     * @return true if initialization was successful, false otherwise
      */
-    open fun onCreate(): Boolean {
-        return true
-    }
+    @EmptySuper
+    @Throws(Exception::class)
+    open fun onCreate() {}
 
     /**
      * Finish any ongoing operations, remove listeners... so
@@ -166,6 +178,7 @@ abstract class Plugin {
      * called as well if onCreate threw an exception, so your plugin
      * could be not fully initialized.
      */
+    @EmptySuper
     open fun onDestroy() {}
 
     /**
@@ -173,6 +186,7 @@ abstract class Plugin {
      * By convention, we return true when we have done something in response to the packet or false otherwise,
      * even though that value is unused as of now.
      */
+    @EmptySuper
     open fun onPacketReceived(np: NetworkPacket): Boolean {
         return false
     }
@@ -231,7 +245,7 @@ abstract class Plugin {
             .setTitle(displayName)
             .setMessage(reason)
             .setPermissions(permissions)
-            .setRequestCode(MainActivity.RESULT_NEEDS_RELOAD)
+            .setReloadPluginsOnResult(true)
             .create()
     }
 
@@ -255,12 +269,12 @@ abstract class Plugin {
 
     open fun loadPluginWhenRequiredPermissionsMissing(): Boolean = false
 
+    @EmptySuper
     open fun onDeviceUnpaired(context: Context, deviceId: String) {}
 
     open val minSdk: Int = Build.VERSION_CODES.BASE
 
     companion object {
-        @JvmStatic
         fun getPluginKey(p: Class<out Plugin>): String {
             return p.simpleName
         }

@@ -2,14 +2,14 @@
  * SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.plugins.mpris
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.preference.PreferenceManager
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -28,11 +28,13 @@ import androidx.core.net.toUri
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.preference.PreferenceManager
+import org.kde.kdeconnect.KdeConnect
 import org.kde.kdeconnect.helpers.DEFAULT_MAX_VOLUME
 import org.kde.kdeconnect.helpers.DEFAULT_VOLUME_STEP
 import org.kde.kdeconnect.helpers.VideoUrlsHelper
 import org.kde.kdeconnect.helpers.calculateNewVolume
-import org.kde.kdeconnect.KdeConnect
+import org.kde.kdeconnect.plugins.mpris.MprisActivity.Companion.MENU_OPEN_URL
 import org.kde.kdeconnect.plugins.mpris.MprisPlugin.MprisPlayer
 import com.zorinos.zorin_connect.R
 import com.zorinos.zorin_connect.databinding.MprisControlBinding
@@ -44,24 +46,41 @@ import kotlin.time.Duration.Companion.milliseconds
 private typealias MprisPlayerCallback = (MprisPlayer) -> Unit
 
 class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
-    private val positionSeekUpdateHandler = Handler()
     private lateinit var mprisControlBinding: MprisControlBinding
     private lateinit var activityMprisBinding: MprisNowPlayingBinding
-    private var deviceId: String? = null
-    private lateinit var positionSeekUpdateRunnable: Runnable
+    private lateinit var deviceId: String
+
+    private val positionSeekUpdateHandler = Handler(Looper.getMainLooper())
+    private val positionSeekUpdateRunnable = object : Runnable {
+        override fun run() {
+            if (!isAdded) return // Fragment was already detached
+
+            targetPlayer?.let {
+                mprisControlBinding.positionSeek.progress = it.position.toInt()
+            }
+            positionSeekUpdateHandler.removeCallbacks(this)
+            positionSeekUpdateHandler.postDelayed(this, 1000)
+        }
+    }
 
     private var targetPlayerName = ""
     private var targetPlayer: MprisPlayer? = null
+    private var showRemainingTime = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        showRemainingTime = savedInstanceState?.getBoolean("showRemainingTime") ?: false
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         activityMprisBinding = MprisNowPlayingBinding.inflate(inflater)
         mprisControlBinding = activityMprisBinding.mprisControl
 
-        deviceId = requireArguments().getString(MprisPlugin.DEVICE_ID_KEY)
+        deviceId = arguments?.getString(EXTRA_DEVICE_ID)!!
 
         val activityIntent = requireActivity().intent
 
-        val stringExtra = activityIntent.getStringExtra("player")
+        val stringExtra = activityIntent.getStringExtra(MprisActivity.EXTRA_PLAYER)
         if (stringExtra != null) {
             activityIntent.removeExtra("player")
         }
@@ -117,20 +136,20 @@ class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
             override fun onStopTrackingTouch(seekBar: SeekBar) {}
         })
 
-        positionSeekUpdateRunnable = Runnable {
-            if (!isAdded) return@Runnable  // Fragment was already detached
-
-            targetPlayer?.let {
-                mprisControlBinding.positionSeek.progress = it.position.toInt()
-            }
-            positionSeekUpdateHandler.removeCallbacks(positionSeekUpdateRunnable)
-            positionSeekUpdateHandler.postDelayed(positionSeekUpdateRunnable, 1000)
-        }
         positionSeekUpdateHandler.postDelayed(positionSeekUpdateRunnable, 200)
+
+        mprisControlBinding.timeTextview.setOnClickListener {
+            showRemainingTime = !showRemainingTime
+            updateTimeViews()
+        }
 
         mprisControlBinding.positionSeek.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, progress: Int, byUser: Boolean) {
                 mprisControlBinding.progressTextview.text = durationToProgress(progress.milliseconds)
+                if (showRemainingTime) {
+                    val remaining = ((targetPlayer?.length ?: 0) - progress).coerceAtLeast(0)
+                    mprisControlBinding.timeTextview.text = "-${durationToProgress(remaining.milliseconds)}"
+                }
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -148,14 +167,25 @@ class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
         return activityMprisBinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        KdeConnect.getInstance().getDevicePlugin<MprisPlugin>(deviceId)?.isControlActivityVisible = true
+    }
+
+    override fun onPause() {
+        KdeConnect.getInstance().getDevicePlugin<MprisPlugin>(deviceId)?.isControlActivityVisible = false
+        super.onPause()
+    }
+
     override fun onDestroyView() {
+        positionSeekUpdateHandler.removeCallbacks(positionSeekUpdateRunnable)
         disconnectFromPlugin()
         mprisControlBinding.playerSpinner.adapter = null
         super.onDestroyView()
     }
 
     private fun disconnectFromPlugin() {
-        val plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, MprisPlugin::class.java) ?: return
+        val plugin = KdeConnect.getInstance().getDevicePlugin<MprisPlugin>(deviceId) ?: return
         plugin.apply {
             removePlayerListUpdatedHandler("activity")
             removePlayerStatusUpdatedHandler("activity")
@@ -163,7 +193,7 @@ class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
     }
 
     private fun connectToPlugin() {
-        val plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, MprisPlugin::class.java)
+        val plugin = KdeConnect.getInstance().getDevicePlugin<MprisPlugin>(deviceId)
         if (plugin == null) {
             if (isAdded) {
                 requireActivity().finish()
@@ -173,15 +203,17 @@ class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
         targetPlayer = plugin.getPlayerStatus(targetPlayerName)
 
         plugin.setPlayerStatusUpdatedHandler("activity") {
-            requireActivity().runOnUiThread {
+            val activity = activity ?: return@setPlayerStatusUpdatedHandler
+            activity.runOnUiThread {
                 updatePlayerStatus(plugin)
             }
         }
         plugin.setPlayerListUpdatedHandler("activity") {
-            requireActivity().runOnUiThread {
+            val activity = activity ?: return@setPlayerListUpdatedHandler
+            activity.runOnUiThread {
                 val playerList = plugin.playerList
                 val adapter = ArrayAdapter(
-                    requireContext(),
+                    activity,
                     android.R.layout.simple_spinner_item,
                     playerList.toTypedArray()
                 )
@@ -260,6 +292,7 @@ class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
             //Fragment is not attached to an activity. We will crash if we try to do anything here.
             return
         }
+        val activity = requireActivity()
 
         var playerStatus = targetPlayer
         if (playerStatus == null) {
@@ -267,9 +300,10 @@ class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
             playerStatus = plugin.getEmptyPlayer()
         }
 
-        var song = playerStatus.title
-        if (playerStatus.artist.isNotEmpty()) {
-            song += " - " + playerStatus.artist
+        val song = if (playerStatus.artist.isEmpty()) {
+            playerStatus.title
+        } else {
+            "${playerStatus.title} - ${playerStatus.artist}"
         }
         if (mprisControlBinding.nowPlayingTextview.text.toString() != song) {
             mprisControlBinding.nowPlayingTextview.text = song
@@ -277,16 +311,16 @@ class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
 
         val albumArt = playerStatus.getAlbumArt()
         if (albumArt == null) {
-            val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_album_art_placeholder)!!
+            val drawable = ContextCompat.getDrawable(activity, R.drawable.ic_album_art_placeholder)!!
             activityMprisBinding.albumArt.setImageDrawable(DrawableCompat.wrap(drawable))
         } else {
             activityMprisBinding.albumArt.setImageBitmap(albumArt)
         }
 
         if (playerStatus.isSeekAllowed) {
-            mprisControlBinding.timeTextview.text = durationToProgress(playerStatus.length.milliseconds)
             mprisControlBinding.positionSeek.max = playerStatus.length.toInt()
             mprisControlBinding.positionSeek.progress = playerStatus.position.toInt()
+            updateTimeViews()
             mprisControlBinding.progressSlider.visibility = View.VISIBLE
         } else {
             mprisControlBinding.progressSlider.visibility = View.GONE
@@ -327,7 +361,7 @@ class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
         mprisControlBinding.ffButton.visibility =
             if (playerStatus.isSeekAllowed) View.VISIBLE else View.GONE
 
-        requireActivity().invalidateOptionsMenu()
+        activity.invalidateOptionsMenu()
 
         //Show and hide previous/next buttons simultaneously
         if (playerStatus.isGoPreviousAllowed || playerStatus.isGoNextAllowed) {
@@ -338,6 +372,18 @@ class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
         } else {
             mprisControlBinding.prevButton.visibility = View.GONE
             mprisControlBinding.nextButton.visibility = View.GONE
+        }
+    }
+
+    private fun updateTimeViews() {
+        val player = targetPlayer ?: return
+        val currentPosition = mprisControlBinding.positionSeek.progress.toLong()
+        mprisControlBinding.progressTextview.text = durationToProgress(currentPosition.milliseconds)
+        if (showRemainingTime) {
+            val remaining = (player.length - currentPosition).coerceAtLeast(0)
+            mprisControlBinding.timeTextview.text = "-${durationToProgress(remaining.milliseconds)}"
+        } else {
+            mprisControlBinding.timeTextview.text = durationToProgress(player.length.milliseconds)
         }
     }
 
@@ -359,12 +405,12 @@ class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) = Unit
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menu.add(0, MENU_OPEN_URL, Menu.NONE, R.string.mpris_open_url)
+            }
+
             override fun onPrepareMenu(menu: Menu) {
-                menu.clear()
-                if (!targetPlayer?.getHttpUrl().isNullOrEmpty()) {
-                    menu.add(0, MENU_OPEN_URL, Menu.NONE, R.string.mpris_open_url)
-                }
+                menu.findItem(MENU_OPEN_URL).isVisible = !targetPlayer?.getHttpUrl().isNullOrEmpty()
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -402,22 +448,22 @@ class MprisNowPlayingFragment : Fragment(), VolumeKeyListener {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean("showRemainingTime", showRemainingTime)
         if (targetPlayer != null) {
             outState.putString("targetPlayer", targetPlayerName)
         }
     }
 
     companion object {
-        const val MENU_OPEN_URL: Int = Menu.FIRST
-        fun newInstance(deviceId: String?): MprisNowPlayingFragment {
-            val mprisNowPlayingFragment = MprisNowPlayingFragment()
+        const val EXTRA_DEVICE_ID: String = "deviceId"
 
-            val arguments = Bundle()
-            arguments.putString(MprisPlugin.DEVICE_ID_KEY, deviceId)
-
-            mprisNowPlayingFragment.arguments = arguments
-
-            return mprisNowPlayingFragment
+        fun newInstance(deviceId: String): MprisNowPlayingFragment {
+            return MprisNowPlayingFragment().apply {
+                arguments = Bundle().apply {
+                    putString(EXTRA_DEVICE_ID, deviceId)
+                }
+            }
         }
 
         private fun durationToProgress(duration: Duration): String = buildString {

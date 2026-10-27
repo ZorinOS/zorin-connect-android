@@ -3,19 +3,17 @@
  * SPDX-FileCopyrightText: 2021 Ilmaz Gumerov <ilmaz1309@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.plugins.clipboard
 
-import android.Manifest
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 import org.kde.kdeconnect.helpers.ThreadHelper.execute
 import com.zorinos.zorin_connect.BuildConfig
 import java.io.BufferedReader
@@ -49,7 +47,7 @@ class ClipboardListener {
     private constructor(ctx: Context) {
         context = ctx.applicationContext
         Handler(Looper.getMainLooper()).post {
-            cm = ContextCompat.getSystemService<ClipboardManager>(context, ClipboardManager::class.java)!!
+            cm = context.getSystemService<ClipboardManager>()!!
             cm.addPrimaryClipChangedListener { this.onClipboardChanged() }
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && ClipboardPlugin.canSyncAutomatically(context)) {
@@ -100,26 +98,26 @@ class ClipboardListener {
         }
     }
 
-    @Suppress("deprecation")
     fun setText(text: String?) {
         if (this::cm.isInitialized) {
+            if (text == currentContent) {
+                return
+            }
             updateTimestamp = System.currentTimeMillis()
             currentContent = text
             currentContentType = ClipboardContentType.Text
-            cm.text = text
+            cm.setPrimaryClip(ClipData.newPlainText(null, text))
         }
     }
 
     companion object {
         private var _instance: ClipboardListener? = null
 
-        @JvmStatic
         fun instance(context: Context): ClipboardListener {
             // FIXME: The _instance we return won't be completely initialized yet since initialization happens on a new thread (why?)
             return _instance ?: ClipboardListener(context).also { _instance = it }
         }
 
-        @JvmStatic
         fun detectContentType(clip: ClipData?): ClipboardContentType {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                 return ClipboardContentType.Text

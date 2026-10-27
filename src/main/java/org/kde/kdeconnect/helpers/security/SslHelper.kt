@@ -2,15 +2,15 @@
  * SPDX-FileCopyrightText: 2015 Vineet Garg <grg.vineet@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.helpers.security
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.preference.PreferenceManager
 import android.util.Base64
 import android.util.Log
 import androidx.core.content.edit
+import androidx.preference.PreferenceManager
 import org.bouncycastle.asn1.x500.X500Name
 import org.bouncycastle.asn1.x500.X500NameBuilder
 import org.bouncycastle.asn1.x500.style.BCStyle
@@ -20,9 +20,9 @@ import org.bouncycastle.cert.jcajce.JcaX509v3CertificateBuilder
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder
 import org.kde.kdeconnect.helpers.DeviceHelper.getDeviceId
 import org.kde.kdeconnect.helpers.RandomHelper
+import org.kde.kdeconnect.helpers.TrustedDevices
 import org.kde.kdeconnect.helpers.security.RsaHelper.getPrivateKey
 import org.kde.kdeconnect.helpers.security.RsaHelper.getPublicKey
-import org.kde.kdeconnect.helpers.TrustedDevices
 import java.io.ByteArrayInputStream
 import java.math.BigInteger
 import java.net.Socket
@@ -38,6 +38,7 @@ import java.time.ZoneId
 import java.util.Date
 import java.util.Formatter
 import java.util.Locale
+import java.util.concurrent.ConcurrentHashMap
 import javax.net.ssl.KeyManagerFactory
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLSocket
@@ -48,6 +49,10 @@ import javax.net.ssl.X509TrustManager
 object SslHelper {
     lateinit var certificate: Certificate //my device's certificate
     private val factory: CertificateFactory = CertificateFactory.getInstance("X.509")
+
+    private val trustedSslContextCache = ConcurrentHashMap<String, SSLContext>()
+    @Volatile
+    private var untrustedSslContext: SSLContext? = null
 
     @SuppressLint("CustomX509TrustManager", "TrustAllX509TrustManager")
     private val trustAllCerts: Array<TrustManager> = arrayOf(object : X509TrustManager {
@@ -61,7 +66,7 @@ object SslHelper {
         val privateKey: PrivateKey = getPrivateKey(context)
         val publicKey: PublicKey = getPublicKey(context)
 
-        Log.i(LOG_TAG, "Key algorithm: " + publicKey.algorithm)
+        Log.i(LOG_TAG, "Key algorithm: ${publicKey.algorithm}")
 
         val deviceId = getDeviceId(context)
 
@@ -79,10 +84,10 @@ object SslHelper {
                     Log.e(LOG_TAG,"The certificate stored is from a different device id! (found: $certDeviceId expected:$deviceId)")
                     needsToGenerateCertificate = true
                 } else if (cert.notAfter.time < currDate.time) {
-                    Log.e(LOG_TAG, "The certificate expired: " + cert.notAfter)
+                    Log.e(LOG_TAG, "The certificate expired: ${cert.notAfter}")
                     needsToGenerateCertificate = true
                 } else if (cert.notBefore.time > currDate.time) {
-                    Log.e(LOG_TAG, "The certificate is not effective yet: " + cert.notBefore)
+                    Log.e(LOG_TAG, "The certificate is not effective yet: ${cert.notBefore}")
                     needsToGenerateCertificate = true
                 } else {
                     certificate = cert
@@ -96,51 +101,50 @@ object SslHelper {
         }
 
         if (needsToGenerateCertificate) {
-            TrustedDevices.removeAllTrustedDevices(context)
             Log.i(LOG_TAG, "Generating a certificate")
-            //Fix for https://issuetracker.google.com/issues/37095309
+            // Fix for https://issuetracker.google.com/issues/37095309
             val initialLocale = Locale.getDefault()
-            setLocale(Locale.ENGLISH, context)
+            Locale.setDefault(Locale.ENGLISH)
+            try {
+                val nameBuilder = X500NameBuilder(BCStyle.INSTANCE)
+                nameBuilder.addRDN(BCStyle.CN, deviceId)
+                nameBuilder.addRDN(BCStyle.OU, "KDE Connect")
+                nameBuilder.addRDN(BCStyle.O, "KDE")
+                val localDate = LocalDate.now()
+                val notBefore = localDate.minusYears(1).atStartOfDay(ZoneId.systemDefault()).toInstant()
+                val notAfter = localDate.plusYears(10).atStartOfDay(ZoneId.systemDefault()).toInstant()
+                val certificateBuilder: X509v3CertificateBuilder = JcaX509v3CertificateBuilder(
+                    nameBuilder.build(),
+                    BigInteger.ONE,
+                    Date.from(notBefore),
+                    Date.from(notAfter),
+                    nameBuilder.build(),
+                    publicKey
+                )
+                val keyAlgorithm = privateKey.algorithm
+                val signatureAlgorithm = if ("RSA" == keyAlgorithm) "SHA512withRSA" else "SHA512withECDSA"
+                val contentSigner = JcaContentSignerBuilder(signatureAlgorithm).build(privateKey)
+                val certificateBytes = certificateBuilder.build(contentSigner).encoded
+                certificate = parseCertificate(certificateBytes)
 
-            val nameBuilder = X500NameBuilder(BCStyle.INSTANCE)
-            nameBuilder.addRDN(BCStyle.CN, deviceId)
-            nameBuilder.addRDN(BCStyle.OU, "KDE Connect")
-            nameBuilder.addRDN(BCStyle.O, "KDE")
-            val localDate = LocalDate.now()
-            val notBefore = localDate.minusYears(1).atStartOfDay(ZoneId.systemDefault()).toInstant()
-            val notAfter = localDate.plusYears(10).atStartOfDay(ZoneId.systemDefault()).toInstant()
-            val certificateBuilder: X509v3CertificateBuilder = JcaX509v3CertificateBuilder(
-                nameBuilder.build(),
-                BigInteger.ONE,
-                Date.from(notBefore),
-                Date.from(notAfter),
-                nameBuilder.build(),
-                publicKey
-            )
-            val keyAlgorithm = privateKey.algorithm
-            val signatureAlgorithm = if ("RSA" == keyAlgorithm) "SHA512withRSA" else "SHA512withECDSA"
-            val contentSigner = JcaContentSignerBuilder(signatureAlgorithm).build(privateKey)
-            val certificateBytes = certificateBuilder.build(contentSigner).encoded
-            certificate = parseCertificate(certificateBytes)
+                settings.edit {
+                    putString("certificate", Base64.encodeToString(certificateBytes, 0))
+                }
 
-            settings.edit {
-                putString("certificate", Base64.encodeToString(certificateBytes, 0))
+                invalidateUntrustedSslContext()
+                TrustedDevices.removeAllTrustedDevices(context) // Already calls invalidateTrustedSslContext()
+            } finally {
+                Locale.setDefault(initialLocale)
             }
-
-            setLocale(initialLocale, context)
         }
     }
 
-    private fun setLocale(locale: Locale, context: Context) {
-        Locale.setDefault(locale)
-        val resources = context.resources
-        val config = resources.configuration
-        config.locale = locale
-        resources.updateConfiguration(config, resources.displayMetrics)
+    private sealed interface ContextTarget {
+        data class TrustedDevice(val deviceId: String) : ContextTarget
+        object UntrustedDevices : ContextTarget
     }
 
-    private fun getSslContextForDevice(context: Context, deviceId: String, isDeviceTrusted: Boolean): SSLContext {
-        // TODO: This method is called for each payload that is sent. Cache the result.
+    private fun createSslContext(context: Context, target: ContextTarget): SSLContext {
         val privateKey = getPrivateKey(context)
 
         // Setup keystore
@@ -149,31 +153,61 @@ object SslHelper {
         keyStore.setKeyEntry("key", privateKey, "".toCharArray(), arrayOf(certificate))
 
         // Add device certificate if device trusted
-        if (isDeviceTrusted) {
-            val remoteDeviceCertificate = TrustedDevices.getDeviceCertificate(context, deviceId)
-            keyStore.setCertificateEntry(deviceId, remoteDeviceCertificate)
+        if (target is ContextTarget.TrustedDevice) {
+            val remoteDeviceCertificate = TrustedDevices.getDeviceCertificate(context, target.deviceId)
+            keyStore.setCertificateEntry(target.deviceId, remoteDeviceCertificate)
         }
 
         // Setup key manager factory
         val keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm())
         keyManagerFactory.init(keyStore, "".toCharArray())
 
-        // Setup default trust manager
-        val trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
-        trustManagerFactory.init(keyStore)
-
-        // Setup custom trust manager if device not trusted
         val tlsContext = SSLContext.getInstance("TLSv1.2") // Use TLS up to 1.2, since 1.3 seems to cause issues in some (older?) devices
-        if (isDeviceTrusted) {
-            tlsContext.init(keyManagerFactory.keyManagers, trustManagerFactory.trustManagers, RandomHelper.secureRandom)
-        } else {
-            tlsContext.init(keyManagerFactory.keyManagers, trustAllCerts, RandomHelper.secureRandom)
+        when (target) {
+            is ContextTarget.TrustedDevice -> {
+                // Setup trust manager
+                val trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+                trustManagerFactory.init(keyStore)
+
+                tlsContext.init(keyManagerFactory.keyManagers, trustManagerFactory.trustManagers, RandomHelper.secureRandom)
+            }
+            is ContextTarget.UntrustedDevices -> {
+                tlsContext.init(keyManagerFactory.keyManagers, trustAllCerts, RandomHelper.secureRandom)
+            }
         }
         return tlsContext
     }
 
+    private fun getSslContextForDevice(context: Context, deviceId: String, isDeviceTrusted: Boolean): SSLContext {
+        return if (isDeviceTrusted) {
+            trustedSslContextCache.computeIfAbsent(deviceId) {
+                createSslContext(context, ContextTarget.TrustedDevice(deviceId))
+            }
+        } else {
+            untrustedSslContext ?: synchronized(this) {
+                untrustedSslContext ?: createSslContext(context, ContextTarget.UntrustedDevices).also {
+                    untrustedSslContext = it
+                }
+            }
+        }
+    }
+
+    fun invalidateTrustedSslContext(deviceId: String? = null) {
+        if (deviceId != null) {
+            trustedSslContextCache.remove(deviceId)
+        } else {
+            trustedSslContextCache.clear()
+        }
+    }
+
+    fun invalidateUntrustedSslContext() {
+        synchronized(this) {
+            untrustedSslContext = null
+        }
+    }
+
     private fun configureSslSocket(socket: SSLSocket, isDeviceTrusted: Boolean, isClient: Boolean) {
-        socket.setSoTimeout(10000)
+        socket.setSoTimeout(10 * 1000)
         if (isClient) {
             socket.useClientMode = true
         } else {
@@ -186,7 +220,6 @@ object SslHelper {
         }
     }
 
-    @JvmStatic
     @Throws(java.security.cert.CertificateException::class)
     fun convertToSslSocket(context: Context, socket: Socket, deviceId: String, isDeviceTrusted: Boolean, clientMode: Boolean): SSLSocket {
         val sslSocketFactory = getSslContextForDevice(context, deviceId, isDeviceTrusted).socketFactory

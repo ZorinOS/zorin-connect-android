@@ -13,17 +13,15 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.media.AudioManager
-import android.preference.PreferenceManager
 import android.telephony.PhoneNumberUtils
 import android.telephony.TelephonyManager
-import android.util.Log
 import androidx.core.content.ContextCompat
-import org.kde.kdeconnect.helpers.ContactsHelper
+import androidx.core.content.getSystemService
 import org.kde.kdeconnect.NetworkPacket
+import org.kde.kdeconnect.helpers.ContactsHelper
 import org.kde.kdeconnect.plugins.Plugin
 import org.kde.kdeconnect.plugins.PluginFactory.LoadablePlugin
 import org.kde.kdeconnect.ui.PluginSettingsFragment
-import org.kde.kdeconnect.ui.PluginSettingsFragment.Companion.newInstance
 import com.zorinos.zorin_connect.R
 import java.util.Timer
 import java.util.TimerTask
@@ -70,25 +68,19 @@ class TelephonyPlugin : Plugin() {
 
         val permissionCheck = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_CONTACTS)
 
-        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            val contactInfo = ContactsHelper.phoneNumberLookup(context, phoneNumber)
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED && phoneNumber != null) {
+            val result = ContactsHelper.phoneNumberLookup(context, phoneNumber)
 
-            val name = contactInfo["name"]
+            val name = result.name
             if (name != null) {
                 np["contactName"] = name
             }
 
-            if (contactInfo.containsKey("photoID")) {
-                val photoUri = contactInfo["photoID"]
-                if (photoUri != null) {
-                    try {
-                        val base64photo = ContactsHelper.photoId64Encoded(context, photoUri)
-                        if (!base64photo.isNullOrEmpty()) {
-                            np["phoneThumbnail"] = base64photo
-                        }
-                    } catch (e: Exception) {
-                        Log.e("TelephonyPlugin", "Failed to get contact photo")
-                    }
+            val photoId = result.photoId
+            if (photoId != null) {
+                val base64photo = ContactsHelper.photoId64Encoded(context, photoId)
+                if (!base64photo.isNullOrEmpty()) {
+                    np["phoneThumbnail"] = base64photo
                 }
             }
         } else if (phoneNumber != null) {
@@ -145,15 +137,17 @@ class TelephonyPlugin : Plugin() {
 
     private fun unmuteRinger() {
         if (isMuted) {
-            val am = ContextCompat.getSystemService(context, AudioManager::class.java) ?: return
+            val am = context.getSystemService<AudioManager>() ?: return
             am.setStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_UNMUTE, 0)
             isMuted = false
         }
     }
 
     private fun muteRinger() {
-        if (!isMuted) {
-            val am = ContextCompat.getSystemService(context, AudioManager::class.java) ?: return
+        if (isMuted) return
+
+        val am = context.getSystemService<AudioManager>() ?: return
+        if (!am.isStreamMute(AudioManager.STREAM_RING)) {
             am.setStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0)
             isMuted = true
         }
@@ -163,11 +157,10 @@ class TelephonyPlugin : Plugin() {
 
     override val optionalPermissionExplanation: Int = R.string.telephony_optional_permission_explanation
 
-    override fun onCreate(): Boolean {
+    override fun onCreate() {
         val filter = IntentFilter(TelephonyManager.ACTION_PHONE_STATE_CHANGED)
         filter.priority = 500
         context.registerReceiver(receiver, filter)
-        return true
     }
 
     override fun onDestroy() {
@@ -182,8 +175,7 @@ class TelephonyPlugin : Plugin() {
     }
 
     private fun isNumberBlocked(number: String?): Boolean {
-        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        val blockedNumbers: List<String> = sharedPref.getString(KEY_PREF_BLOCKED_NUMBERS, "")!!.split("\n").dropLastWhile { it.isEmpty() }
+        val blockedNumbers: List<String> = preferences.getString(KEY_PREF_BLOCKED_NUMBERS, "")!!.split("\n").dropLastWhile { it.isEmpty() }
 
         return blockedNumbers.any { s -> PhoneNumberUtils.compare(number, s) }
     }
@@ -198,7 +190,11 @@ class TelephonyPlugin : Plugin() {
 
     override fun hasSettings(): Boolean = true
 
-    override fun getSettingsFragment(activity: Activity): PluginSettingsFragment = newInstance(pluginKey, R.xml.telephonyplugin_preferences)
+    override val settingsScope = SettingsScope.APP_WIDE
+
+    override fun getSettingsFragment(activity: Activity): PluginSettingsFragment {
+        return PluginSettingsFragment.newInstance(pluginKey, device.deviceId, R.xml.telephonyplugin_preferences)
+    }
 
     companion object {
         /**

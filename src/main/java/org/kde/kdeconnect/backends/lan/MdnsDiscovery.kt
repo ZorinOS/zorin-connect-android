@@ -7,7 +7,6 @@ package org.kde.kdeconnect.backends.lan
 
 import android.Manifest
 import android.content.Context
-import android.content.pm.PackageManager
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.net.nsd.NsdManager
 import android.net.nsd.NsdManager.DiscoveryListener
@@ -22,7 +21,8 @@ import org.kde.kdeconnect.helpers.DeviceHelper
 import org.kde.kdeconnect.helpers.DeviceHelper.deviceType
 import org.kde.kdeconnect.helpers.DeviceHelper.getDeviceId
 import org.kde.kdeconnect.helpers.DeviceHelper.getDeviceName
-import java.net.InetAddress
+import org.kde.kdeconnect.helpers.TrustedNetworkHelper
+import org.kde.kdeconnect.helpers.normalizedMappedIpv4Address
 
 class MdnsDiscovery {
     private val context: Context
@@ -42,9 +42,14 @@ class MdnsDiscovery {
         multicastLock = wifiManager.createMulticastLock("kdeConnectMdnsMulticastLock")
     }
 
+    @Synchronized
     fun startDiscovering() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_LOCAL_NETWORK) != PERMISSION_GRANTED) {
             Log.w("MdnsDiscover", "Will not MDNS discover, missing ACCESS_LOCAL_NETWORK permission")
+            return
+        }
+        if (!TrustedNetworkHelper.isTrustedNetwork(context)) {
+            Log.i(LOG_TAG, "Will not MDNS discover on an untrusted network")
             return
         }
         if (discoveryListener == null) {
@@ -54,18 +59,20 @@ class MdnsDiscovery {
         }
     }
 
+    @Synchronized
     fun stopDiscovering() {
-        try {
-            if (discoveryListener != null) {
+        if (discoveryListener != null) {
+            try {
                 mNsdManager.stopServiceDiscovery(discoveryListener)
-                multicastLock.release()
+            } catch (_: IllegalArgumentException) {
+                // Ignore "listener not registered" exception
             }
-        } catch (_: IllegalArgumentException) {
-            // Ignore "listener not registered" exception
+            discoveryListener = null
+            multicastLock.release()
         }
-        discoveryListener = null
     }
 
+    @Synchronized
     fun startAnnouncing() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN && ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_LOCAL_NETWORK) != PERMISSION_GRANTED) {
             Log.w("MdnsDiscover", "Will not MDNS announce, missing ACCESS_LOCAL_NETWORK permission")
@@ -75,8 +82,11 @@ class MdnsDiscovery {
             val serviceInfo: NsdServiceInfo?
             try {
                 serviceInfo = createNsdServiceInfo()
+            } catch (e: IllegalStateException) {
+                Log.w(LOG_TAG, "Couldn't start announcing via MDNS: ${e.message}")
+                return
             } catch (e: IllegalAccessException) {
-                Log.w(LOG_TAG, "Couldn't start announcing via MDNS: " + e.message)
+                Log.w(LOG_TAG, "Couldn't start announcing via MDNS: ${e.message}")
                 return
             }
             registrationListener = createRegistrationListener()
@@ -84,6 +94,7 @@ class MdnsDiscovery {
         }
     }
 
+    @Synchronized
     fun stopAnnouncing() {
         if (registrationListener != null) {
             try {
@@ -103,6 +114,11 @@ class MdnsDiscovery {
 
         override fun onRegistrationFailed(serviceInfo: NsdServiceInfo?, errorCode: Int) {
             Log.e(LOG_TAG, "Registration failed with: $errorCode")
+            synchronized(this@MdnsDiscovery) {
+                if (registrationListener === this) {
+                    registrationListener = null
+                }
+            }
         }
 
         override fun onServiceUnregistered(serviceInfo: NsdServiceInfo?) {
@@ -114,7 +130,7 @@ class MdnsDiscovery {
         }
     }
 
-    @Throws(IllegalAccessException::class)
+    @Throws(IllegalAccessException::class, IllegalStateException::class)
     fun createNsdServiceInfo(): NsdServiceInfo {
         val serviceInfo = NsdServiceInfo()
 
@@ -123,7 +139,7 @@ class MdnsDiscovery {
         // Also, it must be unique, otherwise it will be automatically renamed. For these reasons we use the deviceId.
         serviceInfo.serviceName = deviceId
         serviceInfo.serviceType = SERVICE_TYPE
-        serviceInfo.port = lanLinkProvider.tcpPort
+        serviceInfo.port = lanLinkProvider.tcpPort ?: throw IllegalStateException("tcpPort is null")
 
         // The following fields aren't really used for anything, since we can't include enough info
         // for it to be useful (namely: we can't include the device certificate).
@@ -158,7 +174,7 @@ class MdnsDiscovery {
                 return
             }
 
-            if (lanLinkProvider.visibleDevices.containsKey(deviceId)) {
+            if (lanLinkProvider.hasDevice(deviceId)) {
                 Log.i(LOG_TAG, "MDNS discovered $deviceId to which I'm already connected to. Ignoring.")
                 return
             }
@@ -181,6 +197,12 @@ class MdnsDiscovery {
 
         override fun onStartDiscoveryFailed(serviceType: String?, errorCode: Int) {
             Log.e(LOG_TAG, "MDNS discovery start failed: $errorCode")
+            synchronized(this@MdnsDiscovery) {
+                if (discoveryListener === this) {
+                    discoveryListener = null
+                    multicastLock.release()
+                }
+            }
         }
 
         override fun onStopDiscoveryFailed(serviceType: String?, errorCode: Int) {
@@ -199,12 +221,19 @@ class MdnsDiscovery {
         override fun onServiceResolved(serviceInfo: NsdServiceInfo) {
             Log.i(LOG_TAG, "MDNS successfully resolved $serviceInfo")
 
+            // Discovery can have been stopped while this resolve was in flight.
+            // Do not leak our identity to a service discovered on an untrusted network.
+            if (!TrustedNetworkHelper.isTrustedNetwork(context)) {
+                Log.i(LOG_TAG, "Ignoring MDNS result on an untrusted network")
+                return
+            }
+
             // Let the LanLinkProvider handle the connection
-            val remoteAddress = serviceInfo.host
+            val remoteAddress = serviceInfo.host.normalizedMappedIpv4Address()
             // TODO: In protocol version 8 we should be able to call "identityPacketReceived"
             //       here, since we already have all the info we need to start a connection
             //       and the remaining identity info will be exchanged later.
-            lanLinkProvider.sendUdpIdentityPacket(mutableListOf<InetAddress?>(remoteAddress), null)
+            lanLinkProvider.sendUdpIdentityPacket(listOf(remoteAddress), null)
         }
     }
 

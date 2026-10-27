@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2025 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 
 package org.kde.kdeconnect.plugins.connectivityreport
 
@@ -18,7 +18,7 @@ import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener
 import android.telephony.TelephonyManager
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
 
 /**
  * Registers a listener for changes in connectivity for the device.
@@ -40,7 +40,6 @@ class ConnectivityListener(context: Context) {
     companion object {
         private const val TAG: String = "ConnectivityListener"
         private var instance: ConnectivityListener? = null
-        @JvmStatic
         fun getInstance(context: Context): ConnectivityListener {
             if (instance == null) {
                 instance = ConnectivityListener(context)
@@ -49,12 +48,12 @@ class ConnectivityListener(context: Context) {
         }
     }
 
-    private val connectivityListeners = mutableMapOf<Int?, PhoneStateListener?>()
-    private val states = mutableMapOf<Int, SubscriptionState>() // by subscription ID
+    private val connectivityListeners = HashMap<Int?, PhoneStateListener?>()
+    private val states = HashMap<Int, SubscriptionState>() // by subscription ID
 
-    private val externalListeners = mutableSetOf<StateCallback>()
+    private val externalListeners = HashSet<StateCallback>()
 
-    private val activeIDs = mutableSetOf<Int>()
+    private val activeIDs = HashSet<Int>()
 
     private fun statesChanged() {
         val listenersCopy = synchronized(externalListeners) {
@@ -136,7 +135,7 @@ class ConnectivityListener(context: Context) {
         runOnMainThread {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 // Multi-SIM supported on Nougat+
-                val sm = ContextCompat.getSystemService(context, SubscriptionManager::class.java)
+                val sm = context.getSystemService<SubscriptionManager>()
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     sm?.addOnSubscriptionsChangedListener(context.mainExecutor, subscriptionsListener)
                 } else {
@@ -144,8 +143,8 @@ class ConnectivityListener(context: Context) {
                 }
             } else {
                 // Fallback to single SIM
-                connectivityListeners.put(0, createListenerForSubscription(0))
-                states.put(0, SubscriptionState())
+                connectivityListeners[0] = createListenerForSubscription(0)
+                states[0] = SubscriptionState()
             }
         }
     }
@@ -154,7 +153,7 @@ class ConnectivityListener(context: Context) {
         runOnMainThread {
             val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                val sm = ContextCompat.getSystemService(context, SubscriptionManager::class.java)
+                val sm = context.getSystemService<SubscriptionManager>()
                 sm?.removeOnSubscriptionsChangedListener(subscriptionsListener)
             }
             for (subID in connectivityListeners.keys) {
@@ -202,7 +201,7 @@ class ConnectivityListener(context: Context) {
      */
     @Throws(SecurityException::class)
     fun getActiveSubscriptionIDs(): List<Int> {
-        val subscriptionManager = ContextCompat.getSystemService(context, SubscriptionManager::class.java)
+        val subscriptionManager = context.getSystemService<SubscriptionManager>()
         if (subscriptionManager == null) {
             Log.w(TAG, "Could not get SubscriptionManager")
             return emptyList()

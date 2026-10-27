@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.ui.list
 
 import android.view.LayoutInflater
@@ -16,7 +16,6 @@ class SectionItem : ListAdapter.Item {
         this.title = title
     }
 
-    @JvmField
     var isEmpty: Boolean = true
 
     override fun inflateView(layoutInflater: LayoutInflater): View {

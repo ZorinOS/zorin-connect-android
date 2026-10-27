@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.helpers
 
 import android.annotation.SuppressLint
@@ -15,7 +15,6 @@ import android.util.Log
 import android.webkit.MimeTypeMap
 import androidx.annotation.WorkerThread
 import androidx.documentfile.provider.DocumentFile
-import org.apache.commons.io.FilenameUtils
 import org.kde.kdeconnect.NetworkPacket
 import java.io.File
 import java.nio.charset.StandardCharsets
@@ -23,13 +22,14 @@ import java.nio.charset.StandardCharsets
 object FilesHelper {
     private const val LOG_TAG: String = "SendFileActivity"
 
-    @JvmStatic
     fun getMimeTypeFromFile(file: String?): String {
-        val mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(FilenameUtils.getExtension(file))
+        val mime = file?.let {
+            val extension = file.substringAfterLast('.')
+            MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
+        }
         return mime ?: "*/*"
     }
 
-    @JvmStatic
     fun findValidNonExistingFileName(folder: DocumentFile, filename: String): String {
         var filename = filename.trimEnd('.')
         if (filename.isEmpty()) {
@@ -57,8 +57,8 @@ object FilesHelper {
     /*
         Source https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/core/java/android/os/FileUtils.java
      */
-    private fun buildValidFatFilename(name: String?): String {
-        val res = StringBuilder(name!!.length)
+    private fun buildValidFatFilename(name: String): String {
+        val res = StringBuilder(name.length)
 
         for (c in name) {
             if (isValidFatFilenameChar(c)) {
@@ -99,20 +99,19 @@ object FilesHelper {
     private fun getOpenFileCount(): Int? = File("/proc/self/fd").listFiles()?.size
 
     fun logOpenFileCount() {
-        Log.e("KDE/FileCount", "" + getOpenFileCount())
+        Log.e("KDE/FileCount", "${getOpenFileCount()}")
     }
 
     /**
      * Creates a network packet from the given URI
      */
-    @JvmStatic
     @WorkerThread
-    fun uriToNetworkPacket(context: Context, uri: Uri, type: String?): NetworkPacket? {
+    fun uriToNetworkPacket(context: Context, uri: Uri, type: String): NetworkPacket? {
         try {
             val contentResolver = context.contentResolver
             val inputStream = contentResolver.openInputStream(uri)
 
-            val packet = NetworkPacket(type!!)
+            val packet = NetworkPacket(type)
 
             val sizeDefault = -1L
 
@@ -138,8 +137,8 @@ object FilesHelper {
                 val proj = arrayOf(OpenableColumns.SIZE, OpenableColumns.DISPLAY_NAME)
 
                 try {
-                    contentResolver.query(uri, proj, null, null, null).use { cursor ->
-                        val nameColumnIndex = cursor!!.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME)
+                    contentResolver.query(uri, proj, null, null, null)!!.use { cursor ->
+                        val nameColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME)
                         val sizeColumnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.SIZE)
                         cursor.moveToFirst()
 
@@ -215,7 +214,7 @@ object FilesHelper {
                 // Do we actually have a DocumentProvider here?
                 // I do not think this code path will ever happen for a non-media file is selected on an API < KitKat device, since those will be delivered as a file:// URI and handled accordingly.
                 // Therefore, it is safe to ignore the warning that this field requires API 19
-                @SuppressLint("InlinedApi") val documentLastModifiedColumnIndex = cursor.getColumnIndex(DocumentsContract.Document.COLUMN_LAST_MODIFIED)
+                val documentLastModifiedColumnIndex = cursor.getColumnIndex(DocumentsContract.Document.COLUMN_LAST_MODIFIED)
 
                 // If we have an image, it may be the case that MediaStore.MediaColumns.DATE_MODIFIED catches the modification date, but if not, here is another column we can look for.
                 // This should be checked *after* DATE_MODIFIED since I think that column might give better information
@@ -234,9 +233,11 @@ object FilesHelper {
                     }
                 }
 
-                val lastModifiedTime: Long? = if (!cursor.isNull(properColumnIndex)) cursor.getLong(properColumnIndex) else null
-
-                return if (!milliseconds) lastModifiedTime!! * 1000 else lastModifiedTime
+                if (cursor.isNull(properColumnIndex)) {
+                    return null
+                }
+                val lastModifiedTime: Long = cursor.getLong(properColumnIndex)
+                return if (!milliseconds) lastModifiedTime * 1000 else lastModifiedTime
             }
         }
         return null

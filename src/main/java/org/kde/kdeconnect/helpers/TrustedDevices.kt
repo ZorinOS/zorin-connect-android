@@ -6,12 +6,11 @@ import android.content.SharedPreferences
 import android.util.Base64
 import android.util.Log
 import androidx.core.content.edit
-import org.kde.kdeconnect.helpers.security.SslHelper.parseCertificate
+import org.kde.kdeconnect.helpers.security.SslHelper
 import java.security.cert.Certificate
 
 object TrustedDevices {
 
-    @JvmStatic
     fun isTrustedDevice(context: Context, deviceId: String): Boolean {
         val preferences: SharedPreferences = context.getSharedPreferences("trusted_devices", MODE_PRIVATE)
         return preferences.getBoolean(deviceId, false)
@@ -25,9 +24,9 @@ object TrustedDevices {
     fun removeTrustedDevice(context: Context, deviceId: String) {
         val preferences = context.getSharedPreferences("trusted_devices", MODE_PRIVATE)
         preferences.edit { remove(deviceId) }
-        val deviceSettings = context.getSharedPreferences(deviceId, Context.MODE_PRIVATE)
+        val deviceSettings = context.getSharedPreferences(deviceId, MODE_PRIVATE)
         deviceSettings.edit { clear() }
-
+        SslHelper.invalidateTrustedSslContext(deviceId)
     }
 
     fun getAllTrustedDevices(context: Context): List<String> {
@@ -42,6 +41,7 @@ object TrustedDevices {
                 Log.d("KdeConnect", "Removing devices: $it")
                 preferences.edit { remove(it) }
             }
+        SslHelper.invalidateTrustedSslContext()
     }
 
     /**
@@ -52,10 +52,9 @@ object TrustedDevices {
     fun getDeviceCertificate(context: Context, deviceId: String): Certificate {
         val devicePreferences = context.getSharedPreferences(deviceId, MODE_PRIVATE)
         val certificateBytes = Base64.decode(devicePreferences.getString("certificate", ""), 0)
-        return parseCertificate(certificateBytes)
+        return SslHelper.parseCertificate(certificateBytes)
     }
 
-    @JvmStatic
     fun isCertificateStored(context: Context, deviceId: String): Boolean {
         val devicePreferences = context.getSharedPreferences(deviceId, MODE_PRIVATE)
         val cert: String = devicePreferences.getString("certificate", "")!!

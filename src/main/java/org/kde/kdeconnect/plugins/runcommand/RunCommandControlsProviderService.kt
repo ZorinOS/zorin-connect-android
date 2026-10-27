@@ -22,18 +22,17 @@ import androidx.annotation.RequiresApi
 import androidx.preference.PreferenceManager
 import io.reactivex.Flowable
 import io.reactivex.processors.ReplayProcessor
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
+import kotlinx.serialization.SerializationException
 import org.kde.kdeconnect.Device
 import org.kde.kdeconnect.KdeConnect
+import org.kde.kdeconnect.helpers.JsonHelper.json
 import org.kde.kdeconnect.ui.MainActivity
 import com.zorinos.zorin_connect.R
 import org.reactivestreams.FlowAdapters
 import java.util.concurrent.Flow
 import java.util.function.Consumer
 
-private class CommandEntryWithDevice(o: JSONObject, val device: Device) : CommandEntry(o)
+private class CommandEntryWithDevice(info: CommandInfo, val device: Device) : CommandEntry(info)
 
 @RequiresApi(Build.VERSION_CODES.R)
 class RunCommandControlsProviderService : ControlsProviderService() {
@@ -42,7 +41,7 @@ class RunCommandControlsProviderService : ControlsProviderService() {
 
     override fun createPublisherForAllAvailable(): Flow.Publisher<Control> {
         return FlowAdapters.toFlowPublisher(Flowable.fromIterable(getAllCommandsList().map { commandEntry ->
-            Control.StatelessBuilder(commandEntry.device.deviceId + ":" + commandEntry.key, getIntent(commandEntry.device))
+            Control.StatelessBuilder("${commandEntry.device.deviceId}:${commandEntry.key}", getIntent(commandEntry.device))
                 .setTitle(commandEntry.name)
                 .setSubtitle(commandEntry.command)
                 .setStructure(commandEntry.device.name)
@@ -84,7 +83,7 @@ class RunCommandControlsProviderService : ControlsProviderService() {
             val commandEntry = getCommandByControlId(controlId)
             if (commandEntry != null) {
                 val deviceId = controlId.split(":")[0]
-                val plugin = KdeConnect.getInstance().getDevicePlugin(deviceId ,RunCommandPlugin::class.java)
+                val plugin = KdeConnect.getInstance().getDevicePlugin<RunCommandPlugin>(deviceId)
                 if (plugin != null) {
                     plugin.runCommand(commandEntry.key)
                     consumer.accept(ControlAction.RESPONSE_OK)
@@ -105,18 +104,11 @@ class RunCommandControlsProviderService : ControlsProviderService() {
             sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         }
 
-        val commandList = mutableListOf<CommandEntryWithDevice>()
-
         return try {
-            val jsonArray = JSONArray(sharedPreferences.getString(RunCommandPlugin.KEY_COMMANDS_PREFERENCE + device.deviceId, "[]"))
-
-            for (index in 0 until jsonArray.length()) {
-                val jsonObject = jsonArray.getJSONObject(index)
-                commandList.add(CommandEntryWithDevice(jsonObject, device))
-            }
-
-            commandList
-        } catch (error: JSONException) {
+            val commandsJson = sharedPreferences.getString(RunCommandPlugin.KEY_COMMANDS_PREFERENCE + device.deviceId, "[]")!!
+            val commands: List<CommandInfo> = json.decodeFromString(commandsJson)
+            commands.map { CommandEntryWithDevice(it, device) }
+        } catch (error: SerializationException) {
             Log.e("RunCommand", "Error parsing JSON", error)
             listOf()
         }
@@ -133,14 +125,10 @@ class RunCommandControlsProviderService : ControlsProviderService() {
                 continue
             }
 
-            val plugin = device.getPlugin(RunCommandPlugin::class.java)
+            val plugin = device.getPlugin<RunCommandPlugin>()
             if (plugin != null) {
-                for (jsonObject in plugin.commandList) {
-                    try {
-                        commandList.add(CommandEntryWithDevice(jsonObject, device))
-                    } catch (error: JSONException) {
-                        Log.e("RunCommand", "Error parsing JSON", error)
-                    }
+                for (info in plugin.commandList) {
+                    commandList.add(CommandEntryWithDevice(info, device))
                 }
             }
         }
@@ -156,20 +144,15 @@ class RunCommandControlsProviderService : ControlsProviderService() {
         if (device == null || !device.isPaired) return null
 
         val commandList = if (device.isReachable) {
-            device.getPlugin(RunCommandPlugin::class.java)?.commandList?.map { jsonObject ->
-                CommandEntryWithDevice(jsonObject, device)
+            device.getPlugin<RunCommandPlugin>()?.commandList?.map { info ->
+                CommandEntryWithDevice(info, device)
             }
         } else {
             getSavedCommandsList(device)
         }
 
         return commandList?.find { command ->
-            try {
-                command.key == controlIdParts[1]
-            } catch (error: JSONException) {
-                Log.e("RunCommand", "Error parsing JSON", error)
-                false
-            }
+            command.key == controlIdParts[1]
         }
     }
 
@@ -196,6 +179,9 @@ class RunCommandControlsProviderService : ControlsProviderService() {
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .putExtra(MainActivity.EXTRA_DEVICE_ID, device?.deviceId)
 
-        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        // Use a request code unique to the device: extras are ignored when matching PendingIntents, so with a
+        // fixed one the controls of all devices would share the device id of the latest one
+        val requestCode = device?.deviceId.hashCode()
+        return PendingIntent.getActivity(this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }
 }

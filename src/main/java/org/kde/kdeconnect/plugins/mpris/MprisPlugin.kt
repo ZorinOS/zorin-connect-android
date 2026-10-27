@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.plugins.mpris
 
 import android.Manifest
@@ -14,22 +14,23 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemClock
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
-import androidx.preference.PreferenceManager
+import org.kde.kdeconnect.Device
+import org.kde.kdeconnect.NetworkPacket
 import org.kde.kdeconnect.helpers.NotificationHelper
 import org.kde.kdeconnect.helpers.ThreadHelper
 import org.kde.kdeconnect.helpers.VideoUrlsHelper
-import org.kde.kdeconnect.NetworkPacket
+import org.kde.kdeconnect.plugins.Plugin
+import org.kde.kdeconnect.plugins.PluginFactory.LoadablePlugin
 import org.kde.kdeconnect.plugins.mpris.AlbumArtCache.deregisterPlugin
 import org.kde.kdeconnect.plugins.mpris.AlbumArtCache.getAlbumArt
 import org.kde.kdeconnect.plugins.mpris.AlbumArtCache.initializeDiskCache
 import org.kde.kdeconnect.plugins.mpris.AlbumArtCache.payloadToDiskCache
 import org.kde.kdeconnect.plugins.mpris.AlbumArtCache.registerPlugin
-import org.kde.kdeconnect.plugins.Plugin
-import org.kde.kdeconnect.plugins.PluginFactory.LoadablePlugin
 import org.kde.kdeconnect.ui.PluginSettingsFragment
 import com.zorinos.zorin_connect.R
 import java.net.MalformedURLException
@@ -43,7 +44,7 @@ class MprisPlugin : Plugin() {
         var isPlaying: Boolean = false
             internal set(value) {
                 if (value && !field) {
-                    playStartTime = System.currentTimeMillis()
+                    playStartTime = SystemClock.elapsedRealtime()
                 }
                 field = value
             }
@@ -56,6 +57,16 @@ class MprisPlugin : Plugin() {
         var album: String = ""
             internal set
         internal var albumArtUrl: String = ""
+            set(value) {
+                if (value != field) {
+                    fetchedAlbumArt = null
+                }
+                field = value
+            }
+        /**
+         * The album art delivered by [AlbumArtCache], together with the url it was fetched from
+         */
+        internal var fetchedAlbumArt: Pair<String, Bitmap>? = null
         internal var url: String = ""
         var loopStatus: String = ""
             internal set
@@ -85,7 +96,7 @@ class MprisPlugin : Plugin() {
             internal set
 
         init {
-            lastPositionTime = System.currentTimeMillis()
+            lastPositionTime = SystemClock.elapsedRealtime()
         }
 
         val isSpotify: Boolean
@@ -94,20 +105,20 @@ class MprisPlugin : Plugin() {
         val isSeekAllowed: Boolean
             get() = seekAllowed && length >= 0 && position >= 0
 
-        val hasAlbumArt: Boolean
-            get() = albumArtUrl.isNotEmpty()
-
         /**
-         * Returns the album art (if available). Note that this can return null even if hasAlbumArt() returns true.
+         * Returns the album art (if available). Note that this can return null even if albumArtUrl is set
          *
          * @return The album art, or null if not available
          */
         fun getAlbumArt(): Bitmap? {
+            fetchedAlbumArt?.let { (url, bitmap) ->
+                if (url == albumArtUrl) return bitmap
+            }
             return getAlbumArt(albumArtUrl, this@MprisPlugin, playerName)
         }
 
         fun getHttpUrl(): String? {
-            return url?.takeIf { it.startsWith("http://") || it.startsWith("https://") }
+            return url.takeIf { it.startsWith("http://") || it.startsWith("https://") }
         }
 
         val isSetVolumeAllowed: Boolean
@@ -115,7 +126,7 @@ class MprisPlugin : Plugin() {
 
         val position: Long
             get() = if (isPlaying) {
-                lastPosition + (System.currentTimeMillis() - lastPositionTime)
+                lastPosition + (SystemClock.elapsedRealtime() - lastPositionTime)
             } else {
                 lastPosition
             }
@@ -173,7 +184,7 @@ class MprisPlugin : Plugin() {
                 sendCommand(playerName, "SetPosition", position)
 
                 lastPosition = position.toLong()
-                lastPositionTime = System.currentTimeMillis()
+                lastPositionTime = SystemClock.elapsedRealtime()
             }
         }
 
@@ -182,12 +193,18 @@ class MprisPlugin : Plugin() {
                 sendCommand(playerName, "Seek", offset)
             }
         }
+
+        val device : Device
+            get() = this@MprisPlugin.device
     }
 
     private val players = ConcurrentHashMap<String, MprisPlayer>()
     private var supportAlbumArtPayload = false
     private val playerStatusUpdated = ConcurrentHashMap<String, () -> Unit>()
     private val playerListUpdated = ConcurrentHashMap<String, () -> Unit>()
+    @Volatile
+    var isControlActivityVisible = false
+
     override val displayName: String
         get() = context.resources.getString(R.string.pref_plugin_mpris)
 
@@ -200,33 +217,33 @@ class MprisPlugin : Plugin() {
             R.drawable.mpris_plugin_action_24dp
         ) { parentActivity ->
             val intent = Intent(parentActivity, MprisActivity::class.java)
-            intent.putExtra(DEVICE_ID_KEY, device.deviceId)
+            intent.putExtra(MprisActivity.EXTRA_DEVICE_ID, device.deviceId)
             parentActivity.startActivity(intent)
         }
     )
 
     override fun hasSettings(): Boolean = true
 
+    override val settingsScope = SettingsScope.APP_WIDE
+
     override fun getSettingsFragment(activity: Activity): PluginSettingsFragment {
-        return PluginSettingsFragment.newInstance(pluginKey, R.xml.mprisplugin_preferences)
+        return PluginSettingsFragment.newInstance(pluginKey, device.deviceId, R.xml.mprisplugin_preferences)
     }
 
-    override fun onCreate(): Boolean {
-        MprisMediaSession.instance.onCreate(context.applicationContext, this, device.deviceId)
+    override fun onCreate() {
+        MprisMediaSession.instance.addDevice(context.applicationContext, this, device.deviceId)
 
         // Always request the player list so the data is up-to-date
         requestPlayerList()
 
         initializeDiskCache(context)
         registerPlugin(this)
-
-        return true
     }
 
     override fun onDestroy() {
         players.clear()
         deregisterPlugin(this)
-        MprisMediaSession.instance.onDestroy(this, device.deviceId)
+        MprisMediaSession.instance.removeDevice(this, device.deviceId)
     }
 
     private fun sendCommand(player: String, method: String, value: String) {
@@ -283,7 +300,7 @@ class MprisPlugin : Plugin() {
                 playerStatus.length = np.getLong("length", playerStatus.length)
                 if (np.has("pos")) {
                     playerStatus.lastPosition = np.getLong("pos", playerStatus.lastPosition)
-                    playerStatus.lastPositionTime = System.currentTimeMillis()
+                    playerStatus.lastPositionTime = SystemClock.elapsedRealtime()
                 }
                 playerStatus.isPlaying = np.getBoolean("isPlaying", playerStatus.isPlaying)
                 playerStatus.isPlayAllowed = np.getBoolean("canPlay", playerStatus.isPlayAllowed)
@@ -303,7 +320,7 @@ class MprisPlugin : Plugin() {
                 notifyPlayerStatusUpdated()
 
                 // Check to see if a stream has stopped playing and we should deliver a notification
-                if (np.has("isPlaying") && !playerStatus.isPlaying && wasPlaying) {
+                if (np.has("isPlaying") && !playerStatus.isPlaying && wasPlaying && !isControlActivityVisible) {
                     showContinueWatchingNotification(playerStatus)
                 }
             }
@@ -315,7 +332,7 @@ class MprisPlugin : Plugin() {
         val newPlayerList = np.getStringList("playerList")
         if (newPlayerList != null) {
             var equals = true
-            newPlayerList.stream().filter { !players.containsKey(it) }.forEach { newPlayer ->
+            newPlayerList.filter { !players.containsKey(it) }.forEach { newPlayer ->
                 equals = false
                 val player = MprisPlayer().apply {
                     playerName = newPlayer
@@ -327,7 +344,7 @@ class MprisPlugin : Plugin() {
             val iter = players.entries.iterator()
             iter.forEach {
                 val oldPlayer = it.key
-                val found = newPlayerList.stream().anyMatch { newPlayer -> newPlayer == oldPlayer }
+                val found = newPlayerList.any { newPlayer -> newPlayer == oldPlayer }
                 if (!found) {
                     // Player got removed
                     equals = false
@@ -352,7 +369,7 @@ class MprisPlugin : Plugin() {
     }
 
     private fun showContinueWatchingNotification(playerStatus: MprisPlayer) {
-        if (playerStatus.playStartTime + 5000 > System.currentTimeMillis()) {
+        if (playerStatus.playStartTime + 5000 > SystemClock.elapsedRealtime()) {
             // Playback was too short
             return
         }
@@ -362,9 +379,8 @@ class MprisPlugin : Plugin() {
                 // Pause was too short. Probably just the gap between songs
                 return@execute
             }
-            val prefs = PreferenceManager.getDefaultSharedPreferences(context)
             val httpUrl = playerStatus.getHttpUrl()
-            if (prefs.getBoolean(context.getString(R.string.mpris_keepwatching_key), true) && httpUrl != null) {
+            if (preferences.getBoolean(context.getString(R.string.mpris_keepwatching_key), true) && httpUrl != null) {
                 try {
                     val transformedUrl = httpUrl
                         .let { VideoUrlsHelper.convertToAndFromYoutubeTvLinks(it) }
@@ -382,7 +398,7 @@ class MprisPlugin : Plugin() {
                             .setContentIntent(pendingIntent)
                             .setContentText(context.resources.getString(R.string.mpris_keepwatching) + " " + playerStatus.title)
                         notificationManager.notify(
-                            System.currentTimeMillis().toInt(),
+                            SystemClock.elapsedRealtime().toInt(),
                             builder.build()
                         )
                     }
@@ -452,7 +468,7 @@ class MprisPlugin : Plugin() {
          *
          * @return null if no players are playing, a playing player otherwise
          */
-        get() = players.values.stream().filter(MprisPlayer::isPlaying).findFirst().orElse(null)
+        get() = players.values.firstOrNull(MprisPlayer::isPlaying)
 
     fun hasPlayer(player: MprisPlayer): Boolean = players.containsValue(player)
 
@@ -472,8 +488,12 @@ class MprisPlugin : Plugin() {
         device.sendPacket(np)
     }
 
-    fun fetchedAlbumArt(url: String) {
-        if (players.values.stream().anyMatch { player -> url == player.albumArtUrl }) {
+    fun fetchedAlbumArt(url: String, albumArt: Bitmap) {
+        val matchingPlayers = players.values.filter { player -> url == player.albumArtUrl }
+        if (matchingPlayers.isNotEmpty()) {
+            for (player in matchingPlayers) {
+                player.fetchedAlbumArt = url to albumArt
+            }
             notifyPlayerStatusUpdated()
         }
     }
@@ -504,7 +524,6 @@ class MprisPlugin : Plugin() {
     override val optionalPermissionExplanation: Int = R.string.mpris_notifications_explanation
 
     companion object {
-        const val DEVICE_ID_KEY: String = "deviceId"
         private const val PACKET_TYPE_MPRIS = "kdeconnect.mpris"
         private const val PACKET_TYPE_MPRIS_REQUEST = "kdeconnect.mpris.request"
     }

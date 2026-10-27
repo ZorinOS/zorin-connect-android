@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2014 Ahmed I. Khalil <ahmedibrahimkhali@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.plugins.presenter
 
 import android.app.Activity
@@ -10,11 +10,10 @@ import android.content.Intent
 import android.view.KeyEvent
 import org.kde.kdeconnect.DeviceType
 import org.kde.kdeconnect.NetworkPacket
-import org.kde.kdeconnect.plugins.mousepad.KeyListenerView
 import org.kde.kdeconnect.plugins.Plugin
 import org.kde.kdeconnect.plugins.PluginFactory.LoadablePlugin
+import org.kde.kdeconnect.plugins.mousepad.KeyListenerView
 import org.kde.kdeconnect.ui.PluginSettingsFragment
-import org.kde.kdeconnect.ui.PluginSettingsFragment.Companion.newInstance
 import com.zorinos.zorin_connect.R
 
 
@@ -32,8 +31,10 @@ class PresenterPlugin : Plugin() {
 
     override fun hasSettings(): Boolean = true
 
+    override val settingsScope = SettingsScope.APP_WIDE
+
     override fun getSettingsFragment(activity: Activity): PluginSettingsFragment {
-        return newInstance(pluginKey, R.xml.presenterplugin_preferences)
+        return PluginSettingsFragment.newInstance(pluginKey, device.deviceId, R.xml.presenterplugin_preferences)
     }
 
     override fun getUiButtons(): List<PluginUiButton> = listOf(
@@ -42,7 +43,7 @@ class PresenterPlugin : Plugin() {
             R.drawable.ic_presenter_24dp
         ) { parentActivity ->
             val intent = Intent(parentActivity, PresenterActivity::class.java)
-            intent.putExtra("deviceId", device.deviceId)
+            intent.putExtra(PresenterActivity.EXTRA_DEVICE_ID, device.deviceId)
             parentActivity.startActivity(intent)
         })
 

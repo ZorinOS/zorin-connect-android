@@ -18,12 +18,15 @@
   <string name="pref_plugin_clipboard">Sincronizar el portapapeles</string>
   <string name="pref_plugin_clipboard_desc">Compartir el contenido del portapapeles</string>
   <string name="pref_plugin_clipboard_sent">Enviado al portapapeles</string>
+  <string name="clipboard_preference_title_skip_sensitive">Evitar la sincronización sensitiva del portapapeles</string>
+  <string name="clipboard_preference_summary_skip_sensitive">No sincronizar automáticamente contraseñas u otro contenido marcado como sensitivo</string>
   <string name="pref_plugin_mousepad">Entrada remota</string>
   <string name="pref_plugin_mousepad_desc_nontv">Usar su teléfono o tableta como teclado y teclado táctil</string>
   <string name="pref_plugin_mousepad_desc_tv">Usar su teléfono o tableta como mando de TV</string>
   <string name="pref_plugin_presenter">Controles de presentación</string>
   <string name="pref_plugin_presenter_desc">Use su dispositivo para cambiar las diapositivas de una presentación</string>
-  <string name="pref_plugin_remotekeyboard">Recibir entrada de teclado</string>
+  <string name="pref_plugin_remotekeyboard_ime">Receptor de teclado (via teclado de Android)</string>
+  <string name="pref_plugin_remotekeyboard_accessibility">Receptor de teclado (via accesibilidad)</string>
   <string name="pref_plugin_remotekeyboard_desc">Recibe entradas de teclado desde otros dispositivos</string>
   <string name="pref_plugin_mpris">Controles multimedia</string>
   <string name="pref_plugin_mpris_desc">Mostrar un control remoto para su reproductor de medios</string>
@@ -46,9 +49,12 @@
   <string name="sad_ok">OK :(</string>
   <string name="cancel">Cancelar</string>
   <string name="open_settings">Abrir preferencias</string>
+  <string name="open_accessibility_settings">Abrir preferencias de accesibilidad</string>
+  <string name="open_input_settings">Abrir preferencias de teclado</string>
   <string name="no_permissions">Debe permitir el acceso a las notificaciones</string>
   <string name="no_permission_mprisreceiver">Para poder controlar sus reproductores de medios, necesita dar acceso a las notificaciones</string>
-  <string name="no_permissions_remotekeyboard">Para recibir pulsaciones de teclado, debe activar el teclado remoto de Zorin Connect</string>
+  <string name="no_permissions_remotekeyboard_ime">Para recibir pulsaciones de teclado, debe activar el teclado remoto de Zorin Connect como un método de entrada de Android</string>
+  <string name="no_permissions_remotekeyboard_accessibility">Para recibir pulsaciones de teclado debe dar permisos de accesibilidad</string>
   <string name="send_ping">Enviar ping</string>
   <string name="open_mpris_controls">Control multimedia</string>
   <string name="remotekeyboard_editing_only_title">Procesar teclas remotas solo al editar</string>
@@ -58,6 +64,7 @@
   <string name="open_mousepad">Entrada remota</string>
   <string name="open_mousepad_tv">Control remoto TV</string>
   <string name="mousepad_info">Mueva un dedo sobre la pantalla para mover el cursor del ratón. Pulse para realizar un clic y use dos o tres dedos para emular los botones derecho y central. Use 2 dedos para desplazarse. Mantenga el dedo pulsado para arrastrar y soltar. El ratón giroscópico puede ser activado desde las preferencias del complemento.</string>
+  <string name="mousepad_info_double_tap">Mueva un dedo sobre la pantalla para mover el cursor del ratón. Pulse para realizar un clic y use dos o tres dedos para emular los botones derecho y central. Use 2 dedos para desplazarse. Una doble pulsación para arrastrar y soltar. El ratón giroscópico puede ser activado desde las preferencias del complemento.</string>
   <string name="mousepad_info_no_gestures">Mueva un dedo sobre la pantalla para mover el cursor del ratón, tóquela para hacer clic.</string>
   <string name="mousepad_keyboard_input_not_supported">Entrada de teclado no soportada por el dispositivo vinculado.</string>
   <string name="mousepad_single_tap_settings_title">Establecer la acción al pulsar con un dedo</string>
@@ -73,6 +80,7 @@
   <string name="bigscreen_hide_mouse_input">Ocultar el botón de entrada remota de ratón y teclado</string>
   <string name="bigscreen_show_home_title">Mostrar botón de inicio</string>
   <string name="bigscreen_show_back_title">Mostrar botón Atrás</string>
+  <string name="bigscreen_show_close_title">Mostrar botón de cerrar</string>
   <string-array name="mousepad_tap_entries">
     <item>Clic izquierdo</item>
     <item>Clic derecho</item>
@@ -108,7 +116,8 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Enviar como teclas</string>
   <string name="mouse_receiver_plugin_description">Permite mover el ratón desde otro dispositivo</string>
   <string name="mouse_receiver_plugin_name">Recibir movimiento del ratón</string>
-  <string name="mouse_receiver_no_permissions">Para recibir entradas táctiles de manera remota necesita conceder permisos de accesibilidad para controlar totalmente su dispositivo</string>
+  <string name="mouse_receiver_no_permissions">Para recibir entradas táctiles de manera remota necesita conceder permisos de accesibilidad</string>
+  <string name="mouse_keyboard_receiver_service_description">Recibir movimiento de ratón y entrada de teclado remotos</string>
   <string name="view_status_title">Estado</string>
   <string name="battery_status_format">Batería: %d%%</string>
   <string name="battery_status_low_format">Batería: %d%% batería baja</string>
@@ -172,10 +181,11 @@
   <string name="tap_to_answer">Pulse para responder</string>
   <string name="left_click">Enviar clic izquierdo</string>
   <string name="right_click">Enviar clic derecho</string>
-  <string name="middle_click">Enviar clic del botón central</string>
+  <string name="middle_click">Enviar clic central</string>
   <string name="show_keyboard">Mostrar teclado</string>
   <string name="show_mouse_and_keyboard">Mostrar ratón y teclado</string>
   <string name="device_not_paired">Dispositivo no vinculado</string>
+  <string name="pairing_missing_local_network_permission">Faltan permisos para acceder a dispositivos cercanos, la aplicación no funcionará.</string>
   <string name="pairing_duplicate_names">Precaución: Hay varios dispositivos con el mismo nombre.</string>
   <string name="request_pairing">Vincular</string>
   <string name="pairing_accept">Aceptar</string>
@@ -227,7 +237,6 @@
   <string name="share_destination_folder_preference">Carpeta de guardado</string>
   <string name="share">Compartir</string>
   <string name="share_received_file">Compartir «%s»</string>
-  <string name="title_activity_notification_filter">Filtro de notificaciones</string>
   <string name="filter_apps_info">Las notificaciones se sincronizarán en las aplicaciones seleccionadas.</string>
   <string name="show_notification_if_screen_off">Enviar notificaciones solo si la pantalla está apagada</string>
   <string name="add_device_dialog_title">Añadir dispositivo</string>
@@ -297,7 +306,7 @@
   <string name="contacts_per_device_confirmation">Sus contactos telefónicos serán copiados a este dispositivo y así podrán ser usados por la aplicación de SMS de Zorin Connect y por otras aplicaciones.</string>
   <string name="select_ringtone">Seleccionar tono</string>
   <string name="telephony_pref_blocked_title">Números bloqueados</string>
-  <string name="telephony_pref_blocked_dialog_desc">No mostrar llamadas y SMS de estos números. Por favor, especifique solo un número por línea</string>
+  <string name="telephony_pref_blocked_dialog_desc">No mostrar llamadas de estos números. Por favor, especifique solo un número por línea</string>
   <string name="mpris_coverart_description">Carátula del medio actual</string>
   <string name="settings_icon_description">Icono de preferencias</string>
   <string name="presenter_fullscreen">Pantalla completa</string>
@@ -324,6 +333,7 @@
   <string name="runcommand_notpaired">El dispositivo no está vinculado</string>
   <string name="runcommand_nosuchdevice">No se encuentra este dispositivo</string>
   <string name="runcommand_noruncommandplugin">No tiene activado el complemento para ejecutar órdenes en este dispositivo</string>
+  <string name="runcommand_widget_no_device">Pulse el título para seleccionar un dispositivo.</string>
   <string name="runcommand_category_device_controls_title">Controles del dispositivo</string>
   <string name="runcommand_device_controls_summary">Si su dispositivo reconoce los controles de dispositivo, las órdenes que haya configurado aparecerán aquí.</string>
   <string name="set_runcommand_name_as_title">mostrar_nombre_de_la_orden_como_título</string>
@@ -367,6 +377,7 @@
   <string name="mpris_open_url">Seguir reproduciendo aquí</string>
   <string name="cant_open_url">No se pudo abrir la URL para seguir reproduciendo</string>
   <string name="bigscreen_home">Inicio</string>
+  <string name="bigscreen_close">Cerrar</string>
   <string name="bigscreen_up">Arriba</string>
   <string name="bigscreen_left">Izquierda</string>
   <string name="bigscreen_select">Seleccionar</string>
@@ -403,11 +414,11 @@
     <item>Claro</item>
     <item>Oscuro</item>
   </string-array>
-  <string name="report_bug">Reportar error</string>
-  <string name="donate">Realizar una donación</string>
+  <string name="report_bug">Informar de fallo</string>
+  <string name="donate">Hacer un donativo</string>
   <string name="source_code">Código fuente</string>
   <string name="licenses">Licencias</string>
-  <string name="website">Página web</string>
+  <string name="website">Sitio web</string>
   <string name="about">Acerca de</string>
   <string name="authors">Autores</string>
   <string name="thanks_to">Gracias a</string>
@@ -469,4 +480,10 @@
   <string name="pref_presenter_enable_volume_keys_summary">«En espera» no está implementado en Android entre las versiones 13 y 15</string>
   <string name="presenter_volume_keys_foreground_tip">Puede dejar la pantalla activada y usar las teclas de volumen para ir a la diapositiva previa/siguiente</string>
   <string name="presenter_volume_keys_tip">Puede dejar la pantalla activada o bloquear su dispositivo y usar las teclas de volumen para ir a la diapositiva previa/siguiente</string>
+  <string name="runcommand_output_no_output_desc">La salida de las órdenes aparecerá aquí.</string>
+  <string name="runcommand_output_no_output">No se ejecutó ninguna orden</string>
+  <string name="runcommand_stop">Detener la orden actual</string>
+  <string name="runcommand_clear_output">Limpiar salida</string>
+  <string name="pref_mpris_volume_control_title">Teclas de volumen hardware</string>
+  <string name="pref_mpris_volume_control_summary">Controle el volumen de los dispositivos conectados con los botones hardware de este teléfono</string>
 </resources>

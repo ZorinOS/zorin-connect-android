@@ -2,16 +2,16 @@
  * SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.helpers
 
 import android.content.Context
 import android.os.Build
-import android.preference.PreferenceManager
 import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationManagerCompat
-import com.zorinos.zorin_connect.R
 import androidx.core.content.edit
+import androidx.preference.PreferenceManager
+import com.zorinos.zorin_connect.R
 
 object NotificationHelper {
     fun initializeChannels(context: Context) {
@@ -70,12 +70,12 @@ object NotificationHelper {
         nm.deleteUnlistedNotificationChannels(channels.map { channel -> channel.id })
     }
 
-    fun setPersistentNotificationEnabled(context: Context?, enabled: Boolean) {
+    fun setPersistentNotificationEnabled(context: Context, enabled: Boolean) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         prefs.edit { putBoolean("persistentNotification", enabled) }
     }
 
-    fun isPersistentNotificationEnabled(context: Context?): Boolean {
+    fun isPersistentNotificationEnabled(context: Context): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return true
         }

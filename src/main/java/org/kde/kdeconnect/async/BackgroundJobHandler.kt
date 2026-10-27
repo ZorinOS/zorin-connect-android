@@ -24,11 +24,17 @@ import java.util.concurrent.TimeUnit
  *
  * Might be able to be replaced with coroutines later
  */
-class BackgroundJobHandler {
-    private constructor(corePoolSize: Int, maxPoolSize: Int, keepAliveTime: Long, unit: TimeUnit, workQueue: BlockingQueue<Runnable>) {
-        this.threadPoolExecutor = MyThreadPoolExecutor(corePoolSize, maxPoolSize, keepAliveTime, unit, workQueue)
-        this.handler = Handler(Looper.getMainLooper())
-    }
+class BackgroundJobHandler(
+    corePoolSize: Int,
+    maxPoolSize: Int,
+    keepAliveTime: Long,
+    unit: TimeUnit,
+    workQueue: BlockingQueue<Runnable>
+) {
+
+    private val threadPoolExecutor = MyThreadPoolExecutor(corePoolSize, maxPoolSize, keepAliveTime, unit, workQueue)
+    private val handler = Handler(Looper.getMainLooper())
+
 
     private val jobMap: MutableMap<BackgroundJob<*, *>, Future<*>> = HashMap()
     private val jobMapLock: Any = Any()
@@ -65,9 +71,6 @@ class BackgroundJobHandler {
             }
         }
     }
-
-    private val threadPoolExecutor: ThreadPoolExecutor
-    private val handler: Handler
 
     fun runJob(bgJob: BackgroundJob<*, *>) {
         bgJob.setBackgroundJobHandler(this)
@@ -125,7 +128,6 @@ class BackgroundJobHandler {
     companion object {
         private val LOG_TAG: String = BackgroundJobHandler::class.java.simpleName
 
-        @JvmStatic
         fun newFixedThreadPoolBackgroundJobHandler(numThreads: Int): BackgroundJobHandler {
             return BackgroundJobHandler(numThreads, numThreads, 0L, TimeUnit.MILLISECONDS, LinkedBlockingQueue())
         }

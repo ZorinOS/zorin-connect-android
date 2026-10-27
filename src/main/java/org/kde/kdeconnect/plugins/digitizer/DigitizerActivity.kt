@@ -7,7 +7,6 @@
 package org.kde.kdeconnect.plugins.digitizer
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Gravity
@@ -24,9 +23,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.preference.PreferenceManager
 import org.kde.kdeconnect.KdeConnect
-import org.kde.kdeconnect.ui.PluginSettingsActivity
 import org.kde.kdeconnect.base.BaseActivity
 import org.kde.kdeconnect.extensions.viewBinding
+import org.kde.kdeconnect.ui.PluginSettingsActivity
 import com.zorinos.zorin_connect.R
 import com.zorinos.zorin_connect.databinding.ActivityDigitizerBinding
 import kotlin.math.roundToInt
@@ -42,11 +41,9 @@ class DigitizerActivity : BaseActivity<ActivityDigitizerBinding>(), DrawingPadVi
 
     private val plugin: DigitizerPlugin?
         get() {
-            val plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, DigitizerPlugin::class.java)
-
+            val plugin = KdeConnect.getInstance().getDevicePlugin<DigitizerPlugin>(deviceId)
             if (plugin == null)
                 finish()
-
             return plugin
         }
 
@@ -59,7 +56,7 @@ class DigitizerActivity : BaseActivity<ActivityDigitizerBinding>(), DrawingPadVi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        deviceId = intent.getStringExtra("deviceId")!!
+        deviceId = intent.getStringExtra(EXTRA_DEVICE_ID)!!
 
         setSupportActionBar(binding.toolbarLayout.toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -160,11 +157,7 @@ class DigitizerActivity : BaseActivity<ActivityDigitizerBinding>(), DrawingPadVi
                 true
             }
             R.id.menu_open_settings -> {
-                startActivity(
-                    Intent(this, PluginSettingsActivity::class.java)
-                        .putExtra(PluginSettingsActivity.EXTRA_DEVICE_ID, deviceId)
-                        .putExtra(PluginSettingsActivity.EXTRA_PLUGIN_KEY, DigitizerPlugin::class.java.getSimpleName())
-                )
+                startActivity(PluginSettingsActivity.createIntent(this, deviceId, DigitizerPlugin::class.java.simpleName))
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -180,8 +173,7 @@ class DigitizerActivity : BaseActivity<ActivityDigitizerBinding>(), DrawingPadVi
     }
 
     companion object {
-        private const val TAG = "DigitizerActivity"
-
+        const val EXTRA_DEVICE_ID = "deviceId"
         private const val INCHES_TO_MM = 0.0393701
     }
 }

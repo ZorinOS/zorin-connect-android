@@ -1,0 +1,68 @@
+/* SPDX-FileCopyrightText: 2018 Nicolas Fella <nicolas.fella@gmx.de>
+ * SPDX-FileCopyrightText: 2015 David Edmundson <david@davidedmundson.co.uk>
+ *
+ * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+ */
+package org.kde.kdeconnect.plugins.findmyphone
+
+import android.os.Build
+import android.os.Bundle
+import android.view.WindowManager
+import org.kde.kdeconnect.KdeConnect
+import org.kde.kdeconnect.base.BaseActivity
+import com.zorinos.zorin_connect.databinding.ActivityFindMyPhoneBinding
+
+class FindMyPhoneActivity : BaseActivity<ActivityFindMyPhoneBinding>() {
+    private lateinit var deviceId: String
+
+    override val binding: ActivityFindMyPhoneBinding by lazy {
+        ActivityFindMyPhoneBinding.inflate(layoutInflater)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setSupportActionBar(binding.toolbarLayout.toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
+
+        deviceId = intent.getStringExtra(EXTRA_DEVICE_ID)!!
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        } else {
+            @Suppress("DEPRECATION")
+            window.addFlags(
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD or
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+            )
+        }
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+        binding.bFindMyPhone.setOnClickListener { finish() }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val plugin = KdeConnect.getInstance().getDevicePlugin<FindMyPhonePlugin>(deviceId) ?: return
+        plugin.startPlaying()
+        plugin.startFlashing()
+        plugin.hideNotification()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        val plugin = KdeConnect.getInstance().getDevicePlugin<FindMyPhonePlugin>(deviceId) ?: return
+        plugin.stopPlaying()
+        plugin.stopFlashing()
+    }
+
+    companion object {
+        const val EXTRA_DEVICE_ID = "deviceId"
+        private const val TAG = "FindMyPhoneActivity"
+    }
+}

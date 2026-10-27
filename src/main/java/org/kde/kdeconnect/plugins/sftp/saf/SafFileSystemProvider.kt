@@ -155,8 +155,8 @@ class SafFileSystemProvider(
             }
 
             else -> {
-                Log.w(TAG, "newFileChannel($path, $options, $attrs) not implemented")
-                throw IOException("newFileChannel($path, $options, $attrs) not implemented")
+                Log.w(TAG, "newFileChannel($path, $options, ${attrs.contentToString()}) not implemented")
+                throw IOException("newFileChannel($path, $options, ${attrs.contentToString()}) not implemented")
             }
         }
     }
@@ -270,7 +270,7 @@ class SafFileSystemProvider(
                     }
                     source.safUri = newUri
                     return
-                } catch (ignored: FileNotFoundException) {
+                } catch (_: FileNotFoundException) {
                     // no-op: fallback to the next method
                 }
             }

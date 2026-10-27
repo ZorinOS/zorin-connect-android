@@ -23,7 +23,6 @@
   <string name="pref_plugin_mousepad_desc_tv">Folosiți telefonul sau tableta ca telecomandă TV</string>
   <string name="pref_plugin_presenter">Telecomandă pentru prezentări</string>
   <string name="pref_plugin_presenter_desc">Folosiți dispozitivul pentru a schimba diapozitivele dintr-o prezentare</string>
-  <string name="pref_plugin_remotekeyboard">Primește apăsări de taste de la distanță</string>
   <string name="pref_plugin_remotekeyboard_desc">Primește evenimente de apăsare a tastelor de la dispozitive distante</string>
   <string name="pref_plugin_mpris">Controale multimedia</string>
   <string name="pref_plugin_mpris_desc">Furnizează control de la distanță pentru lectorul multimedia</string>
@@ -46,7 +45,6 @@
   <string name="open_settings">Deschide configurările</string>
   <string name="no_permissions">Trebuie să acordați permisiunea pentru accesarea notificărilor</string>
   <string name="no_permission_mprisreceiver">Pentru a putea controla lectorul multimedia, trebuie să permiteți accesul la notificări</string>
-  <string name="no_permissions_remotekeyboard">Pentru a primi apăsări de taste, trebuie să activați Tastatura de la distanță Zorin Connect</string>
   <string name="send_ping">Trimite ping</string>
   <string name="open_mpris_controls">Control multimedia</string>
   <string name="remotekeyboard_editing_only_title">Manipulează taste de la distanță numai la redactare</string>
@@ -106,7 +104,6 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Trimite ca apăsări de taste</string>
   <string name="mouse_receiver_plugin_description">Primește mișcări de maus de la distanță</string>
   <string name="mouse_receiver_plugin_name">Receptor pentru maus</string>
-  <string name="mouse_receiver_no_permissions">Pentru a primi atingeri de la distanță, trebuie să acordați permisiunile de accesibilitate ce permit controlul deplin asupra dispozitivului</string>
   <string name="view_status_title">Stare</string>
   <string name="battery_status_format">Acumulator: %d%%</string>
   <string name="battery_status_low_format">Acumulator: %d%% Acumulator scăzut</string>
@@ -232,7 +229,6 @@
   <string name="share_destination_folder_preference">Dosar destinație</string>
   <string name="share">Partajează</string>
   <string name="share_received_file">Partajează „%s”</string>
-  <string name="title_activity_notification_filter">Filtru de notificări</string>
   <string name="filter_apps_info">Notificările vor fi sincronizate pentru aplicațiile alese.</string>
   <string name="show_notification_if_screen_off">Trimite notificări doar dacă ecranul e stins</string>
   <string name="add_device_dialog_title">Adaugă dispozitiv</string>
@@ -302,7 +298,6 @@
   <string name="contacts_per_device_confirmation">"Contactele de pe telefon vor fi copiate pe acest dispozitiv, astfel încât să poată fi folosite de aplicația Zorin Connect pentru SMS și alte aplicații. "</string>
   <string name="select_ringtone">Alegeți tonul de apel</string>
   <string name="telephony_pref_blocked_title">Numere blocate</string>
-  <string name="telephony_pref_blocked_dialog_desc">Nu arăta apeluri și SMS de la aceste numere. Specificați un număr pe linie</string>
   <string name="mpris_coverart_description">Coperta piesei actuale</string>
   <string name="settings_icon_description">Pictogramă configurări</string>
   <string name="presenter_fullscreen">Ecran complet</string>

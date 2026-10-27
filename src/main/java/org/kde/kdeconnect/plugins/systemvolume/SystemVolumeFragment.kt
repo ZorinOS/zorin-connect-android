@@ -12,13 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
-import org.kde.kdeconnect.helpers.calculateNewVolume
 import org.kde.kdeconnect.KdeConnect
-import org.kde.kdeconnect.plugins.mpris.MprisPlugin
-import org.kde.kdeconnect.plugins.mpris.VolumeKeyListener
-import org.kde.kdeconnect.plugins.systemvolume.SystemVolumePlugin.SinkListener
 import org.kde.kdeconnect.base.BaseFragment
 import org.kde.kdeconnect.extensions.setupBottomPadding
+import org.kde.kdeconnect.helpers.calculateNewVolume
+import org.kde.kdeconnect.plugins.mpris.VolumeKeyListener
+import org.kde.kdeconnect.plugins.systemvolume.SystemVolumePlugin.SinkListener
 import com.zorinos.zorin_connect.R
 import com.zorinos.zorin_connect.databinding.ListItemSystemvolumeBinding
 import com.zorinos.zorin_connect.databinding.SystemVolumeFragmentBinding
@@ -30,8 +29,7 @@ class SystemVolumeFragment : BaseFragment<SystemVolumeFragmentBinding>(),
     private lateinit var recyclerAdapter: RecyclerSinkAdapter
     private var tracking = false
 
-    private val deviceId: String?
-        get() = arguments?.getString(MprisPlugin.DEVICE_ID_KEY)
+    private lateinit var deviceId: String
 
     override fun getActionBarTitle() = getString(R.string.open_mpris_controls)
 
@@ -45,6 +43,7 @@ class SystemVolumeFragment : BaseFragment<SystemVolumeFragmentBinding>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        deviceId = arguments?.getString(EXTRA_DEVICE_ID)!!
         recyclerAdapter = RecyclerSinkAdapter()
         binding.audioDevicesRecycler.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -72,28 +71,16 @@ class SystemVolumeFragment : BaseFragment<SystemVolumeFragmentBinding>(),
         }
     }
 
-    private fun connectToPlugin(deviceId: String?) {
-        val plugin = KdeConnect.getInstance().getDevicePlugin(
-            deviceId,
-            SystemVolumePlugin::class.java
-        )
-        if (plugin == null) {
-            return
-        }
+    private fun connectToPlugin(deviceId: String) {
+        val plugin = KdeConnect.getInstance().getDevicePlugin<SystemVolumePlugin>(deviceId) ?: return
         this.plugin = plugin
         plugin.addSinkListener(this@SystemVolumeFragment)
         sinksChanged()
     }
 
-    private fun disconnectFromPlugin(deviceId: String?) {
-        val plugin = KdeConnect.getInstance().getDevicePlugin(
-            deviceId,
-            SystemVolumePlugin::class.java
-        )
-        if (plugin == null) {
-            return
-        }
-        plugin.removeSinkListener(this@SystemVolumeFragment)
+    private fun disconnectFromPlugin(deviceId: String) {
+        KdeConnect.getInstance().getDevicePlugin<SystemVolumePlugin>(deviceId)
+            ?.removeSinkListener(this@SystemVolumeFragment)
     }
 
     override fun sinksChanged() {
@@ -149,15 +136,14 @@ class SystemVolumeFragment : BaseFragment<SystemVolumeFragmentBinding>(),
     }
 
     companion object {
-        fun newInstance(deviceId: String?): SystemVolumeFragment {
-            val systemVolumeFragment = SystemVolumeFragment()
+        private const val EXTRA_DEVICE_ID = "deviceId"
 
-            val arguments = Bundle()
-            arguments.putString(MprisPlugin.DEVICE_ID_KEY, deviceId)
-
-            systemVolumeFragment.arguments = arguments
-
-            return systemVolumeFragment
+        fun newInstance(deviceId: String): SystemVolumeFragment {
+            return SystemVolumeFragment().apply {
+                arguments = Bundle().apply {
+                    putString(EXTRA_DEVICE_ID, deviceId)
+                }
+            }
         }
     }
 }

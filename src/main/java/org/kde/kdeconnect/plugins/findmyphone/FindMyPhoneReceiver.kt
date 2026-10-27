@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2015 David Edmundson <kde@davidedmundson.co.uk>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.plugins.findmyphone
 
 import android.content.BroadcastReceiver
@@ -19,18 +19,18 @@ class FindMyPhoneReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         when (intent.action) {
-            ACTION_FOUND_IT -> foundIt(context, intent)
+            ACTION_FOUND_IT -> foundIt(intent)
             else -> Log.d("ShareBroadcastReceiver", "Unhandled Action received: ${intent.action}")
         }
     }
 
-    private fun foundIt(context: Context, intent: Intent) {
+    private fun foundIt(intent: Intent) {
         if (!intent.hasExtra(EXTRA_DEVICE_ID)) {
             Log.e("FindMyPhoneReceiver", "foundIt() - deviceId extra is not present, ignoring")
             return
         }
         val deviceId = intent.getStringExtra(EXTRA_DEVICE_ID)
-        val plugin = KdeConnect.getInstance().getDevicePlugin(deviceId, FindMyPhonePlugin::class.java) ?: return
+        val plugin = KdeConnect.getInstance().getDevicePlugin<FindMyPhonePlugin>(deviceId) ?: return
         plugin.stopPlaying()
         plugin.stopFlashing()
     }

@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.plugins
 
 import android.content.Context
@@ -24,7 +24,7 @@ object PluginFactory {
         } catch (e: Exception) {
             throw RuntimeException(e)
         }
-        Log.i("PluginFactory", "Loaded " + pluginInfo.size + " plugins")
+        Log.i("PluginFactory", "Loaded ${pluginInfo.size} plugins")
     }
 
     val availablePlugins: Set<String>
@@ -34,11 +34,9 @@ object PluginFactory {
     val outgoingCapabilities: Set<String>
         get() = pluginInfo.values.flatMap { plugin -> plugin.outgoingPacketTypes }.toSet()
 
-    @JvmStatic
     fun getPluginInfo(pluginKey: String): PluginInfo = pluginInfo[pluginKey]!!
 
-    @JvmStatic
-    fun sortPluginList(plugins: List<String>): List<String> {
+    fun sortPluginList(plugins: Collection<String>): List<String> {
         return plugins.sortedBy { pluginInfo[it]?.displayName }
     }
 

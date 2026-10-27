@@ -33,7 +33,8 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     <string name="pref_plugin_mousepad_desc_tv">Use your phone or tablet as a TV remote</string>
     <string name="pref_plugin_presenter">Presentation remote</string>
     <string name="pref_plugin_presenter_desc">Use your device to change slides in a presentation</string>
-    <string name="pref_plugin_remotekeyboard">Receive remote keypresses</string>
+    <string name="pref_plugin_remotekeyboard_ime">Keyboard receiver (via Android keyboard)</string>
+    <string name="pref_plugin_remotekeyboard_accessibility">Keyboard receiver (via accessibility)</string>
     <string name="pref_plugin_remotekeyboard_desc">Receive keypress events from remote devices</string>
     <string name="pref_plugin_mpris">Multimedia controls</string>
     <string name="pref_plugin_mpris_desc">Provides a remote control for your media player</string>
@@ -56,9 +57,12 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     <string name="sad_ok">OK :(</string>
     <string name="cancel">Cancel</string>
     <string name="open_settings">Open settings</string>
+    <string name="open_accessibility_settings">Open accessibility settings</string>
+    <string name="open_input_settings">Open keyboard settings</string>
     <string name="no_permissions">You need to grant permission to access notifications</string>
     <string name="no_permission_mprisreceiver">To be able to control your media players you need to grant access to the notifications</string>
-    <string name="no_permissions_remotekeyboard">To receive keypresses you need to activate the Zorin Connect Remote Keyboard</string>
+    <string name="no_permissions_remotekeyboard_ime">To receive keypresses you need to activate the Zorin Connect Remote Keyboard as an Android input method</string>
+    <string name="no_permissions_remotekeyboard_accessibility">To receive keypresses you need to grant Accessibility permissions</string>
     <string name="send_ping">Send ping</string>
     <string name="open_mpris_controls">Multimedia control</string>
     <string name="remotekeyboard_editing_only" translatable="false">remotekeyboard_editing_only</string>
@@ -68,7 +72,8 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     <string name="remotekeyboard_multiple_connections" translatable="true">There is more than one remote keyboard connection, select the device to configure</string>
     <string name="open_mousepad">Remote input</string>
     <string name="open_mousepad_tv">TV remote</string>
-    <string name="mousepad_info">Move a finger on the screen to move the mouse cursor. Tap for a click, and use two/three fingers for right and middle buttons. Use 2 fingers to scroll. Use a long press to drag\'n drop. Gyro mouse functionality can be enabled from plugin preferences</string>
+    <string name="mousepad_info">Move a finger on the screen to move the mouse cursor. Tap for a click, and use two/three fingers for right and middle buttons. Use 2 fingers to scroll. Use a long press to drag and drop. Gyro mouse functionality can be enabled from plugin preferences</string>
+    <string name="mousepad_info_double_tap">Move a finger on the screen to move the mouse cursor. Tap for a click, and use two/three fingers for right and middle buttons. Use 2 fingers to scroll. Double tap to drag and drop. Gyro mouse functionality can be enabled from plugin preferences</string>
     <string name="mousepad_info_no_gestures">Move a finger on the screen to move the mouse cursor, tap for a click.</string>
     <string name="mousepad_keyboard_input_not_supported">Keyboard input not supported by the paired device</string>
     <string name="mousepad_single_tap_settings_title">Set one finger tap action</string>
@@ -172,7 +177,9 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 
     <string name="mouse_receiver_plugin_description">Receive remote mouse movement</string>
     <string name="mouse_receiver_plugin_name">Mouse receiver</string>
-    <string name="mouse_receiver_no_permissions">To receive touch inputs remotely you need to grant Accessibility permissions to fully control your device</string>
+    <string name="mouse_receiver_no_permissions">To receive touch inputs remotely you need to grant Accessibility permissions</string>
+
+    <string name="mouse_keyboard_receiver_service_description">Receive remote mouse movement and Keyboard input</string>
 
     <string name="view_status_title">Status</string>
     <string name="battery_status_format">Battery: %d%%</string>
@@ -305,7 +312,6 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     <string name="share_destination_folder_preference">Destination directory</string>
     <string name="share">Share</string>
     <string name="share_received_file">Share \"%s\"</string>
-    <string name="title_activity_notification_filter">Notification filter</string>
     <string name="filter_apps_info">Notifications will be synchronized for the selected apps.</string>
     <string name="show_notification_if_screen_off">Send notifications only if the screen is off</string>
     <string name="add_device_dialog_title">Add device</string>
@@ -328,6 +334,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     <string name="sftp_saf_permission_explanation">To access files remotely you have to configure storage locations</string>
     <string name="sftp_manage_storage_permission_explanation">To allow remote access to files on this device you need to allow Zorin Connect to manage the storage.</string>
     <string name="sftp_missing_permission_error">Permissions missing: filesystem access</string>
+    <string name="sftp_could_not_determine_ip">Could not determine local IP address</string>
     <string name="no_players_connected">No players found</string>
     <string name="send_files">Send files</string>
     <string name="use_digitizer">Use as drawing tablet</string>
@@ -394,7 +401,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
 
     <string name="select_ringtone">Select a ringtone</string>
     <string name="telephony_pref_blocked_title">Blocked numbers</string>
-    <string name="telephony_pref_blocked_dialog_desc">Don\'t show calls and SMS from these numbers. Please specify one number per line</string>
+    <string name="telephony_pref_blocked_dialog_desc">Don\'t show calls from these numbers. Please specify one number per line</string>
     <string name="mpris_coverart_description">Cover art of current media</string>
     <string name="settings_icon_description">Settings icon</string>
 
@@ -426,6 +433,7 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     <string name="runcommand_notpaired">Device is not paired</string>
     <string name="runcommand_nosuchdevice">There is no such device</string>
     <string name="runcommand_noruncommandplugin">This device does not have the Run Command Plugin enabled</string>
+    <string name="runcommand_widget_no_device">Click the title to select a device.</string>
     <string name="runcommand_category_device_controls_title">Device Controls</string>
     <string name="runcommand_category_device_controls" translatable="false">runcommand_category_device_controls</string>
     <string name="runcommand_device_controls_summary">If your device supports Device Controls, commands you have configured will appear there.</string>
@@ -541,15 +549,10 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
       <item>dark</item>
     </string-array>
     <string name="report_bug">Report Bug</string>
-    <string name="report_bug_url" translatable="false">https://github.com/ZorinOS/zorin-connect-android/issues/new</string>
     <string name="donate">Donate</string>
-    <string name="donate_url" translatable="false">https://zorin.com/about/#funding</string>
     <string name="source_code">Source Code</string>
-    <string name="source_code_url" translatable="false">https://github.com/ZorinOS/zorin-connect-android/</string>
     <string name="licenses">Licenses</string>
     <string name="website">Website</string>
-    <string name="website_url" translatable="false">https://zorin.com/os/</string>
-
     <string name="about">About</string>
     <string name="authors">Authors</string>
     <string name="thanks_to">Thanks To</string>
@@ -630,7 +633,6 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     <string name="findmyphone_open_settings_for_camera">Grant camera permission in app settings to use the flashlight</string>
     <string name="no_notifications">Notifications are disabled, you won\'t receive incoming pairing request notifications.</string>
 
-
     <string name="mpris_keepwatching">Continue playing</string>
     <string name="mpris_keepwatching_key" translatable="false">mpris_keepwatching_enabled</string>
     <string name="mpris_keepwatching_settings_title">Continue playing</string>
@@ -656,8 +658,11 @@ SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted
     <string name="runcommand_output_no_output_desc">The output from the commands will appear here.</string>
     <string name="runcommand_output_no_output">No commands executed</string>
     <string name="runcommand_stop">Stop the current command</string>
+    <string name="runcommand_clear_output">Clear output</string>
 
     <string name="pref_mpris_volume_control_key" translatable="false">mpris_volume_control_enabled</string>
     <string name="pref_mpris_volume_control_title">Hardware volume keys</string>
     <string name="pref_mpris_volume_control_summary">Control the connected device\'s media volume using this phone\'s hardware buttons</string>
+
+    <string name="pref_notification_screen_off_key" translatable="false">pref_notification_screen_off</string>
 </resources>

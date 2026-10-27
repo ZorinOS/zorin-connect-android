@@ -24,6 +24,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.dependencyLicenseReport)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 val licenseResDir = "$projectDir/build/dependency-license-res"
@@ -41,8 +42,8 @@ android {
         applicationId = "com.zorinos.zorin_connect"
         minSdk = 23
         targetSdk = 37
-        versionCode = 13513
-        versionName = "1.35.13"
+        versionCode = 13700
+        versionName = "1.37.0"
         proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
     buildFeatures {
@@ -69,7 +70,7 @@ android {
 
     packaging {
         resources {
-            merges += listOf("META-INF/DEPENDENCIES", "META-INF/LICENSE", "META-INF/NOTICE")
+            merges += listOf("META-INF/DEPENDENCIES", "META-INF/LICENSE", "META-INF/LICENSE.md", "META-INF/NOTICE")
         }
     }
     signingConfigs {
@@ -261,12 +262,12 @@ dependencies {
     // See `FixPosixFilePermissionClassVisitorFactory` for more details.
     coreLibraryDesugaring(libs.android.desugarJdkLibsNio)
 
+    // Compose
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons)
-    implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.constraintlayout.compose)
-
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
@@ -277,13 +278,13 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.documentfile)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.extensions)
-    implementation(libs.androidx.lifecycle.common.java8)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx) // For ViewModel
+    implementation(libs.androidx.lifecycle.livedata.ktx) // For LiveData
+    implementation(libs.androidx.lifecycle.process) // For ProcessLifecycleOwner
     implementation(libs.androidx.gridlayout)
     implementation(libs.google.android.material)
-    implementation(libs.disklrucache) //For caching album art bitmaps. FIXME: Not updated in 10+ years. Replace with Kache.
+    implementation(libs.coil.core) //For loading and caching album art
+    implementation(libs.coil.network.okhttp)
     implementation(libs.slf4j.api)
     implementation(libs.slf4j.handroid)
 
@@ -293,7 +294,7 @@ dependencies {
     implementation(libs.apache.sshd.mina)
     implementation(libs.apache.mina.core)
 
-    implementation(libs.bcpkix.jdk15on) //For SSL certificate generation
+    implementation(libs.bcpkix.jdk18on) //For SSL certificate generation
 
     ksp(libs.classindexksp)
 
@@ -305,16 +306,12 @@ dependencies {
     implementation(libs.android.smsmms)
     implementation(libs.logger)
 
-    implementation(libs.commons.io)
-    implementation(libs.commons.collections4)
-    implementation(libs.commons.lang3)
-
     implementation(libs.univocity.parsers)
 
     // Kotlin
-    implementation(libs.kotlin.stdlib.jdk8)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.serialization.json)
 
     // Testing
     testImplementation(libs.junit)

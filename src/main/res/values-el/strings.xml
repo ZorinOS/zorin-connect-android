@@ -16,7 +16,6 @@
   <string name="pref_plugin_clipboard_sent">Το πρόχειρο εστάλη</string>
   <string name="pref_plugin_mousepad">Απομακρυσμένη είσοδος στοιχείων</string>
   <string name="pref_plugin_presenter_desc">Χρησιμοποιήστε τη συσκευή σας για να αλλάξετε διαφάνειες σε μία παρουσίαση</string>
-  <string name="pref_plugin_remotekeyboard">Λήψη απομακρυσμένων πληκτρολογήσεων</string>
   <string name="pref_plugin_remotekeyboard_desc">Λήψη συμβάντων πληκτρολόγησης από απομακρυσμένες συσκευές</string>
   <string name="pref_plugin_mpris">Κονσόλα πολυμέσων</string>
   <string name="pref_plugin_mpris_desc">Παρέχει ένα τηλεχειριστήριο για την αναπαραγωγή πολυμέσων</string>
@@ -39,7 +38,6 @@
   <string name="open_settings">Ρυθμίσεις ανοίγματος</string>
   <string name="no_permissions">Απαιτείται παραχώρηση δικαιωμάτων για την πρόσβαση σε ειδοποιήσεις</string>
   <string name="no_permission_mprisreceiver">Για να ελέγξετε τους αναπαραγωγείς πολυμέσων απαιτείται να παραχωρήσετε πρόσβαση στις ειδοποιήσεις</string>
-  <string name="no_permissions_remotekeyboard">Για να λαμβάνετε πατήματα πλήκτρων απαιτείται να ενεργοποιήσετε το πληκτρολόγιο απομακρυσμένης σύνδεσης του Zorin</string>
   <string name="send_ping">Αποστολή ping</string>
   <string name="open_mpris_controls">Έλεγχος πολυμέσων</string>
   <string name="remotekeyboard_editing_only_title">Χειρισμός απομακρυσμένων πλήκτρων μόνο στην επεξεργασία</string>
@@ -182,7 +180,6 @@
   <string name="share_destination_folder_preference">Κατάλογος προορισμού</string>
   <string name="share">Διαμοιρασμός</string>
   <string name="share_received_file">Διαμοιρασμός «%s»</string>
-  <string name="title_activity_notification_filter">Φιλτράρισμα ειδοποιήσεων</string>
   <string name="filter_apps_info">Οι ειδοποιήσεις θα συγχρονίζονται για επιλεγμένες εφαρμογές.</string>
   <string name="add_device_dialog_title">Προσθήκη συσκευής</string>
   <string name="add_device_hint">Όνομα ή IP διεύθυνση</string>
@@ -236,7 +233,6 @@
   <string name="contacts_permission_explanation">Για να μοιραστείτε το βιβλίο επαφών σας με την επιφάνεια εργασίας, απαιτείται να δώσετε δικαιώματα στις επαφές</string>
   <string name="select_ringtone">Επιλογή ήχου κλήσης</string>
   <string name="telephony_pref_blocked_title">Αριθμοί σε φραγή</string>
-  <string name="telephony_pref_blocked_dialog_desc">Να μην εμφανίζονται κλήσεις ή SMS από αυτούς τους αριθμούς. Καθορίστε έναν αριθμό ανά γραμμή</string>
   <string name="mpris_coverart_description">Καλλιτεχνικό εξώφυλλο των πολυμέσων</string>
   <string name="settings_icon_description">Εικονίδιο ρυθμίσεων</string>
   <string name="presenter_fullscreen">Πλήρης οθόνη</string>

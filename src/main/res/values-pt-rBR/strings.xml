@@ -25,7 +25,8 @@
   <string name="pref_plugin_mousepad_desc_tv">Use seu celular ou tablet como controle remoto de TV</string>
   <string name="pref_plugin_presenter">Controle remoto para apresentações</string>
   <string name="pref_plugin_presenter_desc">Use o seu dispositivo para mudar os slides de uma apresentação</string>
-  <string name="pref_plugin_remotekeyboard">Receber pressionamento de teclas remoto</string>
+  <string name="pref_plugin_remotekeyboard_ime">Receptor de teclado (via teclado do Android)</string>
+  <string name="pref_plugin_remotekeyboard_accessibility">Receptor de teclado (via acessibilidade)</string>
   <string name="pref_plugin_remotekeyboard_desc">Recebe os eventos de pressionamento de teclas dos dispositivos remotos</string>
   <string name="pref_plugin_mpris">Controle multimídia</string>
   <string name="pref_plugin_mpris_desc">Fornece um controle remoto de seu reprodutor de mídia</string>
@@ -48,9 +49,12 @@
   <string name="sad_ok">OK :(</string>
   <string name="cancel">Cancelar</string>
   <string name="open_settings">Abrir configurações</string>
+  <string name="open_accessibility_settings">Abrir configurações de acessibilidade</string>
+  <string name="open_input_settings">Abrir configurações de teclado</string>
   <string name="no_permissions">Você precisa conceder permissão para acessar as notificações</string>
   <string name="no_permission_mprisreceiver">Para ser possível controlar os seus leitores multimídia é necessário conceder acesso às notificações</string>
-  <string name="no_permissions_remotekeyboard">Para receber eventos de teclado é preciso ativar o Teclado Remoto do Zorin Connect</string>
+  <string name="no_permissions_remotekeyboard_ime">Para receber eventos de teclado é preciso ativar o Teclado Remoto do Zorin Connect como método de entrada do Android</string>
+  <string name="no_permissions_remotekeyboard_accessibility">Para receber as teclas pressionadas, você precisa conceder permissões de acessibilidade</string>
   <string name="send_ping">Enviar ping</string>
   <string name="open_mpris_controls">Controle multimídia</string>
   <string name="remotekeyboard_editing_only_title">Lidar com as teclas remotas apenas na edição</string>
@@ -60,6 +64,7 @@
   <string name="open_mousepad">Introdução de dados remota</string>
   <string name="open_mousepad_tv">Controle remoto da TV</string>
   <string name="mousepad_info">Mova um dedo pela tela para mover o ponteiro do mouse. Dê um toque para clicar e use dois/três dedos para os botões da direita e do meio. Use dois dedos para rolar a tela. Use uma pressão longa para arrastar e soltar. A funcionalidade do mouse giroscópio pode ser habilitada nas preferências do plugin.</string>
+  <string name="mousepad_info_double_tap">Mova um dedo pela tela para mover o ponteiro do mouse. Dê um toque para clicar e use dois/três dedos para os botões da direita e do meio. Use dois dedos para rolar a tela. Duple toque para arrastar e soltar. A funcionalidade do mouse giroscópio pode ser habilitada nas preferências do plugin.</string>
   <string name="mousepad_info_no_gestures">Mova o dedo na tela para mover o cursor do mouse, toque para um clique.</string>
   <string name="mousepad_keyboard_input_not_supported">Entrada de teclado não suportada pelo dispositivo emparelhado</string>
   <string name="mousepad_single_tap_settings_title">Definir ação do toque com um dedo</string>
@@ -111,7 +116,8 @@
   <string name="pref_plugin_mousepad_send_keystrokes">Enviar como pressionamento de teclas</string>
   <string name="mouse_receiver_plugin_description">Receber movimento de mouse remoto</string>
   <string name="mouse_receiver_plugin_name">Receptor de mouse</string>
-  <string name="mouse_receiver_no_permissions">Para receber entradas de toque remotas você precisa conceder permissões de acessibilidade para controlar totalmente seu dispositivo</string>
+  <string name="mouse_receiver_no_permissions">Para receber entradas de toque remotamente, você precisa conceder permissões de acessibilidade</string>
+  <string name="mouse_keyboard_receiver_service_description">Receber movimentos do mouse e entradas de teclado remotos</string>
   <string name="view_status_title">Status</string>
   <string name="battery_status_format">Bateria: %d%%</string>
   <string name="battery_status_low_format">Bateria: %d%% bateria baixa</string>
@@ -231,7 +237,6 @@
   <string name="share_destination_folder_preference">Pasta de destino</string>
   <string name="share">Compartilhar</string>
   <string name="share_received_file">Compartilhar \"%s\"</string>
-  <string name="title_activity_notification_filter">Filtro de notificações</string>
   <string name="filter_apps_info">As notificações dos aplicativos selecionados serão sincronizadas.</string>
   <string name="show_notification_if_screen_off">Envia notificações apenas se a tela estiver desligada</string>
   <string name="add_device_dialog_title">Adicionar dispositivo</string>
@@ -250,6 +255,7 @@
   <string name="sftp_saf_permission_explanation">Para acessar arquivos remotamente você precisa configurar locais de armazenamento</string>
   <string name="sftp_manage_storage_permission_explanation">Para permitir o acesso remoto aos arquivos neste dispositivo, você precisapermitir que o Zorin Connect gerencie o armazenamento.</string>
   <string name="sftp_missing_permission_error">Permissões ausentes: acesso ao sistema de arquivos</string>
+  <string name="sftp_could_not_determine_ip">Não foi possível determinar o endereço IP local</string>
   <string name="no_players_connected">Nenhum reprodutor encontrado</string>
   <string name="send_files">Enviar arquivos</string>
   <string name="use_digitizer">Usar como mesa digitalizadora</string>
@@ -301,7 +307,7 @@
   <string name="contacts_per_device_confirmation">Os contatos do seu telefone serão copiados para este dispositivo, dessa forma eles poderão ser utilizados pelo aplicativo de SMS do Zorin Connect e por outros.</string>
   <string name="select_ringtone">Selecionar um toque de chamada</string>
   <string name="telephony_pref_blocked_title">Números bloqueados</string>
-  <string name="telephony_pref_blocked_dialog_desc">Não mostrar as chamadas e SMS destes números. Indique um número por linha.</string>
+  <string name="telephony_pref_blocked_dialog_desc">Não mostrar as chamadas destes números. Indique um número por linha</string>
   <string name="mpris_coverart_description">Capa da mídia atual</string>
   <string name="settings_icon_description">Ícone de configurações</string>
   <string name="presenter_fullscreen">Tela cheia</string>
@@ -328,6 +334,7 @@
   <string name="runcommand_notpaired">Dispositivo não emparelhado</string>
   <string name="runcommand_nosuchdevice">Este dispositivo não existe</string>
   <string name="runcommand_noruncommandplugin">Este dispositivo não tem o plugin \'Executar comando\' ativo</string>
+  <string name="runcommand_widget_no_device">Clique no título para selecionar um dispositivo.</string>
   <string name="runcommand_category_device_controls_title">Controles do dispositivo</string>
   <string name="runcommand_device_controls_summary">Caso o seu dispositivo suporte \"controles de dispositivo\", os comandos que você configurou aparecerão aqui.</string>
   <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
@@ -477,6 +484,7 @@
   <string name="runcommand_output_no_output_desc">A saída dos comandos aparecerá aqui.</string>
   <string name="runcommand_output_no_output">Nenhum comando executado</string>
   <string name="runcommand_stop">Parar o comando atual</string>
+  <string name="runcommand_clear_output">Limpar saída</string>
   <string name="pref_mpris_volume_control_title">Teclas de volume do hardware</string>
   <string name="pref_mpris_volume_control_summary">Controlar o volume de mídia do dispositivo conectado usando os botões físicos deste telefone</string>
 </resources>

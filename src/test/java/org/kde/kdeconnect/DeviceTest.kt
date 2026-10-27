@@ -2,13 +2,14 @@
  * SPDX-FileCopyrightText: 2015 Vineet Garg <grg.vineet@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect
 
 import android.app.NotificationManager
 import android.content.Context
-import android.preference.PreferenceManager
 import androidx.core.content.ContextCompat
+import androidx.core.content.getSystemService
+import androidx.preference.PreferenceManager
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
@@ -18,18 +19,13 @@ import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.kde.kdeconnect.PairingHandler.PairingCallback
 import org.kde.kdeconnect.backends.lan.LanLink
 import org.kde.kdeconnect.backends.lan.LanLinkProvider
-import org.kde.kdeconnect.DeviceInfo.Companion.fromIdentityPacketAndCert
-import org.kde.kdeconnect.DeviceInfo.Companion.isValidDeviceId
-import org.kde.kdeconnect.DeviceInfo.Companion.isValidIdentityPacket
-import org.kde.kdeconnect.DeviceInfo.Companion.loadFromSettings
-import org.kde.kdeconnect.DeviceType.Companion.fromString
 import org.kde.kdeconnect.helpers.DeviceHelper
+import org.kde.kdeconnect.helpers.TrustedDevices
 import org.kde.kdeconnect.helpers.security.RsaHelper
 import org.kde.kdeconnect.helpers.security.SslHelper
-import org.kde.kdeconnect.helpers.TrustedDevices
-import org.kde.kdeconnect.PairingHandler.PairingCallback
 import java.security.cert.CertificateException
 
 class DeviceTest {
@@ -93,7 +89,7 @@ class DeviceTest {
         RsaHelper.initialiseRsaKeys(context)
 
         mockkStatic(ContextCompat::class)
-        every { ContextCompat.getSystemService(context, NotificationManager::class.java) } returns mockk(relaxed = true)
+        every { context.getSystemService<NotificationManager>() } returns mockk(relaxed = true)
 
         mockkStatic(android.util.Log::class)
     }
@@ -107,7 +103,7 @@ class DeviceTest {
     @Throws(CertificateException::class)
     fun testDeviceInfoToIdentityPacket() {
         val deviceId = "testDevice"
-        val deviceInfo = loadFromSettings(context, deviceId)
+        val deviceInfo = DeviceInfo.loadFromSettings(context, deviceId)
         deviceInfo.protocolVersion = DeviceHelper.PROTOCOL_VERSION
         deviceInfo.incomingCapabilities = hashSetOf("kdeconnect.plugin1State", "kdeconnect.plugin2State")
         deviceInfo.outgoingCapabilities = hashSetOf("kdeconnect.plugin1State.request", "kdeconnect.plugin2State.request")
@@ -123,48 +119,48 @@ class DeviceTest {
 
     @Test
     fun testIsValidDeviceId() {
-        Assert.assertTrue(isValidDeviceId("27456E3C_fE5C_4208_96A7_c0CAEEC5E5A0"))
-        Assert.assertTrue(isValidDeviceId("27456e3c_fe5c_4208_96a7_c0caeec5e5a0"))
-        Assert.assertTrue(isValidDeviceId("27456e3cfe5c420896a7c0caeec5e5a0"))
-        Assert.assertFalse(isValidDeviceId("7456e3cfe5c420896a7c0caeec5e5a0"))
-        Assert.assertTrue(isValidDeviceId("_27456e3c_fe5c_4208_96a7_c0caeec5e5a0_"))
-        Assert.assertTrue(isValidDeviceId("z7456e3c_fe5c_4208_96a7_c0caeec5e5a0"))
-        Assert.assertFalse(isValidDeviceId(""))
-        Assert.assertFalse(isValidDeviceId("______"))
-        Assert.assertFalse(isValidDeviceId("____"))
-        Assert.assertFalse(isValidDeviceId("potato"))
-        Assert.assertFalse(isValidDeviceId("12345"))
+        Assert.assertTrue(DeviceInfo.isValidDeviceId("27456E3C_fE5C_4208_96A7_c0CAEEC5E5A0"))
+        Assert.assertTrue(DeviceInfo.isValidDeviceId("27456e3c_fe5c_4208_96a7_c0caeec5e5a0"))
+        Assert.assertTrue(DeviceInfo.isValidDeviceId("27456e3cfe5c420896a7c0caeec5e5a0"))
+        Assert.assertFalse(DeviceInfo.isValidDeviceId("7456e3cfe5c420896a7c0caeec5e5a0"))
+        Assert.assertTrue(DeviceInfo.isValidDeviceId("_27456e3c_fe5c_4208_96a7_c0caeec5e5a0_"))
+        Assert.assertTrue(DeviceInfo.isValidDeviceId("z7456e3c_fe5c_4208_96a7_c0caeec5e5a0"))
+        Assert.assertFalse(DeviceInfo.isValidDeviceId(""))
+        Assert.assertFalse(DeviceInfo.isValidDeviceId("______"))
+        Assert.assertFalse(DeviceInfo.isValidDeviceId("____"))
+        Assert.assertFalse(DeviceInfo.isValidDeviceId("potato"))
+        Assert.assertFalse(DeviceInfo.isValidDeviceId("12345"))
     }
 
     @Test
     fun testIsValidIdentityPacket() {
         val np = NetworkPacket(NetworkPacket.PACKET_TYPE_IDENTITY)
-        Assert.assertFalse(isValidIdentityPacket(np))
+        Assert.assertFalse(DeviceInfo.isValidIdentityPacket(np))
 
         val validName = "MyDevice"
         val validId = "27456e3c_fe5c_4208_96a7_c0caeec5e5a0"
         np["deviceName"] = validName
         np["deviceId"] = validId
-        Assert.assertTrue(isValidIdentityPacket(np))
+        Assert.assertTrue(DeviceInfo.isValidIdentityPacket(np))
 
         np["deviceName"] = "    "
-        Assert.assertFalse(isValidIdentityPacket(np))
+        Assert.assertFalse(DeviceInfo.isValidIdentityPacket(np))
         np["deviceName"] = "<><><><><><><><><>" // Only invalid characters
-        Assert.assertFalse(isValidIdentityPacket(np))
+        Assert.assertFalse(DeviceInfo.isValidIdentityPacket(np))
 
         np["deviceName"] = validName
         np["deviceId"] = "    "
-        Assert.assertFalse(isValidIdentityPacket(np))
+        Assert.assertFalse(DeviceInfo.isValidIdentityPacket(np))
     }
 
     @Test
     fun testDeviceType() {
-        Assert.assertEquals(DeviceType.PHONE, fromString(DeviceType.PHONE.toString()))
-        Assert.assertEquals(DeviceType.TABLET, fromString(DeviceType.TABLET.toString()))
-        Assert.assertEquals(DeviceType.DESKTOP, fromString(DeviceType.DESKTOP.toString()))
-        Assert.assertEquals(DeviceType.LAPTOP, fromString(DeviceType.LAPTOP.toString()))
-        Assert.assertEquals(DeviceType.TV, fromString(DeviceType.TV.toString()))
-        Assert.assertEquals(DeviceType.DESKTOP, fromString("invalid"))
+        Assert.assertEquals(DeviceType.PHONE, DeviceType.fromString(DeviceType.PHONE.toString()))
+        Assert.assertEquals(DeviceType.TABLET, DeviceType.fromString(DeviceType.TABLET.toString()))
+        Assert.assertEquals(DeviceType.DESKTOP, DeviceType.fromString(DeviceType.DESKTOP.toString()))
+        Assert.assertEquals(DeviceType.LAPTOP, DeviceType.fromString(DeviceType.LAPTOP.toString()))
+        Assert.assertEquals(DeviceType.TV, DeviceType.fromString(DeviceType.TV.toString()))
+        Assert.assertEquals(DeviceType.DESKTOP, DeviceType.fromString("invalid"))
     }
 
     // Basic paired device testing
@@ -178,6 +174,26 @@ class DeviceTest {
         Assert.assertEquals(device.name, "Test Device")
         Assert.assertTrue(device.isPaired)
         Assert.assertNotNull(device.deviceInfo.certificate)
+    }
+
+    @Test
+    fun receiverIsRegisteredBeforeInitialPluginLoad() {
+        val device = Device(context, "testDevice")
+        val events = mutableListOf<String>()
+        device.addPluginsChangedListener { events.add("plugins loaded") }
+
+        val link = mockk<LanLink>()
+        every { link.deviceInfo } returns device.deviceInfo
+        every { link.addPacketReceiver(any()) } answers {
+            events.add("receiver registered")
+        }
+
+        device.addLink(link)
+
+        Assert.assertEquals(
+            listOf("receiver registered", "plugins loaded"),
+            events
+        )
     }
 
     @Test
@@ -209,7 +225,7 @@ class DeviceTest {
             """.trimIndent()
         val certificateBytes = android.util.Base64.decode(certificateString, 0)
         val certificate = SslHelper.parseCertificate(certificateBytes)
-        val deviceInfo = fromIdentityPacketAndCert(fakeNetworkPacket, certificate)
+        val deviceInfo = DeviceInfo.fromIdentityPacketAndCert(fakeNetworkPacket, certificate)
 
         val linkProvider = mockk<LanLinkProvider>()
         every { linkProvider.name } returns "LanLinkProvider"

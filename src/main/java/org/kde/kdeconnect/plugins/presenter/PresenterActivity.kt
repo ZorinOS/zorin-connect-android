@@ -9,7 +9,6 @@ package org.kde.kdeconnect.plugins.presenter
 import android.content.SharedPreferences
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.hardware.Sensor
-import android.view.WindowManager
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
@@ -19,6 +18,7 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.KeyEvent
 import android.view.MotionEvent
+import android.view.WindowManager
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Arrangement
@@ -28,8 +28,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
@@ -44,10 +44,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -71,8 +72,8 @@ class PresenterActivity : AppCompatActivity(), SensorEventListener, OnSharedPref
     private lateinit var plugin : PresenterPlugin
     private var prefsApplied = false
     private var volumeKeys = false
-    private var prefs: SharedPreferences? = null
-    private var sensitivity = 0.04f
+    private lateinit var prefs: SharedPreferences
+    private var sensitivity = 0.03f
 
     override fun onSensorChanged(event: SensorEvent?) {
         if (event?.sensor?.type == Sensor.TYPE_GYROSCOPE) {
@@ -84,27 +85,31 @@ class PresenterActivity : AppCompatActivity(), SensorEventListener, OnSharedPref
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        //ignored
+        // ignored
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 
-        prefs = PreferenceManager.getDefaultSharedPreferences(this)
-        prefs!!.registerOnSharedPreferenceChangeListener(this)
-        applyPrefs()
-
-        plugin = KdeConnect.getInstance().getDevicePlugin(intent.getStringExtra("deviceId"), PresenterPlugin::class.java)
+        val deviceId = intent.getStringExtra(EXTRA_DEVICE_ID)!!
+        val device = KdeConnect.getInstance().getDevice(deviceId)
+        plugin = device?.getPlugin<PresenterPlugin>()
             ?: run {
                 finish()
                 return
             }
-        setContent { PresenterScreen() }
+
+        prefs = plugin.preferences
+        prefs.registerOnSharedPreferenceChangeListener(this)
+        applyPrefs()
+
+        setContent { PresenterScreen(device.name) }
         createMediaSession()
     }
 
     override fun onDestroy() {
+        prefs.unregisterOnSharedPreferenceChangeListener(this)
         mediaSession?.release()
         super.onDestroy()
     }
@@ -158,27 +163,31 @@ class PresenterActivity : AppCompatActivity(), SensorEventListener, OnSharedPref
     private fun applyPrefs() {
         if (prefsApplied) return
 
-        var scrollSensitivity = prefs!!.getInt(getString(R.string.pref_presenter_sensitivity), 50)
+        var scrollSensitivity = prefs.getInt(getString(R.string.pref_presenter_sensitivity), 50)
         scrollSensitivity += 10 // Do not allow near-zero sensitivity
         sensitivity = ((scrollSensitivity / 100f)/10f)*(6f/10f)
 
-        volumeKeys =
-            prefs!!.getBoolean(getString(R.string.pref_presenter_enable_volume_keys), true)
+        volumeKeys = prefs.getBoolean(getString(R.string.pref_presenter_enable_volume_keys), true)
 
         prefsApplied = true
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
     @Preview
     @Composable
-    private fun PresenterScreen() {
+    private fun PresenterScreenPreview() {
+        PresenterScreen("TestDevice")
+    }
+
+    @Composable
+    private fun PresenterScreen(deviceName: String) {
 
         val sensorManager = LocalContext.current.getSystemService(SENSOR_SERVICE) as? SensorManager
+        val haptics = LocalHapticFeedback.current
 
         KdeTheme(this) {
             Scaffold(
                 modifier = Modifier.safeDrawingPadding(),
-                topBar = { PresenterAppBar() }
+                topBar = { PresenterAppBar(deviceName) }
             ) {
                 Column(
                     modifier = Modifier
@@ -194,7 +203,6 @@ class PresenterActivity : AppCompatActivity(), SensorEventListener, OnSharedPref
                             .padding(horizontal = 16.dp),
                         style = MaterialTheme.typography.bodyLarge,
                     )
-                    @Suppress("DEPRECATION") // we explicitly want the non-mirrored version of the icons
                     Row(
                         modifier = Modifier
                             .fillMaxSize()
@@ -202,20 +210,26 @@ class PresenterActivity : AppCompatActivity(), SensorEventListener, OnSharedPref
                         horizontalArrangement = Arrangement.spacedBy(20.dp),
                     ) {
                         KdeButton(
-                            onClick = { plugin.sendPrevious() },
+                            onClick = {
+                                plugin.sendPrevious()
+                                haptics.performHapticFeedback(HapticFeedbackType.Confirm)
+                            },
                             modifier = Modifier
                                 .fillMaxSize()
                                 .weight(1f),
                             contentDescription = getString(R.string.mpris_previous),
-                            icon = Icons.Default.ArrowBack,
+                            icon = Icons.AutoMirrored.Filled.ArrowBack,
                         )
                         KdeButton(
-                            onClick = { plugin.sendNext() },
+                            onClick = {
+                                plugin.sendNext()
+                                haptics.performHapticFeedback(HapticFeedbackType.Confirm)
+                            },
                             contentDescription = getString(R.string.mpris_next),
                             modifier = Modifier
                                 .fillMaxSize()
                                 .weight(1f),
-                            icon = Icons.Default.ArrowForward,
+                            icon = Icons.AutoMirrored.Filled.ArrowForward,
                         )
                     }
                     if (sensorManager != null) KdeButton(
@@ -227,6 +241,7 @@ class PresenterActivity : AppCompatActivity(), SensorEventListener, OnSharedPref
                             .pointerInteropFilter { event ->
                                 when (event.action) {
                                     MotionEvent.ACTION_DOWN -> {
+                                        haptics.performHapticFeedback(HapticFeedbackType.LongPress)
                                         sensorManager.registerListener(
                                             this@PresenterActivity,
                                             sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE),
@@ -235,6 +250,7 @@ class PresenterActivity : AppCompatActivity(), SensorEventListener, OnSharedPref
                                     }
 
                                     MotionEvent.ACTION_UP -> {
+                                        haptics.performHapticFeedback(HapticFeedbackType.GestureEnd)
                                         sensorManager.unregisterListener(this@PresenterActivity)
                                         plugin.stopPointer()
                                         false
@@ -249,31 +265,41 @@ class PresenterActivity : AppCompatActivity(), SensorEventListener, OnSharedPref
         }
     }
 
-    @Preview
     @Composable
-    private fun PresenterAppBar() {
+    private fun PresenterAppBar(subTitle: String) {
 
-        var dropdownShownState by remember { mutableStateOf(false) }
+        var menuExpanded by remember { mutableStateOf(false) }
 
         KdeTopAppBar(
             title = stringResource(R.string.pref_plugin_presenter),
+            subTitle = subTitle,
             navIconOnClick = { onBackPressedDispatcher.onBackPressed() },
             navIconDescription = getString(androidx.appcompat.R.string.abc_action_bar_up_description),
             actions = {
-                IconButton(onClick = { dropdownShownState = true }) {
+                IconButton(onClick = { menuExpanded = true }) {
                     Icon(Icons.Default.MoreVert, stringResource(R.string.extra_options))
                 }
-                DropdownMenu(expanded = dropdownShownState, onDismissRequest = { dropdownShownState = false }) {
+                DropdownMenu(expanded = menuExpanded, onDismissRequest = { menuExpanded = false }) {
                     DropdownMenuItem(
-                        onClick = { plugin.sendFullscreen() },
+                        onClick = {
+                            menuExpanded = false
+                            plugin.sendFullscreen()
+                        },
                         text = { Text(stringResource(R.string.presenter_fullscreen)) },
                     )
                     DropdownMenuItem(
-                        onClick = { plugin.sendEsc() },
+                        onClick = {
+                            menuExpanded = false
+                            plugin.sendEsc()
+                        },
                         text = { Text(stringResource(R.string.presenter_exit)) },
                     )
                 }
             }
         )
+    }
+
+    companion object {
+        const val EXTRA_DEVICE_ID = "deviceId"
     }
 }

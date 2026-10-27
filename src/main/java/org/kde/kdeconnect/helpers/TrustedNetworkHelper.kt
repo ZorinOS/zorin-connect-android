@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2024 TPJ Schikhof <kde@schikhof.eu>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.helpers
 
 import android.Manifest
@@ -10,10 +10,11 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.wifi.SupplicantState
 import android.net.wifi.WifiManager
-import android.preference.PreferenceManager
 import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
+import androidx.core.content.getSystemService
+import androidx.preference.PreferenceManager
 
 class TrustedNetworkHelper(private val context: Context) {
 
@@ -42,7 +43,7 @@ class TrustedNetworkHelper(private val context: Context) {
 
     /** @return The current SSID or null if it's not available for any reason */
     fun getCurrentSSID(): String? {
-        val wifiManager = ContextCompat.getSystemService(context.applicationContext, WifiManager::class.java) ?: return null
+        val wifiManager = context.getSystemService<WifiManager>() ?: return null
         val wifiInfo = wifiManager.connectionInfo
         if (wifiInfo.supplicantState != SupplicantState.COMPLETED) return null
         val ssid = wifiInfo.ssid
@@ -57,7 +58,7 @@ class TrustedNetworkHelper(private val context: Context) {
     }
 
     val isTrustedNetwork: Boolean
-        get() = this.allNetworksAllowed || this.getCurrentSSID() in this.trustedNetworks
+        get() = this.allNetworksAllowed || (this.trustedNetworks.isNotEmpty() && this.getCurrentSSID() in this.trustedNetworks)
 
     companion object {
         private const val KEY_CUSTOM_TRUSTED_NETWORKS = "trusted_network_preference"
@@ -65,7 +66,6 @@ class TrustedNetworkHelper(private val context: Context) {
         private const val NETWORK_SSID_DELIMITER = "\u0000"
         private const val NOT_AVAILABLE_SSID_RESULT = "<unknown ssid>"
 
-        @JvmStatic
         fun isTrustedNetwork(context: Context): Boolean = TrustedNetworkHelper(context).isTrustedNetwork
     }
 }

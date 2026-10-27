@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 
 package org.kde.kdeconnect.plugins.runcommand
 
@@ -39,7 +39,7 @@ internal class RunCommandWidgetDataProvider(private val context: Context, val in
     override fun onDestroy() {}
 
     private fun getPlugin(): RunCommandPlugin? {
-        return KdeConnect.getInstance().getDevicePlugin(deviceId, RunCommandPlugin::class.java)
+        return KdeConnect.getInstance().getDevicePlugin<RunCommandPlugin>(deviceId)
     }
 
     override fun getCount(): Int {

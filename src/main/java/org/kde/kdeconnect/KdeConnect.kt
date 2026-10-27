@@ -12,16 +12,19 @@ import android.os.StrictMode.ThreadPolicy
 import android.os.StrictMode.VmPolicy
 import android.util.Log
 import androidx.annotation.WorkerThread
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.kde.kdeconnect.PairingHandler.PairingCallback
 import org.kde.kdeconnect.backends.BaseLink
 import org.kde.kdeconnect.backends.BaseLinkProvider.ConnectionReceiver
 import org.kde.kdeconnect.helpers.DeviceHelper
 import org.kde.kdeconnect.helpers.LifecycleHelper
 import org.kde.kdeconnect.helpers.NotificationHelper
-import org.kde.kdeconnect.helpers.security.RsaHelper
-import org.kde.kdeconnect.helpers.security.SslHelper
 import org.kde.kdeconnect.helpers.ThreadHelper
 import org.kde.kdeconnect.helpers.TrustedDevices
-import org.kde.kdeconnect.PairingHandler.PairingCallback
+import org.kde.kdeconnect.helpers.security.RsaHelper
+import org.kde.kdeconnect.helpers.security.SslHelper
 import org.kde.kdeconnect.plugins.Plugin
 import org.kde.kdeconnect.plugins.PluginFactory
 import org.kde.kdeconnect.ui.ThemeUtil
@@ -116,9 +119,18 @@ class KdeConnect : Application() {
         return devices[id]
     }
 
+    inline fun <reified T : Plugin> getDevicePlugin(deviceId: String?): T? = getDevicePlugin(deviceId, T::class.java)
+
     fun <T : Plugin> getDevicePlugin(deviceId: String?, pluginClass: Class<T>): T? {
         val device = getDevice(deviceId)
         return device?.getPlugin(pluginClass)
+    }
+
+    // To be triggered when new permissions are accepted
+    fun reloadAllDevicePlugins() {
+        CoroutineScope(Dispatchers.IO).launch {
+            devices.values.forEach(Device::reloadPluginsFromSettings)
+        }
     }
 
     private fun loadRememberedDevicesFromSettings() {
@@ -240,10 +252,8 @@ class KdeConnect : Application() {
     }
 
     companion object {
-        @JvmStatic
         private lateinit var _instance: KdeConnect
 
-        @JvmStatic
         fun getInstance(): KdeConnect = _instance
     }
 }

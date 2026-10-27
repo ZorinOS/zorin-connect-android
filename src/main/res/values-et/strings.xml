@@ -14,7 +14,6 @@
   <string name="pref_plugin_clipboard_sent">Lõikepuhvrist saadud</string>
   <string name="pref_plugin_mousepad">Kaugsisestus</string>
   <string name="pref_plugin_presenter_desc">Seadme kasutamine esitluse slaidide vahetamiseks</string>
-  <string name="pref_plugin_remotekeyboard">Kaugklahvivajutuste vastuvõtmine</string>
   <string name="pref_plugin_remotekeyboard_desc">Kaugseadmete klahvivajutuste vastuvõtmine</string>
   <string name="pref_plugin_mpris">Multimeedia juhtimine</string>
   <string name="pref_plugin_mpris_desc">Meediamängija kaugjuhtimise võimaldamine</string>
@@ -37,7 +36,6 @@
   <string name="open_settings">Ava seadistused</string>
   <string name="no_permissions">Märguannete nägemiseks tuleb anda vastavad õigused</string>
   <string name="no_permission_mprisreceiver">Meediamängija juhtimiseks tuleb lubada juurdepääs märguannetele</string>
-  <string name="no_permissions_remotekeyboard">Klahvivajutuste vastuvõtmiseks tuleb aktiveerida Zorin Connecti kaugklaviatuur</string>
   <string name="send_ping">Saada ping</string>
   <string name="open_mpris_controls">Multimeedia juhtimine</string>
   <string name="remotekeyboard_editing_only_title">Kaugklahvide käitlemine ainult redigeerimisel</string>
@@ -158,7 +156,6 @@
   <string name="share_destination_folder_preference">Sihtkataloog</string>
   <string name="share">Jaga</string>
   <string name="share_received_file">Jaga \"%s\"</string>
-  <string name="title_activity_notification_filter">Märguannete filter</string>
   <string name="filter_apps_info">Valitud rakenduste märguanded sünkroonitakse</string>
   <string name="add_device_dialog_title">Seadme lisamine</string>
   <string name="add_device_hint">Masinanimi või IP-aadress</string>
@@ -212,7 +209,6 @@
   <string name="contacts_permission_explanation">Oma kontaktide jagamiseks töölauaga tuleb anda õigused kontaktidele</string>
   <string name="select_ringtone">Vali helin</string>
   <string name="telephony_pref_blocked_title">Blokitud numbrid</string>
-  <string name="telephony_pref_blocked_dialog_desc">Neilt numbritelt tulevaid kõnesid ja SMS-e ei näidata. Palun pane iga number kirja eraldi reale</string>
   <string name="mpris_coverart_description">Aktiivse meedia kaanepilt</string>
   <string name="settings_icon_description">Seadistuste ikoon</string>
   <string name="presenter_fullscreen">Täisekraan</string>

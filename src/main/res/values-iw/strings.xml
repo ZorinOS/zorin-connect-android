@@ -25,7 +25,8 @@
   <string name="pref_plugin_mousepad_desc_tv">להשתמש בטלפון או במחשב הלוח כשלט לטלוויזיה</string>
   <string name="pref_plugin_presenter">מצב מצגת</string>
   <string name="pref_plugin_presenter_desc">שימוש במכשיר שלך כדי לעבור בין שקפים במצגת</string>
-  <string name="pref_plugin_remotekeyboard">קבלת לחיצות מרחוק</string>
+  <string name="pref_plugin_remotekeyboard_ime">מקלט מקלדת (דרך מקלדת Android)</string>
+  <string name="pref_plugin_remotekeyboard_accessibility">מקלט מקלדת (דרך נגישות)</string>
   <string name="pref_plugin_remotekeyboard_desc">קבלת אירועי מקלדת ממכשיר מרוחק</string>
   <string name="pref_plugin_mpris">פקדי מדיה</string>
   <string name="pref_plugin_mpris_desc">אספקת שליטה מרוחקת על נגן המדיה שלך</string>
@@ -48,9 +49,12 @@
   <string name="sad_ok">בסדר :(</string>
   <string name="cancel">ביטול</string>
   <string name="open_settings">פתיחת הגדרות</string>
+  <string name="open_accessibility_settings">פתיחת הגדרות נגישות</string>
+  <string name="open_input_settings">פתיחת הגדרות מקלדת</string>
   <string name="no_permissions">צריך להעניק הרשאת לגישה להתראות</string>
   <string name="no_permission_mprisreceiver">כדי לאפשר לשלוט בנגני המדיה שלך צריך להעניק גישה להתראות</string>
-  <string name="no_permissions_remotekeyboard">כדי לקבל לחיצות מקשים צריך להפעיל את המקלדת המרוחקת של Zorin Connect</string>
+  <string name="no_permissions_remotekeyboard_ime">כדי לקבל לחיצות מקשים צריך להפעיל את המקלדת המרוחקת של Zorin Connect כשיטת קלט של Android</string>
+  <string name="no_permissions_remotekeyboard_accessibility">כדי לקבל לחיצות מקשים צריך להעניק הרשאת נגישות</string>
   <string name="send_ping">שליחת פינג</string>
   <string name="open_mpris_controls">בקרת מדיה</string>
   <string name="remotekeyboard_editing_only_title">השתמש במקשים מרוחקים רק בעת עריכה</string>
@@ -60,6 +64,7 @@
   <string name="open_mousepad">שליטה מרחוק</string>
   <string name="open_mousepad_tv">שלט לטלוויזיה</string>
   <string name="mousepad_info">החלקת האצבע על המסך תזיז את סמן העכבר. נקישה תלחץ, שימוש ב־2/3 אצבעות לכפתורים הימני והאמצעי. 2 אצבעות משמשות לגלילה. לחיצה ארוכה כדי לגרור ולהשליך. אפשר להפעיל יכולת עכבר גירוסקופי מהעדפות התוסף</string>
+  <string name="mousepad_info_double_tap">החלקת האצבע על המסך תזיז את סמן העכבר. נקישה תלחץ, שימוש ב־2/3 אצבעות לכפתורים הימני והאמצעי. 2 אצבעות משמשות לגלילה. נגיעה כפולה כדי לגרור ולהשליך. אפשר להפעיל יכולת עכבר גירוסקופי מהעדפות התוסף</string>
   <string name="mousepad_info_no_gestures">יש להזיז את האצבע על גבי המסך כדי להזיז את זמן העכבר, נגיעה גוררת לחיצת עכבר.</string>
   <string name="mousepad_keyboard_input_not_supported">אין תמיכה בקלט מקלדת במכשיר המצומד</string>
   <string name="mousepad_single_tap_settings_title">הגדרת פעולת נקישה באצבע אחת</string>
@@ -111,7 +116,8 @@
   <string name="pref_plugin_mousepad_send_keystrokes">שליחה כלחיצות מקשים</string>
   <string name="mouse_receiver_plugin_description">קבלת תנועות עכבר מרוחקות</string>
   <string name="mouse_receiver_plugin_name">מקלט עכבר</string>
-  <string name="mouse_receiver_no_permissions">כדי לקבל קלט מגע יש להעניק הרשאות נגישות כדי לשלוט במכשיר שלך באופן מלא</string>
+  <string name="mouse_receiver_no_permissions">כדי לקבל קלט מגע מרחוק יש להעניק הרשאות נגישות</string>
+  <string name="mouse_keyboard_receiver_service_description">קבלת קלט תנועות עכבר ומקלדת מרוחק</string>
   <string name="view_status_title">מצב</string>
   <string name="battery_status_format">סוללה: %d%%</string>
   <string name="battery_status_low_format">סוללה: %d%% סוללה חלשה</string>
@@ -247,7 +253,6 @@
   <string name="share_destination_folder_preference">תיקיית יעד</string>
   <string name="share">שיתוף</string>
   <string name="share_received_file">שיתוף „%s”</string>
-  <string name="title_activity_notification_filter">סינון התראות</string>
   <string name="filter_apps_info">התראות יסונכרנו רק מול יישומונים נבחרים.</string>
   <string name="show_notification_if_screen_off">לשלוח התראות רק אם המסך כבוי</string>
   <string name="add_device_dialog_title">הוספת מכשיר</string>
@@ -317,7 +322,7 @@
   <string name="contacts_per_device_confirmation">אנשי הקשר בטלפון שלך יועתקו למכשיר הזה, כדי שאפשר יהיה להשתמש בהם ביישום המסרונים של Zorin Connect וביישומים אחרים.</string>
   <string name="select_ringtone">בחירת צלצול</string>
   <string name="telephony_pref_blocked_title">מספרים חסומים</string>
-  <string name="telephony_pref_blocked_dialog_desc">לא להציג הודעות ושיחות מהמספרים האלה. נא לציין מספר טלפון אחד בכל שורה</string>
+  <string name="telephony_pref_blocked_dialog_desc">לא להציג שיחות מהמספרים האלה. נא לציין מספר טלפון אחד בכל שורה</string>
   <string name="mpris_coverart_description">עטיפת האלבום של המדיה הנוכחית</string>
   <string name="settings_icon_description">סמל הגדרות</string>
   <string name="presenter_fullscreen">מסך מלא</string>
@@ -344,6 +349,7 @@
   <string name="runcommand_notpaired">המכשיר לא מצומד</string>
   <string name="runcommand_nosuchdevice">אין כזה מכשיר</string>
   <string name="runcommand_noruncommandplugin">תוסף הרצת הפקודות לא פעיל במכשיר הזה</string>
+  <string name="runcommand_widget_no_device">יש ללחוץ על הכותרת כדי לבחור מכשיר.</string>
   <string name="runcommand_category_device_controls_title">שליטה במכשירים</string>
   <string name="runcommand_device_controls_summary">אם המכשיר שלך תומך בשליטה בהתקנים, הפקודות שהוגדרת תופענה כאן.</string>
   <string name="set_runcommand_name_as_title">הגדרת_שם_פקודת_ההרצה_ככותרת</string>
@@ -493,6 +499,7 @@
   <string name="runcommand_output_no_output_desc">הפלט מהפקודות יופיע כאן.</string>
   <string name="runcommand_output_no_output">לא רצו פקודות</string>
   <string name="runcommand_stop">עצירת הפקודה הנוכחית</string>
+  <string name="runcommand_clear_output">איפוס הפלט</string>
   <string name="pref_mpris_volume_control_title">מקשי עוצמת שמע חומרתיים</string>
   <string name="pref_mpris_volume_control_summary">אפשר לשלוט בעוצמת השמע של המכשיר המחובר באמצעות כפתורי החומרה של הטלפון הזה.</string>
 </resources>

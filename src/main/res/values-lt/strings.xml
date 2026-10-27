@@ -17,7 +17,6 @@
   <string name="pref_plugin_clipboard_sent">Iškarpinė išsiųsta</string>
   <string name="pref_plugin_mousepad">Nuotolinis įvedimas</string>
   <string name="pref_plugin_presenter_desc">Naudoti savo įrenginį pateikties skaidrių keitimui</string>
-  <string name="pref_plugin_remotekeyboard">Gauti nuotolinius klavišų paspaudimus</string>
   <string name="pref_plugin_remotekeyboard_desc">Gauti klavišų paspaudimo įvykius iš nuotolinių įrenginių</string>
   <string name="pref_plugin_mpris">Įvairialypės terpės valdikliai</string>
   <string name="pref_plugin_mpris_desc">Pateikia jūsų medijos leistuvės nuotolinį valdymą</string>
@@ -40,7 +39,6 @@
   <string name="open_settings">Atverti nuostatas</string>
   <string name="no_permissions">Norėdami gauti prieigą prie pranešimų, turite suteikti leidimą</string>
   <string name="no_permission_mprisreceiver">Norėdami valdyti savo medijos leistuves, turite suteikti prieigą prie pranešimų</string>
-  <string name="no_permissions_remotekeyboard">Norėdami gauti klavišų paspaudimus, turite aktyvuoti Zorin Connect nuotolinę klaviatūrą</string>
   <string name="send_ping">Tikrinti ryšį</string>
   <string name="open_mpris_controls">Įvairialypės terpės valdymas</string>
   <string name="remotekeyboard_editing_only_title">Apdoroti nuotolinius klavišus tik redaguojant</string>
@@ -207,7 +205,6 @@
   <string name="share_destination_folder_preference">Paskirties katalogas</string>
   <string name="share">Bendrinti</string>
   <string name="share_received_file">Bendrinti \"%s\"</string>
-  <string name="title_activity_notification_filter">Pranešimų filtras</string>
   <string name="filter_apps_info">Pranešimai bus sinchronizuojami pasirinktoms programėlėms.</string>
   <string name="show_notification_if_screen_off">Siųsti pranešimus tik tuo atveju, jei ekranas yra išjungtas</string>
   <string name="add_device_dialog_title">Pridėti įrenginį</string>
@@ -262,7 +259,6 @@
   <string name="contacts_permission_explanation">Norėdami bendrinti savo adresatų knygą su darbalaukiu, turite suteikti adresatų leidimą</string>
   <string name="select_ringtone">Pasirinkti skambučio melodiją</string>
   <string name="telephony_pref_blocked_title">Užblokuoti numeriai</string>
-  <string name="telephony_pref_blocked_dialog_desc">Nerodyti skambučių ir SMS žinučių iš šių numerių. Nurodykite kiekvienoje eilutėje po vieną</string>
   <string name="mpris_coverart_description">Dabartinės įvairialypės terpės iliustracija</string>
   <string name="settings_icon_description">Nuostatų piktograma</string>
   <string name="presenter_fullscreen">Visas ekranas</string>

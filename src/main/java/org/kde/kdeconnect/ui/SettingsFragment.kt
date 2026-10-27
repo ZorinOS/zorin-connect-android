@@ -2,7 +2,7 @@
  * SPDX-FileCopyrightText: 2023 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect.ui
 
 import android.Manifest
@@ -23,29 +23,28 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.preference.EditTextPreference
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.apache.commons.io.IOUtils
 import org.kde.kdeconnect.BackgroundService
+import org.kde.kdeconnect.extensions.setupBottomPadding
 import org.kde.kdeconnect.helpers.CreateFileParams
 import org.kde.kdeconnect.helpers.CreateFileResultContract
 import org.kde.kdeconnect.helpers.DeviceHelper
-import org.kde.kdeconnect.helpers.DeviceHelper.filterInvalidCharactersFromDeviceName
 import org.kde.kdeconnect.helpers.DeviceHelper.getDeviceName
 import org.kde.kdeconnect.helpers.NotificationHelper
 import org.kde.kdeconnect.ui.ThemeUtil.applyTheme
-import org.kde.kdeconnect.extensions.setupBottomPadding
 import com.zorinos.zorin_connect.BuildConfig
 import com.zorinos.zorin_connect.R
-import java.io.InputStreamReader
 
 class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -79,14 +78,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
         listView.setupBottomPadding()
     }
 
+    override fun onDestroyView() {
+        bluetoothPermissionsDialog?.dismiss()
+        bluetoothPermissionsDialog = null
+        super.onDestroyView()
+    }
+
     private fun deviceNamePref(context: Context) = EditTextPreference(context).apply {
         key = DeviceHelper.KEY_DEVICE_NAME_PREFERENCE
         isSelectable = true
-        setOnBindEditTextListener(EditText::setSingleLine)
         setOnBindEditTextListener { editText: EditText ->
+            editText.setSingleLine()
             editText.filters = arrayOf(
                 InputFilter { source: CharSequence, start: Int, end: Int, _: Spanned?, _: Int, _: Int ->
-                    filterInvalidCharactersFromDeviceName(source.subSequence(start, end).toString())
+                    DeviceHelper.filterDeviceNameInput(source, start, end)
                 },
                 LengthFilter(DeviceHelper.MAX_DEVICE_NAME_LENGTH),
             )
@@ -196,8 +201,19 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun updateDevicesByIpSummary() {
         devicesByIpPref.setSummary(getString(
             R.string.custom_devices_settings_summary,
-            CustomDevicesActivity.getCustomDeviceList(context).size
+            CustomDevicesActivity.getCustomDeviceList(requireContext()).size
         ))
+    }
+
+    private var bluetoothPermissionsDialog: AlertDialog? = null
+
+    private val bluetoothPermissionsLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { results ->
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+            results[Manifest.permission.BLUETOOTH_CONNECT] == true &&
+            results[Manifest.permission.BLUETOOTH_SCAN] == true) {
+            findPreference<SwitchPreference>(KEY_BLUETOOTH_ENABLED)?.isChecked = true // Also saves the preference
+            BackgroundService.ForceRefreshConnections(requireContext()) // Restarts the BluetoothLinkProvider
+        }
     }
 
     private fun bluetoothSupportPref(context: Context) = SwitchPreference(context).apply {
@@ -209,15 +225,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 val permissions = arrayOf(Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_SCAN)
                 val permissionsGranted = permissions.all { ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED }
                 if (!permissionsGranted) {
-                    PermissionsAlertDialogFragment.Builder()
+                    bluetoothPermissionsDialog = MaterialAlertDialogBuilder(requireContext())
                         .setTitle(R.string.location_permission_needed_title)
                         .setMessage(R.string.bluetooth_permission_needed_desc)
-                        .setPermissions(permissions)
-                        .setRequestCode(2)
-                        .create().show(childFragmentManager, null)
+                        .setPositiveButton(R.string.ok) { _, _ -> bluetoothPermissionsLauncher.launch(permissions) }
+                        .setNegativeButton(R.string.cancel, null)
+                        .show()
                     return@OnPreferenceChangeListener false
                 }
             }
+            // Restarts the BluetoothLinkProvider. The preference is saved before the service handles this.
+            BackgroundService.ForceRefreshConnections(context)
             true
         }
     }
@@ -235,17 +253,20 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private val exportLogs: ActivityResultLauncher<CreateFileParams> = registerForActivityResult(
         CreateFileResultContract()
     ) { uri: Uri? ->
-        val output = uri?.let { context?.contentResolver?.openOutputStream(uri) } ?: return@registerForActivityResult
-        CoroutineScope(Dispatchers.IO).launch {
-            val process = Runtime.getRuntime().exec(arrayOf("logcat", "-d"))
-            val reader = InputStreamReader(process.inputStream)
-            output.use {
-                it.write("Zorin Connect ${BuildConfig.VERSION_NAME}\n".toByteArray(Charsets.UTF_8))
-                it.write("Android ${Build.VERSION.RELEASE} (${Build.MANUFACTURER} ${Build.MODEL})\n".toByteArray(Charsets.UTF_8))
-                IOUtils.copy(reader, it, Charsets.UTF_8)
+            val output = uri?.let { context?.contentResolver?.openOutputStream(it) }
+                ?: return@registerForActivityResult
+
+            CoroutineScope(Dispatchers.IO).launch {
+                val process = Runtime.getRuntime().exec(arrayOf("logcat", "-d"))
+                process.inputStream.reader(Charsets.UTF_8).use { reader ->
+                    output.writer(Charsets.UTF_8).use { writer ->
+                        writer.write("Zorin Connect ${BuildConfig.VERSION_NAME}\n")
+                        writer.write("Android ${Build.VERSION.RELEASE} (${Build.MANUFACTURER} ${Build.MODEL})\n")
+                        reader.copyTo(writer)
+                    }
+                }
             }
         }
-    }
 
     private fun moreSettingsPref(context: Context) = Preference(context).apply {
         isPersistent = false

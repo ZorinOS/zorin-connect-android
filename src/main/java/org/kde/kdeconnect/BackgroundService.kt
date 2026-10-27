@@ -2,10 +2,9 @@
  * SPDX-FileCopyrightText: 2014 Albert Vaca Cintora <albertvaka@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 package org.kde.kdeconnect
 
-import android.Manifest
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -13,7 +12,6 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
 import android.net.ConnectivityManager
 import android.net.ConnectivityManager.NetworkCallback
@@ -54,10 +52,9 @@ class BackgroundService : Service() {
 
     private val linkProviders = mutableListOf<BaseLinkProvider>()
 
-    private val connectedToNonCellularNetwork = MutableLiveData<Boolean>()
     /** Indicates whether device is connected over wifi / usb / bluetooth / (anything other than cellular) */
     val isConnectedToNonCellularNetwork: LiveData<Boolean>
-        get() = connectedToNonCellularNetwork
+        field = MutableLiveData<Boolean>()
 
     fun updateForegroundNotification() {
         if (NotificationHelper.isPersistentNotificationEnabled(this)) {
@@ -119,17 +116,18 @@ class BackgroundService : Service() {
         val connectivityManager = this.getSystemService<ConnectivityManager>()
         connectivityManager?.registerNetworkCallback(networkRequestBuilder.build(), object : NetworkCallback() {
 
-            // All callbacks runs on a dedicated thread that isn't the main thread
+            // All callbacks run on a dedicated thread that isn't the main thread
 
             override fun onAvailable(network: Network) {
                 Log.i("BackgroundService", "Valid network available")
-                connectedToNonCellularNetwork.postValue(true)
+                isConnectedToNonCellularNetwork.postValue(true)
                 onNetworkChange(network)
             }
 
             override fun onLost(network: Network) {
                 Log.i("BackgroundService", "Valid network lost")
-                connectedToNonCellularNetwork.postValue(false)
+                isConnectedToNonCellularNetwork.postValue(false)
+                onNetworkChange(network)
             }
         })
 
@@ -146,7 +144,7 @@ class BackgroundService : Service() {
             updateForegroundNotification()
         }
         else {
-            stopForeground(true)
+            stopForeground(true) // Pass STOP_FOREGROUND_REMOVE instead of true when we only support API 24+
             Start(this)
         }
     }
@@ -164,6 +162,9 @@ class BackgroundService : Service() {
         }
 
         val intent = Intent(this, MainActivity::class.java)
+        // PendingIntent matching ignores extras, so add an action to avoid other notifications that also
+        // open MainActivity replacing the device id extra below.
+        intent.action = "org.kde.kdeconnect.FOREGROUND_NOTIFICATION"
         if (connectedDeviceIds.size == 1) {
             // Force open screen of the only connected device
             intent.putExtra(MainActivity.EXTRA_DEVICE_ID, connectedDeviceIds[0])
@@ -195,7 +196,8 @@ class BackgroundService : Service() {
             // Adding an action button to send clipboard manually in Android 10 and later.
             if (!ClipboardPlugin.canSyncAutomatically(this)) {
                 val sendClipboard = ClipboardFloatingActivity.getIntent(this, true)
-                val sendPendingClipboard = PendingIntent.getActivity(this, 3, sendClipboard, UPDATE_IMMUTABLE_FLAGS)
+                sendClipboard.action = "org.kde.kdeconnect.FOREGROUND_NOTIFICATION_SEND_CLIPBOARD"
+                val sendPendingClipboard = PendingIntent.getActivity(this, 0, sendClipboard, UPDATE_IMMUTABLE_FLAGS)
                 notification.addAction(0, getString(R.string.foreground_notification_send_clipboard), sendPendingClipboard)
             }
 
@@ -206,16 +208,18 @@ class BackgroundService : Service() {
                     // Adding two action buttons only when there is a single device connected.
                     // Setting up Send File Intent.
                     val sendFile = Intent(this, SendFileActivity::class.java)
-                    sendFile.putExtra("deviceId", deviceId)
-                    val sendPendingFile = PendingIntent.getActivity(this, 1, sendFile, UPDATE_IMMUTABLE_FLAGS)
+                    sendFile.action = "org.kde.kdeconnect.FOREGROUND_NOTIFICATION_SEND_FILE"
+                    sendFile.putExtra(SendFileActivity.EXTRA_DEVICE_ID, deviceId)
+                    val sendPendingFile = PendingIntent.getActivity(this, 0, sendFile, UPDATE_IMMUTABLE_FLAGS)
                     notification.addAction(0, getString(R.string.send_files), sendPendingFile)
 
                     // Checking if there are registered commands and adding the button.
-                    val plugin = device.getPlugin("RunCommandPlugin") as RunCommandPlugin?
+                    val plugin = device.getPlugin<RunCommandPlugin>()
                     if (plugin != null && plugin.commandList.isNotEmpty()) {
                         val runCommand = Intent(this, RunCommandActivity::class.java)
-                        runCommand.putExtra("deviceId", connectedDeviceIds[0])
-                        val runPendingCommand = PendingIntent.getActivity(this, 2, runCommand, UPDATE_IMMUTABLE_FLAGS)
+                        runCommand.action = "org.kde.kdeconnect.FOREGROUND_NOTIFICATION_RUN_COMMAND"
+                        runCommand.putExtra(RunCommandActivity.EXTRA_DEVICE_ID, connectedDeviceIds[0])
+                        val runPendingCommand = PendingIntent.getActivity(this, 0, runCommand, UPDATE_IMMUTABLE_FLAGS)
                         notification.addAction(0, getString(R.string.pref_plugin_runcommand), runPendingCommand)
                     }
                 }
@@ -263,7 +267,6 @@ class BackgroundService : Service() {
         const val UPDATE_IMMUTABLE_FLAGS = PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         private const val FOREGROUND_NOTIFICATION_ID = 1
 
-        @JvmStatic
         var instance: BackgroundService? = null
             private set
 
@@ -271,6 +274,9 @@ class BackgroundService : Service() {
 
         private fun createNonCellularNetworkRequestBuilder(): NetworkRequest.Builder {
             return NetworkRequest.Builder().apply {
+                // NetworkRequest.Builder requires NET_CAPABILITY_NOT_VPN by default.
+                // Remove it so this request can match VPN networks as well.
+                removeCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
                 addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
                 addTransportType(NetworkCapabilities.TRANSPORT_VPN)
                 addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET)
@@ -291,7 +297,6 @@ class BackgroundService : Service() {
             ContextCompat.startForegroundService(context, intent)
         }
 
-        @JvmStatic
         fun ForceRefreshConnections(context: Context) {
             Log.d(LOG_TAG, "ForceRefreshConnections")
             val intent = Intent(context, BackgroundService::class.java)

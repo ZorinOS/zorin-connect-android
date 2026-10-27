@@ -25,7 +25,8 @@
   <string name="pref_plugin_mousepad_desc_tv">将您的手机或平板电脑用作电视遥控器</string>
   <string name="pref_plugin_presenter">演示遥控</string>
   <string name="pref_plugin_presenter_desc">使用移动设备切换幻灯片</string>
-  <string name="pref_plugin_remotekeyboard">接收远程按键</string>
+  <string name="pref_plugin_remotekeyboard_ime">键盘接收器 (通过安卓键盘)</string>
+  <string name="pref_plugin_remotekeyboard_accessibility">键盘接收器 (通过无障碍辅助)</string>
   <string name="pref_plugin_remotekeyboard_desc">从远程设备接收按键事件</string>
   <string name="pref_plugin_mpris">多媒体控制</string>
   <string name="pref_plugin_mpris_desc">遥控媒体播放器</string>
@@ -48,9 +49,12 @@
   <string name="sad_ok">确定 :(</string>
   <string name="cancel">取消</string>
   <string name="open_settings">打开设置</string>
+  <string name="open_accessibility_settings">打开无障碍辅助设置</string>
+  <string name="open_input_settings">打开键盘设置</string>
   <string name="no_permissions">您需要授予权限以访问通知</string>
   <string name="no_permission_mprisreceiver">为了控制您的媒体播放器，您需要授予访问通知的权限</string>
-  <string name="no_permissions_remotekeyboard">要接收按键，您需要激活 Zorin Connect 远程键盘</string>
+  <string name="no_permissions_remotekeyboard_ime">要接收按键输入，您需要将 Zorin Connect 远程键盘激活为 Android 的输入法</string>
+  <string name="no_permissions_remotekeyboard_accessibility">要接收按键输入，您需要授予无障碍辅助权限。</string>
   <string name="send_ping">发送 Ping</string>
   <string name="open_mpris_controls">多媒体控制</string>
   <string name="remotekeyboard_editing_only_title">只有在编辑时才接受远程按键</string>
@@ -60,6 +64,7 @@
   <string name="open_mousepad">远程输入</string>
   <string name="open_mousepad_tv">电视遥控器</string>
   <string name="mousepad_info">在屏幕上移动手指来移动光标。轻击代表左键，双指或三指点击代表右键或中键。用双指滚动。用长按来拖放。基于陀螺仪的空中鼠标功能可以在插件的首选项中启用。</string>
+  <string name="mousepad_info_double_tap">在屏幕上移动手指来移动光标。轻击代表左键，双指或三指点击代表右键或中键。双指滚动，双击拖放。基于陀螺仪的空中鼠标功能可以在插件的首选项中启用。</string>
   <string name="mousepad_info_no_gestures">在屏幕上移动手指来移动鼠标光标，手指轻点来进行鼠标键点击。</string>
   <string name="mousepad_keyboard_input_not_supported">配对的设备不支持键盘输入</string>
   <string name="mousepad_single_tap_settings_title">设置单指点击操作</string>
@@ -111,7 +116,8 @@
   <string name="pref_plugin_mousepad_send_keystrokes">作为按键发送</string>
   <string name="mouse_receiver_plugin_description">接收远程鼠标移动</string>
   <string name="mouse_receiver_plugin_name">鼠标接收器</string>
-  <string name="mouse_receiver_no_permissions">要远程接受触摸输入，您必须授予完全控制此设备的访问权限</string>
+  <string name="mouse_receiver_no_permissions">要接收远程触摸输入，您需要授予无障碍辅助权限。</string>
+  <string name="mouse_keyboard_receiver_service_description">接收远程鼠标移动和键盘输入</string>
   <string name="view_status_title">状态</string>
   <string name="battery_status_format">电量：%d%%</string>
   <string name="battery_status_low_format">电量：%d%% 电量低</string>
@@ -223,7 +229,6 @@
   <string name="share_destination_folder_preference">目标目录</string>
   <string name="share">分享</string>
   <string name="share_received_file">分享 \"%s\"</string>
-  <string name="title_activity_notification_filter">通知过滤器</string>
   <string name="filter_apps_info">所选软件的通知将会被同步。</string>
   <string name="show_notification_if_screen_off">仅在屏幕关闭时发送通知</string>
   <string name="add_device_dialog_title">添加设备</string>
@@ -293,7 +298,7 @@
   <string name="contacts_per_device_confirmation">您的手机联系人将被复制到此设备，以便让 Zorin Connect 短信应用和其他应用使用。</string>
   <string name="select_ringtone">选择铃声</string>
   <string name="telephony_pref_blocked_title">已屏蔽的号码</string>
-  <string name="telephony_pref_blocked_dialog_desc">不要显示来自这些号码的电话和短信。一行一个号码</string>
+  <string name="telephony_pref_blocked_dialog_desc">不要显示来自这些号码的电话。一行一个号码</string>
   <string name="mpris_coverart_description">当前媒体的封面艺术</string>
   <string name="settings_icon_description">设置图标</string>
   <string name="presenter_fullscreen">全屏</string>
@@ -320,6 +325,7 @@
   <string name="runcommand_notpaired">设备未配对</string>
   <string name="runcommand_nosuchdevice">没有此设备</string>
   <string name="runcommand_noruncommandplugin">此设备没有启用“运行命令插件”</string>
+  <string name="runcommand_widget_no_device">点击标题来选择设备。</string>
   <string name="runcommand_category_device_controls_title">设备控制</string>
   <string name="runcommand_device_controls_summary">如果您的设备支持设备控制功能，您配置的命令将显示在该设备上。</string>
   <string name="set_runcommand_name_as_title">set_runcommand_name_as_title</string>
@@ -469,6 +475,7 @@
   <string name="runcommand_output_no_output_desc">命令的输出将显示在此处。</string>
   <string name="runcommand_output_no_output">没有执行命令</string>
   <string name="runcommand_stop">停止当前命令</string>
+  <string name="runcommand_clear_output">清除输出</string>
   <string name="pref_mpris_volume_control_title">硬件音量键</string>
   <string name="pref_mpris_volume_control_summary">使用此手机的硬件按钮控制已连接设备的媒体音量</string>
 </resources>
